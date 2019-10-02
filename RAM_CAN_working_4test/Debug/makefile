@@ -15,6 +15,9 @@ RM := rm -rf
 -include objects.mk
 
 ifneq ($(MAKECMDGOALS),clean)
+ifneq ($(strip $(S_UPPER_DEPS)),)
+-include $(S_UPPER_DEPS)
+endif
 ifneq ($(strip $(C_DEPS)),)
 -include $(C_DEPS)
 endif
@@ -23,51 +26,31 @@ endif
 -include ../makefile.defs
 
 # Add inputs and outputs from these tool invocations to the build variables 
-EXECUTABLES += \
-RAM_CAN_working_4test.elf \
-
-SIZE_OUTPUT += \
-default.size.stdout \
-
-OBJDUMP_LIST += \
-RAM_CAN_working_4test.list \
-
-OBJCOPY_HEX += \
-RAM_CAN_working_4test.hex \
-
 
 # All Target
-all: RAM_CAN_working_4test.elf secondary-outputs
+all: RAM_CAN_working_4test.elf
 
 # Tool invocations
 RAM_CAN_working_4test.elf: $(OBJS) $(USER_OBJS) ../STM32F765VGTx_FLASH.ld
-	arm-none-eabi-gcc -o "RAM_CAN_working_4test.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m7 -T"../STM32F765VGTx_FLASH.ld" --specs=nosys.specs -Wl,-Map="RAM_CAN_working_4test.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+	@echo 'Building target: $@'
+	@echo 'Invoking: MCU GCC Linker'
+	arm-none-eabi-gcc -mcpu=cortex-m7 -mthumb -mfloat-abi=hard -mfpu=fpv5-d16 -specs=nosys.specs -specs=nano.specs -T"../STM32F765VGTx_FLASH.ld" -Wl,-Map=output.map -Wl,--gc-sections -o "RAM_CAN_working_4test.elf" @"objects.list" $(USER_OBJS) $(LIBS) -lm
 	@echo 'Finished building target: $@'
 	@echo ' '
-
-default.size.stdout: $(EXECUTABLES)
-	arm-none-eabi-size  $(EXECUTABLES)
-	@echo 'Finished building: $@'
-	@echo ' '
-
-RAM_CAN_working_4test.list: $(EXECUTABLES)
-	arm-none-eabi-objdump -h -S $(EXECUTABLES) > "RAM_CAN_working_4test.list"
-	@echo 'Finished building: $@'
-	@echo ' '
-
-RAM_CAN_working_4test.hex: $(EXECUTABLES)
-	arm-none-eabi-objcopy  -O ihex $(EXECUTABLES) "RAM_CAN_working_4test.hex"
-	@echo 'Finished building: $@'
-	@echo ' '
+	$(MAKE) --no-print-directory post-build
 
 # Other Targets
 clean:
 	-$(RM) *
 	-@echo ' '
 
-secondary-outputs: $(SIZE_OUTPUT) $(OBJDUMP_LIST) $(OBJCOPY_HEX)
+post-build:
+	-@echo 'Generating hex and Printing size information:'
+	arm-none-eabi-objcopy -O ihex "RAM_CAN_working_4test.elf" "RAM_CAN_working_4test.hex"
+	arm-none-eabi-size "RAM_CAN_working_4test.elf"
+	-@echo ' '
 
 .PHONY: all clean dependents
-.SECONDARY:
+.SECONDARY: post-build
 
 -include ../makefile.targets
