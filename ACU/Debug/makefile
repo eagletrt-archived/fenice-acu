@@ -37,8 +37,8 @@ ACU.list \
 all: ACU.elf secondary-outputs
 
 # Tool invocations
-ACU.elf: $(OBJS) $(USER_OBJS) /home/luca/Documents/git/fenice-sensors/STM32F765VGTX_FLASH.ld
-	arm-none-eabi-gcc -o "ACU.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m7 -T"/home/luca/Documents/git/fenice-sensors/STM32F765VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="ACU.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+ACU.elf: $(OBJS) $(USER_OBJS) /home/luca/Documents/git/fenice-sensors/ACU/STM32F765VGTX_FLASH.ld
+	arm-none-eabi-gcc -o "ACU.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m7 -T"/home/luca/Documents/git/fenice-sensors/ACU/STM32F765VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="ACU.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 

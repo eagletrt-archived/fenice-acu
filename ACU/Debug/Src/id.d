@@ -1,5 +1,4 @@
-Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_cortex.o: \
- ../Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_cortex.c \
+Src/id.o: ../Src/id.c ../Inc/id.h ../Inc/main.h \
  ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal.h \
  ../Inc/stm32f7xx_hal_conf.h \
  ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_rcc.h \
@@ -26,6 +25,10 @@ Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_cortex.o: \
  ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_i2c_ex.h \
  ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_pwr.h \
  ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_pwr_ex.h
+
+../Inc/id.h:
+
+../Inc/main.h:
 
 ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal.h:
 

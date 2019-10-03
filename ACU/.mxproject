@@ -1,7 +1,7 @@
 [PreviousGenFiles]
-HeaderPath=/home/luca/Documents/git/fenice-sensors/Inc
+HeaderPath=/home/luca/Documents/git/fenice-sensors/ACU/Inc
 HeaderFiles=stm32f7xx_it.h;stm32f7xx_hal_conf.h;main.h;
-SourcePath=/home/luca/Documents/git/fenice-sensors/Src
+SourcePath=/home/luca/Documents/git/fenice-sensors/ACU/Src
 SourceFiles=stm32f7xx_it.c;stm32f7xx_hal_msp.c;main.c;
 
 [PreviousLibFiles]
