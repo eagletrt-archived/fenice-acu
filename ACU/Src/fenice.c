@@ -1,6 +1,27 @@
 #include "fenice.h"
 
+#define fifoLengthN 100
+#define fifoLengthR 10
 
+uint8_t fifoRxDataCAN1_head;
+uint8_t fifoRxDataCAN1_tail;
+
+uint8_t fifoRxDataCAN3_head = 0;
+uint8_t fifoRxDataCAN3_tail = 0;
+
+uint8_t fifoTxDataCAN1_normal_head = 0;
+uint8_t fifoTxDataCAN1_high_head = 0;
+uint8_t fifoTxDataCAN1_normal_tail = 0;
+uint8_t fifoTxDataCAN1_high_tail = 0;
+
+uint8_t fifoTxDataCAN3_normal_head = 0;
+uint8_t fifoTxDataCAN3_high_head = 0;
+uint8_t fifoTxDataCAN3_normal_tail = 0;
+uint8_t fifoTxDataCAN3_high_tail = 0;
+
+fifoRxDataType fifoRxDataCAN1[100], fifoRxDataCAN3[100];
+fifoTxDataType fifoTxDataCAN1_normal[100], fifoTxDataCAN1_high[10];
+fifoTxDataType fifoTxDataCAN3_normal[100], fifoTxDataCAN3_high[10];
 
 #ifdef HAL_CAN_MODULE_ENABLED
 #include "stm32f7xx_hal_can.h"
@@ -101,5 +122,44 @@
 
 	}
 
+	uint8_t fifoRxDataCAN1_pop(){
+
+	}
+	uint8_t fifoRxDataCAN1_push(){
+
+	}
+
+	uint8_t fifoRxDataCAN3_pop(){
+
+	}
+	uint8_t fifoRxDataCAN3_push(){
+
+	}
+
+	uint8_t fifoTxDataCAN1_normal_pop(){
+
+	}
+	uint8_t fifoTxDataCAN1_high_pop(){
+
+	}
+	uint8_t fifoTxDataCAN1_normal_push(){
+
+	}
+	uint8_t fifoTxDataCAN1_high_push(){
+
+	}
+
+	uint8_t fifoTxDataCAN3_normal_pop(){
+
+	}
+	uint8_t fifoTxDataCAN3_high_pop(){
+
+	}
+	uint8_t fifoTxDataCAN3_normal_push(){
+
+	}
+	uint8_t fifoTxDataCAN3_high_push(){
+
+	}
 
 #endif

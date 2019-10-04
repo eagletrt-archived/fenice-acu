@@ -26,6 +26,7 @@
 #include "id.h"
 #include "state.h"
 #include "fenice.h"
+#include "global_variables.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -53,6 +54,9 @@ TIM_HandleTypeDef htim3;
 /* USER CODE BEGIN PV */
 ID id;
 canStruct can1,can3;
+extern fifoRxDataType fifoRxDataCAN1[100], fifoRxDataCAN3[100];
+extern fifoTxDataType fifoTxDataCAN1_normal[100], fifoTxDataCAN1_high[10];
+extern fifoTxDataType fifoTxDataCAN3_normal[100], fifoTxDataCAN3_high[10];
 
 /* USER CODE END PV */
 
@@ -428,7 +432,24 @@ static void MX_GPIO_Init(void)
 /* USER CODE BEGIN 4 */
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
 	if(htim == &htim3){
-
+		count_ms += 10;
+		if(count_ms == 10){
+			count_ms = 0;
+			count_dec++;
+			count_inverter++;
+			if(count_inverter == 10){
+				//TODO: implementare funzione
+			}else if(count_inverter == 11){
+				count_inverter = 10;
+			}
+			if(count_dec == 10){
+				count_dec = 0;
+				count_sec++;
+				if(count_sec == 100){
+					count_sec = 0;
+				}
+			}
+		}
 	}
 }
 /* USER CODE END 4 */
