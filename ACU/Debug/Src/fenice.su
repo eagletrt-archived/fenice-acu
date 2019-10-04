@@ -1,0 +1,3 @@
+fenice.c:8:10:CAN_Send	48	static
+fenice.c:29:10:CAN1_initialization	16	static
+fenice.c:63:10:CAN3_initialization	16	static

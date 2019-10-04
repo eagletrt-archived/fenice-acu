@@ -1,0 +1,5 @@
+state.c:4:6:init	4	static
+state.c:7:6:idle	4	static
+state.c:10:6:calib	4	static
+state.c:13:6:setup	4	static
+state.c:16:6:run	4	static
