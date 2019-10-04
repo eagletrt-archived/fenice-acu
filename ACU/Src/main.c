@@ -25,6 +25,7 @@
 /* USER CODE BEGIN Includes */
 #include "id.h"
 #include "state.h"
+#include "fenice.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -109,6 +110,8 @@ int main(void)
   /* Initialize interrupts */
   MX_NVIC_Init();
   /* USER CODE BEGIN 2 */
+  HAL_TIM_Base_Start_IT(&htim3);
+
 
   if(CAN1_initialization(&can1)){
 	  report_error_can1();
@@ -423,7 +426,11 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
+	if(htim == &htim3){
 
+	}
+}
 /* USER CODE END 4 */
 
 /**
