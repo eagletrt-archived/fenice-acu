@@ -54,9 +54,11 @@ TIM_HandleTypeDef htim3;
 /* USER CODE BEGIN PV */
 ID id;
 canStruct can1,can3;
-extern fifoRxDataType fifoRxDataCAN1[100], fifoRxDataCAN3[100];
-extern fifoTxDataType fifoTxDataCAN1_normal[100], fifoTxDataCAN1_high[10];
-extern fifoTxDataType fifoTxDataCAN3_normal[100], fifoTxDataCAN3_high[10];
+extern fifoCanDataType fifoCAN1, fifoCAN3;
+/*
+extern fifoRxDataType fifoRxDataCAN1[fifoLengthN], fifoRxDataCAN3[fifoLengthN];
+extern fifoTxDataType fifoTxDataCAN1_normal[fifoLengthN], fifoTxDataCAN1_high[fifoLengthR];
+extern fifoTxDataType fifoTxDataCAN3_normal[fifoLengthN], fifoTxDataCAN3_high[fifoLengthR];*/
 
 /* USER CODE END PV */
 
@@ -125,7 +127,6 @@ int main(void)
   }
 
   current_state = STATE_INIT;
-
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -449,6 +450,47 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
 					count_sec = 0;
 				}
 			}
+		}
+	}
+}
+void HAL_CAN_TxMailbox0CompleteCallback(CAN_HandleTypeDef *hcan){
+	if(hcan == &hcan1){
+		fifoDataType fifodata;
+		if(fifoTxDataCAN1_high_pop(&fifoCAN1, &fifodata)){
+			for(int i = 0; i < 8; i++){
+				can1.dataTx[i] = fifodata.data[i];
+			}
+			if(CAN_Send_IT(&can1, fifodata.id) == 0){
+				//TODO: implementare errore
+			}
+		}else if(fifoTxDataCAN1_normal_pop(&fifoCAN1, &fifodata)){
+			for(int i = 0; i < 8; i++){
+				can1.dataTx[i] = fifodata.data[i];
+			}
+			if(CAN_Send_IT(&can1, fifodata.id) == 0){
+				//TODO: implementare errore
+			}
+		}else{
+			//TODO: riattivare interrupt
+		}
+	}else{
+		fifoDataType fifodata;
+		if(fifoTxDataCAN3_high_pop(&fifoCAN3, &fifodata)){
+			for(int i = 0; i < 8; i++){
+				can3.dataTx[i] = fifodata.data[i];
+			}
+			if(CAN_Send_IT(&can3, fifodata.id) == 0){
+				//TODO: implementare errore
+			}
+		}else if(fifoTxDataCAN3_normal_pop(&fifoCAN3, &fifodata)){
+			for(int i = 0; i < 8; i++){
+				can3.dataTx[i] = fifodata.data[i];
+			}
+			if(CAN_Send_IT(&can3, fifodata.id) == 0){
+				//TODO: implementare errore
+			}
+		}else{
+			//TODO: riattivare interrupt
 		}
 	}
 }

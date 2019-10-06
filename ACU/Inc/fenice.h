@@ -1,11 +1,17 @@
 #ifndef _FENICE_H
 #define _FENICE_H
 
+#define fifoLengthN 100
+#define fifoLengthH 10
+
+
 #include "stm32f7xx_hal.h"
 
 	void fenice_init();
 
 	#ifdef HAL_CAN_MODULE_ENABLED
+
+		typedef enum fifoPriority_t {normalPriority, highPriority}fifoPriority;
 
 		typedef struct{
 
@@ -27,32 +33,48 @@
 		uint8_t CAN3_initialization(canStruct *can);
 		void report_error_can1();
 		void report_error_can3();
-		uint8_t CAN_Send(canStruct* can, uint32_t id);
+		uint8_t CAN_Send(canStruct* can, uint32_t id, fifoPriority);
+		uint8_t CAN_Send_IT(canStruct* can, uint32_t id);
 
-		typedef struct fifoRxDataType{
-			uint16_t id;
+		typedef struct fifoDataType{
+			uint32_t id;
 			uint8_t data[8];
-		}fifoRxDataType;
-		typedef struct fifoTxDataType{
-			uint16_t id;
-			uint8_t data[8];
-		}fifoTxDataType;
+		}fifoDataType;
 
-		uint8_t fifoRxDataCAN1_pop();
-		uint8_t fifoRxDataCAN1_push();
 
-		uint8_t fifoRxDataCAN3_pop();
-		uint8_t fifoRxDataCAN3_push();
+		typedef struct fifoCanDataType{
+			uint8_t rxHead;
+			uint8_t rxTail;
 
-		uint8_t fifoTxDataCAN1_normal_pop();
-		uint8_t fifoTxDataCAN1_high_pop();
-		uint8_t fifoTxDataCAN1_normal_push();
-		uint8_t fifoTxDataCAN1_high_push();
+			uint8_t txHeadNormal;
+			uint8_t txTailNormal;
 
-		uint8_t fifoTxDataCAN3_normal_pop();
-		uint8_t fifoTxDataCAN3_high_pop();
-		uint8_t fifoTxDataCAN3_normal_push();
-		uint8_t fifoTxDataCAN3_high_push();
+			uint8_t txHeadHigh;
+			uint8_t txTailHigh;
+
+			fifoDataType rx[fifoLengthN];
+			fifoDataType txNormal[fifoLengthN];
+			fifoDataType txHigh[fifoLengthH];
+
+		}fifoCanDataType;
+
+
+
+		uint8_t fifoRxDataCAN1_pop(fifoCanDataType*, fifoDataType*);
+		uint8_t fifoRxDataCAN1_push(fifoCanDataType*, fifoDataType*);
+
+		uint8_t fifoRxDataCAN3_pop(fifoCanDataType*, fifoDataType*);
+		uint8_t fifoRxDataCAN3_push(fifoCanDataType*, fifoDataType*);
+
+		uint8_t fifoTxDataCAN1_normal_pop(fifoCanDataType*, fifoDataType*);
+		uint8_t fifoTxDataCAN1_high_pop(fifoCanDataType*, fifoDataType*);
+		uint8_t fifoTxDataCAN1_normal_push(fifoCanDataType*, fifoDataType*);
+		uint8_t fifoTxDataCAN1_high_push(fifoCanDataType*, fifoDataType*);
+
+		uint8_t fifoTxDataCAN3_normal_pop(fifoCanDataType*, fifoDataType*);
+		uint8_t fifoTxDataCAN3_high_pop(fifoCanDataType*, fifoDataType*);
+		uint8_t fifoTxDataCAN3_normal_push(fifoCanDataType*, fifoDataType*);
+		uint8_t fifoTxDataCAN3_high_push(fifoCanDataType*, fifoDataType*);
 
 
 	#endif

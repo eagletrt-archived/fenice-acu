@@ -1,34 +1,59 @@
 #include "fenice.h"
 
-#define fifoLengthN 100
-#define fifoLengthR 10
-
-uint8_t fifoRxDataCAN1_head;
-uint8_t fifoRxDataCAN1_tail;
-
-uint8_t fifoRxDataCAN3_head = 0;
-uint8_t fifoRxDataCAN3_tail = 0;
-
-uint8_t fifoTxDataCAN1_normal_head = 0;
-uint8_t fifoTxDataCAN1_high_head = 0;
-uint8_t fifoTxDataCAN1_normal_tail = 0;
-uint8_t fifoTxDataCAN1_high_tail = 0;
-
-uint8_t fifoTxDataCAN3_normal_head = 0;
-uint8_t fifoTxDataCAN3_high_head = 0;
-uint8_t fifoTxDataCAN3_normal_tail = 0;
-uint8_t fifoTxDataCAN3_high_tail = 0;
-
-fifoRxDataType fifoRxDataCAN1[100], fifoRxDataCAN3[100];
-fifoTxDataType fifoTxDataCAN1_normal[100], fifoTxDataCAN1_high[10];
-fifoTxDataType fifoTxDataCAN3_normal[100], fifoTxDataCAN3_high[10];
+extern CAN_HandleTypeDef hcan1;
+extern CAN_HandleTypeDef hcan3;
+fifoCanDataType fifoCAN1, fifoCAN3;
 
 #ifdef HAL_CAN_MODULE_ENABLED
 #include "stm32f7xx_hal_can.h"
+	uint8_t CAN_Send(canStruct* can, uint32_t id, fifoPriority _fifoPriority){
+		if (HAL_CAN_IsTxMessagePending(can->hcan, CAN_TX_MAILBOX0) == 0){
+			if(CAN_Send_IT(can, id) == 0){
+				//TODO: implementare errore
+				return 0;
+			}
+		}else{
+			fifoDataType fifodata;
+			for(int i = 0; i < 8; i++){
+				fifodata.data[i] = can->dataTx[i];
+			}
+			fifodata.id = id;
+			if(_fifoPriority == normalPriority){
+				if(can->hcan == &hcan1){
+					if(fifoTxDataCAN1_normal_push(&fifoCAN1, &fifodata) == 0){
+						//TODO: implementare errore
+						return 0;
+					}
+				}else{
+					if(fifoTxDataCAN3_normal_push(&fifoCAN3, &fifodata) == 0){
+						//TODO: implementare errore
+						return 0;
+					}
+				}
+			}else{
+				if(can->hcan == &hcan1){
+					if(fifoTxDataCAN1_high_push(&fifoCAN1, &fifodata) == 0){
+						//TODO: implementare errore
+						return 0;
+					}
+				}else{
+					if(fifoTxDataCAN3_high_push(&fifoCAN3, &fifodata) == 0){
+						//TODO: implementare errore
+						return 0;
+					}
+				}
+			}
 
-	uint8_t CAN_Send(canStruct* can, uint32_t id){
+		}
+		return 1;
+	}
 
-		uint32_t mailbox;
+
+	uint8_t CAN_Send_IT(canStruct* can, uint32_t id){
+
+		uint32_t mailbox = 0;
+		//CAN_TxMailBox_TypeDef mailbox;
+		//mailbox.TIR = 0; //set to mailbox 0
 		uint8_t flag = 0; //error
 
 		CAN_TxHeaderTypeDef TxHeader;
@@ -38,23 +63,14 @@ fifoTxDataType fifoTxDataCAN3_normal[100], fifoTxDataCAN3_high[10];
 		TxHeader.DLC = can->size;
 		TxHeader.TransmitGlobalTime = DISABLE;
 
-		if (HAL_CAN_GetTxMailboxesFreeLevel(can->hcan) != 0 && HAL_CAN_IsTxMessagePending(can->hcan, CAN_TX_MAILBOX0) == 0){
-			if(HAL_CAN_AddTxMessage(can->hcan, &TxHeader, can->dataTx, &mailbox) == HAL_OK){
-				flag = 1; //ok
-			}
+		if(HAL_CAN_AddTxMessage(can->hcan, &TxHeader, can->dataTx,&mailbox) == HAL_OK){
+			flag = 1; //ok
 		}
 
 		return flag;
 	}
 
 	uint8_t CAN1_initialization(canStruct *can){
-
-		// USB_HP_CAN_TX_IRQn interrupt configuration //
-		HAL_NVIC_SetPriority(CAN1_TX_IRQn, 0, 0);
-		HAL_NVIC_EnableIRQ(CAN1_TX_IRQn);
-		// USB_LP_CAN_RX0_IRQn interrupt configuration //
-		HAL_NVIC_SetPriority(CAN1_RX0_IRQn, 0, 0);
-		HAL_NVIC_EnableIRQ(CAN1_RX0_IRQn);
 
 		//CAN filter initialization
 		can->canFilter.FilterMode = CAN_FILTERMODE_IDMASK;
@@ -82,13 +98,6 @@ fifoTxDataType fifoTxDataCAN3_normal[100], fifoTxDataCAN3_high[10];
 	}
 
 	uint8_t CAN3_initialization(canStruct *can){
-
-		// USB_HP_CAN_TX_IRQn interrupt configuration //
-		HAL_NVIC_SetPriority(CAN3_TX_IRQn, 0, 0);
-		HAL_NVIC_EnableIRQ(CAN3_TX_IRQn);
-		// USB_LP_CAN_RX0_IRQn interrupt configuration //
-		HAL_NVIC_SetPriority(CAN3_RX0_IRQn, 0, 0);
-		HAL_NVIC_EnableIRQ(CAN3_RX0_IRQn);
 
 		//CAN filter initialization
 		can->canFilter.FilterMode = CAN_FILTERMODE_IDMASK;
@@ -122,44 +131,154 @@ fifoTxDataType fifoTxDataCAN3_normal[100], fifoTxDataCAN3_high[10];
 
 	}
 
-	uint8_t fifoRxDataCAN1_pop(){
-
-	}
-	uint8_t fifoRxDataCAN1_push(){
-
-	}
-
-	uint8_t fifoRxDataCAN3_pop(){
-
-	}
-	uint8_t fifoRxDataCAN3_push(){
-
-	}
-
-	uint8_t fifoTxDataCAN1_normal_pop(){
-
-	}
-	uint8_t fifoTxDataCAN1_high_pop(){
-
-	}
-	uint8_t fifoTxDataCAN1_normal_push(){
-
-	}
-	uint8_t fifoTxDataCAN1_high_push(){
-
+	uint8_t fifoRxDataCAN1_pop(fifoCanDataType* _fifoCAN,fifoDataType* _rxData){
+		if(_fifoCAN->rxHead ==_fifoCAN->rxTail){
+			return 0;
+		}else{
+			_rxData->id = _fifoCAN->rx[_fifoCAN->rxTail].id;
+			for(uint8_t i = 0; i < 8; i++){
+				_rxData->data[i] = _fifoCAN->rx[_fifoCAN->rxTail].data[i];
+			}
+			_fifoCAN->rxTail = (_fifoCAN->rxTail + 1) % fifoLengthN;
+			return 1;
+		}
 	}
 
-	uint8_t fifoTxDataCAN3_normal_pop(){
-
+	uint8_t fifoRxDataCAN1_push(fifoCanDataType* _fifoCAN, fifoDataType* _rxData){
+		if((_fifoCAN->rxHead + 1) % fifoLengthN == _fifoCAN->rxTail){
+			return 0;
+		}else{
+			_fifoCAN->rx[_fifoCAN->rxHead].id = _rxData->id;
+			for(uint8_t i = 0; i < 8; i++){
+				_fifoCAN->rx[_fifoCAN->rxHead].data[i] = _rxData->data[i];
+			}
+			_fifoCAN->rxHead = (_fifoCAN->rxHead + 1) % fifoLengthN;
+			return 1;
+		}
 	}
-	uint8_t fifoTxDataCAN3_high_pop(){
 
+	uint8_t fifoRxDataCAN3_pop(fifoCanDataType* _fifoCAN,fifoDataType* _rxData){
+		if(_fifoCAN->rxHead ==_fifoCAN->rxTail){
+			return 0;
+		}else{
+			_rxData->id = _fifoCAN->rx[_fifoCAN->rxTail].id;
+			for(uint8_t i = 0; i < 8; i++){
+				_rxData->data[i] = _fifoCAN->rx[_fifoCAN->rxTail].data[i];
+			}
+			_fifoCAN->rxTail = (_fifoCAN->rxTail + 1) % fifoLengthN;
+			return 1;
+		}
 	}
-	uint8_t fifoTxDataCAN3_normal_push(){
+	uint8_t fifoRxDataCAN3_push(fifoCanDataType* _fifoCAN,fifoDataType* _rxData){
+		if((_fifoCAN->rxHead + 1) % fifoLengthN == _fifoCAN->rxTail){
+			return 0;
+		}else{
+			_fifoCAN->rx[_fifoCAN->rxHead].id = _rxData->id;
+			for(uint8_t i = 0; i < 8; i++){
+				_fifoCAN->rx[_fifoCAN->rxHead].data[i] = _rxData->data[i];
+			}
+			_fifoCAN->rxHead = (_fifoCAN->rxHead + 1) % fifoLengthN;
+			return 1;
+		}
+	}
 
+	uint8_t fifoTxDataCAN1_normal_pop(fifoCanDataType* _fifoCAN,fifoDataType* _txData){
+		if(_fifoCAN->txHeadNormal ==_fifoCAN->txTailNormal){
+			return 0;
+		}else{
+			_txData->id = _fifoCAN->txNormal[_fifoCAN->txTailNormal].id;
+			for(uint8_t i = 0; i < 8; i++){
+				_txData->data[i] = _fifoCAN->txNormal[_fifoCAN->txTailNormal].data[i];
+			}
+			_fifoCAN->txTailNormal = (_fifoCAN->txTailNormal + 1) % fifoLengthN;
+			return 1;
+		}
 	}
-	uint8_t fifoTxDataCAN3_high_push(){
+	uint8_t fifoTxDataCAN1_high_pop(fifoCanDataType* _fifoCAN,fifoDataType* _txData){
+		if(_fifoCAN->txHeadHigh ==_fifoCAN->txTailHigh){
+			return 0;
+		}else{
+			_txData->id = _fifoCAN->txHigh[_fifoCAN->txTailHigh].id;
+			for(uint8_t i = 0; i < 8; i++){
+				_txData->data[i] = _fifoCAN->txHigh[_fifoCAN->txTailHigh].data[i];
+			}
+			_fifoCAN->txTailHigh = (_fifoCAN->txTailHigh + 1) % fifoLengthH;
+			return 1;
+		}
+	}
+	uint8_t fifoTxDataCAN1_normal_push(fifoCanDataType* _fifoCAN,fifoDataType* _txData){
+		if((_fifoCAN->txHeadNormal + 1) % fifoLengthN == _fifoCAN->txTailNormal){
+			return 0;
+		}else{
+			_fifoCAN->txNormal[_fifoCAN->txHeadNormal].id = _txData->id;
+			for(uint8_t i = 0; i < 8; i++){
+				_fifoCAN->txNormal[_fifoCAN->txHeadNormal].data[i] = _txData->data[i];
+			}
+			_fifoCAN->txHeadNormal = (_fifoCAN->txHeadNormal + 1) % fifoLengthN;
+			return 1;
+		}
+	}
+	uint8_t fifoTxDataCAN1_high_push(fifoCanDataType* _fifoCAN,fifoDataType* _txData){
+		if((_fifoCAN->txHeadHigh + 1) % fifoLengthH == _fifoCAN->txTailHigh){
+			return 0;
+		}else{
+			_fifoCAN->txHigh[_fifoCAN->txHeadHigh].id = _txData->id;
+			for(uint8_t i = 0; i < 8; i++){
+				_fifoCAN->txHigh[_fifoCAN->txHeadHigh].data[i] = _txData->data[i];
+			}
+			_fifoCAN->txHeadHigh = (_fifoCAN->txHeadHigh + 1) % fifoLengthH;
+			return 1;
+		}
+	}
 
+	uint8_t fifoTxDataCAN3_normal_pop(fifoCanDataType* _fifoCAN,fifoDataType* _txData){
+		if(_fifoCAN->txHeadNormal ==_fifoCAN->txTailNormal){
+			return 0;
+		}else{
+			_txData->id = _fifoCAN->txNormal[_fifoCAN->txTailNormal].id;
+			for(uint8_t i = 0; i < 8; i++){
+				_txData->data[i] = _fifoCAN->txNormal[_fifoCAN->txTailNormal].data[i];
+			}
+			_fifoCAN->txTailNormal = (_fifoCAN->txTailNormal + 1) % fifoLengthN;
+			return 1;
+		}
 	}
+	uint8_t fifoTxDataCAN3_high_pop(fifoCanDataType* _fifoCAN,fifoDataType* _txData){
+		if(_fifoCAN->txHeadHigh ==_fifoCAN->txTailHigh){
+			return 0;
+		}else{
+			_txData->id = _fifoCAN->txHigh[_fifoCAN->txTailHigh].id;
+			for(uint8_t i = 0; i < 8; i++){
+				_txData->data[i] = _fifoCAN->txHigh[_fifoCAN->txTailHigh].data[i];
+			}
+			_fifoCAN->txTailHigh = (_fifoCAN->txTailHigh + 1) % fifoLengthH;
+			return 1;
+		}
+	}
+	uint8_t fifoTxDataCAN3_normal_push(fifoCanDataType* _fifoCAN,fifoDataType* _txData){
+		if((_fifoCAN->txHeadNormal + 1) % fifoLengthN == _fifoCAN->txTailNormal){
+			return 0;
+		}else{
+			_fifoCAN->txNormal[_fifoCAN->txHeadNormal].id = _txData->id;
+			for(uint8_t i = 0; i < 8; i++){
+				_fifoCAN->txNormal[_fifoCAN->txHeadNormal].data[i] = _txData->data[i];
+			}
+			_fifoCAN->txHeadNormal = (_fifoCAN->txHeadNormal + 1) % fifoLengthN;
+			return 1;
+		}
+	}
+	uint8_t fifoTxDataCAN3_high_push(fifoCanDataType* _fifoCAN,fifoDataType* _txData){
+		if((_fifoCAN->txHeadHigh + 1) % fifoLengthH == _fifoCAN->txTailHigh){
+			return 0;
+		}else{
+			_fifoCAN->txHigh[_fifoCAN->txHeadHigh].id = _txData->id;
+			for(uint8_t i = 0; i < 8; i++){
+				_fifoCAN->txHigh[_fifoCAN->txHeadHigh].data[i] = _txData->data[i];
+			}
+			_fifoCAN->txHeadHigh = (_fifoCAN->txHeadHigh + 1) % fifoLengthH;
+			return 1;
+		}
+	}
+
 
 #endif
