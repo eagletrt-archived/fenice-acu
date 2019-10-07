@@ -1,4 +1,4 @@
-Src/fenice.o: ../Src/fenice.c ../Inc/fenice.h \
+Src/can.o: ../Src/can.c ../Inc/can.h \
  ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal.h \
  ../Inc/stm32f7xx_hal_conf.h \
  ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_rcc.h \
@@ -29,7 +29,7 @@ Src/fenice.o: ../Src/fenice.c ../Inc/fenice.h \
  ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_tim.h \
  ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_tim_ex.h
 
-../Inc/fenice.h:
+../Inc/can.h:
 
 ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal.h:
 

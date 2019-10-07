@@ -25,7 +25,7 @@
 /* USER CODE BEGIN Includes */
 #include "id.h"
 #include "state.h"
-#include "fenice.h"
+#include "can.h"
 #include "global_variables.h"
 /* USER CODE END Includes */
 
@@ -53,7 +53,7 @@ TIM_HandleTypeDef htim3;
 
 /* USER CODE BEGIN PV */
 ID id;
-canStruct can1,can3;
+extern canStruct can1,can3;
 extern fifoCanDataType fifoCAN1, fifoCAN3;
 /*
 extern fifoRxDataType fifoRxDataCAN1[fifoLengthN], fifoRxDataCAN3[fifoLengthN];
@@ -118,13 +118,7 @@ int main(void)
   /* USER CODE BEGIN 2 */
   HAL_TIM_Base_Start_IT(&htim3);
 
-
-  if(CAN1_initialization(&can1)){
-	  report_error_can1();
-  }
-  if(CAN3_initialization(&can3)){
-	  report_error_can3();
-  }
+  can_init();
 
   current_state = STATE_INIT;
   /* USER CODE END 2 */

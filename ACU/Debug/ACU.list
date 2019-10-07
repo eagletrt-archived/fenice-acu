@@ -37,13 +37,13 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING
  16 .debug_macro  00025030  00000000  00000000  00030398  2**0
                   CONTENTS, READONLY, DEBUGGING
- 17 .debug_line   00008ea5  00000000  00000000  000553c8  2**0
+ 17 .debug_line   00008e9e  00000000  00000000  000553c8  2**0
                   CONTENTS, READONLY, DEBUGGING
- 18 .debug_str    000e9756  00000000  00000000  0005e26d  2**0
+ 18 .debug_str    000e9757  00000000  00000000  0005e266  2**0
                   CONTENTS, READONLY, DEBUGGING
- 19 .comment      0000007b  00000000  00000000  001479c3  2**0
+ 19 .comment      0000007b  00000000  00000000  001479bd  2**0
                   CONTENTS, READONLY
- 20 .debug_frame  000033dc  00000000  00000000  00147a40  2**2
+ 20 .debug_frame  000033dc  00000000  00000000  00147a38  2**2
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -6622,46 +6622,46 @@ __weak void HAL_TIMEx_Break2Callback(TIM_HandleTypeDef *htim)
  800271a:	4770      	bx	lr
 
 0800271c <CAN_Send_IT>:
-		}
-		return 1;
 	}
+	return 1;
+}
 
 
-	uint8_t CAN_Send_IT(canStruct* can, uint32_t id){
+uint8_t CAN_Send_IT(canStruct* can, uint32_t id){
  800271c:	b580      	push	{r7, lr}
  800271e:	b08a      	sub	sp, #40	; 0x28
  8002720:	af00      	add	r7, sp, #0
  8002722:	6078      	str	r0, [r7, #4]
  8002724:	6039      	str	r1, [r7, #0]
 
-		uint32_t mailbox = 0;
+	uint32_t mailbox = 0;
  8002726:	2300      	movs	r3, #0
  8002728:	623b      	str	r3, [r7, #32]
-		//CAN_TxMailBox_TypeDef mailbox;
-		//mailbox.TIR = 0; //set to mailbox 0
-		uint8_t flag = 0; //error
+	//CAN_TxMailBox_TypeDef mailbox;
+	//mailbox.TIR = 0; //set to mailbox 0
+	uint8_t flag = 0; //error
  800272a:	2300      	movs	r3, #0
  800272c:	f887 3027 	strb.w	r3, [r7, #39]	; 0x27
 
-		CAN_TxHeaderTypeDef TxHeader;
-		TxHeader.StdId = id;
+	CAN_TxHeaderTypeDef TxHeader;
+	TxHeader.StdId = id;
  8002730:	683b      	ldr	r3, [r7, #0]
  8002732:	60bb      	str	r3, [r7, #8]
-		TxHeader.IDE = CAN_ID_STD;
+	TxHeader.IDE = CAN_ID_STD;
  8002734:	2300      	movs	r3, #0
  8002736:	613b      	str	r3, [r7, #16]
-		TxHeader.RTR = CAN_RTR_DATA;
+	TxHeader.RTR = CAN_RTR_DATA;
  8002738:	2300      	movs	r3, #0
  800273a:	617b      	str	r3, [r7, #20]
-		TxHeader.DLC = can->size;
+	TxHeader.DLC = can->size;
  800273c:	687b      	ldr	r3, [r7, #4]
  800273e:	681b      	ldr	r3, [r3, #0]
  8002740:	61bb      	str	r3, [r7, #24]
-		TxHeader.TransmitGlobalTime = DISABLE;
+	TxHeader.TransmitGlobalTime = DISABLE;
  8002742:	2300      	movs	r3, #0
  8002744:	773b      	strb	r3, [r7, #28]
 
-		if(HAL_CAN_AddTxMessage(can->hcan, &TxHeader, can->dataTx,&mailbox) == HAL_OK){
+	if(HAL_CAN_AddTxMessage(can->hcan, &TxHeader, can->dataTx,&mailbox) == HAL_OK){
  8002746:	687b      	ldr	r3, [r7, #4]
  8002748:	6958      	ldr	r0, [r3, #20]
  800274a:	687b      	ldr	r3, [r7, #4]
@@ -6672,14 +6672,14 @@ __weak void HAL_TIMEx_Break2Callback(TIM_HandleTypeDef *htim)
  800275a:	4603      	mov	r3, r0
  800275c:	2b00      	cmp	r3, #0
  800275e:	d102      	bne.n	8002766 <CAN_Send_IT+0x4a>
-			flag = 1; //ok
+		flag = 1; //ok
  8002760:	2301      	movs	r3, #1
  8002762:	f887 3027 	strb.w	r3, [r7, #39]	; 0x27
-		}
-
-		return flag;
- 8002766:	f897 3027 	ldrb.w	r3, [r7, #39]	; 0x27
 	}
+
+	return flag;
+ 8002766:	f897 3027 	ldrb.w	r3, [r7, #39]	; 0x27
+}
  800276a:	4618      	mov	r0, r3
  800276c:	3728      	adds	r7, #40	; 0x28
  800276e:	46bd      	mov	sp, r7
@@ -6687,52 +6687,52 @@ __weak void HAL_TIMEx_Break2Callback(TIM_HandleTypeDef *htim)
 
 08002772 <CAN1_initialization>:
 
-	uint8_t CAN1_initialization(canStruct *can){
+uint8_t CAN1_initialization(canStruct *can){
  8002772:	b580      	push	{r7, lr}
  8002774:	b082      	sub	sp, #8
  8002776:	af00      	add	r7, sp, #0
  8002778:	6078      	str	r0, [r7, #4]
 
-		//CAN filter initialization
-		can->canFilter.FilterMode = CAN_FILTERMODE_IDMASK;
+	//CAN filter initialization
+	can->canFilter.FilterMode = CAN_FILTERMODE_IDMASK;
  800277a:	687b      	ldr	r3, [r7, #4]
  800277c:	2200      	movs	r2, #0
  800277e:	631a      	str	r2, [r3, #48]	; 0x30
-		can->canFilter.FilterIdLow = 0;
+	can->canFilter.FilterIdLow = 0;
  8002780:	687b      	ldr	r3, [r7, #4]
  8002782:	2200      	movs	r2, #0
  8002784:	61da      	str	r2, [r3, #28]
-		can->canFilter.FilterIdHigh = 0;
+	can->canFilter.FilterIdHigh = 0;
  8002786:	687b      	ldr	r3, [r7, #4]
  8002788:	2200      	movs	r2, #0
  800278a:	619a      	str	r2, [r3, #24]
-		can->canFilter.FilterMaskIdHigh = 0;
+	can->canFilter.FilterMaskIdHigh = 0;
  800278c:	687b      	ldr	r3, [r7, #4]
  800278e:	2200      	movs	r2, #0
  8002790:	621a      	str	r2, [r3, #32]
-		can->canFilter.FilterMaskIdLow = 0;
+	can->canFilter.FilterMaskIdLow = 0;
  8002792:	687b      	ldr	r3, [r7, #4]
  8002794:	2200      	movs	r2, #0
  8002796:	625a      	str	r2, [r3, #36]	; 0x24
-		can->canFilter.FilterFIFOAssignment = CAN_FILTER_FIFO0;
+	can->canFilter.FilterFIFOAssignment = CAN_FILTER_FIFO0;
  8002798:	687b      	ldr	r3, [r7, #4]
  800279a:	2200      	movs	r2, #0
  800279c:	629a      	str	r2, [r3, #40]	; 0x28
-		can->canFilter.FilterBank = 0;
+	can->canFilter.FilterBank = 0;
  800279e:	687b      	ldr	r3, [r7, #4]
  80027a0:	2200      	movs	r2, #0
  80027a2:	62da      	str	r2, [r3, #44]	; 0x2c
-		can->canFilter.FilterScale  = CAN_FILTERSCALE_16BIT;
+	can->canFilter.FilterScale  = CAN_FILTERSCALE_16BIT;
  80027a4:	687b      	ldr	r3, [r7, #4]
  80027a6:	2200      	movs	r2, #0
  80027a8:	635a      	str	r2, [r3, #52]	; 0x34
-		can->canFilter.FilterActivation = ENABLE;
+	can->canFilter.FilterActivation = ENABLE;
  80027aa:	687b      	ldr	r3, [r7, #4]
  80027ac:	2201      	movs	r2, #1
  80027ae:	639a      	str	r2, [r3, #56]	; 0x38
 
-		//CAN filter configuration
-		can->configFilter_status = HAL_CAN_ConfigFilter(can->hcan, &can->canFilter);
+	//CAN filter configuration
+	can->configFilter_status = HAL_CAN_ConfigFilter(can->hcan, &can->canFilter);
  80027b0:	687b      	ldr	r3, [r7, #4]
  80027b2:	695a      	ldr	r2, [r3, #20]
  80027b4:	687b      	ldr	r3, [r7, #4]
@@ -6745,8 +6745,8 @@ __weak void HAL_TIMEx_Break2Callback(TIM_HandleTypeDef *htim)
  80027c4:	687b      	ldr	r3, [r7, #4]
  80027c6:	f883 2040 	strb.w	r2, [r3, #64]	; 0x40
 
-		//CAN interrupt activation
-		can->activateNotif_status = HAL_CAN_ActivateNotification(can->hcan, CAN1_RX0_IRQn);
+	//CAN interrupt activation
+	can->activateNotif_status = HAL_CAN_ActivateNotification(can->hcan, CAN1_RX0_IRQn);
  80027ca:	687b      	ldr	r3, [r7, #4]
  80027cc:	695b      	ldr	r3, [r3, #20]
  80027ce:	2114      	movs	r1, #20
@@ -6757,8 +6757,8 @@ __weak void HAL_TIMEx_Break2Callback(TIM_HandleTypeDef *htim)
  80027da:	687b      	ldr	r3, [r7, #4]
  80027dc:	f883 2041 	strb.w	r2, [r3, #65]	; 0x41
 
-		//CAN start
-		can->canStart_status = HAL_CAN_Start(can->hcan);
+	//CAN start
+	can->canStart_status = HAL_CAN_Start(can->hcan);
  80027e0:	687b      	ldr	r3, [r7, #4]
  80027e2:	695b      	ldr	r3, [r3, #20]
  80027e4:	4618      	mov	r0, r3
@@ -6768,7 +6768,7 @@ __weak void HAL_TIMEx_Break2Callback(TIM_HandleTypeDef *htim)
  80027ee:	687b      	ldr	r3, [r7, #4]
  80027f0:	f883 2042 	strb.w	r2, [r3, #66]	; 0x42
 
-		if(can->configFilter_status == HAL_OK && can->activateNotif_status == HAL_OK && can->canStart_status == HAL_OK) return 0; // no errors occurred
+	if(can->configFilter_status == HAL_OK && can->activateNotif_status == HAL_OK && can->canStart_status == HAL_OK) return 0; // no errors occurred
  80027f4:	687b      	ldr	r3, [r7, #4]
  80027f6:	f893 3040 	ldrb.w	r3, [r3, #64]	; 0x40
  80027fa:	2b00      	cmp	r3, #0
@@ -6783,10 +6783,10 @@ __weak void HAL_TIMEx_Break2Callback(TIM_HandleTypeDef *htim)
  8002810:	d101      	bne.n	8002816 <CAN1_initialization+0xa4>
  8002812:	2300      	movs	r3, #0
  8002814:	e000      	b.n	8002818 <CAN1_initialization+0xa6>
-		else return 1;
+	else return 1;
  8002816:	2301      	movs	r3, #1
 
-	}
+}
  8002818:	4618      	mov	r0, r3
  800281a:	3708      	adds	r7, #8
  800281c:	46bd      	mov	sp, r7
@@ -6794,52 +6794,52 @@ __weak void HAL_TIMEx_Break2Callback(TIM_HandleTypeDef *htim)
 
 08002820 <CAN3_initialization>:
 
-	uint8_t CAN3_initialization(canStruct *can){
+uint8_t CAN3_initialization(canStruct *can){
  8002820:	b580      	push	{r7, lr}
  8002822:	b082      	sub	sp, #8
  8002824:	af00      	add	r7, sp, #0
  8002826:	6078      	str	r0, [r7, #4]
 
-		//CAN filter initialization
-		can->canFilter.FilterMode = CAN_FILTERMODE_IDMASK;
+	//CAN filter initialization
+	can->canFilter.FilterMode = CAN_FILTERMODE_IDMASK;
  8002828:	687b      	ldr	r3, [r7, #4]
  800282a:	2200      	movs	r2, #0
  800282c:	631a      	str	r2, [r3, #48]	; 0x30
-		can->canFilter.FilterIdLow = 0;
+	can->canFilter.FilterIdLow = 0;
  800282e:	687b      	ldr	r3, [r7, #4]
  8002830:	2200      	movs	r2, #0
  8002832:	61da      	str	r2, [r3, #28]
-		can->canFilter.FilterIdHigh = 0;
+	can->canFilter.FilterIdHigh = 0;
  8002834:	687b      	ldr	r3, [r7, #4]
  8002836:	2200      	movs	r2, #0
  8002838:	619a      	str	r2, [r3, #24]
-		can->canFilter.FilterMaskIdHigh = 0;
+	can->canFilter.FilterMaskIdHigh = 0;
  800283a:	687b      	ldr	r3, [r7, #4]
  800283c:	2200      	movs	r2, #0
  800283e:	621a      	str	r2, [r3, #32]
-		can->canFilter.FilterMaskIdLow = 0;
+	can->canFilter.FilterMaskIdLow = 0;
  8002840:	687b      	ldr	r3, [r7, #4]
  8002842:	2200      	movs	r2, #0
  8002844:	625a      	str	r2, [r3, #36]	; 0x24
-		can->canFilter.FilterFIFOAssignment = CAN_FILTER_FIFO0;
+	can->canFilter.FilterFIFOAssignment = CAN_FILTER_FIFO0;
  8002846:	687b      	ldr	r3, [r7, #4]
  8002848:	2200      	movs	r2, #0
  800284a:	629a      	str	r2, [r3, #40]	; 0x28
-		can->canFilter.FilterBank = 0;
+	can->canFilter.FilterBank = 0;
  800284c:	687b      	ldr	r3, [r7, #4]
  800284e:	2200      	movs	r2, #0
  8002850:	62da      	str	r2, [r3, #44]	; 0x2c
-		can->canFilter.FilterScale  = CAN_FILTERSCALE_16BIT;
+	can->canFilter.FilterScale  = CAN_FILTERSCALE_16BIT;
  8002852:	687b      	ldr	r3, [r7, #4]
  8002854:	2200      	movs	r2, #0
  8002856:	635a      	str	r2, [r3, #52]	; 0x34
-		can->canFilter.FilterActivation = ENABLE;
+	can->canFilter.FilterActivation = ENABLE;
  8002858:	687b      	ldr	r3, [r7, #4]
  800285a:	2201      	movs	r2, #1
  800285c:	639a      	str	r2, [r3, #56]	; 0x38
 
-		//CAN filter configuration
-		can->configFilter_status = HAL_CAN_ConfigFilter(can->hcan, &can->canFilter);
+	//CAN filter configuration
+	can->configFilter_status = HAL_CAN_ConfigFilter(can->hcan, &can->canFilter);
  800285e:	687b      	ldr	r3, [r7, #4]
  8002860:	695a      	ldr	r2, [r3, #20]
  8002862:	687b      	ldr	r3, [r7, #4]
@@ -6852,8 +6852,8 @@ __weak void HAL_TIMEx_Break2Callback(TIM_HandleTypeDef *htim)
  8002872:	687b      	ldr	r3, [r7, #4]
  8002874:	f883 2040 	strb.w	r2, [r3, #64]	; 0x40
 
-		//CAN interrupt activation
-		can->activateNotif_status = HAL_CAN_ActivateNotification(can->hcan, CAN3_RX0_IRQn);
+	//CAN interrupt activation
+	can->activateNotif_status = HAL_CAN_ActivateNotification(can->hcan, CAN3_RX0_IRQn);
  8002878:	687b      	ldr	r3, [r7, #4]
  800287a:	695b      	ldr	r3, [r3, #20]
  800287c:	2169      	movs	r1, #105	; 0x69
@@ -6864,8 +6864,8 @@ __weak void HAL_TIMEx_Break2Callback(TIM_HandleTypeDef *htim)
  8002888:	687b      	ldr	r3, [r7, #4]
  800288a:	f883 2041 	strb.w	r2, [r3, #65]	; 0x41
 
-		//CAN start
-		can->canStart_status = HAL_CAN_Start(can->hcan);
+	//CAN start
+	can->canStart_status = HAL_CAN_Start(can->hcan);
  800288e:	687b      	ldr	r3, [r7, #4]
  8002890:	695b      	ldr	r3, [r3, #20]
  8002892:	4618      	mov	r0, r3
@@ -6875,7 +6875,7 @@ __weak void HAL_TIMEx_Break2Callback(TIM_HandleTypeDef *htim)
  800289c:	687b      	ldr	r3, [r7, #4]
  800289e:	f883 2042 	strb.w	r2, [r3, #66]	; 0x42
 
-		if(can->configFilter_status == HAL_OK && can->activateNotif_status == HAL_OK && can->canStart_status == HAL_OK) return 0; // no errors occurred
+	if(can->configFilter_status == HAL_OK && can->activateNotif_status == HAL_OK && can->canStart_status == HAL_OK) return 0; // no errors occurred
  80028a2:	687b      	ldr	r3, [r7, #4]
  80028a4:	f893 3040 	ldrb.w	r3, [r3, #64]	; 0x40
  80028a8:	2b00      	cmp	r3, #0
@@ -6890,10 +6890,10 @@ __weak void HAL_TIMEx_Break2Callback(TIM_HandleTypeDef *htim)
  80028be:	d101      	bne.n	80028c4 <CAN3_initialization+0xa4>
  80028c0:	2300      	movs	r3, #0
  80028c2:	e000      	b.n	80028c6 <CAN3_initialization+0xa6>
-		else return 1;
+	else return 1;
  80028c4:	2301      	movs	r3, #1
 
-	}
+}
  80028c6:	4618      	mov	r0, r3
  80028c8:	3708      	adds	r7, #8
  80028ca:	46bd      	mov	sp, r7
@@ -6901,22 +6901,22 @@ __weak void HAL_TIMEx_Break2Callback(TIM_HandleTypeDef *htim)
 
 080028ce <report_error_can1>:
 
-	void report_error_can1(){
+void report_error_can1(){
  80028ce:	b480      	push	{r7}
  80028d0:	af00      	add	r7, sp, #0
 
-	}
+}
  80028d2:	bf00      	nop
  80028d4:	46bd      	mov	sp, r7
  80028d6:	f85d 7b04 	ldr.w	r7, [sp], #4
  80028da:	4770      	bx	lr
 
 080028dc <report_error_can3>:
-	void report_error_can3(){
+void report_error_can3(){
  80028dc:	b480      	push	{r7}
  80028de:	af00      	add	r7, sp, #0
 
-	}
+}
  80028e0:	bf00      	nop
  80028e2:	46bd      	mov	sp, r7
  80028e4:	f85d 7b04 	ldr.w	r7, [sp], #4
@@ -6924,29 +6924,29 @@ __weak void HAL_TIMEx_Break2Callback(TIM_HandleTypeDef *htim)
 	...
 
 080028ec <fifoTxDataCAN1_normal_pop>:
-			_fifoCAN->rxHead = (_fifoCAN->rxHead + 1) % fifoLengthN;
-			return 1;
-		}
+		_fifoCAN->rxHead = (_fifoCAN->rxHead + 1) % fifoLengthN;
+		return 1;
 	}
+}
 
-	uint8_t fifoTxDataCAN1_normal_pop(fifoCanDataType* _fifoCAN,fifoDataType* _txData){
+uint8_t fifoTxDataCAN1_normal_pop(fifoCanDataType* _fifoCAN,fifoDataType* _txData){
  80028ec:	b490      	push	{r4, r7}
  80028ee:	b084      	sub	sp, #16
  80028f0:	af00      	add	r7, sp, #0
  80028f2:	6078      	str	r0, [r7, #4]
  80028f4:	6039      	str	r1, [r7, #0]
-		if(_fifoCAN->txHeadNormal ==_fifoCAN->txTailNormal){
+	if(_fifoCAN->txHeadNormal ==_fifoCAN->txTailNormal){
  80028f6:	687b      	ldr	r3, [r7, #4]
  80028f8:	789a      	ldrb	r2, [r3, #2]
  80028fa:	687b      	ldr	r3, [r7, #4]
  80028fc:	78db      	ldrb	r3, [r3, #3]
  80028fe:	429a      	cmp	r2, r3
  8002900:	d101      	bne.n	8002906 <fifoTxDataCAN1_normal_pop+0x1a>
-			return 0;
+		return 0;
  8002902:	2300      	movs	r3, #0
  8002904:	e03a      	b.n	800297c <fifoTxDataCAN1_normal_pop+0x90>
-		}else{
-			_txData->id = _fifoCAN->txNormal[_fifoCAN->txTailNormal].id;
+	}else{
+		_txData->id = _fifoCAN->txNormal[_fifoCAN->txTailNormal].id;
  8002906:	687b      	ldr	r3, [r7, #4]
  8002908:	78db      	ldrb	r3, [r3, #3]
  800290a:	4619      	mov	r1, r3
@@ -6960,11 +6960,11 @@ __weak void HAL_TIMEx_Break2Callback(TIM_HandleTypeDef *htim)
  800291c:	681a      	ldr	r2, [r3, #0]
  800291e:	683b      	ldr	r3, [r7, #0]
  8002920:	601a      	str	r2, [r3, #0]
-			for(uint8_t i = 0; i < 8; i++){
+		for(uint8_t i = 0; i < 8; i++){
  8002922:	2300      	movs	r3, #0
  8002924:	73fb      	strb	r3, [r7, #15]
  8002926:	e015      	b.n	8002954 <fifoTxDataCAN1_normal_pop+0x68>
-				_txData->data[i] = _fifoCAN->txNormal[_fifoCAN->txTailNormal].data[i];
+			_txData->data[i] = _fifoCAN->txNormal[_fifoCAN->txTailNormal].data[i];
  8002928:	687b      	ldr	r3, [r7, #4]
  800292a:	78db      	ldrb	r3, [r3, #3]
  800292c:	461c      	mov	r4, r3
@@ -6983,15 +6983,15 @@ __weak void HAL_TIMEx_Break2Callback(TIM_HandleTypeDef *htim)
  8002948:	4413      	add	r3, r2
  800294a:	460a      	mov	r2, r1
  800294c:	711a      	strb	r2, [r3, #4]
-			for(uint8_t i = 0; i < 8; i++){
+		for(uint8_t i = 0; i < 8; i++){
  800294e:	7bfb      	ldrb	r3, [r7, #15]
  8002950:	3301      	adds	r3, #1
  8002952:	73fb      	strb	r3, [r7, #15]
  8002954:	7bfb      	ldrb	r3, [r7, #15]
  8002956:	2b07      	cmp	r3, #7
  8002958:	d9e6      	bls.n	8002928 <fifoTxDataCAN1_normal_pop+0x3c>
-			}
-			_fifoCAN->txTailNormal = (_fifoCAN->txTailNormal + 1) % fifoLengthN;
+		}
+		_fifoCAN->txTailNormal = (_fifoCAN->txTailNormal + 1) % fifoLengthN;
  800295a:	687b      	ldr	r3, [r7, #4]
  800295c:	78db      	ldrb	r3, [r3, #3]
  800295e:	3301      	adds	r3, #1
@@ -7006,10 +7006,10 @@ __weak void HAL_TIMEx_Break2Callback(TIM_HandleTypeDef *htim)
  8002974:	b2d2      	uxtb	r2, r2
  8002976:	687b      	ldr	r3, [r7, #4]
  8002978:	70da      	strb	r2, [r3, #3]
-			return 1;
+		return 1;
  800297a:	2301      	movs	r3, #1
-		}
 	}
+}
  800297c:	4618      	mov	r0, r3
  800297e:	3710      	adds	r7, #16
  8002980:	46bd      	mov	sp, r7
@@ -7019,24 +7019,24 @@ __weak void HAL_TIMEx_Break2Callback(TIM_HandleTypeDef *htim)
  8002988:	51eb851f 	.word	0x51eb851f
 
 0800298c <fifoTxDataCAN1_high_pop>:
-	uint8_t fifoTxDataCAN1_high_pop(fifoCanDataType* _fifoCAN,fifoDataType* _txData){
+uint8_t fifoTxDataCAN1_high_pop(fifoCanDataType* _fifoCAN,fifoDataType* _txData){
  800298c:	b490      	push	{r4, r7}
  800298e:	b084      	sub	sp, #16
  8002990:	af00      	add	r7, sp, #0
  8002992:	6078      	str	r0, [r7, #4]
  8002994:	6039      	str	r1, [r7, #0]
-		if(_fifoCAN->txHeadHigh ==_fifoCAN->txTailHigh){
+	if(_fifoCAN->txHeadHigh ==_fifoCAN->txTailHigh){
  8002996:	687b      	ldr	r3, [r7, #4]
  8002998:	791a      	ldrb	r2, [r3, #4]
  800299a:	687b      	ldr	r3, [r7, #4]
  800299c:	795b      	ldrb	r3, [r3, #5]
  800299e:	429a      	cmp	r2, r3
  80029a0:	d101      	bne.n	80029a6 <fifoTxDataCAN1_high_pop+0x1a>
-			return 0;
+		return 0;
  80029a2:	2300      	movs	r3, #0
  80029a4:	e03b      	b.n	8002a1e <fifoTxDataCAN1_high_pop+0x92>
-		}else{
-			_txData->id = _fifoCAN->txHigh[_fifoCAN->txTailHigh].id;
+	}else{
+		_txData->id = _fifoCAN->txHigh[_fifoCAN->txTailHigh].id;
  80029a6:	687b      	ldr	r3, [r7, #4]
  80029a8:	795b      	ldrb	r3, [r3, #5]
  80029aa:	4619      	mov	r1, r3
@@ -7050,11 +7050,11 @@ __weak void HAL_TIMEx_Break2Callback(TIM_HandleTypeDef *htim)
  80029bc:	681a      	ldr	r2, [r3, #0]
  80029be:	683b      	ldr	r3, [r7, #0]
  80029c0:	601a      	str	r2, [r3, #0]
-			for(uint8_t i = 0; i < 8; i++){
+		for(uint8_t i = 0; i < 8; i++){
  80029c2:	2300      	movs	r3, #0
  80029c4:	73fb      	strb	r3, [r7, #15]
  80029c6:	e015      	b.n	80029f4 <fifoTxDataCAN1_high_pop+0x68>
-				_txData->data[i] = _fifoCAN->txHigh[_fifoCAN->txTailHigh].data[i];
+			_txData->data[i] = _fifoCAN->txHigh[_fifoCAN->txTailHigh].data[i];
  80029c8:	687b      	ldr	r3, [r7, #4]
  80029ca:	795b      	ldrb	r3, [r3, #5]
  80029cc:	461c      	mov	r4, r3
@@ -7073,15 +7073,15 @@ __weak void HAL_TIMEx_Break2Callback(TIM_HandleTypeDef *htim)
  80029e8:	4413      	add	r3, r2
  80029ea:	460a      	mov	r2, r1
  80029ec:	711a      	strb	r2, [r3, #4]
-			for(uint8_t i = 0; i < 8; i++){
+		for(uint8_t i = 0; i < 8; i++){
  80029ee:	7bfb      	ldrb	r3, [r7, #15]
  80029f0:	3301      	adds	r3, #1
  80029f2:	73fb      	strb	r3, [r7, #15]
  80029f4:	7bfb      	ldrb	r3, [r7, #15]
  80029f6:	2b07      	cmp	r3, #7
  80029f8:	d9e6      	bls.n	80029c8 <fifoTxDataCAN1_high_pop+0x3c>
-			}
-			_fifoCAN->txTailHigh = (_fifoCAN->txTailHigh + 1) % fifoLengthH;
+		}
+		_fifoCAN->txTailHigh = (_fifoCAN->txTailHigh + 1) % fifoLengthH;
  80029fa:	687b      	ldr	r3, [r7, #4]
  80029fc:	795b      	ldrb	r3, [r3, #5]
  80029fe:	1c5a      	adds	r2, r3, #1
@@ -7098,10 +7098,10 @@ __weak void HAL_TIMEx_Break2Callback(TIM_HandleTypeDef *htim)
  8002a16:	b2ca      	uxtb	r2, r1
  8002a18:	687b      	ldr	r3, [r7, #4]
  8002a1a:	715a      	strb	r2, [r3, #5]
-			return 1;
+		return 1;
  8002a1c:	2301      	movs	r3, #1
-		}
 	}
+}
  8002a1e:	4618      	mov	r0, r3
  8002a20:	3710      	adds	r7, #16
  8002a22:	46bd      	mov	sp, r7
@@ -7110,29 +7110,29 @@ __weak void HAL_TIMEx_Break2Callback(TIM_HandleTypeDef *htim)
  8002a28:	66666667 	.word	0x66666667
 
 08002a2c <fifoTxDataCAN3_normal_pop>:
-			_fifoCAN->txHeadHigh = (_fifoCAN->txHeadHigh + 1) % fifoLengthH;
-			return 1;
-		}
+		_fifoCAN->txHeadHigh = (_fifoCAN->txHeadHigh + 1) % fifoLengthH;
+		return 1;
 	}
+}
 
-	uint8_t fifoTxDataCAN3_normal_pop(fifoCanDataType* _fifoCAN,fifoDataType* _txData){
+uint8_t fifoTxDataCAN3_normal_pop(fifoCanDataType* _fifoCAN,fifoDataType* _txData){
  8002a2c:	b490      	push	{r4, r7}
  8002a2e:	b084      	sub	sp, #16
  8002a30:	af00      	add	r7, sp, #0
  8002a32:	6078      	str	r0, [r7, #4]
  8002a34:	6039      	str	r1, [r7, #0]
-		if(_fifoCAN->txHeadNormal ==_fifoCAN->txTailNormal){
+	if(_fifoCAN->txHeadNormal ==_fifoCAN->txTailNormal){
  8002a36:	687b      	ldr	r3, [r7, #4]
  8002a38:	789a      	ldrb	r2, [r3, #2]
  8002a3a:	687b      	ldr	r3, [r7, #4]
  8002a3c:	78db      	ldrb	r3, [r3, #3]
  8002a3e:	429a      	cmp	r2, r3
  8002a40:	d101      	bne.n	8002a46 <fifoTxDataCAN3_normal_pop+0x1a>
-			return 0;
+		return 0;
  8002a42:	2300      	movs	r3, #0
  8002a44:	e03a      	b.n	8002abc <fifoTxDataCAN3_normal_pop+0x90>
-		}else{
-			_txData->id = _fifoCAN->txNormal[_fifoCAN->txTailNormal].id;
+	}else{
+		_txData->id = _fifoCAN->txNormal[_fifoCAN->txTailNormal].id;
  8002a46:	687b      	ldr	r3, [r7, #4]
  8002a48:	78db      	ldrb	r3, [r3, #3]
  8002a4a:	4619      	mov	r1, r3
@@ -7146,11 +7146,11 @@ __weak void HAL_TIMEx_Break2Callback(TIM_HandleTypeDef *htim)
  8002a5c:	681a      	ldr	r2, [r3, #0]
  8002a5e:	683b      	ldr	r3, [r7, #0]
  8002a60:	601a      	str	r2, [r3, #0]
-			for(uint8_t i = 0; i < 8; i++){
+		for(uint8_t i = 0; i < 8; i++){
  8002a62:	2300      	movs	r3, #0
  8002a64:	73fb      	strb	r3, [r7, #15]
  8002a66:	e015      	b.n	8002a94 <fifoTxDataCAN3_normal_pop+0x68>
-				_txData->data[i] = _fifoCAN->txNormal[_fifoCAN->txTailNormal].data[i];
+			_txData->data[i] = _fifoCAN->txNormal[_fifoCAN->txTailNormal].data[i];
  8002a68:	687b      	ldr	r3, [r7, #4]
  8002a6a:	78db      	ldrb	r3, [r3, #3]
  8002a6c:	461c      	mov	r4, r3
@@ -7169,15 +7169,15 @@ __weak void HAL_TIMEx_Break2Callback(TIM_HandleTypeDef *htim)
  8002a88:	4413      	add	r3, r2
  8002a8a:	460a      	mov	r2, r1
  8002a8c:	711a      	strb	r2, [r3, #4]
-			for(uint8_t i = 0; i < 8; i++){
+		for(uint8_t i = 0; i < 8; i++){
  8002a8e:	7bfb      	ldrb	r3, [r7, #15]
  8002a90:	3301      	adds	r3, #1
  8002a92:	73fb      	strb	r3, [r7, #15]
  8002a94:	7bfb      	ldrb	r3, [r7, #15]
  8002a96:	2b07      	cmp	r3, #7
  8002a98:	d9e6      	bls.n	8002a68 <fifoTxDataCAN3_normal_pop+0x3c>
-			}
-			_fifoCAN->txTailNormal = (_fifoCAN->txTailNormal + 1) % fifoLengthN;
+		}
+		_fifoCAN->txTailNormal = (_fifoCAN->txTailNormal + 1) % fifoLengthN;
  8002a9a:	687b      	ldr	r3, [r7, #4]
  8002a9c:	78db      	ldrb	r3, [r3, #3]
  8002a9e:	3301      	adds	r3, #1
@@ -7192,10 +7192,10 @@ __weak void HAL_TIMEx_Break2Callback(TIM_HandleTypeDef *htim)
  8002ab4:	b2d2      	uxtb	r2, r2
  8002ab6:	687b      	ldr	r3, [r7, #4]
  8002ab8:	70da      	strb	r2, [r3, #3]
-			return 1;
+		return 1;
  8002aba:	2301      	movs	r3, #1
-		}
 	}
+}
  8002abc:	4618      	mov	r0, r3
  8002abe:	3710      	adds	r7, #16
  8002ac0:	46bd      	mov	sp, r7
@@ -7205,24 +7205,24 @@ __weak void HAL_TIMEx_Break2Callback(TIM_HandleTypeDef *htim)
  8002ac8:	51eb851f 	.word	0x51eb851f
 
 08002acc <fifoTxDataCAN3_high_pop>:
-	uint8_t fifoTxDataCAN3_high_pop(fifoCanDataType* _fifoCAN,fifoDataType* _txData){
+uint8_t fifoTxDataCAN3_high_pop(fifoCanDataType* _fifoCAN,fifoDataType* _txData){
  8002acc:	b490      	push	{r4, r7}
  8002ace:	b084      	sub	sp, #16
  8002ad0:	af00      	add	r7, sp, #0
  8002ad2:	6078      	str	r0, [r7, #4]
  8002ad4:	6039      	str	r1, [r7, #0]
-		if(_fifoCAN->txHeadHigh ==_fifoCAN->txTailHigh){
+	if(_fifoCAN->txHeadHigh ==_fifoCAN->txTailHigh){
  8002ad6:	687b      	ldr	r3, [r7, #4]
  8002ad8:	791a      	ldrb	r2, [r3, #4]
  8002ada:	687b      	ldr	r3, [r7, #4]
  8002adc:	795b      	ldrb	r3, [r3, #5]
  8002ade:	429a      	cmp	r2, r3
  8002ae0:	d101      	bne.n	8002ae6 <fifoTxDataCAN3_high_pop+0x1a>
-			return 0;
+		return 0;
  8002ae2:	2300      	movs	r3, #0
  8002ae4:	e03b      	b.n	8002b5e <fifoTxDataCAN3_high_pop+0x92>
-		}else{
-			_txData->id = _fifoCAN->txHigh[_fifoCAN->txTailHigh].id;
+	}else{
+		_txData->id = _fifoCAN->txHigh[_fifoCAN->txTailHigh].id;
  8002ae6:	687b      	ldr	r3, [r7, #4]
  8002ae8:	795b      	ldrb	r3, [r3, #5]
  8002aea:	4619      	mov	r1, r3
@@ -7236,11 +7236,11 @@ __weak void HAL_TIMEx_Break2Callback(TIM_HandleTypeDef *htim)
  8002afc:	681a      	ldr	r2, [r3, #0]
  8002afe:	683b      	ldr	r3, [r7, #0]
  8002b00:	601a      	str	r2, [r3, #0]
-			for(uint8_t i = 0; i < 8; i++){
+		for(uint8_t i = 0; i < 8; i++){
  8002b02:	2300      	movs	r3, #0
  8002b04:	73fb      	strb	r3, [r7, #15]
  8002b06:	e015      	b.n	8002b34 <fifoTxDataCAN3_high_pop+0x68>
-				_txData->data[i] = _fifoCAN->txHigh[_fifoCAN->txTailHigh].data[i];
+			_txData->data[i] = _fifoCAN->txHigh[_fifoCAN->txTailHigh].data[i];
  8002b08:	687b      	ldr	r3, [r7, #4]
  8002b0a:	795b      	ldrb	r3, [r3, #5]
  8002b0c:	461c      	mov	r4, r3
@@ -7259,15 +7259,15 @@ __weak void HAL_TIMEx_Break2Callback(TIM_HandleTypeDef *htim)
  8002b28:	4413      	add	r3, r2
  8002b2a:	460a      	mov	r2, r1
  8002b2c:	711a      	strb	r2, [r3, #4]
-			for(uint8_t i = 0; i < 8; i++){
+		for(uint8_t i = 0; i < 8; i++){
  8002b2e:	7bfb      	ldrb	r3, [r7, #15]
  8002b30:	3301      	adds	r3, #1
  8002b32:	73fb      	strb	r3, [r7, #15]
  8002b34:	7bfb      	ldrb	r3, [r7, #15]
  8002b36:	2b07      	cmp	r3, #7
  8002b38:	d9e6      	bls.n	8002b08 <fifoTxDataCAN3_high_pop+0x3c>
-			}
-			_fifoCAN->txTailHigh = (_fifoCAN->txTailHigh + 1) % fifoLengthH;
+		}
+		_fifoCAN->txTailHigh = (_fifoCAN->txTailHigh + 1) % fifoLengthH;
  8002b3a:	687b      	ldr	r3, [r7, #4]
  8002b3c:	795b      	ldrb	r3, [r3, #5]
  8002b3e:	1c5a      	adds	r2, r3, #1
@@ -7284,10 +7284,10 @@ __weak void HAL_TIMEx_Break2Callback(TIM_HandleTypeDef *htim)
  8002b56:	b2ca      	uxtb	r2, r1
  8002b58:	687b      	ldr	r3, [r7, #4]
  8002b5a:	715a      	strb	r2, [r3, #5]
-			return 1;
+		return 1;
  8002b5c:	2301      	movs	r3, #1
-		}
 	}
+}
  8002b5e:	4618      	mov	r0, r3
  8002b60:	3710      	adds	r7, #16
  8002b62:	46bd      	mov	sp, r7

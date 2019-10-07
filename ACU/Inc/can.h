@@ -1,6 +1,7 @@
 #ifndef _FENICE_H
 #define _FENICE_H
 
+
 #define fifoLengthN 100
 #define fifoLengthH 10
 
@@ -33,8 +34,8 @@
 		uint8_t CAN3_initialization(canStruct *can);
 		void report_error_can1();
 		void report_error_can3();
-		uint8_t CAN_Send(canStruct* can, uint32_t id, fifoPriority);
-		uint8_t CAN_Send_IT(canStruct* can, uint32_t id);
+		uint8_t CAN_Send(canStruct*, uint32_t, fifoPriority);
+		uint8_t CAN_Send_IT(canStruct*, uint32_t);
 
 		typedef struct fifoDataType{
 			uint32_t id;
@@ -76,7 +77,10 @@
 		uint8_t fifoTxDataCAN3_normal_push(fifoCanDataType*, fifoDataType*);
 		uint8_t fifoTxDataCAN3_high_push(fifoCanDataType*, fifoDataType*);
 
+		void can_init();
+
 
 	#endif
+
 
 #endif
