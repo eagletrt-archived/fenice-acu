@@ -12,7 +12,7 @@
 
 	#ifdef HAL_CAN_MODULE_ENABLED
 
-		typedef enum fifoPriority_t {normalPriority, highPriority}fifoPriority;
+		typedef enum fifoPriority_t{normalPriority, highPriority}fifoPriority;
 
 		typedef struct{
 

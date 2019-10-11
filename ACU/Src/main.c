@@ -27,6 +27,8 @@
 #include "state.h"
 #include "can.h"
 #include "global_variables.h"
+#include "string.h"
+#include "stdio.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -45,16 +47,22 @@
 /* USER CODE END PM */
 
 /* Private variables ---------------------------------------------------------*/
-CAN_HandleTypeDef hcan1;
 CAN_HandleTypeDef hcan3;
 
 TIM_HandleTypeDef htim1;
 TIM_HandleTypeDef htim3;
 
+UART_HandleTypeDef huart1;
+UART_HandleTypeDef huart2;
+
 /* USER CODE BEGIN PV */
 ID id;
+uint8_t i_debug;
 extern canStruct can1,can3;
 extern fifoCanDataType fifoCAN1, fifoCAN3;
+extern fifoPriority fifoPriority_t;
+
+CAN_FilterTypeDef sFilter;
 /*
 extern fifoRxDataType fifoRxDataCAN1[fifoLengthN], fifoRxDataCAN3[fifoLengthN];
 extern fifoTxDataType fifoTxDataCAN1_normal[fifoLengthN], fifoTxDataCAN1_high[fifoLengthR];
@@ -65,10 +73,11 @@ extern fifoTxDataType fifoTxDataCAN3_normal[fifoLengthN], fifoTxDataCAN3_high[fi
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
-static void MX_CAN1_Init(void);
-static void MX_CAN3_Init(void);
 static void MX_TIM1_Init(void);
 static void MX_TIM3_Init(void);
+static void MX_USART2_UART_Init(void);
+static void MX_USART1_UART_Init(void);
+static void MX_CAN3_Init(void);
 static void MX_NVIC_Init(void);
 /* USER CODE BEGIN PFP */
 
@@ -108,17 +117,44 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
-  MX_CAN1_Init();
-  MX_CAN3_Init();
   MX_TIM1_Init();
   MX_TIM3_Init();
+  MX_USART2_UART_Init();
+  MX_USART1_UART_Init();
+  MX_CAN3_Init();
 
   /* Initialize interrupts */
   MX_NVIC_Init();
   /* USER CODE BEGIN 2 */
+
   HAL_TIM_Base_Start_IT(&htim3);
+/*
+  sFilter.FilterMode = CAN_FILTERMODE_IDMASK;
+  sFilter.FilterIdLow = 0;
+  sFilter.FilterIdHigh = 0;
+  sFilter.FilterMaskIdHigh = 0;
+  sFilter.FilterMaskIdLow = 0;
+  sFilter.FilterFIFOAssignment = CAN_FILTER_FIFO0;
+  sFilter.FilterBank = 0;
+  sFilter.FilterScale  = CAN_FILTERSCALE_16BIT;
+  sFilter.FilterActivation = ENABLE;
+  int err1 = HAL_CAN_ConfigFilter(&hcan3, &sFilter);
+  int err2 = HAL_CAN_ActivateNotification(&hcan3, CAN3_RX0_IRQn);
+  int err3 = HAL_CAN_Start(&hcan3);*/
+
+  can3.hcan = &hcan3;
 
   can_init();
+
+  char txt[100];
+  sprintf(txt,"----------START---------\r\n");
+  HAL_UART_Transmit(&huart1,(uint8_t*)txt, strlen(txt), 10);
+  sprintf(txt,"Config Status: %d\r\n", can3.configFilter_status);
+  HAL_UART_Transmit(&huart1,(uint8_t*)txt, strlen(txt), 10);
+  sprintf(txt,"CAN Notification %d\r\n", can3.activateNotif_status);
+  HAL_UART_Transmit(&huart1,(uint8_t*)txt, strlen(txt), 10);
+  sprintf(txt,"CAN start status: %d\r\n", can3.canStart_status);
+  HAL_UART_Transmit(&huart1,(uint8_t*)txt, strlen(txt), 10);
 
   current_state = STATE_INIT;
   /* USER CODE END 2 */
@@ -138,6 +174,34 @@ int main(void)
 	  }else if(current_state == STATE_RUN){
 		  run();
 	  }
+
+	  can3.dataTx[0]=i_debug;
+	  i_debug++;
+	  can3.dataTx[1]=2;
+	  can3.dataTx[2]=3;
+	  can3.dataTx[3]=4;
+	  can3.dataTx[4]=5;
+	  can3.dataTx[5]=6;
+	  can3.dataTx[6]=7;
+	  can3.dataTx[7]=8;
+	  can3.size = 8;
+
+	  CAN_Send(&can3, 130, normalPriority);
+
+	  HAL_UART_Transmit(&huart1,(uint8_t*)txt, strlen(txt), 10);
+	  sprintf(txt,"Config Status: %d\r\n", can3.configFilter_status);
+	  HAL_UART_Transmit(&huart1,(uint8_t*)txt, strlen(txt), 10);
+	  sprintf(txt,"CAN Notification %d\r\n", can3.activateNotif_status);
+	  HAL_UART_Transmit(&huart1,(uint8_t*)txt, strlen(txt), 10);
+	  sprintf(txt,"CAN start status: %d\r\n", can3.canStart_status);
+	  HAL_UART_Transmit(&huart1,(uint8_t*)txt, strlen(txt), 10);
+
+	  /*HAL_GPIO_TogglePin(USER_LED_3_GPIO_Port, USER_LED_2_Pin);
+	  HAL_GPIO_TogglePin(USER_LED_3_GPIO_Port, USER_LED_3_Pin);
+	  HAL_GPIO_TogglePin(USER_LED_4_GPIO_Port, USER_LED_4_Pin);
+	  HAL_GPIO_TogglePin(USER_LED_5_GPIO_Port, USER_LED_5_Pin);*/
+	  HAL_Delay(500);
+
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -153,6 +217,7 @@ void SystemClock_Config(void)
 {
   RCC_OscInitTypeDef RCC_OscInitStruct = {0};
   RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
+  RCC_PeriphCLKInitTypeDef PeriphClkInitStruct = {0};
 
   /** Configure the main internal regulator output voltage 
   */
@@ -160,11 +225,12 @@ void SystemClock_Config(void)
   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
   /** Initializes the CPU, AHB and APB busses clocks 
   */
-  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE;
-  RCC_OscInitStruct.HSEState = RCC_HSE_BYPASS;
+  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSI;
+  RCC_OscInitStruct.HSIState = RCC_HSI_ON;
+  RCC_OscInitStruct.HSICalibrationValue = RCC_HSICALIBRATION_DEFAULT;
   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
-  RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
-  RCC_OscInitStruct.PLL.PLLM = 13;
+  RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSI;
+  RCC_OscInitStruct.PLL.PLLM = 8;
   RCC_OscInitStruct.PLL.PLLN = 216;
   RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
   RCC_OscInitStruct.PLL.PLLQ = 2;
@@ -191,6 +257,13 @@ void SystemClock_Config(void)
   {
     Error_Handler();
   }
+  PeriphClkInitStruct.PeriphClockSelection = RCC_PERIPHCLK_USART1|RCC_PERIPHCLK_USART2;
+  PeriphClkInitStruct.Usart1ClockSelection = RCC_USART1CLKSOURCE_PCLK2;
+  PeriphClkInitStruct.Usart2ClockSelection = RCC_USART2CLKSOURCE_PCLK1;
+  if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInitStruct) != HAL_OK)
+  {
+    Error_Handler();
+  }
 }
 
 /**
@@ -199,15 +272,9 @@ void SystemClock_Config(void)
   */
 static void MX_NVIC_Init(void)
 {
-  /* CAN1_TX_IRQn interrupt configuration */
-  HAL_NVIC_SetPriority(CAN1_TX_IRQn, 0, 0);
-  HAL_NVIC_EnableIRQ(CAN1_TX_IRQn);
-  /* CAN1_RX0_IRQn interrupt configuration */
-  HAL_NVIC_SetPriority(CAN1_RX0_IRQn, 0, 0);
-  HAL_NVIC_EnableIRQ(CAN1_RX0_IRQn);
-  /* CAN1_RX1_IRQn interrupt configuration */
-  HAL_NVIC_SetPriority(CAN1_RX1_IRQn, 0, 0);
-  HAL_NVIC_EnableIRQ(CAN1_RX1_IRQn);
+  /* TIM3_IRQn interrupt configuration */
+  HAL_NVIC_SetPriority(TIM3_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(TIM3_IRQn);
   /* CAN3_TX_IRQn interrupt configuration */
   HAL_NVIC_SetPriority(CAN3_TX_IRQn, 0, 0);
   HAL_NVIC_EnableIRQ(CAN3_TX_IRQn);
@@ -220,49 +287,6 @@ static void MX_NVIC_Init(void)
   /* CAN3_SCE_IRQn interrupt configuration */
   HAL_NVIC_SetPriority(CAN3_SCE_IRQn, 0, 0);
   HAL_NVIC_EnableIRQ(CAN3_SCE_IRQn);
-  /* CAN1_SCE_IRQn interrupt configuration */
-  HAL_NVIC_SetPriority(CAN1_SCE_IRQn, 0, 0);
-  HAL_NVIC_EnableIRQ(CAN1_SCE_IRQn);
-  /* TIM3_IRQn interrupt configuration */
-  HAL_NVIC_SetPriority(TIM3_IRQn, 0, 0);
-  HAL_NVIC_EnableIRQ(TIM3_IRQn);
-}
-
-/**
-  * @brief CAN1 Initialization Function
-  * @param None
-  * @retval None
-  */
-static void MX_CAN1_Init(void)
-{
-
-  /* USER CODE BEGIN CAN1_Init 0 */
-
-  /* USER CODE END CAN1_Init 0 */
-
-  /* USER CODE BEGIN CAN1_Init 1 */
-
-  /* USER CODE END CAN1_Init 1 */
-  hcan1.Instance = CAN1;
-  hcan1.Init.Prescaler = 3;
-  hcan1.Init.Mode = CAN_MODE_NORMAL;
-  hcan1.Init.SyncJumpWidth = CAN_SJW_1TQ;
-  hcan1.Init.TimeSeg1 = CAN_BS1_15TQ;
-  hcan1.Init.TimeSeg2 = CAN_BS2_2TQ;
-  hcan1.Init.TimeTriggeredMode = DISABLE;
-  hcan1.Init.AutoBusOff = DISABLE;
-  hcan1.Init.AutoWakeUp = DISABLE;
-  hcan1.Init.AutoRetransmission = DISABLE;
-  hcan1.Init.ReceiveFifoLocked = DISABLE;
-  hcan1.Init.TransmitFifoPriority = DISABLE;
-  if (HAL_CAN_Init(&hcan1) != HAL_OK)
-  {
-    Error_Handler();
-  }
-  /* USER CODE BEGIN CAN1_Init 2 */
-
-  /* USER CODE END CAN1_Init 2 */
-
 }
 
 /**
@@ -284,11 +308,11 @@ static void MX_CAN3_Init(void)
   hcan3.Init.Prescaler = 3;
   hcan3.Init.Mode = CAN_MODE_NORMAL;
   hcan3.Init.SyncJumpWidth = CAN_SJW_1TQ;
-  hcan3.Init.TimeSeg1 = CAN_BS1_15TQ;
-  hcan3.Init.TimeSeg2 = CAN_BS2_2TQ;
+  hcan3.Init.TimeSeg1 = CAN_BS1_12TQ;
+  hcan3.Init.TimeSeg2 = CAN_BS2_5TQ;
   hcan3.Init.TimeTriggeredMode = DISABLE;
   hcan3.Init.AutoBusOff = DISABLE;
-  hcan3.Init.AutoWakeUp = DISABLE;
+  hcan3.Init.AutoWakeUp = ENABLE;
   hcan3.Init.AutoRetransmission = DISABLE;
   hcan3.Init.ReceiveFifoLocked = DISABLE;
   hcan3.Init.TransmitFifoPriority = DISABLE;
@@ -395,6 +419,76 @@ static void MX_TIM3_Init(void)
 }
 
 /**
+  * @brief USART1 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_USART1_UART_Init(void)
+{
+
+  /* USER CODE BEGIN USART1_Init 0 */
+
+  /* USER CODE END USART1_Init 0 */
+
+  /* USER CODE BEGIN USART1_Init 1 */
+
+  /* USER CODE END USART1_Init 1 */
+  huart1.Instance = USART1;
+  huart1.Init.BaudRate = 115200;
+  huart1.Init.WordLength = UART_WORDLENGTH_8B;
+  huart1.Init.StopBits = UART_STOPBITS_1;
+  huart1.Init.Parity = UART_PARITY_NONE;
+  huart1.Init.Mode = UART_MODE_TX_RX;
+  huart1.Init.HwFlowCtl = UART_HWCONTROL_NONE;
+  huart1.Init.OverSampling = UART_OVERSAMPLING_16;
+  huart1.Init.OneBitSampling = UART_ONE_BIT_SAMPLE_DISABLE;
+  huart1.AdvancedInit.AdvFeatureInit = UART_ADVFEATURE_NO_INIT;
+  if (HAL_UART_Init(&huart1) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN USART1_Init 2 */
+
+  /* USER CODE END USART1_Init 2 */
+
+}
+
+/**
+  * @brief USART2 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_USART2_UART_Init(void)
+{
+
+  /* USER CODE BEGIN USART2_Init 0 */
+
+  /* USER CODE END USART2_Init 0 */
+
+  /* USER CODE BEGIN USART2_Init 1 */
+
+  /* USER CODE END USART2_Init 1 */
+  huart2.Instance = USART2;
+  huart2.Init.BaudRate = 115200;
+  huart2.Init.WordLength = UART_WORDLENGTH_8B;
+  huart2.Init.StopBits = UART_STOPBITS_1;
+  huart2.Init.Parity = UART_PARITY_NONE;
+  huart2.Init.Mode = UART_MODE_TX_RX;
+  huart2.Init.HwFlowCtl = UART_HWCONTROL_NONE;
+  huart2.Init.OverSampling = UART_OVERSAMPLING_16;
+  huart2.Init.OneBitSampling = UART_ONE_BIT_SAMPLE_DISABLE;
+  huart2.AdvancedInit.AdvFeatureInit = UART_ADVFEATURE_NO_INIT;
+  if (HAL_UART_Init(&huart2) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN USART2_Init 2 */
+
+  /* USER CODE END USART2_Init 2 */
+
+}
+
+/**
   * @brief GPIO Initialization Function
   * @param None
   * @retval None
@@ -405,18 +499,18 @@ static void MX_GPIO_Init(void)
 
   /* GPIO Ports Clock Enable */
   __HAL_RCC_GPIOH_CLK_ENABLE();
-  __HAL_RCC_GPIOE_CLK_ENABLE();
   __HAL_RCC_GPIOA_CLK_ENABLE();
+  __HAL_RCC_GPIOE_CLK_ENABLE();
   __HAL_RCC_GPIOB_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOE, GPIO_PIN_11|GPIO_PIN_12|GPIO_PIN_13|GPIO_PIN_14 
-                          |GPIO_PIN_15, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOE, USER_LED_1_Pin|USER_LED_2_Pin|USER_LED_3_Pin|USER_LED_4_Pin 
+                          |USER_LED_5_Pin, GPIO_PIN_RESET);
 
-  /*Configure GPIO pins : PE11 PE12 PE13 PE14 
-                           PE15 */
-  GPIO_InitStruct.Pin = GPIO_PIN_11|GPIO_PIN_12|GPIO_PIN_13|GPIO_PIN_14 
-                          |GPIO_PIN_15;
+  /*Configure GPIO pins : USER_LED_1_Pin USER_LED_2_Pin USER_LED_3_Pin USER_LED_4_Pin 
+                           USER_LED_5_Pin */
+  GPIO_InitStruct.Pin = USER_LED_1_Pin|USER_LED_2_Pin|USER_LED_3_Pin|USER_LED_4_Pin 
+                          |USER_LED_5_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
@@ -448,7 +542,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
 	}
 }
 void HAL_CAN_TxMailbox0CompleteCallback(CAN_HandleTypeDef *hcan){
-	if(hcan == &hcan1){
+	/*if(hcan == &hcan1){
 		fifoDataType fifodata;
 		if(fifoTxDataCAN1_high_pop(&fifoCAN1, &fifodata)){
 			for(int i = 0; i < 8; i++){
@@ -467,7 +561,8 @@ void HAL_CAN_TxMailbox0CompleteCallback(CAN_HandleTypeDef *hcan){
 		}else{
 			//TODO: riattivare interrupt
 		}
-	}else{
+	}else{*/
+		HAL_GPIO_TogglePin(USER_LED_4_GPIO_Port, USER_LED_4_Pin);
 		fifoDataType fifodata;
 		if(fifoTxDataCAN3_high_pop(&fifoCAN3, &fifodata)){
 			for(int i = 0; i < 8; i++){
@@ -486,7 +581,7 @@ void HAL_CAN_TxMailbox0CompleteCallback(CAN_HandleTypeDef *hcan){
 		}else{
 			//TODO: riattivare interrupt
 		}
-	}
+	//}
 }
 /* USER CODE END 4 */
 
@@ -498,7 +593,12 @@ void Error_Handler(void)
 {
   /* USER CODE BEGIN Error_Handler_Debug */
   /* User can add his own implementation to report the HAL error return state */
-
+	HAL_GPIO_TogglePin(USER_LED_1_GPIO_Port, USER_LED_1_Pin);
+	HAL_GPIO_TogglePin(USER_LED_2_GPIO_Port, USER_LED_2_Pin);
+	HAL_GPIO_TogglePin(USER_LED_3_GPIO_Port, USER_LED_3_Pin);
+	HAL_GPIO_TogglePin(USER_LED_4_GPIO_Port, USER_LED_4_Pin);
+	HAL_GPIO_TogglePin(USER_LED_5_GPIO_Port, USER_LED_5_Pin);
+	HAL_Delay(100);
   /* USER CODE END Error_Handler_Debug */
 }
 

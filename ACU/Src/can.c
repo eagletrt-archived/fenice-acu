@@ -1,25 +1,27 @@
 #include "can.h"
+#include "main.h"
 #include "stm32f7xx_hal_can.h"
 
-extern CAN_HandleTypeDef hcan1;
+//extern CAN_HandleTypeDef hcan1;
 extern CAN_HandleTypeDef hcan3;
 canStruct can1,can3;
 fifoCanDataType fifoCAN1, fifoCAN3;
 
 void can_init(){
-	if(CAN1_initialization(&can1)){
+	/*if(CAN1_initialization(&can1)){
 		report_error_can1();
-	}
+	}*/
 	if(CAN3_initialization(&can3)){
 		report_error_can3();
 	}
 
-	fifoCAN1.rxHead = 0;
+	/*fifoCAN1.rxHead = 0;
 	fifoCAN1.rxTail = 0;
 	fifoCAN1.txHeadNormal = 0;
 	fifoCAN1.txHeadHigh = 0;
 	fifoCAN1.txTailNormal = 0;
 	fifoCAN1.txTailHigh = 0;
+*/
 
 	fifoCAN3.rxHead = 0;
 	fifoCAN3.rxTail = 0;
@@ -30,41 +32,44 @@ void can_init(){
 }
 
 uint8_t CAN_Send(canStruct* can, uint32_t id, fifoPriority _fifoPriority){
+	HAL_GPIO_TogglePin(USER_LED_3_GPIO_Port, USER_LED_3_Pin);
 	if (HAL_CAN_IsTxMessagePending(can->hcan, CAN_TX_MAILBOX0) == 0){
 		if(CAN_Send_IT(can, id) == 0){
 			//TODO: implementare errore
+			HAL_GPIO_TogglePin(USER_LED_2_GPIO_Port, USER_LED_2_Pin);
 			return 0;
 		}
 	}else{
+		HAL_GPIO_TogglePin(USER_LED_1_GPIO_Port, USER_LED_1_Pin);
 		fifoDataType fifodata;
 		for(int i = 0; i < 8; i++){
 			fifodata.data[i] = can->dataTx[i];
 		}
 		fifodata.id = id;
 		if(_fifoPriority == normalPriority){
-			if(can->hcan == &hcan1){
+			/*if(can->hcan == &hcan1){
 				if(fifoTxDataCAN1_normal_push(&fifoCAN1, &fifodata) == 0){
 					//TODO: implementare errore
 					return 0;
 				}
-			}else{
+			}else{*/
 				if(fifoTxDataCAN3_normal_push(&fifoCAN3, &fifodata) == 0){
 					//TODO: implementare errore
 					return 0;
 				}
-			}
+			//}
 		}else{
-			if(can->hcan == &hcan1){
+			/*if(can->hcan == &hcan1){
 				if(fifoTxDataCAN1_high_push(&fifoCAN1, &fifodata) == 0){
 					//TODO: implementare errore
 					return 0;
 				}
-			}else{
+			}else{*/
 				if(fifoTxDataCAN3_high_push(&fifoCAN3, &fifodata) == 0){
 					//TODO: implementare errore
 					return 0;
 				}
-			}
+			//}
 		}
 
 	}
@@ -93,7 +98,7 @@ uint8_t CAN_Send_IT(canStruct* can, uint32_t id){
 	return flag;
 }
 
-uint8_t CAN1_initialization(canStruct *can){
+/*uint8_t CAN1_initialization(canStruct *can){
 
 	//CAN filter initialization
 	can->canFilter.FilterMode = CAN_FILTERMODE_IDMASK;
@@ -118,7 +123,7 @@ uint8_t CAN1_initialization(canStruct *can){
 	if(can->configFilter_status == HAL_OK && can->activateNotif_status == HAL_OK && can->canStart_status == HAL_OK) return 0; // no errors occurred
 	else return 1;
 
-}
+}*/
 
 uint8_t CAN3_initialization(canStruct *can){
 
@@ -148,7 +153,7 @@ uint8_t CAN3_initialization(canStruct *can){
 }
 
 void report_error_can1(){
-
+	//HAL_GPIO_TogglePin(USER_LED_3_GPIO_Port, USER_LED_3_Pin);
 }
 void report_error_can3(){
 
