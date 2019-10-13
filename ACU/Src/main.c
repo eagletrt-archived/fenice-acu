@@ -142,8 +142,6 @@ int main(void)
   int err2 = HAL_CAN_ActivateNotification(&hcan3, CAN3_RX0_IRQn);
   int err3 = HAL_CAN_Start(&hcan3);*/
 
-  can3.hcan = &hcan3;
-
   can_init();
 
   char txt[100];
