@@ -1,9 +1,11 @@
 #include "can.h"
 #include "main.h"
+#include "string.h"
 #include "stm32f7xx_hal_can.h"
 
 //extern CAN_HandleTypeDef hcan1;
 extern CAN_HandleTypeDef hcan3;
+extern UART_HandleTypeDef huart3;
 canStruct can1,can3;
 fifoCanDataType fifoCAN1, fifoCAN3;
 
@@ -34,12 +36,15 @@ void can_init(){
 uint8_t CAN_Send(canStruct* can, uint32_t id, fifoPriority _fifoPriority){
 	HAL_GPIO_TogglePin(USER_LED_3_GPIO_Port, USER_LED_3_Pin);
 	if (HAL_CAN_IsTxMessagePending(can->hcan, CAN_TX_MAILBOX0) == 0){
+		HAL_UART_Transmit(&huart3,(uint8_t*)("Invio diretto\r\n"), strlen("Invio diretto\r\n"), 10);
 		if(CAN_Send_IT(can, id) == 0){
 			//TODO: implementare errore
+			HAL_UART_Transmit(&huart3,(uint8_t*)("Cagato fuori dal vaso\r\n"), strlen("Cagato fuori dal vaso\r\n"), 10);
 			HAL_GPIO_TogglePin(USER_LED_2_GPIO_Port, USER_LED_2_Pin);
 			return 0;
 		}
 	}else{
+		HAL_UART_Transmit(&huart3,(uint8_t*)("Metto in coda\r\n"), strlen("Metto in coda\r\n"), 10);
 		HAL_GPIO_TogglePin(USER_LED_1_GPIO_Port, USER_LED_1_Pin);
 		fifoDataType fifodata;
 		for(int i = 0; i < 8; i++){
@@ -79,7 +84,7 @@ uint8_t CAN_Send(canStruct* can, uint32_t id, fifoPriority _fifoPriority){
 
 uint8_t CAN_Send_IT(canStruct* can, uint32_t id){
 
-	uint32_t mailbox = 0;
+	//uint32_t mailbox = 0;
 	//CAN_TxMailBox_TypeDef mailbox;
 	//mailbox.TIR = 0; //set to mailbox 0
 	uint8_t flag = 0; //error
@@ -91,7 +96,7 @@ uint8_t CAN_Send_IT(canStruct* can, uint32_t id){
 	TxHeader.DLC = can->size;
 	TxHeader.TransmitGlobalTime = DISABLE;
 
-	if(HAL_CAN_AddTxMessage(can->hcan, &TxHeader, can->dataTx,&mailbox) == HAL_OK){
+	if(HAL_CAN_AddTxMessage(can->hcan, &TxHeader, can->dataTx,CAN_TX_MAILBOX0) == HAL_OK){
 		flag = 1; //ok
 	}
 
