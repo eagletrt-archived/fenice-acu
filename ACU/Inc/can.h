@@ -20,6 +20,9 @@
 
 			uint8_t dataTx[8];
 			uint8_t dataRx[8];
+			uint8_t dataTxBck[8];
+
+			uint32_t idBck;
 
 			CAN_HandleTypeDef *hcan;
 			CAN_FilterTypeDef canFilter;
@@ -36,6 +39,7 @@
 		void report_error_can3();
 		uint8_t CAN_Send(canStruct*, uint32_t, fifoPriority);
 		uint8_t CAN_Send_IT(canStruct*, uint32_t);
+		uint8_t CAN_Send_Bck(canStruct*);
 
 		typedef struct fifoDataType{
 			uint32_t id;

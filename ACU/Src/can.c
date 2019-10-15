@@ -87,6 +87,12 @@ uint8_t CAN_Send_IT(canStruct* can, uint32_t id){
 	//uint32_t mailbox = 0;
 	//CAN_TxMailBox_TypeDef mailbox;
 	//mailbox.TIR = 0; //set to mailbox 0
+
+	for(int i = 0; i < 7; i++){
+		can->dataTxBck[i] = can->dataTx[i];
+	}
+	can->idBck = id;
+
 	uint8_t flag = 0; //error
 
 	CAN_TxHeaderTypeDef TxHeader;
@@ -97,6 +103,24 @@ uint8_t CAN_Send_IT(canStruct* can, uint32_t id){
 	TxHeader.TransmitGlobalTime = DISABLE;
 
 	if(HAL_CAN_AddTxMessage(can->hcan, &TxHeader, can->dataTx,CAN_TX_MAILBOX0) == HAL_OK){
+		flag = 1; //ok
+	}
+
+	return flag;
+}
+
+uint8_t CAN_Send_Bck(canStruct* can){
+
+	uint8_t flag = 0; //error
+
+	CAN_TxHeaderTypeDef TxHeader;
+	TxHeader.StdId = can->idBck;
+	TxHeader.IDE = CAN_ID_STD;
+	TxHeader.RTR = CAN_RTR_DATA;
+	TxHeader.DLC = can->size;
+	TxHeader.TransmitGlobalTime = DISABLE;
+
+	if(HAL_CAN_AddTxMessage(can->hcan, &TxHeader, can->dataTxBck,CAN_TX_MAILBOX0) == HAL_OK){
 		flag = 1; //ok
 	}
 

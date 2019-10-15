@@ -69,6 +69,8 @@ extern fifoRxDataType fifoRxDataCAN1[fifoLengthN], fifoRxDataCAN3[fifoLengthN];
 extern fifoTxDataType fifoTxDataCAN1_normal[fifoLengthN], fifoTxDataCAN1_high[fifoLengthR];
 extern fifoTxDataType fifoTxDataCAN3_normal[fifoLengthN], fifoTxDataCAN3_high[fifoLengthR];*/
 
+
+char txt[100];
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -117,6 +119,8 @@ int main(void)
 
   /* USER CODE END SysInit */
 
+  /* MCU Configuration--------------------------------------------------------*/
+
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   MX_TIM1_Init();
@@ -147,7 +151,7 @@ int main(void)
 
   can_init();
 
-  char txt[100];
+
   sprintf(txt,"----------START---------\r\n");
   HAL_UART_Transmit(&huart3,(uint8_t*)txt, strlen(txt), 10);
   sprintf(txt,"Config Status: %d\r\n", can3.configFilter_status);
@@ -632,7 +636,11 @@ void HAL_CAN_TxMailbox2CompleteCallback(CAN_HandleTypeDef *hcan){
 	HAL_UART_Transmit(&huart3,(uint8_t*)("Mailbox 2\r\n"), strlen("Mailbox 2\r\n"), 10);
 }
 void HAL_CAN_ErrorCallback(CAN_HandleTypeDef *hcan){
-	HAL_UART_Transmit(&huart3,(uint8_t*)("--- Errore ---\r\n"), strlen("--- Errore ---\r\n"), 10);
+	sprintf(txt,"--- Errore ---: %d\r\n",(int)hcan->ErrorCode);
+	HAL_UART_Transmit(&huart3,(uint8_t*)(txt), strlen(txt), 10);
+	/*if(hcan == &hcan3){
+		CAN_Send_Bck(&can3);
+	}*/
 }
 /* USER CODE END 4 */
 
