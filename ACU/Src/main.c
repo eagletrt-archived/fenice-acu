@@ -47,6 +47,7 @@
 /* USER CODE END PM */
 
 /* Private variables ---------------------------------------------------------*/
+CAN_HandleTypeDef hcan1;
 CAN_HandleTypeDef hcan3;
 
 TIM_HandleTypeDef htim1;
@@ -82,6 +83,7 @@ static void MX_USART2_UART_Init(void);
 static void MX_USART1_UART_Init(void);
 static void MX_CAN3_Init(void);
 static void MX_USART3_UART_Init(void);
+static void MX_CAN1_Init(void);
 static void MX_NVIC_Init(void);
 /* USER CODE BEGIN PFP */
 
@@ -119,8 +121,6 @@ int main(void)
 
   /* USER CODE END SysInit */
 
-  /* MCU Configuration--------------------------------------------------------*/
-
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   MX_TIM1_Init();
@@ -129,6 +129,7 @@ int main(void)
   MX_USART1_UART_Init();
   MX_CAN3_Init();
   MX_USART3_UART_Init();
+  MX_CAN1_Init();
 
   /* Initialize interrupts */
   MX_NVIC_Init();
@@ -148,6 +149,11 @@ int main(void)
   int err1 = HAL_CAN_ConfigFilter(&hcan3, &sFilter);
   int err2 = HAL_CAN_ActivateNotification(&hcan3, CAN3_RX0_IRQn);
   int err3 = HAL_CAN_Start(&hcan3);*/
+
+  //can3.rx0_interrupt = CAN1_RX0_IRQn;
+  //can1.hcan = &hcan1;
+  can3.rx0_interrupt = CAN3_RX0_IRQn;
+  can3.hcan = &hcan3;
 
   can_init();
 
@@ -230,12 +236,11 @@ void SystemClock_Config(void)
   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
   /** Initializes the CPU, AHB and APB busses clocks 
   */
-  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSI;
-  RCC_OscInitStruct.HSIState = RCC_HSI_ON;
-  RCC_OscInitStruct.HSICalibrationValue = RCC_HSICALIBRATION_DEFAULT;
+  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE;
+  RCC_OscInitStruct.HSEState = RCC_HSE_BYPASS;
   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
-  RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSI;
-  RCC_OscInitStruct.PLL.PLLM = 8;
+  RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
+  RCC_OscInitStruct.PLL.PLLM = 13;
   RCC_OscInitStruct.PLL.PLLN = 216;
   RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
   RCC_OscInitStruct.PLL.PLLQ = 2;
@@ -294,6 +299,43 @@ static void MX_NVIC_Init(void)
   /* CAN3_SCE_IRQn interrupt configuration */
   HAL_NVIC_SetPriority(CAN3_SCE_IRQn, 0, 0);
   HAL_NVIC_EnableIRQ(CAN3_SCE_IRQn);
+}
+
+/**
+  * @brief CAN1 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_CAN1_Init(void)
+{
+
+  /* USER CODE BEGIN CAN1_Init 0 */
+
+  /* USER CODE END CAN1_Init 0 */
+
+  /* USER CODE BEGIN CAN1_Init 1 */
+
+  /* USER CODE END CAN1_Init 1 */
+  hcan1.Instance = CAN1;
+  hcan1.Init.Prescaler = 3;
+  hcan1.Init.Mode = CAN_MODE_NORMAL;
+  hcan1.Init.SyncJumpWidth = CAN_SJW_1TQ;
+  hcan1.Init.TimeSeg1 = CAN_BS1_15TQ;
+  hcan1.Init.TimeSeg2 = CAN_BS2_2TQ;
+  hcan1.Init.TimeTriggeredMode = DISABLE;
+  hcan1.Init.AutoBusOff = DISABLE;
+  hcan1.Init.AutoWakeUp = ENABLE;
+  hcan1.Init.AutoRetransmission = DISABLE;
+  hcan1.Init.ReceiveFifoLocked = DISABLE;
+  hcan1.Init.TransmitFifoPriority = DISABLE;
+  if (HAL_CAN_Init(&hcan1) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN CAN1_Init 2 */
+
+  /* USER CODE END CAN1_Init 2 */
+
 }
 
 /**
@@ -638,9 +680,9 @@ void HAL_CAN_TxMailbox2CompleteCallback(CAN_HandleTypeDef *hcan){
 void HAL_CAN_ErrorCallback(CAN_HandleTypeDef *hcan){
 	sprintf(txt,"--- Errore ---: %d\r\n",(int)hcan->ErrorCode);
 	HAL_UART_Transmit(&huart3,(uint8_t*)(txt), strlen(txt), 10);
-	/*if(hcan == &hcan3){
+	if(hcan == &hcan3){
 		CAN_Send_Bck(&can3);
-	}*/
+	}
 }
 /* USER CODE END 4 */
 
@@ -652,12 +694,13 @@ void Error_Handler(void)
 {
   /* USER CODE BEGIN Error_Handler_Debug */
   /* User can add his own implementation to report the HAL error return state */
+
 	HAL_GPIO_TogglePin(USER_LED_1_GPIO_Port, USER_LED_1_Pin);
-	HAL_GPIO_TogglePin(USER_LED_2_GPIO_Port, USER_LED_2_Pin);
+	//HAL_GPIO_TogglePin(USER_LED_2_GPIO_Port, USER_LED_2_Pin);
 	HAL_GPIO_TogglePin(USER_LED_3_GPIO_Port, USER_LED_3_Pin);
 	HAL_GPIO_TogglePin(USER_LED_4_GPIO_Port, USER_LED_4_Pin);
 	HAL_GPIO_TogglePin(USER_LED_5_GPIO_Port, USER_LED_5_Pin);
-	HAL_Delay(100);
+	HAL_Delay(1000);
   /* USER CODE END Error_Handler_Debug */
 }
 

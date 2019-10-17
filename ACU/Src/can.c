@@ -10,10 +10,10 @@ canStruct can1,can3;
 fifoCanDataType fifoCAN1, fifoCAN3;
 
 void can_init(){
-	/*if(CAN1_initialization(&can1)){
+	/*if(CAN_initialization(&can1)){
 		report_error_can1();
 	}*/
-	if(CAN3_initialization(&can3)){
+	if(CAN_initialization(&can3)){
 		report_error_can3();
 	}
 
@@ -102,7 +102,7 @@ uint8_t CAN_Send_IT(canStruct* can, uint32_t id){
 	TxHeader.DLC = can->size;
 	TxHeader.TransmitGlobalTime = DISABLE;
 
-	if(HAL_CAN_AddTxMessage(can->hcan, &TxHeader, can->dataTx,CAN_TX_MAILBOX0) == HAL_OK){
+	if(HAL_CAN_AddTxMessage(can->hcan, &TxHeader, can->dataTx,(uint32_t*)CAN_TX_MAILBOX0) == HAL_OK){
 		flag = 1; //ok
 	}
 
@@ -120,52 +120,16 @@ uint8_t CAN_Send_Bck(canStruct* can){
 	TxHeader.DLC = can->size;
 	TxHeader.TransmitGlobalTime = DISABLE;
 
-	if(HAL_CAN_AddTxMessage(can->hcan, &TxHeader, can->dataTxBck,CAN_TX_MAILBOX0) == HAL_OK){
+	if(HAL_CAN_AddTxMessage(can->hcan, &TxHeader, can->dataTxBck,(uint32_t*)CAN_TX_MAILBOX0) == HAL_OK){
 		flag = 1; //ok
 	}
 
 	return flag;
 }
 
-/*uint8_t CAN1_initialization(canStruct *can){
+uint8_t CAN_initialization(canStruct *can){
 
-	can->hcan = &hcan1;
 
-	//CAN filter initialization
-	can->canFilter.FilterMode = CAN_FILTERMODE_IDMASK;
-	can->canFilter.FilterIdLow = 0;
-	can->canFilter.FilterIdHigh = 0;
-	can->canFilter.FilterMaskIdHigh = 0;
-	can->canFilter.FilterMaskIdLow = 0;
-	can->canFilter.FilterFIFOAssignment = CAN_FILTER_FIFO0;
-	can->canFilter.FilterBank = 0;
-	can->canFilter.FilterScale  = CAN_FILTERSCALE_16BIT;
-	can->canFilter.FilterActivation = ENABLE;
-
-	//CAN filter configuration
-	can->configFilter_status = HAL_CAN_ConfigFilter(can->hcan, &can->canFilter);
-
-	//CAN interrupt activation
-	can->activateNotif_status = HAL_CAN_ActivateNotification(can->hcan, CAN1_RX0_IRQn);
-
-	//CAN start
-	can->canStart_status = HAL_CAN_Start(can->hcan);
-
-	fifoCAN1.rxHead = 0;
-	fifoCAN1.rxTail = 0;
-	fifoCAN1.txHeadHigh = 0;
-	fifoCAN1.txHeadNormal = 0;
-	fifoCAN1.txTailHigh = 0;
-	fifoCAN1.txTailNormal = 0;
-
-	if(can->configFilter_status == HAL_OK && can->activateNotif_status == HAL_OK && can->canStart_status == HAL_OK) return 0; // no errors occurred
-	else return 1;
-
-}*/
-
-uint8_t CAN3_initialization(canStruct *can){
-
-	can->hcan = &hcan3;
 
 	//CAN filter initialization
 	can->canFilter.FilterMode = CAN_FILTERMODE_IDMASK;
@@ -181,23 +145,27 @@ uint8_t CAN3_initialization(canStruct *can){
 	//CAN filter configuration
 	can->configFilter_status = HAL_CAN_ConfigFilter(can->hcan, &can->canFilter);
 
-	//CAN interrupt activation
-	can->activateNotif_status = HAL_CAN_ActivateNotification(can->hcan, CAN3_RX0_IRQn);
+
+	can->activateNotif_status = HAL_CAN_ActivateNotification(can->hcan, can->rx0_interrupt);
+
+	can->fifo.rxHead = 0;
+	can->fifo.rxTail = 0;
+	can->fifo.txHeadHigh = 0;
+	can->fifo.txHeadNormal = 0;
+	can->fifo.txTailHigh = 0;
+	can->fifo.txTailNormal = 0;
 
 	//CAN start
 	can->canStart_status = HAL_CAN_Start(can->hcan);
 
-	fifoCAN3.rxHead = 0;
-	fifoCAN3.rxTail = 0;
-	fifoCAN3.txHeadHigh = 0;
-	fifoCAN3.txHeadNormal = 0;
-	fifoCAN3.txTailHigh = 0;
-	fifoCAN3.txTailNormal = 0;
+
 
 	if(can->configFilter_status == HAL_OK && can->activateNotif_status == HAL_OK && can->canStart_status == HAL_OK) return 0; // no errors occurred
 	else return 1;
 
 }
+
+
 
 void report_error_can1(){
 	//HAL_GPIO_TogglePin(USER_LED_3_GPIO_Port, USER_LED_3_Pin);
