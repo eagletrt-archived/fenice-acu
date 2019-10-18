@@ -37,8 +37,8 @@ ACU_Nucleo.list \
 all: ACU_Nucleo.elf secondary-outputs
 
 # Tool invocations
-ACU_Nucleo.elf: $(OBJS) $(USER_OBJS) /home/eagletrt/STM32CubeIDE/workspace_1.0.2/ACU_Nucleo/STM32F767ZITX_FLASH.ld
-	arm-none-eabi-gcc -o "ACU_Nucleo.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m7 -T"/home/eagletrt/STM32CubeIDE/workspace_1.0.2/ACU_Nucleo/STM32F767ZITX_FLASH.ld" --specs=nosys.specs -Wl,-Map="ACU_Nucleo.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+ACU_Nucleo.elf: $(OBJS) $(USER_OBJS) /home/eagletrt/Documents/git/fenice-sensors/ACU_Nucleo/STM32F767ZITX_FLASH.ld
+	arm-none-eabi-gcc -o "ACU_Nucleo.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m7 -T"/home/eagletrt/Documents/git/fenice-sensors/ACU_Nucleo/STM32F767ZITX_FLASH.ld" --specs=nosys.specs -Wl,-Map="ACU_Nucleo.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 

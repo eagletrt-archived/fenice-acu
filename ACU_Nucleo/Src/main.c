@@ -57,7 +57,6 @@ UART_HandleTypeDef huart3;
 ID id;
 uint8_t i_debug;
 extern canStruct can1,can3;
-extern fifoCanDataType fifoCAN1, fifoCAN3;
 extern fifoPriority fifoPriority_t;
 
 CAN_FilterTypeDef sFilter;
@@ -117,6 +116,7 @@ int main(void)
   /* USER CODE BEGIN 2 */
 
   can1.rx0_interrupt = CAN1_RX0_IRQn;
+  can1.tx_interrupt = CAN1_TX_IRQn;
   can1.hcan = &hcan1;
 
   can_init();
@@ -140,18 +140,29 @@ int main(void)
 
     /* USER CODE BEGIN 3 */
 
-	  can3.dataTx[0]=i_debug;
-	  i_debug++;
-	  can3.dataTx[1]=2;
-	  can3.dataTx[2]=3;
-	  can3.dataTx[3]=4;
-	  can3.dataTx[4]=5;
-	  can3.dataTx[5]=6;
-	  can3.dataTx[6]=7;
-	  can3.dataTx[7]=8;
-	  can3.size = 8;
+	  can1.dataTx[0]=0;
+	  can1.dataTx[1]=2;
+	  can1.dataTx[2]=3;
+	  can1.dataTx[3]=4;
+	  can1.dataTx[4]=5;
+	  can1.dataTx[5]=i_debug / 256 / 256;
+	  can1.dataTx[6]=i_debug / 256;
+	  can1.dataTx[7]=i_debug % 256;
+	  can1.size = 8;
+	  i_debug++;/*
+	  HAL_UART_Transmit(&huart3,(uint8_t*)"\r\n\n\n", strlen("\r\n\n\n"), 10);
+	  HAL_UART_Transmit(&huart3,(uint8_t*)"------------\r\n", strlen("------------\r\n"), 10);
 
-	  CAN_Send(&can3, 130, normalPriority);
+	  can1.id = 100;
+	  CAN_Send(&can1, normalPriority);
+	  HAL_Delay(10);
+
+	  for(int i = 0; i < 10; i++){
+		  can1.id = i;
+		  CAN_Send(&can1, normalPriority);
+	  }
+	  can1.id = 200;
+	  CAN_Send(&can1, highPriority);*/
 
 	  HAL_Delay(500);
   }
@@ -174,12 +185,13 @@ void SystemClock_Config(void)
   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
   /** Initializes the CPU, AHB and APB busses clocks 
   */
-  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE;
-  RCC_OscInitStruct.HSEState = RCC_HSE_BYPASS;
+  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSI;
+  RCC_OscInitStruct.HSIState = RCC_HSI_ON;
+  RCC_OscInitStruct.HSICalibrationValue = RCC_HSICALIBRATION_DEFAULT;
   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
-  RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
-  RCC_OscInitStruct.PLL.PLLM = 25;
-  RCC_OscInitStruct.PLL.PLLN = 432;
+  RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSI;
+  RCC_OscInitStruct.PLL.PLLM = 8;
+  RCC_OscInitStruct.PLL.PLLN = 216;
   RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
   RCC_OscInitStruct.PLL.PLLQ = 2;
   if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
@@ -257,7 +269,7 @@ static void MX_CAN1_Init(void)
   hcan1.Init.TimeTriggeredMode = DISABLE;
   hcan1.Init.AutoBusOff = DISABLE;
   hcan1.Init.AutoWakeUp = ENABLE;
-  hcan1.Init.AutoRetransmission = DISABLE;
+  hcan1.Init.AutoRetransmission = ENABLE;
   hcan1.Init.ReceiveFifoLocked = DISABLE;
   hcan1.Init.TransmitFifoPriority = DISABLE;
   if (HAL_CAN_Init(&hcan1) != HAL_OK)
@@ -286,7 +298,7 @@ static void MX_USART3_UART_Init(void)
 
   /* USER CODE END USART3_Init 1 */
   huart3.Instance = USART3;
-  huart3.Init.BaudRate = 115200;
+  huart3.Init.BaudRate = 2250000;
   huart3.Init.WordLength = UART_WORDLENGTH_8B;
   huart3.Init.StopBits = UART_STOPBITS_1;
   huart3.Init.Parity = UART_PARITY_NONE;
@@ -317,7 +329,9 @@ static void MX_GPIO_Init(void)
   /* GPIO Ports Clock Enable */
   __HAL_RCC_GPIOH_CLK_ENABLE();
   __HAL_RCC_GPIOB_CLK_ENABLE();
+  __HAL_RCC_GPIOD_CLK_ENABLE();
   __HAL_RCC_GPIOA_CLK_ENABLE();
+  __HAL_RCC_GPIOC_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0|GPIO_PIN_14|GPIO_PIN_7, GPIO_PIN_RESET);
@@ -329,31 +343,67 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
+  /*Configure GPIO pin : PC10 */
+  GPIO_InitStruct.Pin = GPIO_PIN_10;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
+
 }
 
 /* USER CODE BEGIN 4 */
 
+void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan){
+	HAL_GPIO_TogglePin(USER_LED_2_GPIO_Port, USER_LED_2_Pin);
+	if (hcan == &hcan1){
+		if (HAL_CAN_GetRxFifoFillLevel(&hcan1, CAN_RX_FIFO0) != 0){
+			CAN_RxHeaderTypeDef header;
+			HAL_CAN_GetRxMessage(&hcan1, CAN_RX_FIFO0, &header, can1.dataRx);
+			/*
+			sprintf(txt, "%d\r\n", HAL_CAN_GetRxFifoFillLevel(&hcan1, CAN_RX_FIFO0));
+			HAL_UART_Transmit(&huart3, (uint8_t*)txt, strlen(txt), 10);
+			sprintf(txt, "received %ld %d\r\n", header.StdId, can1.dataRx[0]);
+			HAL_UART_Transmit(&huart3, (uint8_t*)txt, strlen(txt), 10);*/
+		}
+	}
+}
+void HAL_CAN_RxFifo1MsgPendingCallback(CAN_HandleTypeDef *hcan){
+	if (hcan == &hcan1){
+		HAL_UART_Transmit(&huart3, (uint8_t*)"rx on FIFO1\r\n", strlen("rx on FIFO1\r\n"), 10);
+	}
+}
+
+void HAL_CAN_RxFifo0FullCallback(CAN_HandleTypeDef *hcan){
+	if (hcan == &hcan1){
+		HAL_UART_Transmit(&huart3, (uint8_t*)"FIFO0 FULL\r\n", strlen("FIFO0 FULL\r\n"), 10);
+	}
+}
+void HAL_CAN_RxFifo1FullCallback(CAN_HandleTypeDef *hcan){
+	if (hcan == &hcan1){
+		HAL_UART_Transmit(&huart3, (uint8_t*)"FIFO1 FULL\r\n", strlen("FIFO1 FULL\r\n"), 10);
+	}
+}
+
 void HAL_CAN_TxMailbox0CompleteCallback(CAN_HandleTypeDef *hcan){
-	/*if(hcan == &hcan1){
-		fifoDataType fifodata;
-		if(fifoTxDataCAN1_high_pop(&fifoCAN1, &fifodata)){
-			for(int i = 0; i < 8; i++){
-				can1.dataTx[i] = fifodata.data[i];
-			}
-			if(CAN_Send_IT(&can1, fifodata.id) == 0){
+	sprintf(txt,"mb0: %d\r\n", (int)can1.idBck);
+	HAL_UART_Transmit(&huart3,(uint8_t*)(txt), strlen(txt), 10);
+	HAL_GPIO_TogglePin(USER_LED_1_GPIO_Port, USER_LED_1_Pin);
+	if(hcan == &hcan1){
+		if(fifoTxDataCAN_high_pop(&can1)){
+			if(CAN_Send_IT(&can1) == 0){
 				//TODO: implementare errore
+			}else{
+				HAL_UART_Transmit(&huart3,(uint8_t*)("high\r\n"), strlen("high\r\n"), 10);
 			}
-		}else if(fifoTxDataCAN1_normal_pop(&fifoCAN1, &fifodata)){
-			for(int i = 0; i < 8; i++){
-				can1.dataTx[i] = fifodata.data[i];
-			}
-			if(CAN_Send_IT(&can1, fifodata.id) == 0){
+		}else if(fifoTxDataCAN_normal_pop(&can1)){
+			//HAL_UART_Transmit(&huart3,(uint8_t*)("Prendo dalla fifo\r\n"), strlen("Prendo dalla fifo\r\n"), 10);
+			if(CAN_Send_IT(&can1) == 0){
 				//TODO: implementare errore
 			}
 		}else{
-			//TODO: riattivare interrupt
+			//HAL_UART_Transmit(&huart3,(uint8_t*)("Fifo vuota\r\n"), strlen("Fifo vuota\r\n"), 10);
 		}
-	}else{*/
+	}/*else{
 	HAL_UART_Transmit(&huart3,(uint8_t*)("Messaggio trasmesso\r\n"), strlen("Messaggio trasmesso\r\n"), 10);
 		//HAL_GPIO_TogglePin(USER_LED_4_GPIO_Port, USER_LED_4_Pin);
 		fifoDataType fifodata;
@@ -375,14 +425,50 @@ void HAL_CAN_TxMailbox0CompleteCallback(CAN_HandleTypeDef *hcan){
 		}else{
 			//TODO: riattivare interrupt
 			HAL_UART_Transmit(&huart3,(uint8_t*)("Fifo vuota\r\n"), strlen("Fifo vuota\r\n"), 10);
-		}
+		}*/
 	//}
 }
 void HAL_CAN_TxMailbox1CompleteCallback(CAN_HandleTypeDef *hcan){
-	HAL_UART_Transmit(&huart3,(uint8_t*)("Mailbox 1\r\n"), strlen("Mailbox 1\r\n"), 10);
+	sprintf(txt,"mb1: %d %d\r\n" ,can1.fifo.txTailNormal, can1.fifo.txHeadNormal);
+	HAL_UART_Transmit(&huart3,(uint8_t*)(txt), strlen(txt), 10);
+	HAL_GPIO_TogglePin(USER_LED_1_GPIO_Port, USER_LED_1_Pin);
+	if(hcan == &hcan1){
+		if(fifoTxDataCAN_high_pop(&can1)){
+			if(CAN_Send_IT(&can1) == 0){
+				//TODO: implementare errore
+			}else{
+				HAL_UART_Transmit(&huart3,(uint8_t*)("high\r\n"), strlen("high\r\n"), 10);
+			}
+		}else if(fifoTxDataCAN_normal_pop(&can1)){
+			//HAL_UART_Transmit(&huart3,(uint8_t*)("Prendo dalla fifo\r\n"), strlen("Prendo dalla fifo\r\n"), 10);
+			if(CAN_Send_IT(&can1) == 0){
+				//TODO: implementare errore
+			}
+		}else{
+			//HAL_UART_Transmit(&huart3,(uint8_t*)("Fifo vuota\r\n"), strlen("Fifo vuota\r\n"), 10);
+		}
+	}
 }
 void HAL_CAN_TxMailbox2CompleteCallback(CAN_HandleTypeDef *hcan){
-	HAL_UART_Transmit(&huart3,(uint8_t*)("Mailbox 2\r\n"), strlen("Mailbox 2\r\n"), 10);
+	sprintf(txt,"mb2: %d %d\r\n", can1.fifo.txTailNormal, can1.fifo.txHeadNormal);
+	HAL_UART_Transmit(&huart3,(uint8_t*)(txt), strlen(txt), 10);
+	HAL_GPIO_TogglePin(USER_LED_1_GPIO_Port, USER_LED_1_Pin);
+	if(hcan == &hcan1){
+		if(fifoTxDataCAN_high_pop(&can1)){
+			if(CAN_Send_IT(&can1) == 0){
+				//TODO: implementare errore
+			}else{
+				HAL_UART_Transmit(&huart3,(uint8_t*)("high\r\n"), strlen("high\r\n"), 10);
+			}
+		}else if(fifoTxDataCAN_normal_pop(&can1)){
+			//HAL_UART_Transmit(&huart3,(uint8_t*)("Prendo dalla fifo\r\n"), strlen("Prendo dalla fifo\r\n"), 10);
+			if(CAN_Send_IT(&can1) == 0){
+				//TODO: implementare errore
+			}
+		}else{
+			//HAL_UART_Transmit(&huart3,(uint8_t*)("Fifo vuota\r\n"), strlen("Fifo vuota\r\n"), 10);
+		}
+	}
 }
 void HAL_CAN_ErrorCallback(CAN_HandleTypeDef *hcan){
 	sprintf(txt,"--- Errore ---: %d\r\n",(int)hcan->ErrorCode);
@@ -401,9 +487,10 @@ void HAL_CAN_ErrorCallback(CAN_HandleTypeDef *hcan){
 void Error_Handler(void)
 {
   /* USER CODE BEGIN Error_Handler_Debug */
+
   /* User can add his own implementation to report the HAL error return state */
 
-	HAL_GPIO_TogglePin(USER_LED_1_GPIO_Port, USER_LED_1_Pin);
+	//HAL_GPIO_TogglePin(USER_LED_1_GPIO_Port, USER_LED_1_Pin);
 	HAL_GPIO_TogglePin(USER_LED_2_GPIO_Port, USER_LED_2_Pin);
 	HAL_GPIO_TogglePin(USER_LED_3_GPIO_Port, USER_LED_3_Pin);
 

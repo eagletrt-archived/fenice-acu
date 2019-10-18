@@ -44,7 +44,10 @@
 			uint8_t dataRx[8];
 			uint8_t dataTxBck[8];
 
+
+			uint32_t id;
 			uint32_t idBck;
+
 
 			CAN_HandleTypeDef *hcan;
 			CAN_FilterTypeDef canFilter;
@@ -54,9 +57,10 @@
 			HAL_StatusTypeDef canStart_status;
 
 			fifoCanDataType fifo;
+			fifoCanDataType rxfifo;
 
 			IRQn_Type rx0_interrupt;
-			IRQn_Type tx0_interrupt;
+			IRQn_Type tx_interrupt;
 
 
 
@@ -65,25 +69,18 @@
 		uint8_t CAN_initialization(canStruct *can);
 		void report_error_can1();
 		void report_error_can3();
-		uint8_t CAN_Send(canStruct*, uint32_t, fifoPriority);
-		uint8_t CAN_Send_IT(canStruct*, uint32_t);
+		uint8_t CAN_Send(canStruct*, fifoPriority);
+		uint8_t CAN_Send_IT(canStruct*);
 		uint8_t CAN_Send_Bck(canStruct*);
 
-		uint8_t fifoRxDataCAN1_pop(fifoCanDataType*, fifoDataType*);
-		uint8_t fifoRxDataCAN1_push(fifoCanDataType*, fifoDataType*);
+		uint8_t fifoRxDataCAN_pop(canStruct*);
+		uint8_t fifoRxDataCAN_push(canStruct*);
 
-		uint8_t fifoRxDataCAN3_pop(fifoCanDataType*, fifoDataType*);
-		uint8_t fifoRxDataCAN3_push(fifoCanDataType*, fifoDataType*);
+		uint8_t fifoTxDataCAN_normal_pop(canStruct*);
+		uint8_t fifoTxDataCAN_high_pop(canStruct*);
+		uint8_t fifoTxDataCAN_normal_push(canStruct*);
+		uint8_t fifoTxDataCAN_high_push(canStruct*);
 
-		uint8_t fifoTxDataCAN1_normal_pop(fifoCanDataType*, fifoDataType*);
-		uint8_t fifoTxDataCAN1_high_pop(fifoCanDataType*, fifoDataType*);
-		uint8_t fifoTxDataCAN1_normal_push(fifoCanDataType*, fifoDataType*);
-		uint8_t fifoTxDataCAN1_high_push(fifoCanDataType*, fifoDataType*);
-
-		uint8_t fifoTxDataCAN3_normal_pop(fifoCanDataType*, fifoDataType*);
-		uint8_t fifoTxDataCAN3_high_pop(fifoCanDataType*, fifoDataType*);
-		uint8_t fifoTxDataCAN3_normal_push(fifoCanDataType*, fifoDataType*);
-		uint8_t fifoTxDataCAN3_high_push(fifoCanDataType*, fifoDataType*);
 
 		void can_init();
 

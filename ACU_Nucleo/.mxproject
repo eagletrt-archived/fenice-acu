@@ -1,7 +1,7 @@
 [PreviousGenFiles]
-HeaderPath=/home/eagletrt/STM32CubeIDE/workspace_1.0.2/ACU_Nucleo/Inc
+HeaderPath=/home/eagletrt/Documents/git/fenice-sensors/ACU_Nucleo/Inc
 HeaderFiles=stm32f7xx_it.h;stm32f7xx_hal_conf.h;main.h;
-SourcePath=/home/eagletrt/STM32CubeIDE/workspace_1.0.2/ACU_Nucleo/Src
+SourcePath=/home/eagletrt/Documents/git/fenice-sensors/ACU_Nucleo/Src
 SourceFiles=stm32f7xx_it.c;stm32f7xx_hal_msp.c;main.c;
 
 [PreviousLibFiles]
