@@ -119,6 +119,8 @@ int main(void)
   MX_NVIC_Init();
   /* USER CODE BEGIN 2 */
 
+  HAL_TIM_Base_Start_IT(&htim2);
+
   can1.rx0_interrupt = CAN1_RX0_IRQn;
   can1.tx_interrupt = CAN1_TX_IRQn;
   can1.hcan = &hcan1;
@@ -134,6 +136,8 @@ int main(void)
   sprintf(txt,"CAN start status: %d\r\n", can1.canStart_status);
   HAL_UART_Transmit(&huart3,(uint8_t*)txt, strlen(txt), 10);
 
+  current_state = STATE_INIT;
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -143,7 +147,7 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-
+/*
 	  can1.dataTx[0]=0;
 	  can1.dataTx[1]=2;
 	  can1.dataTx[2]=3;
@@ -153,7 +157,7 @@ int main(void)
 	  can1.dataTx[6]=i_debug / 256;
 	  can1.dataTx[7]=i_debug % 256;
 	  can1.size = 8;
-	  i_debug++;/*
+	  i_debug++;
 	  HAL_UART_Transmit(&huart3,(uint8_t*)"\r\n\n\n", strlen("\r\n\n\n"), 10);
 	  HAL_UART_Transmit(&huart3,(uint8_t*)"------------\r\n", strlen("------------\r\n"), 10);
 
@@ -168,7 +172,18 @@ int main(void)
 	  can1.id = 200;
 	  CAN_Send(&can1, highPriority);*/
 
-	  HAL_Delay(500);
+	  //HAL_Delay(500);
+	  if(current_state == STATE_INIT){
+		  init();
+	  }else if(current_state == STATE_IDLE){
+		  idle();
+	  }else if(current_state == STATE_CALIB){
+		  calib();
+	  }else if(current_state == STATE_SETUP){
+		  setup();
+	  }else if(current_state == STATE_RUN){
+		  run();
+	  }
   }
   /* USER CODE END 3 */
 }
@@ -406,15 +421,23 @@ static void MX_GPIO_Init(void)
 /* USER CODE BEGIN 4 */
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
 	if(htim == &htim2){
-		count_ms += 10;
-		if(count_ms == 10){
+		count_ms += 1;
+		if(count_ms == 100){
 			count_ms = 0;
 			count_dec++;
+			//--- put your counter here (count each 0,1 sec) ---//
 			count_inverter++;
+			count_imu++;
 			if(count_inverter == 10){
 				//TODO: implementare funzione
 			}else if(count_inverter == 11){
 				count_inverter = 10;
+			}
+			if(count_imu == 10){
+				// imu non presente //
+				HAL_UART_Transmit(&huart3, (uint8_t*)"IMU non presente\r\n", strlen("IMU non presente\r\n"), 10);
+			}else if(count_imu == 11){
+				count_imu = 10;
 			}
 			if(count_dec == 10){
 				count_dec = 0;
@@ -433,6 +456,8 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan){
 		if (HAL_CAN_GetRxFifoFillLevel(&hcan1, CAN_RX_FIFO0) != 0){
 			CAN_RxHeaderTypeDef header;
 			HAL_CAN_GetRxMessage(&hcan1, CAN_RX_FIFO0, &header, can1.dataRx);
+			fifoRxDataCAN_push(&can1);
+			//HAL_UART_Transmit(&huart3, (uint8_t*)"ciao2\r\n", strlen("ciao2\r\n"), 10);
 			/*
 			sprintf(txt, "%d\r\n", HAL_CAN_GetRxFifoFillLevel(&hcan1, CAN_RX_FIFO0));
 			HAL_UART_Transmit(&huart3, (uint8_t*)txt, strlen(txt), 10);

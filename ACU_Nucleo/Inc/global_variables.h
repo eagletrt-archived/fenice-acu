@@ -13,8 +13,10 @@ extern ID id;
 extern uint16_t count_ms, count_dec, count_sec;
 extern uint16_t count_inverter;
 extern uint16_t count_accumulator;
+extern uint16_t count_imu;
 
 
+extern UART_HandleTypeDef huart3;
 
 #endif
 

@@ -5,3 +5,5 @@
 uint16_t count_ms, count_dec, count_sec = 0;
 uint16_t count_inverter = 0;
 uint16_t count_accumulator = 0;
+uint16_t count_imu = 0;
+
