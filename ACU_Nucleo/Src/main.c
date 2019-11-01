@@ -127,14 +127,16 @@ int main(void)
 
   can_init();
 
-  sprintf(txt,"----------START---------\r\n");
+  /*sprintf(txt,"----------START---------\r\n");
   HAL_UART_Transmit(&huart3,(uint8_t*)txt, strlen(txt), 10);
   sprintf(txt,"Config Status: %d\r\n", can1.configFilter_status);
   HAL_UART_Transmit(&huart3,(uint8_t*)txt, strlen(txt), 10);
   sprintf(txt,"CAN Notification %d\r\n", can1.activateNotif_status);
   HAL_UART_Transmit(&huart3,(uint8_t*)txt, strlen(txt), 10);
   sprintf(txt,"CAN start status: %d\r\n", can1.canStart_status);
-  HAL_UART_Transmit(&huart3,(uint8_t*)txt, strlen(txt), 10);
+  HAL_UART_Transmit(&huart3,(uint8_t*)txt, strlen(txt), 10);*/
+
+  HAL_UART_Receive_IT(&huart3,(uint8_t*) &debug_rx[debug_rx_count], 1); //activate rx interrupt for debug
 
   current_state = STATE_INIT;
 
@@ -265,6 +267,9 @@ static void MX_NVIC_Init(void)
   /* TIM2_IRQn interrupt configuration */
   HAL_NVIC_SetPriority(TIM2_IRQn, 0, 0);
   HAL_NVIC_EnableIRQ(TIM2_IRQn);
+  /* USART3_IRQn interrupt configuration */
+  HAL_NVIC_SetPriority(USART3_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(USART3_IRQn);
 }
 
 /**
@@ -323,7 +328,7 @@ static void MX_TIM2_Init(void)
 
   /* USER CODE END TIM2_Init 1 */
   htim2.Instance = TIM2;
-  htim2.Init.Prescaler = 54;
+  htim2.Init.Prescaler = 108;
   htim2.Init.CounterMode = TIM_COUNTERMODE_UP;
   htim2.Init.Period = 1000;
   htim2.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
@@ -365,7 +370,7 @@ static void MX_USART3_UART_Init(void)
 
   /* USER CODE END USART3_Init 1 */
   huart3.Instance = USART3;
-  huart3.Init.BaudRate = 2250000;
+  huart3.Init.BaudRate = 115200;
   huart3.Init.WordLength = UART_WORDLENGTH_8B;
   huart3.Init.StopBits = UART_STOPBITS_1;
   huart3.Init.Parity = UART_PARITY_NONE;
@@ -442,8 +447,13 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
 			if(count_dec == 10){
 				count_dec = 0;
 				count_sec++;
-				if(count_sec == 100){
+				if(count_sec == 60){
 					count_sec = 0;
+					count_min++;
+					if(count_min == 60){
+						count_min = 0;
+						count_hour++;
+					}
 				}
 			}
 		}
@@ -577,6 +587,25 @@ void HAL_CAN_ErrorCallback(CAN_HandleTypeDef *hcan){
 	}
 }
 
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart){
+	if(huart == &huart3){
+		if((debug_rx[debug_rx_count] == '\r') | (debug_rx[debug_rx_count] == '\n')){
+			debug_msg_arrived = 1; //set flag
+			debug_rx[debug_rx_count] = 0; //set end of the string
+			debug_rx_count = 0; //reset counter
+		}else{
+			if(debug_rx_count == 9){
+				//overflow
+				debug_rx_count = 0; //reset counter for overflow
+			}else{
+				HAL_UART_Transmit(&huart3, (uint8_t*)&debug_rx[debug_rx_count], 1, 10); //retransmit char
+				debug_rx_count++;
+			}
+		}
+		HAL_UART_Receive_IT(&huart3,(uint8_t*) &debug_rx[debug_rx_count], 1); //activate rx interrupt for debug
+	}
+}
+
 /* USER CODE END 4 */
 
 /**
@@ -590,6 +619,7 @@ void Error_Handler(void)
   /* User can add his own implementation to report the HAL error return state */
 
 	//HAL_GPIO_TogglePin(USER_LED_1_GPIO_Port, USER_LED_1_Pin);
+
 	HAL_GPIO_TogglePin(USER_LED_2_GPIO_Port, USER_LED_2_Pin);
 	HAL_GPIO_TogglePin(USER_LED_3_GPIO_Port, USER_LED_3_Pin);
 
