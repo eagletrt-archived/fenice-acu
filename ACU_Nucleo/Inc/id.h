@@ -4,6 +4,7 @@
 #include "main.h"
 
 typedef struct{
+	//IMU
 	uint32_t imu_angular_rate;
 	uint32_t imu_acceleration;
 	//Infrared Temperature Sensor
@@ -26,7 +27,7 @@ typedef struct{
 
 }ID;
 
-void ID_intit(ID* _ID);
+void ID_init(ID* _ID);
 
 
 #endif

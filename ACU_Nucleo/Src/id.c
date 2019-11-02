@@ -1,6 +1,6 @@
 #include "id.h"
 
-void ID_intit(ID* _ID){
+void ID_init(ID* _ID){
 	_ID->imu_angular_rate = 0x4EC;
 	_ID->imu_acceleration = 0x4ED;
 	//--- Infrared Temperature Sensor ---//

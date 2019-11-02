@@ -6,6 +6,8 @@
 #include "id.h"
 #include "stm32f7xx_hal.h"
 
+#define MAX_DEBUG_RX_L 20
+#define MAX_DEBUG_TX_L 500
 
 extern canStruct can1,can3;
 extern ID id;
@@ -17,10 +19,12 @@ extern uint16_t count_imu;
 
 extern const char code_version[];
 
-extern char debug_rx[10], debug_tx[500];
+extern char debug_rx[MAX_DEBUG_RX_L], debug_tx[MAX_DEBUG_TX_L];
 extern uint8_t debug_rx_count, debug_msg_arrived;
 
 extern UART_HandleTypeDef huart3;
+
+extern uint8_t imu_connected, its0_connected, its1_connected, its2_connected, its3_connected;
 
 #endif
 

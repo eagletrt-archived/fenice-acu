@@ -126,6 +126,8 @@ int main(void)
   can1.hcan = &hcan1;
 
   can_init();
+  ID_init(&id);
+
 
   /*sprintf(txt,"----------START---------\r\n");
   HAL_UART_Transmit(&huart3,(uint8_t*)txt, strlen(txt), 10);
@@ -440,6 +442,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
 			}
 			if(count_imu == 10){
 				// imu non presente //
+				imu_connected = 0; //imu not connected
 				HAL_UART_Transmit(&huart3, (uint8_t*)"IMU non presente\r\n", strlen("IMU non presente\r\n"), 10);
 			}else if(count_imu == 11){
 				count_imu = 10;
@@ -594,7 +597,7 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart){
 			debug_rx[debug_rx_count] = 0; //set end of the string
 			debug_rx_count = 0; //reset counter
 		}else{
-			if(debug_rx_count == 9){
+			if(debug_rx_count == MAX_DEBUG_RX_L){
 				//overflow
 				debug_rx_count = 0; //reset counter for overflow
 			}else{

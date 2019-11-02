@@ -8,4 +8,6 @@
 	void calib();
 	void setup();
 	void run();
+
+	void debug_operations();
 #endif
