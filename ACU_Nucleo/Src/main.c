@@ -64,6 +64,8 @@ extern fifoPriority fifoPriority_t;
 CAN_FilterTypeDef sFilter;
 
 char txt[100];
+
+long int counter = 0;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -142,6 +144,22 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
+
+	  can1.dataTx[0] = 0;
+	  can1.dataTx[1] = 0;
+	  can1.dataTx[2] = 0;
+	  can1.dataTx[3] = 0;
+	  can1.dataTx[4] = counter >> 24;
+	  can1.dataTx[5] = counter >> 16;
+	  can1.dataTx[6] = counter >> 8;
+	  can1.dataTx[7] = counter % 256;
+
+	  can1.id = 0xA0;
+
+	  //CAN_Send(&can1, normalPriority);
+	  HAL_Delay(500);
+
+	  counter ++;
 
 	  if(current_state == STATE_INIT){
 		  init();
@@ -370,7 +388,6 @@ static void MX_GPIO_Init(void)
   __HAL_RCC_GPIOH_CLK_ENABLE();
   __HAL_RCC_GPIOB_CLK_ENABLE();
   __HAL_RCC_GPIOD_CLK_ENABLE();
-  __HAL_RCC_GPIOA_CLK_ENABLE();
   __HAL_RCC_GPIOC_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
@@ -430,18 +447,19 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
 }
 
 void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan){
+	/*sprintf(txt, "%d\r\n", HAL_CAN_GetRxFifoFillLevel(&hcan1, CAN_RX_FIFO0));
+	HAL_UART_Transmit(&huart3, (uint8_t*)txt, strlen(txt), 10);*/
+
 	HAL_GPIO_TogglePin(USER_LED_2_GPIO_Port, USER_LED_2_Pin);
 	if (hcan == &hcan1){
+		//HAL_UART_Transmit(&huart3, (uint8_t*)"rx on FIFO0\r\n", strlen("rx on FIFO0\r\n"), 10);
 		if (HAL_CAN_GetRxFifoFillLevel(&hcan1, CAN_RX_FIFO0) != 0){
 			CAN_RxHeaderTypeDef header;
 			HAL_CAN_GetRxMessage(&hcan1, CAN_RX_FIFO0, &header, can1.dataRx);
 			fifoRxDataCAN_push(&can1);
 			//HAL_UART_Transmit(&huart3, (uint8_t*)"ciao2\r\n", strlen("ciao2\r\n"), 10);
-			/*
-			sprintf(txt, "%d\r\n", HAL_CAN_GetRxFifoFillLevel(&hcan1, CAN_RX_FIFO0));
-			HAL_UART_Transmit(&huart3, (uint8_t*)txt, strlen(txt), 10);
-			sprintf(txt, "received %ld %d\r\n", header.StdId, can1.dataRx[0]);
-			HAL_UART_Transmit(&huart3, (uint8_t*)txt, strlen(txt), 10);*/
+
+
 		}
 	}
 }
