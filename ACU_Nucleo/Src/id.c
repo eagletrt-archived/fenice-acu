@@ -1,6 +1,9 @@
 #include "id.h"
 
 void ID_init(ID* _ID){
+	//ACU ID
+	_ID->ACU = 0x100;
+	//IMU
 	_ID->imu_angular_rate = 0x4EC;
 	_ID->imu_acceleration = 0x4ED;
 	//--- Infrared Temperature Sensor ---//
@@ -20,5 +23,20 @@ void ID_init(ID* _ID){
 	_ID->ITS_4_1 = 0x5BD;
 	_ID->ITS_4_2 = 0x5BE;
 	_ID->ITS_4_3 = 0x5BF;
+	//from inverter
+
+	_ID->REQ_INV_SX = 0x181;
+	_ID->REQ_INV_DX = 0x182;
+	_ID->ASK_INV_SX = 0x201;
+	_ID->ASK_INV_DX = 0x202;
+	_ID->ASK_STATE = 0x10;
+
+
+	//from steer
+	_ID->STEERING_WEEL = 0xA0;
+	//from BMS
+	_ID->BMS_HV = 0xAA;
+	_ID->BMS_LV = 0xFF;
+
 
 }

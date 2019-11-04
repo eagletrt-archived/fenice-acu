@@ -26,8 +26,35 @@ void init(){
 	if(fifoRxDataCAN_pop(&can3)){
 
 	}
+	current_state = STATE_IDLE;
 }
 void idle(){
+	if(debug_msg_arrived == 1){
+		debug_msg_arrived = 0; // reset flag
+		debug_operations();
+	}
+	if(fifoRxDataCAN_pop(&can1)){
+		if(can1.id == id.ASK_STATE){
+			can1.dataTx[0] = (uint8_t)current_state;
+			can1.dataTx[1] = 0;
+			can1.dataTx[2] = 0;
+			can1.dataTx[3] = 0;
+			can1.dataTx[4] = 0;
+			can1.dataTx[5] = 0;
+			can1.dataTx[6] = 0;
+			can1.dataTx[7] = 0;
+			can1.id = id.ACU;
+			CAN_Send(&can1, normalPriority);
+		}else if(can1.id == id.ASK_INV_DX){
+
+		}else if(can1.id == id.ASK_INV_SX){
+
+		}else if(can1.id == id.BMS_HV){
+
+		}else if(can1.id == id.BMS_LV){
+
+		}
+	}
 
 }
 void calib(){

@@ -1,6 +1,6 @@
 state.c:10:6:init	8	static
-state.c:30:6:idle	4	static
-state.c:33:6:calib	4	static
-state.c:36:6:setup	4	static
-state.c:39:6:run	4	static
-state.c:43:6:debug_operations	32	static
+state.c:31:6:idle	8	static
+state.c:60:6:calib	4	static
+state.c:63:6:setup	4	static
+state.c:66:6:run	4	static
+state.c:70:6:debug_operations	32	static

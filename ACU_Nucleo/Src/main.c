@@ -128,19 +128,10 @@ int main(void)
   can_init();
   ID_init(&id);
 
-
-  /*sprintf(txt,"----------START---------\r\n");
-  HAL_UART_Transmit(&huart3,(uint8_t*)txt, strlen(txt), 10);
-  sprintf(txt,"Config Status: %d\r\n", can1.configFilter_status);
-  HAL_UART_Transmit(&huart3,(uint8_t*)txt, strlen(txt), 10);
-  sprintf(txt,"CAN Notification %d\r\n", can1.activateNotif_status);
-  HAL_UART_Transmit(&huart3,(uint8_t*)txt, strlen(txt), 10);
-  sprintf(txt,"CAN start status: %d\r\n", can1.canStart_status);
-  HAL_UART_Transmit(&huart3,(uint8_t*)txt, strlen(txt), 10);*/
-
   HAL_UART_Receive_IT(&huart3,(uint8_t*) &debug_rx[debug_rx_count], 1); //activate rx interrupt for debug
 
   current_state = STATE_INIT;
+
 
   /* USER CODE END 2 */
 
@@ -151,32 +142,7 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-/*
-	  can1.dataTx[0]=0;
-	  can1.dataTx[1]=2;
-	  can1.dataTx[2]=3;
-	  can1.dataTx[3]=4;
-	  can1.dataTx[4]=5;
-	  can1.dataTx[5]=i_debug / 256 / 256;
-	  can1.dataTx[6]=i_debug / 256;
-	  can1.dataTx[7]=i_debug % 256;
-	  can1.size = 8;
-	  i_debug++;
-	  HAL_UART_Transmit(&huart3,(uint8_t*)"\r\n\n\n", strlen("\r\n\n\n"), 10);
-	  HAL_UART_Transmit(&huart3,(uint8_t*)"------------\r\n", strlen("------------\r\n"), 10);
 
-	  can1.id = 100;
-	  CAN_Send(&can1, normalPriority);
-	  HAL_Delay(10);
-
-	  for(int i = 0; i < 10; i++){
-		  can1.id = i;
-		  CAN_Send(&can1, normalPriority);
-	  }
-	  can1.id = 200;
-	  CAN_Send(&can1, highPriority);*/
-
-	  //HAL_Delay(500);
 	  if(current_state == STATE_INIT){
 		  init();
 	  }else if(current_state == STATE_IDLE){
@@ -372,7 +338,7 @@ static void MX_USART3_UART_Init(void)
 
   /* USER CODE END USART3_Init 1 */
   huart3.Instance = USART3;
-  huart3.Init.BaudRate = 115200;
+  huart3.Init.BaudRate = 2000000;
   huart3.Init.WordLength = UART_WORDLENGTH_8B;
   huart3.Init.StopBits = UART_STOPBITS_1;
   huart3.Init.Parity = UART_PARITY_NONE;

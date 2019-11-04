@@ -4,6 +4,7 @@
 #include "main.h"
 
 typedef struct{
+	uint32_t ACU;
 	//IMU
 	uint32_t imu_angular_rate;
 	uint32_t imu_acceleration;
@@ -24,6 +25,17 @@ typedef struct{
 	uint32_t ITS_4_1;
 	uint32_t ITS_4_2;
 	uint32_t ITS_4_3;
+	//from steer
+	uint32_t STEERING_WEEL;
+	//from BMS
+	uint32_t BMS_HV;
+	uint32_t BMS_LV;
+	//from inverter
+	uint32_t ASK_INV_SX;
+	uint32_t ASK_INV_DX;
+	uint32_t ASK_STATE;
+	uint32_t REQ_INV_SX;
+	uint32_t REQ_INV_DX;
 
 }ID;
 
