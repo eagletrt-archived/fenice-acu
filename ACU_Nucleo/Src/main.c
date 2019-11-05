@@ -157,9 +157,9 @@ int main(void)
 	  can1.id = 0xA0;
 
 	  //CAN_Send(&can1, normalPriority);
-	  HAL_Delay(500);
+	  //HAL_Delay(500);
 
-	  counter ++;
+	  //counter ++;
 
 	  if(current_state == STATE_INIT){
 		  init();
@@ -457,6 +457,8 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan){
 			CAN_RxHeaderTypeDef header;
 			HAL_CAN_GetRxMessage(&hcan1, CAN_RX_FIFO0, &header, can1.dataRx);
 			fifoRxDataCAN_push(&can1);
+			sprintf(txt,"DATA: %d %d %d %d %d %d %d %d\r\n",can1.dataRx[0],can1.dataRx[1],can1.dataRx[2],can1.dataRx[3],can1.dataRx[4],can1.dataRx[5],can1.dataRx[6],can1.dataRx[7]);
+			HAL_UART_Transmit(&huart3, (uint8_t*)txt, strlen(txt), 100);
 			//HAL_UART_Transmit(&huart3, (uint8_t*)"ciao2\r\n", strlen("ciao2\r\n"), 10);
 
 
