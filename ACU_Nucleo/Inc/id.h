@@ -26,7 +26,8 @@ typedef struct{
 	uint32_t ITS_4_2;
 	uint32_t ITS_4_3;
 	//from steer
-	uint32_t STEERING_WEEL;
+	uint32_t STEERING_WEEL_1;
+	uint32_t STEERING_WEEL_2;
 	//from BMS
 	uint32_t BMS_HV;
 	uint32_t BMS_LV;
@@ -36,6 +37,7 @@ typedef struct{
 	uint32_t ASK_STATE;
 	uint32_t REQ_INV_SX;
 	uint32_t REQ_INV_DX;
+
 
 }ID;
 

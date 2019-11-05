@@ -10,4 +10,5 @@
 	void run();
 
 	void debug_operations();
+	void imu_operations();
 #endif

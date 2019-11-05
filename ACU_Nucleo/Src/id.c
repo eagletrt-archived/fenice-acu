@@ -33,7 +33,8 @@ void ID_init(ID* _ID){
 
 
 	//from steer
-	_ID->STEERING_WEEL = 0xA0;
+	_ID->STEERING_WEEL_1 = 0xA0;
+	_ID->STEERING_WEEL_2 = 0xAF;
 	//from BMS
 	_ID->BMS_HV = 0xAA;
 	_ID->BMS_LV = 0xFF;

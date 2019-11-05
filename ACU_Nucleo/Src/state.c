@@ -7,20 +7,17 @@
 
 // Default state
 // Init variables
+/*******************************************************************
+ *                         START INIT STATE
+ *******************************************************************/
 void init(){
 	if(debug_msg_arrived == 1){
 		debug_msg_arrived = 0; // reset flag
 		debug_operations();
 	}
 	if(fifoRxDataCAN_pop(&can1)){
-		if(can1.id == id.imu_acceleration){
-			imu_connected = 1; //imu connected true
-			if(count_imu == 10 || count_imu == 11){
-				HAL_UART_Transmit(&huart3, (uint8_t*)"IMU presente\r\n", strlen("IMU presente\r\n"), 10);
-			}
-			count_imu = 0;
-		}else if(can1.id == id.imu_angular_rate){
-
+		if(can1.id == id.imu_acceleration || can1.id == id.imu_angular_rate){
+			imu_operations();
 		}
 	}
 	if(fifoRxDataCAN_pop(&can3)){
@@ -28,6 +25,12 @@ void init(){
 	}
 	current_state = STATE_IDLE;
 }
+/*******************************************************************
+ *                         END INIT STATE
+ *******************************************************************/
+/*******************************************************************
+ *                        START IDLE STATE
+ *******************************************************************/
 void idle(){
 	if(debug_msg_arrived == 1){
 		debug_msg_arrived = 0; // reset flag
@@ -53,19 +56,61 @@ void idle(){
 
 		}else if(can1.id == id.BMS_LV){
 
+		}else if(can1.id == id.STEERING_WEEL_1){
+			if(can1.dataRx[0] == 2){
+				current_state = can1.dataRx[1];
+			}else if(can1.dataRx[0] == 3){
+				current_state = STATE_SETUP;
+			}
+
 		}
 	}
 
 }
+/*******************************************************************
+ *                         END IDLE STATE
+ *******************************************************************/
+/*******************************************************************
+ *                        START CALIB STATE
+ *******************************************************************/
 void calib(){
 
 }
+/*******************************************************************
+ *                         END CALIB STATE
+ *******************************************************************/
+/*******************************************************************
+ *                        START SETUP STATE
+ *******************************************************************/
 void setup(){
-
+	if(fifoRxDataCAN_pop(&can1)){
+		if(can1.id == id.STEERING_WEEL_1){
+			if(can1.dataRx[0] == 4){
+				current_state = STATE_IDLE;
+			}else if(can1.dataRx[0] == 5){
+				current_state = STATE_RUN;
+			}
+		}
+	}
 }
+/*******************************************************************
+ *                         END SETUP STATE
+ *******************************************************************/
+/*******************************************************************
+ *                         START RUN STATE
+ *******************************************************************/
 void run(){
-
+	if(fifoRxDataCAN_pop(&can1)){
+		if(can1.id == id.STEERING_WEEL_1){
+			if(can1.dataRx[0] == 6){
+				current_state = STATE_SETUP;
+			}
+		}
+	}
 }
+/*******************************************************************
+ *                         END RUN STATE
+ *******************************************************************/
 
 void debug_operations(){
 	if(strcmp(debug_rx,"help") == 0){
@@ -145,6 +190,14 @@ void debug_operations(){
 		sprintf(debug_tx,"\r\nERROR : msg %s doesn't exist\r\n",debug_rx);
 		HAL_UART_Transmit(&huart3,(uint8_t*)debug_tx, strlen(debug_tx), 100);
 	}
+}
+
+void imu_operations(){
+	imu_connected = 1; //imu connected true
+	if(count_imu == 10 || count_imu == 11){
+		HAL_UART_Transmit(&huart3, (uint8_t*)"IMU presente\r\n", strlen("IMU presente\r\n"), 10);
+	}
+	count_imu = 0;
 }
 
 
