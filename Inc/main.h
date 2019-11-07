@@ -74,8 +74,10 @@ void Error_Handler(void);
 #define SWO_GPIO_Port GPIOB
 #define Signal_A_Pin GPIO_PIN_4
 #define Signal_A_GPIO_Port GPIOB
+#define Signal_A_EXTI_IRQn EXTI4_IRQn
 #define Signal_B_Pin GPIO_PIN_5
 #define Signal_B_GPIO_Port GPIOB
+#define Signal_B_EXTI_IRQn EXTI9_5_IRQn
 /* USER CODE BEGIN Private defines */
 
 /* USER CODE END Private defines */
