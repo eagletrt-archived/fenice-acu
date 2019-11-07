@@ -16,6 +16,7 @@
 
 		typedef struct fifoDataType{
 			uint32_t id;
+			uint32_t size;
 			uint8_t data[8];
 		}fifoDataType;
 
@@ -38,15 +39,18 @@
 
 		typedef struct{
 
-			int size; //size of data
+			int tx_size; //size of data
+			int rx_size;
 
 			uint8_t dataTx[8];
 			uint8_t dataRx[8];
 			uint8_t dataTxBck[8];
 
 
-			uint32_t id;
+			uint32_t tx_id;
+			uint32_t rx_id;
 			uint32_t idBck;
+			uint32_t sizeBck;
 
 
 			CAN_HandleTypeDef *hcan;
@@ -57,7 +61,6 @@
 			HAL_StatusTypeDef canStart_status;
 
 			fifoCanDataType fifo;
-			fifoCanDataType rxfifo;
 
 			IRQn_Type rx0_interrupt;
 			IRQn_Type tx_interrupt;

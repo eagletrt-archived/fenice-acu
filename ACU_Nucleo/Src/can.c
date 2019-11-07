@@ -74,15 +74,16 @@ uint8_t CAN_Send_IT(canStruct* can){
 	for(int i = 0; i < 8; i++){
 		can->dataTxBck[i] = can->dataTx[i];
 	}
-	can->idBck = can->id;
+	can->idBck = can->tx_id;
+	can->sizeBck = can->tx_size;
 
 	uint8_t flag = 0; //error
 
 	CAN_TxHeaderTypeDef TxHeader;
-	TxHeader.StdId = can->id;
+	TxHeader.StdId = can->tx_id;
 	TxHeader.IDE = CAN_ID_STD;
 	TxHeader.RTR = CAN_RTR_DATA;
-	TxHeader.DLC = can->size;
+	TxHeader.DLC = can->tx_size;
 	TxHeader.TransmitGlobalTime = DISABLE;
 
 	if(HAL_CAN_AddTxMessage(can->hcan, &TxHeader, can->dataTx, &mailbox) == HAL_OK){
@@ -100,7 +101,7 @@ uint8_t CAN_Send_Bck(canStruct* can){
 	TxHeader.StdId = can->idBck;
 	TxHeader.IDE = CAN_ID_STD;
 	TxHeader.RTR = CAN_RTR_DATA;
-	TxHeader.DLC = can->size;
+	TxHeader.DLC = can->sizeBck;
 	TxHeader.TransmitGlobalTime = DISABLE;
 
 	if(HAL_CAN_AddTxMessage(can->hcan, &TxHeader, can->dataTxBck,(uint32_t*)CAN_TX_MAILBOX0) == HAL_OK){
@@ -159,11 +160,12 @@ void report_error_can3(){
 }
 
 uint8_t fifoRxDataCAN_pop(canStruct * can){
-	if(can->fifo.rxHead ==can->fifo.rxTail){
+	if(can->fifo.rxHead == can->fifo.rxTail){
 		return 0;
 	}else{
-		can->id = can->fifo.rx[can->fifo.rxTail].id;
-		for(uint8_t i = 0; i < 8; i++){
+		can->rx_id = can->fifo.rx[can->fifo.rxTail].id;
+		can->rx_size = can->fifo.rx[can->fifo.rxTail].size;
+		for(uint8_t i = 0; i < can->rx_size; i++){
 			can->dataRx[i] = can->fifo.rx[can->fifo.rxTail].data[i];
 		}
 		can->fifo.rxTail = (can->fifo.rxTail + 1) % fifoLengthN;
@@ -175,8 +177,9 @@ uint8_t fifoRxDataCAN_push(canStruct * can){
 	if((can->fifo.rxHead + 1) % fifoLengthN == can->fifo.rxTail){
 		return 0;
 	}else{
-		can->fifo.rx[can->fifo.rxHead].id = can->id;
-		for(uint8_t i = 0; i < 8; i++){
+		can->fifo.rx[can->fifo.rxHead].id = can->rx_id;
+		can->fifo.rx[can->fifo.rxHead].size = can->rx_size;
+		for(uint8_t i = 0; i < can->rx_size; i++){
 			can->fifo.rx[can->fifo.rxHead].data[i] = can->dataTx[i];
 		}
 		can->fifo.rxHead = (can->fifo.rxHead + 1) % fifoLengthN;
@@ -188,8 +191,9 @@ uint8_t fifoTxDataCAN_normal_pop(canStruct * can){
 	if(can->fifo.txHeadNormal ==can->fifo.txTailNormal){
 		return 0;
 	}else{
-		can->id = can->fifo.txNormal[can->fifo.txTailNormal].id;
-		for(uint8_t i = 0; i < 8; i++){
+		can->tx_id = can->fifo.txNormal[can->fifo.txTailNormal].id;
+		can->tx_size = can->fifo.txNormal[can->fifo.txTailNormal].size;
+		for(uint8_t i = 0; i < can->tx_size; i++){
 			can->dataTx[i] = can->fifo.txNormal[can->fifo.txTailNormal].data[i];
 		}
 		can->fifo.txTailNormal = (can->fifo.txTailNormal + 1) % fifoLengthN;
@@ -200,8 +204,9 @@ uint8_t fifoTxDataCAN_high_pop(canStruct * can){
 	if(can->fifo.txHeadHigh ==can->fifo.txTailHigh){
 		return 0;
 	}else{
-		can->id = can->fifo.txHigh[can->fifo.txTailHigh].id;
-		for(uint8_t i = 0; i < 8; i++){
+		can->tx_id = can->fifo.txHigh[can->fifo.txTailHigh].id;
+		can->tx_size = can->fifo.txHigh[can->fifo.txTailHigh].size;
+		for(uint8_t i = 0; i < can->tx_size; i++){
 			can->dataTx[i] = can->fifo.txHigh[can->fifo.txTailHigh].data[i];
 		}
 		can->fifo.txTailHigh = (can->fifo.txTailHigh + 1) % fifoLengthH;
@@ -212,8 +217,9 @@ uint8_t fifoTxDataCAN_normal_push(canStruct *can){
 	if((can->fifo.txHeadNormal + 1) % fifoLengthN == can->fifo.txTailNormal){
 		return 0;
 	}else{
-		can->fifo.txNormal[can->fifo.txHeadNormal].id = can->id;
-		for(uint8_t i = 0; i < 8; i++){
+		can->fifo.txNormal[can->fifo.txHeadNormal].id = can->tx_id;
+		can->fifo.txNormal[can->fifo.txHeadNormal].size = can->tx_size;
+		for(uint8_t i = 0; i < can->tx_size; i++){
 			can->fifo.txNormal[can->fifo.txHeadNormal].data[i] = can->dataTx[i];
 		}
 		can->fifo.txHeadNormal = (can->fifo.txHeadNormal + 1) % fifoLengthN;
@@ -224,8 +230,9 @@ uint8_t fifoTxDataCAN_high_push(canStruct * can){
 	if((can->fifo.txHeadHigh + 1) % fifoLengthH == can->fifo.txTailHigh){
 		return 0;
 	}else{
-		can->fifo.txHigh[can->fifo.txHeadHigh].id = can->id;
-		for(uint8_t i = 0; i < 8; i++){
+		can->fifo.txHigh[can->fifo.txHeadHigh].id = can->tx_id;
+		can->fifo.txHigh[can->fifo.txHeadHigh].size = can->tx_size;
+		for(uint8_t i = 0; i < can->tx_size; i++){
 			can->fifo.txHigh[can->fifo.txHeadHigh].data[i] = can->dataTx[i];
 		}
 		can->fifo.txHeadHigh = (can->fifo.txHeadHigh + 1) % fifoLengthH;

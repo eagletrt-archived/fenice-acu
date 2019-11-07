@@ -16,7 +16,7 @@ void init(){
 		debug_operations();
 	}
 	if(fifoRxDataCAN_pop(&can1)){
-		if(can1.id == id.imu_acceleration || can1.id == id.imu_angular_rate){
+		if(can1.rx_id == id.imu_acceleration || can1.rx_id == id.imu_angular_rate){
 			imu_operations();
 		}
 	}
@@ -37,7 +37,7 @@ void idle(){
 		debug_operations();
 	}
 	if(fifoRxDataCAN_pop(&can1)){
-		if(can1.id == id.ASK_STATE){
+		if(can1.rx_id == id.ASK_STATE){
 			can1.dataTx[0] = (uint8_t)current_state;
 			can1.dataTx[1] = 0;
 			can1.dataTx[2] = 0;
@@ -46,20 +46,20 @@ void idle(){
 			can1.dataTx[5] = 0;
 			can1.dataTx[6] = 0;
 			can1.dataTx[7] = 0;
-			can1.id = id.ACU;
+			can1.tx_id = id.ACU_1;
 			CAN_Send(&can1, normalPriority);
-		}else if(can1.id == id.ASK_INV_DX){
+		}else if(can1.rx_id == id.ASK_INV_DX){
 
-		}else if(can1.id == id.ASK_INV_SX){
+		}else if(can1.rx_id == id.ASK_INV_SX){
 
-		}else if(can1.id == id.BMS_HV){
+		}else if(can1.rx_id == id.BMS_HV){
 
-		}else if(can1.id == id.BMS_LV){
+		}else if(can1.rx_id == id.BMS_LV){
 
-		}else if(can1.id == id.STEERING_WEEL_1){
-			if(can1.dataRx[0] == 2){
+		}else if(can1.rx_id == id.STEERING_WEEL_1){
+			if(can1.dataRx[0] == 2){ //----- change the current state -----//
 				current_state = can1.dataRx[1];
-			}else if(can1.dataRx[0] == 3){
+			}else if(can1.dataRx[0] == 3){ //----- change state to setup -----//
 				current_state = STATE_SETUP;
 			}
 
@@ -84,11 +84,15 @@ void calib(){
  *******************************************************************/
 void setup(){
 	if(fifoRxDataCAN_pop(&can1)){
-		if(can1.id == id.STEERING_WEEL_1){
-			if(can1.dataRx[0] == 4){
+		if(can1.rx_id == id.STEERING_WEEL_1){
+			if(can1.dataRx[0] == 4){ //----- change state to idle -----//
 				current_state = STATE_IDLE;
-			}else if(can1.dataRx[0] == 5){
+			}else if(can1.dataRx[0] == 5){ //----- change state to run -----//
 				current_state = STATE_RUN;
+				can1.tx_id = id.ACU_2;
+				can1.dataRx[0] = 5;
+				can1.tx_size = 1;
+				CAN_Send(&can1, normalPriority);
 			}
 		}
 	}
@@ -101,8 +105,8 @@ void setup(){
  *******************************************************************/
 void run(){
 	if(fifoRxDataCAN_pop(&can1)){
-		if(can1.id == id.STEERING_WEEL_1){
-			if(can1.dataRx[0] == 6){
+		if(can1.rx_id == id.STEERING_WEEL_1){
+			if(can1.dataRx[0] == 6){ //----- change state to setup -----//
 				current_state = STATE_SETUP;
 			}
 		}

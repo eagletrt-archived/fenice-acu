@@ -2,7 +2,8 @@
 
 void ID_init(ID* _ID){
 	//ACU ID
-	_ID->ACU = 0x100;
+	_ID->ACU_1 = 0x100;
+	_ID->ACU_2 = 0x55;
 	//IMU
 	_ID->imu_angular_rate = 0x4EC;
 	_ID->imu_acceleration = 0x4ED;

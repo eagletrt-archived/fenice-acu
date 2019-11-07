@@ -4,7 +4,8 @@
 #include "main.h"
 
 typedef struct{
-	uint32_t ACU;
+	uint32_t ACU_1;
+	uint32_t ACU_2;
 	//IMU
 	uint32_t imu_angular_rate;
 	uint32_t imu_acceleration;
