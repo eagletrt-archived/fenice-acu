@@ -45,7 +45,10 @@
 UART_HandleTypeDef huart2;
 
 /* USER CODE BEGIN PV */
-
+int polA_cont_up = 0;
+int polA_cont_down = 0;
+int polB_cont_down = 0;
+int polB_cont_up = 0;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -229,6 +232,7 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
+
 
 /* USER CODE END 4 */
 
