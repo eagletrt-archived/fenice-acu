@@ -56,7 +56,7 @@ void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 static void MX_USART2_UART_Init(void);
 /* USER CODE BEGIN PFP */
-
+void print(UART_HandleTypeDef *huart, char* text);
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -233,6 +233,10 @@ static void MX_GPIO_Init(void)
 
 /* USER CODE BEGIN 4 */
 
+// print on uart
+void print(UART_HandleTypeDef *huart, char* text){
+  HAL_UART_Transmit(huart, (uint8_t*)text, strlen(text), 5);
+}
 
 /* USER CODE END 4 */
 
