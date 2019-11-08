@@ -215,9 +215,6 @@ void EXTI4_IRQHandler(void)
 	{
 		polA_cont_down++;
 	}
-	char message[200] = "";
-	sprintf(message, "\nA cont up => %d  ---  cont down => %d", polA_cont_up, polA_cont_down);
-	print(&huart2, message);
 
   /* USER CODE END EXTI4_IRQn 0 */
   HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_4);
@@ -240,9 +237,6 @@ void EXTI9_5_IRQHandler(void)
 		{
 			polB_cont_down++;
 		}
-	char message[200] = "";
-	sprintf(message, "\nB cont up => %d  ---  cont down => %d", polB_cont_up, polB_cont_down);
-	print(&huart2, message);
 
   /* USER CODE END EXTI9_5_IRQn 0 */
   HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_5);

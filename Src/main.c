@@ -103,7 +103,10 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
-
+	  char message[250] = "";
+	  sprintf(message, "\nA cont up => %d --- cont down => %d B cont up => %d --- cont down => %d ", polA_cont_up, polA_cont_down, polB_cont_up, polB_cont_down);
+	  print(&huart2, message);
+	  HAL_Delay(500);
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
