@@ -42,7 +42,8 @@
 
 /* Private variables ---------------------------------------------------------*/
 /* USER CODE BEGIN PV */
-
+int sig_a = RESET;
+int sig_b = RESET;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -62,7 +63,7 @@ extern polA_cont_up;
 extern polA_cont_down;
 extern polB_cont_up;
 extern polB_cont_down;
-extern huart2;
+extern direction;
 /* USER CODE END EV */
 
 /******************************************************************************/
@@ -210,10 +211,28 @@ void EXTI4_IRQHandler(void)
 	if(HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_4))
 	{
 		polA_cont_up++;
+		sig_a = SET;
+		if(sig_b)
+		{
+			direction = RESET;
+		}
+		else
+		{
+			direction = SET;
+		}
 	}
 	else
 	{
 		polA_cont_down++;
+		sig_a = RESET;
+		if(sig_b)
+		{
+			direction = SET;
+		}
+		else
+		{
+			direction = RESET;
+		}
 	}
 
   /* USER CODE END EXTI4_IRQn 0 */
@@ -232,10 +251,28 @@ void EXTI9_5_IRQHandler(void)
 	if(HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_5))
 		{
 			polB_cont_up++;
+			sig_b = SET;
+			if(sig_b)
+			{
+				direction = SET;
+			}
+			else
+			{
+				direction = RESET;
+			}
 		}
 		else
 		{
 			polB_cont_down++;
+			sig_b = RESET;
+			if(sig_b)
+			{
+				direction = RESET;
+			}
+			else
+			{
+				direction = SET;
+			}
 		}
 
   /* USER CODE END EXTI9_5_IRQn 0 */

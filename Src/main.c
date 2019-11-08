@@ -49,6 +49,8 @@ int polA_cont_up = 0;
 int polA_cont_down = 0;
 int polB_cont_down = 0;
 int polB_cont_up = 0;
+// 1 => Clockwise, 0 => counter-Clockwise
+int direction = SET;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -57,6 +59,7 @@ static void MX_GPIO_Init(void);
 static void MX_USART2_UART_Init(void);
 /* USER CODE BEGIN PFP */
 void print(UART_HandleTypeDef *huart, char* text);
+
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
