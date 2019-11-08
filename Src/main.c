@@ -95,7 +95,7 @@ int main(void)
   MX_GPIO_Init();
   MX_USART2_UART_Init();
   /* USER CODE BEGIN 2 */
-
+  print(&huart2, "\nAll initialized\n");
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -218,7 +218,7 @@ static void MX_GPIO_Init(void)
 
   /*Configure GPIO pins : Signal_A_Pin Signal_B_Pin */
   GPIO_InitStruct.Pin = Signal_A_Pin|Signal_B_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
+  GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING_FALLING;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
