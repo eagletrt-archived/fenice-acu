@@ -4,9 +4,9 @@ main.c:239:13:MX_NVIC_Init	8	static
 main.c:266:13:MX_CAN1_Init	8	static
 main.c:303:13:MX_TIM2_Init	40	static
 main.c:348:13:MX_USART3_UART_Init	8	static
-main.c:383:13:MX_GPIO_Init	48	static
-main.c:412:6:HAL_TIM_PeriodElapsedCallback	16	static
-main.c:449:6:HAL_CAN_RxFifo0MsgPendingCallback	88	static
+main.c:383:13:MX_GPIO_Init	40	static
+main.c:411:6:HAL_TIM_PeriodElapsedCallback	16	static
+main.c:448:6:HAL_CAN_RxFifo0MsgPendingCallback	48	static
 main.c:470:6:HAL_CAN_RxFifo1MsgPendingCallback	16	static
 main.c:476:6:HAL_CAN_RxFifo0FullCallback	16	static
 main.c:481:6:HAL_CAN_RxFifo1FullCallback	16	static
@@ -15,4 +15,4 @@ main.c:531:6:HAL_CAN_TxMailbox1CompleteCallback	16	static
 main.c:552:6:HAL_CAN_TxMailbox2CompleteCallback	16	static
 main.c:573:6:HAL_CAN_ErrorCallback	16	static
 main.c:581:6:HAL_UART_RxCpltCallback	16	static
-main.c:606:6:Error_Handler	8	static
+main.c:606:6:Error_Handler	16	static

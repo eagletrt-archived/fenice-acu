@@ -385,16 +385,15 @@ static void MX_GPIO_Init(void)
   GPIO_InitTypeDef GPIO_InitStruct = {0};
 
   /* GPIO Ports Clock Enable */
-  __HAL_RCC_GPIOH_CLK_ENABLE();
   __HAL_RCC_GPIOB_CLK_ENABLE();
   __HAL_RCC_GPIOD_CLK_ENABLE();
   __HAL_RCC_GPIOC_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0|GPIO_PIN_14|GPIO_PIN_7, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOB, LED_GREEN_Pin|LED_RED_Pin|LED_BLUE_Pin, GPIO_PIN_RESET);
 
-  /*Configure GPIO pins : PB0 PB14 PB7 */
-  GPIO_InitStruct.Pin = GPIO_PIN_0|GPIO_PIN_14|GPIO_PIN_7;
+  /*Configure GPIO pins : LED_GREEN_Pin LED_RED_Pin LED_BLUE_Pin */
+  GPIO_InitStruct.Pin = LED_GREEN_Pin|LED_RED_Pin|LED_BLUE_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
@@ -450,7 +449,7 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan){
 	/*sprintf(txt, "%d\r\n", HAL_CAN_GetRxFifoFillLevel(&hcan1, CAN_RX_FIFO0));
 	HAL_UART_Transmit(&huart3, (uint8_t*)txt, strlen(txt), 10);*/
 
-	HAL_GPIO_TogglePin(USER_LED_2_GPIO_Port, USER_LED_2_Pin);
+	HAL_GPIO_TogglePin(LED_BLUE_GPIO_Port, LED_BLUE_Pin);
 	if (hcan == &hcan1){
 		//HAL_UART_Transmit(&huart3, (uint8_t*)"rx on FIFO0\r\n", strlen("rx on FIFO0\r\n"), 10);
 		if (HAL_CAN_GetRxFifoFillLevel(&hcan1, CAN_RX_FIFO0) != 0){
@@ -459,8 +458,9 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan){
 			can1.rx_id = header.StdId;
 			can1.rx_size = header.DLC;
 			fifoRxDataCAN_push(&can1);
-			sprintf(txt,"DATA: %d %d %d %d %d %d %d %d\r\n",can1.dataRx[0],can1.dataRx[1],can1.dataRx[2],can1.dataRx[3],can1.dataRx[4],can1.dataRx[5],can1.dataRx[6],can1.dataRx[7]);
-			HAL_UART_Transmit(&huart3, (uint8_t*)txt, strlen(txt), 100);
+			//sprintf(txt,"Size: %d\r\n",can1.rx_size);
+			//sprintf(txt,"DATA: %d %d %d %d %d %d %d %d\r\n",can1.dataRx[0],can1.dataRx[1],can1.dataRx[2],can1.dataRx[3],can1.dataRx[4],can1.dataRx[5],can1.dataRx[6],can1.dataRx[7]);
+			//HAL_UART_Transmit(&huart3, (uint8_t*)txt, strlen(txt), 100);
 			//HAL_UART_Transmit(&huart3, (uint8_t*)"ciao2\r\n", strlen("ciao2\r\n"), 10);
 
 
@@ -487,7 +487,7 @@ void HAL_CAN_RxFifo1FullCallback(CAN_HandleTypeDef *hcan){
 void HAL_CAN_TxMailbox0CompleteCallback(CAN_HandleTypeDef *hcan){
 	sprintf(txt,"mb0: %d\r\n", (int)can1.idBck);
 	HAL_UART_Transmit(&huart3,(uint8_t*)(txt), strlen(txt), 10);
-	HAL_GPIO_TogglePin(USER_LED_1_GPIO_Port, USER_LED_1_Pin);
+	HAL_GPIO_TogglePin(LED_GREEN_GPIO_Port, LED_GREEN_Pin);
 	if(hcan == &hcan1){
 		if(fifoTxDataCAN_high_pop(&can1)){
 			if(CAN_Send_IT(&can1) == 0){
@@ -531,7 +531,7 @@ void HAL_CAN_TxMailbox0CompleteCallback(CAN_HandleTypeDef *hcan){
 void HAL_CAN_TxMailbox1CompleteCallback(CAN_HandleTypeDef *hcan){
 	sprintf(txt,"mb1: %d %d\r\n" ,can1.fifo.txTailNormal, can1.fifo.txHeadNormal);
 	HAL_UART_Transmit(&huart3,(uint8_t*)(txt), strlen(txt), 10);
-	HAL_GPIO_TogglePin(USER_LED_1_GPIO_Port, USER_LED_1_Pin);
+	HAL_GPIO_TogglePin(LED_GREEN_GPIO_Port, LED_GREEN_Pin);
 	if(hcan == &hcan1){
 		if(fifoTxDataCAN_high_pop(&can1)){
 			if(CAN_Send_IT(&can1) == 0){
@@ -552,7 +552,7 @@ void HAL_CAN_TxMailbox1CompleteCallback(CAN_HandleTypeDef *hcan){
 void HAL_CAN_TxMailbox2CompleteCallback(CAN_HandleTypeDef *hcan){
 	sprintf(txt,"mb2: %d %d\r\n", can1.fifo.txTailNormal, can1.fifo.txHeadNormal);
 	HAL_UART_Transmit(&huart3,(uint8_t*)(txt), strlen(txt), 10);
-	HAL_GPIO_TogglePin(USER_LED_1_GPIO_Port, USER_LED_1_Pin);
+	HAL_GPIO_TogglePin(LED_GREEN_GPIO_Port, LED_GREEN_Pin);
 	if(hcan == &hcan1){
 		if(fifoTxDataCAN_high_pop(&can1)){
 			if(CAN_Send_IT(&can1) == 0){
@@ -611,10 +611,13 @@ void Error_Handler(void)
 
 	//HAL_GPIO_TogglePin(USER_LED_1_GPIO_Port, USER_LED_1_Pin);
 
-	HAL_GPIO_TogglePin(USER_LED_2_GPIO_Port, USER_LED_2_Pin);
-	HAL_GPIO_TogglePin(USER_LED_3_GPIO_Port, USER_LED_3_Pin);
+	for(int i = 0; i < 10; i++){
+		HAL_GPIO_TogglePin(LED_BLUE_GPIO_Port, LED_BLUE_Pin);
+		HAL_GPIO_TogglePin(LED_RED_GPIO_Port, LED_RED_Pin);
+		HAL_GPIO_TogglePin(LED_GREEN_GPIO_Port, LED_GREEN_Pin);
+		HAL_Delay(100);
+	}
 
-	HAL_Delay(100);
 
   /* USER CODE END Error_Handler_Debug */
 }
