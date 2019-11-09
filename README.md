@@ -1,6 +1,17 @@
 # Encoder Specifics
-- **D40** 
-    -**Interpolation factor** => 400
-    -**Resolution** (um) => 5
-- **Minimum edge separation** => 0.12us (8MHz)
- 
+- **LM13**  
+    - **Interpolation factor** => 400   
+    - **Resolution** => 5 um  
+    - **Minimum edge separation** => 0.12us (8MHz)  
+- **MR100F**  
+    - **Diameter** => 100.5 +- 0.1 mm  
+    - **Circumference** => `3.1415926535 * 0.1005 = 0.31573006167675m`   
+    - **cpr** => 64000  
+    - **ppr** => 16000   
+    - **Circumference with datasheeté** => `64000*0.000005 = 0.32m`  
+- **Wheel**  
+    - **Diameter** => 0.395 m
+    - **Circumference** => `3.1415926535 * 0.395 = 1.2409290981325m`  
+- **Speed**  
+    - **Speed1:** is the speed calculated with the real circumference of the encoder `mult fact = 3.9303482587064676616`  
+    - **Speed2:** is the speed caluclated with the resolution and the cpr of the encoder `mult fact = 3.8778125`  
