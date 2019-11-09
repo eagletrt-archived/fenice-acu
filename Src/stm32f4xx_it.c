@@ -57,13 +57,15 @@ int sig_b = RESET;
 /* USER CODE END 0 */
 
 /* External variables --------------------------------------------------------*/
-
+extern TIM_HandleTypeDef htim3;
+extern TIM_HandleTypeDef htim4;
 /* USER CODE BEGIN EV */
 extern polA_cont_up;
 extern polA_cont_down;
 extern polB_cont_up;
 extern polB_cont_down;
 extern direction;
+extern cpr;
 /* USER CODE END EV */
 
 /******************************************************************************/
@@ -280,6 +282,46 @@ void EXTI9_5_IRQHandler(void)
   /* USER CODE BEGIN EXTI9_5_IRQn 1 */
 
   /* USER CODE END EXTI9_5_IRQn 1 */
+}
+
+/**
+  * @brief This function handles TIM3 global interrupt.
+  *
+  * This timer is giving the period to read the speed.
+  * At every interrupt the the GPIO interrupts are activated and so the STM32 is going to
+  * read the encoder. Also a second timer is started, in order to have a definite time in
+  * which we are reading the speed encoder.
+  *
+  * Period = 1s
+  */
+void TIM3_IRQHandler(void)
+{
+  /* USER CODE BEGIN TIM3_IRQn 0 */
+
+  /* USER CODE END TIM3_IRQn 0 */
+  HAL_TIM_IRQHandler(&htim3);
+  /* USER CODE BEGIN TIM3_IRQn 1 */
+
+  /* USER CODE END TIM3_IRQn 1 */
+}
+
+/**
+  * @brief This function handles TIM4 global interrupt.
+  *
+  * This timer is giving the amount of time in which the encoder is read. So when the
+  * interrupt arrive the GPIO interrupts of the encoder are disabled.
+  *
+  * Period = 0.1s
+  */
+void TIM4_IRQHandler(void)
+{
+  /* USER CODE BEGIN TIM4_IRQn 0 */
+
+  /* USER CODE END TIM4_IRQn 0 */
+  HAL_TIM_IRQHandler(&htim4);
+  /* USER CODE BEGIN TIM4_IRQn 1 */
+
+  /* USER CODE END TIM4_IRQn 1 */
 }
 
 /* USER CODE BEGIN 1 */

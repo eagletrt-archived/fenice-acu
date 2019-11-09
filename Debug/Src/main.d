@@ -24,6 +24,8 @@ Src/main.o: ../Src/main.c /home/bogdan/SAE/Read_Encoder/Inc/main.h \
  /home/bogdan/SAE/Read_Encoder/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ramfunc.h \
  /home/bogdan/SAE/Read_Encoder/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h \
  /home/bogdan/SAE/Read_Encoder/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h \
+ /home/bogdan/SAE/Read_Encoder/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h \
+ /home/bogdan/SAE/Read_Encoder/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h \
  /home/bogdan/SAE/Read_Encoder/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h
 
 /home/bogdan/SAE/Read_Encoder/Inc/main.h:
@@ -77,5 +79,9 @@ Src/main.o: ../Src/main.c /home/bogdan/SAE/Read_Encoder/Inc/main.h \
 /home/bogdan/SAE/Read_Encoder/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h:
 
 /home/bogdan/SAE/Read_Encoder/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h:
+
+/home/bogdan/SAE/Read_Encoder/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h:
+
+/home/bogdan/SAE/Read_Encoder/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h:
 
 /home/bogdan/SAE/Read_Encoder/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h:
