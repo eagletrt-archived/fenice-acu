@@ -54,7 +54,12 @@ int polB_cont_down = 0;
 int polB_cont_up = 0;
 // 1 => Clockwise, 0 => counter-Clockwise
 int direction = SET;
-uint32_t cpr;
+uint32_t cp;
+double resolution = 0.000005;
+double mult_fact = 3.9303482587;
+double enc_speed = 0;
+double wheel_speed = 0;
+double wheel_speed2 = 0;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -106,8 +111,12 @@ int main(void)
   MX_TIM3_Init();
   MX_TIM4_Init();
   /* USER CODE BEGIN 2 */
-  print(&huart2, "\nAll initialized\n");
+  // Disabling the GPIO interrupts in order to activate them when the period of the first timer passes.
+  HAL_NVIC_DisableIRQ(EXTI4_IRQn);
+  HAL_NVIC_DisableIRQ(EXTI9_5_IRQn);
   HAL_TIM_Base_Start(&htim3);
+  print(&huart2, "\nAll initialized\n");
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -115,7 +124,14 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
+	  char message[250] = "";
+//	  sprintf(message, "\nA cont up => %d --- cont down => %d B cont up => %d --- cont down => %d ", polA_cont_up, polA_cont_down, polB_cont_up, polB_cont_down);
+//	  print(&huart2, message);
 
+	  sprintf(message, "\nCP = %d -- Encoder = %d -- Speed1 = %d -- Speed2 = %d", cp, enc_speed, wheel_speed, wheel_speed2);
+	  print(&huart2, message);
+
+	  HAL_Delay(500);
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
@@ -338,6 +354,49 @@ static void MX_GPIO_Init(void)
 // print on uart
 void print(UART_HandleTypeDef *huart, char* text){
   HAL_UART_Transmit(huart, (uint8_t*)text, strlen(text), 5);
+}
+
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
+	if(htim == &htim3){
+		// Initializing all the variables to calculate the speed.
+		cp = 0;
+		polA_cont_up = 0;
+		polA_cont_down = 0;
+		polB_cont_up = 0;
+		polB_cont_down = 0;
+		HAL_TIM_Base_Start(&htim4);
+		HAL_NVIC_EnableIRQ(EXTI4_IRQn);
+		HAL_NVIC_EnableIRQ(EXTI9_5_IRQn);
+	}
+	/* Here we are calculating the speed thanks to the diameter of the encoder, of the wheel and the period
+	   of the timer of 0.1s
+
+	  Then we restart the first timer.
+	*/
+	if(htim == &htim4){
+		HAL_NVIC_DisableIRQ(EXTI4_IRQn);
+		HAL_NVIC_DisableIRQ(EXTI9_5_IRQn);
+		HAL_TIM_Base_Start(&htim3);
+
+		// Resolution = 5um = 0.000005 m
+		// cpr = 64'000
+		// encoder diameter = 100.5 +- 0.1 mm = 0.1005 m
+		// wheel diameter = 0.395 m
+		// encoder circumference = 3.1415926535 * 0.1005 = 0.31573006167675
+		// wheel circumference = 3.1415926535 * 0.395 = 1.2409290981325
+		// speed multiplier factor = 3.9303482587064676616
+		// second mult_factor = 1.2409/0.32 = 3.8778125
+		// encoder speed = Resolution*cp/1s
+		// wheel speed = encoder speed * sp_mult
+
+		enc_speed = resolution*cp;
+		wheel_speed = enc_speed*mult_fact;
+		wheel_speed2 = resolution*cp/3.8778125;
+
+		// Restart the waiting timer (To check if starts alone)
+		HAL_TIM_Base_Start(&htim3);
+
+	}
 }
 
 /* USER CODE END 4 */
