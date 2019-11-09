@@ -376,7 +376,8 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
 	if(htim == &htim4){
 		HAL_NVIC_DisableIRQ(EXTI4_IRQn);
 		HAL_NVIC_DisableIRQ(EXTI9_5_IRQn);
-		HAL_TIM_Base_Start(&htim3);
+		HAL_TIM_Base_Stop(&htim4);
+		&htim4 -> Instance -> CNT = 0;
 
 		// Resolution = 5um = 0.000005 m
 		// cpr = 64'000
