@@ -111,12 +111,24 @@ int main(void)
   MX_TIM3_Init();
   MX_TIM4_Init();
   /* USER CODE BEGIN 2 */
+  RCC->APB1ENR |= (RCC_APB1ENR_TIM3EN | RCC_APB1ENR_TIM4EN); //enable MCU debug module clock
+  HAL_DBGMCU_EnableDBGStandbyMode();
+  HAL_DBGMCU_EnableDBGStopMode();
+  DBGMCU->APB1FZ |= (DBGMCU_APB1_FZ_DBG_TIM3_STOP | DBGMCU_APB1_FZ_DBG_TIM4_STOP);
   // Disabling the GPIO interrupts in order to activate them when the period of the first timer passes.
   HAL_NVIC_DisableIRQ(EXTI4_IRQn);
   HAL_NVIC_DisableIRQ(EXTI9_5_IRQn);
   HAL_TIM_Base_Start(&htim3);
-  print(&huart2, "\nAll initialized\n");
 
+  //HAL_DBGMCU_EnableDBGStopMode();
+  //
+
+
+  print(&huart2, "\nAll initialized\n");
+  HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_5);
+
+  char message[256] = "";
+  char message2[256] = "";
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -124,12 +136,14 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
-	  char message[250] = "";
+
 //	  sprintf(message, "\nA cont up => %d --- cont down => %d B cont up => %d --- cont down => %d ", polA_cont_up, polA_cont_down, polB_cont_up, polB_cont_down);
 //	  print(&huart2, message);
 
-	  sprintf(message, "\nCP = %d -- Encoder = %d -- Speed1 = %d -- Speed2 = %d", cp, enc_speed, wheel_speed, wheel_speed2);
+	  sprintf(message, "\r\nCP = %u -- Encoder = %f", cp, enc_speed);
+	  sprintf(message2, "\nSpeed1 = %f -- Speed2 = %f", wheel_speed, wheel_speed2);
 	  print(&huart2, message);
+	  print(&huart2, message2);
 
 	  HAL_Delay(500);
     /* USER CODE BEGIN 3 */
@@ -367,6 +381,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
 		HAL_TIM_Base_Start(&htim4);
 		HAL_NVIC_EnableIRQ(EXTI4_IRQn);
 		HAL_NVIC_EnableIRQ(EXTI9_5_IRQn);
+		HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_5);
 	}
 	/* Here we are calculating the speed thanks to the diameter of the encoder, of the wheel and the period
 	   of the timer of 0.1s
@@ -377,7 +392,6 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
 		HAL_NVIC_DisableIRQ(EXTI4_IRQn);
 		HAL_NVIC_DisableIRQ(EXTI9_5_IRQn);
 		HAL_TIM_Base_Stop(&htim4);
-		&htim4 -> Instance -> CNT = 0;
 
 		// Resolution = 5um = 0.000005 m
 		// cpr = 64'000
@@ -390,9 +404,18 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
 		// encoder speed = Resolution*cp/1s
 		// wheel speed = encoder speed * sp_mult
 
-		enc_speed = resolution*cp;
-		wheel_speed = enc_speed*mult_fact;
-		wheel_speed2 = resolution*cp/3.8778125;
+		if(direction){
+			enc_speed = resolution*cp*3.6;
+			wheel_speed = enc_speed*mult_fact*3.6;
+			wheel_speed2 = resolution*cp/3.8778125*3.6;
+		}
+		else
+		{
+			enc_speed = resolution*cp*3.6*-1;
+			wheel_speed = enc_speed*mult_fact*3.6*-1;
+			wheel_speed2 = resolution*cp/3.8778125*3.6*-1;
+		}
+
 
 		// Restart the waiting timer (To check if starts alone)
 		HAL_TIM_Base_Start(&htim3);
