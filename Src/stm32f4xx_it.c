@@ -66,6 +66,7 @@ extern polB_cont_up;
 extern polB_cont_down;
 extern direction;
 extern cp;
+extern huart2;
 /* USER CODE END EV */
 
 /******************************************************************************/
@@ -302,6 +303,8 @@ void TIM3_IRQHandler(void)
 {
   /* USER CODE BEGIN TIM3_IRQn 0 */
 	HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_5);
+	print(&huart2, "Coglione");
+	cp++;
   /* USER CODE END TIM3_IRQn 0 */
   HAL_TIM_IRQHandler(&htim3);
   /* USER CODE BEGIN TIM3_IRQn 1 */
