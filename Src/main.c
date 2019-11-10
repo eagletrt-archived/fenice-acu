@@ -119,6 +119,7 @@ int main(void)
   HAL_NVIC_DisableIRQ(EXTI4_IRQn);
   HAL_NVIC_DisableIRQ(EXTI9_5_IRQn);
   HAL_TIM_Base_Start(&htim3);
+  //HAL_TIM_Base_Start_IT(&htim3);
 
   //HAL_DBGMCU_EnableDBGStopMode();
   //
@@ -129,6 +130,8 @@ int main(void)
 
   char message[256] = "";
   char message2[256] = "";
+  char mes[200] = "";
+  int val = -1;
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -144,6 +147,9 @@ int main(void)
 	  sprintf(message2, "\nSpeed1 = %f -- Speed2 = %f", wheel_speed, wheel_speed2);
 	  print(&huart2, message);
 	  print(&huart2, message2);
+	  val = __HAL_TIM_GET_COUNTER(&htim3);
+	  sprintf(mes,"\n TIM3 = %d",val);
+	  print(&huart2, mes);
 
 	  HAL_Delay(500);
     /* USER CODE BEGIN 3 */
