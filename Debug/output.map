@@ -2968,18 +2968,17 @@ LOAD /home/bogdan/Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.
  .text.MX_USART2_UART_Init
                 0x0000000008002298       0x2c Src/main.o
  .text.MX_TIM3_Init
-                0x00000000080022c4       0x68 Src/main.o
+                0x00000000080022c4       0x6c Src/main.o
  .text.MX_TIM4_Init
-                0x000000000800232c       0x58 Src/main.o
+                0x0000000008002330       0x58 Src/main.o
  .text.SystemClock_Config
-                0x0000000008002384       0x90 Src/main.o
-                0x0000000008002384                SystemClock_Config
- .text.print    0x0000000008002414       0x1a Src/main.o
-                0x0000000008002414                print
- *fill*         0x000000000800242e        0x2 
- .text.main     0x0000000008002430      0x10c Src/main.o
-                0x0000000008002430                main
- *fill*         0x000000000800253c        0x4 
+                0x0000000008002388       0x90 Src/main.o
+                0x0000000008002388                SystemClock_Config
+ .text.print    0x0000000008002418       0x1a Src/main.o
+                0x0000000008002418                print
+ *fill*         0x0000000008002432        0x2 
+ .text.main     0x0000000008002434      0x10c Src/main.o
+                0x0000000008002434                main
  .text.HAL_TIM_PeriodElapsedCallback
                 0x0000000008002540      0x150 Src/main.o
                 0x0000000008002540                HAL_TIM_PeriodElapsedCallback
