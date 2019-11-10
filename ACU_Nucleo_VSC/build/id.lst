@@ -1,0 +1,225 @@
+ARM GAS  /tmp/ccjuBO35.s 			page 1
+
+
+   1              		.cpu cortex-m7
+   2              		.eabi_attribute 28, 1
+   3              		.eabi_attribute 20, 1
+   4              		.eabi_attribute 21, 1
+   5              		.eabi_attribute 23, 3
+   6              		.eabi_attribute 24, 1
+   7              		.eabi_attribute 25, 1
+   8              		.eabi_attribute 26, 1
+   9              		.eabi_attribute 30, 1
+  10              		.eabi_attribute 34, 1
+  11              		.eabi_attribute 18, 4
+  12              		.file	"id.c"
+  13              		.text
+  14              	.Ltext0:
+  15              		.cfi_sections	.debug_frame
+  16              		.section	.text.ID_init,"ax",%progbits
+  17              		.align	1
+  18              		.global	ID_init
+  19              		.arch armv7e-m
+  20              		.syntax unified
+  21              		.thumb
+  22              		.thumb_func
+  23              		.fpu fpv5-d16
+  25              	ID_init:
+  26              	.LVL0:
+  27              	.LFB141:
+  28              		.file 1 "Src/id.c"
+   1:Src/id.c      **** #include "id.h"
+   2:Src/id.c      **** 
+   3:Src/id.c      **** void ID_init(ID* _ID){
+  29              		.loc 1 3 22 view -0
+  30              		.cfi_startproc
+  31              		@ args = 0, pretend = 0, frame = 0
+  32              		@ frame_needed = 0, uses_anonymous_args = 0
+  33              		@ link register save eliminated.
+   4:Src/id.c      **** 	//ACU ID
+   5:Src/id.c      **** 	_ID->ACU_1 = 0x100;
+  34              		.loc 1 5 2 view .LVU1
+  35              		.loc 1 5 13 is_stmt 0 view .LVU2
+  36 0000 4FF48073 		mov	r3, #256
+  37 0004 0360     		str	r3, [r0]
+   6:Src/id.c      **** 	_ID->ACU_2 = 0x55;
+  38              		.loc 1 6 2 is_stmt 1 view .LVU3
+  39              		.loc 1 6 13 is_stmt 0 view .LVU4
+  40 0006 5523     		movs	r3, #85
+  41 0008 4360     		str	r3, [r0, #4]
+   7:Src/id.c      **** 	//IMU
+   8:Src/id.c      **** 	_ID->imu_angular_rate = 0x4EC;
+  42              		.loc 1 8 2 is_stmt 1 view .LVU5
+  43              		.loc 1 8 24 is_stmt 0 view .LVU6
+  44 000a 40F2EC43 		movw	r3, #1260
+  45 000e 8360     		str	r3, [r0, #8]
+   9:Src/id.c      **** 	_ID->imu_acceleration = 0x4ED;
+  46              		.loc 1 9 2 is_stmt 1 view .LVU7
+  47              		.loc 1 9 24 is_stmt 0 view .LVU8
+  48 0010 40F2ED43 		movw	r3, #1261
+  49 0014 C360     		str	r3, [r0, #12]
+ARM GAS  /tmp/ccjuBO35.s 			page 2
+
+
+  10:Src/id.c      **** 	//--- Infrared Temperature Sensor ---//
+  11:Src/id.c      **** 	_ID->ITS_1_0 = 0x5B0;
+  50              		.loc 1 11 2 is_stmt 1 view .LVU9
+  51              		.loc 1 11 15 is_stmt 0 view .LVU10
+  52 0016 4FF4B663 		mov	r3, #1456
+  53 001a 0361     		str	r3, [r0, #16]
+  12:Src/id.c      **** 	_ID->ITS_1_1 = 0x5B1;
+  54              		.loc 1 12 2 is_stmt 1 view .LVU11
+  55              		.loc 1 12 15 is_stmt 0 view .LVU12
+  56 001c 40F2B153 		movw	r3, #1457
+  57 0020 4361     		str	r3, [r0, #20]
+  13:Src/id.c      **** 	_ID->ITS_1_2 = 0x5B2;
+  58              		.loc 1 13 2 is_stmt 1 view .LVU13
+  59              		.loc 1 13 15 is_stmt 0 view .LVU14
+  60 0022 40F2B253 		movw	r3, #1458
+  61 0026 8361     		str	r3, [r0, #24]
+  14:Src/id.c      **** 	_ID->ITS_1_3 = 0x5B3;
+  62              		.loc 1 14 2 is_stmt 1 view .LVU15
+  63              		.loc 1 14 15 is_stmt 0 view .LVU16
+  64 0028 40F2B353 		movw	r3, #1459
+  65 002c C361     		str	r3, [r0, #28]
+  15:Src/id.c      **** 	_ID->ITS_2_0 = 0x5B4;
+  66              		.loc 1 15 2 is_stmt 1 view .LVU17
+  67              		.loc 1 15 15 is_stmt 0 view .LVU18
+  68 002e 40F2B453 		movw	r3, #1460
+  69 0032 0362     		str	r3, [r0, #32]
+  16:Src/id.c      **** 	_ID->ITS_2_1 = 0x5B5;
+  70              		.loc 1 16 2 is_stmt 1 view .LVU19
+  71              		.loc 1 16 15 is_stmt 0 view .LVU20
+  72 0034 40F2B553 		movw	r3, #1461
+  73 0038 4362     		str	r3, [r0, #36]
+  17:Src/id.c      **** 	_ID->ITS_2_2 = 0x5B6;
+  74              		.loc 1 17 2 is_stmt 1 view .LVU21
+  75              		.loc 1 17 15 is_stmt 0 view .LVU22
+  76 003a 40F2B653 		movw	r3, #1462
+  77 003e 8362     		str	r3, [r0, #40]
+  18:Src/id.c      **** 	_ID->ITS_2_3 = 0x5B7;
+  78              		.loc 1 18 2 is_stmt 1 view .LVU23
+  79              		.loc 1 18 15 is_stmt 0 view .LVU24
+  80 0040 40F2B753 		movw	r3, #1463
+  81 0044 C362     		str	r3, [r0, #44]
+  19:Src/id.c      **** 	_ID->ITS_3_0 = 0x5B8;
+  82              		.loc 1 19 2 is_stmt 1 view .LVU25
+  83              		.loc 1 19 15 is_stmt 0 view .LVU26
+  84 0046 4FF4B763 		mov	r3, #1464
+  85 004a 0363     		str	r3, [r0, #48]
+  20:Src/id.c      **** 	_ID->ITS_3_1 = 0x5B9;
+  86              		.loc 1 20 2 is_stmt 1 view .LVU27
+  87              		.loc 1 20 15 is_stmt 0 view .LVU28
+  88 004c 40F2B953 		movw	r3, #1465
+  89 0050 4363     		str	r3, [r0, #52]
+  21:Src/id.c      **** 	_ID->ITS_3_2 = 0x5BA;
+  90              		.loc 1 21 2 is_stmt 1 view .LVU29
+  91              		.loc 1 21 15 is_stmt 0 view .LVU30
+  92 0052 40F2BA53 		movw	r3, #1466
+  93 0056 8363     		str	r3, [r0, #56]
+  22:Src/id.c      **** 	_ID->ITS_3_3 = 0x5BB;
+ARM GAS  /tmp/ccjuBO35.s 			page 3
+
+
+  94              		.loc 1 22 2 is_stmt 1 view .LVU31
+  95              		.loc 1 22 15 is_stmt 0 view .LVU32
+  96 0058 40F2BB53 		movw	r3, #1467
+  97 005c C363     		str	r3, [r0, #60]
+  23:Src/id.c      **** 	_ID->ITS_4_0 = 0x5BC;
+  98              		.loc 1 23 2 is_stmt 1 view .LVU33
+  99              		.loc 1 23 15 is_stmt 0 view .LVU34
+ 100 005e 40F2BC53 		movw	r3, #1468
+ 101 0062 0364     		str	r3, [r0, #64]
+  24:Src/id.c      **** 	_ID->ITS_4_1 = 0x5BD;
+ 102              		.loc 1 24 2 is_stmt 1 view .LVU35
+ 103              		.loc 1 24 15 is_stmt 0 view .LVU36
+ 104 0064 40F2BD53 		movw	r3, #1469
+ 105 0068 4364     		str	r3, [r0, #68]
+  25:Src/id.c      **** 	_ID->ITS_4_2 = 0x5BE;
+ 106              		.loc 1 25 2 is_stmt 1 view .LVU37
+ 107              		.loc 1 25 15 is_stmt 0 view .LVU38
+ 108 006a 40F2BE53 		movw	r3, #1470
+ 109 006e 8364     		str	r3, [r0, #72]
+  26:Src/id.c      **** 	_ID->ITS_4_3 = 0x5BF;
+ 110              		.loc 1 26 2 is_stmt 1 view .LVU39
+ 111              		.loc 1 26 15 is_stmt 0 view .LVU40
+ 112 0070 40F2BF53 		movw	r3, #1471
+ 113 0074 C364     		str	r3, [r0, #76]
+  27:Src/id.c      **** 	//from inverter
+  28:Src/id.c      **** 
+  29:Src/id.c      **** 	_ID->REQ_INV_SX = 0x181;
+ 114              		.loc 1 29 2 is_stmt 1 view .LVU41
+ 115              		.loc 1 29 18 is_stmt 0 view .LVU42
+ 116 0076 40F28113 		movw	r3, #385
+ 117 007a C366     		str	r3, [r0, #108]
+  30:Src/id.c      **** 	_ID->REQ_INV_DX = 0x182;
+ 118              		.loc 1 30 2 is_stmt 1 view .LVU43
+ 119              		.loc 1 30 18 is_stmt 0 view .LVU44
+ 120 007c 4FF4C173 		mov	r3, #386
+ 121 0080 0367     		str	r3, [r0, #112]
+  31:Src/id.c      **** 	_ID->ASK_INV_SX = 0x201;
+ 122              		.loc 1 31 2 is_stmt 1 view .LVU45
+ 123              		.loc 1 31 18 is_stmt 0 view .LVU46
+ 124 0082 40F20123 		movw	r3, #513
+ 125 0086 0366     		str	r3, [r0, #96]
+  32:Src/id.c      **** 	_ID->ASK_INV_DX = 0x202;
+ 126              		.loc 1 32 2 is_stmt 1 view .LVU47
+ 127              		.loc 1 32 18 is_stmt 0 view .LVU48
+ 128 0088 40F20223 		movw	r3, #514
+ 129 008c 4366     		str	r3, [r0, #100]
+  33:Src/id.c      **** 	_ID->ASK_STATE = 0x10;
+ 130              		.loc 1 33 2 is_stmt 1 view .LVU49
+ 131              		.loc 1 33 17 is_stmt 0 view .LVU50
+ 132 008e 1023     		movs	r3, #16
+ 133 0090 8366     		str	r3, [r0, #104]
+  34:Src/id.c      **** 
+  35:Src/id.c      **** 
+  36:Src/id.c      **** 	//from steer
+  37:Src/id.c      **** 	_ID->STEERING_WEEL_1 = 0xA0;
+ 134              		.loc 1 37 2 is_stmt 1 view .LVU51
+ 135              		.loc 1 37 23 is_stmt 0 view .LVU52
+ARM GAS  /tmp/ccjuBO35.s 			page 4
+
+
+ 136 0092 A023     		movs	r3, #160
+ 137 0094 0365     		str	r3, [r0, #80]
+  38:Src/id.c      **** 	_ID->STEERING_WEEL_2 = 0xAF;
+ 138              		.loc 1 38 2 is_stmt 1 view .LVU53
+ 139              		.loc 1 38 23 is_stmt 0 view .LVU54
+ 140 0096 AF23     		movs	r3, #175
+ 141 0098 4365     		str	r3, [r0, #84]
+  39:Src/id.c      **** 	//from BMS
+  40:Src/id.c      **** 	_ID->BMS_HV = 0xAA;
+ 142              		.loc 1 40 2 is_stmt 1 view .LVU55
+ 143              		.loc 1 40 14 is_stmt 0 view .LVU56
+ 144 009a AA23     		movs	r3, #170
+ 145 009c 8365     		str	r3, [r0, #88]
+  41:Src/id.c      **** 	_ID->BMS_LV = 0xFF;
+ 146              		.loc 1 41 2 is_stmt 1 view .LVU57
+ 147              		.loc 1 41 14 is_stmt 0 view .LVU58
+ 148 009e FF23     		movs	r3, #255
+ 149 00a0 C365     		str	r3, [r0, #92]
+  42:Src/id.c      **** 
+  43:Src/id.c      **** 
+  44:Src/id.c      **** }
+ 150              		.loc 1 44 1 view .LVU59
+ 151 00a2 7047     		bx	lr
+ 152              		.cfi_endproc
+ 153              	.LFE141:
+ 155              		.text
+ 156              	.Letext0:
+ 157              		.file 2 "/usr/arm-none-eabi/include/machine/_default_types.h"
+ 158              		.file 3 "/usr/arm-none-eabi/include/sys/_stdint.h"
+ 159              		.file 4 "Drivers/CMSIS/Include/core_cm7.h"
+ 160              		.file 5 "Drivers/CMSIS/Device/ST/STM32F7xx/Include/system_stm32f7xx.h"
+ 161              		.file 6 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal.h"
+ 162              		.file 7 "Inc/id.h"
+ARM GAS  /tmp/ccjuBO35.s 			page 5
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 id.c
+     /tmp/ccjuBO35.s:17     .text.ID_init:0000000000000000 $t
+     /tmp/ccjuBO35.s:25     .text.ID_init:0000000000000000 ID_init
+
+NO UNDEFINED SYMBOLS

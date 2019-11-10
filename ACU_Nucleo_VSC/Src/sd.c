@@ -1,0 +1,93 @@
+#include "global_variables.h"
+#include "fatfs.h"
+#include "string.h"
+#include "stdio.h"
+
+void init_sd(){
+    res_mount = f_mount(&SDFatFS, (TCHAR const*)SDPath, 1); //try to mount sd card
+
+	if (res_mount == FR_OK) {
+		sprintf(filename_1, "name.txt");
+		res_open = f_open(&log_names_f, (TCHAR const*)&filename_1, FA_OPEN_ALWAYS | FA_READ ); //open "name.txt" file, if doesn't exit create it
+		if(res_open == RES_OK)f_read(&log_names_f, log_names, 1000, (void*)&bytes_read); //read into file "name.txt" and put the result into "log_names" variable
+
+		HAL_UART_Transmit(&huart3,(uint8_t*)"mounted, opened\r\n",strlen("mounted, opened\r\n"),10);
+
+		sprintf(txt, "%s\r\n", log_names);
+		HAL_UART_Transmit(&huart3,(uint8_t*)txt,strlen(txt),100);
+
+		char name[256];
+
+		f_close(&log_names_f); // close the file
+		f_open(&log_names_f, (TCHAR const*)&filename_1, FA_OPEN_APPEND | FA_OPEN_ALWAYS | FA_READ | FA_WRITE );
+
+		for(int i = 0; i < max_files; i++){
+
+			sprintf(name, "log_%d ", i);
+
+			pointer = strstr(log_names, name);
+
+			if(i == max_files){
+				sprintf(filename,"default.txt");
+
+				f_open(&loggingFile, (TCHAR const*)&filename, FA_OPEN_APPEND | FA_OPEN_ALWAYS | FA_READ | FA_WRITE );
+				f_write(&loggingFile, buffer, strlen(buffer), (void*)&byteswritten);
+				f_close(&loggingFile);
+				f_open(&loggingFile, (TCHAR const*)&filename, FA_OPEN_APPEND | FA_OPEN_ALWAYS | FA_READ | FA_WRITE );
+
+				HAL_UART_Transmit(&huart3,(uint8_t*)"created -> default.txt\r\n",strlen("created -> default.txt\r\n"),10);
+
+				successfull_opening = 1;
+
+				break;
+			}
+
+			if(i == 0 && pointer == NULL){
+
+				sprintf(filename, "log_0 \t\r\n");
+
+				f_write(&log_names_f, filename, strlen(filename), (void*)&byteswritten);
+				f_close(&log_names_f);
+
+				sprintf(filename, "Log_0.txt");
+
+				f_open(&loggingFile, (TCHAR const*)&filename, FA_OPEN_APPEND | FA_OPEN_ALWAYS | FA_READ | FA_WRITE );
+				f_write(&loggingFile, buffer, strlen(buffer), (void*)&byteswritten);
+				f_close(&loggingFile);
+				f_open(&loggingFile, (TCHAR const*)&filename, FA_OPEN_APPEND | FA_OPEN_ALWAYS | FA_READ | FA_WRITE );
+
+				HAL_UART_Transmit(&huart3,(uint8_t*)"\r\ncreated -> Log_0\r\n",strlen("\r\ncreated -> Log_0\r\n"),10);
+
+				successfull_opening = 1;
+
+				break;
+			}
+			if(pointer == NULL){
+				sprintf(filename, "log_%d \t\r\n", i);
+
+				f_write(&log_names_f, filename, strlen(filename), (void*)&byteswritten);
+				f_close(&log_names_f);
+
+				sprintf(filename, "Log_%d.txt", i);
+
+				f_open(&loggingFile, (TCHAR const*)&filename, FA_OPEN_APPEND | FA_OPEN_ALWAYS | FA_READ | FA_WRITE );
+				f_write(&loggingFile, buffer, strlen(buffer), (void*)&byteswritten);
+				f_close(&loggingFile);
+				f_open(&loggingFile, (TCHAR const*)&filename, FA_OPEN_APPEND | FA_OPEN_ALWAYS | FA_READ | FA_WRITE );
+
+				HAL_UART_Transmit(&huart3,(uint8_t*)"\r\ncreated -> ",strlen("\r\ncreated -> "),10);
+				HAL_UART_Transmit(&huart3,(uint8_t*) filename, strlen(filename), 10);
+				HAL_UART_Transmit(&huart3,(uint8_t*) "\r\n", strlen("\r\n"),10);
+
+				successfull_opening = 1;
+
+				break;
+			}
+		}
+
+		mount_ok = 1;
+		HAL_UART_Transmit(&huart3,(uint8_t*)"files closed\r\n",strlen("files closed\r\n"),10);
+	}else {
+		mount_ok = 0;
+	}
+}
