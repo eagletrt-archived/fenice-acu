@@ -66,7 +66,6 @@ Src/can.c \
 Src/fatfs.c \
 Src/fatfs_platform.c \
 Src/global_variables.c \
-Src/id.c \
 Src/main.c \
 Src/sd.c \
 Src/sd_diskio.c \

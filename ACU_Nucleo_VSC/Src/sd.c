@@ -9,7 +9,7 @@ void init_sd(){
 	if (res_mount == FR_OK) {
 		sprintf(filename_1, "name.txt");
 		res_open = f_open(&log_names_f, (TCHAR const*)&filename_1, FA_OPEN_ALWAYS | FA_READ ); //open "name.txt" file, if doesn't exit create it
-		if(res_open == RES_OK)f_read(&log_names_f, log_names, 1000, (void*)&bytes_read); //read into file "name.txt" and put the result into "log_names" variable
+		if(res_open == 0)f_read(&log_names_f, log_names, 1000, (void*)&bytes_read); //read into file "name.txt" and put the result into "log_names" variable
 
 		HAL_UART_Transmit(&huart3,(uint8_t*)"mounted, opened\r\n",strlen("mounted, opened\r\n"),10);
 

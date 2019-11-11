@@ -24,7 +24,6 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include "id.h"
 #include "state.h"
 #include "can.h"
 #include "global_variables.h"
@@ -57,7 +56,6 @@ UART_HandleTypeDef huart3;
 
 /* USER CODE BEGIN PV */
 
-ID id;
 uint8_t i_debug;
 extern canStruct can1,can3;
 extern fifoPriority fifoPriority_t;
@@ -129,7 +127,6 @@ int main(void)
   can1.hcan = &hcan1;
 
   can_init();
-  ID_init(&id);
 
   HAL_UART_Receive_IT(&huart3,(uint8_t*) &debug_rx[debug_rx_count], 1); //activate rx interrupt for debug
 

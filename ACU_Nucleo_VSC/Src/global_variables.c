@@ -20,6 +20,7 @@ uint8_t debug_rx_count = 0, debug_msg_arrived = 0;
 //--- DEVICE CONNECTED VARIABLES ---//
 uint8_t imu_connected = 0, its0_connected = 0, its1_connected = 0, its2_connected = 0, its3_connected = 0;
 
+
 //--- RESULT VARIABLES FOR SD ---//
 FRESULT res_open;
 FRESULT res_mount;
@@ -48,3 +49,4 @@ char log_names[1000];
 
 
 int successfull_opening = 0;
+

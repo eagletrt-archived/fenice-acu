@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccWifu1h.s 			page 1
+ARM GAS  /tmp/ccZkYW81.s 			page 1
 
 
    1              		.cpu cortex-m7
@@ -17,23 +17,23 @@ ARM GAS  /tmp/ccWifu1h.s 			page 1
   14              	.Ltext0:
   15              		.cfi_sections	.debug_frame
   16              		.global	successfull_opening
-  17              		.comm	res_mount,1,1
-  18              		.comm	res_open,1,1
-  19              		.comm	log_names,356,4
-  20              		.comm	pointer,4,4
-  21              		.comm	bytes_read,4,4
-  22              		.global	buffer
-  23              		.global	msg_index
-  24              		.global	msg_counter
-  25              		.global	mount_ok
-  26              		.comm	byteswritten,4,4
-  27              		.global	max_files
-  28              		.comm	txt,1000,4
-  29              		.global	filename_1
-  30              		.global	filename
-  31              		.comm	message,256,4
-  32              		.comm	log_names_f,560,4
-  33              		.comm	loggingFile,560,4
+  17              		.comm	log_names,1000,4
+  18              		.comm	pointer,4,4
+  19              		.comm	bytes_read,4,4
+  20              		.global	buffer
+  21              		.global	msg_index
+  22              		.global	msg_counter
+  23              		.global	mount_ok
+  24              		.comm	byteswritten,4,4
+  25              		.global	max_files
+  26              		.comm	txt,1000,4
+  27              		.global	filename_1
+  28              		.global	filename
+  29              		.comm	message,256,4
+  30              		.comm	log_names_f,560,4
+  31              		.comm	loggingFile,560,4
+  32              		.comm	res_mount,1,1
+  33              		.comm	res_open,1,1
   34              		.global	its3_connected
   35              		.global	its2_connected
   36              		.global	its1_connected
@@ -58,7 +58,7 @@ ARM GAS  /tmp/ccWifu1h.s 			page 1
   57 0000 0000     		.space	2
   58              		.section	.bss.count_dec,"aw",%nobits
   59              		.align	1
-ARM GAS  /tmp/ccWifu1h.s 			page 2
+ARM GAS  /tmp/ccZkYW81.s 			page 2
 
 
   62              	count_dec:
@@ -118,7 +118,7 @@ ARM GAS  /tmp/ccWifu1h.s 			page 1
  146 0000 00000000 		.space	4
  147              		.section	.bss.msg_index,"aw",%nobits
  148              		.align	2
-ARM GAS  /tmp/ccWifu1h.s 			page 3
+ARM GAS  /tmp/ccZkYW81.s 			page 3
 
 
  151              	msg_index:
@@ -127,7 +127,7 @@ ARM GAS  /tmp/ccWifu1h.s 			page 1
  154              		.align	2
  157              	successfull_opening:
  158 0000 00000000 		.space	4
- 159              		.section	.data.buffer,"aw"
+ 159              		.section	.data.buffer,"aw",%progbits
  160              		.align	2
  163              	buffer:
  164 0000 53746172 		.ascii	"Starting Antenna Logging\015\012\000"
@@ -140,7 +140,7 @@ ARM GAS  /tmp/ccWifu1h.s 			page 1
  165      00000000 
  165      00000000 
  165      00000000 
- 166              		.section	.data.filename,"aw"
+ 166              		.section	.data.filename,"aw",%progbits
  167              		.align	2
  170              	filename:
  171 0000 61626361 		.ascii	"abcabc.txt\000"
@@ -151,7 +151,7 @@ ARM GAS  /tmp/ccWifu1h.s 			page 1
  172      00000000 
  172      00000000 
  172      00000000 
- 173              		.section	.data.filename_1,"aw"
+ 173              		.section	.data.filename_1,"aw",%progbits
  174              		.align	2
  177              	filename_1:
  178 0000 6C6F675F 		.ascii	"log_names.txt\000"
@@ -163,11 +163,11 @@ ARM GAS  /tmp/ccWifu1h.s 			page 1
  179      00000000 
  179      00000000 
  179      00000000 
- 180              		.section	.data.max_files,"aw"
+ 180              		.section	.data.max_files,"aw",%progbits
  181              		.align	2
  184              	max_files:
  185 0000 64000000 		.word	100
- 186              		.section	.rodata.code_version,"a"
+ 186              		.section	.rodata.code_version,"a",%progbits
  187              		.align	2
  190              	code_version:
  191 0000 0D0A436F 		.ascii	"\015\012Code version = 1.0, updated 01/11/2019\015\012"
@@ -178,12 +178,12 @@ ARM GAS  /tmp/ccWifu1h.s 			page 1
  192 002a 00       		.ascii	"\000"
  193              		.text
  194              	.Letext0:
-ARM GAS  /tmp/ccWifu1h.s 			page 4
+ARM GAS  /tmp/ccZkYW81.s 			page 4
 
 
  195              		.file 1 "Drivers/CMSIS/Device/ST/STM32F7xx/Include/stm32f767xx.h"
- 196              		.file 2 "/usr/arm-none-eabi/include/machine/_default_types.h"
- 197              		.file 3 "/usr/arm-none-eabi/include/sys/_stdint.h"
+ 196              		.file 2 "/usr/include/newlib/machine/_default_types.h"
+ 197              		.file 3 "/usr/include/newlib/sys/_stdint.h"
  198              		.file 4 "Drivers/CMSIS/Include/core_cm7.h"
  199              		.file 5 "Drivers/CMSIS/Device/ST/STM32F7xx/Include/system_stm32f7xx.h"
  200              		.file 6 "Drivers/CMSIS/Device/ST/STM32F7xx/Include/stm32f7xx.h"
@@ -193,87 +193,86 @@ ARM GAS  /tmp/ccWifu1h.s 			page 1
  204              		.file 10 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart.h"
  205              		.file 11 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal.h"
  206              		.file 12 "Inc/can.h"
- 207              		.file 13 "Inc/id.h"
- 208              		.file 14 "Middlewares/Third_Party/FatFs/src/integer.h"
- 209              		.file 15 "/usr/arm-none-eabi/include/sys/lock.h"
- 210              		.file 16 "/usr/arm-none-eabi/include/sys/_types.h"
- 211              		.file 17 "/usr/lib/gcc/arm-none-eabi/9.2.0/include/stddef.h"
- 212              		.file 18 "/usr/arm-none-eabi/include/sys/reent.h"
- 213              		.file 19 "/usr/arm-none-eabi/include/stdlib.h"
- 214              		.file 20 "Middlewares/Third_Party/FatFs/src/ff.h"
- 215              		.file 21 "Middlewares/Third_Party/FatFs/src/diskio.h"
- 216              		.file 22 "Middlewares/Third_Party/FatFs/src/ff_gen_drv.h"
- 217              		.file 23 "Inc/sd_diskio.h"
- 218              		.file 24 "Inc/fatfs.h"
- 219              		.file 25 "Inc/global_variables.h"
- 220              		.file 26 "Src/global_variables.c"
-ARM GAS  /tmp/ccWifu1h.s 			page 5
+ 207              		.file 13 "Middlewares/Third_Party/FatFs/src/integer.h"
+ 208              		.file 14 "/usr/include/newlib/sys/lock.h"
+ 209              		.file 15 "/usr/include/newlib/sys/_types.h"
+ 210              		.file 16 "/usr/lib/gcc/arm-none-eabi/6.3.1/include/stddef.h"
+ 211              		.file 17 "/usr/include/newlib/sys/reent.h"
+ 212              		.file 18 "/usr/include/newlib/stdlib.h"
+ 213              		.file 19 "Middlewares/Third_Party/FatFs/src/ff.h"
+ 214              		.file 20 "Middlewares/Third_Party/FatFs/src/diskio.h"
+ 215              		.file 21 "Middlewares/Third_Party/FatFs/src/ff_gen_drv.h"
+ 216              		.file 22 "Inc/sd_diskio.h"
+ 217              		.file 23 "Inc/fatfs.h"
+ 218              		.file 24 "Inc/global_variables.h"
+ 219              		.file 25 "Src/global_variables.c"
+ARM GAS  /tmp/ccZkYW81.s 			page 5
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 global_variables.c
-     /tmp/ccWifu1h.s:157    .bss.successfull_opening:0000000000000000 successfull_opening
-                            *COM*:0000000000000001 res_mount
-                            *COM*:0000000000000001 res_open
-                            *COM*:0000000000000164 log_names
+     /tmp/ccZkYW81.s:157    .bss.successfull_opening:0000000000000000 successfull_opening
+                            *COM*:00000000000003e8 log_names
                             *COM*:0000000000000004 pointer
                             *COM*:0000000000000004 bytes_read
-     /tmp/ccWifu1h.s:163    .data.buffer:0000000000000000 buffer
-     /tmp/ccWifu1h.s:151    .bss.msg_index:0000000000000000 msg_index
-     /tmp/ccWifu1h.s:145    .bss.msg_counter:0000000000000000 msg_counter
-     /tmp/ccWifu1h.s:139    .bss.mount_ok:0000000000000000 mount_ok
+     /tmp/ccZkYW81.s:163    .data.buffer:0000000000000000 buffer
+     /tmp/ccZkYW81.s:151    .bss.msg_index:0000000000000000 msg_index
+     /tmp/ccZkYW81.s:145    .bss.msg_counter:0000000000000000 msg_counter
+     /tmp/ccZkYW81.s:139    .bss.mount_ok:0000000000000000 mount_ok
                             *COM*:0000000000000004 byteswritten
-     /tmp/ccWifu1h.s:184    .data.max_files:0000000000000000 max_files
+     /tmp/ccZkYW81.s:184    .data.max_files:0000000000000000 max_files
                             *COM*:00000000000003e8 txt
-     /tmp/ccWifu1h.s:177    .data.filename_1:0000000000000000 filename_1
-     /tmp/ccWifu1h.s:170    .data.filename:0000000000000000 filename
+     /tmp/ccZkYW81.s:177    .data.filename_1:0000000000000000 filename_1
+     /tmp/ccZkYW81.s:170    .data.filename:0000000000000000 filename
                             *COM*:0000000000000100 message
                             *COM*:0000000000000230 log_names_f
                             *COM*:0000000000000230 loggingFile
-     /tmp/ccWifu1h.s:133    .bss.its3_connected:0000000000000000 its3_connected
-     /tmp/ccWifu1h.s:128    .bss.its2_connected:0000000000000000 its2_connected
-     /tmp/ccWifu1h.s:123    .bss.its1_connected:0000000000000000 its1_connected
-     /tmp/ccWifu1h.s:118    .bss.its0_connected:0000000000000000 its0_connected
-     /tmp/ccWifu1h.s:113    .bss.imu_connected:0000000000000000 imu_connected
-     /tmp/ccWifu1h.s:103    .bss.debug_msg_arrived:0000000000000000 debug_msg_arrived
-     /tmp/ccWifu1h.s:108    .bss.debug_rx_count:0000000000000000 debug_rx_count
+                            *COM*:0000000000000001 res_mount
+                            *COM*:0000000000000001 res_open
+     /tmp/ccZkYW81.s:133    .bss.its3_connected:0000000000000000 its3_connected
+     /tmp/ccZkYW81.s:128    .bss.its2_connected:0000000000000000 its2_connected
+     /tmp/ccZkYW81.s:123    .bss.its1_connected:0000000000000000 its1_connected
+     /tmp/ccZkYW81.s:118    .bss.its0_connected:0000000000000000 its0_connected
+     /tmp/ccZkYW81.s:113    .bss.imu_connected:0000000000000000 imu_connected
+     /tmp/ccZkYW81.s:103    .bss.debug_msg_arrived:0000000000000000 debug_msg_arrived
+     /tmp/ccZkYW81.s:108    .bss.debug_rx_count:0000000000000000 debug_rx_count
                             *COM*:00000000000001f4 debug_tx
                             *COM*:0000000000000014 debug_rx
-     /tmp/ccWifu1h.s:190    .rodata.code_version:0000000000000000 code_version
-     /tmp/ccWifu1h.s:74     .bss.count_imu:0000000000000000 count_imu
-     /tmp/ccWifu1h.s:56     .bss.count_accumulator:0000000000000000 count_accumulator
-     /tmp/ccWifu1h.s:80     .bss.count_inverter:0000000000000000 count_inverter
-     /tmp/ccWifu1h.s:68     .bss.count_hour:0000000000000000 count_hour
-     /tmp/ccWifu1h.s:86     .bss.count_min:0000000000000000 count_min
-     /tmp/ccWifu1h.s:98     .bss.count_sec:0000000000000000 count_sec
-     /tmp/ccWifu1h.s:62     .bss.count_dec:0000000000000000 count_dec
-     /tmp/ccWifu1h.s:92     .bss.count_ms:0000000000000000 count_ms
-     /tmp/ccWifu1h.s:53     .bss.count_accumulator:0000000000000000 $d
-     /tmp/ccWifu1h.s:59     .bss.count_dec:0000000000000000 $d
-     /tmp/ccWifu1h.s:65     .bss.count_hour:0000000000000000 $d
-     /tmp/ccWifu1h.s:71     .bss.count_imu:0000000000000000 $d
-     /tmp/ccWifu1h.s:77     .bss.count_inverter:0000000000000000 $d
-     /tmp/ccWifu1h.s:83     .bss.count_min:0000000000000000 $d
-     /tmp/ccWifu1h.s:89     .bss.count_ms:0000000000000000 $d
-     /tmp/ccWifu1h.s:95     .bss.count_sec:0000000000000000 $d
-     /tmp/ccWifu1h.s:104    .bss.debug_msg_arrived:0000000000000000 $d
-     /tmp/ccWifu1h.s:109    .bss.debug_rx_count:0000000000000000 $d
-     /tmp/ccWifu1h.s:114    .bss.imu_connected:0000000000000000 $d
-     /tmp/ccWifu1h.s:119    .bss.its0_connected:0000000000000000 $d
-     /tmp/ccWifu1h.s:124    .bss.its1_connected:0000000000000000 $d
-     /tmp/ccWifu1h.s:129    .bss.its2_connected:0000000000000000 $d
-     /tmp/ccWifu1h.s:134    .bss.its3_connected:0000000000000000 $d
-     /tmp/ccWifu1h.s:136    .bss.mount_ok:0000000000000000 $d
-     /tmp/ccWifu1h.s:142    .bss.msg_counter:0000000000000000 $d
-     /tmp/ccWifu1h.s:148    .bss.msg_index:0000000000000000 $d
-     /tmp/ccWifu1h.s:154    .bss.successfull_opening:0000000000000000 $d
-ARM GAS  /tmp/ccWifu1h.s 			page 6
+     /tmp/ccZkYW81.s:190    .rodata.code_version:0000000000000000 code_version
+     /tmp/ccZkYW81.s:74     .bss.count_imu:0000000000000000 count_imu
+     /tmp/ccZkYW81.s:56     .bss.count_accumulator:0000000000000000 count_accumulator
+     /tmp/ccZkYW81.s:80     .bss.count_inverter:0000000000000000 count_inverter
+     /tmp/ccZkYW81.s:68     .bss.count_hour:0000000000000000 count_hour
+     /tmp/ccZkYW81.s:86     .bss.count_min:0000000000000000 count_min
+     /tmp/ccZkYW81.s:98     .bss.count_sec:0000000000000000 count_sec
+     /tmp/ccZkYW81.s:62     .bss.count_dec:0000000000000000 count_dec
+     /tmp/ccZkYW81.s:92     .bss.count_ms:0000000000000000 count_ms
+     /tmp/ccZkYW81.s:53     .bss.count_accumulator:0000000000000000 $d
+     /tmp/ccZkYW81.s:59     .bss.count_dec:0000000000000000 $d
+     /tmp/ccZkYW81.s:65     .bss.count_hour:0000000000000000 $d
+     /tmp/ccZkYW81.s:71     .bss.count_imu:0000000000000000 $d
+     /tmp/ccZkYW81.s:77     .bss.count_inverter:0000000000000000 $d
+     /tmp/ccZkYW81.s:83     .bss.count_min:0000000000000000 $d
+     /tmp/ccZkYW81.s:89     .bss.count_ms:0000000000000000 $d
+     /tmp/ccZkYW81.s:95     .bss.count_sec:0000000000000000 $d
+     /tmp/ccZkYW81.s:104    .bss.debug_msg_arrived:0000000000000000 $d
+     /tmp/ccZkYW81.s:109    .bss.debug_rx_count:0000000000000000 $d
+     /tmp/ccZkYW81.s:114    .bss.imu_connected:0000000000000000 $d
+     /tmp/ccZkYW81.s:119    .bss.its0_connected:0000000000000000 $d
+     /tmp/ccZkYW81.s:124    .bss.its1_connected:0000000000000000 $d
+     /tmp/ccZkYW81.s:129    .bss.its2_connected:0000000000000000 $d
+     /tmp/ccZkYW81.s:134    .bss.its3_connected:0000000000000000 $d
+     /tmp/ccZkYW81.s:136    .bss.mount_ok:0000000000000000 $d
+     /tmp/ccZkYW81.s:142    .bss.msg_counter:0000000000000000 $d
+     /tmp/ccZkYW81.s:148    .bss.msg_index:0000000000000000 $d
+     /tmp/ccZkYW81.s:154    .bss.successfull_opening:0000000000000000 $d
+ARM GAS  /tmp/ccZkYW81.s 			page 6
 
 
-     /tmp/ccWifu1h.s:160    .data.buffer:0000000000000000 $d
-     /tmp/ccWifu1h.s:167    .data.filename:0000000000000000 $d
-     /tmp/ccWifu1h.s:174    .data.filename_1:0000000000000000 $d
-     /tmp/ccWifu1h.s:181    .data.max_files:0000000000000000 $d
-     /tmp/ccWifu1h.s:187    .rodata.code_version:0000000000000000 $d
+     /tmp/ccZkYW81.s:160    .data.buffer:0000000000000000 $d
+     /tmp/ccZkYW81.s:167    .data.filename:0000000000000000 $d
+     /tmp/ccZkYW81.s:174    .data.filename_1:0000000000000000 $d
+     /tmp/ccZkYW81.s:181    .data.max_files:0000000000000000 $d
+     /tmp/ccZkYW81.s:187    .rodata.code_version:0000000000000000 $d
 
 NO UNDEFINED SYMBOLS

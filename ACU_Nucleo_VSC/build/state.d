@@ -30,9 +30,9 @@ build/state.o: Src/state.c Inc/state.h Inc/can.h \
  Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_tim_ex.h \
  Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart.h \
  Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart_ex.h \
- Inc/global_variables.h Inc/can.h Inc/id.h Inc/main.h Inc/fatfs.h \
+ Inc/global_variables.h Inc/can.h Inc/fatfs.h \
  Middlewares/Third_Party/FatFs/src/ff.h \
- Middlewares/Third_Party/FatFs/src/integer.h Inc/ffconf.h \
+ Middlewares/Third_Party/FatFs/src/integer.h Inc/ffconf.h Inc/main.h \
  Inc/bsp_driver_sd.h Inc/fatfs_platform.h \
  Middlewares/Third_Party/FatFs/src/ff_gen_drv.h \
  Middlewares/Third_Party/FatFs/src/diskio.h \
@@ -112,10 +112,6 @@ Inc/global_variables.h:
 
 Inc/can.h:
 
-Inc/id.h:
-
-Inc/main.h:
-
 Inc/fatfs.h:
 
 Middlewares/Third_Party/FatFs/src/ff.h:
@@ -123,6 +119,8 @@ Middlewares/Third_Party/FatFs/src/ff.h:
 Middlewares/Third_Party/FatFs/src/integer.h:
 
 Inc/ffconf.h:
+
+Inc/main.h:
 
 Inc/bsp_driver_sd.h:
 

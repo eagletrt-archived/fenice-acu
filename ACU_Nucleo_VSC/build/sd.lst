@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccFObcB0.s 			page 1
+ARM GAS  /tmp/ccosWqnV.s 			page 1
 
 
    1              		.cpu cortex-m7
@@ -16,846 +16,752 @@ ARM GAS  /tmp/ccFObcB0.s 			page 1
   13              		.text
   14              	.Ltext0:
   15              		.cfi_sections	.debug_frame
-  16              		.section	.rodata.init_sd.str1.4,"aMS",%progbits,1
-  17              		.align	2
-  18              	.LC0:
-  19 0000 2D2D2D6D 		.ascii	"---mounting---\015\012\000"
-  19      6F756E74 
-  19      696E672D 
-  19      2D2D0D0A 
-  19      00
-  20 0011 000000   		.align	2
-  21              	.LC1:
-  22 0014 6E616D65 		.ascii	"name.txt\000"
-  22      2E747874 
-  22      00
-  23 001d 000000   		.align	2
-  24              	.LC2:
-  25 0020 6D6F756E 		.ascii	"mounted, opened\015\012\000"
-  25      7465642C 
-  25      206F7065 
-  25      6E65640D 
-  25      0A00
-  26 0032 0000     		.align	2
-  27              	.LC3:
-  28 0034 25730D0A 		.ascii	"%s\015\012\000"
-  28      00
-  29 0039 000000   		.align	2
-  30              	.LC4:
-  31 003c 6C6F675F 		.ascii	"log_%d \000"
-  31      25642000 
-  32              		.align	2
-  33              	.LC5:
-  34 0044 64656661 		.ascii	"default.txt\000"
-  34      756C742E 
-  34      74787400 
-  35              		.align	2
-  36              	.LC6:
-  37 0050 63726561 		.ascii	"created -> default.txt\015\012\000"
-  37      74656420 
-  37      2D3E2064 
-  37      65666175 
-  37      6C742E74 
-  38 0069 000000   		.align	2
-  39              	.LC7:
-ARM GAS  /tmp/ccFObcB0.s 			page 2
-
-
-  40 006c 6C6F675F 		.ascii	"log_0 \011\015\012\000"
-  40      3020090D 
-  40      0A00
-  41 0076 0000     		.align	2
-  42              	.LC8:
-  43 0078 4C6F675F 		.ascii	"Log_0.txt\000"
-  43      302E7478 
-  43      7400
-  44 0082 0000     		.align	2
-  45              	.LC9:
-  46 0084 0D0A6372 		.ascii	"\015\012created -> Log_0\015\012\000"
-  46      65617465 
-  46      64202D3E 
-  46      204C6F67 
-  46      5F300D0A 
-  47 0099 000000   		.align	2
-  48              	.LC10:
-  49 009c 6C6F675F 		.ascii	"log_%d \011\015\012\000"
-  49      25642009 
-  49      0D0A00
-  50 00a7 00       		.align	2
-  51              	.LC11:
-  52 00a8 4C6F675F 		.ascii	"Log_%d.txt\000"
-  52      25642E74 
-  52      787400
-  53 00b3 00       		.align	2
-  54              	.LC12:
-  55 00b4 0D0A6372 		.ascii	"\015\012created -> \000"
-  55      65617465 
-  55      64202D3E 
-  55      2000
-  56 00c2 0000     		.align	2
-  57              	.LC13:
-  58 00c4 0D0A00   		.ascii	"\015\012\000"
-  59 00c7 00       		.align	2
-  60              	.LC14:
-  61 00c8 66696C65 		.ascii	"files closed\015\012\000"
-  61      7320636C 
-  61      6F736564 
-  61      0D0A00
-  62              		.section	.text.init_sd,"ax",%progbits
-  63              		.align	1
-  64              		.global	init_sd
-  65              		.arch armv7e-m
-  66              		.syntax unified
-  67              		.thumb
-  68              		.thumb_func
-  69              		.fpu fpv5-d16
-  71              	init_sd:
-  72              	.LFB141:
-  73              		.file 1 "Src/sd.c"
+  16              		.section	.text.init_sd,"ax",%progbits
+  17              		.align	1
+  18              		.global	init_sd
+  19              		.syntax unified
+  20              		.thumb
+  21              		.thumb_func
+  22              		.fpu fpv5-d16
+  24              	init_sd:
+  25              	.LFB142:
+  26              		.file 1 "Src/sd.c"
    1:Src/sd.c      **** #include "global_variables.h"
    2:Src/sd.c      **** #include "fatfs.h"
-   3:Src/sd.c      **** void init_sd(){
-  74              		.loc 1 3 15 view -0
-  75              		.cfi_startproc
-  76              		@ args = 0, pretend = 0, frame = 256
-ARM GAS  /tmp/ccFObcB0.s 			page 3
+   3:Src/sd.c      **** #include "string.h"
+   4:Src/sd.c      **** #include "stdio.h"
+   5:Src/sd.c      **** 
+   6:Src/sd.c      **** void init_sd(){
+  27              		.loc 1 6 0
+  28              		.cfi_startproc
+  29              		@ args = 0, pretend = 0, frame = 256
+  30              		@ frame_needed = 0, uses_anonymous_args = 0
+  31 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+  32              	.LCFI0:
+  33              		.cfi_def_cfa_offset 20
+  34              		.cfi_offset 4, -20
+  35              		.cfi_offset 5, -16
+  36              		.cfi_offset 6, -12
+  37              		.cfi_offset 7, -8
+  38              		.cfi_offset 14, -4
+  39 0002 C1B0     		sub	sp, sp, #260
+  40              	.LCFI1:
+  41              		.cfi_def_cfa_offset 280
+   7:Src/sd.c      ****     res_mount = f_mount(&SDFatFS, (TCHAR const*)SDPath, 1); //try to mount sd card
+  42              		.loc 1 7 0
+  43 0004 0122     		movs	r2, #1
+  44 0006 8B49     		ldr	r1, .L16
+  45 0008 8B48     		ldr	r0, .L16+4
+  46 000a FFF7FEFF 		bl	f_mount
+  47              	.LVL0:
+  48 000e 8B4B     		ldr	r3, .L16+8
+  49 0010 1870     		strb	r0, [r3]
+   8:Src/sd.c      **** 
+   9:Src/sd.c      **** 	if (res_mount == FR_OK) {
+ARM GAS  /tmp/ccosWqnV.s 			page 2
 
 
-  77              		@ frame_needed = 0, uses_anonymous_args = 0
-  78 0000 2DE9F041 		push	{r4, r5, r6, r7, r8, lr}
-  79              	.LCFI0:
-  80              		.cfi_def_cfa_offset 24
-  81              		.cfi_offset 4, -24
-  82              		.cfi_offset 5, -20
-  83              		.cfi_offset 6, -16
-  84              		.cfi_offset 7, -12
-  85              		.cfi_offset 8, -8
-  86              		.cfi_offset 14, -4
-  87 0004 C0B0     		sub	sp, sp, #256
-  88              	.LCFI1:
-  89              		.cfi_def_cfa_offset 280
-   4:Src/sd.c      **** 	if(res_mount != FR_OK){
-  90              		.loc 1 4 2 view .LVU1
-  91              		.loc 1 4 15 is_stmt 0 view .LVU2
-  92 0006 924B     		ldr	r3, .L16
-  93 0008 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
-  94              		.loc 1 4 4 view .LVU3
-  95 000a 43B9     		cbnz	r3, .L12
-  96              	.L2:
-   5:Src/sd.c      **** 		HAL_UART_Transmit(&huart3,(uint8_t*)"---mounting---\r\n",strlen("---mounting---\r\n"), 10);
-   6:Src/sd.c      **** 		res_mount = f_mount(&SDFatFS, (TCHAR const*)SDPath, 0);
-   7:Src/sd.c      **** 	}
-   8:Src/sd.c      **** 	if (res_mount == FR_OK) {
-  97              		.loc 1 8 2 is_stmt 1 view .LVU4
-  98              		.loc 1 8 16 is_stmt 0 view .LVU5
-  99 000c 904B     		ldr	r3, .L16
- 100 000e 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
- 101              		.loc 1 8 5 view .LVU6
- 102 0010 9BB1     		cbz	r3, .L13
-   9:Src/sd.c      **** 		sprintf(filename_1, "name.txt");
-  10:Src/sd.c      **** 		res_open=f_open(&log_names_f, (TCHAR const*)&filename_1, FA_OPEN_ALWAYS | FA_READ | FA_WRITE );
-  11:Src/sd.c      **** 		f_read(&log_names_f, log_names, 256, (void*)&bytes_read);
-  12:Src/sd.c      **** 
-  13:Src/sd.c      **** 		HAL_UART_Transmit(&huart3,(uint8_t*)"mounted, opened\r\n",strlen("mounted, opened\r\n"),10);
-  14:Src/sd.c      **** 
-  15:Src/sd.c      **** 		sprintf(txt, "%s\r\n", log_names);
-  16:Src/sd.c      **** 		HAL_UART_Transmit(&huart3,(uint8_t*)txt,strlen(txt),10);
-  17:Src/sd.c      **** 
-  18:Src/sd.c      **** 		char name[256];
-  19:Src/sd.c      **** 
-  20:Src/sd.c      **** 		f_close(&log_names_f);
-  21:Src/sd.c      **** 		f_open(&log_names_f, (TCHAR const*)&filename_1, FA_OPEN_APPEND | FA_OPEN_ALWAYS | FA_READ | FA_WR
-  22:Src/sd.c      **** 
-  23:Src/sd.c      **** 		for(int i = 0; i < max_files; i++){
-  24:Src/sd.c      **** 
-  25:Src/sd.c      **** 			sprintf(name, "log_%d ", i);
-  26:Src/sd.c      **** 
-  27:Src/sd.c      **** 			pointer = strstr(log_names, name);
-  28:Src/sd.c      **** 
-  29:Src/sd.c      **** 			if(i == max_files){
-  30:Src/sd.c      **** 				sprintf(filename,"default.txt");
-  31:Src/sd.c      **** 
-  32:Src/sd.c      **** 				f_open(&loggingFile, (TCHAR const*)&filename, FA_OPEN_APPEND | FA_OPEN_ALWAYS | FA_READ | FA_WR
-  33:Src/sd.c      **** 				f_write(&loggingFile, buffer, strlen(buffer), (void*)&byteswritten);
-  34:Src/sd.c      **** 				f_close(&loggingFile);
-ARM GAS  /tmp/ccFObcB0.s 			page 4
+  50              		.loc 1 9 0
+  51 0012 20B1     		cbz	r0, .L12
+  10:Src/sd.c      **** 		sprintf(filename_1, "name.txt");
+  11:Src/sd.c      **** 		res_open = f_open(&log_names_f, (TCHAR const*)&filename_1, FA_OPEN_ALWAYS | FA_READ ); //open "na
+  12:Src/sd.c      **** 		if(res_open == 0)f_read(&log_names_f, log_names, 1000, (void*)&bytes_read); //read into file "nam
+  13:Src/sd.c      **** 
+  14:Src/sd.c      **** 		HAL_UART_Transmit(&huart3,(uint8_t*)"mounted, opened\r\n",strlen("mounted, opened\r\n"),10);
+  15:Src/sd.c      **** 
+  16:Src/sd.c      **** 		sprintf(txt, "%s\r\n", log_names);
+  17:Src/sd.c      **** 		HAL_UART_Transmit(&huart3,(uint8_t*)txt,strlen(txt),100);
+  18:Src/sd.c      **** 
+  19:Src/sd.c      **** 		char name[256];
+  20:Src/sd.c      **** 
+  21:Src/sd.c      **** 		f_close(&log_names_f); // close the file
+  22:Src/sd.c      **** 		f_open(&log_names_f, (TCHAR const*)&filename_1, FA_OPEN_APPEND | FA_OPEN_ALWAYS | FA_READ | FA_WR
+  23:Src/sd.c      **** 
+  24:Src/sd.c      **** 		for(int i = 0; i < max_files; i++){
+  25:Src/sd.c      **** 
+  26:Src/sd.c      **** 			sprintf(name, "log_%d ", i);
+  27:Src/sd.c      **** 
+  28:Src/sd.c      **** 			pointer = strstr(log_names, name);
+  29:Src/sd.c      **** 
+  30:Src/sd.c      **** 			if(i == max_files){
+  31:Src/sd.c      **** 				sprintf(filename,"default.txt");
+  32:Src/sd.c      **** 
+  33:Src/sd.c      **** 				f_open(&loggingFile, (TCHAR const*)&filename, FA_OPEN_APPEND | FA_OPEN_ALWAYS | FA_READ | FA_WR
+  34:Src/sd.c      **** 				f_write(&loggingFile, buffer, strlen(buffer), (void*)&byteswritten);
+  35:Src/sd.c      **** 				f_close(&loggingFile);
+  36:Src/sd.c      **** 				f_open(&loggingFile, (TCHAR const*)&filename, FA_OPEN_APPEND | FA_OPEN_ALWAYS | FA_READ | FA_WR
+  37:Src/sd.c      **** 
+  38:Src/sd.c      **** 				HAL_UART_Transmit(&huart3,(uint8_t*)"created -> default.txt\r\n",strlen("created -> default.txt
+  39:Src/sd.c      **** 
+  40:Src/sd.c      **** 				successfull_opening = 1;
+  41:Src/sd.c      **** 
+  42:Src/sd.c      **** 				break;
+  43:Src/sd.c      **** 			}
+  44:Src/sd.c      **** 
+  45:Src/sd.c      **** 			if(i == 0 && pointer == NULL){
+  46:Src/sd.c      **** 
+  47:Src/sd.c      **** 				sprintf(filename, "log_0 \t\r\n");
+  48:Src/sd.c      **** 
+  49:Src/sd.c      **** 				f_write(&log_names_f, filename, strlen(filename), (void*)&byteswritten);
+  50:Src/sd.c      **** 				f_close(&log_names_f);
+  51:Src/sd.c      **** 
+  52:Src/sd.c      **** 				sprintf(filename, "Log_0.txt");
+  53:Src/sd.c      **** 
+  54:Src/sd.c      **** 				f_open(&loggingFile, (TCHAR const*)&filename, FA_OPEN_APPEND | FA_OPEN_ALWAYS | FA_READ | FA_WR
+  55:Src/sd.c      **** 				f_write(&loggingFile, buffer, strlen(buffer), (void*)&byteswritten);
+  56:Src/sd.c      **** 				f_close(&loggingFile);
+  57:Src/sd.c      **** 				f_open(&loggingFile, (TCHAR const*)&filename, FA_OPEN_APPEND | FA_OPEN_ALWAYS | FA_READ | FA_WR
+  58:Src/sd.c      **** 
+  59:Src/sd.c      **** 				HAL_UART_Transmit(&huart3,(uint8_t*)"\r\ncreated -> Log_0\r\n",strlen("\r\ncreated -> Log_0\r\n
+  60:Src/sd.c      **** 
+  61:Src/sd.c      **** 				successfull_opening = 1;
+  62:Src/sd.c      **** 
+  63:Src/sd.c      **** 				break;
+  64:Src/sd.c      **** 			}
+ARM GAS  /tmp/ccosWqnV.s 			page 3
 
 
-  35:Src/sd.c      **** 				f_open(&loggingFile, (TCHAR const*)&filename, FA_OPEN_APPEND | FA_OPEN_ALWAYS | FA_READ | FA_WR
-  36:Src/sd.c      **** 
-  37:Src/sd.c      **** 				HAL_UART_Transmit(&huart3,(uint8_t*)"created -> default.txt\r\n",strlen("created -> default.txt
-  38:Src/sd.c      **** 
-  39:Src/sd.c      **** 				successfull_opening = 1;
-  40:Src/sd.c      **** 
-  41:Src/sd.c      **** 				break;
-  42:Src/sd.c      **** 			}
-  43:Src/sd.c      **** 
-  44:Src/sd.c      **** 			if(i == 0 && pointer == NULL){
-  45:Src/sd.c      **** 
-  46:Src/sd.c      **** 				sprintf(filename, "log_0 \t\r\n");
-  47:Src/sd.c      **** 
-  48:Src/sd.c      **** 				f_write(&log_names_f, filename, strlen(filename), (void*)&byteswritten);
-  49:Src/sd.c      **** 				f_close(&log_names_f);
-  50:Src/sd.c      **** 
-  51:Src/sd.c      **** 				sprintf(filename, "Log_0.txt");
-  52:Src/sd.c      **** 
-  53:Src/sd.c      **** 				f_open(&loggingFile, (TCHAR const*)&filename, FA_OPEN_APPEND | FA_OPEN_ALWAYS | FA_READ | FA_WR
-  54:Src/sd.c      **** 				f_write(&loggingFile, buffer, strlen(buffer), (void*)&byteswritten);
-  55:Src/sd.c      **** 				f_close(&loggingFile);
-  56:Src/sd.c      **** 				f_open(&loggingFile, (TCHAR const*)&filename, FA_OPEN_APPEND | FA_OPEN_ALWAYS | FA_READ | FA_WR
-  57:Src/sd.c      **** 
-  58:Src/sd.c      **** 				HAL_UART_Transmit(&huart3,(uint8_t*)"\r\ncreated -> Log_0\r\n",strlen("\r\ncreated -> Log_0\r\n
-  59:Src/sd.c      **** 
-  60:Src/sd.c      **** 				successfull_opening = 1;
-  61:Src/sd.c      **** 
-  62:Src/sd.c      **** 				break;
-  63:Src/sd.c      **** 			}
-  64:Src/sd.c      **** 			if(pointer == NULL){
-  65:Src/sd.c      **** 				sprintf(filename, "log_%d \t\r\n", i);
-  66:Src/sd.c      **** 
-  67:Src/sd.c      **** 				f_write(&log_names_f, filename, strlen(filename), (void*)&byteswritten);
-  68:Src/sd.c      **** 				f_close(&log_names_f);
-  69:Src/sd.c      **** 
-  70:Src/sd.c      **** 				sprintf(filename, "Log_%d.txt", i);
-  71:Src/sd.c      **** 
-  72:Src/sd.c      **** 				f_open(&loggingFile, (TCHAR const*)&filename, FA_OPEN_APPEND | FA_OPEN_ALWAYS | FA_READ | FA_WR
-  73:Src/sd.c      **** 				f_write(&loggingFile, buffer, strlen(buffer), (void*)&byteswritten);
-  74:Src/sd.c      **** 				f_close(&loggingFile);
-  75:Src/sd.c      **** 				f_open(&loggingFile, (TCHAR const*)&filename, FA_OPEN_APPEND | FA_OPEN_ALWAYS | FA_READ | FA_WR
-  76:Src/sd.c      **** 
-  77:Src/sd.c      **** 				HAL_UART_Transmit(&huart3,(uint8_t*)"\r\ncreated -> ",strlen("\r\ncreated -> "),10);
-  78:Src/sd.c      **** 				HAL_UART_Transmit(&huart3,(uint8_t*) filename, strlen(filename), 10);
-  79:Src/sd.c      **** 				HAL_UART_Transmit(&huart3,(uint8_t*) "\r\n", strlen("\r\n"),10);
-  80:Src/sd.c      **** 
-  81:Src/sd.c      **** 				successfull_opening = 1;
-  82:Src/sd.c      **** 
-  83:Src/sd.c      **** 				break;
-  84:Src/sd.c      **** 			}
-  85:Src/sd.c      **** 		}
-  86:Src/sd.c      **** 
-  87:Src/sd.c      **** 		mount_ok = 1;
-  88:Src/sd.c      **** 		HAL_UART_Transmit(&huart3,(uint8_t*)"files closed\r\n",strlen("files closed\r\n"),10);
-  89:Src/sd.c      **** 	}else {
-  90:Src/sd.c      **** 		mount_ok = 0;
- 103              		.loc 1 90 3 is_stmt 1 view .LVU7
-ARM GAS  /tmp/ccFObcB0.s 			page 5
+  65:Src/sd.c      **** 			if(pointer == NULL){
+  66:Src/sd.c      **** 				sprintf(filename, "log_%d \t\r\n", i);
+  67:Src/sd.c      **** 
+  68:Src/sd.c      **** 				f_write(&log_names_f, filename, strlen(filename), (void*)&byteswritten);
+  69:Src/sd.c      **** 				f_close(&log_names_f);
+  70:Src/sd.c      **** 
+  71:Src/sd.c      **** 				sprintf(filename, "Log_%d.txt", i);
+  72:Src/sd.c      **** 
+  73:Src/sd.c      **** 				f_open(&loggingFile, (TCHAR const*)&filename, FA_OPEN_APPEND | FA_OPEN_ALWAYS | FA_READ | FA_WR
+  74:Src/sd.c      **** 				f_write(&loggingFile, buffer, strlen(buffer), (void*)&byteswritten);
+  75:Src/sd.c      **** 				f_close(&loggingFile);
+  76:Src/sd.c      **** 				f_open(&loggingFile, (TCHAR const*)&filename, FA_OPEN_APPEND | FA_OPEN_ALWAYS | FA_READ | FA_WR
+  77:Src/sd.c      **** 
+  78:Src/sd.c      **** 				HAL_UART_Transmit(&huart3,(uint8_t*)"\r\ncreated -> ",strlen("\r\ncreated -> "),10);
+  79:Src/sd.c      **** 				HAL_UART_Transmit(&huart3,(uint8_t*) filename, strlen(filename), 10);
+  80:Src/sd.c      **** 				HAL_UART_Transmit(&huart3,(uint8_t*) "\r\n", strlen("\r\n"),10);
+  81:Src/sd.c      **** 
+  82:Src/sd.c      **** 				successfull_opening = 1;
+  83:Src/sd.c      **** 
+  84:Src/sd.c      **** 				break;
+  85:Src/sd.c      **** 			}
+  86:Src/sd.c      **** 		}
+  87:Src/sd.c      **** 
+  88:Src/sd.c      **** 		mount_ok = 1;
+  89:Src/sd.c      **** 		HAL_UART_Transmit(&huart3,(uint8_t*)"files closed\r\n",strlen("files closed\r\n"),10);
+  90:Src/sd.c      **** 	}else {
+  91:Src/sd.c      **** 		mount_ok = 0;
+  52              		.loc 1 91 0
+  53 0014 0022     		movs	r2, #0
+  54 0016 8A4B     		ldr	r3, .L16+12
+  55 0018 1A60     		str	r2, [r3]
+  56              	.L1:
+  92:Src/sd.c      **** 	}
+  93:Src/sd.c      **** }...
+  57              		.loc 1 93 0
+  58 001a 41B0     		add	sp, sp, #260
+  59              	.LCFI2:
+  60              		.cfi_remember_state
+  61              		.cfi_def_cfa_offset 20
+  62              		@ sp needed
+  63 001c F0BD     		pop	{r4, r5, r6, r7, pc}
+  64              	.L12:
+  65              	.LCFI3:
+  66              		.cfi_restore_state
+  67              	.LBB2:
+  10:Src/sd.c      **** 		sprintf(filename_1, "name.txt");
+  68              		.loc 1 10 0
+  69 001e 894C     		ldr	r4, .L16+16
+  70 0020 894B     		ldr	r3, .L16+20
+  71 0022 03CB     		ldmia	r3!, {r0, r1}
+  72 0024 2060     		str	r0, [r4]	@ unaligned
+  73 0026 6160     		str	r1, [r4, #4]	@ unaligned
+  74 0028 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+  75 002a 2372     		strb	r3, [r4, #8]
+  11:Src/sd.c      **** 		res_open = f_open(&log_names_f, (TCHAR const*)&filename_1, FA_OPEN_ALWAYS | FA_READ ); //open "na
+  76              		.loc 1 11 0
+  77 002c 1122     		movs	r2, #17
+ARM GAS  /tmp/ccosWqnV.s 			page 4
 
 
- 104              		.loc 1 90 12 is_stmt 0 view .LVU8
- 105 0012 904B     		ldr	r3, .L16+4
- 106 0014 0022     		movs	r2, #0
- 107 0016 1A60     		str	r2, [r3]
- 108              	.L1:
-  91:Src/sd.c      **** 	}
-  92:Src/sd.c      **** }...
- 109              		.loc 1 92 1 view .LVU9
- 110 0018 40B0     		add	sp, sp, #256
- 111              	.LCFI2:
- 112              		.cfi_remember_state
- 113              		.cfi_def_cfa_offset 24
- 114              		@ sp needed
- 115 001a BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
- 116              	.L12:
- 117              	.LCFI3:
- 118              		.cfi_restore_state
- 119              	.LBB2:
-   5:Src/sd.c      **** 		HAL_UART_Transmit(&huart3,(uint8_t*)"---mounting---\r\n",strlen("---mounting---\r\n"), 10);
- 120              		.loc 1 5 3 is_stmt 1 view .LVU10
- 121 001e 0A23     		movs	r3, #10
- 122 0020 1022     		movs	r2, #16
- 123 0022 8D49     		ldr	r1, .L16+8
- 124 0024 8D48     		ldr	r0, .L16+12
- 125 0026 FFF7FEFF 		bl	HAL_UART_Transmit
- 126              	.LVL0:
-   6:Src/sd.c      **** 		res_mount = f_mount(&SDFatFS, (TCHAR const*)SDPath, 0);
- 127              		.loc 1 6 3 view .LVU11
-   6:Src/sd.c      **** 		res_mount = f_mount(&SDFatFS, (TCHAR const*)SDPath, 0);
- 128              		.loc 1 6 15 is_stmt 0 view .LVU12
- 129 002a 0022     		movs	r2, #0
- 130 002c 8C49     		ldr	r1, .L16+16
- 131 002e 8D48     		ldr	r0, .L16+20
- 132 0030 FFF7FEFF 		bl	f_mount
- 133              	.LVL1:
-   6:Src/sd.c      **** 		res_mount = f_mount(&SDFatFS, (TCHAR const*)SDPath, 0);
- 134              		.loc 1 6 13 view .LVU13
- 135 0034 864B     		ldr	r3, .L16
- 136 0036 1870     		strb	r0, [r3]
- 137 0038 E8E7     		b	.L2
- 138              	.L13:
- 139              	.LBE2:
- 140              	.LBB3:
-   9:Src/sd.c      **** 		sprintf(filename_1, "name.txt");
- 141              		.loc 1 9 3 is_stmt 1 view .LVU14
- 142 003a 8B4C     		ldr	r4, .L16+24
- 143 003c 8B4B     		ldr	r3, .L16+28
- 144 003e 03CB     		ldmia	r3!, {r0, r1}
- 145 0040 2060     		str	r0, [r4]	@ unaligned
- 146 0042 6160     		str	r1, [r4, #4]	@ unaligned
- 147 0044 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
- 148 0046 2372     		strb	r3, [r4, #8]
-  10:Src/sd.c      **** 		res_open=f_open(&log_names_f, (TCHAR const*)&filename_1, FA_OPEN_ALWAYS | FA_READ | FA_WRITE );
- 149              		.loc 1 10 3 view .LVU15
-  10:Src/sd.c      **** 		res_open=f_open(&log_names_f, (TCHAR const*)&filename_1, FA_OPEN_ALWAYS | FA_READ | FA_WRITE );
- 150              		.loc 1 10 12 is_stmt 0 view .LVU16
- 151 0048 894D     		ldr	r5, .L16+32
-ARM GAS  /tmp/ccFObcB0.s 			page 6
+  78 002e 2146     		mov	r1, r4
+  79 0030 8648     		ldr	r0, .L16+24
+  80 0032 FFF7FEFF 		bl	f_open
+  81              	.LVL1:
+  82 0036 864B     		ldr	r3, .L16+28
+  83 0038 1870     		strb	r0, [r3]
+  12:Src/sd.c      **** 		if(res_open == 0)f_read(&log_names_f, log_names, 1000, (void*)&bytes_read); //read into file "nam
+  84              		.loc 1 12 0
+  85 003a 00B3     		cbz	r0, .L13
+  86              	.L3:
+  14:Src/sd.c      **** 		HAL_UART_Transmit(&huart3,(uint8_t*)"mounted, opened\r\n",strlen("mounted, opened\r\n"),10);
+  87              		.loc 1 14 0
+  88 003c 854D     		ldr	r5, .L16+32
+  89 003e 0A23     		movs	r3, #10
+  90 0040 1122     		movs	r2, #17
+  91 0042 8549     		ldr	r1, .L16+36
+  92 0044 2846     		mov	r0, r5
+  93 0046 FFF7FEFF 		bl	HAL_UART_Transmit
+  94              	.LVL2:
+  16:Src/sd.c      **** 		sprintf(txt, "%s\r\n", log_names);
+  95              		.loc 1 16 0
+  96 004a 844C     		ldr	r4, .L16+40
+  97 004c 844A     		ldr	r2, .L16+44
+  98 004e 8549     		ldr	r1, .L16+48
+  99 0050 2046     		mov	r0, r4
+ 100 0052 FFF7FEFF 		bl	sprintf
+ 101              	.LVL3:
+  17:Src/sd.c      **** 		HAL_UART_Transmit(&huart3,(uint8_t*)txt,strlen(txt),100);
+ 102              		.loc 1 17 0
+ 103 0056 2046     		mov	r0, r4
+ 104 0058 FFF7FEFF 		bl	strlen
+ 105              	.LVL4:
+ 106 005c 6423     		movs	r3, #100
+ 107 005e 82B2     		uxth	r2, r0
+ 108 0060 2146     		mov	r1, r4
+ 109 0062 2846     		mov	r0, r5
+ 110 0064 FFF7FEFF 		bl	HAL_UART_Transmit
+ 111              	.LVL5:
+  21:Src/sd.c      **** 		f_close(&log_names_f); // close the file
+ 112              		.loc 1 21 0
+ 113 0068 784C     		ldr	r4, .L16+24
+ 114 006a 2046     		mov	r0, r4
+ 115 006c FFF7FEFF 		bl	f_close
+ 116              	.LVL6:
+  22:Src/sd.c      **** 		f_open(&log_names_f, (TCHAR const*)&filename_1, FA_OPEN_APPEND | FA_OPEN_ALWAYS | FA_READ | FA_WR
+ 117              		.loc 1 22 0
+ 118 0070 3322     		movs	r2, #51
+ 119 0072 7449     		ldr	r1, .L16+16
+ 120 0074 2046     		mov	r0, r4
+ 121 0076 FFF7FEFF 		bl	f_open
+ 122              	.LVL7:
+ 123              	.LBB3:
+  24:Src/sd.c      **** 		for(int i = 0; i < max_files; i++){
+ 124              		.loc 1 24 0
+ 125 007a 0024     		movs	r4, #0
+ 126 007c 3BE0     		b	.L4
+ 127              	.LVL8:
+ARM GAS  /tmp/ccosWqnV.s 			page 5
 
 
- 152 004a 1322     		movs	r2, #19
- 153 004c 2146     		mov	r1, r4
- 154 004e 2846     		mov	r0, r5
- 155 0050 FFF7FEFF 		bl	f_open
- 156              	.LVL2:
-  10:Src/sd.c      **** 		res_open=f_open(&log_names_f, (TCHAR const*)&filename_1, FA_OPEN_ALWAYS | FA_READ | FA_WRITE );
- 157              		.loc 1 10 11 view .LVU17
- 158 0054 874B     		ldr	r3, .L16+36
- 159 0056 1870     		strb	r0, [r3]
-  11:Src/sd.c      **** 		f_read(&log_names_f, log_names, 256, (void*)&bytes_read);
- 160              		.loc 1 11 3 is_stmt 1 view .LVU18
- 161 0058 DFF85482 		ldr	r8, .L16+96
- 162 005c 864B     		ldr	r3, .L16+40
- 163 005e 4FF48072 		mov	r2, #256
- 164 0062 4146     		mov	r1, r8
- 165 0064 2846     		mov	r0, r5
- 166 0066 FFF7FEFF 		bl	f_read
- 167              	.LVL3:
-  13:Src/sd.c      **** 		HAL_UART_Transmit(&huart3,(uint8_t*)"mounted, opened\r\n",strlen("mounted, opened\r\n"),10);
- 168              		.loc 1 13 3 view .LVU19
- 169 006a 7C4F     		ldr	r7, .L16+12
- 170 006c 0A23     		movs	r3, #10
- 171 006e 1122     		movs	r2, #17
- 172 0070 8249     		ldr	r1, .L16+44
- 173 0072 3846     		mov	r0, r7
- 174 0074 FFF7FEFF 		bl	HAL_UART_Transmit
- 175              	.LVL4:
-  15:Src/sd.c      **** 		sprintf(txt, "%s\r\n", log_names);
- 176              		.loc 1 15 3 view .LVU20
- 177 0078 814E     		ldr	r6, .L16+48
- 178 007a 4246     		mov	r2, r8
- 179 007c 8149     		ldr	r1, .L16+52
- 180 007e 3046     		mov	r0, r6
- 181 0080 FFF7FEFF 		bl	sprintf
- 182              	.LVL5:
-  16:Src/sd.c      **** 		HAL_UART_Transmit(&huart3,(uint8_t*)txt,strlen(txt),10);
- 183              		.loc 1 16 3 view .LVU21
-  16:Src/sd.c      **** 		HAL_UART_Transmit(&huart3,(uint8_t*)txt,strlen(txt),10);
- 184              		.loc 1 16 43 is_stmt 0 view .LVU22
- 185 0084 3046     		mov	r0, r6
- 186 0086 FFF7FEFF 		bl	strlen
- 187              	.LVL6:
-  16:Src/sd.c      **** 		HAL_UART_Transmit(&huart3,(uint8_t*)txt,strlen(txt),10);
- 188              		.loc 1 16 3 view .LVU23
- 189 008a 0A23     		movs	r3, #10
- 190 008c 82B2     		uxth	r2, r0
- 191 008e 3146     		mov	r1, r6
- 192 0090 3846     		mov	r0, r7
- 193 0092 FFF7FEFF 		bl	HAL_UART_Transmit
- 194              	.LVL7:
-  18:Src/sd.c      **** 		char name[256];
- 195              		.loc 1 18 3 is_stmt 1 view .LVU24
-  20:Src/sd.c      **** 		f_close(&log_names_f);
- 196              		.loc 1 20 3 view .LVU25
- 197 0096 2846     		mov	r0, r5
- 198 0098 FFF7FEFF 		bl	f_close
- 199              	.LVL8:
-ARM GAS  /tmp/ccFObcB0.s 			page 7
+ 128              	.L13:
+ 129              	.LBE3:
+  12:Src/sd.c      **** 		if(res_open == 0)f_read(&log_names_f, log_names, 1000, (void*)&bytes_read); //read into file "nam
+ 130              		.loc 1 12 0 discriminator 1
+ 131 007e 7A4B     		ldr	r3, .L16+52
+ 132 0080 4FF47A72 		mov	r2, #1000
+ 133 0084 7649     		ldr	r1, .L16+44
+ 134 0086 7148     		ldr	r0, .L16+24
+ 135 0088 FFF7FEFF 		bl	f_read
+ 136              	.LVL9:
+ 137 008c D6E7     		b	.L3
+ 138              	.LVL10:
+ 139              	.L15:
+ 140              	.LBB4:
+  31:Src/sd.c      **** 				sprintf(filename,"default.txt");
+ 141              		.loc 1 31 0
+ 142 008e 774C     		ldr	r4, .L16+56
+ 143              	.LVL11:
+ 144 0090 774B     		ldr	r3, .L16+60
+ 145 0092 07CB     		ldmia	r3!, {r0, r1, r2}
+ 146 0094 2060     		str	r0, [r4]	@ unaligned
+ 147 0096 6160     		str	r1, [r4, #4]	@ unaligned
+ 148 0098 A260     		str	r2, [r4, #8]	@ unaligned
+  33:Src/sd.c      **** 				f_open(&loggingFile, (TCHAR const*)&filename, FA_OPEN_APPEND | FA_OPEN_ALWAYS | FA_READ | FA_WR
+ 149              		.loc 1 33 0
+ 150 009a 764D     		ldr	r5, .L16+64
+ 151 009c 3322     		movs	r2, #51
+ 152 009e 2146     		mov	r1, r4
+ 153 00a0 2846     		mov	r0, r5
+ 154 00a2 FFF7FEFF 		bl	f_open
+ 155              	.LVL12:
+  34:Src/sd.c      **** 				f_write(&loggingFile, buffer, strlen(buffer), (void*)&byteswritten);
+ 156              		.loc 1 34 0
+ 157 00a6 744E     		ldr	r6, .L16+68
+ 158 00a8 3046     		mov	r0, r6
+ 159 00aa FFF7FEFF 		bl	strlen
+ 160              	.LVL13:
+ 161 00ae 734B     		ldr	r3, .L16+72
+ 162 00b0 0246     		mov	r2, r0
+ 163 00b2 3146     		mov	r1, r6
+ 164 00b4 2846     		mov	r0, r5
+ 165 00b6 FFF7FEFF 		bl	f_write
+ 166              	.LVL14:
+  35:Src/sd.c      **** 				f_close(&loggingFile);
+ 167              		.loc 1 35 0
+ 168 00ba 2846     		mov	r0, r5
+ 169 00bc FFF7FEFF 		bl	f_close
+ 170              	.LVL15:
+  36:Src/sd.c      **** 				f_open(&loggingFile, (TCHAR const*)&filename, FA_OPEN_APPEND | FA_OPEN_ALWAYS | FA_READ | FA_WR
+ 171              		.loc 1 36 0
+ 172 00c0 3322     		movs	r2, #51
+ 173 00c2 2146     		mov	r1, r4
+ 174 00c4 2846     		mov	r0, r5
+ 175 00c6 FFF7FEFF 		bl	f_open
+ 176              	.LVL16:
+  38:Src/sd.c      **** 				HAL_UART_Transmit(&huart3,(uint8_t*)"created -> default.txt\r\n",strlen("created -> default.txt
+ 177              		.loc 1 38 0
+ARM GAS  /tmp/ccosWqnV.s 			page 6
 
 
-  21:Src/sd.c      **** 		f_open(&log_names_f, (TCHAR const*)&filename_1, FA_OPEN_APPEND | FA_OPEN_ALWAYS | FA_READ | FA_WR
- 200              		.loc 1 21 3 view .LVU26
- 201 009c 3322     		movs	r2, #51
- 202 009e 2146     		mov	r1, r4
- 203 00a0 2846     		mov	r0, r5
- 204 00a2 FFF7FEFF 		bl	f_open
- 205              	.LVL9:
-  23:Src/sd.c      **** 		for(int i = 0; i < max_files; i++){
- 206              		.loc 1 23 3 view .LVU27
- 207              	.LBB4:
-  23:Src/sd.c      **** 		for(int i = 0; i < max_files; i++){
- 208              		.loc 1 23 7 view .LVU28
-  23:Src/sd.c      **** 		for(int i = 0; i < max_files; i++){
- 209              		.loc 1 23 11 is_stmt 0 view .LVU29
- 210 00a6 0024     		movs	r4, #0
-  23:Src/sd.c      **** 		for(int i = 0; i < max_files; i++){
- 211              		.loc 1 23 3 view .LVU30
- 212 00a8 33E0     		b	.L4
- 213              	.LVL10:
- 214              	.L15:
- 215              	.LBB5:
-  30:Src/sd.c      **** 				sprintf(filename,"default.txt");
- 216              		.loc 1 30 5 is_stmt 1 view .LVU31
- 217 00aa 774C     		ldr	r4, .L16+56
- 218              	.LVL11:
-  30:Src/sd.c      **** 				sprintf(filename,"default.txt");
- 219              		.loc 1 30 5 is_stmt 0 view .LVU32
- 220 00ac 774B     		ldr	r3, .L16+60
- 221 00ae 07CB     		ldmia	r3!, {r0, r1, r2}
- 222 00b0 2060     		str	r0, [r4]	@ unaligned
- 223 00b2 6160     		str	r1, [r4, #4]	@ unaligned
- 224 00b4 A260     		str	r2, [r4, #8]	@ unaligned
-  32:Src/sd.c      **** 				f_open(&loggingFile, (TCHAR const*)&filename, FA_OPEN_APPEND | FA_OPEN_ALWAYS | FA_READ | FA_WR
- 225              		.loc 1 32 5 is_stmt 1 view .LVU33
- 226 00b6 764D     		ldr	r5, .L16+64
- 227 00b8 3322     		movs	r2, #51
- 228 00ba 2146     		mov	r1, r4
- 229 00bc 2846     		mov	r0, r5
- 230 00be FFF7FEFF 		bl	f_open
- 231              	.LVL12:
-  33:Src/sd.c      **** 				f_write(&loggingFile, buffer, strlen(buffer), (void*)&byteswritten);
- 232              		.loc 1 33 5 view .LVU34
- 233 00c2 744E     		ldr	r6, .L16+68
- 234 00c4 3046     		mov	r0, r6
- 235 00c6 FFF7FEFF 		bl	strlen
- 236              	.LVL13:
- 237 00ca 0246     		mov	r2, r0
- 238 00cc 724B     		ldr	r3, .L16+72
- 239 00ce 3146     		mov	r1, r6
- 240 00d0 2846     		mov	r0, r5
- 241 00d2 FFF7FEFF 		bl	f_write
- 242              	.LVL14:
-  34:Src/sd.c      **** 				f_close(&loggingFile);
- 243              		.loc 1 34 5 view .LVU35
- 244 00d6 2846     		mov	r0, r5
- 245 00d8 FFF7FEFF 		bl	f_close
- 246              	.LVL15:
-ARM GAS  /tmp/ccFObcB0.s 			page 8
+ 178 00ca 0A23     		movs	r3, #10
+ 179 00cc 1822     		movs	r2, #24
+ 180 00ce 6C49     		ldr	r1, .L16+76
+ 181 00d0 6048     		ldr	r0, .L16+32
+ 182 00d2 FFF7FEFF 		bl	HAL_UART_Transmit
+ 183              	.LVL17:
+  40:Src/sd.c      **** 				successfull_opening = 1;
+ 184              		.loc 1 40 0
+ 185 00d6 0122     		movs	r2, #1
+ 186 00d8 6A4B     		ldr	r3, .L16+80
+ 187 00da 1A60     		str	r2, [r3]
+ 188              	.L6:
+ 189              	.LBE4:
+  88:Src/sd.c      **** 		mount_ok = 1;
+ 190              		.loc 1 88 0
+ 191 00dc 0122     		movs	r2, #1
+ 192 00de 584B     		ldr	r3, .L16+12
+ 193 00e0 1A60     		str	r2, [r3]
+  89:Src/sd.c      **** 		HAL_UART_Transmit(&huart3,(uint8_t*)"files closed\r\n",strlen("files closed\r\n"),10);
+ 194              		.loc 1 89 0
+ 195 00e2 0A23     		movs	r3, #10
+ 196 00e4 0E22     		movs	r2, #14
+ 197 00e6 6849     		ldr	r1, .L16+84
+ 198 00e8 5A48     		ldr	r0, .L16+32
+ 199 00ea FFF7FEFF 		bl	HAL_UART_Transmit
+ 200              	.LVL18:
+ 201              	.LBE2:
+ 202 00ee 94E7     		b	.L1
+ 203              	.LVL19:
+ 204              	.L7:
+ 205              	.LBB6:
+ 206              	.LBB5:
+  65:Src/sd.c      **** 			if(pointer == NULL){
+ 207              		.loc 1 65 0
+ 208 00f0 0028     		cmp	r0, #0
+ 209 00f2 54D0     		beq	.L14
+  24:Src/sd.c      **** 		for(int i = 0; i < max_files; i++){
+ 210              		.loc 1 24 0 discriminator 2
+ 211 00f4 0134     		adds	r4, r4, #1
+ 212              	.LVL20:
+ 213              	.L4:
+  24:Src/sd.c      **** 		for(int i = 0; i < max_files; i++){
+ 214              		.loc 1 24 0 is_stmt 0 discriminator 1
+ 215 00f6 654B     		ldr	r3, .L16+88
+ 216 00f8 1B68     		ldr	r3, [r3]
+ 217 00fa 9C42     		cmp	r4, r3
+ 218 00fc EEDA     		bge	.L6
+  26:Src/sd.c      **** 			sprintf(name, "log_%d ", i);
+ 219              		.loc 1 26 0 is_stmt 1
+ 220 00fe 2246     		mov	r2, r4
+ 221 0100 6349     		ldr	r1, .L16+92
+ 222 0102 6846     		mov	r0, sp
+ 223 0104 FFF7FEFF 		bl	sprintf
+ 224              	.LVL21:
+  28:Src/sd.c      **** 			pointer = strstr(log_names, name);
+ 225              		.loc 1 28 0
+ 226 0108 6946     		mov	r1, sp
+ARM GAS  /tmp/ccosWqnV.s 			page 7
 
 
-  35:Src/sd.c      **** 				f_open(&loggingFile, (TCHAR const*)&filename, FA_OPEN_APPEND | FA_OPEN_ALWAYS | FA_READ | FA_WR
- 247              		.loc 1 35 5 view .LVU36
- 248 00dc 3322     		movs	r2, #51
- 249 00de 2146     		mov	r1, r4
- 250 00e0 2846     		mov	r0, r5
- 251 00e2 FFF7FEFF 		bl	f_open
- 252              	.LVL16:
-  37:Src/sd.c      **** 				HAL_UART_Transmit(&huart3,(uint8_t*)"created -> default.txt\r\n",strlen("created -> default.txt
- 253              		.loc 1 37 5 view .LVU37
- 254 00e6 0A23     		movs	r3, #10
- 255 00e8 1822     		movs	r2, #24
- 256 00ea 6C49     		ldr	r1, .L16+76
- 257 00ec 5B48     		ldr	r0, .L16+12
- 258 00ee FFF7FEFF 		bl	HAL_UART_Transmit
- 259              	.LVL17:
-  39:Src/sd.c      **** 				successfull_opening = 1;
- 260              		.loc 1 39 5 view .LVU38
-  39:Src/sd.c      **** 				successfull_opening = 1;
- 261              		.loc 1 39 25 is_stmt 0 view .LVU39
- 262 00f2 6B4B     		ldr	r3, .L16+80
- 263 00f4 0122     		movs	r2, #1
- 264 00f6 1A60     		str	r2, [r3]
-  41:Src/sd.c      **** 				break;
- 265              		.loc 1 41 5 is_stmt 1 view .LVU40
- 266              	.L6:
- 267              	.LBE5:
- 268              	.LBE4:
-  87:Src/sd.c      **** 		mount_ok = 1;
- 269              		.loc 1 87 3 view .LVU41
-  87:Src/sd.c      **** 		mount_ok = 1;
- 270              		.loc 1 87 12 is_stmt 0 view .LVU42
- 271 00f8 564B     		ldr	r3, .L16+4
- 272 00fa 0122     		movs	r2, #1
- 273 00fc 1A60     		str	r2, [r3]
-  88:Src/sd.c      **** 		HAL_UART_Transmit(&huart3,(uint8_t*)"files closed\r\n",strlen("files closed\r\n"),10);
- 274              		.loc 1 88 3 is_stmt 1 view .LVU43
- 275 00fe 0A23     		movs	r3, #10
- 276 0100 0E22     		movs	r2, #14
- 277 0102 6849     		ldr	r1, .L16+84
- 278 0104 5548     		ldr	r0, .L16+12
- 279 0106 FFF7FEFF 		bl	HAL_UART_Transmit
- 280              	.LVL18:
- 281              	.LBE3:
- 282 010a 85E7     		b	.L1
- 283              	.LVL19:
- 284              	.L7:
- 285              	.LBB9:
- 286              	.LBB8:
- 287              	.LBB6:
-  64:Src/sd.c      **** 			if(pointer == NULL){
- 288              		.loc 1 64 4 view .LVU44
-  64:Src/sd.c      **** 			if(pointer == NULL){
- 289              		.loc 1 64 6 is_stmt 0 view .LVU45
- 290 010c 0028     		cmp	r0, #0
- 291 010e 54D0     		beq	.L14
- 292              	.LBE6:
-  23:Src/sd.c      **** 		for(int i = 0; i < max_files; i++){
-ARM GAS  /tmp/ccFObcB0.s 			page 9
+ 227 010a 5548     		ldr	r0, .L16+44
+ 228 010c FFF7FEFF 		bl	strstr
+ 229              	.LVL22:
+ 230 0110 604B     		ldr	r3, .L16+96
+ 231 0112 1860     		str	r0, [r3]
+  30:Src/sd.c      **** 			if(i == max_files){
+ 232              		.loc 1 30 0
+ 233 0114 5D4B     		ldr	r3, .L16+88
+ 234 0116 1B68     		ldr	r3, [r3]
+ 235 0118 9C42     		cmp	r4, r3
+ 236 011a B8D0     		beq	.L15
+  45:Src/sd.c      **** 			if(i == 0 && pointer == NULL){
+ 237              		.loc 1 45 0
+ 238 011c 002C     		cmp	r4, #0
+ 239 011e E7D1     		bne	.L7
+  45:Src/sd.c      **** 			if(i == 0 && pointer == NULL){
+ 240              		.loc 1 45 0 is_stmt 0 discriminator 1
+ 241 0120 0028     		cmp	r0, #0
+ 242 0122 E5D1     		bne	.L7
+  47:Src/sd.c      **** 				sprintf(filename, "log_0 \t\r\n");
+ 243              		.loc 1 47 0 is_stmt 1
+ 244 0124 514C     		ldr	r4, .L16+56
+ 245              	.LVL23:
+ 246 0126 5C4B     		ldr	r3, .L16+100
+ 247 0128 03CB     		ldmia	r3!, {r0, r1}
+ 248 012a 2060     		str	r0, [r4]	@ unaligned
+ 249 012c 6160     		str	r1, [r4, #4]	@ unaligned
+ 250 012e 1B88     		ldrh	r3, [r3]	@ unaligned
+ 251 0130 2381     		strh	r3, [r4, #8]	@ unaligned
+  49:Src/sd.c      **** 				f_write(&log_names_f, filename, strlen(filename), (void*)&byteswritten);
+ 252              		.loc 1 49 0
+ 253 0132 2046     		mov	r0, r4
+ 254 0134 FFF7FEFF 		bl	strlen
+ 255              	.LVL24:
+ 256 0138 504F     		ldr	r7, .L16+72
+ 257 013a 444D     		ldr	r5, .L16+24
+ 258 013c 3B46     		mov	r3, r7
+ 259 013e 0246     		mov	r2, r0
+ 260 0140 2146     		mov	r1, r4
+ 261 0142 2846     		mov	r0, r5
+ 262 0144 FFF7FEFF 		bl	f_write
+ 263              	.LVL25:
+  50:Src/sd.c      **** 				f_close(&log_names_f);
+ 264              		.loc 1 50 0
+ 265 0148 2846     		mov	r0, r5
+ 266 014a FFF7FEFF 		bl	f_close
+ 267              	.LVL26:
+  52:Src/sd.c      **** 				sprintf(filename, "Log_0.txt");
+ 268              		.loc 1 52 0
+ 269 014e 534B     		ldr	r3, .L16+104
+ 270 0150 03CB     		ldmia	r3!, {r0, r1}
+ 271 0152 2060     		str	r0, [r4]	@ unaligned
+ 272 0154 6160     		str	r1, [r4, #4]	@ unaligned
+ 273 0156 1B88     		ldrh	r3, [r3]	@ unaligned
+ 274 0158 2381     		strh	r3, [r4, #8]	@ unaligned
+  54:Src/sd.c      **** 				f_open(&loggingFile, (TCHAR const*)&filename, FA_OPEN_APPEND | FA_OPEN_ALWAYS | FA_READ | FA_WR
+ 275              		.loc 1 54 0
+ARM GAS  /tmp/ccosWqnV.s 			page 8
 
 
- 293              		.loc 1 23 33 is_stmt 1 discriminator 2 view .LVU46
-  23:Src/sd.c      **** 		for(int i = 0; i < max_files; i++){
- 294              		.loc 1 23 34 is_stmt 0 discriminator 2 view .LVU47
- 295 0110 0134     		adds	r4, r4, #1
- 296              	.LVL20:
- 297              	.L4:
-  23:Src/sd.c      **** 		for(int i = 0; i < max_files; i++){
- 298              		.loc 1 23 18 is_stmt 1 discriminator 1 view .LVU48
-  23:Src/sd.c      **** 		for(int i = 0; i < max_files; i++){
- 299              		.loc 1 23 20 is_stmt 0 discriminator 1 view .LVU49
- 300 0112 654B     		ldr	r3, .L16+88
- 301 0114 1B68     		ldr	r3, [r3]
-  23:Src/sd.c      **** 		for(int i = 0; i < max_files; i++){
- 302              		.loc 1 23 3 discriminator 1 view .LVU50
- 303 0116 A342     		cmp	r3, r4
- 304 0118 EEDD     		ble	.L6
- 305              	.LBB7:
-  25:Src/sd.c      **** 			sprintf(name, "log_%d ", i);
- 306              		.loc 1 25 4 is_stmt 1 view .LVU51
- 307 011a 2246     		mov	r2, r4
- 308 011c 6349     		ldr	r1, .L16+92
- 309 011e 6846     		mov	r0, sp
- 310 0120 FFF7FEFF 		bl	sprintf
- 311              	.LVL21:
-  27:Src/sd.c      **** 			pointer = strstr(log_names, name);
- 312              		.loc 1 27 4 view .LVU52
-  27:Src/sd.c      **** 			pointer = strstr(log_names, name);
- 313              		.loc 1 27 14 is_stmt 0 view .LVU53
- 314 0124 6946     		mov	r1, sp
- 315 0126 6248     		ldr	r0, .L16+96
- 316 0128 FFF7FEFF 		bl	strstr
- 317              	.LVL22:
-  27:Src/sd.c      **** 			pointer = strstr(log_names, name);
- 318              		.loc 1 27 12 view .LVU54
- 319 012c 614B     		ldr	r3, .L16+100
- 320 012e 1860     		str	r0, [r3]
-  29:Src/sd.c      **** 			if(i == max_files){
- 321              		.loc 1 29 4 is_stmt 1 view .LVU55
-  29:Src/sd.c      **** 			if(i == max_files){
- 322              		.loc 1 29 9 is_stmt 0 view .LVU56
- 323 0130 5D4B     		ldr	r3, .L16+88
- 324 0132 1B68     		ldr	r3, [r3]
-  29:Src/sd.c      **** 			if(i == max_files){
- 325              		.loc 1 29 6 view .LVU57
- 326 0134 A342     		cmp	r3, r4
- 327 0136 B8D0     		beq	.L15
-  44:Src/sd.c      **** 			if(i == 0 && pointer == NULL){
- 328              		.loc 1 44 4 is_stmt 1 view .LVU58
-  44:Src/sd.c      **** 			if(i == 0 && pointer == NULL){
- 329              		.loc 1 44 6 is_stmt 0 view .LVU59
- 330 0138 002C     		cmp	r4, #0
- 331 013a E7D1     		bne	.L7
-  44:Src/sd.c      **** 			if(i == 0 && pointer == NULL){
- 332              		.loc 1 44 14 discriminator 1 view .LVU60
- 333 013c 0028     		cmp	r0, #0
- 334 013e E5D1     		bne	.L7
-  46:Src/sd.c      **** 				sprintf(filename, "log_0 \t\r\n");
-ARM GAS  /tmp/ccFObcB0.s 			page 10
+ 276 015a 464D     		ldr	r5, .L16+64
+ 277 015c 3322     		movs	r2, #51
+ 278 015e 2146     		mov	r1, r4
+ 279 0160 2846     		mov	r0, r5
+ 280 0162 FFF7FEFF 		bl	f_open
+ 281              	.LVL27:
+  55:Src/sd.c      **** 				f_write(&loggingFile, buffer, strlen(buffer), (void*)&byteswritten);
+ 282              		.loc 1 55 0
+ 283 0166 444E     		ldr	r6, .L16+68
+ 284 0168 3046     		mov	r0, r6
+ 285 016a FFF7FEFF 		bl	strlen
+ 286              	.LVL28:
+ 287 016e 3B46     		mov	r3, r7
+ 288 0170 0246     		mov	r2, r0
+ 289 0172 3146     		mov	r1, r6
+ 290 0174 2846     		mov	r0, r5
+ 291 0176 FFF7FEFF 		bl	f_write
+ 292              	.LVL29:
+  56:Src/sd.c      **** 				f_close(&loggingFile);
+ 293              		.loc 1 56 0
+ 294 017a 2846     		mov	r0, r5
+ 295 017c FFF7FEFF 		bl	f_close
+ 296              	.LVL30:
+  57:Src/sd.c      **** 				f_open(&loggingFile, (TCHAR const*)&filename, FA_OPEN_APPEND | FA_OPEN_ALWAYS | FA_READ | FA_WR
+ 297              		.loc 1 57 0
+ 298 0180 3322     		movs	r2, #51
+ 299 0182 2146     		mov	r1, r4
+ 300 0184 2846     		mov	r0, r5
+ 301 0186 FFF7FEFF 		bl	f_open
+ 302              	.LVL31:
+  59:Src/sd.c      **** 				HAL_UART_Transmit(&huart3,(uint8_t*)"\r\ncreated -> Log_0\r\n",strlen("\r\ncreated -> Log_0\r\n
+ 303              		.loc 1 59 0
+ 304 018a 0A23     		movs	r3, #10
+ 305 018c 1422     		movs	r2, #20
+ 306 018e 4449     		ldr	r1, .L16+108
+ 307 0190 3048     		ldr	r0, .L16+32
+ 308 0192 FFF7FEFF 		bl	HAL_UART_Transmit
+ 309              	.LVL32:
+  61:Src/sd.c      **** 				successfull_opening = 1;
+ 310              		.loc 1 61 0
+ 311 0196 0122     		movs	r2, #1
+ 312 0198 3A4B     		ldr	r3, .L16+80
+ 313 019a 1A60     		str	r2, [r3]
+  63:Src/sd.c      **** 				break;
+ 314              		.loc 1 63 0
+ 315 019c 9EE7     		b	.L6
+ 316              	.LVL33:
+ 317              	.L14:
+  66:Src/sd.c      **** 				sprintf(filename, "log_%d \t\r\n", i);
+ 318              		.loc 1 66 0
+ 319 019e 334D     		ldr	r5, .L16+56
+ 320 01a0 2246     		mov	r2, r4
+ 321 01a2 4049     		ldr	r1, .L16+112
+ 322 01a4 2846     		mov	r0, r5
+ 323 01a6 FFF7FEFF 		bl	sprintf
+ 324              	.LVL34:
+  68:Src/sd.c      **** 				f_write(&log_names_f, filename, strlen(filename), (void*)&byteswritten);
+ARM GAS  /tmp/ccosWqnV.s 			page 9
 
 
- 335              		.loc 1 46 5 is_stmt 1 view .LVU61
- 336 0140 514C     		ldr	r4, .L16+56
- 337              	.LVL23:
-  46:Src/sd.c      **** 				sprintf(filename, "log_0 \t\r\n");
- 338              		.loc 1 46 5 is_stmt 0 view .LVU62
- 339 0142 5D4B     		ldr	r3, .L16+104
- 340 0144 03CB     		ldmia	r3!, {r0, r1}
- 341 0146 2060     		str	r0, [r4]	@ unaligned
- 342 0148 6160     		str	r1, [r4, #4]	@ unaligned
- 343 014a 1B88     		ldrh	r3, [r3]	@ unaligned
- 344 014c 2381     		strh	r3, [r4, #8]	@ unaligned
-  48:Src/sd.c      **** 				f_write(&log_names_f, filename, strlen(filename), (void*)&byteswritten);
- 345              		.loc 1 48 5 is_stmt 1 view .LVU63
- 346 014e 2046     		mov	r0, r4
- 347 0150 FFF7FEFF 		bl	strlen
- 348              	.LVL24:
- 349 0154 0246     		mov	r2, r0
- 350 0156 504F     		ldr	r7, .L16+72
- 351 0158 454D     		ldr	r5, .L16+32
- 352 015a 3B46     		mov	r3, r7
- 353 015c 2146     		mov	r1, r4
- 354 015e 2846     		mov	r0, r5
- 355 0160 FFF7FEFF 		bl	f_write
- 356              	.LVL25:
-  49:Src/sd.c      **** 				f_close(&log_names_f);
- 357              		.loc 1 49 5 view .LVU64
- 358 0164 2846     		mov	r0, r5
- 359 0166 FFF7FEFF 		bl	f_close
- 360              	.LVL26:
-  51:Src/sd.c      **** 				sprintf(filename, "Log_0.txt");
- 361              		.loc 1 51 5 view .LVU65
- 362 016a 544B     		ldr	r3, .L16+108
- 363 016c 03CB     		ldmia	r3!, {r0, r1}
- 364 016e 2060     		str	r0, [r4]	@ unaligned
- 365 0170 6160     		str	r1, [r4, #4]	@ unaligned
- 366 0172 1B88     		ldrh	r3, [r3]	@ unaligned
- 367 0174 2381     		strh	r3, [r4, #8]	@ unaligned
-  53:Src/sd.c      **** 				f_open(&loggingFile, (TCHAR const*)&filename, FA_OPEN_APPEND | FA_OPEN_ALWAYS | FA_READ | FA_WR
- 368              		.loc 1 53 5 view .LVU66
- 369 0176 464D     		ldr	r5, .L16+64
- 370 0178 3322     		movs	r2, #51
- 371 017a 2146     		mov	r1, r4
- 372 017c 2846     		mov	r0, r5
- 373 017e FFF7FEFF 		bl	f_open
- 374              	.LVL27:
-  54:Src/sd.c      **** 				f_write(&loggingFile, buffer, strlen(buffer), (void*)&byteswritten);
- 375              		.loc 1 54 5 view .LVU67
- 376 0182 444E     		ldr	r6, .L16+68
- 377 0184 3046     		mov	r0, r6
- 378 0186 FFF7FEFF 		bl	strlen
- 379              	.LVL28:
- 380 018a 0246     		mov	r2, r0
- 381 018c 3B46     		mov	r3, r7
- 382 018e 3146     		mov	r1, r6
- 383 0190 2846     		mov	r0, r5
- 384 0192 FFF7FEFF 		bl	f_write
- 385              	.LVL29:
-ARM GAS  /tmp/ccFObcB0.s 			page 11
+ 325              		.loc 1 68 0
+ 326 01aa 2846     		mov	r0, r5
+ 327 01ac FFF7FEFF 		bl	strlen
+ 328              	.LVL35:
+ 329 01b0 324F     		ldr	r7, .L16+72
+ 330 01b2 264E     		ldr	r6, .L16+24
+ 331 01b4 3B46     		mov	r3, r7
+ 332 01b6 0246     		mov	r2, r0
+ 333 01b8 2946     		mov	r1, r5
+ 334 01ba 3046     		mov	r0, r6
+ 335 01bc FFF7FEFF 		bl	f_write
+ 336              	.LVL36:
+  69:Src/sd.c      **** 				f_close(&log_names_f);
+ 337              		.loc 1 69 0
+ 338 01c0 3046     		mov	r0, r6
+ 339 01c2 FFF7FEFF 		bl	f_close
+ 340              	.LVL37:
+  71:Src/sd.c      **** 				sprintf(filename, "Log_%d.txt", i);
+ 341              		.loc 1 71 0
+ 342 01c6 2246     		mov	r2, r4
+ 343 01c8 3749     		ldr	r1, .L16+116
+ 344 01ca 2846     		mov	r0, r5
+ 345 01cc FFF7FEFF 		bl	sprintf
+ 346              	.LVL38:
+  73:Src/sd.c      **** 				f_open(&loggingFile, (TCHAR const*)&filename, FA_OPEN_APPEND | FA_OPEN_ALWAYS | FA_READ | FA_WR
+ 347              		.loc 1 73 0
+ 348 01d0 284C     		ldr	r4, .L16+64
+ 349              	.LVL39:
+ 350 01d2 3322     		movs	r2, #51
+ 351 01d4 2946     		mov	r1, r5
+ 352 01d6 2046     		mov	r0, r4
+ 353 01d8 FFF7FEFF 		bl	f_open
+ 354              	.LVL40:
+  74:Src/sd.c      **** 				f_write(&loggingFile, buffer, strlen(buffer), (void*)&byteswritten);
+ 355              		.loc 1 74 0
+ 356 01dc 264E     		ldr	r6, .L16+68
+ 357 01de 3046     		mov	r0, r6
+ 358 01e0 FFF7FEFF 		bl	strlen
+ 359              	.LVL41:
+ 360 01e4 3B46     		mov	r3, r7
+ 361 01e6 0246     		mov	r2, r0
+ 362 01e8 3146     		mov	r1, r6
+ 363 01ea 2046     		mov	r0, r4
+ 364 01ec FFF7FEFF 		bl	f_write
+ 365              	.LVL42:
+  75:Src/sd.c      **** 				f_close(&loggingFile);
+ 366              		.loc 1 75 0
+ 367 01f0 2046     		mov	r0, r4
+ 368 01f2 FFF7FEFF 		bl	f_close
+ 369              	.LVL43:
+  76:Src/sd.c      **** 				f_open(&loggingFile, (TCHAR const*)&filename, FA_OPEN_APPEND | FA_OPEN_ALWAYS | FA_READ | FA_WR
+ 370              		.loc 1 76 0
+ 371 01f6 3322     		movs	r2, #51
+ 372 01f8 2946     		mov	r1, r5
+ 373 01fa 2046     		mov	r0, r4
+ 374 01fc FFF7FEFF 		bl	f_open
+ 375              	.LVL44:
+ARM GAS  /tmp/ccosWqnV.s 			page 10
 
 
-  55:Src/sd.c      **** 				f_close(&loggingFile);
- 386              		.loc 1 55 5 view .LVU68
- 387 0196 2846     		mov	r0, r5
- 388 0198 FFF7FEFF 		bl	f_close
- 389              	.LVL30:
-  56:Src/sd.c      **** 				f_open(&loggingFile, (TCHAR const*)&filename, FA_OPEN_APPEND | FA_OPEN_ALWAYS | FA_READ | FA_WR
- 390              		.loc 1 56 5 view .LVU69
- 391 019c 3322     		movs	r2, #51
- 392 019e 2146     		mov	r1, r4
- 393 01a0 2846     		mov	r0, r5
- 394 01a2 FFF7FEFF 		bl	f_open
- 395              	.LVL31:
-  58:Src/sd.c      **** 				HAL_UART_Transmit(&huart3,(uint8_t*)"\r\ncreated -> Log_0\r\n",strlen("\r\ncreated -> Log_0\r\n
- 396              		.loc 1 58 5 view .LVU70
- 397 01a6 0A23     		movs	r3, #10
- 398 01a8 1422     		movs	r2, #20
- 399 01aa 4549     		ldr	r1, .L16+112
- 400 01ac 2B48     		ldr	r0, .L16+12
- 401 01ae FFF7FEFF 		bl	HAL_UART_Transmit
- 402              	.LVL32:
-  60:Src/sd.c      **** 				successfull_opening = 1;
- 403              		.loc 1 60 5 view .LVU71
-  60:Src/sd.c      **** 				successfull_opening = 1;
- 404              		.loc 1 60 25 is_stmt 0 view .LVU72
- 405 01b2 3B4B     		ldr	r3, .L16+80
- 406 01b4 0122     		movs	r2, #1
- 407 01b6 1A60     		str	r2, [r3]
-  62:Src/sd.c      **** 				break;
- 408              		.loc 1 62 5 is_stmt 1 view .LVU73
- 409 01b8 9EE7     		b	.L6
- 410              	.LVL33:
- 411              	.L14:
-  65:Src/sd.c      **** 				sprintf(filename, "log_%d \t\r\n", i);
- 412              		.loc 1 65 5 view .LVU74
- 413 01ba 334D     		ldr	r5, .L16+56
- 414 01bc 2246     		mov	r2, r4
- 415 01be 4149     		ldr	r1, .L16+116
- 416 01c0 2846     		mov	r0, r5
- 417 01c2 FFF7FEFF 		bl	sprintf
- 418              	.LVL34:
-  67:Src/sd.c      **** 				f_write(&log_names_f, filename, strlen(filename), (void*)&byteswritten);
- 419              		.loc 1 67 5 view .LVU75
- 420 01c6 2846     		mov	r0, r5
- 421 01c8 FFF7FEFF 		bl	strlen
- 422              	.LVL35:
- 423 01cc 0246     		mov	r2, r0
- 424 01ce 324F     		ldr	r7, .L16+72
- 425 01d0 274E     		ldr	r6, .L16+32
- 426 01d2 3B46     		mov	r3, r7
- 427 01d4 2946     		mov	r1, r5
- 428 01d6 3046     		mov	r0, r6
- 429 01d8 FFF7FEFF 		bl	f_write
- 430              	.LVL36:
-  68:Src/sd.c      **** 				f_close(&log_names_f);
- 431              		.loc 1 68 5 view .LVU76
- 432 01dc 3046     		mov	r0, r6
- 433 01de FFF7FEFF 		bl	f_close
-ARM GAS  /tmp/ccFObcB0.s 			page 12
+  78:Src/sd.c      **** 				HAL_UART_Transmit(&huart3,(uint8_t*)"\r\ncreated -> ",strlen("\r\ncreated -> "),10);
+ 376              		.loc 1 78 0
+ 377 0200 144C     		ldr	r4, .L16+32
+ 378 0202 0A23     		movs	r3, #10
+ 379 0204 0D22     		movs	r2, #13
+ 380 0206 2949     		ldr	r1, .L16+120
+ 381 0208 2046     		mov	r0, r4
+ 382 020a FFF7FEFF 		bl	HAL_UART_Transmit
+ 383              	.LVL45:
+  79:Src/sd.c      **** 				HAL_UART_Transmit(&huart3,(uint8_t*) filename, strlen(filename), 10);
+ 384              		.loc 1 79 0
+ 385 020e 2846     		mov	r0, r5
+ 386 0210 FFF7FEFF 		bl	strlen
+ 387              	.LVL46:
+ 388 0214 0A23     		movs	r3, #10
+ 389 0216 82B2     		uxth	r2, r0
+ 390 0218 2946     		mov	r1, r5
+ 391 021a 2046     		mov	r0, r4
+ 392 021c FFF7FEFF 		bl	HAL_UART_Transmit
+ 393              	.LVL47:
+  80:Src/sd.c      **** 				HAL_UART_Transmit(&huart3,(uint8_t*) "\r\n", strlen("\r\n"),10);
+ 394              		.loc 1 80 0
+ 395 0220 0A23     		movs	r3, #10
+ 396 0222 0222     		movs	r2, #2
+ 397 0224 2249     		ldr	r1, .L16+124
+ 398 0226 2046     		mov	r0, r4
+ 399 0228 FFF7FEFF 		bl	HAL_UART_Transmit
+ 400              	.LVL48:
+  82:Src/sd.c      **** 				successfull_opening = 1;
+ 401              		.loc 1 82 0
+ 402 022c 0122     		movs	r2, #1
+ 403 022e 154B     		ldr	r3, .L16+80
+ 404 0230 1A60     		str	r2, [r3]
+  84:Src/sd.c      **** 				break;
+ 405              		.loc 1 84 0
+ 406 0232 53E7     		b	.L6
+ 407              	.L17:
+ 408              		.align	2
+ 409              	.L16:
+ 410 0234 00000000 		.word	SDPath
+ 411 0238 00000000 		.word	SDFatFS
+ 412 023c 00000000 		.word	res_mount
+ 413 0240 00000000 		.word	mount_ok
+ 414 0244 00000000 		.word	filename_1
+ 415 0248 00000000 		.word	.LC0
+ 416 024c 00000000 		.word	log_names_f
+ 417 0250 00000000 		.word	res_open
+ 418 0254 00000000 		.word	huart3
+ 419 0258 0C000000 		.word	.LC1
+ 420 025c 00000000 		.word	txt
+ 421 0260 00000000 		.word	log_names
+ 422 0264 20000000 		.word	.LC2
+ 423 0268 00000000 		.word	bytes_read
+ 424 026c 00000000 		.word	filename
+ 425 0270 30000000 		.word	.LC4
+ 426 0274 00000000 		.word	loggingFile
+ 427 0278 00000000 		.word	buffer
+ARM GAS  /tmp/ccosWqnV.s 			page 11
 
 
- 434              	.LVL37:
-  70:Src/sd.c      **** 				sprintf(filename, "Log_%d.txt", i);
- 435              		.loc 1 70 5 view .LVU77
- 436 01e2 2246     		mov	r2, r4
- 437 01e4 3849     		ldr	r1, .L16+120
- 438 01e6 2846     		mov	r0, r5
- 439 01e8 FFF7FEFF 		bl	sprintf
- 440              	.LVL38:
-  72:Src/sd.c      **** 				f_open(&loggingFile, (TCHAR const*)&filename, FA_OPEN_APPEND | FA_OPEN_ALWAYS | FA_READ | FA_WR
- 441              		.loc 1 72 5 view .LVU78
- 442 01ec 284C     		ldr	r4, .L16+64
- 443              	.LVL39:
-  72:Src/sd.c      **** 				f_open(&loggingFile, (TCHAR const*)&filename, FA_OPEN_APPEND | FA_OPEN_ALWAYS | FA_READ | FA_WR
- 444              		.loc 1 72 5 is_stmt 0 view .LVU79
- 445 01ee 3322     		movs	r2, #51
- 446 01f0 2946     		mov	r1, r5
- 447 01f2 2046     		mov	r0, r4
- 448 01f4 FFF7FEFF 		bl	f_open
- 449              	.LVL40:
-  73:Src/sd.c      **** 				f_write(&loggingFile, buffer, strlen(buffer), (void*)&byteswritten);
- 450              		.loc 1 73 5 is_stmt 1 view .LVU80
- 451 01f8 264E     		ldr	r6, .L16+68
- 452 01fa 3046     		mov	r0, r6
- 453 01fc FFF7FEFF 		bl	strlen
- 454              	.LVL41:
- 455 0200 0246     		mov	r2, r0
- 456 0202 3B46     		mov	r3, r7
- 457 0204 3146     		mov	r1, r6
- 458 0206 2046     		mov	r0, r4
- 459 0208 FFF7FEFF 		bl	f_write
- 460              	.LVL42:
-  74:Src/sd.c      **** 				f_close(&loggingFile);
- 461              		.loc 1 74 5 view .LVU81
- 462 020c 2046     		mov	r0, r4
- 463 020e FFF7FEFF 		bl	f_close
- 464              	.LVL43:
-  75:Src/sd.c      **** 				f_open(&loggingFile, (TCHAR const*)&filename, FA_OPEN_APPEND | FA_OPEN_ALWAYS | FA_READ | FA_WR
- 465              		.loc 1 75 5 view .LVU82
- 466 0212 3322     		movs	r2, #51
- 467 0214 2946     		mov	r1, r5
- 468 0216 2046     		mov	r0, r4
- 469 0218 FFF7FEFF 		bl	f_open
- 470              	.LVL44:
-  77:Src/sd.c      **** 				HAL_UART_Transmit(&huart3,(uint8_t*)"\r\ncreated -> ",strlen("\r\ncreated -> "),10);
- 471              		.loc 1 77 5 view .LVU83
- 472 021c 0F4C     		ldr	r4, .L16+12
- 473 021e 0A23     		movs	r3, #10
- 474 0220 0D22     		movs	r2, #13
- 475 0222 2A49     		ldr	r1, .L16+124
- 476 0224 2046     		mov	r0, r4
- 477 0226 FFF7FEFF 		bl	HAL_UART_Transmit
- 478              	.LVL45:
-  78:Src/sd.c      **** 				HAL_UART_Transmit(&huart3,(uint8_t*) filename, strlen(filename), 10);
- 479              		.loc 1 78 5 view .LVU84
-  78:Src/sd.c      **** 				HAL_UART_Transmit(&huart3,(uint8_t*) filename, strlen(filename), 10);
- 480              		.loc 1 78 52 is_stmt 0 view .LVU85
- 481 022a 2846     		mov	r0, r5
-ARM GAS  /tmp/ccFObcB0.s 			page 13
+ 428 027c 00000000 		.word	byteswritten
+ 429 0280 3C000000 		.word	.LC5
+ 430 0284 00000000 		.word	successfull_opening
+ 431 0288 B4000000 		.word	.LC13
+ 432 028c 00000000 		.word	max_files
+ 433 0290 28000000 		.word	.LC3
+ 434 0294 00000000 		.word	pointer
+ 435 0298 58000000 		.word	.LC6
+ 436 029c 64000000 		.word	.LC7
+ 437 02a0 70000000 		.word	.LC8
+ 438 02a4 88000000 		.word	.LC9
+ 439 02a8 94000000 		.word	.LC10
+ 440 02ac A0000000 		.word	.LC11
+ 441 02b0 B0000000 		.word	.LC12
+ 442              	.LBE5:
+ 443              	.LBE6:
+ 444              		.cfi_endproc
+ 445              	.LFE142:
+ 447              		.section	.rodata.init_sd.str1.4,"aMS",%progbits,1
+ 448              		.align	2
+ 449              	.LC0:
+ 450 0000 6E616D65 		.ascii	"name.txt\000"
+ 450      2E747874 
+ 450      00
+ 451 0009 000000   		.space	3
+ 452              	.LC1:
+ 453 000c 6D6F756E 		.ascii	"mounted, opened\015\012\000"
+ 453      7465642C 
+ 453      206F7065 
+ 453      6E65640D 
+ 453      0A00
+ 454 001e 0000     		.space	2
+ 455              	.LC2:
+ 456 0020 25730D0A 		.ascii	"%s\015\012\000"
+ 456      00
+ 457 0025 000000   		.space	3
+ 458              	.LC3:
+ 459 0028 6C6F675F 		.ascii	"log_%d \000"
+ 459      25642000 
+ 460              	.LC4:
+ 461 0030 64656661 		.ascii	"default.txt\000"
+ 461      756C742E 
+ 461      74787400 
+ 462              	.LC5:
+ 463 003c 63726561 		.ascii	"created -> default.txt\015\012\000"
+ 463      74656420 
+ 463      2D3E2064 
+ 463      65666175 
+ 463      6C742E74 
+ 464 0055 000000   		.space	3
+ 465              	.LC6:
+ 466 0058 6C6F675F 		.ascii	"log_0 \011\015\012\000"
+ 466      3020090D 
+ 466      0A00
+ 467 0062 0000     		.space	2
+ 468              	.LC7:
+ 469 0064 4C6F675F 		.ascii	"Log_0.txt\000"
+ARM GAS  /tmp/ccosWqnV.s 			page 12
 
 
- 482 022c FFF7FEFF 		bl	strlen
- 483              	.LVL46:
-  78:Src/sd.c      **** 				HAL_UART_Transmit(&huart3,(uint8_t*) filename, strlen(filename), 10);
- 484              		.loc 1 78 5 view .LVU86
- 485 0230 0A23     		movs	r3, #10
- 486 0232 82B2     		uxth	r2, r0
- 487 0234 2946     		mov	r1, r5
- 488 0236 2046     		mov	r0, r4
- 489 0238 FFF7FEFF 		bl	HAL_UART_Transmit
- 490              	.LVL47:
-  79:Src/sd.c      **** 				HAL_UART_Transmit(&huart3,(uint8_t*) "\r\n", strlen("\r\n"),10);
- 491              		.loc 1 79 5 is_stmt 1 view .LVU87
- 492 023c 0A23     		movs	r3, #10
- 493 023e 0222     		movs	r2, #2
- 494 0240 2349     		ldr	r1, .L16+128
- 495 0242 2046     		mov	r0, r4
- 496 0244 FFF7FEFF 		bl	HAL_UART_Transmit
- 497              	.LVL48:
-  81:Src/sd.c      **** 				successfull_opening = 1;
- 498              		.loc 1 81 5 view .LVU88
-  81:Src/sd.c      **** 				successfull_opening = 1;
- 499              		.loc 1 81 25 is_stmt 0 view .LVU89
- 500 0248 154B     		ldr	r3, .L16+80
- 501 024a 0122     		movs	r2, #1
- 502 024c 1A60     		str	r2, [r3]
-  83:Src/sd.c      **** 				break;
- 503              		.loc 1 83 5 is_stmt 1 view .LVU90
- 504 024e 53E7     		b	.L6
- 505              	.L17:
- 506              		.align	2
- 507              	.L16:
- 508 0250 00000000 		.word	res_mount
- 509 0254 00000000 		.word	mount_ok
- 510 0258 00000000 		.word	.LC0
- 511 025c 00000000 		.word	huart3
- 512 0260 00000000 		.word	SDPath
- 513 0264 00000000 		.word	SDFatFS
- 514 0268 00000000 		.word	filename_1
- 515 026c 14000000 		.word	.LC1
- 516 0270 00000000 		.word	log_names_f
- 517 0274 00000000 		.word	res_open
- 518 0278 00000000 		.word	bytes_read
- 519 027c 20000000 		.word	.LC2
- 520 0280 00000000 		.word	txt
- 521 0284 34000000 		.word	.LC3
- 522 0288 00000000 		.word	filename
- 523 028c 44000000 		.word	.LC5
- 524 0290 00000000 		.word	loggingFile
- 525 0294 00000000 		.word	buffer
- 526 0298 00000000 		.word	byteswritten
- 527 029c 50000000 		.word	.LC6
- 528 02a0 00000000 		.word	successfull_opening
- 529 02a4 C8000000 		.word	.LC14
- 530 02a8 00000000 		.word	max_files
- 531 02ac 3C000000 		.word	.LC4
- 532 02b0 00000000 		.word	log_names
- 533 02b4 00000000 		.word	pointer
-ARM GAS  /tmp/ccFObcB0.s 			page 14
+ 469      302E7478 
+ 469      7400
+ 470 006e 0000     		.space	2
+ 471              	.LC8:
+ 472 0070 0D0A6372 		.ascii	"\015\012created -> Log_0\015\012\000"
+ 472      65617465 
+ 472      64202D3E 
+ 472      204C6F67 
+ 472      5F300D0A 
+ 473 0085 000000   		.space	3
+ 474              	.LC9:
+ 475 0088 6C6F675F 		.ascii	"log_%d \011\015\012\000"
+ 475      25642009 
+ 475      0D0A00
+ 476 0093 00       		.space	1
+ 477              	.LC10:
+ 478 0094 4C6F675F 		.ascii	"Log_%d.txt\000"
+ 478      25642E74 
+ 478      787400
+ 479 009f 00       		.space	1
+ 480              	.LC11:
+ 481 00a0 0D0A6372 		.ascii	"\015\012created -> \000"
+ 481      65617465 
+ 481      64202D3E 
+ 481      2000
+ 482 00ae 0000     		.space	2
+ 483              	.LC12:
+ 484 00b0 0D0A00   		.ascii	"\015\012\000"
+ 485 00b3 00       		.space	1
+ 486              	.LC13:
+ 487 00b4 66696C65 		.ascii	"files closed\015\012\000"
+ 487      7320636C 
+ 487      6F736564 
+ 487      0D0A00
+ 488              		.text
+ 489              	.Letext0:
+ 490              		.file 2 "Drivers/CMSIS/Device/ST/STM32F7xx/Include/stm32f767xx.h"
+ 491              		.file 3 "/usr/include/newlib/machine/_default_types.h"
+ 492              		.file 4 "/usr/include/newlib/sys/_stdint.h"
+ 493              		.file 5 "Drivers/CMSIS/Include/core_cm7.h"
+ 494              		.file 6 "Drivers/CMSIS/Device/ST/STM32F7xx/Include/system_stm32f7xx.h"
+ 495              		.file 7 "Drivers/CMSIS/Device/ST/STM32F7xx/Include/stm32f7xx.h"
+ 496              		.file 8 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_def.h"
+ 497              		.file 9 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_dma.h"
+ 498              		.file 10 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_can.h"
+ 499              		.file 11 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart.h"
+ 500              		.file 12 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal.h"
+ 501              		.file 13 "Inc/can.h"
+ 502              		.file 14 "Middlewares/Third_Party/FatFs/src/integer.h"
+ 503              		.file 15 "/usr/include/newlib/sys/lock.h"
+ 504              		.file 16 "/usr/include/newlib/sys/_types.h"
+ 505              		.file 17 "/usr/lib/gcc/arm-none-eabi/6.3.1/include/stddef.h"
+ 506              		.file 18 "/usr/include/newlib/sys/reent.h"
+ 507              		.file 19 "/usr/include/newlib/stdlib.h"
+ 508              		.file 20 "Middlewares/Third_Party/FatFs/src/ff.h"
+ 509              		.file 21 "Middlewares/Third_Party/FatFs/src/diskio.h"
+ 510              		.file 22 "Middlewares/Third_Party/FatFs/src/ff_gen_drv.h"
+ARM GAS  /tmp/ccosWqnV.s 			page 13
 
 
- 534 02b8 6C000000 		.word	.LC7
- 535 02bc 78000000 		.word	.LC8
- 536 02c0 84000000 		.word	.LC9
- 537 02c4 9C000000 		.word	.LC10
- 538 02c8 A8000000 		.word	.LC11
- 539 02cc B4000000 		.word	.LC12
- 540 02d0 C4000000 		.word	.LC13
- 541              	.LBE7:
- 542              	.LBE8:
- 543              	.LBE9:
- 544              		.cfi_endproc
- 545              	.LFE141:
- 547              		.text
- 548              	.Letext0:
- 549              		.file 2 "Drivers/CMSIS/Device/ST/STM32F7xx/Include/stm32f767xx.h"
- 550              		.file 3 "/usr/arm-none-eabi/include/machine/_default_types.h"
- 551              		.file 4 "/usr/arm-none-eabi/include/sys/_stdint.h"
- 552              		.file 5 "Drivers/CMSIS/Include/core_cm7.h"
- 553              		.file 6 "Drivers/CMSIS/Device/ST/STM32F7xx/Include/system_stm32f7xx.h"
- 554              		.file 7 "Drivers/CMSIS/Device/ST/STM32F7xx/Include/stm32f7xx.h"
- 555              		.file 8 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_def.h"
- 556              		.file 9 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_dma.h"
- 557              		.file 10 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_can.h"
- 558              		.file 11 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart.h"
- 559              		.file 12 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal.h"
- 560              		.file 13 "Inc/can.h"
- 561              		.file 14 "Inc/id.h"
- 562              		.file 15 "Middlewares/Third_Party/FatFs/src/integer.h"
- 563              		.file 16 "/usr/arm-none-eabi/include/sys/lock.h"
- 564              		.file 17 "/usr/arm-none-eabi/include/sys/_types.h"
- 565              		.file 18 "/usr/lib/gcc/arm-none-eabi/9.2.0/include/stddef.h"
- 566              		.file 19 "/usr/arm-none-eabi/include/sys/reent.h"
- 567              		.file 20 "/usr/arm-none-eabi/include/stdlib.h"
- 568              		.file 21 "Middlewares/Third_Party/FatFs/src/ff.h"
- 569              		.file 22 "Middlewares/Third_Party/FatFs/src/diskio.h"
- 570              		.file 23 "Middlewares/Third_Party/FatFs/src/ff_gen_drv.h"
- 571              		.file 24 "Inc/sd_diskio.h"
- 572              		.file 25 "Inc/fatfs.h"
- 573              		.file 26 "Inc/global_variables.h"
- 574              		.file 27 "<built-in>"
-ARM GAS  /tmp/ccFObcB0.s 			page 15
+ 511              		.file 23 "Inc/sd_diskio.h"
+ 512              		.file 24 "Inc/fatfs.h"
+ 513              		.file 25 "Inc/global_variables.h"
+ 514              		.file 26 "/usr/include/newlib/string.h"
+ 515              		.file 27 "/usr/include/newlib/stdio.h"
+ARM GAS  /tmp/ccosWqnV.s 			page 14
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 sd.c
-     /tmp/ccFObcB0.s:17     .rodata.init_sd.str1.4:0000000000000000 $d
-     /tmp/ccFObcB0.s:63     .text.init_sd:0000000000000000 $t
-     /tmp/ccFObcB0.s:71     .text.init_sd:0000000000000000 init_sd
-     /tmp/ccFObcB0.s:508    .text.init_sd:0000000000000250 $d
+     /tmp/ccosWqnV.s:17     .text.init_sd:0000000000000000 $t
+     /tmp/ccosWqnV.s:24     .text.init_sd:0000000000000000 init_sd
+     /tmp/ccosWqnV.s:410    .text.init_sd:0000000000000234 $d
+     /tmp/ccosWqnV.s:448    .rodata.init_sd.str1.4:0000000000000000 $d
+                     .debug_frame:0000000000000010 $d
 
 UNDEFINED SYMBOLS
-HAL_UART_Transmit
 f_mount
 f_open
-f_read
+HAL_UART_Transmit
 sprintf
 strlen
 f_close
+f_read
 f_write
 strstr
-res_mount
-mount_ok
-huart3
 SDPath
 SDFatFS
+res_mount
+mount_ok
 filename_1
 log_names_f
 res_open
-bytes_read
+huart3
 txt
+log_names
+bytes_read
 filename
 loggingFile
 buffer
 byteswritten
 successfull_opening
 max_files
-log_names
 pointer
