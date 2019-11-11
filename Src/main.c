@@ -57,6 +57,8 @@ int direction = SET;
 uint32_t cp;
 double resolution = 0.000005;
 double mult_fact = 3.9303482587;
+double mult_fact2 = 3.8778125;
+double measurment_per = 0.1;
 double enc_speed = 0;
 double wheel_speed = 0;
 double wheel_speed2 = 0;
@@ -418,19 +420,19 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
 		// wheel circumference = 3.1415926535 * 0.395 = 1.2409290981325
 		// speed multiplier factor = 3.9303482587064676616
 		// second mult_factor = 1.2409/0.32 = 3.8778125
-		// encoder speed = Resolution*cp/1s
+		// encoder speed = Resolution*cp/0.1s
 		// wheel speed = encoder speed * sp_mult
 
 		if(direction){
-			enc_speed = resolution*cp*3.6;
+			enc_speed = resolution*cp*3.60/measurment_per;
 			wheel_speed = enc_speed*mult_fact*3.6;
-			wheel_speed2 = resolution*cp/3.8778125*3.6;
+			wheel_speed2 = resolution*cp/mult_fact2*3.6/measurment_per;
 		}
 		else
 		{
-			enc_speed = resolution*cp*3.6*-1;
+			enc_speed = resolution*cp*3.6/measurment_per*-1;
 			wheel_speed = enc_speed*mult_fact*3.6;
-			wheel_speed2 = resolution*cp/3.8778125*3.6*-1;
+			wheel_speed2 = resolution*cp/mult_fact2*3.6/measurment_per*-1;
 		}
 
 	}
