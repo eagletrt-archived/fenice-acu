@@ -420,7 +420,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
 
 		// Resolution = 5um = 0.000005 m
 		// cpr = 64'000
-		// encoder diameter = 100.5 +- 0.1 mm = 0.1005 m
+		// encoder diameter = 100.5 mm = 0.1005 m
 		// wheel diameter = 0.395 m
 		// encoder circumference = 3.1415926535 * 0.1005 = 0.31573006167675
 		// wheel circumference = 3.1415926535 * 0.395 = 1.2409290981325

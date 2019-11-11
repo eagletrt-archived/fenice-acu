@@ -6,16 +6,25 @@
     - **Minimum edge separation** => 0.12us (8MHz)  
 - **MR100F**  
     - **Diameter** => 100.5 +- 0.1 mm  
-    - **Circumference** => `3.1415926535 * 0.1005 = 0.31573006167675m`   
+    - **Circumference** => `3.1415926535 * 0.1005 = 0.31573006167675m` 
+    - **Poles** => 160  
     - **cpr** => 64000  
     - **ppr** => 16000   
-    - **Circumference with datasheeté** => `64000*0.000005 = 0.32m`  
+    - **Circumference with datasheet** => `64000*0.000005 = 0.32m`  
 - **Wheel**  
     - **Diameter** => 0.395 m
     - **Circumference** => `3.1415926535 * 0.395 = 1.2409290981325m`  
 - **Speed**  
     - **Speed1:** is the speed calculated with the real circumference of the encoder `mult fact = 3.9303482587064676616`  
     - **Speed2:** is the speed caluclated with the resolution and the cpr of the encoder `mult fact = 3.8778125`  
+
+## How it works
+The sensor is made from two components: 
+- **The ring**: it is a circle made of magnetinc poles. It is made in a such  way, that by rotating it, you can read 2 signals _sin_ and _cos_ with an offset of 90°.
+- **The Reader sensor**: it reads the magnetic signal from the ring and transform the signal from analogic to digital. Thanks to interpolation, it can give more resolution and be more prcise during the conversion. The digital signal can be distinguish in ***A*** and ***B*** and thanks to the offset of 90°, reading the signals you can determine both, direction and speed.
+> **A** -011001100110
+> **B** -001100110011
+
 
 ## Usage
 ### Inputs
