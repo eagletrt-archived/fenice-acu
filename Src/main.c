@@ -118,8 +118,9 @@ int main(void)
   // Disabling the GPIO interrupts in order to activate them when the period of the first timer passes.
   HAL_NVIC_DisableIRQ(EXTI4_IRQn);
   HAL_NVIC_DisableIRQ(EXTI9_5_IRQn);
+  __HAL_TIM_SET_COUNTER(&htim3,1);
   HAL_TIM_Base_Start(&htim3);
-  //HAL_TIM_Base_Start_IT(&htim3);
+  HAL_TIM_Base_Start_IT(&htim3);
 
   //HAL_DBGMCU_EnableDBGStopMode();
   //
@@ -132,6 +133,7 @@ int main(void)
   char message2[256] = "";
   char mes[200] = "";
   int val = -1;
+  int val2 = -1;
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -140,15 +142,13 @@ int main(void)
   {
     /* USER CODE END WHILE */
 
-//	  sprintf(message, "\nA cont up => %d --- cont down => %d B cont up => %d --- cont down => %d ", polA_cont_up, polA_cont_down, polB_cont_up, polB_cont_down);
-//	  print(&huart2, message);
-
 	  sprintf(message, "\r\nCP = %u -- Encoder = %f", cp, enc_speed);
 	  sprintf(message2, "\nSpeed1 = %f -- Speed2 = %f", wheel_speed, wheel_speed2);
 	  print(&huart2, message);
 	  print(&huart2, message2);
 	  val = __HAL_TIM_GET_COUNTER(&htim3);
-	  sprintf(mes,"\n TIM3 = %d",val);
+	  val2 = __HAL_TIM_GET_COUNTER(&htim4);
+	  sprintf(mes,"\n TIM3 = %d -- TIM4 = %d",val,val2);
 	  print(&huart2, mes);
 
 	  HAL_Delay(500);
@@ -240,8 +240,7 @@ static void MX_TIM3_Init(void)
     Error_Handler();
   }
   /* USER CODE BEGIN TIM3_Init 2 */
-  HAL_NVIC_SetPriority(TIM3_IRQn, 0, 0);
-  HAL_NVIC_EnableIRQ(TIM3_IRQn);
+
   /* USER CODE END TIM3_Init 2 */
 
 }
@@ -386,6 +385,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
 		polB_cont_up = 0;
 		polB_cont_down = 0;
 		HAL_TIM_Base_Start(&htim4);
+		HAL_TIM_Base_Start_IT(&htim4);
 		HAL_NVIC_EnableIRQ(EXTI4_IRQn);
 		HAL_NVIC_EnableIRQ(EXTI9_5_IRQn);
 		HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_5);
@@ -399,6 +399,16 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
 		HAL_NVIC_DisableIRQ(EXTI4_IRQn);
 		HAL_NVIC_DisableIRQ(EXTI9_5_IRQn);
 		HAL_TIM_Base_Stop(&htim4);
+		// The next line it is not necessary but can be a good practice
+		__HAL_TIM_SET_COUNTER(&htim4,0);
+
+//		int val,val2 = -1;
+//		char mes[250] = "";
+//
+//		val = __HAL_TIM_GET_COUNTER(&htim3);
+//		val2 = __HAL_TIM_GET_COUNTER(&htim4);
+//		sprintf(mes,"\n TIM3 = %d -- TIM4 = %d",cp,val2);
+//		print(&huart2, mes);
 
 		// Resolution = 5um = 0.000005 m
 		// cpr = 64'000
@@ -419,13 +429,9 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
 		else
 		{
 			enc_speed = resolution*cp*3.6*-1;
-			wheel_speed = enc_speed*mult_fact*3.6*-1;
+			wheel_speed = enc_speed*mult_fact*3.6;
 			wheel_speed2 = resolution*cp/3.8778125*3.6*-1;
 		}
-
-
-		// Restart the waiting timer (To check if starts alone)
-		HAL_TIM_Base_Start(&htim3);
 
 	}
 }
