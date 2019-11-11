@@ -145,14 +145,13 @@ int main(void)
     /* USER CODE END WHILE */
 
 	  sprintf(message, "\r\nCP = %u -- Encoder = %f", cp, enc_speed);
-	  sprintf(message2, "\nSpeed1 = %f -- Speed2 = %f", wheel_speed, wheel_speed2);
+	  sprintf(message2, "\r\nSpeed1 = %f -- Speed2 = %f", wheel_speed, wheel_speed2);
 	  print(&huart2, message);
 	  print(&huart2, message2);
 	  val = __HAL_TIM_GET_COUNTER(&htim3);
 	  val2 = __HAL_TIM_GET_COUNTER(&htim4);
-	  sprintf(mes,"\n TIM3 = %d -- TIM4 = %d",val,val2);
+	  sprintf(mes,"\r\n TIM3 = %d -- TIM4 = %d",val,val2);
 	  print(&huart2, mes);
-
 	  HAL_Delay(500);
     /* USER CODE BEGIN 3 */
   }
@@ -404,12 +403,19 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
 		// The next line it is not necessary but can be a good practice
 		__HAL_TIM_SET_COUNTER(&htim4,0);
 
-//		int val,val2 = -1;
-//		char mes[250] = "";
-//
+		char message[256] = "";
+		char message2[256] = "";
+		char mes[200] = "";
+		int val = -1;
+		int val2 = -1;
+
+//		sprintf(message, "\r\nCP = %u -- Encoder = %f", cp, enc_speed);
+//		sprintf(message2, "\r\nSpeed1 = %f -- Speed2 = %f", wheel_speed, wheel_speed2);
+//		print(&huart2, message);
+//		print(&huart2, message2);
 //		val = __HAL_TIM_GET_COUNTER(&htim3);
 //		val2 = __HAL_TIM_GET_COUNTER(&htim4);
-//		sprintf(mes,"\n TIM3 = %d -- TIM4 = %d",cp,val2);
+//		sprintf(mes,"\r\n TIM3 = %d -- TIM4 = %d",val,val2);
 //		print(&huart2, mes);
 
 		// Resolution = 5um = 0.000005 m
@@ -426,13 +432,13 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
 		if(direction){
 			enc_speed = resolution*cp*3.60/measurment_per;
 			wheel_speed = enc_speed*mult_fact*3.6;
-			wheel_speed2 = resolution*cp/mult_fact2*3.6/measurment_per;
+			wheel_speed2 = resolution*cp*mult_fact2*3.6/measurment_per;
 		}
 		else
 		{
 			enc_speed = resolution*cp*3.6/measurment_per*-1;
 			wheel_speed = enc_speed*mult_fact*3.6;
-			wheel_speed2 = resolution*cp/mult_fact2*3.6/measurment_per*-1;
+			wheel_speed2 = resolution*cp*mult_fact2*3.6/measurment_per*-1;
 		}
 
 	}
