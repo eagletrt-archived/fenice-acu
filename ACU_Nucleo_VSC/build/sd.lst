@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccosWqnV.s 			page 1
+ARM GAS  /tmp/ccT5Btif.s 			page 1
 
 
    1              		.cpu cortex-m7
@@ -58,7 +58,7 @@ ARM GAS  /tmp/ccosWqnV.s 			page 1
   49 0010 1870     		strb	r0, [r3]
    8:Src/sd.c      **** 
    9:Src/sd.c      **** 	if (res_mount == FR_OK) {
-ARM GAS  /tmp/ccosWqnV.s 			page 2
+ARM GAS  /tmp/ccT5Btif.s 			page 2
 
 
   50              		.loc 1 9 0
@@ -118,7 +118,7 @@ ARM GAS  /tmp/ccosWqnV.s 			page 1
   62:Src/sd.c      **** 
   63:Src/sd.c      **** 				break;
   64:Src/sd.c      **** 			}
-ARM GAS  /tmp/ccosWqnV.s 			page 3
+ARM GAS  /tmp/ccT5Btif.s 			page 3
 
 
   65:Src/sd.c      **** 			if(pointer == NULL){
@@ -178,7 +178,7 @@ ARM GAS  /tmp/ccosWqnV.s 			page 1
   11:Src/sd.c      **** 		res_open = f_open(&log_names_f, (TCHAR const*)&filename_1, FA_OPEN_ALWAYS | FA_READ ); //open "na
   76              		.loc 1 11 0
   77 002c 1122     		movs	r2, #17
-ARM GAS  /tmp/ccosWqnV.s 			page 4
+ARM GAS  /tmp/ccT5Btif.s 			page 4
 
 
   78 002e 2146     		mov	r1, r4
@@ -238,7 +238,7 @@ ARM GAS  /tmp/ccosWqnV.s 			page 1
  125 007a 0024     		movs	r4, #0
  126 007c 3BE0     		b	.L4
  127              	.LVL8:
-ARM GAS  /tmp/ccosWqnV.s 			page 5
+ARM GAS  /tmp/ccT5Btif.s 			page 5
 
 
  128              	.L13:
@@ -298,7 +298,7 @@ ARM GAS  /tmp/ccosWqnV.s 			page 1
  176              	.LVL16:
   38:Src/sd.c      **** 				HAL_UART_Transmit(&huart3,(uint8_t*)"created -> default.txt\r\n",strlen("created -> default.txt
  177              		.loc 1 38 0
-ARM GAS  /tmp/ccosWqnV.s 			page 6
+ARM GAS  /tmp/ccT5Btif.s 			page 6
 
 
  178 00ca 0A23     		movs	r3, #10
@@ -358,7 +358,7 @@ ARM GAS  /tmp/ccosWqnV.s 			page 1
   28:Src/sd.c      **** 			pointer = strstr(log_names, name);
  225              		.loc 1 28 0
  226 0108 6946     		mov	r1, sp
-ARM GAS  /tmp/ccosWqnV.s 			page 7
+ARM GAS  /tmp/ccT5Btif.s 			page 7
 
 
  227 010a 5548     		ldr	r0, .L16+44
@@ -418,7 +418,7 @@ ARM GAS  /tmp/ccosWqnV.s 			page 1
  274 0158 2381     		strh	r3, [r4, #8]	@ unaligned
   54:Src/sd.c      **** 				f_open(&loggingFile, (TCHAR const*)&filename, FA_OPEN_APPEND | FA_OPEN_ALWAYS | FA_READ | FA_WR
  275              		.loc 1 54 0
-ARM GAS  /tmp/ccosWqnV.s 			page 8
+ARM GAS  /tmp/ccT5Btif.s 			page 8
 
 
  276 015a 464D     		ldr	r5, .L16+64
@@ -478,7 +478,7 @@ ARM GAS  /tmp/ccosWqnV.s 			page 1
  323 01a6 FFF7FEFF 		bl	sprintf
  324              	.LVL34:
   68:Src/sd.c      **** 				f_write(&log_names_f, filename, strlen(filename), (void*)&byteswritten);
-ARM GAS  /tmp/ccosWqnV.s 			page 9
+ARM GAS  /tmp/ccT5Btif.s 			page 9
 
 
  325              		.loc 1 68 0
@@ -538,7 +538,7 @@ ARM GAS  /tmp/ccosWqnV.s 			page 1
  373 01fa 2046     		mov	r0, r4
  374 01fc FFF7FEFF 		bl	f_open
  375              	.LVL44:
-ARM GAS  /tmp/ccosWqnV.s 			page 10
+ARM GAS  /tmp/ccT5Btif.s 			page 10
 
 
   78:Src/sd.c      **** 				HAL_UART_Transmit(&huart3,(uint8_t*)"\r\ncreated -> ",strlen("\r\ncreated -> "),10);
@@ -598,7 +598,7 @@ ARM GAS  /tmp/ccosWqnV.s 			page 1
  425 0270 30000000 		.word	.LC4
  426 0274 00000000 		.word	loggingFile
  427 0278 00000000 		.word	buffer
-ARM GAS  /tmp/ccosWqnV.s 			page 11
+ARM GAS  /tmp/ccT5Btif.s 			page 11
 
 
  428 027c 00000000 		.word	byteswritten
@@ -658,7 +658,7 @@ ARM GAS  /tmp/ccosWqnV.s 			page 1
  467 0062 0000     		.space	2
  468              	.LC7:
  469 0064 4C6F675F 		.ascii	"Log_0.txt\000"
-ARM GAS  /tmp/ccosWqnV.s 			page 12
+ARM GAS  /tmp/ccT5Btif.s 			page 12
 
 
  469      302E7478 
@@ -718,23 +718,24 @@ ARM GAS  /tmp/ccosWqnV.s 			page 1
  508              		.file 20 "Middlewares/Third_Party/FatFs/src/ff.h"
  509              		.file 21 "Middlewares/Third_Party/FatFs/src/diskio.h"
  510              		.file 22 "Middlewares/Third_Party/FatFs/src/ff_gen_drv.h"
-ARM GAS  /tmp/ccosWqnV.s 			page 13
+ARM GAS  /tmp/ccT5Btif.s 			page 13
 
 
  511              		.file 23 "Inc/sd_diskio.h"
  512              		.file 24 "Inc/fatfs.h"
- 513              		.file 25 "Inc/global_variables.h"
- 514              		.file 26 "/usr/include/newlib/string.h"
- 515              		.file 27 "/usr/include/newlib/stdio.h"
-ARM GAS  /tmp/ccosWqnV.s 			page 14
+ 513              		.file 25 "Inc/pedals.h"
+ 514              		.file 26 "Inc/global_variables.h"
+ 515              		.file 27 "/usr/include/newlib/string.h"
+ 516              		.file 28 "/usr/include/newlib/stdio.h"
+ARM GAS  /tmp/ccT5Btif.s 			page 14
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 sd.c
-     /tmp/ccosWqnV.s:17     .text.init_sd:0000000000000000 $t
-     /tmp/ccosWqnV.s:24     .text.init_sd:0000000000000000 init_sd
-     /tmp/ccosWqnV.s:410    .text.init_sd:0000000000000234 $d
-     /tmp/ccosWqnV.s:448    .rodata.init_sd.str1.4:0000000000000000 $d
+     /tmp/ccT5Btif.s:17     .text.init_sd:0000000000000000 $t
+     /tmp/ccT5Btif.s:24     .text.init_sd:0000000000000000 init_sd
+     /tmp/ccT5Btif.s:410    .text.init_sd:0000000000000234 $d
+     /tmp/ccT5Btif.s:448    .rodata.init_sd.str1.4:0000000000000000 $d
                      .debug_frame:0000000000000010 $d
 
 UNDEFINED SYMBOLS

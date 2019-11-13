@@ -10,5 +10,6 @@
 	void run();
 
 	void debug_operations();
+	void atc_pot_operations();
 	void imu_operations();
 #endif

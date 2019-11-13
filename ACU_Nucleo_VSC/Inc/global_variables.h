@@ -5,6 +5,7 @@
 #include "can.h"
 #include "stm32f7xx_hal.h"
 #include "fatfs.h"
+#include "pedals.h"
 
 #define MAX_DEBUG_RX_L 20
 #define MAX_DEBUG_TX_L 500
@@ -15,6 +16,7 @@ extern uint16_t count_ms, count_dec, count_sec, count_min, count_hour;
 extern uint16_t count_inverter;
 extern uint16_t count_accumulator;
 extern uint16_t count_imu;
+extern uint16_t count_atc;
 
 extern const char code_version[];
 
@@ -24,6 +26,7 @@ extern uint8_t debug_rx_count, debug_msg_arrived;
 extern UART_HandleTypeDef huart3;
 
 extern uint8_t imu_connected, its0_connected, its1_connected, its2_connected, its3_connected;
+extern uint8_t atc_connected;
 
 extern FIL loggingFile;
 extern FIL log_names_f;
@@ -49,6 +52,9 @@ extern FRESULT res_open;
 extern FRESULT res_mount;
 
 extern int successfull_opening;
+
+extern PotStc accel;
+extern PotStc brake;
 
 //-----------------------------------------//
 //------------------ ID -------------------//
@@ -90,6 +96,9 @@ extern int successfull_opening;
 //from BMS
 #define ID_BMS_HV 0xAA
 #define ID_BMS_LV 0xFF
+
+//from ATC (Analog To CAN)
+#define ID_ATC_POT 0x34
 
 
 

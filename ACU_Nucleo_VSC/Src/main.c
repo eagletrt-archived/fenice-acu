@@ -449,12 +449,19 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
 			//--- put your counter here (count each 0,1 sec) ---//
 			count_inverter++;
 			count_imu++;
-			if(count_inverter == 10){
-				//TODO: implementare funzione
+            count_atc++;
+			if(count_inverter == 10){ //--- check if inverter is connected ---//
+				//TODO: to implement error functions
 			}else if(count_inverter == 11){
 				count_inverter = 10;
 			}
-			if(count_imu == 10){
+            if(count_atc == 10){ //--- check if Analog To Can is connected ---//
+                //TODO: to implement error functions
+                atc_connected = 0;
+            }else if(count_atc == 11){
+                count_atc = 10;
+            }
+			if(count_imu == 10){ //--- check if imu is connected ---//
 				// imu non presente //
 				imu_connected = 0; //imu not connected
 				HAL_UART_Transmit(&huart3, (uint8_t*)"IMU non presente\r\n", strlen("IMU non presente\r\n"), 10);

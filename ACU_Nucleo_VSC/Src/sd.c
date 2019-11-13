@@ -87,6 +87,8 @@ void init_sd(){
 
 		mount_ok = 1;
 		HAL_UART_Transmit(&huart3,(uint8_t*)"files closed\r\n",strlen("files closed\r\n"),10);
+
+		
 	}else {
 		mount_ok = 0;
 	}

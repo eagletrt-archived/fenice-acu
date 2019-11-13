@@ -36,7 +36,7 @@ build/state.o: Src/state.c Inc/state.h Inc/can.h \
  Inc/bsp_driver_sd.h Inc/fatfs_platform.h \
  Middlewares/Third_Party/FatFs/src/ff_gen_drv.h \
  Middlewares/Third_Party/FatFs/src/diskio.h \
- Middlewares/Third_Party/FatFs/src/ff.h Inc/sd_diskio.h
+ Middlewares/Third_Party/FatFs/src/ff.h Inc/sd_diskio.h Inc/pedals.h
 
 Inc/state.h:
 
@@ -133,3 +133,5 @@ Middlewares/Third_Party/FatFs/src/diskio.h:
 Middlewares/Third_Party/FatFs/src/ff.h:
 
 Inc/sd_diskio.h:
+
+Inc/pedals.h:

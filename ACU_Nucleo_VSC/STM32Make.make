@@ -67,6 +67,7 @@ Src/fatfs.c \
 Src/fatfs_platform.c \
 Src/global_variables.c \
 Src/main.c \
+Src/pedals.c \
 Src/sd.c \
 Src/sd_diskio.c \
 Src/state.c \

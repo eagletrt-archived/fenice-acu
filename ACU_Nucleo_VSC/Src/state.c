@@ -16,8 +16,14 @@ void init(){
 		debug_operations();
 	}
 	if(fifoRxDataCAN_pop(&can1)){
-		if(can1.rx_id == ID_imu_acceleration || can1.rx_id == ID_imu_angular_rate){
+		switch (can1.rx_id){
+		case ID_imu_acceleration:
+		case ID_imu_angular_rate:
 			imu_operations();
+			break;
+		
+		default:
+			break;
 		}
 	}
 	if(fifoRxDataCAN_pop(&can3)){
@@ -65,6 +71,9 @@ void idle(){
 					current_state = STATE_SETUP;
 				}
 				break;
+			case ID_ATC_POT:
+				atc_pot_operations();
+				break;
 			default:
 				break;
 		}
@@ -99,6 +108,9 @@ void setup(){
 					can1.tx_size = 1;
 					CAN_Send(&can1, normalPriority);
 				}
+			case ID_ATC_POT:
+				atc_pot_operations();
+				break;
 			default:
 				break;
 		}
@@ -117,6 +129,9 @@ void run(){
 				if(can1.dataRx[0] == 6){ //----- change state to setup -----//
 					current_state = STATE_SETUP;
 				}
+				break;
+			case ID_ATC_POT:
+				atc_pot_operations();
 				break;
 			default:
 				break;
@@ -214,5 +229,21 @@ void imu_operations(){
 	}
 	count_imu = 0;
 }
+void atc_pot_operations(){
+	atc_connected = 1;
+	count_atc = 0;
+	accel.pot1_val = can1.dataRx[0];
+	accel.pot2_val = can1.dataRx[1];
+	brake.pot1_val = can1.dataRx[2];
+	brake.pot2_val = can1.dataRx[3];
+	if(check_accel_pot()){
+		accel.pot1_val = 0;
+		accel.pot2_val = 0;
+	}
+	if(check_brake_pot()){
+		brake.pot1_val = 0;
+		brake.pot2_val = 0;
+	}
 
+}
 
