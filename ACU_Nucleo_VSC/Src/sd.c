@@ -134,19 +134,19 @@ void init_sd(){
 			for(int i=0; i<5 ; i++){
 				val_pot[i] = pot_values[i];
 			}
-			accel.max_val = atoi(val_pot);
+			//accel.max_val = atoi(val_pot);
 			for(int i=0 ; i<5 ; i++){
 				val_pot[i] = pot_values[i+7];
 			}
-			accel.min_val = atoi(val_pot);
+			//accel.min_val = atoi(val_pot);
 			for(int i=0 ; i<5 ; i++){
 				val_pot[i] = pot_values[i+14];
 			}
-			brake.max_val = atoi(pot_values);
+			//brake.max_val = atoi(pot_values);
 			for(int i=0 ; i<5 ; i++){
 				val_pot[i] = pot_values[i+21];
 			}
-			brake.min_val = atoi(pot_values);
+			//brake.min_val = atoi(pot_values);
 			
 			pot_values_loaded = 1;
 

@@ -4,10 +4,16 @@
 #include "stm32f7xx_hal.h"
 
 typedef struct{
-    int pot1_val;
-    int pot2_val;
-    int max_val;
-    int min_val;
+    uint16_t pot1_val;
+    uint8_t pot1_val_100;
+    uint16_t pot2_val;
+    uint8_t pot2_val_100;
+    uint16_t pot1_max_val;
+    uint16_t pot2_max_val;
+    uint16_t pot1_range;
+    uint16_t pot1_min_val;
+    uint16_t pot2_min_val;
+    uint16_t pot2_range;
 }PotStc;
 
 uint8_t accel_implausibility_check();

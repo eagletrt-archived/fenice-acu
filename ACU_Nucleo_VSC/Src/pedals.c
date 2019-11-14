@@ -8,7 +8,7 @@ uint8_t accel_implausibility_check_count = 0;
 uint8_t brake_implausibility_check_count = 0;
 
 uint8_t accel_implausibility_check(){
-    if(abs(accel.pot1_val - accel.pot2_val) < 90){
+    if(abs(accel.pot1_val_100 - accel.pot2_val_100) < 90){
         //error
         if(accel_implausibility_check_count_flag != 2)accel_implausibility_check_count_flag = 1; //if aiccf = 2 -> just passed 50ms
         return 0; //return error
@@ -21,9 +21,4 @@ uint8_t accel_implausibility_check(){
 }
 uint8_t brake_implausibility_check(){
     return 0;
-    if(abs(brake.pot1_val - brake.pot2_val) < 90){
-
-    }else{
-
-    }
 }

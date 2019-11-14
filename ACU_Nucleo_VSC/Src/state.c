@@ -221,13 +221,35 @@ void imu_operations(){
 void atc_pot_operations(){
 	atc_connected = 1;
 	count_atc = 0;
-	accel.pot1_val = can1.dataRx[0];
-	accel.pot2_val = can1.dataRx[1];
-	brake.pot1_val = can1.dataRx[2];
-	brake.pot2_val = can1.dataRx[3];
+	accel.pot1_val = can1.dataRx[0]*256 + can1.dataRx[1];
+	accel.pot2_val = can1.dataRx[2]*256 + can1.dataRx[3];
+	brake.pot1_val = can1.dataRx[4]*256 + can1.dataRx[5];
+	brake.pot2_val = can1.dataRx[6]*256 + can1.dataRx[7];
+
+	//val100 = (val - pot_min_val)/(pot_max_val - pot_min_val)*100
+	if(accel.pot1_range!= 0 && accel.pot2_range != 0){
+		accel.pot1_val_100 = (accel.pot1_val - accel.pot1_min_val)/(accel.pot1_range)*100;
+		accel.pot2_val_100 = (accel.pot2_val - accel.pot2_min_val)/(accel.pot2_range)*100;
+	}
+	if(brake.pot1_range != 0 && brake.pot2_range != 0){
+		brake.pot1_val_100 = (brake.pot1_val - brake.pot1_min_val)/(brake.pot1_range)*100;
+		brake.pot2_val_100 = (brake.pot2_val - brake.pot2_min_val)/(brake.pot2_range)*100;
+	}
+
 	if(accel_implausibility_check()){
 		accel.pot1_val = 0;
 		accel.pot2_val = 0;
+		accel.pot1_val_100 = 0;
+		accel.pot2_val_100 = 0;
+		//send error//
+		can1.tx_id = 0x10;
+		can1.dataTx[0] = 1;
+		can1.tx_size = 1;
+		CAN_Send(&can1,highPriority);
+	}else{
+		
+		
+		
 	}
 	/*if(brake_implausibility_check()){
 		brake.pot1_val = 0;

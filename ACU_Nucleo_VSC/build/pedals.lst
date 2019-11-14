@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccjr10JO.s 			page 1
+ARM GAS  /tmp/ccL9emg3.s 			page 1
 
 
    1              		.cpu cortex-m7
@@ -19,186 +19,163 @@ ARM GAS  /tmp/ccjr10JO.s 			page 1
   16              		.section	.text.accel_implausibility_check,"ax",%progbits
   17              		.align	1
   18              		.global	accel_implausibility_check
-  19              		.arch armv7e-m
-  20              		.syntax unified
-  21              		.thumb
-  22              		.thumb_func
-  23              		.fpu fpv5-d16
-  25              	accel_implausibility_check:
-  26              	.LFB141:
-  27              		.file 1 "Src/pedals.c"
+  19              		.syntax unified
+  20              		.thumb
+  21              		.thumb_func
+  22              		.fpu fpv5-d16
+  24              	accel_implausibility_check:
+  25              	.LFB141:
+  26              		.file 1 "Src/pedals.c"
    1:Src/pedals.c  **** #include "pedals.h"
    2:Src/pedals.c  **** #include "stm32f7xx_hal.h"
    3:Src/pedals.c  **** 
    4:Src/pedals.c  **** PotStc accel, brake;
    5:Src/pedals.c  **** uint8_t accel_implausibility_check_count_flag = 0;
-   6:Src/pedals.c  **** uint8_t accel_implausibility_check_count = 0;
-   7:Src/pedals.c  **** 
-   8:Src/pedals.c  **** uint8_t accel_implausibility_check(){
-  28              		.loc 1 8 37 view -0
-  29              		.cfi_startproc
-  30              		@ args = 0, pretend = 0, frame = 0
-  31              		@ frame_needed = 0, uses_anonymous_args = 0
-  32              		@ link register save eliminated.
-   9:Src/pedals.c  ****     if(abs(accel.pot1_val - accel.pot2_val) < 90){
-  33              		.loc 1 9 5 view .LVU1
-  34              	.LBB2:
-  35              		.loc 1 9 17 is_stmt 0 view .LVU2
-  36 0000 0B4A     		ldr	r2, .L5
-  37 0002 1368     		ldr	r3, [r2]
-  38              		.loc 1 9 34 view .LVU3
-  39 0004 5268     		ldr	r2, [r2, #4]
-  40              		.loc 1 9 27 view .LVU4
-  41 0006 9B1A     		subs	r3, r3, r2
-  42              		.loc 1 9 45 view .LVU5
-  43 0008 5933     		adds	r3, r3, #89
-  44              		.loc 1 9 7 view .LVU6
-  45 000a B22B     		cmp	r3, #178
-  46 000c 08D8     		bhi	.L2
-  10:Src/pedals.c  ****         //error
-  11:Src/pedals.c  ****         if(accel_implausibility_check_count_flag != 2)accel_implausibility_check_count_flag = 1; //
-  47              		.loc 1 11 9 is_stmt 1 view .LVU7
-ARM GAS  /tmp/ccjr10JO.s 			page 2
+   6:Src/pedals.c  **** uint8_t brake_implausibility_check_count_flag = 0;
+   7:Src/pedals.c  **** uint8_t accel_implausibility_check_count = 0;
+   8:Src/pedals.c  **** uint8_t brake_implausibility_check_count = 0;
+   9:Src/pedals.c  **** 
+  10:Src/pedals.c  **** uint8_t accel_implausibility_check(){
+  27              		.loc 1 10 0
+  28              		.cfi_startproc
+  29              		@ args = 0, pretend = 0, frame = 0
+  30              		@ frame_needed = 0, uses_anonymous_args = 0
+  31              		@ link register save eliminated.
+  32              	.LBB2:
+  11:Src/pedals.c  ****     if(abs(accel.pot1_val_100 - accel.pot2_val_100) < 90){
+  33              		.loc 1 11 0
+  34 0000 0C4A     		ldr	r2, .L5
+  35 0002 9378     		ldrb	r3, [r2, #2]	@ zero_extendqisi2
+  36 0004 9279     		ldrb	r2, [r2, #6]	@ zero_extendqisi2
+  37 0006 9B1A     		subs	r3, r3, r2
+  38 0008 5933     		adds	r3, r3, #89
+  39 000a B22B     		cmp	r3, #178
+  40 000c 08D8     		bhi	.L2
+  12:Src/pedals.c  ****         //error
+  13:Src/pedals.c  ****         if(accel_implausibility_check_count_flag != 2)accel_implausibility_check_count_flag = 1; //
+  41              		.loc 1 13 0
+  42 000e 0A4B     		ldr	r3, .L5+4
+  43 0010 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+  44 0012 022B     		cmp	r3, #2
+  45 0014 0BD0     		beq	.L4
+ARM GAS  /tmp/ccL9emg3.s 			page 2
 
 
-  48              		.loc 1 11 50 is_stmt 0 view .LVU8
-  49 000e 094B     		ldr	r3, .L5+4
-  50 0010 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
-  51              		.loc 1 11 11 view .LVU9
-  52 0012 022B     		cmp	r3, #2
-  53 0014 02D0     		beq	.L3
-  54              		.loc 1 11 55 is_stmt 1 discriminator 1 view .LVU10
-  55              		.loc 1 11 93 is_stmt 0 discriminator 1 view .LVU11
-  56 0016 074B     		ldr	r3, .L5+4
-  57 0018 0122     		movs	r2, #1
-  58 001a 1A70     		strb	r2, [r3]
-  59              	.L3:
-  12:Src/pedals.c  ****         return 0; //return error
-  60              		.loc 1 12 9 is_stmt 1 view .LVU12
-  61              		.loc 1 12 16 is_stmt 0 view .LVU13
-  62 001c 0020     		movs	r0, #0
-  63 001e 7047     		bx	lr
-  64              	.L2:
-  13:Src/pedals.c  ****     }else{
-  14:Src/pedals.c  ****         accel_implausibility_check_count_flag = 0;
-  65              		.loc 1 14 9 is_stmt 1 view .LVU14
-  66              		.loc 1 14 47 is_stmt 0 view .LVU15
-  67 0020 0023     		movs	r3, #0
-  68 0022 044A     		ldr	r2, .L5+4
-  69 0024 1370     		strb	r3, [r2]
-  15:Src/pedals.c  ****         accel_implausibility_check_count = 0;
-  70              		.loc 1 15 9 is_stmt 1 view .LVU16
-  71              		.loc 1 15 42 is_stmt 0 view .LVU17
-  72 0026 044A     		ldr	r2, .L5+8
-  73 0028 1370     		strb	r3, [r2]
-  16:Src/pedals.c  ****         return 1; //retrun ok
-  74              		.loc 1 16 9 is_stmt 1 view .LVU18
-  75              		.loc 1 16 16 is_stmt 0 view .LVU19
-  76 002a 0120     		movs	r0, #1
-  77              	.LBE2:
-  17:Src/pedals.c  **** 
-  18:Src/pedals.c  ****     }
-  19:Src/pedals.c  **** }
-  78              		.loc 1 19 1 view .LVU20
-  79 002c 7047     		bx	lr
-  80              	.L6:
-  81 002e 00BF     		.align	2
-  82              	.L5:
-  83 0030 00000000 		.word	accel
-  84 0034 00000000 		.word	.LANCHOR0
-  85 0038 00000000 		.word	.LANCHOR1
-  86              		.cfi_endproc
-  87              	.LFE141:
-  89              		.section	.text.brake_implausibility_check,"ax",%progbits
-  90              		.align	1
-  91              		.global	brake_implausibility_check
-  92              		.syntax unified
-  93              		.thumb
-  94              		.thumb_func
-  95              		.fpu fpv5-d16
-  97              	brake_implausibility_check:
-  98              	.LFB142:
-ARM GAS  /tmp/ccjr10JO.s 			page 3
+  46              		.loc 1 13 0 is_stmt 0 discriminator 1
+  47 0016 0122     		movs	r2, #1
+  48 0018 074B     		ldr	r3, .L5+4
+  49 001a 1A70     		strb	r2, [r3]
+  14:Src/pedals.c  ****         return 0; //return error
+  50              		.loc 1 14 0 is_stmt 1 discriminator 1
+  51 001c 0020     		movs	r0, #0
+  52 001e 7047     		bx	lr
+  53              	.L2:
+  15:Src/pedals.c  ****     }else{
+  16:Src/pedals.c  ****         accel_implausibility_check_count_flag = 0;
+  54              		.loc 1 16 0
+  55 0020 0023     		movs	r3, #0
+  56 0022 054A     		ldr	r2, .L5+4
+  57 0024 1370     		strb	r3, [r2]
+  17:Src/pedals.c  ****         accel_implausibility_check_count = 0;
+  58              		.loc 1 17 0
+  59 0026 054A     		ldr	r2, .L5+8
+  60 0028 1370     		strb	r3, [r2]
+  18:Src/pedals.c  ****         return 1; //retrun ok
+  61              		.loc 1 18 0
+  62 002a 0120     		movs	r0, #1
+  63 002c 7047     		bx	lr
+  64              	.L4:
+  14:Src/pedals.c  ****     }else{
+  65              		.loc 1 14 0
+  66 002e 0020     		movs	r0, #0
+  67              	.LBE2:
+  19:Src/pedals.c  **** 
+  20:Src/pedals.c  ****     }
+  21:Src/pedals.c  **** }
+  68              		.loc 1 21 0
+  69 0030 7047     		bx	lr
+  70              	.L6:
+  71 0032 00BF     		.align	2
+  72              	.L5:
+  73 0034 00000000 		.word	accel
+  74 0038 00000000 		.word	.LANCHOR0
+  75 003c 00000000 		.word	.LANCHOR1
+  76              		.cfi_endproc
+  77              	.LFE141:
+  79              		.section	.text.brake_implausibility_check,"ax",%progbits
+  80              		.align	1
+  81              		.global	brake_implausibility_check
+  82              		.syntax unified
+  83              		.thumb
+  84              		.thumb_func
+  85              		.fpu fpv5-d16
+  87              	brake_implausibility_check:
+  88              	.LFB142:
+  22:Src/pedals.c  **** uint8_t brake_implausibility_check(){
+  89              		.loc 1 22 0
+  90              		.cfi_startproc
+  91              		@ args = 0, pretend = 0, frame = 0
+  92              		@ frame_needed = 0, uses_anonymous_args = 0
+  93              		@ link register save eliminated.
+  23:Src/pedals.c  ****     return 0;
+ARM GAS  /tmp/ccL9emg3.s 			page 3
 
 
-  20:Src/pedals.c  **** uint8_t brake_implausibility_check(){
-  99              		.loc 1 20 37 is_stmt 1 view -0
- 100              		.cfi_startproc
- 101              		@ args = 0, pretend = 0, frame = 0
- 102              		@ frame_needed = 0, uses_anonymous_args = 0
- 103              		@ link register save eliminated.
-  21:Src/pedals.c  ****     if(abs(brake.pot1_val - brake.pot2_val) < 90) return 0;
- 104              		.loc 1 21 5 view .LVU22
- 105              	.LBB3:
- 106              		.loc 1 21 17 is_stmt 0 view .LVU23
- 107 0000 054A     		ldr	r2, .L10
- 108 0002 1368     		ldr	r3, [r2]
- 109              		.loc 1 21 34 view .LVU24
- 110 0004 5268     		ldr	r2, [r2, #4]
- 111              		.loc 1 21 27 view .LVU25
- 112 0006 9B1A     		subs	r3, r3, r2
- 113              		.loc 1 21 45 view .LVU26
- 114 0008 5933     		adds	r3, r3, #89
- 115              		.loc 1 21 7 view .LVU27
- 116 000a B22B     		cmp	r3, #178
- 117 000c 01D8     		bhi	.L9
- 118              		.loc 1 21 58 view .LVU28
- 119 000e 0020     		movs	r0, #0
- 120 0010 7047     		bx	lr
- 121              	.L9:
-  22:Src/pedals.c  ****     else return 1;
- 122              		.loc 1 22 17 view .LVU29
- 123 0012 0120     		movs	r0, #1
- 124              	.LBE3:
-  23:Src/pedals.c  **** }...
- 125              		.loc 1 23 1 view .LVU30
- 126 0014 7047     		bx	lr
- 127              	.L11:
- 128 0016 00BF     		.align	2
- 129              	.L10:
- 130 0018 00000000 		.word	brake
- 131              		.cfi_endproc
- 132              	.LFE142:
- 134              		.global	accel_implausibility_check_count
- 135              		.global	accel_implausibility_check_count_flag
- 136              		.comm	brake,16,4
- 137              		.comm	accel,16,4
- 138              		.section	.bss.accel_implausibility_check_count,"aw",%nobits
- 139              		.set	.LANCHOR1,. + 0
- 142              	accel_implausibility_check_count:
- 143 0000 00       		.space	1
- 144              		.section	.bss.accel_implausibility_check_count_flag,"aw",%nobits
- 145              		.set	.LANCHOR0,. + 0
- 148              	accel_implausibility_check_count_flag:
- 149 0000 00       		.space	1
- 150              		.text
- 151              	.Letext0:
- 152              		.file 2 "/usr/arm-none-eabi/include/machine/_default_types.h"
- 153              		.file 3 "/usr/arm-none-eabi/include/sys/_stdint.h"
- 154              		.file 4 "Drivers/CMSIS/Include/core_cm7.h"
- 155              		.file 5 "Drivers/CMSIS/Device/ST/STM32F7xx/Include/system_stm32f7xx.h"
- 156              		.file 6 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal.h"
-ARM GAS  /tmp/ccjr10JO.s 			page 4
-
-
- 157              		.file 7 "Inc/pedals.h"
- 158              		.file 8 "<built-in>"
-ARM GAS  /tmp/ccjr10JO.s 			page 5
+  24:Src/pedals.c  **** }...
+  94              		.loc 1 24 0
+  95 0000 0020     		movs	r0, #0
+  96 0002 7047     		bx	lr
+  97              		.cfi_endproc
+  98              	.LFE142:
+ 100              		.global	brake_implausibility_check_count
+ 101              		.global	accel_implausibility_check_count
+ 102              		.global	brake_implausibility_check_count_flag
+ 103              		.global	accel_implausibility_check_count_flag
+ 104              		.comm	brake,20,4
+ 105              		.comm	accel,20,4
+ 106              		.section	.bss.accel_implausibility_check_count,"aw",%nobits
+ 107              		.set	.LANCHOR1,. + 0
+ 110              	accel_implausibility_check_count:
+ 111 0000 00       		.space	1
+ 112              		.section	.bss.accel_implausibility_check_count_flag,"aw",%nobits
+ 113              		.set	.LANCHOR0,. + 0
+ 116              	accel_implausibility_check_count_flag:
+ 117 0000 00       		.space	1
+ 118              		.section	.bss.brake_implausibility_check_count,"aw",%nobits
+ 121              	brake_implausibility_check_count:
+ 122 0000 00       		.space	1
+ 123              		.section	.bss.brake_implausibility_check_count_flag,"aw",%nobits
+ 126              	brake_implausibility_check_count_flag:
+ 127 0000 00       		.space	1
+ 128              		.text
+ 129              	.Letext0:
+ 130              		.file 2 "/usr/include/newlib/machine/_default_types.h"
+ 131              		.file 3 "/usr/include/newlib/sys/_stdint.h"
+ 132              		.file 4 "Drivers/CMSIS/Include/core_cm7.h"
+ 133              		.file 5 "Drivers/CMSIS/Device/ST/STM32F7xx/Include/system_stm32f7xx.h"
+ 134              		.file 6 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal.h"
+ 135              		.file 7 "Inc/pedals.h"
+ 136              		.file 8 "<built-in>"
+ARM GAS  /tmp/ccL9emg3.s 			page 4
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 pedals.c
-     /tmp/ccjr10JO.s:17     .text.accel_implausibility_check:0000000000000000 $t
-     /tmp/ccjr10JO.s:25     .text.accel_implausibility_check:0000000000000000 accel_implausibility_check
-     /tmp/ccjr10JO.s:83     .text.accel_implausibility_check:0000000000000030 $d
-                            *COM*:0000000000000010 accel
-     /tmp/ccjr10JO.s:90     .text.brake_implausibility_check:0000000000000000 $t
-     /tmp/ccjr10JO.s:97     .text.brake_implausibility_check:0000000000000000 brake_implausibility_check
-     /tmp/ccjr10JO.s:130    .text.brake_implausibility_check:0000000000000018 $d
-                            *COM*:0000000000000010 brake
-     /tmp/ccjr10JO.s:142    .bss.accel_implausibility_check_count:0000000000000000 accel_implausibility_check_count
-     /tmp/ccjr10JO.s:148    .bss.accel_implausibility_check_count_flag:0000000000000000 accel_implausibility_check_count_flag
-     /tmp/ccjr10JO.s:143    .bss.accel_implausibility_check_count:0000000000000000 $d
-     /tmp/ccjr10JO.s:149    .bss.accel_implausibility_check_count_flag:0000000000000000 $d
+     /tmp/ccL9emg3.s:17     .text.accel_implausibility_check:0000000000000000 $t
+     /tmp/ccL9emg3.s:24     .text.accel_implausibility_check:0000000000000000 accel_implausibility_check
+     /tmp/ccL9emg3.s:73     .text.accel_implausibility_check:0000000000000034 $d
+                            *COM*:0000000000000014 accel
+     /tmp/ccL9emg3.s:80     .text.brake_implausibility_check:0000000000000000 $t
+     /tmp/ccL9emg3.s:87     .text.brake_implausibility_check:0000000000000000 brake_implausibility_check
+     /tmp/ccL9emg3.s:121    .bss.brake_implausibility_check_count:0000000000000000 brake_implausibility_check_count
+     /tmp/ccL9emg3.s:110    .bss.accel_implausibility_check_count:0000000000000000 accel_implausibility_check_count
+     /tmp/ccL9emg3.s:126    .bss.brake_implausibility_check_count_flag:0000000000000000 brake_implausibility_check_count_flag
+     /tmp/ccL9emg3.s:116    .bss.accel_implausibility_check_count_flag:0000000000000000 accel_implausibility_check_count_flag
+                            *COM*:0000000000000014 brake
+     /tmp/ccL9emg3.s:111    .bss.accel_implausibility_check_count:0000000000000000 $d
+     /tmp/ccL9emg3.s:117    .bss.accel_implausibility_check_count_flag:0000000000000000 $d
+     /tmp/ccL9emg3.s:122    .bss.brake_implausibility_check_count:0000000000000000 $d
+     /tmp/ccL9emg3.s:127    .bss.brake_implausibility_check_count_flag:0000000000000000 $d
+                     .debug_frame:0000000000000010 $d
 
 NO UNDEFINED SYMBOLS
