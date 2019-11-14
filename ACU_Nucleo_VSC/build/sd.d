@@ -36,7 +36,7 @@ build/sd.o: Src/sd.c Inc/global_variables.h Inc/can.h \
  Middlewares/Third_Party/FatFs/src/ff_gen_drv.h \
  Middlewares/Third_Party/FatFs/src/diskio.h \
  Middlewares/Third_Party/FatFs/src/ff.h Inc/sd_diskio.h Inc/pedals.h \
- Inc/fatfs.h
+ Inc/fatfs.h Inc/sd.h
 
 Inc/global_variables.h:
 
@@ -133,3 +133,5 @@ Inc/sd_diskio.h:
 Inc/pedals.h:
 
 Inc/fatfs.h:
+
+Inc/sd.h:

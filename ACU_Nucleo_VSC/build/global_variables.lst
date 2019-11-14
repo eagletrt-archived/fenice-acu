@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccesfbyZ.s 			page 1
+ARM GAS  /tmp/cc6jxJh8.s 			page 1
 
 
    1              		.cpu cortex-m7
@@ -17,276 +17,294 @@ ARM GAS  /tmp/ccesfbyZ.s 			page 1
   14              	.Ltext0:
   15              		.cfi_sections	.debug_frame
   16              		.global	successfull_opening
-  17              		.comm	log_names,1000,4
-  18              		.comm	pointer,4,4
-  19              		.comm	bytes_read,4,4
-  20              		.global	buffer
-  21              		.global	msg_index
-  22              		.global	msg_counter
-  23              		.global	mount_ok
-  24              		.comm	byteswritten,4,4
-  25              		.global	max_files
-  26              		.comm	txt,1000,4
-  27              		.global	filename_1
-  28              		.global	filename
-  29              		.comm	message,256,4
-  30              		.comm	log_names_f,560,4
-  31              		.comm	loggingFile,560,4
-  32              		.comm	res_mount,1,1
-  33              		.comm	res_open,1,1
-  34              		.global	atc_connected
-  35              		.global	its3_connected
-  36              		.global	its2_connected
-  37              		.global	its1_connected
-  38              		.global	its0_connected
-  39              		.global	imu_connected
-  40              		.global	debug_msg_arrived
-  41              		.global	debug_rx_count
-  42              		.comm	debug_tx,500,4
-  43              		.comm	debug_rx,20,4
-  44              		.global	code_version
-  45              		.global	count_atc
-  46              		.global	count_imu
-  47              		.global	count_accumulator
-  48              		.global	count_inverter
-  49              		.global	count_hour
-  50              		.global	count_min
-  51              		.global	count_sec
-  52              		.global	count_dec
-  53              		.global	count_ms
-  54              		.section	.bss.atc_connected,"aw",%nobits
-  57              	atc_connected:
-  58 0000 00       		.space	1
-  59              		.section	.bss.count_accumulator,"aw",%nobits
-ARM GAS  /tmp/ccesfbyZ.s 			page 2
+  17              		.global	pot_values_loaded
+  18              		.comm	log_names,900,4
+  19              		.comm	pointer,4,4
+  20              		.comm	bytes_read,4,4
+  21              		.global	buffer
+  22              		.global	msg_index
+  23              		.global	msg_counter
+  24              		.global	mount_ok
+  25              		.comm	byteswritten,4,4
+  26              		.global	max_files
+  27              		.comm	txt,1000,4
+  28              		.global	filename_pot
+  29              		.global	filename_1
+  30              		.global	filename
+  31              		.comm	message,256,4
+  32              		.comm	log_names_f,560,4
+  33              		.comm	pot_values_f,560,4
+  34              		.comm	loggingFile,560,4
+  35              		.comm	res_mount,1,1
+  36              		.comm	res_open,1,1
+  37              		.global	atc_connected
+  38              		.global	its3_connected
+  39              		.global	its2_connected
+  40              		.global	its1_connected
+  41              		.global	its0_connected
+  42              		.global	imu_connected
+  43              		.global	debug_msg_arrived
+  44              		.global	debug_rx_count
+  45              		.comm	debug_tx,500,4
+  46              		.comm	debug_rx,20,4
+  47              		.global	code_version
+  48              		.global	count_atc
+  49              		.global	count_imu
+  50              		.global	count_accumulator
+  51              		.global	count_inverter
+  52              		.global	count_hour
+  53              		.global	count_min
+  54              		.global	count_sec
+  55              		.global	count_dec
+  56              		.global	count_ms
+  57              		.section	.bss.atc_connected,"aw",%nobits
+ARM GAS  /tmp/cc6jxJh8.s 			page 2
 
 
-  60              		.align	1
-  63              	count_accumulator:
-  64 0000 0000     		.space	2
-  65              		.section	.bss.count_atc,"aw",%nobits
-  66              		.align	1
-  69              	count_atc:
-  70 0000 0000     		.space	2
-  71              		.section	.bss.count_dec,"aw",%nobits
-  72              		.align	1
-  75              	count_dec:
-  76 0000 0000     		.space	2
-  77              		.section	.bss.count_hour,"aw",%nobits
-  78              		.align	1
-  81              	count_hour:
-  82 0000 0000     		.space	2
-  83              		.section	.bss.count_imu,"aw",%nobits
-  84              		.align	1
-  87              	count_imu:
-  88 0000 0000     		.space	2
-  89              		.section	.bss.count_inverter,"aw",%nobits
-  90              		.align	1
-  93              	count_inverter:
-  94 0000 0000     		.space	2
-  95              		.section	.bss.count_min,"aw",%nobits
-  96              		.align	1
-  99              	count_min:
- 100 0000 0000     		.space	2
- 101              		.section	.bss.count_ms,"aw",%nobits
- 102              		.align	1
- 105              	count_ms:
- 106 0000 0000     		.space	2
- 107              		.section	.bss.count_sec,"aw",%nobits
- 108              		.align	1
- 111              	count_sec:
- 112 0000 0000     		.space	2
- 113              		.section	.bss.debug_msg_arrived,"aw",%nobits
- 116              	debug_msg_arrived:
- 117 0000 00       		.space	1
- 118              		.section	.bss.debug_rx_count,"aw",%nobits
- 121              	debug_rx_count:
- 122 0000 00       		.space	1
- 123              		.section	.bss.imu_connected,"aw",%nobits
- 126              	imu_connected:
- 127 0000 00       		.space	1
- 128              		.section	.bss.its0_connected,"aw",%nobits
- 131              	its0_connected:
- 132 0000 00       		.space	1
- 133              		.section	.bss.its1_connected,"aw",%nobits
- 136              	its1_connected:
- 137 0000 00       		.space	1
- 138              		.section	.bss.its2_connected,"aw",%nobits
- 141              	its2_connected:
- 142 0000 00       		.space	1
- 143              		.section	.bss.its3_connected,"aw",%nobits
- 146              	its3_connected:
- 147 0000 00       		.space	1
- 148              		.section	.bss.mount_ok,"aw",%nobits
-ARM GAS  /tmp/ccesfbyZ.s 			page 3
+  60              	atc_connected:
+  61 0000 00       		.space	1
+  62              		.section	.bss.count_accumulator,"aw",%nobits
+  63              		.align	1
+  66              	count_accumulator:
+  67 0000 0000     		.space	2
+  68              		.section	.bss.count_atc,"aw",%nobits
+  69              		.align	1
+  72              	count_atc:
+  73 0000 0000     		.space	2
+  74              		.section	.bss.count_dec,"aw",%nobits
+  75              		.align	1
+  78              	count_dec:
+  79 0000 0000     		.space	2
+  80              		.section	.bss.count_hour,"aw",%nobits
+  81              		.align	1
+  84              	count_hour:
+  85 0000 0000     		.space	2
+  86              		.section	.bss.count_imu,"aw",%nobits
+  87              		.align	1
+  90              	count_imu:
+  91 0000 0000     		.space	2
+  92              		.section	.bss.count_inverter,"aw",%nobits
+  93              		.align	1
+  96              	count_inverter:
+  97 0000 0000     		.space	2
+  98              		.section	.bss.count_min,"aw",%nobits
+  99              		.align	1
+ 102              	count_min:
+ 103 0000 0000     		.space	2
+ 104              		.section	.bss.count_ms,"aw",%nobits
+ 105              		.align	1
+ 108              	count_ms:
+ 109 0000 0000     		.space	2
+ 110              		.section	.bss.count_sec,"aw",%nobits
+ 111              		.align	1
+ 114              	count_sec:
+ 115 0000 0000     		.space	2
+ 116              		.section	.bss.debug_msg_arrived,"aw",%nobits
+ 119              	debug_msg_arrived:
+ 120 0000 00       		.space	1
+ 121              		.section	.bss.debug_rx_count,"aw",%nobits
+ 124              	debug_rx_count:
+ 125 0000 00       		.space	1
+ 126              		.section	.bss.imu_connected,"aw",%nobits
+ 129              	imu_connected:
+ 130 0000 00       		.space	1
+ 131              		.section	.bss.its0_connected,"aw",%nobits
+ 134              	its0_connected:
+ 135 0000 00       		.space	1
+ 136              		.section	.bss.its1_connected,"aw",%nobits
+ 139              	its1_connected:
+ 140 0000 00       		.space	1
+ 141              		.section	.bss.its2_connected,"aw",%nobits
+ 144              	its2_connected:
+ 145 0000 00       		.space	1
+ 146              		.section	.bss.its3_connected,"aw",%nobits
+ARM GAS  /tmp/cc6jxJh8.s 			page 3
 
 
- 149              		.align	2
- 152              	mount_ok:
- 153 0000 00000000 		.space	4
- 154              		.section	.bss.msg_counter,"aw",%nobits
- 155              		.align	2
- 158              	msg_counter:
- 159 0000 00000000 		.space	4
- 160              		.section	.bss.msg_index,"aw",%nobits
- 161              		.align	2
- 164              	msg_index:
- 165 0000 00000000 		.space	4
- 166              		.section	.bss.successfull_opening,"aw",%nobits
- 167              		.align	2
- 170              	successfull_opening:
- 171 0000 00000000 		.space	4
- 172              		.section	.data.buffer,"aw",%progbits
- 173              		.align	2
- 176              	buffer:
- 177 0000 53746172 		.ascii	"Starting Antenna Logging\015\012\000"
- 177      74696E67 
- 177      20416E74 
- 177      656E6E61 
- 177      204C6F67 
- 178 001b 00000000 		.space	229
- 178      00000000 
- 178      00000000 
- 178      00000000 
- 178      00000000 
- 179              		.section	.data.filename,"aw",%progbits
- 180              		.align	2
- 183              	filename:
- 184 0000 61626361 		.ascii	"abcabc.txt\000"
- 184      62632E74 
- 184      787400
- 185 000b 00000000 		.space	245
- 185      00000000 
- 185      00000000 
- 185      00000000 
- 185      00000000 
- 186              		.section	.data.filename_1,"aw",%progbits
- 187              		.align	2
- 190              	filename_1:
- 191 0000 6C6F675F 		.ascii	"log_names.txt\000"
- 191      6E616D65 
- 191      732E7478 
- 191      7400
- 192 000e 00000000 		.space	242
- 192      00000000 
- 192      00000000 
- 192      00000000 
- 192      00000000 
- 193              		.section	.data.max_files,"aw",%progbits
- 194              		.align	2
- 197              	max_files:
- 198 0000 64000000 		.word	100
- 199              		.section	.rodata.code_version,"a",%progbits
- 200              		.align	2
-ARM GAS  /tmp/ccesfbyZ.s 			page 4
+ 149              	its3_connected:
+ 150 0000 00       		.space	1
+ 151              		.section	.bss.mount_ok,"aw",%nobits
+ 152              		.align	2
+ 155              	mount_ok:
+ 156 0000 00000000 		.space	4
+ 157              		.section	.bss.msg_counter,"aw",%nobits
+ 158              		.align	2
+ 161              	msg_counter:
+ 162 0000 00000000 		.space	4
+ 163              		.section	.bss.msg_index,"aw",%nobits
+ 164              		.align	2
+ 167              	msg_index:
+ 168 0000 00000000 		.space	4
+ 169              		.section	.bss.pot_values_loaded,"aw",%nobits
+ 172              	pot_values_loaded:
+ 173 0000 00       		.space	1
+ 174              		.section	.bss.successfull_opening,"aw",%nobits
+ 175              		.align	2
+ 178              	successfull_opening:
+ 179 0000 00000000 		.space	4
+ 180              		.section	.data.buffer,"aw"
+ 181              		.align	2
+ 184              	buffer:
+ 185 0000 53746172 		.ascii	"Starting Antenna Logging\015\012\000"
+ 185      74696E67 
+ 185      20416E74 
+ 185      656E6E61 
+ 185      204C6F67 
+ 186 001b 00000000 		.space	229
+ 186      00000000 
+ 186      00000000 
+ 186      00000000 
+ 186      00000000 
+ 187              		.section	.data.filename,"aw"
+ 188              		.align	2
+ 191              	filename:
+ 192 0000 61626361 		.ascii	"abcabc.txt\000"
+ 192      62632E74 
+ 192      787400
+ 193 000b 00000000 		.space	245
+ 193      00000000 
+ 193      00000000 
+ 193      00000000 
+ 193      00000000 
+ 194              		.section	.data.filename_1,"aw"
+ 195              		.align	2
+ 198              	filename_1:
+ 199 0000 6C6F675F 		.ascii	"log_names.txt\000"
+ 199      6E616D65 
+ 199      732E7478 
+ 199      7400
+ 200 000e 00000000 		.space	242
+ 200      00000000 
+ 200      00000000 
+ 200      00000000 
+ 200      00000000 
+ARM GAS  /tmp/cc6jxJh8.s 			page 4
 
 
- 203              	code_version:
- 204 0000 0D0A436F 		.ascii	"\015\012Code version = 1.0, updated 01/11/2019\015\012"
- 204      64652076 
- 204      65727369 
- 204      6F6E203D 
- 204      20312E30 
- 205 002a 00       		.ascii	"\000"
- 206              		.text
- 207              	.Letext0:
- 208              		.file 1 "Drivers/CMSIS/Device/ST/STM32F7xx/Include/stm32f767xx.h"
- 209              		.file 2 "/usr/include/newlib/machine/_default_types.h"
- 210              		.file 3 "/usr/include/newlib/sys/_stdint.h"
- 211              		.file 4 "Drivers/CMSIS/Include/core_cm7.h"
- 212              		.file 5 "Drivers/CMSIS/Device/ST/STM32F7xx/Include/system_stm32f7xx.h"
- 213              		.file 6 "Drivers/CMSIS/Device/ST/STM32F7xx/Include/stm32f7xx.h"
- 214              		.file 7 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_def.h"
- 215              		.file 8 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_dma.h"
- 216              		.file 9 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_can.h"
- 217              		.file 10 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart.h"
- 218              		.file 11 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal.h"
- 219              		.file 12 "Inc/can.h"
- 220              		.file 13 "Middlewares/Third_Party/FatFs/src/integer.h"
- 221              		.file 14 "/usr/include/newlib/sys/lock.h"
- 222              		.file 15 "/usr/include/newlib/sys/_types.h"
- 223              		.file 16 "/usr/lib/gcc/arm-none-eabi/6.3.1/include/stddef.h"
- 224              		.file 17 "/usr/include/newlib/sys/reent.h"
- 225              		.file 18 "/usr/include/newlib/stdlib.h"
- 226              		.file 19 "Middlewares/Third_Party/FatFs/src/ff.h"
- 227              		.file 20 "Middlewares/Third_Party/FatFs/src/diskio.h"
- 228              		.file 21 "Middlewares/Third_Party/FatFs/src/ff_gen_drv.h"
- 229              		.file 22 "Inc/sd_diskio.h"
- 230              		.file 23 "Inc/fatfs.h"
- 231              		.file 24 "Inc/pedals.h"
- 232              		.file 25 "Inc/global_variables.h"
- 233              		.file 26 "Src/global_variables.c"
-ARM GAS  /tmp/ccesfbyZ.s 			page 5
+ 201              		.section	.data.filename_pot,"aw"
+ 202              		.align	2
+ 205              	filename_pot:
+ 206 0000 706F745F 		.ascii	"pot_values.txt"
+ 206      76616C75 
+ 206      65732E74 
+ 206      7874
+ 207              		.section	.data.max_files,"aw"
+ 208              		.align	2
+ 211              	max_files:
+ 212 0000 64000000 		.word	100
+ 213              		.section	.rodata.code_version,"a"
+ 214              		.align	2
+ 217              	code_version:
+ 218 0000 0D0A436F 		.ascii	"\015\012Code version = 1.0, updated 01/11/2019\015\012"
+ 218      64652076 
+ 218      65727369 
+ 218      6F6E203D 
+ 218      20312E30 
+ 219 002a 00       		.ascii	"\000"
+ 220              		.text
+ 221              	.Letext0:
+ 222              		.file 1 "Drivers/CMSIS/Device/ST/STM32F7xx/Include/stm32f767xx.h"
+ 223              		.file 2 "/usr/arm-none-eabi/include/machine/_default_types.h"
+ 224              		.file 3 "/usr/arm-none-eabi/include/sys/_stdint.h"
+ 225              		.file 4 "Drivers/CMSIS/Include/core_cm7.h"
+ 226              		.file 5 "Drivers/CMSIS/Device/ST/STM32F7xx/Include/system_stm32f7xx.h"
+ 227              		.file 6 "Drivers/CMSIS/Device/ST/STM32F7xx/Include/stm32f7xx.h"
+ 228              		.file 7 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_def.h"
+ 229              		.file 8 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_dma.h"
+ 230              		.file 9 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_can.h"
+ 231              		.file 10 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart.h"
+ 232              		.file 11 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal.h"
+ 233              		.file 12 "Inc/can.h"
+ 234              		.file 13 "Middlewares/Third_Party/FatFs/src/integer.h"
+ 235              		.file 14 "/usr/arm-none-eabi/include/sys/lock.h"
+ 236              		.file 15 "/usr/arm-none-eabi/include/sys/_types.h"
+ 237              		.file 16 "/usr/lib/gcc/arm-none-eabi/9.2.0/include/stddef.h"
+ 238              		.file 17 "/usr/arm-none-eabi/include/sys/reent.h"
+ 239              		.file 18 "/usr/arm-none-eabi/include/stdlib.h"
+ 240              		.file 19 "Middlewares/Third_Party/FatFs/src/ff.h"
+ 241              		.file 20 "Middlewares/Third_Party/FatFs/src/diskio.h"
+ 242              		.file 21 "Middlewares/Third_Party/FatFs/src/ff_gen_drv.h"
+ 243              		.file 22 "Inc/sd_diskio.h"
+ 244              		.file 23 "Inc/fatfs.h"
+ 245              		.file 24 "Inc/pedals.h"
+ 246              		.file 25 "Inc/global_variables.h"
+ 247              		.file 26 "Src/global_variables.c"
+ARM GAS  /tmp/cc6jxJh8.s 			page 5
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 global_variables.c
-     /tmp/ccesfbyZ.s:170    .bss.successfull_opening:0000000000000000 successfull_opening
-                            *COM*:00000000000003e8 log_names
+     /tmp/cc6jxJh8.s:178    .bss.successfull_opening:0000000000000000 successfull_opening
+     /tmp/cc6jxJh8.s:172    .bss.pot_values_loaded:0000000000000000 pot_values_loaded
+                            *COM*:0000000000000384 log_names
                             *COM*:0000000000000004 pointer
                             *COM*:0000000000000004 bytes_read
-     /tmp/ccesfbyZ.s:176    .data.buffer:0000000000000000 buffer
-     /tmp/ccesfbyZ.s:164    .bss.msg_index:0000000000000000 msg_index
-     /tmp/ccesfbyZ.s:158    .bss.msg_counter:0000000000000000 msg_counter
-     /tmp/ccesfbyZ.s:152    .bss.mount_ok:0000000000000000 mount_ok
+     /tmp/cc6jxJh8.s:184    .data.buffer:0000000000000000 buffer
+     /tmp/cc6jxJh8.s:167    .bss.msg_index:0000000000000000 msg_index
+     /tmp/cc6jxJh8.s:161    .bss.msg_counter:0000000000000000 msg_counter
+     /tmp/cc6jxJh8.s:155    .bss.mount_ok:0000000000000000 mount_ok
                             *COM*:0000000000000004 byteswritten
-     /tmp/ccesfbyZ.s:197    .data.max_files:0000000000000000 max_files
+     /tmp/cc6jxJh8.s:211    .data.max_files:0000000000000000 max_files
                             *COM*:00000000000003e8 txt
-     /tmp/ccesfbyZ.s:190    .data.filename_1:0000000000000000 filename_1
-     /tmp/ccesfbyZ.s:183    .data.filename:0000000000000000 filename
+     /tmp/cc6jxJh8.s:205    .data.filename_pot:0000000000000000 filename_pot
+     /tmp/cc6jxJh8.s:198    .data.filename_1:0000000000000000 filename_1
+     /tmp/cc6jxJh8.s:191    .data.filename:0000000000000000 filename
                             *COM*:0000000000000100 message
                             *COM*:0000000000000230 log_names_f
+                            *COM*:0000000000000230 pot_values_f
                             *COM*:0000000000000230 loggingFile
                             *COM*:0000000000000001 res_mount
                             *COM*:0000000000000001 res_open
-     /tmp/ccesfbyZ.s:57     .bss.atc_connected:0000000000000000 atc_connected
-     /tmp/ccesfbyZ.s:146    .bss.its3_connected:0000000000000000 its3_connected
-     /tmp/ccesfbyZ.s:141    .bss.its2_connected:0000000000000000 its2_connected
-     /tmp/ccesfbyZ.s:136    .bss.its1_connected:0000000000000000 its1_connected
-     /tmp/ccesfbyZ.s:131    .bss.its0_connected:0000000000000000 its0_connected
-     /tmp/ccesfbyZ.s:126    .bss.imu_connected:0000000000000000 imu_connected
-     /tmp/ccesfbyZ.s:116    .bss.debug_msg_arrived:0000000000000000 debug_msg_arrived
-     /tmp/ccesfbyZ.s:121    .bss.debug_rx_count:0000000000000000 debug_rx_count
+     /tmp/cc6jxJh8.s:60     .bss.atc_connected:0000000000000000 atc_connected
+     /tmp/cc6jxJh8.s:149    .bss.its3_connected:0000000000000000 its3_connected
+     /tmp/cc6jxJh8.s:144    .bss.its2_connected:0000000000000000 its2_connected
+     /tmp/cc6jxJh8.s:139    .bss.its1_connected:0000000000000000 its1_connected
+     /tmp/cc6jxJh8.s:134    .bss.its0_connected:0000000000000000 its0_connected
+     /tmp/cc6jxJh8.s:129    .bss.imu_connected:0000000000000000 imu_connected
+     /tmp/cc6jxJh8.s:119    .bss.debug_msg_arrived:0000000000000000 debug_msg_arrived
+     /tmp/cc6jxJh8.s:124    .bss.debug_rx_count:0000000000000000 debug_rx_count
                             *COM*:00000000000001f4 debug_tx
                             *COM*:0000000000000014 debug_rx
-     /tmp/ccesfbyZ.s:203    .rodata.code_version:0000000000000000 code_version
-     /tmp/ccesfbyZ.s:69     .bss.count_atc:0000000000000000 count_atc
-     /tmp/ccesfbyZ.s:87     .bss.count_imu:0000000000000000 count_imu
-     /tmp/ccesfbyZ.s:63     .bss.count_accumulator:0000000000000000 count_accumulator
-     /tmp/ccesfbyZ.s:93     .bss.count_inverter:0000000000000000 count_inverter
-     /tmp/ccesfbyZ.s:81     .bss.count_hour:0000000000000000 count_hour
-     /tmp/ccesfbyZ.s:99     .bss.count_min:0000000000000000 count_min
-     /tmp/ccesfbyZ.s:111    .bss.count_sec:0000000000000000 count_sec
-     /tmp/ccesfbyZ.s:75     .bss.count_dec:0000000000000000 count_dec
-     /tmp/ccesfbyZ.s:105    .bss.count_ms:0000000000000000 count_ms
-     /tmp/ccesfbyZ.s:58     .bss.atc_connected:0000000000000000 $d
-     /tmp/ccesfbyZ.s:60     .bss.count_accumulator:0000000000000000 $d
-     /tmp/ccesfbyZ.s:66     .bss.count_atc:0000000000000000 $d
-     /tmp/ccesfbyZ.s:72     .bss.count_dec:0000000000000000 $d
-     /tmp/ccesfbyZ.s:78     .bss.count_hour:0000000000000000 $d
-     /tmp/ccesfbyZ.s:84     .bss.count_imu:0000000000000000 $d
-     /tmp/ccesfbyZ.s:90     .bss.count_inverter:0000000000000000 $d
-     /tmp/ccesfbyZ.s:96     .bss.count_min:0000000000000000 $d
-     /tmp/ccesfbyZ.s:102    .bss.count_ms:0000000000000000 $d
-     /tmp/ccesfbyZ.s:108    .bss.count_sec:0000000000000000 $d
-     /tmp/ccesfbyZ.s:117    .bss.debug_msg_arrived:0000000000000000 $d
-     /tmp/ccesfbyZ.s:122    .bss.debug_rx_count:0000000000000000 $d
-     /tmp/ccesfbyZ.s:127    .bss.imu_connected:0000000000000000 $d
-     /tmp/ccesfbyZ.s:132    .bss.its0_connected:0000000000000000 $d
-     /tmp/ccesfbyZ.s:137    .bss.its1_connected:0000000000000000 $d
-     /tmp/ccesfbyZ.s:142    .bss.its2_connected:0000000000000000 $d
-     /tmp/ccesfbyZ.s:147    .bss.its3_connected:0000000000000000 $d
-ARM GAS  /tmp/ccesfbyZ.s 			page 6
+     /tmp/cc6jxJh8.s:217    .rodata.code_version:0000000000000000 code_version
+     /tmp/cc6jxJh8.s:72     .bss.count_atc:0000000000000000 count_atc
+     /tmp/cc6jxJh8.s:90     .bss.count_imu:0000000000000000 count_imu
+     /tmp/cc6jxJh8.s:66     .bss.count_accumulator:0000000000000000 count_accumulator
+     /tmp/cc6jxJh8.s:96     .bss.count_inverter:0000000000000000 count_inverter
+     /tmp/cc6jxJh8.s:84     .bss.count_hour:0000000000000000 count_hour
+     /tmp/cc6jxJh8.s:102    .bss.count_min:0000000000000000 count_min
+     /tmp/cc6jxJh8.s:114    .bss.count_sec:0000000000000000 count_sec
+     /tmp/cc6jxJh8.s:78     .bss.count_dec:0000000000000000 count_dec
+     /tmp/cc6jxJh8.s:108    .bss.count_ms:0000000000000000 count_ms
+     /tmp/cc6jxJh8.s:61     .bss.atc_connected:0000000000000000 $d
+     /tmp/cc6jxJh8.s:63     .bss.count_accumulator:0000000000000000 $d
+     /tmp/cc6jxJh8.s:69     .bss.count_atc:0000000000000000 $d
+     /tmp/cc6jxJh8.s:75     .bss.count_dec:0000000000000000 $d
+     /tmp/cc6jxJh8.s:81     .bss.count_hour:0000000000000000 $d
+     /tmp/cc6jxJh8.s:87     .bss.count_imu:0000000000000000 $d
+     /tmp/cc6jxJh8.s:93     .bss.count_inverter:0000000000000000 $d
+     /tmp/cc6jxJh8.s:99     .bss.count_min:0000000000000000 $d
+     /tmp/cc6jxJh8.s:105    .bss.count_ms:0000000000000000 $d
+     /tmp/cc6jxJh8.s:111    .bss.count_sec:0000000000000000 $d
+     /tmp/cc6jxJh8.s:120    .bss.debug_msg_arrived:0000000000000000 $d
+     /tmp/cc6jxJh8.s:125    .bss.debug_rx_count:0000000000000000 $d
+     /tmp/cc6jxJh8.s:130    .bss.imu_connected:0000000000000000 $d
+     /tmp/cc6jxJh8.s:135    .bss.its0_connected:0000000000000000 $d
+ARM GAS  /tmp/cc6jxJh8.s 			page 6
 
 
-     /tmp/ccesfbyZ.s:149    .bss.mount_ok:0000000000000000 $d
-     /tmp/ccesfbyZ.s:155    .bss.msg_counter:0000000000000000 $d
-     /tmp/ccesfbyZ.s:161    .bss.msg_index:0000000000000000 $d
-     /tmp/ccesfbyZ.s:167    .bss.successfull_opening:0000000000000000 $d
-     /tmp/ccesfbyZ.s:173    .data.buffer:0000000000000000 $d
-     /tmp/ccesfbyZ.s:180    .data.filename:0000000000000000 $d
-     /tmp/ccesfbyZ.s:187    .data.filename_1:0000000000000000 $d
-     /tmp/ccesfbyZ.s:194    .data.max_files:0000000000000000 $d
-     /tmp/ccesfbyZ.s:200    .rodata.code_version:0000000000000000 $d
+     /tmp/cc6jxJh8.s:140    .bss.its1_connected:0000000000000000 $d
+     /tmp/cc6jxJh8.s:145    .bss.its2_connected:0000000000000000 $d
+     /tmp/cc6jxJh8.s:150    .bss.its3_connected:0000000000000000 $d
+     /tmp/cc6jxJh8.s:152    .bss.mount_ok:0000000000000000 $d
+     /tmp/cc6jxJh8.s:158    .bss.msg_counter:0000000000000000 $d
+     /tmp/cc6jxJh8.s:164    .bss.msg_index:0000000000000000 $d
+     /tmp/cc6jxJh8.s:173    .bss.pot_values_loaded:0000000000000000 $d
+     /tmp/cc6jxJh8.s:175    .bss.successfull_opening:0000000000000000 $d
+     /tmp/cc6jxJh8.s:181    .data.buffer:0000000000000000 $d
+     /tmp/cc6jxJh8.s:188    .data.filename:0000000000000000 $d
+     /tmp/cc6jxJh8.s:195    .data.filename_1:0000000000000000 $d
+     /tmp/cc6jxJh8.s:202    .data.filename_pot:0000000000000000 $d
+     /tmp/cc6jxJh8.s:208    .data.max_files:0000000000000000 $d
+     /tmp/cc6jxJh8.s:214    .rodata.code_version:0000000000000000 $d
 
 NO UNDEFINED SYMBOLS

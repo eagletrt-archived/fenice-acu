@@ -6,9 +6,11 @@
 typedef struct{
     int pot1_val;
     int pot2_val;
+    int max_val;
+    int min_val;
 }PotStc;
 
-uint8_t check_accel_pot();
-uint8_t check_brake_pot();
+uint8_t accel_implausibility_check();
+uint8_t brake_implausibility_check();
 
 #endif

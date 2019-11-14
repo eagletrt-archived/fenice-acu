@@ -2,12 +2,28 @@
 #include "stm32f7xx_hal.h"
 
 PotStc accel, brake;
+uint8_t accel_implausibility_check_count_flag = 0;
+uint8_t brake_implausibility_check_count_flag = 0;
+uint8_t accel_implausibility_check_count = 0;
+uint8_t brake_implausibility_check_count = 0;
 
-uint8_t check_accel_pot(){
-    if(abs(accel.pot1_val - accel.pot2_val) > 90) return 0;
-    else return 1;
+uint8_t accel_implausibility_check(){
+    if(abs(accel.pot1_val - accel.pot2_val) < 90){
+        //error
+        if(accel_implausibility_check_count_flag != 2)accel_implausibility_check_count_flag = 1; //if aiccf = 2 -> just passed 50ms
+        return 0; //return error
+    }else{
+        accel_implausibility_check_count_flag = 0;
+        accel_implausibility_check_count = 0;
+        return 1; //retrun ok
+
+    }
 }
-uint8_t check_brake_pot(){
-    if(abs(brake.pot1_val - brake.pot2_val) > 90) return 0;
-    else return 1;
+uint8_t brake_implausibility_check(){
+    return 0;
+    if(abs(brake.pot1_val - brake.pot2_val) < 90){
+
+    }else{
+
+    }
 }

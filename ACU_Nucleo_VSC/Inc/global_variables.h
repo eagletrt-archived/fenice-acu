@@ -28,12 +28,18 @@ extern UART_HandleTypeDef huart3;
 extern uint8_t imu_connected, its0_connected, its1_connected, its2_connected, its3_connected;
 extern uint8_t atc_connected;
 
+//-----------------------------------------//
+//--------------- FROM SD------------------//
+//-----------------------------------------//
+
 extern FIL loggingFile;
+extern FIL pot_values_f;
 extern FIL log_names_f;
 
 extern TCHAR message[256];
 extern char filename[256];
 extern char filename_1[256];
+extern char filename_pot[14];
 extern char txt[1000];
 
 extern int max_files;
@@ -46,15 +52,22 @@ extern char buffer[256];
 extern int bytes_read;
 
 extern char *pointer;
-extern char log_names[1000];
+extern char log_names[900];
 
 extern FRESULT res_open;
 extern FRESULT res_mount;
 
 extern int successfull_opening;
 
+extern uint8_t pot_values_loaded;
+
+//-----------------------------------------//
+//------------- FROM PEDALS----------------//
+//-----------------------------------------//
 extern PotStc accel;
 extern PotStc brake;
+extern uint8_t accel_implausibility_check_count_flag;
+extern uint8_t accel_implausibility_check_count;  
 
 //-----------------------------------------//
 //------------------ ID -------------------//

@@ -29,6 +29,7 @@
 #include "global_variables.h"
 #include "string.h"
 #include "stdio.h"
+#include "sd.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -132,6 +133,7 @@ int main(void)
 
   current_state = STATE_INIT;
 
+  init_sd();
   
   /* USER CODE END 2 */
 
@@ -159,8 +161,6 @@ int main(void)
 		  init();
 	  }else if(current_state == STATE_IDLE){
 		  idle();
-	  }else if(current_state == STATE_CALIB){
-		  calib();
 	  }else if(current_state == STATE_SETUP){
 		  setup();
 	  }else if(current_state == STATE_RUN){
@@ -443,13 +443,20 @@ static void MX_GPIO_Init(void)
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
 	if(htim == &htim2){
 		count_ms += 1;
+		if(accel_implausibility_check_count_flag == 1){
+			accel_implausibility_check_count++;
+			if(accel_implausibility_check_count == 50){
+				accel_implausibility_check_count_flag = 2;
+				//TODO: add error messages
+			}
+		}
 		if(count_ms == 100){
 			count_ms = 0;
 			count_dec++;
 			//--- put your counter here (count each 0,1 sec) ---//
 			count_inverter++;
 			count_imu++;
-            count_atc++;
+      		count_atc++;
 			if(count_inverter == 10){ //--- check if inverter is connected ---//
 				//TODO: to implement error functions
 			}else if(count_inverter == 11){

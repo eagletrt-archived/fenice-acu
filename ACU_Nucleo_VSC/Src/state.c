@@ -84,15 +84,6 @@ void idle(){
  *                         END IDLE STATE
  *******************************************************************/
 /*******************************************************************
- *                        START CALIB STATE
- *******************************************************************/
-void calib(){
-
-}
-/*******************************************************************
- *                         END CALIB STATE
- *******************************************************************/
-/*******************************************************************
  *                        START SETUP STATE
  *******************************************************************/
 void setup(){
@@ -180,8 +171,6 @@ void debug_operations(){
 			HAL_UART_Transmit(&huart3,(uint8_t*)"\r\nCurrent state: STATE_INIT\r\n", strlen("\r\nCurrent state: STATE_INIT\r\n"), 100);
 		}else if(current_state == STATE_IDLE){
 			HAL_UART_Transmit(&huart3,(uint8_t*)"\r\nCurrent state: STATE_IDLE\r\n", strlen("\r\nCurrent state: STATE_IDLE\r\n"), 100);
-		}else if(current_state == STATE_CALIB){
-			HAL_UART_Transmit(&huart3,(uint8_t*)"\r\nCurrent state: STATE_CALIB\r\n", strlen("\r\nCurrent state: STATE_CALIB\r\n"), 100);
 		}else if(current_state == STATE_SETUP){
 			HAL_UART_Transmit(&huart3,(uint8_t*)"\r\nCurrent state: STATE_SETUP\r\n", strlen("\r\nCurrent state: STATE_SETUP\r\n"), 100);
 		}else if(current_state == STATE_RUN){
@@ -236,14 +225,14 @@ void atc_pot_operations(){
 	accel.pot2_val = can1.dataRx[1];
 	brake.pot1_val = can1.dataRx[2];
 	brake.pot2_val = can1.dataRx[3];
-	if(check_accel_pot()){
+	if(accel_implausibility_check()){
 		accel.pot1_val = 0;
 		accel.pot2_val = 0;
 	}
-	if(check_brake_pot()){
+	/*if(brake_implausibility_check()){
 		brake.pot1_val = 0;
 		brake.pot2_val = 0;
-	}
+	}*/
 
 }
 
