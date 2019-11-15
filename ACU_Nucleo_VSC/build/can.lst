@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccezYmfJ.s 			page 1
+ARM GAS  /tmp/cc3Lv0SS.s 			page 1
 
 
    1              		.cpu cortex-m7
@@ -30,17 +30,17 @@ ARM GAS  /tmp/ccezYmfJ.s 			page 1
   28              		.file 1 "Src/can.c"
    1:Src/can.c     **** #include "can.h"
    2:Src/can.c     **** #include "main.h"
-   3:Src/can.c     **** #include "string.h"
-   4:Src/can.c     **** #include "stdio.h"
-   5:Src/can.c     **** #include "stm32f7xx_hal_can.h"
+   3:Src/can.c     **** #include "stdio.h"
+   4:Src/can.c     **** #include "stm32f7xx_hal_can.h"
+   5:Src/can.c     **** #include "string.h"
    6:Src/can.c     **** 
-   7:Src/can.c     **** //extern CAN_HandleTypeDef hcan1;
+   7:Src/can.c     **** // extern CAN_HandleTypeDef hcan1;
    8:Src/can.c     **** extern CAN_HandleTypeDef hcan1;
    9:Src/can.c     **** extern UART_HandleTypeDef huart3;
-  10:Src/can.c     **** canStruct can1,can3;
+  10:Src/can.c     **** canStruct can1, can3;
   11:Src/can.c     **** char txt[100];
-  12:Src/can.c     **** void can_init(){
-  13:Src/can.c     **** 	if(CAN_initialization(&can1)){
+  12:Src/can.c     **** void can_init() {
+  13:Src/can.c     **** 	if (CAN_initialization(&can1)) {
   14:Src/can.c     **** 		report_error_can1();
   15:Src/can.c     **** 	}
   16:Src/can.c     **** 	/*
@@ -49,61 +49,63 @@ ARM GAS  /tmp/ccezYmfJ.s 			page 1
   19:Src/can.c     **** 	}*/
   20:Src/can.c     **** }
   21:Src/can.c     **** 
-  22:Src/can.c     **** uint8_t CAN_Send(canStruct* can, fifoPriority _fifoPriority){
-  23:Src/can.c     **** 	if (HAL_CAN_GetTxMailboxesFreeLevel(can->hcan) != 0){
-  24:Src/can.c     **** 		if(CAN_Send_IT(can) == 0){
-  25:Src/can.c     **** 			//HAL_UART_Transmit(&huart3,(uint8_t*)("Cagato fuori dal vaso\r\n"), strlen("Cagato fuori dal va
-  26:Src/can.c     **** 			return 0;
-  27:Src/can.c     **** 		}
-  28:Src/can.c     **** 		else{
-  29:Src/can.c     **** 			//sprintf(txt, "id: %d\r\n", (int)can->id);
-  30:Src/can.c     **** 			//HAL_UART_Transmit(&huart3,(uint8_t*)(txt), strlen(txt), 10);
-ARM GAS  /tmp/ccezYmfJ.s 			page 2
+  22:Src/can.c     **** uint8_t CAN_Send(canStruct* can, fifoPriority _fifoPriority) {
+  23:Src/can.c     **** 	if (HAL_CAN_GetTxMailboxesFreeLevel(can->hcan) != 0) {
+  24:Src/can.c     **** 		if (CAN_Send_IT(can) == 0) {
+  25:Src/can.c     **** 			// HAL_UART_Transmit(&huart3,(uint8_t*)("Cagato fuori dal
+  26:Src/can.c     **** 			// vaso\r\n"), strlen("Cagato fuori dal vaso\r\n"), 10);
+  27:Src/can.c     **** 			return 0;
+  28:Src/can.c     **** 		} else {
+  29:Src/can.c     **** 			// sprintf(txt, "id: %d\r\n", (int)can->id);
+  30:Src/can.c     **** 			// HAL_UART_Transmit(&huart3,(uint8_t*)(txt), strlen(txt), 10);
+ARM GAS  /tmp/cc3Lv0SS.s 			page 2
 
 
-  31:Src/can.c     **** 			//HAL_UART_Transmit(&huart3,(uint8_t*)("sent\r\n"), strlen("sent\r\n"), 10);
-  32:Src/can.c     **** 		}
-  33:Src/can.c     **** 	}else{
-  34:Src/can.c     **** 		//HAL_UART_Transmit(&huart3,(uint8_t*)("Metto in coda\r\n"), strlen("Metto in coda\r\n"), 10);
-  35:Src/can.c     **** 		if(_fifoPriority == normalPriority){
-  36:Src/can.c     **** 			if(can->hcan == &hcan1){
-  37:Src/can.c     **** 				if(fifoTxDataCAN_normal_push(can) == 0){
-  38:Src/can.c     **** 					HAL_UART_Transmit(&huart3,(uint8_t*)("Error while normal push\r\n"), strlen("Error while norma
-  39:Src/can.c     **** 					return 0;
-  40:Src/can.c     **** 				}
-  41:Src/can.c     **** 			}
-  42:Src/can.c     **** 			/*else{
-  43:Src/can.c     **** 				if(fifoTxDataCAN3_normal_push(&fifoCAN3, &fifodata) == 0){
-  44:Src/can.c     **** 					//TODO: implementare errore
-  45:Src/can.c     **** 					return 0;
-  46:Src/can.c     **** 				}*/
-  47:Src/can.c     **** 			//}
-  48:Src/can.c     **** 		}else{
-  49:Src/can.c     **** 			if(can->hcan == &hcan1){
-  50:Src/can.c     **** 				if(fifoTxDataCAN_high_push(can) == 0){
-  51:Src/can.c     **** 					//TODO: implementare errore
-  52:Src/can.c     **** 					return 0;
-  53:Src/can.c     **** 				}
-  54:Src/can.c     **** 			}
-  55:Src/can.c     **** 			/*else{
-  56:Src/can.c     **** 				if(fifoTxDataCAN3_high_push(&fifoCAN3, &fifodata) == 0){
-  57:Src/can.c     **** 					//TODO: implementare errore
-  58:Src/can.c     **** 					return 0;
-  59:Src/can.c     **** 				}*/
-  60:Src/can.c     **** 			//}
-  61:Src/can.c     **** 		}
-  62:Src/can.c     **** 
-  63:Src/can.c     **** 	}
-  64:Src/can.c     **** 	return 1;
-  65:Src/can.c     **** }
-  66:Src/can.c     **** 
-  67:Src/can.c     **** 
-  68:Src/can.c     **** uint8_t CAN_Send_IT(canStruct* can){
-  29              		.loc 1 68 36 view -0
+  31:Src/can.c     **** 			// HAL_UART_Transmit(&huart3,(uint8_t*)("sent\r\n"),
+  32:Src/can.c     **** 			// strlen("sent\r\n"), 10);
+  33:Src/can.c     **** 		}
+  34:Src/can.c     **** 	} else {
+  35:Src/can.c     **** 		// HAL_UART_Transmit(&huart3,(uint8_t*)("Metto in coda\r\n"),
+  36:Src/can.c     **** 		// strlen("Metto in coda\r\n"), 10);
+  37:Src/can.c     **** 		if (_fifoPriority == normalPriority) {
+  38:Src/can.c     **** 			if (can->hcan == &hcan1) {
+  39:Src/can.c     **** 				if (fifoTxDataCAN_normal_push(can) == 0) {
+  40:Src/can.c     **** 					HAL_UART_Transmit(
+  41:Src/can.c     **** 						&huart3, (uint8_t*)("Error while normal push\r\n"),
+  42:Src/can.c     **** 						strlen("Error while normal push\r\n"), 10);
+  43:Src/can.c     **** 					return 0;
+  44:Src/can.c     **** 				}
+  45:Src/can.c     **** 			}
+  46:Src/can.c     **** 			/*else{
+  47:Src/can.c     **** 				if(fifoTxDataCAN3_normal_push(&fifoCAN3, &fifodata) == 0){
+  48:Src/can.c     **** 					//TODO: implementare errore
+  49:Src/can.c     **** 					return 0;
+  50:Src/can.c     **** 				}*/
+  51:Src/can.c     **** 			//}
+  52:Src/can.c     **** 		} else {
+  53:Src/can.c     **** 			if (can->hcan == &hcan1) {
+  54:Src/can.c     **** 				if (fifoTxDataCAN_high_push(can) == 0) {
+  55:Src/can.c     **** 					// TODO: implementare errore
+  56:Src/can.c     **** 					return 0;
+  57:Src/can.c     **** 				}
+  58:Src/can.c     **** 			}
+  59:Src/can.c     **** 			/*else{
+  60:Src/can.c     **** 				if(fifoTxDataCAN3_high_push(&fifoCAN3, &fifodata) == 0){
+  61:Src/can.c     **** 					//TODO: implementare errore
+  62:Src/can.c     **** 					return 0;
+  63:Src/can.c     **** 				}*/
+  64:Src/can.c     **** 			//}
+  65:Src/can.c     **** 		}
+  66:Src/can.c     **** 	}
+  67:Src/can.c     **** 	return 1;
+  68:Src/can.c     **** }
+  69:Src/can.c     **** 
+  70:Src/can.c     **** uint8_t CAN_Send_IT(canStruct* can) {
+  29              		.loc 1 70 37 view -0
   30              		.cfi_startproc
   31              		@ args = 0, pretend = 0, frame = 32
   32              		@ frame_needed = 0, uses_anonymous_args = 0
-  33              		.loc 1 68 36 is_stmt 0 view .LVU1
+  33              		.loc 1 70 37 is_stmt 0 view .LVU1
   34 0000 00B5     		push	{lr}
   35              	.LCFI0:
   36              		.cfi_def_cfa_offset 4
@@ -111,136 +113,136 @@ ARM GAS  /tmp/ccezYmfJ.s 			page 1
   38 0002 89B0     		sub	sp, sp, #36
   39              	.LCFI1:
   40              		.cfi_def_cfa_offset 40
-  69:Src/can.c     **** 
-  70:Src/can.c     **** 	uint32_t mailbox = 0;
-  41              		.loc 1 70 2 is_stmt 1 view .LVU2
-  42              		.loc 1 70 11 is_stmt 0 view .LVU3
+  71:Src/can.c     **** 	uint32_t mailbox = 0;
+  41              		.loc 1 71 2 is_stmt 1 view .LVU2
+  42              		.loc 1 71 11 is_stmt 0 view .LVU3
   43 0004 0023     		movs	r3, #0
   44 0006 0793     		str	r3, [sp, #28]
-  71:Src/can.c     **** 	//CAN_TxMailBox_TypeDef mailbox;
-ARM GAS  /tmp/ccezYmfJ.s 			page 3
+ARM GAS  /tmp/cc3Lv0SS.s 			page 3
 
 
-  72:Src/can.c     **** 	//mailbox.TIR = 0; //set to mailbox 0
-  73:Src/can.c     **** 
-  74:Src/can.c     **** 	for(int i = 0; i < 8; i++){
-  45              		.loc 1 74 2 is_stmt 1 view .LVU4
+  72:Src/can.c     **** 	// CAN_TxMailBox_TypeDef mailbox;
+  73:Src/can.c     **** 	// mailbox.TIR = 0; //set to mailbox 0
+  74:Src/can.c     **** 
+  75:Src/can.c     **** 	for (int i = 0; i < 8; i++) {
+  45              		.loc 1 75 2 is_stmt 1 view .LVU4
   46              	.LBB2:
-  47              		.loc 1 74 6 view .LVU5
+  47              		.loc 1 75 7 view .LVU5
   48              	.LVL1:
-  49              		.loc 1 74 2 is_stmt 0 view .LVU6
-  50 0008 03E0     		b	.L2
+  49              		.loc 1 75 2 is_stmt 0 view .LVU6
+  50 0008 04E0     		b	.L2
   51              	.LVL2:
   52              	.L3:
-  75:Src/can.c     **** 		can->dataTxBck[i] = can->dataTx[i];
-  53              		.loc 1 75 3 is_stmt 1 discriminator 3 view .LVU7
-  54              		.loc 1 75 34 is_stmt 0 discriminator 3 view .LVU8
+  76:Src/can.c     **** 		can->dataTxBck[i] = can->dataTx[i];
+  53              		.loc 1 76 3 is_stmt 1 discriminator 3 view .LVU7
+  54              		.loc 1 76 34 is_stmt 0 discriminator 3 view .LVU8
   55 000a C218     		adds	r2, r0, r3
-  56 000c 117A     		ldrb	r1, [r2, #8]	@ zero_extendqisi2
-  57              		.loc 1 75 21 discriminator 3 view .LVU9
-  58 000e 1176     		strb	r1, [r2, #24]
-  74:Src/can.c     **** 		can->dataTxBck[i] = can->dataTx[i];
-  59              		.loc 1 74 24 is_stmt 1 discriminator 3 view .LVU10
-  74:Src/can.c     **** 		can->dataTxBck[i] = can->dataTx[i];
-  60              		.loc 1 74 25 is_stmt 0 discriminator 3 view .LVU11
-  61 0010 0133     		adds	r3, r3, #1
+  56 000c 117B     		ldrb	r1, [r2, #12]	@ zero_extendqisi2
+  57              		.loc 1 76 21 discriminator 3 view .LVU9
+  58 000e 82F82410 		strb	r1, [r2, #36]
+  75:Src/can.c     **** 		can->dataTxBck[i] = can->dataTx[i];
+  59              		.loc 1 75 25 is_stmt 1 discriminator 3 view .LVU10
+  75:Src/can.c     **** 		can->dataTxBck[i] = can->dataTx[i];
+  60              		.loc 1 75 26 is_stmt 0 discriminator 3 view .LVU11
+  61 0012 0133     		adds	r3, r3, #1
   62              	.LVL3:
   63              	.L2:
-  74:Src/can.c     **** 		can->dataTxBck[i] = can->dataTx[i];
-  64              		.loc 1 74 17 is_stmt 1 discriminator 1 view .LVU12
-  74:Src/can.c     **** 		can->dataTxBck[i] = can->dataTx[i];
-  65              		.loc 1 74 2 is_stmt 0 discriminator 1 view .LVU13
-  66 0012 072B     		cmp	r3, #7
-  67 0014 F9DD     		ble	.L3
+  75:Src/can.c     **** 		can->dataTxBck[i] = can->dataTx[i];
+  64              		.loc 1 75 18 is_stmt 1 discriminator 1 view .LVU12
+  75:Src/can.c     **** 		can->dataTxBck[i] = can->dataTx[i];
+  65              		.loc 1 75 2 is_stmt 0 discriminator 1 view .LVU13
+  66 0014 072B     		cmp	r3, #7
+  67 0016 F8DD     		ble	.L3
   68              	.LBE2:
-  76:Src/can.c     **** 	}
-  77:Src/can.c     **** 	can->idBck = can->tx_id;
-  69              		.loc 1 77 2 is_stmt 1 view .LVU14
-  70              		.loc 1 77 18 is_stmt 0 view .LVU15
-  71 0016 036A     		ldr	r3, [r0, #32]
+  77:Src/can.c     **** 	}
+  78:Src/can.c     **** 	can->idBck = can->tx_id;
+  69              		.loc 1 78 2 is_stmt 1 view .LVU14
+  70              		.loc 1 78 18 is_stmt 0 view .LVU15
+  71 0018 C36A     		ldr	r3, [r0, #44]
   72              	.LVL4:
-  73              		.loc 1 77 13 view .LVU16
-  74 0018 8362     		str	r3, [r0, #40]
-  78:Src/can.c     **** 	can->sizeBck = can->tx_size;
-  75              		.loc 1 78 2 is_stmt 1 view .LVU17
-  76              		.loc 1 78 20 is_stmt 0 view .LVU18
-  77 001a 0268     		ldr	r2, [r0]
-  78              		.loc 1 78 15 view .LVU19
-  79 001c C262     		str	r2, [r0, #44]
-  79:Src/can.c     **** 
-  80:Src/can.c     **** 	uint8_t flag = 0; //error
-  80              		.loc 1 80 2 is_stmt 1 view .LVU20
-  81              	.LVL5:
-  81:Src/can.c     **** 
-  82:Src/can.c     **** 	CAN_TxHeaderTypeDef TxHeader;
-  82              		.loc 1 82 2 view .LVU21
-  83:Src/can.c     **** 	TxHeader.StdId = can->tx_id;
-  83              		.loc 1 83 2 view .LVU22
-  84              		.loc 1 83 17 is_stmt 0 view .LVU23
-  85 001e 0193     		str	r3, [sp, #4]
-ARM GAS  /tmp/ccezYmfJ.s 			page 4
-
-
-  84:Src/can.c     **** 	TxHeader.IDE = CAN_ID_STD;
-  86              		.loc 1 84 2 is_stmt 1 view .LVU24
-  87              		.loc 1 84 15 is_stmt 0 view .LVU25
-  88 0020 0023     		movs	r3, #0
-  89 0022 0393     		str	r3, [sp, #12]
-  85:Src/can.c     **** 	TxHeader.RTR = CAN_RTR_DATA;
-  90              		.loc 1 85 2 is_stmt 1 view .LVU26
-  91              		.loc 1 85 15 is_stmt 0 view .LVU27
-  92 0024 0493     		str	r3, [sp, #16]
-  86:Src/can.c     **** 	TxHeader.DLC = can->tx_size;
-  93              		.loc 1 86 2 is_stmt 1 view .LVU28
-  94              		.loc 1 86 15 is_stmt 0 view .LVU29
-  95 0026 0592     		str	r2, [sp, #20]
-  87:Src/can.c     **** 	TxHeader.TransmitGlobalTime = DISABLE;
-  96              		.loc 1 87 2 is_stmt 1 view .LVU30
-  97              		.loc 1 87 30 is_stmt 0 view .LVU31
-  98 0028 8DF81830 		strb	r3, [sp, #24]
-  88:Src/can.c     **** 
-  89:Src/can.c     **** 	if(HAL_CAN_AddTxMessage(can->hcan, &TxHeader, can->dataTx, &mailbox) == HAL_OK){
-  99              		.loc 1 89 2 is_stmt 1 view .LVU32
- 100              		.loc 1 89 5 is_stmt 0 view .LVU33
- 101 002c 07AB     		add	r3, sp, #28
- 102 002e 00F10802 		add	r2, r0, #8
- 103 0032 01A9     		add	r1, sp, #4
- 104 0034 006B     		ldr	r0, [r0, #48]
- 105              	.LVL6:
- 106              		.loc 1 89 5 view .LVU34
- 107 0036 FFF7FEFF 		bl	HAL_CAN_AddTxMessage
- 108              	.LVL7:
- 109              		.loc 1 89 4 view .LVU35
- 110 003a 18B1     		cbz	r0, .L5
+  73              		.loc 1 78 13 view .LVU16
+  74 001a 8363     		str	r3, [r0, #56]
+  79:Src/can.c     **** 	can->sizeBck = can->tx_size;
+  75              		.loc 1 79 2 is_stmt 1 view .LVU17
+  76              		.loc 1 79 20 is_stmt 0 view .LVU18
+  77 001c 0268     		ldr	r2, [r0]
+  78              		.loc 1 79 15 view .LVU19
+  79 001e C263     		str	r2, [r0, #60]
   80:Src/can.c     **** 
- 111              		.loc 1 80 10 view .LVU36
- 112 003c 0020     		movs	r0, #0
+  81:Src/can.c     **** 	uint8_t flag = 0;  // error
+  80              		.loc 1 81 2 is_stmt 1 view .LVU20
+  81              	.LVL5:
+  82:Src/can.c     **** 
+  83:Src/can.c     **** 	CAN_TxHeaderTypeDef TxHeader;
+  82              		.loc 1 83 2 view .LVU21
+  84:Src/can.c     **** 	TxHeader.StdId = can->tx_id;
+  83              		.loc 1 84 2 view .LVU22
+  84              		.loc 1 84 17 is_stmt 0 view .LVU23
+ARM GAS  /tmp/cc3Lv0SS.s 			page 4
+
+
+  85 0020 0193     		str	r3, [sp, #4]
+  85:Src/can.c     **** 	TxHeader.IDE = CAN_ID_STD;
+  86              		.loc 1 85 2 is_stmt 1 view .LVU24
+  87              		.loc 1 85 15 is_stmt 0 view .LVU25
+  88 0022 0023     		movs	r3, #0
+  89 0024 0393     		str	r3, [sp, #12]
+  86:Src/can.c     **** 	TxHeader.RTR = CAN_RTR_DATA;
+  90              		.loc 1 86 2 is_stmt 1 view .LVU26
+  91              		.loc 1 86 15 is_stmt 0 view .LVU27
+  92 0026 0493     		str	r3, [sp, #16]
+  87:Src/can.c     **** 	TxHeader.DLC = can->tx_size;
+  93              		.loc 1 87 2 is_stmt 1 view .LVU28
+  94              		.loc 1 87 15 is_stmt 0 view .LVU29
+  95 0028 0592     		str	r2, [sp, #20]
+  88:Src/can.c     **** 	TxHeader.TransmitGlobalTime = DISABLE;
+  96              		.loc 1 88 2 is_stmt 1 view .LVU30
+  97              		.loc 1 88 30 is_stmt 0 view .LVU31
+  98 002a 8DF81830 		strb	r3, [sp, #24]
+  89:Src/can.c     **** 
+  90:Src/can.c     **** 	if (HAL_CAN_AddTxMessage(can->hcan, &TxHeader, can->dataTx, &mailbox) ==
+  99              		.loc 1 90 2 is_stmt 1 view .LVU32
+ 100              		.loc 1 90 6 is_stmt 0 view .LVU33
+ 101 002e 07AB     		add	r3, sp, #28
+ 102 0030 00F10C02 		add	r2, r0, #12
+ 103 0034 01A9     		add	r1, sp, #4
+ 104 0036 006C     		ldr	r0, [r0, #64]
+ 105              	.LVL6:
+ 106              		.loc 1 90 6 view .LVU34
+ 107 0038 FFF7FEFF 		bl	HAL_CAN_AddTxMessage
+ 108              	.LVL7:
+ 109              		.loc 1 90 5 view .LVU35
+ 110 003c 18B1     		cbz	r0, .L5
+  81:Src/can.c     **** 
+ 111              		.loc 1 81 10 view .LVU36
+ 112 003e 0020     		movs	r0, #0
  113              	.L4:
  114              	.LVL8:
-  90:Src/can.c     **** 		flag = 1; //ok
-  91:Src/can.c     **** 	}
-  92:Src/can.c     **** 
-  93:Src/can.c     **** 	return flag;
- 115              		.loc 1 93 2 is_stmt 1 view .LVU37
-  94:Src/can.c     **** }
- 116              		.loc 1 94 1 is_stmt 0 view .LVU38
- 117 003e 09B0     		add	sp, sp, #36
+  91:Src/can.c     **** 		HAL_OK) {
+  92:Src/can.c     **** 		flag = 1;  // ok
+  93:Src/can.c     **** 	}
+  94:Src/can.c     **** 
+  95:Src/can.c     **** 	return flag;
+ 115              		.loc 1 95 2 is_stmt 1 view .LVU37
+  96:Src/can.c     **** }
+ 116              		.loc 1 96 1 is_stmt 0 view .LVU38
+ 117 0040 09B0     		add	sp, sp, #36
  118              	.LCFI2:
  119              		.cfi_remember_state
  120              		.cfi_def_cfa_offset 4
  121              		@ sp needed
- 122 0040 5DF804FB 		ldr	pc, [sp], #4
+ 122 0042 5DF804FB 		ldr	pc, [sp], #4
  123              	.LVL9:
  124              	.L5:
  125              	.LCFI3:
  126              		.cfi_restore_state
-  90:Src/can.c     **** 		flag = 1; //ok
- 127              		.loc 1 90 8 view .LVU39
- 128 0044 0120     		movs	r0, #1
- 129 0046 FAE7     		b	.L4
-ARM GAS  /tmp/ccezYmfJ.s 			page 5
+  92:Src/can.c     **** 	}
+ 127              		.loc 1 92 8 view .LVU39
+ARM GAS  /tmp/cc3Lv0SS.s 			page 5
 
 
+ 128 0046 0120     		movs	r0, #1
+ 129 0048 FAE7     		b	.L4
  130              		.cfi_endproc
  131              	.LFE146:
  133              		.section	.text.CAN_Send_Bck,"ax",%progbits
@@ -253,13 +255,13 @@ ARM GAS  /tmp/ccezYmfJ.s 			page 1
  141              	CAN_Send_Bck:
  142              	.LVL10:
  143              	.LFB147:
-  95:Src/can.c     **** 
-  96:Src/can.c     **** uint8_t CAN_Send_Bck(canStruct* can){
- 144              		.loc 1 96 37 is_stmt 1 view -0
+  97:Src/can.c     **** 
+  98:Src/can.c     **** uint8_t CAN_Send_Bck(canStruct* can) {
+ 144              		.loc 1 98 38 is_stmt 1 view -0
  145              		.cfi_startproc
  146              		@ args = 0, pretend = 0, frame = 24
  147              		@ frame_needed = 0, uses_anonymous_args = 0
- 148              		.loc 1 96 37 is_stmt 0 view .LVU41
+ 148              		.loc 1 98 38 is_stmt 0 view .LVU41
  149 0000 00B5     		push	{lr}
  150              	.LCFI4:
  151              		.cfi_def_cfa_offset 4
@@ -267,67 +269,67 @@ ARM GAS  /tmp/ccezYmfJ.s 			page 1
  153 0002 87B0     		sub	sp, sp, #28
  154              	.LCFI5:
  155              		.cfi_def_cfa_offset 32
-  97:Src/can.c     **** 
-  98:Src/can.c     **** 	uint8_t flag = 0; //error
- 156              		.loc 1 98 2 is_stmt 1 view .LVU42
+  99:Src/can.c     **** 	uint8_t flag = 0;  // error
+ 156              		.loc 1 99 2 is_stmt 1 view .LVU42
  157              	.LVL11:
-  99:Src/can.c     **** 
- 100:Src/can.c     **** 	CAN_TxHeaderTypeDef TxHeader;
- 158              		.loc 1 100 2 view .LVU43
- 101:Src/can.c     **** 	TxHeader.StdId = can->idBck;
- 159              		.loc 1 101 2 view .LVU44
- 160              		.loc 1 101 22 is_stmt 0 view .LVU45
- 161 0004 836A     		ldr	r3, [r0, #40]
- 162              		.loc 1 101 17 view .LVU46
+ 100:Src/can.c     **** 
+ 101:Src/can.c     **** 	CAN_TxHeaderTypeDef TxHeader;
+ 158              		.loc 1 101 2 view .LVU43
+ 102:Src/can.c     **** 	TxHeader.StdId = can->idBck;
+ 159              		.loc 1 102 2 view .LVU44
+ 160              		.loc 1 102 22 is_stmt 0 view .LVU45
+ 161 0004 836B     		ldr	r3, [r0, #56]
+ 162              		.loc 1 102 17 view .LVU46
  163 0006 0093     		str	r3, [sp]
- 102:Src/can.c     **** 	TxHeader.IDE = CAN_ID_STD;
- 164              		.loc 1 102 2 is_stmt 1 view .LVU47
- 165              		.loc 1 102 15 is_stmt 0 view .LVU48
+ 103:Src/can.c     **** 	TxHeader.IDE = CAN_ID_STD;
+ 164              		.loc 1 103 2 is_stmt 1 view .LVU47
+ 165              		.loc 1 103 15 is_stmt 0 view .LVU48
  166 0008 0023     		movs	r3, #0
  167 000a 0293     		str	r3, [sp, #8]
- 103:Src/can.c     **** 	TxHeader.RTR = CAN_RTR_DATA;
- 168              		.loc 1 103 2 is_stmt 1 view .LVU49
- 169              		.loc 1 103 15 is_stmt 0 view .LVU50
+ 104:Src/can.c     **** 	TxHeader.RTR = CAN_RTR_DATA;
+ 168              		.loc 1 104 2 is_stmt 1 view .LVU49
+ 169              		.loc 1 104 15 is_stmt 0 view .LVU50
  170 000c 0393     		str	r3, [sp, #12]
- 104:Src/can.c     **** 	TxHeader.DLC = can->sizeBck;
- 171              		.loc 1 104 2 is_stmt 1 view .LVU51
- 172              		.loc 1 104 20 is_stmt 0 view .LVU52
- 173 000e C26A     		ldr	r2, [r0, #44]
- 174              		.loc 1 104 15 view .LVU53
+ 105:Src/can.c     **** 	TxHeader.DLC = can->sizeBck;
+ 171              		.loc 1 105 2 is_stmt 1 view .LVU51
+ 172              		.loc 1 105 20 is_stmt 0 view .LVU52
+ 173 000e C26B     		ldr	r2, [r0, #60]
+ 174              		.loc 1 105 15 view .LVU53
  175 0010 0492     		str	r2, [sp, #16]
- 105:Src/can.c     **** 	TxHeader.TransmitGlobalTime = DISABLE;
- 176              		.loc 1 105 2 is_stmt 1 view .LVU54
- 177              		.loc 1 105 30 is_stmt 0 view .LVU55
-ARM GAS  /tmp/ccezYmfJ.s 			page 6
+ 106:Src/can.c     **** 	TxHeader.TransmitGlobalTime = DISABLE;
+ 176              		.loc 1 106 2 is_stmt 1 view .LVU54
+ARM GAS  /tmp/cc3Lv0SS.s 			page 6
 
 
+ 177              		.loc 1 106 30 is_stmt 0 view .LVU55
  178 0012 8DF81430 		strb	r3, [sp, #20]
- 106:Src/can.c     **** 
- 107:Src/can.c     **** 	if(HAL_CAN_AddTxMessage(can->hcan, &TxHeader, can->dataTxBck,(uint32_t*)CAN_TX_MAILBOX0) == HAL_OK
- 179              		.loc 1 107 2 is_stmt 1 view .LVU56
- 180              		.loc 1 107 5 is_stmt 0 view .LVU57
+ 107:Src/can.c     **** 
+ 108:Src/can.c     **** 	if (HAL_CAN_AddTxMessage(can->hcan, &TxHeader, can->dataTxBck,
+ 179              		.loc 1 108 2 is_stmt 1 view .LVU56
+ 180              		.loc 1 108 6 is_stmt 0 view .LVU57
  181 0016 0123     		movs	r3, #1
- 182 0018 00F11802 		add	r2, r0, #24
+ 182 0018 00F12402 		add	r2, r0, #36
  183 001c 6946     		mov	r1, sp
- 184 001e 006B     		ldr	r0, [r0, #48]
+ 184 001e 006C     		ldr	r0, [r0, #64]
  185              	.LVL12:
- 186              		.loc 1 107 5 view .LVU58
+ 186              		.loc 1 108 6 view .LVU58
  187 0020 FFF7FEFF 		bl	HAL_CAN_AddTxMessage
  188              	.LVL13:
- 189              		.loc 1 107 4 view .LVU59
+ 189              		.loc 1 108 5 view .LVU59
  190 0024 18B1     		cbz	r0, .L9
-  98:Src/can.c     **** 
- 191              		.loc 1 98 10 view .LVU60
+  99:Src/can.c     **** 
+ 191              		.loc 1 99 10 view .LVU60
  192 0026 0020     		movs	r0, #0
  193              	.L8:
  194              	.LVL14:
- 108:Src/can.c     **** 		flag = 1; //ok
- 109:Src/can.c     **** 	}
- 110:Src/can.c     **** 
- 111:Src/can.c     **** 	return flag;
- 195              		.loc 1 111 2 is_stmt 1 view .LVU61
- 112:Src/can.c     **** }
- 196              		.loc 1 112 1 is_stmt 0 view .LVU62
+ 109:Src/can.c     **** 							 (uint32_t*)CAN_TX_MAILBOX0) == HAL_OK) {
+ 110:Src/can.c     **** 		flag = 1;  // ok
+ 111:Src/can.c     **** 	}
+ 112:Src/can.c     **** 
+ 113:Src/can.c     **** 	return flag;
+ 195              		.loc 1 113 2 is_stmt 1 view .LVU61
+ 114:Src/can.c     **** }
+ 196              		.loc 1 114 1 is_stmt 0 view .LVU62
  197 0028 07B0     		add	sp, sp, #28
  198              	.LCFI6:
  199              		.cfi_remember_state
@@ -338,8 +340,8 @@ ARM GAS  /tmp/ccezYmfJ.s 			page 1
  204              	.L9:
  205              	.LCFI7:
  206              		.cfi_restore_state
- 108:Src/can.c     **** 		flag = 1; //ok
- 207              		.loc 1 108 8 view .LVU63
+ 110:Src/can.c     **** 	}
+ 207              		.loc 1 110 8 view .LVU63
  208 002e 0120     		movs	r0, #1
  209 0030 FAE7     		b	.L8
  210              		.cfi_endproc
@@ -354,16 +356,16 @@ ARM GAS  /tmp/ccezYmfJ.s 			page 1
  221              	CAN_initialization:
  222              	.LVL16:
  223              	.LFB148:
- 113:Src/can.c     **** 
- 114:Src/can.c     **** uint8_t CAN_initialization(canStruct *can){
- 224              		.loc 1 114 43 is_stmt 1 view -0
+ 115:Src/can.c     **** 
+ 116:Src/can.c     **** uint8_t CAN_initialization(canStruct* can) {
+ARM GAS  /tmp/cc3Lv0SS.s 			page 7
+
+
+ 224              		.loc 1 116 44 is_stmt 1 view -0
  225              		.cfi_startproc
-ARM GAS  /tmp/ccezYmfJ.s 			page 7
-
-
  226              		@ args = 0, pretend = 0, frame = 0
  227              		@ frame_needed = 0, uses_anonymous_args = 0
- 228              		.loc 1 114 43 is_stmt 0 view .LVU65
+ 228              		.loc 1 116 44 is_stmt 0 view .LVU65
  229 0000 38B5     		push	{r3, r4, r5, lr}
  230              	.LCFI8:
  231              		.cfi_def_cfa_offset 16
@@ -372,141 +374,141 @@ ARM GAS  /tmp/ccezYmfJ.s 			page 1
  234              		.cfi_offset 5, -8
  235              		.cfi_offset 14, -4
  236 0002 0446     		mov	r4, r0
- 115:Src/can.c     **** 
- 116:Src/can.c     **** 
- 117:Src/can.c     **** 
- 118:Src/can.c     **** 	//CAN filter initialization
- 119:Src/can.c     **** 	can->canFilter.FilterMode = CAN_FILTERMODE_IDMASK;
- 237              		.loc 1 119 2 is_stmt 1 view .LVU66
- 238              		.loc 1 119 28 is_stmt 0 view .LVU67
+ 117:Src/can.c     **** 	// CAN filter initialization
+ 118:Src/can.c     **** 	can->canFilter.FilterMode = CAN_FILTERMODE_IDMASK;
+ 237              		.loc 1 118 2 is_stmt 1 view .LVU66
+ 238              		.loc 1 118 28 is_stmt 0 view .LVU67
  239 0004 0025     		movs	r5, #0
- 240 0006 C564     		str	r5, [r0, #76]
- 120:Src/can.c     **** 	can->canFilter.FilterIdLow = 0;
- 241              		.loc 1 120 2 is_stmt 1 view .LVU68
- 242              		.loc 1 120 29 is_stmt 0 view .LVU69
- 243 0008 8563     		str	r5, [r0, #56]
- 121:Src/can.c     **** 	can->canFilter.FilterIdHigh = 0;
- 244              		.loc 1 121 2 is_stmt 1 view .LVU70
- 245              		.loc 1 121 30 is_stmt 0 view .LVU71
- 246 000a 4563     		str	r5, [r0, #52]
- 122:Src/can.c     **** 	can->canFilter.FilterMaskIdHigh = 0;
- 247              		.loc 1 122 2 is_stmt 1 view .LVU72
- 248              		.loc 1 122 34 is_stmt 0 view .LVU73
- 249 000c C563     		str	r5, [r0, #60]
- 123:Src/can.c     **** 	can->canFilter.FilterMaskIdLow = 0;
- 250              		.loc 1 123 2 is_stmt 1 view .LVU74
- 251              		.loc 1 123 33 is_stmt 0 view .LVU75
- 252 000e 0564     		str	r5, [r0, #64]
- 124:Src/can.c     **** 	can->canFilter.FilterFIFOAssignment = CAN_FILTER_FIFO0;
- 253              		.loc 1 124 2 is_stmt 1 view .LVU76
- 254              		.loc 1 124 38 is_stmt 0 view .LVU77
- 255 0010 4564     		str	r5, [r0, #68]
- 125:Src/can.c     **** 	can->canFilter.FilterBank = 0;
- 256              		.loc 1 125 2 is_stmt 1 view .LVU78
- 257              		.loc 1 125 28 is_stmt 0 view .LVU79
- 258 0012 8564     		str	r5, [r0, #72]
- 126:Src/can.c     **** 	can->canFilter.FilterScale  = CAN_FILTERSCALE_16BIT;
- 259              		.loc 1 126 2 is_stmt 1 view .LVU80
- 260              		.loc 1 126 30 is_stmt 0 view .LVU81
- 261 0014 0565     		str	r5, [r0, #80]
- 127:Src/can.c     **** 	can->canFilter.FilterActivation = ENABLE;
- 262              		.loc 1 127 2 is_stmt 1 view .LVU82
- 263              		.loc 1 127 34 is_stmt 0 view .LVU83
+ 240 0006 C565     		str	r5, [r0, #92]
+ 119:Src/can.c     **** 	can->canFilter.FilterIdLow = 0;
+ 241              		.loc 1 119 2 is_stmt 1 view .LVU68
+ 242              		.loc 1 119 29 is_stmt 0 view .LVU69
+ 243 0008 8564     		str	r5, [r0, #72]
+ 120:Src/can.c     **** 	can->canFilter.FilterIdHigh = 0;
+ 244              		.loc 1 120 2 is_stmt 1 view .LVU70
+ 245              		.loc 1 120 30 is_stmt 0 view .LVU71
+ 246 000a 4564     		str	r5, [r0, #68]
+ 121:Src/can.c     **** 	can->canFilter.FilterMaskIdHigh = 0;
+ 247              		.loc 1 121 2 is_stmt 1 view .LVU72
+ 248              		.loc 1 121 34 is_stmt 0 view .LVU73
+ 249 000c C564     		str	r5, [r0, #76]
+ 122:Src/can.c     **** 	can->canFilter.FilterMaskIdLow = 0;
+ 250              		.loc 1 122 2 is_stmt 1 view .LVU74
+ 251              		.loc 1 122 33 is_stmt 0 view .LVU75
+ 252 000e 0565     		str	r5, [r0, #80]
+ 123:Src/can.c     **** 	can->canFilter.FilterFIFOAssignment = CAN_FILTER_FIFO0;
+ 253              		.loc 1 123 2 is_stmt 1 view .LVU76
+ 254              		.loc 1 123 38 is_stmt 0 view .LVU77
+ 255 0010 4565     		str	r5, [r0, #84]
+ 124:Src/can.c     **** 	can->canFilter.FilterBank = 0;
+ 256              		.loc 1 124 2 is_stmt 1 view .LVU78
+ 257              		.loc 1 124 28 is_stmt 0 view .LVU79
+ 258 0012 8565     		str	r5, [r0, #88]
+ 125:Src/can.c     **** 	can->canFilter.FilterScale = CAN_FILTERSCALE_16BIT;
+ 259              		.loc 1 125 2 is_stmt 1 view .LVU80
+ 260              		.loc 1 125 29 is_stmt 0 view .LVU81
+ 261 0014 0566     		str	r5, [r0, #96]
+ 126:Src/can.c     **** 	can->canFilter.FilterActivation = ENABLE;
+ 262              		.loc 1 126 2 is_stmt 1 view .LVU82
+ 263              		.loc 1 126 34 is_stmt 0 view .LVU83
  264 0016 0123     		movs	r3, #1
- 265 0018 4365     		str	r3, [r0, #84]
- 128:Src/can.c     **** 
- 129:Src/can.c     **** 	//CAN filter configuration
- 130:Src/can.c     **** 	can->configFilter_status = HAL_CAN_ConfigFilter(can->hcan, &can->canFilter);
- 266              		.loc 1 130 2 is_stmt 1 view .LVU84
-ARM GAS  /tmp/ccezYmfJ.s 			page 8
+ 265 0018 4366     		str	r3, [r0, #100]
+ 127:Src/can.c     **** 
+ 128:Src/can.c     **** 	// CAN filter configuration
+ 129:Src/can.c     **** 	can->configFilter_status = HAL_CAN_ConfigFilter(can->hcan, &can->canFilter);
+ 266              		.loc 1 129 2 is_stmt 1 view .LVU84
+ 267              		.loc 1 129 29 is_stmt 0 view .LVU85
+ARM GAS  /tmp/cc3Lv0SS.s 			page 8
 
 
- 267              		.loc 1 130 29 is_stmt 0 view .LVU85
- 268 001a 00F13401 		add	r1, r0, #52
- 269 001e 006B     		ldr	r0, [r0, #48]
+ 268 001a 00F14401 		add	r1, r0, #68
+ 269 001e 006C     		ldr	r0, [r0, #64]
  270              	.LVL17:
- 271              		.loc 1 130 29 view .LVU86
+ 271              		.loc 1 129 29 view .LVU86
  272 0020 FFF7FEFF 		bl	HAL_CAN_ConfigFilter
  273              	.LVL18:
- 274              		.loc 1 130 27 view .LVU87
- 275 0024 84F85C00 		strb	r0, [r4, #92]
- 131:Src/can.c     **** 
- 132:Src/can.c     **** 
- 133:Src/can.c     **** 	can->activateNotif_status = HAL_CAN_ActivateNotification(can->hcan, can->rx0_interrupt);
- 276              		.loc 1 133 2 is_stmt 1 view .LVU88
- 277              		.loc 1 133 30 is_stmt 0 view .LVU89
- 278 0028 94F9881D 		ldrsb	r1, [r4, #3464]
- 279 002c 206B     		ldr	r0, [r4, #48]
+ 274              		.loc 1 129 27 view .LVU87
+ 275 0024 84F86C00 		strb	r0, [r4, #108]
+ 130:Src/can.c     **** 
+ 131:Src/can.c     **** 	can->activateNotif_status =
+ 276              		.loc 1 131 2 is_stmt 1 view .LVU88
+ 132:Src/can.c     **** 		HAL_CAN_ActivateNotification(can->hcan, can->rx0_interrupt);
+ 277              		.loc 1 132 3 is_stmt 0 view .LVU89
+ 278 0028 94F9981D 		ldrsb	r1, [r4, #3480]
+ 279 002c 206C     		ldr	r0, [r4, #64]
  280 002e FFF7FEFF 		bl	HAL_CAN_ActivateNotification
  281              	.LVL19:
- 282              		.loc 1 133 28 view .LVU90
- 283 0032 84F85D00 		strb	r0, [r4, #93]
- 134:Src/can.c     **** 	can->activateNotif_status = HAL_CAN_ActivateNotification(can->hcan, can->tx_interrupt);
- 284              		.loc 1 134 2 is_stmt 1 view .LVU91
- 285              		.loc 1 134 30 is_stmt 0 view .LVU92
- 286 0036 94F9891D 		ldrsb	r1, [r4, #3465]
- 287 003a 206B     		ldr	r0, [r4, #48]
+ 131:Src/can.c     **** 		HAL_CAN_ActivateNotification(can->hcan, can->rx0_interrupt);
+ 282              		.loc 1 131 28 view .LVU90
+ 283 0032 84F86D00 		strb	r0, [r4, #109]
+ 133:Src/can.c     **** 	can->activateNotif_status =
+ 284              		.loc 1 133 2 is_stmt 1 view .LVU91
+ 134:Src/can.c     **** 		HAL_CAN_ActivateNotification(can->hcan, can->tx_interrupt);
+ 285              		.loc 1 134 3 is_stmt 0 view .LVU92
+ 286 0036 94F9991D 		ldrsb	r1, [r4, #3481]
+ 287 003a 206C     		ldr	r0, [r4, #64]
  288 003c FFF7FEFF 		bl	HAL_CAN_ActivateNotification
  289              	.LVL20:
- 290              		.loc 1 134 28 view .LVU93
- 291 0040 84F85D00 		strb	r0, [r4, #93]
+ 133:Src/can.c     **** 	can->activateNotif_status =
+ 290              		.loc 1 133 28 view .LVU93
+ 291 0040 84F86D00 		strb	r0, [r4, #109]
  135:Src/can.c     **** 
  136:Src/can.c     **** 	can->fifo.rxHead = 0;
  292              		.loc 1 136 2 is_stmt 1 view .LVU94
  293              		.loc 1 136 19 is_stmt 0 view .LVU95
- 294 0044 84F86050 		strb	r5, [r4, #96]
+ 294 0044 84F87050 		strb	r5, [r4, #112]
  137:Src/can.c     **** 	can->fifo.rxTail = 0;
  295              		.loc 1 137 2 is_stmt 1 view .LVU96
  296              		.loc 1 137 19 is_stmt 0 view .LVU97
- 297 0048 84F86150 		strb	r5, [r4, #97]
+ 297 0048 84F87150 		strb	r5, [r4, #113]
  138:Src/can.c     **** 	can->fifo.txHeadHigh = 0;
  298              		.loc 1 138 2 is_stmt 1 view .LVU98
  299              		.loc 1 138 23 is_stmt 0 view .LVU99
- 300 004c 84F86450 		strb	r5, [r4, #100]
+ 300 004c 84F87450 		strb	r5, [r4, #116]
  139:Src/can.c     **** 	can->fifo.txHeadNormal = 0;
  301              		.loc 1 139 2 is_stmt 1 view .LVU100
  302              		.loc 1 139 25 is_stmt 0 view .LVU101
- 303 0050 84F86250 		strb	r5, [r4, #98]
+ 303 0050 84F87250 		strb	r5, [r4, #114]
  140:Src/can.c     **** 	can->fifo.txTailHigh = 0;
  304              		.loc 1 140 2 is_stmt 1 view .LVU102
  305              		.loc 1 140 23 is_stmt 0 view .LVU103
- 306 0054 84F86550 		strb	r5, [r4, #101]
+ 306 0054 84F87550 		strb	r5, [r4, #117]
  141:Src/can.c     **** 	can->fifo.txTailNormal = 0;
  307              		.loc 1 141 2 is_stmt 1 view .LVU104
  308              		.loc 1 141 25 is_stmt 0 view .LVU105
- 309 0058 84F86350 		strb	r5, [r4, #99]
+ 309 0058 84F87350 		strb	r5, [r4, #115]
  142:Src/can.c     **** 
- 143:Src/can.c     **** 	//CAN start
+ARM GAS  /tmp/cc3Lv0SS.s 			page 9
+
+
+ 143:Src/can.c     **** 	// CAN start
  144:Src/can.c     **** 	can->canStart_status = HAL_CAN_Start(can->hcan);
-ARM GAS  /tmp/ccezYmfJ.s 			page 9
-
-
  310              		.loc 1 144 2 is_stmt 1 view .LVU106
  311              		.loc 1 144 25 is_stmt 0 view .LVU107
- 312 005c 206B     		ldr	r0, [r4, #48]
+ 312 005c 206C     		ldr	r0, [r4, #64]
  313 005e FFF7FEFF 		bl	HAL_CAN_Start
  314              	.LVL21:
  315              		.loc 1 144 23 view .LVU108
- 316 0062 84F85E00 		strb	r0, [r4, #94]
+ 316 0062 84F86E00 		strb	r0, [r4, #110]
  145:Src/can.c     **** 
- 146:Src/can.c     **** 
- 147:Src/can.c     **** 
- 148:Src/can.c     **** 	if(can->configFilter_status == HAL_OK && can->activateNotif_status == HAL_OK && can->canStart_stat
- 317              		.loc 1 148 2 is_stmt 1 view .LVU109
- 318              		.loc 1 148 40 is_stmt 0 view .LVU110
- 319 0066 B4F85C30 		ldrh	r3, [r4, #92]
- 320              		.loc 1 148 4 view .LVU111
+ 146:Src/can.c     **** 	if (can->configFilter_status == HAL_OK &&
+ 317              		.loc 1 146 2 is_stmt 1 view .LVU109
+ 318              		.loc 1 146 41 is_stmt 0 view .LVU110
+ 319 0066 B4F86C30 		ldrh	r3, [r4, #108]
+ 320              		.loc 1 146 5 view .LVU111
  321 006a 13B9     		cbnz	r3, .L13
- 322              		.loc 1 148 79 discriminator 1 view .LVU112
+ 147:Src/can.c     **** 		can->activateNotif_status == HAL_OK && can->canStart_status == HAL_OK)
+ 322              		.loc 1 147 39 view .LVU112
  323 006c 10B1     		cbz	r0, .L12
- 149:Src/can.c     **** 	else return 1;
- 324              		.loc 1 149 14 view .LVU113
+ 148:Src/can.c     **** 		return 0;  // no errors occurred
+ 149:Src/can.c     **** 	else
+ 150:Src/can.c     **** 		return 1;
+ 324              		.loc 1 150 10 view .LVU113
  325 006e 0120     		movs	r0, #1
  326 0070 00E0     		b	.L12
  327              	.L13:
  328 0072 0120     		movs	r0, #1
  329              	.L12:
- 150:Src/can.c     **** 
  151:Src/can.c     **** }
  330              		.loc 1 151 1 view .LVU114
  331 0074 38BD     		pop	{r3, r4, r5, pc}
@@ -522,8 +524,8 @@ ARM GAS  /tmp/ccezYmfJ.s 			page 1
  342              		.fpu fpv5-d16
  344              	can_init:
  345              	.LFB144:
-  12:Src/can.c     **** 	if(CAN_initialization(&can1)){
- 346              		.loc 1 12 16 is_stmt 1 view -0
+  12:Src/can.c     **** 	if (CAN_initialization(&can1)) {
+ 346              		.loc 1 12 17 is_stmt 1 view -0
  347              		.cfi_startproc
  348              		@ args = 0, pretend = 0, frame = 0
  349              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -535,12 +537,12 @@ ARM GAS  /tmp/ccezYmfJ.s 			page 1
   13:Src/can.c     **** 		report_error_can1();
  355              		.loc 1 13 2 view .LVU117
   13:Src/can.c     **** 		report_error_can1();
- 356              		.loc 1 13 5 is_stmt 0 view .LVU118
+ 356              		.loc 1 13 6 is_stmt 0 view .LVU118
+ARM GAS  /tmp/cc3Lv0SS.s 			page 10
+
+
  357 0002 0248     		ldr	r0, .L17
  358 0004 FFF7FEFF 		bl	CAN_initialization
-ARM GAS  /tmp/ccezYmfJ.s 			page 10
-
-
  359              	.LVL22:
   20:Src/can.c     **** 
  360              		.loc 1 20 1 view .LVU119
@@ -561,17 +563,15 @@ ARM GAS  /tmp/ccezYmfJ.s 			page 1
  377              	report_error_can1:
  378              	.LFB149:
  152:Src/can.c     **** 
- 153:Src/can.c     **** 
- 154:Src/can.c     **** 
- 155:Src/can.c     **** void report_error_can1(){
- 379              		.loc 1 155 25 is_stmt 1 view -0
+ 153:Src/can.c     **** void report_error_can1() {
+ 379              		.loc 1 153 26 is_stmt 1 view -0
  380              		.cfi_startproc
  381              		@ args = 0, pretend = 0, frame = 0
  382              		@ frame_needed = 0, uses_anonymous_args = 0
  383              		@ link register save eliminated.
- 156:Src/can.c     **** 	//HAL_GPIO_TogglePin(USER_LED_3_GPIO_Port, USER_LED_3_Pin);
- 157:Src/can.c     **** }
- 384              		.loc 1 157 1 view .LVU121
+ 154:Src/can.c     **** 	// HAL_GPIO_TogglePin(USER_LED_3_GPIO_Port, USER_LED_3_Pin);
+ 155:Src/can.c     **** }
+ 384              		.loc 1 155 1 view .LVU121
  385 0000 7047     		bx	lr
  386              		.cfi_endproc
  387              	.LFE149:
@@ -584,1123 +584,1122 @@ ARM GAS  /tmp/ccezYmfJ.s 			page 1
  395              		.fpu fpv5-d16
  397              	report_error_can3:
  398              	.LFB150:
- 158:Src/can.c     **** void report_error_can3(){
- 399              		.loc 1 158 25 view -0
+ 156:Src/can.c     **** void report_error_can3() {}
+ 399              		.loc 1 156 26 view -0
  400              		.cfi_startproc
  401              		@ args = 0, pretend = 0, frame = 0
  402              		@ frame_needed = 0, uses_anonymous_args = 0
  403              		@ link register save eliminated.
- 159:Src/can.c     **** 
- 160:Src/can.c     **** }
- 404              		.loc 1 160 1 view .LVU123
- 405 0000 7047     		bx	lr
- 406              		.cfi_endproc
- 407              	.LFE150:
- 409              		.section	.text.fifoRxDataCAN_pop,"ax",%progbits
- 410              		.align	1
-ARM GAS  /tmp/ccezYmfJ.s 			page 11
+ 404              		.loc 1 156 27 view .LVU123
+ 405              		.loc 1 156 1 is_stmt 0 view .LVU124
+ 406 0000 7047     		bx	lr
+ 407              		.cfi_endproc
+ 408              	.LFE150:
+ 410              		.section	.text.fifoRxDataCAN_pop,"ax",%progbits
+ 411              		.align	1
+ 412              		.global	fifoRxDataCAN_pop
+ARM GAS  /tmp/cc3Lv0SS.s 			page 11
 
 
- 411              		.global	fifoRxDataCAN_pop
- 412              		.syntax unified
- 413              		.thumb
- 414              		.thumb_func
- 415              		.fpu fpv5-d16
- 417              	fifoRxDataCAN_pop:
- 418              	.LVL23:
- 419              	.LFB151:
- 161:Src/can.c     **** 
- 162:Src/can.c     **** uint8_t fifoRxDataCAN_pop(canStruct * can){
- 420              		.loc 1 162 43 view -0
- 421              		.cfi_startproc
- 422              		@ args = 0, pretend = 0, frame = 0
- 423              		@ frame_needed = 0, uses_anonymous_args = 0
- 424              		@ link register save eliminated.
- 425              		.loc 1 162 43 is_stmt 0 view .LVU125
- 426 0000 70B4     		push	{r4, r5, r6}
- 427              	.LCFI10:
- 428              		.cfi_def_cfa_offset 12
- 429              		.cfi_offset 4, -12
- 430              		.cfi_offset 5, -8
- 431              		.cfi_offset 6, -4
- 163:Src/can.c     **** 	if(can->fifo.rxHead == can->fifo.rxTail){
- 432              		.loc 1 163 2 is_stmt 1 view .LVU126
- 433              		.loc 1 163 14 is_stmt 0 view .LVU127
- 434 0002 90F86030 		ldrb	r3, [r0, #96]	@ zero_extendqisi2
- 435              		.loc 1 163 34 view .LVU128
- 436 0006 90F86160 		ldrb	r6, [r0, #97]	@ zero_extendqisi2
- 437              		.loc 1 163 4 view .LVU129
- 438 000a B342     		cmp	r3, r6
- 439 000c 20D0     		beq	.L25
- 164:Src/can.c     **** 		return 0;
- 165:Src/can.c     **** 	}else{
- 166:Src/can.c     **** 		can->rx_id = can->fifo.rx[can->fifo.rxTail].id;
- 440              		.loc 1 166 3 is_stmt 1 view .LVU130
- 441              		.loc 1 166 38 is_stmt 0 view .LVU131
- 442 000e 3546     		mov	r5, r6
- 443              		.loc 1 166 46 view .LVU132
- 444 0010 00EB0613 		add	r3, r0, r6, lsl #4
- 445 0014 9A6E     		ldr	r2, [r3, #104]
- 446              		.loc 1 166 14 view .LVU133
- 447 0016 4262     		str	r2, [r0, #36]
- 167:Src/can.c     **** 		can->rx_size = can->fifo.rx[can->fifo.rxTail].size;
- 448              		.loc 1 167 3 is_stmt 1 view .LVU134
- 449              		.loc 1 167 48 is_stmt 0 view .LVU135
- 450 0018 DC6E     		ldr	r4, [r3, #108]
- 451              		.loc 1 167 16 view .LVU136
- 452 001a 4460     		str	r4, [r0, #4]
- 168:Src/can.c     **** 		for(uint8_t i = 0; i < can->rx_size; i++){
- 453              		.loc 1 168 3 is_stmt 1 view .LVU137
- 454              	.LBB3:
- 455              		.loc 1 168 7 view .LVU138
- 456              	.LVL24:
- 457              		.loc 1 168 15 is_stmt 0 view .LVU139
- 458 001c 0023     		movs	r3, #0
- 459              	.LVL25:
- 460              	.L23:
-ARM GAS  /tmp/ccezYmfJ.s 			page 12
+ 413              		.syntax unified
+ 414              		.thumb
+ 415              		.thumb_func
+ 416              		.fpu fpv5-d16
+ 418              	fifoRxDataCAN_pop:
+ 419              	.LVL23:
+ 420              	.LFB151:
+ 157:Src/can.c     **** 
+ 158:Src/can.c     **** uint8_t fifoRxDataCAN_pop(canStruct* can) {
+ 421              		.loc 1 158 43 is_stmt 1 view -0
+ 422              		.cfi_startproc
+ 423              		@ args = 0, pretend = 0, frame = 0
+ 424              		@ frame_needed = 0, uses_anonymous_args = 0
+ 425              		@ link register save eliminated.
+ 426              		.loc 1 158 43 is_stmt 0 view .LVU126
+ 427 0000 70B4     		push	{r4, r5, r6}
+ 428              	.LCFI10:
+ 429              		.cfi_def_cfa_offset 12
+ 430              		.cfi_offset 4, -12
+ 431              		.cfi_offset 5, -8
+ 432              		.cfi_offset 6, -4
+ 159:Src/can.c     **** 	if (can->fifo.rxHead == can->fifo.rxTail) {
+ 433              		.loc 1 159 2 is_stmt 1 view .LVU127
+ 434              		.loc 1 159 15 is_stmt 0 view .LVU128
+ 435 0002 90F87030 		ldrb	r3, [r0, #112]	@ zero_extendqisi2
+ 436              		.loc 1 159 35 view .LVU129
+ 437 0006 90F87160 		ldrb	r6, [r0, #113]	@ zero_extendqisi2
+ 438              		.loc 1 159 5 view .LVU130
+ 439 000a B342     		cmp	r3, r6
+ 440 000c 20D0     		beq	.L25
+ 160:Src/can.c     **** 		return 0;
+ 161:Src/can.c     **** 	} else {
+ 162:Src/can.c     **** 		can->rx_id = can->fifo.rx[can->fifo.rxTail].id;
+ 441              		.loc 1 162 3 is_stmt 1 view .LVU131
+ 442              		.loc 1 162 38 is_stmt 0 view .LVU132
+ 443 000e 3546     		mov	r5, r6
+ 444              		.loc 1 162 46 view .LVU133
+ 445 0010 00EB0613 		add	r3, r0, r6, lsl #4
+ 446 0014 9A6F     		ldr	r2, [r3, #120]
+ 447              		.loc 1 162 14 view .LVU134
+ 448 0016 0263     		str	r2, [r0, #48]
+ 163:Src/can.c     **** 		can->rx_size = can->fifo.rx[can->fifo.rxTail].size;
+ 449              		.loc 1 163 3 is_stmt 1 view .LVU135
+ 450              		.loc 1 163 48 is_stmt 0 view .LVU136
+ 451 0018 DC6F     		ldr	r4, [r3, #124]
+ 452              		.loc 1 163 16 view .LVU137
+ 453 001a 4460     		str	r4, [r0, #4]
+ 164:Src/can.c     **** 		for (uint8_t i = 0; i < can->rx_size; i++) {
+ 454              		.loc 1 164 3 is_stmt 1 view .LVU138
+ 455              	.LBB3:
+ 456              		.loc 1 164 8 view .LVU139
+ 457              	.LVL24:
+ 458              		.loc 1 164 16 is_stmt 0 view .LVU140
+ 459 001c 0023     		movs	r3, #0
+ 460              	.LVL25:
+ 461              	.L23:
+ 462              		.loc 1 164 23 is_stmt 1 discriminator 1 view .LVU141
+ARM GAS  /tmp/cc3Lv0SS.s 			page 12
 
 
- 461              		.loc 1 168 22 is_stmt 1 discriminator 1 view .LVU140
- 462              		.loc 1 168 3 is_stmt 0 discriminator 1 view .LVU141
- 463 001e 9C42     		cmp	r4, r3
- 464 0020 09DD     		ble	.L27
- 169:Src/can.c     **** 			can->dataRx[i] = can->fifo.rx[can->fifo.rxTail].data[i];
- 465              		.loc 1 169 4 is_stmt 1 discriminator 3 view .LVU142
- 466              		.loc 1 169 56 is_stmt 0 discriminator 3 view .LVU143
- 467 0022 00EB0512 		add	r2, r0, r5, lsl #4
- 468 0026 1A44     		add	r2, r2, r3
- 469 0028 92F87010 		ldrb	r1, [r2, #112]	@ zero_extendqisi2
- 470              		.loc 1 169 19 discriminator 3 view .LVU144
- 471 002c C218     		adds	r2, r0, r3
- 472 002e 1174     		strb	r1, [r2, #16]
- 168:Src/can.c     **** 		for(uint8_t i = 0; i < can->rx_size; i++){
- 473              		.loc 1 168 40 is_stmt 1 discriminator 3 view .LVU145
- 168:Src/can.c     **** 		for(uint8_t i = 0; i < can->rx_size; i++){
- 474              		.loc 1 168 41 is_stmt 0 discriminator 3 view .LVU146
- 475 0030 0133     		adds	r3, r3, #1
- 476              	.LVL26:
- 168:Src/can.c     **** 		for(uint8_t i = 0; i < can->rx_size; i++){
- 477              		.loc 1 168 41 discriminator 3 view .LVU147
- 478 0032 DBB2     		uxtb	r3, r3
- 479              	.LVL27:
- 168:Src/can.c     **** 		for(uint8_t i = 0; i < can->rx_size; i++){
- 480              		.loc 1 168 41 discriminator 3 view .LVU148
- 481 0034 F3E7     		b	.L23
- 482              	.L27:
- 168:Src/can.c     **** 		for(uint8_t i = 0; i < can->rx_size; i++){
- 483              		.loc 1 168 41 discriminator 3 view .LVU149
- 484              	.LBE3:
- 170:Src/can.c     **** 		}
- 171:Src/can.c     **** 		can->fifo.rxTail = (can->fifo.rxTail + 1) % fifoLengthN;
- 485              		.loc 1 171 3 is_stmt 1 view .LVU150
- 486              		.loc 1 171 40 is_stmt 0 view .LVU151
- 487 0036 0136     		adds	r6, r6, #1
- 488              		.loc 1 171 45 view .LVU152
- 489 0038 064B     		ldr	r3, .L28
- 490              	.LVL28:
- 491              		.loc 1 171 45 view .LVU153
- 492 003a 83FB0623 		smull	r2, r3, r3, r6
- 493 003e 5B11     		asrs	r3, r3, #5
- 494 0040 6422     		movs	r2, #100
- 495 0042 02FB1363 		mls	r3, r2, r3, r6
- 496              		.loc 1 171 20 view .LVU154
- 497 0046 80F86130 		strb	r3, [r0, #97]
- 172:Src/can.c     **** 		return 1;
- 498              		.loc 1 172 3 is_stmt 1 view .LVU155
- 499              		.loc 1 172 10 is_stmt 0 view .LVU156
- 500 004a 0120     		movs	r0, #1
- 501              	.LVL29:
- 502              	.L22:
- 173:Src/can.c     **** 	}
- 174:Src/can.c     **** }
- 503              		.loc 1 174 1 view .LVU157
- 504 004c 70BC     		pop	{r4, r5, r6}
- 505              	.LCFI11:
- 506              		.cfi_remember_state
-ARM GAS  /tmp/ccezYmfJ.s 			page 13
+ 463              		.loc 1 164 3 is_stmt 0 discriminator 1 view .LVU142
+ 464 001e 9C42     		cmp	r4, r3
+ 465 0020 09DD     		ble	.L27
+ 165:Src/can.c     **** 			can->dataRx[i] = can->fifo.rx[can->fifo.rxTail].data[i];
+ 466              		.loc 1 165 4 is_stmt 1 discriminator 3 view .LVU143
+ 467              		.loc 1 165 56 is_stmt 0 discriminator 3 view .LVU144
+ 468 0022 00EB0512 		add	r2, r0, r5, lsl #4
+ 469 0026 1A44     		add	r2, r2, r3
+ 470 0028 92F88010 		ldrb	r1, [r2, #128]	@ zero_extendqisi2
+ 471              		.loc 1 165 19 discriminator 3 view .LVU145
+ 472 002c C218     		adds	r2, r0, r3
+ 473 002e 1175     		strb	r1, [r2, #20]
+ 164:Src/can.c     **** 		for (uint8_t i = 0; i < can->rx_size; i++) {
+ 474              		.loc 1 164 41 is_stmt 1 discriminator 3 view .LVU146
+ 164:Src/can.c     **** 		for (uint8_t i = 0; i < can->rx_size; i++) {
+ 475              		.loc 1 164 42 is_stmt 0 discriminator 3 view .LVU147
+ 476 0030 0133     		adds	r3, r3, #1
+ 477              	.LVL26:
+ 164:Src/can.c     **** 		for (uint8_t i = 0; i < can->rx_size; i++) {
+ 478              		.loc 1 164 42 discriminator 3 view .LVU148
+ 479 0032 DBB2     		uxtb	r3, r3
+ 480              	.LVL27:
+ 164:Src/can.c     **** 		for (uint8_t i = 0; i < can->rx_size; i++) {
+ 481              		.loc 1 164 42 discriminator 3 view .LVU149
+ 482 0034 F3E7     		b	.L23
+ 483              	.L27:
+ 164:Src/can.c     **** 		for (uint8_t i = 0; i < can->rx_size; i++) {
+ 484              		.loc 1 164 42 discriminator 3 view .LVU150
+ 485              	.LBE3:
+ 166:Src/can.c     **** 		}
+ 167:Src/can.c     **** 		can->fifo.rxTail = (can->fifo.rxTail + 1) % fifoLengthN;
+ 486              		.loc 1 167 3 is_stmt 1 view .LVU151
+ 487              		.loc 1 167 40 is_stmt 0 view .LVU152
+ 488 0036 0136     		adds	r6, r6, #1
+ 489              		.loc 1 167 45 view .LVU153
+ 490 0038 064B     		ldr	r3, .L28
+ 491              	.LVL28:
+ 492              		.loc 1 167 45 view .LVU154
+ 493 003a 83FB0623 		smull	r2, r3, r3, r6
+ 494 003e 5B11     		asrs	r3, r3, #5
+ 495 0040 6422     		movs	r2, #100
+ 496 0042 02FB1363 		mls	r3, r2, r3, r6
+ 497              		.loc 1 167 20 view .LVU155
+ 498 0046 80F87130 		strb	r3, [r0, #113]
+ 168:Src/can.c     **** 		return 1;
+ 499              		.loc 1 168 3 is_stmt 1 view .LVU156
+ 500              		.loc 1 168 10 is_stmt 0 view .LVU157
+ 501 004a 0120     		movs	r0, #1
+ 502              	.LVL29:
+ 503              	.L22:
+ 169:Src/can.c     **** 	}
+ 170:Src/can.c     **** }
+ 504              		.loc 1 170 1 view .LVU158
+ 505 004c 70BC     		pop	{r4, r5, r6}
+ 506              	.LCFI11:
+ 507              		.cfi_remember_state
+ 508              		.cfi_restore 6
+ARM GAS  /tmp/cc3Lv0SS.s 			page 13
 
 
- 507              		.cfi_restore 6
- 508              		.cfi_restore 5
- 509              		.cfi_restore 4
- 510              		.cfi_def_cfa_offset 0
- 511 004e 7047     		bx	lr
- 512              	.LVL30:
- 513              	.L25:
- 514              	.LCFI12:
- 515              		.cfi_restore_state
- 164:Src/can.c     **** 	}else{
- 516              		.loc 1 164 10 view .LVU158
- 517 0050 0020     		movs	r0, #0
- 518              	.LVL31:
- 164:Src/can.c     **** 	}else{
- 519              		.loc 1 164 10 view .LVU159
- 520 0052 FBE7     		b	.L22
- 521              	.L29:
- 522              		.align	2
- 523              	.L28:
- 524 0054 1F85EB51 		.word	1374389535
- 525              		.cfi_endproc
- 526              	.LFE151:
- 528              		.section	.text.fifoRxDataCAN_push,"ax",%progbits
- 529              		.align	1
- 530              		.global	fifoRxDataCAN_push
- 531              		.syntax unified
- 532              		.thumb
- 533              		.thumb_func
- 534              		.fpu fpv5-d16
- 536              	fifoRxDataCAN_push:
- 537              	.LVL32:
- 538              	.LFB152:
- 175:Src/can.c     **** 
- 176:Src/can.c     **** uint8_t fifoRxDataCAN_push(canStruct * can){
- 539              		.loc 1 176 44 is_stmt 1 view -0
- 540              		.cfi_startproc
- 541              		@ args = 0, pretend = 0, frame = 0
- 542              		@ frame_needed = 0, uses_anonymous_args = 0
- 543              		@ link register save eliminated.
- 544              		.loc 1 176 44 is_stmt 0 view .LVU161
- 545 0000 70B4     		push	{r4, r5, r6}
- 546              	.LCFI13:
- 547              		.cfi_def_cfa_offset 12
- 548              		.cfi_offset 4, -12
- 549              		.cfi_offset 5, -8
- 550              		.cfi_offset 6, -4
- 177:Src/can.c     **** 	if((can->fifo.rxHead + 1) % fifoLengthN == can->fifo.rxTail){
- 551              		.loc 1 177 2 is_stmt 1 view .LVU162
- 552              		.loc 1 177 15 is_stmt 0 view .LVU163
- 553 0002 90F86060 		ldrb	r6, [r0, #96]	@ zero_extendqisi2
- 554              		.loc 1 177 23 view .LVU164
- 555 0006 731C     		adds	r3, r6, #1
- 556              		.loc 1 177 28 view .LVU165
- 557 0008 124C     		ldr	r4, .L37
- 558 000a 84FB0324 		smull	r2, r4, r4, r3
- 559 000e 6411     		asrs	r4, r4, #5
- 560 0010 6422     		movs	r2, #100
-ARM GAS  /tmp/ccezYmfJ.s 			page 14
+ 509              		.cfi_restore 5
+ 510              		.cfi_restore 4
+ 511              		.cfi_def_cfa_offset 0
+ 512 004e 7047     		bx	lr
+ 513              	.LVL30:
+ 514              	.L25:
+ 515              	.LCFI12:
+ 516              		.cfi_restore_state
+ 160:Src/can.c     **** 	} else {
+ 517              		.loc 1 160 10 view .LVU159
+ 518 0050 0020     		movs	r0, #0
+ 519              	.LVL31:
+ 160:Src/can.c     **** 	} else {
+ 520              		.loc 1 160 10 view .LVU160
+ 521 0052 FBE7     		b	.L22
+ 522              	.L29:
+ 523              		.align	2
+ 524              	.L28:
+ 525 0054 1F85EB51 		.word	1374389535
+ 526              		.cfi_endproc
+ 527              	.LFE151:
+ 529              		.section	.text.fifoRxDataCAN_push,"ax",%progbits
+ 530              		.align	1
+ 531              		.global	fifoRxDataCAN_push
+ 532              		.syntax unified
+ 533              		.thumb
+ 534              		.thumb_func
+ 535              		.fpu fpv5-d16
+ 537              	fifoRxDataCAN_push:
+ 538              	.LVL32:
+ 539              	.LFB152:
+ 171:Src/can.c     **** 
+ 172:Src/can.c     **** uint8_t fifoRxDataCAN_push(canStruct* can) {
+ 540              		.loc 1 172 44 is_stmt 1 view -0
+ 541              		.cfi_startproc
+ 542              		@ args = 0, pretend = 0, frame = 0
+ 543              		@ frame_needed = 0, uses_anonymous_args = 0
+ 544              		@ link register save eliminated.
+ 545              		.loc 1 172 44 is_stmt 0 view .LVU162
+ 546 0000 70B4     		push	{r4, r5, r6}
+ 547              	.LCFI13:
+ 548              		.cfi_def_cfa_offset 12
+ 549              		.cfi_offset 4, -12
+ 550              		.cfi_offset 5, -8
+ 551              		.cfi_offset 6, -4
+ 173:Src/can.c     **** 	if ((can->fifo.rxHead + 1) % fifoLengthN == can->fifo.rxTail) {
+ 552              		.loc 1 173 2 is_stmt 1 view .LVU163
+ 553              		.loc 1 173 16 is_stmt 0 view .LVU164
+ 554 0002 90F87060 		ldrb	r6, [r0, #112]	@ zero_extendqisi2
+ 555              		.loc 1 173 24 view .LVU165
+ 556 0006 731C     		adds	r3, r6, #1
+ 557              		.loc 1 173 29 view .LVU166
+ 558 0008 124C     		ldr	r4, .L37
+ 559 000a 84FB0324 		smull	r2, r4, r4, r3
+ 560 000e 6411     		asrs	r4, r4, #5
+ 561 0010 6422     		movs	r2, #100
+ 562 0012 02FB1434 		mls	r4, r2, r4, r3
+ARM GAS  /tmp/cc3Lv0SS.s 			page 14
 
 
- 561 0012 02FB1434 		mls	r4, r2, r4, r3
- 562              		.loc 1 177 54 view .LVU166
- 563 0016 90F86130 		ldrb	r3, [r0, #97]	@ zero_extendqisi2
- 564              		.loc 1 177 4 view .LVU167
- 565 001a 9C42     		cmp	r4, r3
- 566 001c 17D0     		beq	.L34
- 178:Src/can.c     **** 		return 0;
- 179:Src/can.c     **** 	}else{
- 180:Src/can.c     **** 		can->fifo.rx[can->fifo.rxHead].id = can->rx_id;
- 567              		.loc 1 180 3 is_stmt 1 view .LVU168
- 568              		.loc 1 180 42 is_stmt 0 view .LVU169
- 569 001e 426A     		ldr	r2, [r0, #36]
- 570              		.loc 1 180 37 view .LVU170
- 571 0020 00EB0613 		add	r3, r0, r6, lsl #4
- 572 0024 9A66     		str	r2, [r3, #104]
- 181:Src/can.c     **** 		can->fifo.rx[can->fifo.rxHead].size = can->rx_size;
- 573              		.loc 1 181 3 is_stmt 1 view .LVU171
- 574              		.loc 1 181 44 is_stmt 0 view .LVU172
- 575 0026 4568     		ldr	r5, [r0, #4]
- 576              		.loc 1 181 39 view .LVU173
- 577 0028 DD66     		str	r5, [r3, #108]
- 182:Src/can.c     **** 		for(uint8_t i = 0; i < can->rx_size; i++){
- 578              		.loc 1 182 3 is_stmt 1 view .LVU174
- 579              	.LBB4:
- 580              		.loc 1 182 7 view .LVU175
- 581              	.LVL33:
- 582              		.loc 1 182 15 is_stmt 0 view .LVU176
- 583 002a 0023     		movs	r3, #0
- 584              	.LVL34:
- 585              	.L32:
- 586              		.loc 1 182 22 is_stmt 1 discriminator 1 view .LVU177
- 587              		.loc 1 182 3 is_stmt 0 discriminator 1 view .LVU178
- 588 002c 9D42     		cmp	r5, r3
- 589 002e 09DD     		ble	.L36
- 183:Src/can.c     **** 			can->fifo.rx[can->fifo.rxHead].data[i] = can->dataTx[i];
- 590              		.loc 1 183 4 is_stmt 1 discriminator 3 view .LVU179
- 591              		.loc 1 183 56 is_stmt 0 discriminator 3 view .LVU180
- 592 0030 C218     		adds	r2, r0, r3
- 593 0032 117A     		ldrb	r1, [r2, #8]	@ zero_extendqisi2
- 594              		.loc 1 183 43 discriminator 3 view .LVU181
- 595 0034 00EB0612 		add	r2, r0, r6, lsl #4
- 596 0038 1A44     		add	r2, r2, r3
- 597 003a 82F87010 		strb	r1, [r2, #112]
- 182:Src/can.c     **** 		for(uint8_t i = 0; i < can->rx_size; i++){
- 598              		.loc 1 182 40 is_stmt 1 discriminator 3 view .LVU182
- 182:Src/can.c     **** 		for(uint8_t i = 0; i < can->rx_size; i++){
- 599              		.loc 1 182 41 is_stmt 0 discriminator 3 view .LVU183
- 600 003e 0133     		adds	r3, r3, #1
- 601              	.LVL35:
- 182:Src/can.c     **** 		for(uint8_t i = 0; i < can->rx_size; i++){
- 602              		.loc 1 182 41 discriminator 3 view .LVU184
- 603 0040 DBB2     		uxtb	r3, r3
- 604              	.LVL36:
- 182:Src/can.c     **** 		for(uint8_t i = 0; i < can->rx_size; i++){
- 605              		.loc 1 182 41 discriminator 3 view .LVU185
- 606 0042 F3E7     		b	.L32
- 607              	.L36:
-ARM GAS  /tmp/ccezYmfJ.s 			page 15
+ 563              		.loc 1 173 55 view .LVU167
+ 564 0016 90F87130 		ldrb	r3, [r0, #113]	@ zero_extendqisi2
+ 565              		.loc 1 173 5 view .LVU168
+ 566 001a 9C42     		cmp	r4, r3
+ 567 001c 17D0     		beq	.L34
+ 174:Src/can.c     **** 		return 0;
+ 175:Src/can.c     **** 	} else {
+ 176:Src/can.c     **** 		can->fifo.rx[can->fifo.rxHead].id = can->rx_id_int;
+ 568              		.loc 1 176 3 is_stmt 1 view .LVU169
+ 569              		.loc 1 176 42 is_stmt 0 view .LVU170
+ 570 001e 426B     		ldr	r2, [r0, #52]
+ 571              		.loc 1 176 37 view .LVU171
+ 572 0020 00EB0613 		add	r3, r0, r6, lsl #4
+ 573 0024 9A67     		str	r2, [r3, #120]
+ 177:Src/can.c     **** 		can->fifo.rx[can->fifo.rxHead].size = can->rx_size_int;
+ 574              		.loc 1 177 3 is_stmt 1 view .LVU172
+ 575              		.loc 1 177 44 is_stmt 0 view .LVU173
+ 576 0026 8568     		ldr	r5, [r0, #8]
+ 577              		.loc 1 177 39 view .LVU174
+ 578 0028 DD67     		str	r5, [r3, #124]
+ 178:Src/can.c     **** 		for (uint8_t i = 0; i < can->rx_size_int; i++) {
+ 579              		.loc 1 178 3 is_stmt 1 view .LVU175
+ 580              	.LBB4:
+ 581              		.loc 1 178 8 view .LVU176
+ 582              	.LVL33:
+ 583              		.loc 1 178 16 is_stmt 0 view .LVU177
+ 584 002a 0023     		movs	r3, #0
+ 585              	.LVL34:
+ 586              	.L32:
+ 587              		.loc 1 178 23 is_stmt 1 discriminator 1 view .LVU178
+ 588              		.loc 1 178 3 is_stmt 0 discriminator 1 view .LVU179
+ 589 002c 9D42     		cmp	r5, r3
+ 590 002e 09DD     		ble	.L36
+ 179:Src/can.c     **** 			can->fifo.rx[can->fifo.rxHead].data[i] = can->dataRX_int[i];
+ 591              		.loc 1 179 4 is_stmt 1 discriminator 3 view .LVU180
+ 592              		.loc 1 179 60 is_stmt 0 discriminator 3 view .LVU181
+ 593 0030 C218     		adds	r2, r0, r3
+ 594 0032 117F     		ldrb	r1, [r2, #28]	@ zero_extendqisi2
+ 595              		.loc 1 179 43 discriminator 3 view .LVU182
+ 596 0034 00EB0612 		add	r2, r0, r6, lsl #4
+ 597 0038 1A44     		add	r2, r2, r3
+ 598 003a 82F88010 		strb	r1, [r2, #128]
+ 178:Src/can.c     **** 		for (uint8_t i = 0; i < can->rx_size_int; i++) {
+ 599              		.loc 1 178 45 is_stmt 1 discriminator 3 view .LVU183
+ 178:Src/can.c     **** 		for (uint8_t i = 0; i < can->rx_size_int; i++) {
+ 600              		.loc 1 178 46 is_stmt 0 discriminator 3 view .LVU184
+ 601 003e 0133     		adds	r3, r3, #1
+ 602              	.LVL35:
+ 178:Src/can.c     **** 		for (uint8_t i = 0; i < can->rx_size_int; i++) {
+ 603              		.loc 1 178 46 discriminator 3 view .LVU185
+ 604 0040 DBB2     		uxtb	r3, r3
+ 605              	.LVL36:
+ 178:Src/can.c     **** 		for (uint8_t i = 0; i < can->rx_size_int; i++) {
+ 606              		.loc 1 178 46 discriminator 3 view .LVU186
+ 607 0042 F3E7     		b	.L32
+ 608              	.L36:
+ 178:Src/can.c     **** 		for (uint8_t i = 0; i < can->rx_size_int; i++) {
+ARM GAS  /tmp/cc3Lv0SS.s 			page 15
 
 
- 182:Src/can.c     **** 		for(uint8_t i = 0; i < can->rx_size; i++){
- 608              		.loc 1 182 41 discriminator 3 view .LVU186
- 609              	.LBE4:
- 184:Src/can.c     **** 		}
- 185:Src/can.c     **** 		can->fifo.rxHead = (can->fifo.rxHead + 1) % fifoLengthN;
- 610              		.loc 1 185 3 is_stmt 1 view .LVU187
- 611              		.loc 1 185 20 is_stmt 0 view .LVU188
- 612 0044 80F86040 		strb	r4, [r0, #96]
- 186:Src/can.c     **** 		return 1;
- 613              		.loc 1 186 3 is_stmt 1 view .LVU189
- 614              		.loc 1 186 10 is_stmt 0 view .LVU190
- 615 0048 0120     		movs	r0, #1
- 616              	.LVL37:
- 617              	.L31:
- 187:Src/can.c     **** 	}
- 188:Src/can.c     **** }
- 618              		.loc 1 188 1 view .LVU191
- 619 004a 70BC     		pop	{r4, r5, r6}
- 620              	.LCFI14:
- 621              		.cfi_remember_state
- 622              		.cfi_restore 6
- 623              		.cfi_restore 5
- 624              		.cfi_restore 4
- 625              		.cfi_def_cfa_offset 0
- 626 004c 7047     		bx	lr
- 627              	.LVL38:
- 628              	.L34:
- 629              	.LCFI15:
- 630              		.cfi_restore_state
- 178:Src/can.c     **** 	}else{
- 631              		.loc 1 178 10 view .LVU192
- 632 004e 0020     		movs	r0, #0
- 633              	.LVL39:
- 178:Src/can.c     **** 	}else{
- 634              		.loc 1 178 10 view .LVU193
- 635 0050 FBE7     		b	.L31
- 636              	.L38:
- 637 0052 00BF     		.align	2
- 638              	.L37:
- 639 0054 1F85EB51 		.word	1374389535
- 640              		.cfi_endproc
- 641              	.LFE152:
- 643              		.section	.text.fifoTxDataCAN_normal_pop,"ax",%progbits
- 644              		.align	1
- 645              		.global	fifoTxDataCAN_normal_pop
- 646              		.syntax unified
- 647              		.thumb
- 648              		.thumb_func
- 649              		.fpu fpv5-d16
- 651              	fifoTxDataCAN_normal_pop:
- 652              	.LVL40:
- 653              	.LFB153:
- 189:Src/can.c     **** 
- 190:Src/can.c     **** uint8_t fifoTxDataCAN_normal_pop(canStruct * can){
- 654              		.loc 1 190 50 is_stmt 1 view -0
- 655              		.cfi_startproc
- 656              		@ args = 0, pretend = 0, frame = 0
-ARM GAS  /tmp/ccezYmfJ.s 			page 16
+ 609              		.loc 1 178 46 discriminator 3 view .LVU187
+ 610              	.LBE4:
+ 180:Src/can.c     **** 		}
+ 181:Src/can.c     **** 		can->fifo.rxHead = (can->fifo.rxHead + 1) % fifoLengthN;
+ 611              		.loc 1 181 3 is_stmt 1 view .LVU188
+ 612              		.loc 1 181 20 is_stmt 0 view .LVU189
+ 613 0044 80F87040 		strb	r4, [r0, #112]
+ 182:Src/can.c     **** 		return 1;
+ 614              		.loc 1 182 3 is_stmt 1 view .LVU190
+ 615              		.loc 1 182 10 is_stmt 0 view .LVU191
+ 616 0048 0120     		movs	r0, #1
+ 617              	.LVL37:
+ 618              	.L31:
+ 183:Src/can.c     **** 	}
+ 184:Src/can.c     **** }
+ 619              		.loc 1 184 1 view .LVU192
+ 620 004a 70BC     		pop	{r4, r5, r6}
+ 621              	.LCFI14:
+ 622              		.cfi_remember_state
+ 623              		.cfi_restore 6
+ 624              		.cfi_restore 5
+ 625              		.cfi_restore 4
+ 626              		.cfi_def_cfa_offset 0
+ 627 004c 7047     		bx	lr
+ 628              	.LVL38:
+ 629              	.L34:
+ 630              	.LCFI15:
+ 631              		.cfi_restore_state
+ 174:Src/can.c     **** 	} else {
+ 632              		.loc 1 174 10 view .LVU193
+ 633 004e 0020     		movs	r0, #0
+ 634              	.LVL39:
+ 174:Src/can.c     **** 	} else {
+ 635              		.loc 1 174 10 view .LVU194
+ 636 0050 FBE7     		b	.L31
+ 637              	.L38:
+ 638 0052 00BF     		.align	2
+ 639              	.L37:
+ 640 0054 1F85EB51 		.word	1374389535
+ 641              		.cfi_endproc
+ 642              	.LFE152:
+ 644              		.section	.text.fifoTxDataCAN_normal_pop,"ax",%progbits
+ 645              		.align	1
+ 646              		.global	fifoTxDataCAN_normal_pop
+ 647              		.syntax unified
+ 648              		.thumb
+ 649              		.thumb_func
+ 650              		.fpu fpv5-d16
+ 652              	fifoTxDataCAN_normal_pop:
+ 653              	.LVL40:
+ 654              	.LFB153:
+ 185:Src/can.c     **** 
+ 186:Src/can.c     **** uint8_t fifoTxDataCAN_normal_pop(canStruct* can) {
+ 655              		.loc 1 186 50 is_stmt 1 view -0
+ 656              		.cfi_startproc
+ 657              		@ args = 0, pretend = 0, frame = 0
+ 658              		@ frame_needed = 0, uses_anonymous_args = 0
+ARM GAS  /tmp/cc3Lv0SS.s 			page 16
 
 
- 657              		@ frame_needed = 0, uses_anonymous_args = 0
- 658              		@ link register save eliminated.
- 659              		.loc 1 190 50 is_stmt 0 view .LVU195
- 660 0000 70B4     		push	{r4, r5, r6}
- 661              	.LCFI16:
- 662              		.cfi_def_cfa_offset 12
- 663              		.cfi_offset 4, -12
- 664              		.cfi_offset 5, -8
- 665              		.cfi_offset 6, -4
- 191:Src/can.c     **** 	if(can->fifo.txHeadNormal ==can->fifo.txTailNormal){
- 666              		.loc 1 191 2 is_stmt 1 view .LVU196
- 667              		.loc 1 191 14 is_stmt 0 view .LVU197
- 668 0002 90F86230 		ldrb	r3, [r0, #98]	@ zero_extendqisi2
- 669              		.loc 1 191 39 view .LVU198
- 670 0006 90F86360 		ldrb	r6, [r0, #99]	@ zero_extendqisi2
- 671              		.loc 1 191 4 view .LVU199
- 672 000a B342     		cmp	r3, r6
- 673 000c 22D0     		beq	.L43
- 192:Src/can.c     **** 		return 0;
- 193:Src/can.c     **** 	}else{
- 194:Src/can.c     **** 		can->tx_id = can->fifo.txNormal[can->fifo.txTailNormal].id;
- 674              		.loc 1 194 3 is_stmt 1 view .LVU200
- 675              		.loc 1 194 44 is_stmt 0 view .LVU201
- 676 000e 3546     		mov	r5, r6
- 677              		.loc 1 194 58 view .LVU202
- 678 0010 00EB0613 		add	r3, r0, r6, lsl #4
- 679 0014 D3F8A826 		ldr	r2, [r3, #1704]
- 680              		.loc 1 194 14 view .LVU203
- 681 0018 0262     		str	r2, [r0, #32]
- 195:Src/can.c     **** 		can->tx_size = can->fifo.txNormal[can->fifo.txTailNormal].size;
- 682              		.loc 1 195 3 is_stmt 1 view .LVU204
- 683              		.loc 1 195 60 is_stmt 0 view .LVU205
- 684 001a D3F8AC46 		ldr	r4, [r3, #1708]
- 685              		.loc 1 195 16 view .LVU206
- 686 001e 0460     		str	r4, [r0]
- 196:Src/can.c     **** 		for(uint8_t i = 0; i < can->tx_size; i++){
- 687              		.loc 1 196 3 is_stmt 1 view .LVU207
- 688              	.LBB5:
- 689              		.loc 1 196 7 view .LVU208
- 690              	.LVL41:
- 691              		.loc 1 196 15 is_stmt 0 view .LVU209
- 692 0020 0023     		movs	r3, #0
- 693              	.LVL42:
- 694              	.L41:
- 695              		.loc 1 196 22 is_stmt 1 discriminator 1 view .LVU210
- 696              		.loc 1 196 3 is_stmt 0 discriminator 1 view .LVU211
- 697 0022 9C42     		cmp	r4, r3
- 698 0024 09DD     		ble	.L45
- 197:Src/can.c     **** 			can->dataTx[i] = can->fifo.txNormal[can->fifo.txTailNormal].data[i];
- 699              		.loc 1 197 4 is_stmt 1 discriminator 3 view .LVU212
- 700              		.loc 1 197 68 is_stmt 0 discriminator 3 view .LVU213
- 701 0026 00EB0512 		add	r2, r0, r5, lsl #4
- 702 002a 1A44     		add	r2, r2, r3
- 703 002c 92F8B016 		ldrb	r1, [r2, #1712]	@ zero_extendqisi2
- 704              		.loc 1 197 19 discriminator 3 view .LVU214
- 705 0030 C218     		adds	r2, r0, r3
- 706 0032 1172     		strb	r1, [r2, #8]
-ARM GAS  /tmp/ccezYmfJ.s 			page 17
+ 659              		@ link register save eliminated.
+ 660              		.loc 1 186 50 is_stmt 0 view .LVU196
+ 661 0000 70B4     		push	{r4, r5, r6}
+ 662              	.LCFI16:
+ 663              		.cfi_def_cfa_offset 12
+ 664              		.cfi_offset 4, -12
+ 665              		.cfi_offset 5, -8
+ 666              		.cfi_offset 6, -4
+ 187:Src/can.c     **** 	if (can->fifo.txHeadNormal == can->fifo.txTailNormal) {
+ 667              		.loc 1 187 2 is_stmt 1 view .LVU197
+ 668              		.loc 1 187 15 is_stmt 0 view .LVU198
+ 669 0002 90F87230 		ldrb	r3, [r0, #114]	@ zero_extendqisi2
+ 670              		.loc 1 187 41 view .LVU199
+ 671 0006 90F87360 		ldrb	r6, [r0, #115]	@ zero_extendqisi2
+ 672              		.loc 1 187 5 view .LVU200
+ 673 000a B342     		cmp	r3, r6
+ 674 000c 22D0     		beq	.L43
+ 188:Src/can.c     **** 		return 0;
+ 189:Src/can.c     **** 	} else {
+ 190:Src/can.c     **** 		can->tx_id = can->fifo.txNormal[can->fifo.txTailNormal].id;
+ 675              		.loc 1 190 3 is_stmt 1 view .LVU201
+ 676              		.loc 1 190 44 is_stmt 0 view .LVU202
+ 677 000e 3546     		mov	r5, r6
+ 678              		.loc 1 190 58 view .LVU203
+ 679 0010 00EB0613 		add	r3, r0, r6, lsl #4
+ 680 0014 D3F8B826 		ldr	r2, [r3, #1720]
+ 681              		.loc 1 190 14 view .LVU204
+ 682 0018 C262     		str	r2, [r0, #44]
+ 191:Src/can.c     **** 		can->tx_size = can->fifo.txNormal[can->fifo.txTailNormal].size;
+ 683              		.loc 1 191 3 is_stmt 1 view .LVU205
+ 684              		.loc 1 191 60 is_stmt 0 view .LVU206
+ 685 001a D3F8BC46 		ldr	r4, [r3, #1724]
+ 686              		.loc 1 191 16 view .LVU207
+ 687 001e 0460     		str	r4, [r0]
+ 192:Src/can.c     **** 		for (uint8_t i = 0; i < can->tx_size; i++) {
+ 688              		.loc 1 192 3 is_stmt 1 view .LVU208
+ 689              	.LBB5:
+ 690              		.loc 1 192 8 view .LVU209
+ 691              	.LVL41:
+ 692              		.loc 1 192 16 is_stmt 0 view .LVU210
+ 693 0020 0023     		movs	r3, #0
+ 694              	.LVL42:
+ 695              	.L41:
+ 696              		.loc 1 192 23 is_stmt 1 discriminator 1 view .LVU211
+ 697              		.loc 1 192 3 is_stmt 0 discriminator 1 view .LVU212
+ 698 0022 9C42     		cmp	r4, r3
+ 699 0024 09DD     		ble	.L45
+ 193:Src/can.c     **** 			can->dataTx[i] = can->fifo.txNormal[can->fifo.txTailNormal].data[i];
+ 700              		.loc 1 193 4 is_stmt 1 discriminator 3 view .LVU213
+ 701              		.loc 1 193 68 is_stmt 0 discriminator 3 view .LVU214
+ 702 0026 00EB0512 		add	r2, r0, r5, lsl #4
+ 703 002a 1A44     		add	r2, r2, r3
+ 704 002c 92F8C016 		ldrb	r1, [r2, #1728]	@ zero_extendqisi2
+ 705              		.loc 1 193 19 discriminator 3 view .LVU215
+ 706 0030 C218     		adds	r2, r0, r3
+ 707 0032 1173     		strb	r1, [r2, #12]
+ 192:Src/can.c     **** 		for (uint8_t i = 0; i < can->tx_size; i++) {
+ARM GAS  /tmp/cc3Lv0SS.s 			page 17
 
 
- 196:Src/can.c     **** 		for(uint8_t i = 0; i < can->tx_size; i++){
- 707              		.loc 1 196 40 is_stmt 1 discriminator 3 view .LVU215
- 196:Src/can.c     **** 		for(uint8_t i = 0; i < can->tx_size; i++){
- 708              		.loc 1 196 41 is_stmt 0 discriminator 3 view .LVU216
- 709 0034 0133     		adds	r3, r3, #1
- 710              	.LVL43:
- 196:Src/can.c     **** 		for(uint8_t i = 0; i < can->tx_size; i++){
- 711              		.loc 1 196 41 discriminator 3 view .LVU217
- 712 0036 DBB2     		uxtb	r3, r3
- 713              	.LVL44:
- 196:Src/can.c     **** 		for(uint8_t i = 0; i < can->tx_size; i++){
- 714              		.loc 1 196 41 discriminator 3 view .LVU218
- 715 0038 F3E7     		b	.L41
- 716              	.L45:
- 196:Src/can.c     **** 		for(uint8_t i = 0; i < can->tx_size; i++){
- 717              		.loc 1 196 41 discriminator 3 view .LVU219
- 718              	.LBE5:
- 198:Src/can.c     **** 		}
- 199:Src/can.c     **** 		can->fifo.txTailNormal = (can->fifo.txTailNormal + 1) % fifoLengthN;
- 719              		.loc 1 199 3 is_stmt 1 view .LVU220
- 720              		.loc 1 199 52 is_stmt 0 view .LVU221
- 721 003a 0136     		adds	r6, r6, #1
- 722              		.loc 1 199 57 view .LVU222
- 723 003c 064B     		ldr	r3, .L46
- 724              	.LVL45:
- 725              		.loc 1 199 57 view .LVU223
- 726 003e 83FB0623 		smull	r2, r3, r3, r6
- 727 0042 5B11     		asrs	r3, r3, #5
- 728 0044 6422     		movs	r2, #100
- 729 0046 02FB1363 		mls	r3, r2, r3, r6
- 730              		.loc 1 199 26 view .LVU224
- 731 004a 80F86330 		strb	r3, [r0, #99]
- 200:Src/can.c     **** 		return 1;
- 732              		.loc 1 200 3 is_stmt 1 view .LVU225
- 733              		.loc 1 200 10 is_stmt 0 view .LVU226
- 734 004e 0120     		movs	r0, #1
- 735              	.LVL46:
- 736              	.L40:
- 201:Src/can.c     **** 	}
- 202:Src/can.c     **** }
- 737              		.loc 1 202 1 view .LVU227
- 738 0050 70BC     		pop	{r4, r5, r6}
- 739              	.LCFI17:
- 740              		.cfi_remember_state
- 741              		.cfi_restore 6
- 742              		.cfi_restore 5
- 743              		.cfi_restore 4
- 744              		.cfi_def_cfa_offset 0
- 745 0052 7047     		bx	lr
- 746              	.LVL47:
- 747              	.L43:
- 748              	.LCFI18:
- 749              		.cfi_restore_state
- 192:Src/can.c     **** 	}else{
- 750              		.loc 1 192 10 view .LVU228
- 751 0054 0020     		movs	r0, #0
- 752              	.LVL48:
-ARM GAS  /tmp/ccezYmfJ.s 			page 18
+ 708              		.loc 1 192 41 is_stmt 1 discriminator 3 view .LVU216
+ 192:Src/can.c     **** 		for (uint8_t i = 0; i < can->tx_size; i++) {
+ 709              		.loc 1 192 42 is_stmt 0 discriminator 3 view .LVU217
+ 710 0034 0133     		adds	r3, r3, #1
+ 711              	.LVL43:
+ 192:Src/can.c     **** 		for (uint8_t i = 0; i < can->tx_size; i++) {
+ 712              		.loc 1 192 42 discriminator 3 view .LVU218
+ 713 0036 DBB2     		uxtb	r3, r3
+ 714              	.LVL44:
+ 192:Src/can.c     **** 		for (uint8_t i = 0; i < can->tx_size; i++) {
+ 715              		.loc 1 192 42 discriminator 3 view .LVU219
+ 716 0038 F3E7     		b	.L41
+ 717              	.L45:
+ 192:Src/can.c     **** 		for (uint8_t i = 0; i < can->tx_size; i++) {
+ 718              		.loc 1 192 42 discriminator 3 view .LVU220
+ 719              	.LBE5:
+ 194:Src/can.c     **** 		}
+ 195:Src/can.c     **** 		can->fifo.txTailNormal = (can->fifo.txTailNormal + 1) % fifoLengthN;
+ 720              		.loc 1 195 3 is_stmt 1 view .LVU221
+ 721              		.loc 1 195 52 is_stmt 0 view .LVU222
+ 722 003a 0136     		adds	r6, r6, #1
+ 723              		.loc 1 195 57 view .LVU223
+ 724 003c 064B     		ldr	r3, .L46
+ 725              	.LVL45:
+ 726              		.loc 1 195 57 view .LVU224
+ 727 003e 83FB0623 		smull	r2, r3, r3, r6
+ 728 0042 5B11     		asrs	r3, r3, #5
+ 729 0044 6422     		movs	r2, #100
+ 730 0046 02FB1363 		mls	r3, r2, r3, r6
+ 731              		.loc 1 195 26 view .LVU225
+ 732 004a 80F87330 		strb	r3, [r0, #115]
+ 196:Src/can.c     **** 		return 1;
+ 733              		.loc 1 196 3 is_stmt 1 view .LVU226
+ 734              		.loc 1 196 10 is_stmt 0 view .LVU227
+ 735 004e 0120     		movs	r0, #1
+ 736              	.LVL46:
+ 737              	.L40:
+ 197:Src/can.c     **** 	}
+ 198:Src/can.c     **** }
+ 738              		.loc 1 198 1 view .LVU228
+ 739 0050 70BC     		pop	{r4, r5, r6}
+ 740              	.LCFI17:
+ 741              		.cfi_remember_state
+ 742              		.cfi_restore 6
+ 743              		.cfi_restore 5
+ 744              		.cfi_restore 4
+ 745              		.cfi_def_cfa_offset 0
+ 746 0052 7047     		bx	lr
+ 747              	.LVL47:
+ 748              	.L43:
+ 749              	.LCFI18:
+ 750              		.cfi_restore_state
+ 188:Src/can.c     **** 	} else {
+ 751              		.loc 1 188 10 view .LVU229
+ 752 0054 0020     		movs	r0, #0
+ 753              	.LVL48:
+ 188:Src/can.c     **** 	} else {
+ARM GAS  /tmp/cc3Lv0SS.s 			page 18
 
 
- 192:Src/can.c     **** 	}else{
- 753              		.loc 1 192 10 view .LVU229
- 754 0056 FBE7     		b	.L40
- 755              	.L47:
- 756              		.align	2
- 757              	.L46:
- 758 0058 1F85EB51 		.word	1374389535
- 759              		.cfi_endproc
- 760              	.LFE153:
- 762              		.section	.text.fifoTxDataCAN_high_pop,"ax",%progbits
- 763              		.align	1
- 764              		.global	fifoTxDataCAN_high_pop
- 765              		.syntax unified
- 766              		.thumb
- 767              		.thumb_func
- 768              		.fpu fpv5-d16
- 770              	fifoTxDataCAN_high_pop:
- 771              	.LVL49:
- 772              	.LFB154:
- 203:Src/can.c     **** uint8_t fifoTxDataCAN_high_pop(canStruct * can){
- 773              		.loc 1 203 48 is_stmt 1 view -0
- 774              		.cfi_startproc
- 775              		@ args = 0, pretend = 0, frame = 0
- 776              		@ frame_needed = 0, uses_anonymous_args = 0
- 777              		@ link register save eliminated.
- 778              		.loc 1 203 48 is_stmt 0 view .LVU231
- 779 0000 70B4     		push	{r4, r5, r6}
- 780              	.LCFI19:
- 781              		.cfi_def_cfa_offset 12
- 782              		.cfi_offset 4, -12
- 783              		.cfi_offset 5, -8
- 784              		.cfi_offset 6, -4
- 204:Src/can.c     **** 	if(can->fifo.txHeadHigh ==can->fifo.txTailHigh){
- 785              		.loc 1 204 2 is_stmt 1 view .LVU232
- 786              		.loc 1 204 14 is_stmt 0 view .LVU233
- 787 0002 90F86430 		ldrb	r3, [r0, #100]	@ zero_extendqisi2
- 788              		.loc 1 204 37 view .LVU234
- 789 0006 90F86550 		ldrb	r5, [r0, #101]	@ zero_extendqisi2
- 790              		.loc 1 204 4 view .LVU235
- 791 000a AB42     		cmp	r3, r5
- 792 000c 24D0     		beq	.L52
- 205:Src/can.c     **** 		return 0;
- 206:Src/can.c     **** 	}else{
- 207:Src/can.c     **** 		can->tx_id = can->fifo.txHigh[can->fifo.txTailHigh].id;
- 793              		.loc 1 207 3 is_stmt 1 view .LVU236
- 794              		.loc 1 207 42 is_stmt 0 view .LVU237
- 795 000e 2E46     		mov	r6, r5
- 796              		.loc 1 207 54 view .LVU238
- 797 0010 00EB0513 		add	r3, r0, r5, lsl #4
- 798 0014 D3F8E82C 		ldr	r2, [r3, #3304]
- 799              		.loc 1 207 14 view .LVU239
- 800 0018 0262     		str	r2, [r0, #32]
- 208:Src/can.c     **** 		can->tx_size = can->fifo.txHigh[can->fifo.txTailHigh].size;
- 801              		.loc 1 208 3 is_stmt 1 view .LVU240
- 802              		.loc 1 208 56 is_stmt 0 view .LVU241
- 803 001a D3F8EC4C 		ldr	r4, [r3, #3308]
- 804              		.loc 1 208 16 view .LVU242
-ARM GAS  /tmp/ccezYmfJ.s 			page 19
+ 754              		.loc 1 188 10 view .LVU230
+ 755 0056 FBE7     		b	.L40
+ 756              	.L47:
+ 757              		.align	2
+ 758              	.L46:
+ 759 0058 1F85EB51 		.word	1374389535
+ 760              		.cfi_endproc
+ 761              	.LFE153:
+ 763              		.section	.text.fifoTxDataCAN_high_pop,"ax",%progbits
+ 764              		.align	1
+ 765              		.global	fifoTxDataCAN_high_pop
+ 766              		.syntax unified
+ 767              		.thumb
+ 768              		.thumb_func
+ 769              		.fpu fpv5-d16
+ 771              	fifoTxDataCAN_high_pop:
+ 772              	.LVL49:
+ 773              	.LFB154:
+ 199:Src/can.c     **** uint8_t fifoTxDataCAN_high_pop(canStruct* can) {
+ 774              		.loc 1 199 48 is_stmt 1 view -0
+ 775              		.cfi_startproc
+ 776              		@ args = 0, pretend = 0, frame = 0
+ 777              		@ frame_needed = 0, uses_anonymous_args = 0
+ 778              		@ link register save eliminated.
+ 779              		.loc 1 199 48 is_stmt 0 view .LVU232
+ 780 0000 70B4     		push	{r4, r5, r6}
+ 781              	.LCFI19:
+ 782              		.cfi_def_cfa_offset 12
+ 783              		.cfi_offset 4, -12
+ 784              		.cfi_offset 5, -8
+ 785              		.cfi_offset 6, -4
+ 200:Src/can.c     **** 	if (can->fifo.txHeadHigh == can->fifo.txTailHigh) {
+ 786              		.loc 1 200 2 is_stmt 1 view .LVU233
+ 787              		.loc 1 200 15 is_stmt 0 view .LVU234
+ 788 0002 90F87430 		ldrb	r3, [r0, #116]	@ zero_extendqisi2
+ 789              		.loc 1 200 39 view .LVU235
+ 790 0006 90F87550 		ldrb	r5, [r0, #117]	@ zero_extendqisi2
+ 791              		.loc 1 200 5 view .LVU236
+ 792 000a AB42     		cmp	r3, r5
+ 793 000c 24D0     		beq	.L52
+ 201:Src/can.c     **** 		return 0;
+ 202:Src/can.c     **** 	} else {
+ 203:Src/can.c     **** 		can->tx_id = can->fifo.txHigh[can->fifo.txTailHigh].id;
+ 794              		.loc 1 203 3 is_stmt 1 view .LVU237
+ 795              		.loc 1 203 42 is_stmt 0 view .LVU238
+ 796 000e 2E46     		mov	r6, r5
+ 797              		.loc 1 203 54 view .LVU239
+ 798 0010 00EB0513 		add	r3, r0, r5, lsl #4
+ 799 0014 D3F8F82C 		ldr	r2, [r3, #3320]
+ 800              		.loc 1 203 14 view .LVU240
+ 801 0018 C262     		str	r2, [r0, #44]
+ 204:Src/can.c     **** 		can->tx_size = can->fifo.txHigh[can->fifo.txTailHigh].size;
+ 802              		.loc 1 204 3 is_stmt 1 view .LVU241
+ 803              		.loc 1 204 56 is_stmt 0 view .LVU242
+ 804 001a D3F8FC4C 		ldr	r4, [r3, #3324]
+ 805              		.loc 1 204 16 view .LVU243
+ 806 001e 0460     		str	r4, [r0]
+ARM GAS  /tmp/cc3Lv0SS.s 			page 19
 
 
- 805 001e 0460     		str	r4, [r0]
- 209:Src/can.c     **** 		for(uint8_t i = 0; i < can->tx_size; i++){
- 806              		.loc 1 209 3 is_stmt 1 view .LVU243
- 807              	.LBB6:
- 808              		.loc 1 209 7 view .LVU244
- 809              	.LVL50:
- 810              		.loc 1 209 15 is_stmt 0 view .LVU245
- 811 0020 0023     		movs	r3, #0
- 812              	.LVL51:
- 813              	.L50:
- 814              		.loc 1 209 22 is_stmt 1 discriminator 1 view .LVU246
- 815              		.loc 1 209 3 is_stmt 0 discriminator 1 view .LVU247
- 816 0022 9C42     		cmp	r4, r3
- 817 0024 09DD     		ble	.L54
- 210:Src/can.c     **** 			can->dataTx[i] = can->fifo.txHigh[can->fifo.txTailHigh].data[i];
- 818              		.loc 1 210 4 is_stmt 1 discriminator 3 view .LVU248
- 819              		.loc 1 210 64 is_stmt 0 discriminator 3 view .LVU249
- 820 0026 00EB0612 		add	r2, r0, r6, lsl #4
- 821 002a 1A44     		add	r2, r2, r3
- 822 002c 92F8F01C 		ldrb	r1, [r2, #3312]	@ zero_extendqisi2
- 823              		.loc 1 210 19 discriminator 3 view .LVU250
- 824 0030 C218     		adds	r2, r0, r3
- 825 0032 1172     		strb	r1, [r2, #8]
- 209:Src/can.c     **** 		for(uint8_t i = 0; i < can->tx_size; i++){
- 826              		.loc 1 209 40 is_stmt 1 discriminator 3 view .LVU251
- 209:Src/can.c     **** 		for(uint8_t i = 0; i < can->tx_size; i++){
- 827              		.loc 1 209 41 is_stmt 0 discriminator 3 view .LVU252
- 828 0034 0133     		adds	r3, r3, #1
- 829              	.LVL52:
- 209:Src/can.c     **** 		for(uint8_t i = 0; i < can->tx_size; i++){
- 830              		.loc 1 209 41 discriminator 3 view .LVU253
- 831 0036 DBB2     		uxtb	r3, r3
- 832              	.LVL53:
- 209:Src/can.c     **** 		for(uint8_t i = 0; i < can->tx_size; i++){
- 833              		.loc 1 209 41 discriminator 3 view .LVU254
- 834 0038 F3E7     		b	.L50
- 835              	.L54:
- 209:Src/can.c     **** 		for(uint8_t i = 0; i < can->tx_size; i++){
- 836              		.loc 1 209 41 discriminator 3 view .LVU255
- 837              	.LBE6:
- 211:Src/can.c     **** 		}
- 212:Src/can.c     **** 		can->fifo.txTailHigh = (can->fifo.txTailHigh + 1) % fifoLengthH;
- 838              		.loc 1 212 3 is_stmt 1 view .LVU256
- 839              		.loc 1 212 48 is_stmt 0 view .LVU257
- 840 003a 0135     		adds	r5, r5, #1
- 841              		.loc 1 212 53 view .LVU258
- 842 003c 074B     		ldr	r3, .L55
- 843              	.LVL54:
- 844              		.loc 1 212 53 view .LVU259
- 845 003e 83FB0523 		smull	r2, r3, r3, r5
- 846 0042 03F0FC02 		and	r2, r3, #252
- 847 0046 02EBA303 		add	r3, r2, r3, asr #2
- 848 004a A5EB4305 		sub	r5, r5, r3, lsl #1
- 849              		.loc 1 212 24 view .LVU260
- 850 004e 80F86550 		strb	r5, [r0, #101]
- 213:Src/can.c     **** 		return 1;
- 851              		.loc 1 213 3 is_stmt 1 view .LVU261
-ARM GAS  /tmp/ccezYmfJ.s 			page 20
+ 205:Src/can.c     **** 		for (uint8_t i = 0; i < can->tx_size; i++) {
+ 807              		.loc 1 205 3 is_stmt 1 view .LVU244
+ 808              	.LBB6:
+ 809              		.loc 1 205 8 view .LVU245
+ 810              	.LVL50:
+ 811              		.loc 1 205 16 is_stmt 0 view .LVU246
+ 812 0020 0023     		movs	r3, #0
+ 813              	.LVL51:
+ 814              	.L50:
+ 815              		.loc 1 205 23 is_stmt 1 discriminator 1 view .LVU247
+ 816              		.loc 1 205 3 is_stmt 0 discriminator 1 view .LVU248
+ 817 0022 9C42     		cmp	r4, r3
+ 818 0024 09DD     		ble	.L54
+ 206:Src/can.c     **** 			can->dataTx[i] = can->fifo.txHigh[can->fifo.txTailHigh].data[i];
+ 819              		.loc 1 206 4 is_stmt 1 discriminator 3 view .LVU249
+ 820              		.loc 1 206 64 is_stmt 0 discriminator 3 view .LVU250
+ 821 0026 00EB0612 		add	r2, r0, r6, lsl #4
+ 822 002a 1A44     		add	r2, r2, r3
+ 823 002c 92F8001D 		ldrb	r1, [r2, #3328]	@ zero_extendqisi2
+ 824              		.loc 1 206 19 discriminator 3 view .LVU251
+ 825 0030 C218     		adds	r2, r0, r3
+ 826 0032 1173     		strb	r1, [r2, #12]
+ 205:Src/can.c     **** 		for (uint8_t i = 0; i < can->tx_size; i++) {
+ 827              		.loc 1 205 41 is_stmt 1 discriminator 3 view .LVU252
+ 205:Src/can.c     **** 		for (uint8_t i = 0; i < can->tx_size; i++) {
+ 828              		.loc 1 205 42 is_stmt 0 discriminator 3 view .LVU253
+ 829 0034 0133     		adds	r3, r3, #1
+ 830              	.LVL52:
+ 205:Src/can.c     **** 		for (uint8_t i = 0; i < can->tx_size; i++) {
+ 831              		.loc 1 205 42 discriminator 3 view .LVU254
+ 832 0036 DBB2     		uxtb	r3, r3
+ 833              	.LVL53:
+ 205:Src/can.c     **** 		for (uint8_t i = 0; i < can->tx_size; i++) {
+ 834              		.loc 1 205 42 discriminator 3 view .LVU255
+ 835 0038 F3E7     		b	.L50
+ 836              	.L54:
+ 205:Src/can.c     **** 		for (uint8_t i = 0; i < can->tx_size; i++) {
+ 837              		.loc 1 205 42 discriminator 3 view .LVU256
+ 838              	.LBE6:
+ 207:Src/can.c     **** 		}
+ 208:Src/can.c     **** 		can->fifo.txTailHigh = (can->fifo.txTailHigh + 1) % fifoLengthH;
+ 839              		.loc 1 208 3 is_stmt 1 view .LVU257
+ 840              		.loc 1 208 48 is_stmt 0 view .LVU258
+ 841 003a 0135     		adds	r5, r5, #1
+ 842              		.loc 1 208 53 view .LVU259
+ 843 003c 074B     		ldr	r3, .L55
+ 844              	.LVL54:
+ 845              		.loc 1 208 53 view .LVU260
+ 846 003e 83FB0523 		smull	r2, r3, r3, r5
+ 847 0042 03F0FC02 		and	r2, r3, #252
+ 848 0046 02EBA303 		add	r3, r2, r3, asr #2
+ 849 004a A5EB4305 		sub	r5, r5, r3, lsl #1
+ 850              		.loc 1 208 24 view .LVU261
+ 851 004e 80F87550 		strb	r5, [r0, #117]
+ 209:Src/can.c     **** 		return 1;
+ 852              		.loc 1 209 3 is_stmt 1 view .LVU262
+ 853              		.loc 1 209 10 is_stmt 0 view .LVU263
+ARM GAS  /tmp/cc3Lv0SS.s 			page 20
 
 
- 852              		.loc 1 213 10 is_stmt 0 view .LVU262
- 853 0052 0120     		movs	r0, #1
- 854              	.LVL55:
- 855              	.L49:
- 214:Src/can.c     **** 	}
- 215:Src/can.c     **** }
- 856              		.loc 1 215 1 view .LVU263
- 857 0054 70BC     		pop	{r4, r5, r6}
- 858              	.LCFI20:
- 859              		.cfi_remember_state
- 860              		.cfi_restore 6
- 861              		.cfi_restore 5
- 862              		.cfi_restore 4
- 863              		.cfi_def_cfa_offset 0
- 864 0056 7047     		bx	lr
- 865              	.LVL56:
- 866              	.L52:
- 867              	.LCFI21:
- 868              		.cfi_restore_state
- 205:Src/can.c     **** 	}else{
- 869              		.loc 1 205 10 view .LVU264
- 870 0058 0020     		movs	r0, #0
- 871              	.LVL57:
- 205:Src/can.c     **** 	}else{
- 872              		.loc 1 205 10 view .LVU265
- 873 005a FBE7     		b	.L49
- 874              	.L56:
- 875              		.align	2
- 876              	.L55:
- 877 005c 67666666 		.word	1717986919
- 878              		.cfi_endproc
- 879              	.LFE154:
- 881              		.section	.text.fifoTxDataCAN_normal_push,"ax",%progbits
- 882              		.align	1
- 883              		.global	fifoTxDataCAN_normal_push
- 884              		.syntax unified
- 885              		.thumb
- 886              		.thumb_func
- 887              		.fpu fpv5-d16
- 889              	fifoTxDataCAN_normal_push:
- 890              	.LVL58:
- 891              	.LFB155:
- 216:Src/can.c     **** uint8_t fifoTxDataCAN_normal_push(canStruct *can){
- 892              		.loc 1 216 50 is_stmt 1 view -0
- 893              		.cfi_startproc
- 894              		@ args = 0, pretend = 0, frame = 0
- 895              		@ frame_needed = 0, uses_anonymous_args = 0
- 896              		@ link register save eliminated.
- 897              		.loc 1 216 50 is_stmt 0 view .LVU267
- 898 0000 70B4     		push	{r4, r5, r6}
- 899              	.LCFI22:
- 900              		.cfi_def_cfa_offset 12
- 901              		.cfi_offset 4, -12
- 902              		.cfi_offset 5, -8
- 903              		.cfi_offset 6, -4
- 217:Src/can.c     **** 	if((can->fifo.txHeadNormal + 1) % fifoLengthN == can->fifo.txTailNormal){
- 904              		.loc 1 217 2 is_stmt 1 view .LVU268
-ARM GAS  /tmp/ccezYmfJ.s 			page 21
+ 854 0052 0120     		movs	r0, #1
+ 855              	.LVL55:
+ 856              	.L49:
+ 210:Src/can.c     **** 	}
+ 211:Src/can.c     **** }
+ 857              		.loc 1 211 1 view .LVU264
+ 858 0054 70BC     		pop	{r4, r5, r6}
+ 859              	.LCFI20:
+ 860              		.cfi_remember_state
+ 861              		.cfi_restore 6
+ 862              		.cfi_restore 5
+ 863              		.cfi_restore 4
+ 864              		.cfi_def_cfa_offset 0
+ 865 0056 7047     		bx	lr
+ 866              	.LVL56:
+ 867              	.L52:
+ 868              	.LCFI21:
+ 869              		.cfi_restore_state
+ 201:Src/can.c     **** 	} else {
+ 870              		.loc 1 201 10 view .LVU265
+ 871 0058 0020     		movs	r0, #0
+ 872              	.LVL57:
+ 201:Src/can.c     **** 	} else {
+ 873              		.loc 1 201 10 view .LVU266
+ 874 005a FBE7     		b	.L49
+ 875              	.L56:
+ 876              		.align	2
+ 877              	.L55:
+ 878 005c 67666666 		.word	1717986919
+ 879              		.cfi_endproc
+ 880              	.LFE154:
+ 882              		.section	.text.fifoTxDataCAN_normal_push,"ax",%progbits
+ 883              		.align	1
+ 884              		.global	fifoTxDataCAN_normal_push
+ 885              		.syntax unified
+ 886              		.thumb
+ 887              		.thumb_func
+ 888              		.fpu fpv5-d16
+ 890              	fifoTxDataCAN_normal_push:
+ 891              	.LVL58:
+ 892              	.LFB155:
+ 212:Src/can.c     **** uint8_t fifoTxDataCAN_normal_push(canStruct* can) {
+ 893              		.loc 1 212 51 is_stmt 1 view -0
+ 894              		.cfi_startproc
+ 895              		@ args = 0, pretend = 0, frame = 0
+ 896              		@ frame_needed = 0, uses_anonymous_args = 0
+ 897              		@ link register save eliminated.
+ 898              		.loc 1 212 51 is_stmt 0 view .LVU268
+ 899 0000 70B4     		push	{r4, r5, r6}
+ 900              	.LCFI22:
+ 901              		.cfi_def_cfa_offset 12
+ 902              		.cfi_offset 4, -12
+ 903              		.cfi_offset 5, -8
+ 904              		.cfi_offset 6, -4
+ 213:Src/can.c     **** 	if ((can->fifo.txHeadNormal + 1) % fifoLengthN == can->fifo.txTailNormal) {
+ 905              		.loc 1 213 2 is_stmt 1 view .LVU269
+ 906              		.loc 1 213 16 is_stmt 0 view .LVU270
+ARM GAS  /tmp/cc3Lv0SS.s 			page 21
 
 
- 905              		.loc 1 217 15 is_stmt 0 view .LVU269
- 906 0002 90F86260 		ldrb	r6, [r0, #98]	@ zero_extendqisi2
- 907              		.loc 1 217 29 view .LVU270
- 908 0006 731C     		adds	r3, r6, #1
- 909              		.loc 1 217 34 view .LVU271
- 910 0008 134C     		ldr	r4, .L64
- 911 000a 84FB0324 		smull	r2, r4, r4, r3
- 912 000e 6411     		asrs	r4, r4, #5
- 913 0010 6422     		movs	r2, #100
- 914 0012 02FB1434 		mls	r4, r2, r4, r3
- 915              		.loc 1 217 60 view .LVU272
- 916 0016 90F86330 		ldrb	r3, [r0, #99]	@ zero_extendqisi2
- 917              		.loc 1 217 4 view .LVU273
- 918 001a 9C42     		cmp	r4, r3
- 919 001c 19D0     		beq	.L61
- 218:Src/can.c     **** 		return 0;
- 219:Src/can.c     **** 	}else{
- 220:Src/can.c     **** 		can->fifo.txNormal[can->fifo.txHeadNormal].id = can->tx_id;
- 920              		.loc 1 220 3 is_stmt 1 view .LVU274
- 921              		.loc 1 220 54 is_stmt 0 view .LVU275
- 922 001e 026A     		ldr	r2, [r0, #32]
- 923              		.loc 1 220 49 view .LVU276
- 924 0020 00EB0613 		add	r3, r0, r6, lsl #4
- 925 0024 C3F8A826 		str	r2, [r3, #1704]
- 221:Src/can.c     **** 		can->fifo.txNormal[can->fifo.txHeadNormal].size = can->tx_size;
- 926              		.loc 1 221 3 is_stmt 1 view .LVU277
- 927              		.loc 1 221 56 is_stmt 0 view .LVU278
- 928 0028 0568     		ldr	r5, [r0]
- 929              		.loc 1 221 51 view .LVU279
- 930 002a C3F8AC56 		str	r5, [r3, #1708]
- 222:Src/can.c     **** 		for(uint8_t i = 0; i < can->tx_size; i++){
- 931              		.loc 1 222 3 is_stmt 1 view .LVU280
- 932              	.LBB7:
- 933              		.loc 1 222 7 view .LVU281
- 934              	.LVL59:
- 935              		.loc 1 222 15 is_stmt 0 view .LVU282
- 936 002e 0023     		movs	r3, #0
- 937              	.LVL60:
- 938              	.L59:
- 939              		.loc 1 222 22 is_stmt 1 discriminator 1 view .LVU283
- 940              		.loc 1 222 3 is_stmt 0 discriminator 1 view .LVU284
- 941 0030 9D42     		cmp	r5, r3
- 942 0032 09DD     		ble	.L63
- 223:Src/can.c     **** 			can->fifo.txNormal[can->fifo.txHeadNormal].data[i] = can->dataTx[i];
- 943              		.loc 1 223 4 is_stmt 1 discriminator 3 view .LVU285
- 944              		.loc 1 223 68 is_stmt 0 discriminator 3 view .LVU286
- 945 0034 C218     		adds	r2, r0, r3
- 946 0036 117A     		ldrb	r1, [r2, #8]	@ zero_extendqisi2
- 947              		.loc 1 223 55 discriminator 3 view .LVU287
- 948 0038 00EB0612 		add	r2, r0, r6, lsl #4
- 949 003c 1A44     		add	r2, r2, r3
- 950 003e 82F8B016 		strb	r1, [r2, #1712]
- 222:Src/can.c     **** 		for(uint8_t i = 0; i < can->tx_size; i++){
- 951              		.loc 1 222 40 is_stmt 1 discriminator 3 view .LVU288
- 222:Src/can.c     **** 		for(uint8_t i = 0; i < can->tx_size; i++){
- 952              		.loc 1 222 41 is_stmt 0 discriminator 3 view .LVU289
- 953 0042 0133     		adds	r3, r3, #1
-ARM GAS  /tmp/ccezYmfJ.s 			page 22
+ 907 0002 90F87260 		ldrb	r6, [r0, #114]	@ zero_extendqisi2
+ 908              		.loc 1 213 30 view .LVU271
+ 909 0006 731C     		adds	r3, r6, #1
+ 910              		.loc 1 213 35 view .LVU272
+ 911 0008 134C     		ldr	r4, .L64
+ 912 000a 84FB0324 		smull	r2, r4, r4, r3
+ 913 000e 6411     		asrs	r4, r4, #5
+ 914 0010 6422     		movs	r2, #100
+ 915 0012 02FB1434 		mls	r4, r2, r4, r3
+ 916              		.loc 1 213 61 view .LVU273
+ 917 0016 90F87330 		ldrb	r3, [r0, #115]	@ zero_extendqisi2
+ 918              		.loc 1 213 5 view .LVU274
+ 919 001a 9C42     		cmp	r4, r3
+ 920 001c 19D0     		beq	.L61
+ 214:Src/can.c     **** 		return 0;
+ 215:Src/can.c     **** 	} else {
+ 216:Src/can.c     **** 		can->fifo.txNormal[can->fifo.txHeadNormal].id = can->tx_id;
+ 921              		.loc 1 216 3 is_stmt 1 view .LVU275
+ 922              		.loc 1 216 54 is_stmt 0 view .LVU276
+ 923 001e C26A     		ldr	r2, [r0, #44]
+ 924              		.loc 1 216 49 view .LVU277
+ 925 0020 00EB0613 		add	r3, r0, r6, lsl #4
+ 926 0024 C3F8B826 		str	r2, [r3, #1720]
+ 217:Src/can.c     **** 		can->fifo.txNormal[can->fifo.txHeadNormal].size = can->tx_size;
+ 927              		.loc 1 217 3 is_stmt 1 view .LVU278
+ 928              		.loc 1 217 56 is_stmt 0 view .LVU279
+ 929 0028 0568     		ldr	r5, [r0]
+ 930              		.loc 1 217 51 view .LVU280
+ 931 002a C3F8BC56 		str	r5, [r3, #1724]
+ 218:Src/can.c     **** 		for (uint8_t i = 0; i < can->tx_size; i++) {
+ 932              		.loc 1 218 3 is_stmt 1 view .LVU281
+ 933              	.LBB7:
+ 934              		.loc 1 218 8 view .LVU282
+ 935              	.LVL59:
+ 936              		.loc 1 218 16 is_stmt 0 view .LVU283
+ 937 002e 0023     		movs	r3, #0
+ 938              	.LVL60:
+ 939              	.L59:
+ 940              		.loc 1 218 23 is_stmt 1 discriminator 1 view .LVU284
+ 941              		.loc 1 218 3 is_stmt 0 discriminator 1 view .LVU285
+ 942 0030 9D42     		cmp	r5, r3
+ 943 0032 09DD     		ble	.L63
+ 219:Src/can.c     **** 			can->fifo.txNormal[can->fifo.txHeadNormal].data[i] = can->dataTx[i];
+ 944              		.loc 1 219 4 is_stmt 1 discriminator 3 view .LVU286
+ 945              		.loc 1 219 68 is_stmt 0 discriminator 3 view .LVU287
+ 946 0034 C218     		adds	r2, r0, r3
+ 947 0036 117B     		ldrb	r1, [r2, #12]	@ zero_extendqisi2
+ 948              		.loc 1 219 55 discriminator 3 view .LVU288
+ 949 0038 00EB0612 		add	r2, r0, r6, lsl #4
+ 950 003c 1A44     		add	r2, r2, r3
+ 951 003e 82F8C016 		strb	r1, [r2, #1728]
+ 218:Src/can.c     **** 		for (uint8_t i = 0; i < can->tx_size; i++) {
+ 952              		.loc 1 218 41 is_stmt 1 discriminator 3 view .LVU289
+ 218:Src/can.c     **** 		for (uint8_t i = 0; i < can->tx_size; i++) {
+ 953              		.loc 1 218 42 is_stmt 0 discriminator 3 view .LVU290
+ 954 0042 0133     		adds	r3, r3, #1
+ 955              	.LVL61:
+ARM GAS  /tmp/cc3Lv0SS.s 			page 22
 
 
- 954              	.LVL61:
- 222:Src/can.c     **** 		for(uint8_t i = 0; i < can->tx_size; i++){
- 955              		.loc 1 222 41 discriminator 3 view .LVU290
- 956 0044 DBB2     		uxtb	r3, r3
- 957              	.LVL62:
- 222:Src/can.c     **** 		for(uint8_t i = 0; i < can->tx_size; i++){
- 958              		.loc 1 222 41 discriminator 3 view .LVU291
- 959 0046 F3E7     		b	.L59
- 960              	.L63:
- 222:Src/can.c     **** 		for(uint8_t i = 0; i < can->tx_size; i++){
- 961              		.loc 1 222 41 discriminator 3 view .LVU292
- 962              	.LBE7:
- 224:Src/can.c     **** 		}
- 225:Src/can.c     **** 		can->fifo.txHeadNormal = (can->fifo.txHeadNormal + 1) % fifoLengthN;
- 963              		.loc 1 225 3 is_stmt 1 view .LVU293
- 964              		.loc 1 225 26 is_stmt 0 view .LVU294
- 965 0048 80F86240 		strb	r4, [r0, #98]
- 226:Src/can.c     **** 		return 1;
- 966              		.loc 1 226 3 is_stmt 1 view .LVU295
- 967              		.loc 1 226 10 is_stmt 0 view .LVU296
- 968 004c 0120     		movs	r0, #1
- 969              	.LVL63:
- 970              	.L58:
- 227:Src/can.c     **** 	}
- 228:Src/can.c     **** }
- 971              		.loc 1 228 1 view .LVU297
- 972 004e 70BC     		pop	{r4, r5, r6}
- 973              	.LCFI23:
- 974              		.cfi_remember_state
- 975              		.cfi_restore 6
- 976              		.cfi_restore 5
- 977              		.cfi_restore 4
- 978              		.cfi_def_cfa_offset 0
- 979 0050 7047     		bx	lr
- 980              	.LVL64:
- 981              	.L61:
- 982              	.LCFI24:
- 983              		.cfi_restore_state
- 218:Src/can.c     **** 	}else{
- 984              		.loc 1 218 10 view .LVU298
- 985 0052 0020     		movs	r0, #0
- 986              	.LVL65:
- 218:Src/can.c     **** 	}else{
- 987              		.loc 1 218 10 view .LVU299
- 988 0054 FBE7     		b	.L58
- 989              	.L65:
- 990 0056 00BF     		.align	2
- 991              	.L64:
- 992 0058 1F85EB51 		.word	1374389535
- 993              		.cfi_endproc
- 994              	.LFE155:
- 996              		.section	.text.fifoTxDataCAN_high_push,"ax",%progbits
- 997              		.align	1
- 998              		.global	fifoTxDataCAN_high_push
- 999              		.syntax unified
- 1000              		.thumb
- 1001              		.thumb_func
-ARM GAS  /tmp/ccezYmfJ.s 			page 23
+ 218:Src/can.c     **** 		for (uint8_t i = 0; i < can->tx_size; i++) {
+ 956              		.loc 1 218 42 discriminator 3 view .LVU291
+ 957 0044 DBB2     		uxtb	r3, r3
+ 958              	.LVL62:
+ 218:Src/can.c     **** 		for (uint8_t i = 0; i < can->tx_size; i++) {
+ 959              		.loc 1 218 42 discriminator 3 view .LVU292
+ 960 0046 F3E7     		b	.L59
+ 961              	.L63:
+ 218:Src/can.c     **** 		for (uint8_t i = 0; i < can->tx_size; i++) {
+ 962              		.loc 1 218 42 discriminator 3 view .LVU293
+ 963              	.LBE7:
+ 220:Src/can.c     **** 		}
+ 221:Src/can.c     **** 		can->fifo.txHeadNormal = (can->fifo.txHeadNormal + 1) % fifoLengthN;
+ 964              		.loc 1 221 3 is_stmt 1 view .LVU294
+ 965              		.loc 1 221 26 is_stmt 0 view .LVU295
+ 966 0048 80F87240 		strb	r4, [r0, #114]
+ 222:Src/can.c     **** 		return 1;
+ 967              		.loc 1 222 3 is_stmt 1 view .LVU296
+ 968              		.loc 1 222 10 is_stmt 0 view .LVU297
+ 969 004c 0120     		movs	r0, #1
+ 970              	.LVL63:
+ 971              	.L58:
+ 223:Src/can.c     **** 	}
+ 224:Src/can.c     **** }
+ 972              		.loc 1 224 1 view .LVU298
+ 973 004e 70BC     		pop	{r4, r5, r6}
+ 974              	.LCFI23:
+ 975              		.cfi_remember_state
+ 976              		.cfi_restore 6
+ 977              		.cfi_restore 5
+ 978              		.cfi_restore 4
+ 979              		.cfi_def_cfa_offset 0
+ 980 0050 7047     		bx	lr
+ 981              	.LVL64:
+ 982              	.L61:
+ 983              	.LCFI24:
+ 984              		.cfi_restore_state
+ 214:Src/can.c     **** 	} else {
+ 985              		.loc 1 214 10 view .LVU299
+ 986 0052 0020     		movs	r0, #0
+ 987              	.LVL65:
+ 214:Src/can.c     **** 	} else {
+ 988              		.loc 1 214 10 view .LVU300
+ 989 0054 FBE7     		b	.L58
+ 990              	.L65:
+ 991 0056 00BF     		.align	2
+ 992              	.L64:
+ 993 0058 1F85EB51 		.word	1374389535
+ 994              		.cfi_endproc
+ 995              	.LFE155:
+ 997              		.section	.text.fifoTxDataCAN_high_push,"ax",%progbits
+ 998              		.align	1
+ 999              		.global	fifoTxDataCAN_high_push
+ 1000              		.syntax unified
+ 1001              		.thumb
+ 1002              		.thumb_func
+ 1003              		.fpu fpv5-d16
+ARM GAS  /tmp/cc3Lv0SS.s 			page 23
 
 
- 1002              		.fpu fpv5-d16
- 1004              	fifoTxDataCAN_high_push:
- 1005              	.LVL66:
- 1006              	.LFB156:
- 229:Src/can.c     **** uint8_t fifoTxDataCAN_high_push(canStruct * can){
- 1007              		.loc 1 229 49 is_stmt 1 view -0
- 1008              		.cfi_startproc
- 1009              		@ args = 0, pretend = 0, frame = 0
- 1010              		@ frame_needed = 0, uses_anonymous_args = 0
- 1011              		@ link register save eliminated.
- 1012              		.loc 1 229 49 is_stmt 0 view .LVU301
- 1013 0000 70B4     		push	{r4, r5, r6}
- 1014              	.LCFI25:
- 1015              		.cfi_def_cfa_offset 12
- 1016              		.cfi_offset 4, -12
- 1017              		.cfi_offset 5, -8
- 1018              		.cfi_offset 6, -4
- 230:Src/can.c     **** 	if((can->fifo.txHeadHigh + 1) % fifoLengthH == can->fifo.txTailHigh){
- 1019              		.loc 1 230 2 is_stmt 1 view .LVU302
- 1020              		.loc 1 230 15 is_stmt 0 view .LVU303
- 1021 0002 90F86440 		ldrb	r4, [r0, #100]	@ zero_extendqisi2
- 1022              		.loc 1 230 27 view .LVU304
- 1023 0006 631C     		adds	r3, r4, #1
- 1024              		.loc 1 230 32 view .LVU305
- 1025 0008 144A     		ldr	r2, .L73
- 1026 000a 82FB0312 		smull	r1, r2, r2, r3
- 1027 000e 02F0FC06 		and	r6, r2, #252
- 1028 0012 06EBA206 		add	r6, r6, r2, asr #2
- 1029 0016 A3EB4606 		sub	r6, r3, r6, lsl #1
- 1030              		.loc 1 230 58 view .LVU306
- 1031 001a 90F86530 		ldrb	r3, [r0, #101]	@ zero_extendqisi2
- 1032              		.loc 1 230 4 view .LVU307
- 1033 001e 9E42     		cmp	r6, r3
- 1034 0020 19D0     		beq	.L70
- 231:Src/can.c     **** 		return 0;
- 232:Src/can.c     **** 	}else{
- 233:Src/can.c     **** 		can->fifo.txHigh[can->fifo.txHeadHigh].id = can->tx_id;
- 1035              		.loc 1 233 3 is_stmt 1 view .LVU308
- 1036              		.loc 1 233 50 is_stmt 0 view .LVU309
- 1037 0022 026A     		ldr	r2, [r0, #32]
- 1038              		.loc 1 233 45 view .LVU310
- 1039 0024 00EB0413 		add	r3, r0, r4, lsl #4
- 1040 0028 C3F8E82C 		str	r2, [r3, #3304]
- 234:Src/can.c     **** 		can->fifo.txHigh[can->fifo.txHeadHigh].size = can->tx_size;
- 1041              		.loc 1 234 3 is_stmt 1 view .LVU311
- 1042              		.loc 1 234 52 is_stmt 0 view .LVU312
- 1043 002c 0568     		ldr	r5, [r0]
- 1044              		.loc 1 234 47 view .LVU313
- 1045 002e C3F8EC5C 		str	r5, [r3, #3308]
- 235:Src/can.c     **** 		for(uint8_t i = 0; i < can->tx_size; i++){
- 1046              		.loc 1 235 3 is_stmt 1 view .LVU314
- 1047              	.LBB8:
- 1048              		.loc 1 235 7 view .LVU315
- 1049              	.LVL67:
- 1050              		.loc 1 235 15 is_stmt 0 view .LVU316
- 1051 0032 0023     		movs	r3, #0
- 1052              	.LVL68:
-ARM GAS  /tmp/ccezYmfJ.s 			page 24
+ 1005              	fifoTxDataCAN_high_push:
+ 1006              	.LVL66:
+ 1007              	.LFB156:
+ 225:Src/can.c     **** uint8_t fifoTxDataCAN_high_push(canStruct* can) {
+ 1008              		.loc 1 225 49 is_stmt 1 view -0
+ 1009              		.cfi_startproc
+ 1010              		@ args = 0, pretend = 0, frame = 0
+ 1011              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1012              		@ link register save eliminated.
+ 1013              		.loc 1 225 49 is_stmt 0 view .LVU302
+ 1014 0000 70B4     		push	{r4, r5, r6}
+ 1015              	.LCFI25:
+ 1016              		.cfi_def_cfa_offset 12
+ 1017              		.cfi_offset 4, -12
+ 1018              		.cfi_offset 5, -8
+ 1019              		.cfi_offset 6, -4
+ 226:Src/can.c     **** 	if ((can->fifo.txHeadHigh + 1) % fifoLengthH == can->fifo.txTailHigh) {
+ 1020              		.loc 1 226 2 is_stmt 1 view .LVU303
+ 1021              		.loc 1 226 16 is_stmt 0 view .LVU304
+ 1022 0002 90F87440 		ldrb	r4, [r0, #116]	@ zero_extendqisi2
+ 1023              		.loc 1 226 28 view .LVU305
+ 1024 0006 631C     		adds	r3, r4, #1
+ 1025              		.loc 1 226 33 view .LVU306
+ 1026 0008 144A     		ldr	r2, .L73
+ 1027 000a 82FB0312 		smull	r1, r2, r2, r3
+ 1028 000e 02F0FC06 		and	r6, r2, #252
+ 1029 0012 06EBA206 		add	r6, r6, r2, asr #2
+ 1030 0016 A3EB4606 		sub	r6, r3, r6, lsl #1
+ 1031              		.loc 1 226 59 view .LVU307
+ 1032 001a 90F87530 		ldrb	r3, [r0, #117]	@ zero_extendqisi2
+ 1033              		.loc 1 226 5 view .LVU308
+ 1034 001e 9E42     		cmp	r6, r3
+ 1035 0020 19D0     		beq	.L70
+ 227:Src/can.c     **** 		return 0;
+ 228:Src/can.c     **** 	} else {
+ 229:Src/can.c     **** 		can->fifo.txHigh[can->fifo.txHeadHigh].id = can->tx_id;
+ 1036              		.loc 1 229 3 is_stmt 1 view .LVU309
+ 1037              		.loc 1 229 50 is_stmt 0 view .LVU310
+ 1038 0022 C26A     		ldr	r2, [r0, #44]
+ 1039              		.loc 1 229 45 view .LVU311
+ 1040 0024 00EB0413 		add	r3, r0, r4, lsl #4
+ 1041 0028 C3F8F82C 		str	r2, [r3, #3320]
+ 230:Src/can.c     **** 		can->fifo.txHigh[can->fifo.txHeadHigh].size = can->tx_size;
+ 1042              		.loc 1 230 3 is_stmt 1 view .LVU312
+ 1043              		.loc 1 230 52 is_stmt 0 view .LVU313
+ 1044 002c 0568     		ldr	r5, [r0]
+ 1045              		.loc 1 230 47 view .LVU314
+ 1046 002e C3F8FC5C 		str	r5, [r3, #3324]
+ 231:Src/can.c     **** 		for (uint8_t i = 0; i < can->tx_size; i++) {
+ 1047              		.loc 1 231 3 is_stmt 1 view .LVU315
+ 1048              	.LBB8:
+ 1049              		.loc 1 231 8 view .LVU316
+ 1050              	.LVL67:
+ 1051              		.loc 1 231 16 is_stmt 0 view .LVU317
+ 1052 0032 0023     		movs	r3, #0
+ 1053              	.LVL68:
+ 1054              	.L68:
+ARM GAS  /tmp/cc3Lv0SS.s 			page 24
 
 
- 1053              	.L68:
- 1054              		.loc 1 235 22 is_stmt 1 discriminator 1 view .LVU317
- 1055              		.loc 1 235 3 is_stmt 0 discriminator 1 view .LVU318
- 1056 0034 9D42     		cmp	r5, r3
- 1057 0036 09DD     		ble	.L72
- 236:Src/can.c     **** 			can->fifo.txHigh[can->fifo.txHeadHigh].data[i] = can->dataTx[i];
- 1058              		.loc 1 236 4 is_stmt 1 discriminator 3 view .LVU319
- 1059              		.loc 1 236 64 is_stmt 0 discriminator 3 view .LVU320
- 1060 0038 C218     		adds	r2, r0, r3
- 1061 003a 117A     		ldrb	r1, [r2, #8]	@ zero_extendqisi2
- 1062              		.loc 1 236 51 discriminator 3 view .LVU321
- 1063 003c 00EB0412 		add	r2, r0, r4, lsl #4
- 1064 0040 1A44     		add	r2, r2, r3
- 1065 0042 82F8F01C 		strb	r1, [r2, #3312]
- 235:Src/can.c     **** 		for(uint8_t i = 0; i < can->tx_size; i++){
- 1066              		.loc 1 235 40 is_stmt 1 discriminator 3 view .LVU322
- 235:Src/can.c     **** 		for(uint8_t i = 0; i < can->tx_size; i++){
- 1067              		.loc 1 235 41 is_stmt 0 discriminator 3 view .LVU323
- 1068 0046 0133     		adds	r3, r3, #1
- 1069              	.LVL69:
- 235:Src/can.c     **** 		for(uint8_t i = 0; i < can->tx_size; i++){
- 1070              		.loc 1 235 41 discriminator 3 view .LVU324
- 1071 0048 DBB2     		uxtb	r3, r3
- 1072              	.LVL70:
- 235:Src/can.c     **** 		for(uint8_t i = 0; i < can->tx_size; i++){
- 1073              		.loc 1 235 41 discriminator 3 view .LVU325
- 1074 004a F3E7     		b	.L68
- 1075              	.L72:
- 235:Src/can.c     **** 		for(uint8_t i = 0; i < can->tx_size; i++){
- 1076              		.loc 1 235 41 discriminator 3 view .LVU326
- 1077              	.LBE8:
- 237:Src/can.c     **** 		}
- 238:Src/can.c     **** 		can->fifo.txHeadHigh = (can->fifo.txHeadHigh + 1) % fifoLengthH;
- 1078              		.loc 1 238 3 is_stmt 1 view .LVU327
- 1079              		.loc 1 238 24 is_stmt 0 view .LVU328
- 1080 004c 80F86460 		strb	r6, [r0, #100]
- 239:Src/can.c     **** 		return 1;
- 1081              		.loc 1 239 3 is_stmt 1 view .LVU329
- 1082              		.loc 1 239 10 is_stmt 0 view .LVU330
- 1083 0050 0120     		movs	r0, #1
- 1084              	.LVL71:
- 1085              	.L67:
- 240:Src/can.c     **** 	}
- 241:Src/can.c     **** }
- 1086              		.loc 1 241 1 view .LVU331
- 1087 0052 70BC     		pop	{r4, r5, r6}
- 1088              	.LCFI26:
- 1089              		.cfi_remember_state
- 1090              		.cfi_restore 6
- 1091              		.cfi_restore 5
- 1092              		.cfi_restore 4
- 1093              		.cfi_def_cfa_offset 0
- 1094 0054 7047     		bx	lr
- 1095              	.LVL72:
- 1096              	.L70:
- 1097              	.LCFI27:
- 1098              		.cfi_restore_state
-ARM GAS  /tmp/ccezYmfJ.s 			page 25
+ 1055              		.loc 1 231 23 is_stmt 1 discriminator 1 view .LVU318
+ 1056              		.loc 1 231 3 is_stmt 0 discriminator 1 view .LVU319
+ 1057 0034 9D42     		cmp	r5, r3
+ 1058 0036 09DD     		ble	.L72
+ 232:Src/can.c     **** 			can->fifo.txHigh[can->fifo.txHeadHigh].data[i] = can->dataTx[i];
+ 1059              		.loc 1 232 4 is_stmt 1 discriminator 3 view .LVU320
+ 1060              		.loc 1 232 64 is_stmt 0 discriminator 3 view .LVU321
+ 1061 0038 C218     		adds	r2, r0, r3
+ 1062 003a 117B     		ldrb	r1, [r2, #12]	@ zero_extendqisi2
+ 1063              		.loc 1 232 51 discriminator 3 view .LVU322
+ 1064 003c 00EB0412 		add	r2, r0, r4, lsl #4
+ 1065 0040 1A44     		add	r2, r2, r3
+ 1066 0042 82F8001D 		strb	r1, [r2, #3328]
+ 231:Src/can.c     **** 		for (uint8_t i = 0; i < can->tx_size; i++) {
+ 1067              		.loc 1 231 41 is_stmt 1 discriminator 3 view .LVU323
+ 231:Src/can.c     **** 		for (uint8_t i = 0; i < can->tx_size; i++) {
+ 1068              		.loc 1 231 42 is_stmt 0 discriminator 3 view .LVU324
+ 1069 0046 0133     		adds	r3, r3, #1
+ 1070              	.LVL69:
+ 231:Src/can.c     **** 		for (uint8_t i = 0; i < can->tx_size; i++) {
+ 1071              		.loc 1 231 42 discriminator 3 view .LVU325
+ 1072 0048 DBB2     		uxtb	r3, r3
+ 1073              	.LVL70:
+ 231:Src/can.c     **** 		for (uint8_t i = 0; i < can->tx_size; i++) {
+ 1074              		.loc 1 231 42 discriminator 3 view .LVU326
+ 1075 004a F3E7     		b	.L68
+ 1076              	.L72:
+ 231:Src/can.c     **** 		for (uint8_t i = 0; i < can->tx_size; i++) {
+ 1077              		.loc 1 231 42 discriminator 3 view .LVU327
+ 1078              	.LBE8:
+ 233:Src/can.c     **** 		}
+ 234:Src/can.c     **** 		can->fifo.txHeadHigh = (can->fifo.txHeadHigh + 1) % fifoLengthH;
+ 1079              		.loc 1 234 3 is_stmt 1 view .LVU328
+ 1080              		.loc 1 234 24 is_stmt 0 view .LVU329
+ 1081 004c 80F87460 		strb	r6, [r0, #116]
+ 235:Src/can.c     **** 		return 1;
+ 1082              		.loc 1 235 3 is_stmt 1 view .LVU330
+ 1083              		.loc 1 235 10 is_stmt 0 view .LVU331
+ 1084 0050 0120     		movs	r0, #1
+ 1085              	.LVL71:
+ 1086              	.L67:
+ 236:Src/can.c     **** 	}
+ 237:Src/can.c     **** }
+ 1087              		.loc 1 237 1 view .LVU332
+ 1088 0052 70BC     		pop	{r4, r5, r6}
+ 1089              	.LCFI26:
+ 1090              		.cfi_remember_state
+ 1091              		.cfi_restore 6
+ 1092              		.cfi_restore 5
+ 1093              		.cfi_restore 4
+ 1094              		.cfi_def_cfa_offset 0
+ 1095 0054 7047     		bx	lr
+ 1096              	.LVL72:
+ 1097              	.L70:
+ 1098              	.LCFI27:
+ 1099              		.cfi_restore_state
+ 227:Src/can.c     **** 	} else {
+ARM GAS  /tmp/cc3Lv0SS.s 			page 25
 
 
- 231:Src/can.c     **** 	}else{
- 1099              		.loc 1 231 10 view .LVU332
- 1100 0056 0020     		movs	r0, #0
- 1101              	.LVL73:
- 231:Src/can.c     **** 	}else{
- 1102              		.loc 1 231 10 view .LVU333
- 1103 0058 FBE7     		b	.L67
- 1104              	.L74:
- 1105 005a 00BF     		.align	2
- 1106              	.L73:
- 1107 005c 67666666 		.word	1717986919
- 1108              		.cfi_endproc
- 1109              	.LFE156:
- 1111              		.section	.rodata.CAN_Send.str1.4,"aMS",%progbits,1
- 1112              		.align	2
- 1113              	.LC0:
- 1114 0000 4572726F 		.ascii	"Error while normal push\015\012\000"
- 1114      72207768 
- 1114      696C6520 
- 1114      6E6F726D 
- 1114      616C2070 
- 1115              		.section	.text.CAN_Send,"ax",%progbits
- 1116              		.align	1
- 1117              		.global	CAN_Send
- 1118              		.syntax unified
- 1119              		.thumb
- 1120              		.thumb_func
- 1121              		.fpu fpv5-d16
- 1123              	CAN_Send:
- 1124              	.LVL74:
- 1125              	.LFB145:
-  22:Src/can.c     **** 	if (HAL_CAN_GetTxMailboxesFreeLevel(can->hcan) != 0){
- 1126              		.loc 1 22 61 is_stmt 1 view -0
- 1127              		.cfi_startproc
- 1128              		@ args = 0, pretend = 0, frame = 0
- 1129              		@ frame_needed = 0, uses_anonymous_args = 0
-  22:Src/can.c     **** 	if (HAL_CAN_GetTxMailboxesFreeLevel(can->hcan) != 0){
- 1130              		.loc 1 22 61 is_stmt 0 view .LVU335
- 1131 0000 38B5     		push	{r3, r4, r5, lr}
- 1132              	.LCFI28:
- 1133              		.cfi_def_cfa_offset 16
- 1134              		.cfi_offset 3, -16
- 1135              		.cfi_offset 4, -12
- 1136              		.cfi_offset 5, -8
- 1137              		.cfi_offset 14, -4
- 1138 0002 0446     		mov	r4, r0
- 1139 0004 0D46     		mov	r5, r1
-  23:Src/can.c     **** 		if(CAN_Send_IT(can) == 0){
- 1140              		.loc 1 23 2 is_stmt 1 view .LVU336
-  23:Src/can.c     **** 		if(CAN_Send_IT(can) == 0){
- 1141              		.loc 1 23 6 is_stmt 0 view .LVU337
- 1142 0006 006B     		ldr	r0, [r0, #48]
- 1143              	.LVL75:
-  23:Src/can.c     **** 		if(CAN_Send_IT(can) == 0){
- 1144              		.loc 1 23 6 view .LVU338
- 1145 0008 FFF7FEFF 		bl	HAL_CAN_GetTxMailboxesFreeLevel
- 1146              	.LVL76:
-ARM GAS  /tmp/ccezYmfJ.s 			page 26
+ 1100              		.loc 1 227 10 view .LVU333
+ 1101 0056 0020     		movs	r0, #0
+ 1102              	.LVL73:
+ 227:Src/can.c     **** 	} else {
+ 1103              		.loc 1 227 10 view .LVU334
+ 1104 0058 FBE7     		b	.L67
+ 1105              	.L74:
+ 1106 005a 00BF     		.align	2
+ 1107              	.L73:
+ 1108 005c 67666666 		.word	1717986919
+ 1109              		.cfi_endproc
+ 1110              	.LFE156:
+ 1112              		.section	.rodata.CAN_Send.str1.4,"aMS",%progbits,1
+ 1113              		.align	2
+ 1114              	.LC0:
+ 1115 0000 4572726F 		.ascii	"Error while normal push\015\012\000"
+ 1115      72207768 
+ 1115      696C6520 
+ 1115      6E6F726D 
+ 1115      616C2070 
+ 1116              		.section	.text.CAN_Send,"ax",%progbits
+ 1117              		.align	1
+ 1118              		.global	CAN_Send
+ 1119              		.syntax unified
+ 1120              		.thumb
+ 1121              		.thumb_func
+ 1122              		.fpu fpv5-d16
+ 1124              	CAN_Send:
+ 1125              	.LVL74:
+ 1126              	.LFB145:
+  22:Src/can.c     **** 	if (HAL_CAN_GetTxMailboxesFreeLevel(can->hcan) != 0) {
+ 1127              		.loc 1 22 62 is_stmt 1 view -0
+ 1128              		.cfi_startproc
+ 1129              		@ args = 0, pretend = 0, frame = 0
+ 1130              		@ frame_needed = 0, uses_anonymous_args = 0
+  22:Src/can.c     **** 	if (HAL_CAN_GetTxMailboxesFreeLevel(can->hcan) != 0) {
+ 1131              		.loc 1 22 62 is_stmt 0 view .LVU336
+ 1132 0000 38B5     		push	{r3, r4, r5, lr}
+ 1133              	.LCFI28:
+ 1134              		.cfi_def_cfa_offset 16
+ 1135              		.cfi_offset 3, -16
+ 1136              		.cfi_offset 4, -12
+ 1137              		.cfi_offset 5, -8
+ 1138              		.cfi_offset 14, -4
+ 1139 0002 0446     		mov	r4, r0
+ 1140 0004 0D46     		mov	r5, r1
+  23:Src/can.c     **** 		if (CAN_Send_IT(can) == 0) {
+ 1141              		.loc 1 23 2 is_stmt 1 view .LVU337
+  23:Src/can.c     **** 		if (CAN_Send_IT(can) == 0) {
+ 1142              		.loc 1 23 6 is_stmt 0 view .LVU338
+ 1143 0006 006C     		ldr	r0, [r0, #64]
+ 1144              	.LVL75:
+  23:Src/can.c     **** 		if (CAN_Send_IT(can) == 0) {
+ 1145              		.loc 1 23 6 view .LVU339
+ 1146 0008 FFF7FEFF 		bl	HAL_CAN_GetTxMailboxesFreeLevel
+ 1147              	.LVL76:
+  23:Src/can.c     **** 		if (CAN_Send_IT(can) == 0) {
+ARM GAS  /tmp/cc3Lv0SS.s 			page 26
 
 
-  23:Src/can.c     **** 		if(CAN_Send_IT(can) == 0){
- 1147              		.loc 1 23 5 view .LVU339
- 1148 000c 38B9     		cbnz	r0, .L83
-  35:Src/can.c     **** 			if(can->hcan == &hcan1){
- 1149              		.loc 1 35 3 is_stmt 1 view .LVU340
-  35:Src/can.c     **** 			if(can->hcan == &hcan1){
- 1150              		.loc 1 35 5 is_stmt 0 view .LVU341
- 1151 000e E5B9     		cbnz	r5, .L78
-  36:Src/can.c     **** 				if(fifoTxDataCAN_normal_push(can) == 0){
- 1152              		.loc 1 36 4 is_stmt 1 view .LVU342
-  36:Src/can.c     **** 				if(fifoTxDataCAN_normal_push(can) == 0){
- 1153              		.loc 1 36 10 is_stmt 0 view .LVU343
- 1154 0010 226B     		ldr	r2, [r4, #48]
-  36:Src/can.c     **** 				if(fifoTxDataCAN_normal_push(can) == 0){
- 1155              		.loc 1 36 6 view .LVU344
- 1156 0012 154B     		ldr	r3, .L87
- 1157 0014 9A42     		cmp	r2, r3
- 1158 0016 0AD0     		beq	.L84
-  64:Src/can.c     **** }
- 1159              		.loc 1 64 9 view .LVU345
- 1160 0018 0124     		movs	r4, #1
- 1161              	.LVL77:
- 1162              	.L77:
-  65:Src/can.c     **** 
- 1163              		.loc 1 65 1 view .LVU346
- 1164 001a 2046     		mov	r0, r4
- 1165 001c 38BD     		pop	{r3, r4, r5, pc}
- 1166              	.LVL78:
- 1167              	.L83:
-  24:Src/can.c     **** 			//HAL_UART_Transmit(&huart3,(uint8_t*)("Cagato fuori dal vaso\r\n"), strlen("Cagato fuori dal va
- 1168              		.loc 1 24 3 is_stmt 1 view .LVU347
-  24:Src/can.c     **** 			//HAL_UART_Transmit(&huart3,(uint8_t*)("Cagato fuori dal vaso\r\n"), strlen("Cagato fuori dal va
- 1169              		.loc 1 24 6 is_stmt 0 view .LVU348
- 1170 001e 2046     		mov	r0, r4
- 1171 0020 FFF7FEFF 		bl	CAN_Send_IT
- 1172              	.LVL79:
-  24:Src/can.c     **** 			//HAL_UART_Transmit(&huart3,(uint8_t*)("Cagato fuori dal vaso\r\n"), strlen("Cagato fuori dal va
- 1173              		.loc 1 24 5 view .LVU349
- 1174 0024 0446     		mov	r4, r0
- 1175              	.LVL80:
-  24:Src/can.c     **** 			//HAL_UART_Transmit(&huart3,(uint8_t*)("Cagato fuori dal vaso\r\n"), strlen("Cagato fuori dal va
- 1176              		.loc 1 24 5 view .LVU350
- 1177 0026 0028     		cmp	r0, #0
- 1178 0028 F7D0     		beq	.L77
-  64:Src/can.c     **** }
- 1179              		.loc 1 64 9 view .LVU351
- 1180 002a 0124     		movs	r4, #1
- 1181 002c F5E7     		b	.L77
- 1182              	.LVL81:
- 1183              	.L84:
-  37:Src/can.c     **** 					HAL_UART_Transmit(&huart3,(uint8_t*)("Error while normal push\r\n"), strlen("Error while norma
- 1184              		.loc 1 37 5 is_stmt 1 view .LVU352
-  37:Src/can.c     **** 					HAL_UART_Transmit(&huart3,(uint8_t*)("Error while normal push\r\n"), strlen("Error while norma
- 1185              		.loc 1 37 8 is_stmt 0 view .LVU353
- 1186 002e 2046     		mov	r0, r4
- 1187 0030 FFF7FEFF 		bl	fifoTxDataCAN_normal_push
- 1188              	.LVL82:
-ARM GAS  /tmp/ccezYmfJ.s 			page 27
+ 1148              		.loc 1 23 5 view .LVU340
+ 1149 000c 38B9     		cbnz	r0, .L83
+  37:Src/can.c     **** 			if (can->hcan == &hcan1) {
+ 1150              		.loc 1 37 3 is_stmt 1 view .LVU341
+  37:Src/can.c     **** 			if (can->hcan == &hcan1) {
+ 1151              		.loc 1 37 6 is_stmt 0 view .LVU342
+ 1152 000e E5B9     		cbnz	r5, .L78
+  38:Src/can.c     **** 				if (fifoTxDataCAN_normal_push(can) == 0) {
+ 1153              		.loc 1 38 4 is_stmt 1 view .LVU343
+  38:Src/can.c     **** 				if (fifoTxDataCAN_normal_push(can) == 0) {
+ 1154              		.loc 1 38 11 is_stmt 0 view .LVU344
+ 1155 0010 226C     		ldr	r2, [r4, #64]
+  38:Src/can.c     **** 				if (fifoTxDataCAN_normal_push(can) == 0) {
+ 1156              		.loc 1 38 7 view .LVU345
+ 1157 0012 154B     		ldr	r3, .L87
+ 1158 0014 9A42     		cmp	r2, r3
+ 1159 0016 0AD0     		beq	.L84
+  67:Src/can.c     **** }
+ 1160              		.loc 1 67 9 view .LVU346
+ 1161 0018 0124     		movs	r4, #1
+ 1162              	.LVL77:
+ 1163              	.L77:
+  68:Src/can.c     **** 
+ 1164              		.loc 1 68 1 view .LVU347
+ 1165 001a 2046     		mov	r0, r4
+ 1166 001c 38BD     		pop	{r3, r4, r5, pc}
+ 1167              	.LVL78:
+ 1168              	.L83:
+  24:Src/can.c     **** 			// HAL_UART_Transmit(&huart3,(uint8_t*)("Cagato fuori dal
+ 1169              		.loc 1 24 3 is_stmt 1 view .LVU348
+  24:Src/can.c     **** 			// HAL_UART_Transmit(&huart3,(uint8_t*)("Cagato fuori dal
+ 1170              		.loc 1 24 7 is_stmt 0 view .LVU349
+ 1171 001e 2046     		mov	r0, r4
+ 1172 0020 FFF7FEFF 		bl	CAN_Send_IT
+ 1173              	.LVL79:
+  24:Src/can.c     **** 			// HAL_UART_Transmit(&huart3,(uint8_t*)("Cagato fuori dal
+ 1174              		.loc 1 24 6 view .LVU350
+ 1175 0024 0446     		mov	r4, r0
+ 1176              	.LVL80:
+  24:Src/can.c     **** 			// HAL_UART_Transmit(&huart3,(uint8_t*)("Cagato fuori dal
+ 1177              		.loc 1 24 6 view .LVU351
+ 1178 0026 0028     		cmp	r0, #0
+ 1179 0028 F7D0     		beq	.L77
+  67:Src/can.c     **** }
+ 1180              		.loc 1 67 9 view .LVU352
+ 1181 002a 0124     		movs	r4, #1
+ 1182 002c F5E7     		b	.L77
+ 1183              	.LVL81:
+ 1184              	.L84:
+  39:Src/can.c     **** 					HAL_UART_Transmit(
+ 1185              		.loc 1 39 5 is_stmt 1 view .LVU353
+  39:Src/can.c     **** 					HAL_UART_Transmit(
+ 1186              		.loc 1 39 9 is_stmt 0 view .LVU354
+ 1187 002e 2046     		mov	r0, r4
+ 1188 0030 FFF7FEFF 		bl	fifoTxDataCAN_normal_push
+ 1189              	.LVL82:
+  39:Src/can.c     **** 					HAL_UART_Transmit(
+ARM GAS  /tmp/cc3Lv0SS.s 			page 27
 
 
-  37:Src/can.c     **** 					HAL_UART_Transmit(&huart3,(uint8_t*)("Error while normal push\r\n"), strlen("Error while norma
- 1189              		.loc 1 37 7 view .LVU354
- 1190 0034 0446     		mov	r4, r0
- 1191              	.LVL83:
-  37:Src/can.c     **** 					HAL_UART_Transmit(&huart3,(uint8_t*)("Error while normal push\r\n"), strlen("Error while norma
- 1192              		.loc 1 37 7 view .LVU355
- 1193 0036 08B1     		cbz	r0, .L85
-  64:Src/can.c     **** }
- 1194              		.loc 1 64 9 view .LVU356
- 1195 0038 0124     		movs	r4, #1
- 1196 003a EEE7     		b	.L77
- 1197              	.L85:
-  38:Src/can.c     **** 					return 0;
- 1198              		.loc 1 38 6 is_stmt 1 view .LVU357
- 1199 003c 0A23     		movs	r3, #10
- 1200 003e 1922     		movs	r2, #25
- 1201 0040 0A49     		ldr	r1, .L87+4
- 1202 0042 0B48     		ldr	r0, .L87+8
- 1203 0044 FFF7FEFF 		bl	HAL_UART_Transmit
- 1204              	.LVL84:
-  39:Src/can.c     **** 				}
- 1205              		.loc 1 39 6 view .LVU358
-  39:Src/can.c     **** 				}
- 1206              		.loc 1 39 13 is_stmt 0 view .LVU359
- 1207 0048 E7E7     		b	.L77
- 1208              	.LVL85:
- 1209              	.L78:
-  49:Src/can.c     **** 				if(fifoTxDataCAN_high_push(can) == 0){
- 1210              		.loc 1 49 4 is_stmt 1 view .LVU360
-  49:Src/can.c     **** 				if(fifoTxDataCAN_high_push(can) == 0){
- 1211              		.loc 1 49 10 is_stmt 0 view .LVU361
- 1212 004a 226B     		ldr	r2, [r4, #48]
-  49:Src/can.c     **** 				if(fifoTxDataCAN_high_push(can) == 0){
- 1213              		.loc 1 49 6 view .LVU362
- 1214 004c 064B     		ldr	r3, .L87
- 1215 004e 9A42     		cmp	r2, r3
- 1216 0050 01D0     		beq	.L86
-  64:Src/can.c     **** }
- 1217              		.loc 1 64 9 view .LVU363
- 1218 0052 0124     		movs	r4, #1
- 1219              	.LVL86:
-  64:Src/can.c     **** }
- 1220              		.loc 1 64 9 view .LVU364
- 1221 0054 E1E7     		b	.L77
- 1222              	.LVL87:
- 1223              	.L86:
-  50:Src/can.c     **** 					//TODO: implementare errore
- 1224              		.loc 1 50 5 is_stmt 1 view .LVU365
-  50:Src/can.c     **** 					//TODO: implementare errore
- 1225              		.loc 1 50 8 is_stmt 0 view .LVU366
- 1226 0056 2046     		mov	r0, r4
- 1227 0058 FFF7FEFF 		bl	fifoTxDataCAN_high_push
- 1228              	.LVL88:
-  50:Src/can.c     **** 					//TODO: implementare errore
- 1229              		.loc 1 50 7 view .LVU367
- 1230 005c 0446     		mov	r4, r0
- 1231              	.LVL89:
-ARM GAS  /tmp/ccezYmfJ.s 			page 28
+ 1190              		.loc 1 39 8 view .LVU355
+ 1191 0034 0446     		mov	r4, r0
+ 1192              	.LVL83:
+  39:Src/can.c     **** 					HAL_UART_Transmit(
+ 1193              		.loc 1 39 8 view .LVU356
+ 1194 0036 08B1     		cbz	r0, .L85
+  67:Src/can.c     **** }
+ 1195              		.loc 1 67 9 view .LVU357
+ 1196 0038 0124     		movs	r4, #1
+ 1197 003a EEE7     		b	.L77
+ 1198              	.L85:
+  40:Src/can.c     **** 						&huart3, (uint8_t*)("Error while normal push\r\n"),
+ 1199              		.loc 1 40 6 is_stmt 1 view .LVU358
+ 1200 003c 0A23     		movs	r3, #10
+ 1201 003e 1922     		movs	r2, #25
+ 1202 0040 0A49     		ldr	r1, .L87+4
+ 1203 0042 0B48     		ldr	r0, .L87+8
+ 1204 0044 FFF7FEFF 		bl	HAL_UART_Transmit
+ 1205              	.LVL84:
+  43:Src/can.c     **** 				}
+ 1206              		.loc 1 43 6 view .LVU359
+  43:Src/can.c     **** 				}
+ 1207              		.loc 1 43 13 is_stmt 0 view .LVU360
+ 1208 0048 E7E7     		b	.L77
+ 1209              	.LVL85:
+ 1210              	.L78:
+  53:Src/can.c     **** 				if (fifoTxDataCAN_high_push(can) == 0) {
+ 1211              		.loc 1 53 4 is_stmt 1 view .LVU361
+  53:Src/can.c     **** 				if (fifoTxDataCAN_high_push(can) == 0) {
+ 1212              		.loc 1 53 11 is_stmt 0 view .LVU362
+ 1213 004a 226C     		ldr	r2, [r4, #64]
+  53:Src/can.c     **** 				if (fifoTxDataCAN_high_push(can) == 0) {
+ 1214              		.loc 1 53 7 view .LVU363
+ 1215 004c 064B     		ldr	r3, .L87
+ 1216 004e 9A42     		cmp	r2, r3
+ 1217 0050 01D0     		beq	.L86
+  67:Src/can.c     **** }
+ 1218              		.loc 1 67 9 view .LVU364
+ 1219 0052 0124     		movs	r4, #1
+ 1220              	.LVL86:
+  67:Src/can.c     **** }
+ 1221              		.loc 1 67 9 view .LVU365
+ 1222 0054 E1E7     		b	.L77
+ 1223              	.LVL87:
+ 1224              	.L86:
+  54:Src/can.c     **** 					// TODO: implementare errore
+ 1225              		.loc 1 54 5 is_stmt 1 view .LVU366
+  54:Src/can.c     **** 					// TODO: implementare errore
+ 1226              		.loc 1 54 9 is_stmt 0 view .LVU367
+ 1227 0056 2046     		mov	r0, r4
+ 1228 0058 FFF7FEFF 		bl	fifoTxDataCAN_high_push
+ 1229              	.LVL88:
+  54:Src/can.c     **** 					// TODO: implementare errore
+ 1230              		.loc 1 54 8 view .LVU368
+ 1231 005c 0446     		mov	r4, r0
+ 1232              	.LVL89:
+  54:Src/can.c     **** 					// TODO: implementare errore
+ARM GAS  /tmp/cc3Lv0SS.s 			page 28
 
 
-  50:Src/can.c     **** 					//TODO: implementare errore
- 1232              		.loc 1 50 7 view .LVU368
- 1233 005e 0028     		cmp	r0, #0
- 1234 0060 DBD0     		beq	.L77
-  64:Src/can.c     **** }
- 1235              		.loc 1 64 9 view .LVU369
- 1236 0062 0124     		movs	r4, #1
- 1237 0064 D9E7     		b	.L77
- 1238              	.L88:
- 1239 0066 00BF     		.align	2
- 1240              	.L87:
- 1241 0068 00000000 		.word	hcan1
- 1242 006c 00000000 		.word	.LC0
- 1243 0070 00000000 		.word	huart3
- 1244              		.cfi_endproc
- 1245              	.LFE145:
- 1247              		.comm	txt,100,4
- 1248              		.comm	can3,3468,4
- 1249              		.comm	can1,3468,4
- 1250              		.text
- 1251              	.Letext0:
- 1252              		.file 2 "Drivers/CMSIS/Device/ST/STM32F7xx/Include/stm32f767xx.h"
- 1253              		.file 3 "/usr/arm-none-eabi/include/machine/_default_types.h"
- 1254              		.file 4 "/usr/arm-none-eabi/include/sys/_stdint.h"
- 1255              		.file 5 "Drivers/CMSIS/Include/core_cm7.h"
- 1256              		.file 6 "Drivers/CMSIS/Device/ST/STM32F7xx/Include/system_stm32f7xx.h"
- 1257              		.file 7 "Drivers/CMSIS/Device/ST/STM32F7xx/Include/stm32f7xx.h"
- 1258              		.file 8 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_def.h"
- 1259              		.file 9 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_dma.h"
- 1260              		.file 10 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_can.h"
- 1261              		.file 11 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart.h"
- 1262              		.file 12 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal.h"
- 1263              		.file 13 "Inc/can.h"
- 1264              		.file 14 "/usr/arm-none-eabi/include/sys/lock.h"
- 1265              		.file 15 "/usr/arm-none-eabi/include/sys/_types.h"
- 1266              		.file 16 "/usr/lib/gcc/arm-none-eabi/9.2.0/include/stddef.h"
- 1267              		.file 17 "/usr/arm-none-eabi/include/sys/reent.h"
-ARM GAS  /tmp/ccezYmfJ.s 			page 29
+ 1233              		.loc 1 54 8 view .LVU369
+ 1234 005e 0028     		cmp	r0, #0
+ 1235 0060 DBD0     		beq	.L77
+  67:Src/can.c     **** }
+ 1236              		.loc 1 67 9 view .LVU370
+ 1237 0062 0124     		movs	r4, #1
+ 1238 0064 D9E7     		b	.L77
+ 1239              	.L88:
+ 1240 0066 00BF     		.align	2
+ 1241              	.L87:
+ 1242 0068 00000000 		.word	hcan1
+ 1243 006c 00000000 		.word	.LC0
+ 1244 0070 00000000 		.word	huart3
+ 1245              		.cfi_endproc
+ 1246              	.LFE145:
+ 1248              		.comm	txt,100,4
+ 1249              		.comm	can3,3484,4
+ 1250              		.comm	can1,3484,4
+ 1251              		.text
+ 1252              	.Letext0:
+ 1253              		.file 2 "Drivers/CMSIS/Device/ST/STM32F7xx/Include/stm32f767xx.h"
+ 1254              		.file 3 "/usr/arm-none-eabi/include/machine/_default_types.h"
+ 1255              		.file 4 "/usr/arm-none-eabi/include/sys/_stdint.h"
+ 1256              		.file 5 "Drivers/CMSIS/Include/core_cm7.h"
+ 1257              		.file 6 "Drivers/CMSIS/Device/ST/STM32F7xx/Include/system_stm32f7xx.h"
+ 1258              		.file 7 "Drivers/CMSIS/Device/ST/STM32F7xx/Include/stm32f7xx.h"
+ 1259              		.file 8 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_def.h"
+ 1260              		.file 9 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_dma.h"
+ 1261              		.file 10 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_can.h"
+ 1262              		.file 11 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart.h"
+ 1263              		.file 12 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal.h"
+ 1264              		.file 13 "Inc/can.h"
+ 1265              		.file 14 "/usr/arm-none-eabi/include/sys/lock.h"
+ 1266              		.file 15 "/usr/arm-none-eabi/include/sys/_types.h"
+ 1267              		.file 16 "/usr/lib/gcc/arm-none-eabi/9.2.0/include/stddef.h"
+ 1268              		.file 17 "/usr/arm-none-eabi/include/sys/reent.h"
+ARM GAS  /tmp/cc3Lv0SS.s 			page 29
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 can.c
-     /tmp/ccezYmfJ.s:17     .text.CAN_Send_IT:0000000000000000 $t
-     /tmp/ccezYmfJ.s:25     .text.CAN_Send_IT:0000000000000000 CAN_Send_IT
-     /tmp/ccezYmfJ.s:134    .text.CAN_Send_Bck:0000000000000000 $t
-     /tmp/ccezYmfJ.s:141    .text.CAN_Send_Bck:0000000000000000 CAN_Send_Bck
-     /tmp/ccezYmfJ.s:214    .text.CAN_initialization:0000000000000000 $t
-     /tmp/ccezYmfJ.s:221    .text.CAN_initialization:0000000000000000 CAN_initialization
-     /tmp/ccezYmfJ.s:337    .text.can_init:0000000000000000 $t
-     /tmp/ccezYmfJ.s:344    .text.can_init:0000000000000000 can_init
-     /tmp/ccezYmfJ.s:365    .text.can_init:000000000000000c $d
-                            *COM*:0000000000000d8c can1
-     /tmp/ccezYmfJ.s:370    .text.report_error_can1:0000000000000000 $t
-     /tmp/ccezYmfJ.s:377    .text.report_error_can1:0000000000000000 report_error_can1
-     /tmp/ccezYmfJ.s:390    .text.report_error_can3:0000000000000000 $t
-     /tmp/ccezYmfJ.s:397    .text.report_error_can3:0000000000000000 report_error_can3
-     /tmp/ccezYmfJ.s:410    .text.fifoRxDataCAN_pop:0000000000000000 $t
-     /tmp/ccezYmfJ.s:417    .text.fifoRxDataCAN_pop:0000000000000000 fifoRxDataCAN_pop
-     /tmp/ccezYmfJ.s:524    .text.fifoRxDataCAN_pop:0000000000000054 $d
-     /tmp/ccezYmfJ.s:529    .text.fifoRxDataCAN_push:0000000000000000 $t
-     /tmp/ccezYmfJ.s:536    .text.fifoRxDataCAN_push:0000000000000000 fifoRxDataCAN_push
-     /tmp/ccezYmfJ.s:639    .text.fifoRxDataCAN_push:0000000000000054 $d
-     /tmp/ccezYmfJ.s:644    .text.fifoTxDataCAN_normal_pop:0000000000000000 $t
-     /tmp/ccezYmfJ.s:651    .text.fifoTxDataCAN_normal_pop:0000000000000000 fifoTxDataCAN_normal_pop
-     /tmp/ccezYmfJ.s:758    .text.fifoTxDataCAN_normal_pop:0000000000000058 $d
-     /tmp/ccezYmfJ.s:763    .text.fifoTxDataCAN_high_pop:0000000000000000 $t
-     /tmp/ccezYmfJ.s:770    .text.fifoTxDataCAN_high_pop:0000000000000000 fifoTxDataCAN_high_pop
-     /tmp/ccezYmfJ.s:877    .text.fifoTxDataCAN_high_pop:000000000000005c $d
-     /tmp/ccezYmfJ.s:882    .text.fifoTxDataCAN_normal_push:0000000000000000 $t
-     /tmp/ccezYmfJ.s:889    .text.fifoTxDataCAN_normal_push:0000000000000000 fifoTxDataCAN_normal_push
-     /tmp/ccezYmfJ.s:992    .text.fifoTxDataCAN_normal_push:0000000000000058 $d
-     /tmp/ccezYmfJ.s:997    .text.fifoTxDataCAN_high_push:0000000000000000 $t
-     /tmp/ccezYmfJ.s:1004   .text.fifoTxDataCAN_high_push:0000000000000000 fifoTxDataCAN_high_push
-     /tmp/ccezYmfJ.s:1107   .text.fifoTxDataCAN_high_push:000000000000005c $d
-     /tmp/ccezYmfJ.s:1112   .rodata.CAN_Send.str1.4:0000000000000000 $d
-     /tmp/ccezYmfJ.s:1116   .text.CAN_Send:0000000000000000 $t
-     /tmp/ccezYmfJ.s:1123   .text.CAN_Send:0000000000000000 CAN_Send
-     /tmp/ccezYmfJ.s:1241   .text.CAN_Send:0000000000000068 $d
+     /tmp/cc3Lv0SS.s:17     .text.CAN_Send_IT:0000000000000000 $t
+     /tmp/cc3Lv0SS.s:25     .text.CAN_Send_IT:0000000000000000 CAN_Send_IT
+     /tmp/cc3Lv0SS.s:134    .text.CAN_Send_Bck:0000000000000000 $t
+     /tmp/cc3Lv0SS.s:141    .text.CAN_Send_Bck:0000000000000000 CAN_Send_Bck
+     /tmp/cc3Lv0SS.s:214    .text.CAN_initialization:0000000000000000 $t
+     /tmp/cc3Lv0SS.s:221    .text.CAN_initialization:0000000000000000 CAN_initialization
+     /tmp/cc3Lv0SS.s:337    .text.can_init:0000000000000000 $t
+     /tmp/cc3Lv0SS.s:344    .text.can_init:0000000000000000 can_init
+     /tmp/cc3Lv0SS.s:365    .text.can_init:000000000000000c $d
+                            *COM*:0000000000000d9c can1
+     /tmp/cc3Lv0SS.s:370    .text.report_error_can1:0000000000000000 $t
+     /tmp/cc3Lv0SS.s:377    .text.report_error_can1:0000000000000000 report_error_can1
+     /tmp/cc3Lv0SS.s:390    .text.report_error_can3:0000000000000000 $t
+     /tmp/cc3Lv0SS.s:397    .text.report_error_can3:0000000000000000 report_error_can3
+     /tmp/cc3Lv0SS.s:411    .text.fifoRxDataCAN_pop:0000000000000000 $t
+     /tmp/cc3Lv0SS.s:418    .text.fifoRxDataCAN_pop:0000000000000000 fifoRxDataCAN_pop
+     /tmp/cc3Lv0SS.s:525    .text.fifoRxDataCAN_pop:0000000000000054 $d
+     /tmp/cc3Lv0SS.s:530    .text.fifoRxDataCAN_push:0000000000000000 $t
+     /tmp/cc3Lv0SS.s:537    .text.fifoRxDataCAN_push:0000000000000000 fifoRxDataCAN_push
+     /tmp/cc3Lv0SS.s:640    .text.fifoRxDataCAN_push:0000000000000054 $d
+     /tmp/cc3Lv0SS.s:645    .text.fifoTxDataCAN_normal_pop:0000000000000000 $t
+     /tmp/cc3Lv0SS.s:652    .text.fifoTxDataCAN_normal_pop:0000000000000000 fifoTxDataCAN_normal_pop
+     /tmp/cc3Lv0SS.s:759    .text.fifoTxDataCAN_normal_pop:0000000000000058 $d
+     /tmp/cc3Lv0SS.s:764    .text.fifoTxDataCAN_high_pop:0000000000000000 $t
+     /tmp/cc3Lv0SS.s:771    .text.fifoTxDataCAN_high_pop:0000000000000000 fifoTxDataCAN_high_pop
+     /tmp/cc3Lv0SS.s:878    .text.fifoTxDataCAN_high_pop:000000000000005c $d
+     /tmp/cc3Lv0SS.s:883    .text.fifoTxDataCAN_normal_push:0000000000000000 $t
+     /tmp/cc3Lv0SS.s:890    .text.fifoTxDataCAN_normal_push:0000000000000000 fifoTxDataCAN_normal_push
+     /tmp/cc3Lv0SS.s:993    .text.fifoTxDataCAN_normal_push:0000000000000058 $d
+     /tmp/cc3Lv0SS.s:998    .text.fifoTxDataCAN_high_push:0000000000000000 $t
+     /tmp/cc3Lv0SS.s:1005   .text.fifoTxDataCAN_high_push:0000000000000000 fifoTxDataCAN_high_push
+     /tmp/cc3Lv0SS.s:1108   .text.fifoTxDataCAN_high_push:000000000000005c $d
+     /tmp/cc3Lv0SS.s:1113   .rodata.CAN_Send.str1.4:0000000000000000 $d
+     /tmp/cc3Lv0SS.s:1117   .text.CAN_Send:0000000000000000 $t
+     /tmp/cc3Lv0SS.s:1124   .text.CAN_Send:0000000000000000 CAN_Send
+     /tmp/cc3Lv0SS.s:1242   .text.CAN_Send:0000000000000068 $d
                             *COM*:0000000000000064 txt
-                            *COM*:0000000000000d8c can3
+                            *COM*:0000000000000d9c can3
 
 UNDEFINED SYMBOLS
 HAL_CAN_AddTxMessage

@@ -1,94 +1,86 @@
 #ifndef _FENICE_H
 #define _FENICE_H
 
-
 #define fifoLengthN 100
 #define fifoLengthH 10
 
-
 #include "stm32f7xx_hal.h"
 
-	void fenice_init();
+void fenice_init();
 
-	#ifdef HAL_CAN_MODULE_ENABLED
+#ifdef HAL_CAN_MODULE_ENABLED
 
-		typedef enum fifoPriority_t{normalPriority, highPriority}fifoPriority;
+typedef enum fifoPriority_t { normalPriority, highPriority } fifoPriority;
 
-		typedef struct fifoDataType{
-			uint32_t id;
-			uint32_t size;
-			uint8_t data[8];
-		}fifoDataType;
+typedef struct fifoDataType {
+	uint32_t id;
+	uint32_t size;
+	uint8_t data[8];
+} fifoDataType;
 
+typedef struct fifoCanDataType {
+	uint8_t rxHead;
+	uint8_t rxTail;
 
-		typedef struct fifoCanDataType{
-			uint8_t rxHead;
-			uint8_t rxTail;
+	uint8_t txHeadNormal;
+	uint8_t txTailNormal;
 
-			uint8_t txHeadNormal;
-			uint8_t txTailNormal;
+	uint8_t txHeadHigh;
+	uint8_t txTailHigh;
 
-			uint8_t txHeadHigh;
-			uint8_t txTailHigh;
+	fifoDataType rx[fifoLengthN];
+	fifoDataType txNormal[fifoLengthN];
+	fifoDataType txHigh[fifoLengthH];
 
-			fifoDataType rx[fifoLengthN];
-			fifoDataType txNormal[fifoLengthN];
-			fifoDataType txHigh[fifoLengthH];
+} fifoCanDataType;
 
-		}fifoCanDataType;
+typedef struct {
+	int tx_size;  // size of data
+	int rx_size;
+	int rx_size_int;
 
-		typedef struct{
+	uint8_t dataTx[8];
+	uint8_t dataRx[8];
+	uint8_t dataRX_int[8];
+	uint8_t dataTxBck[8];
 
-			int tx_size; //size of data
-			int rx_size;
+	uint32_t tx_id;
+	uint32_t rx_id;
+	uint32_t rx_id_int;
+	uint32_t idBck;
+	uint32_t sizeBck;
 
-			uint8_t dataTx[8];
-			uint8_t dataRx[8];
-			uint8_t dataTxBck[8];
+	CAN_HandleTypeDef *hcan;
+	CAN_FilterTypeDef canFilter;
 
+	HAL_StatusTypeDef configFilter_status;
+	HAL_StatusTypeDef activateNotif_status;
+	HAL_StatusTypeDef canStart_status;
 
-			uint32_t tx_id;
-			uint32_t rx_id;
-			uint32_t idBck;
-			uint32_t sizeBck;
+	fifoCanDataType fifo;
 
+	IRQn_Type rx0_interrupt;
+	IRQn_Type tx_interrupt;
 
-			CAN_HandleTypeDef *hcan;
-			CAN_FilterTypeDef canFilter;
+} canStruct;
 
-			HAL_StatusTypeDef configFilter_status;
-			HAL_StatusTypeDef activateNotif_status;
-			HAL_StatusTypeDef canStart_status;
+uint8_t CAN_initialization(canStruct *can);
+void report_error_can1();
+void report_error_can3();
+uint8_t CAN_Send(canStruct *, fifoPriority);
+uint8_t CAN_Send_IT(canStruct *);
+uint8_t CAN_Send_Bck(canStruct *);
 
-			fifoCanDataType fifo;
+uint8_t fifoRxDataCAN_pop(canStruct *);
+uint8_t fifoRxDataCAN_push(canStruct *);
 
-			IRQn_Type rx0_interrupt;
-			IRQn_Type tx_interrupt;
+uint8_t fifoTxDataCAN_normal_pop(canStruct *);
+uint8_t fifoTxDataCAN_high_pop(canStruct *);
+uint8_t fifoTxDataCAN_normal_push(canStruct *);
+uint8_t fifoTxDataCAN_high_push(canStruct *);
 
+void can_init();
 
-
-		}canStruct;
-
-		uint8_t CAN_initialization(canStruct *can);
-		void report_error_can1();
-		void report_error_can3();
-		uint8_t CAN_Send(canStruct*, fifoPriority);
-		uint8_t CAN_Send_IT(canStruct*);
-		uint8_t CAN_Send_Bck(canStruct*);
-
-		uint8_t fifoRxDataCAN_pop(canStruct*);
-		uint8_t fifoRxDataCAN_push(canStruct*);
-
-		uint8_t fifoTxDataCAN_normal_pop(canStruct*);
-		uint8_t fifoTxDataCAN_high_pop(canStruct*);
-		uint8_t fifoTxDataCAN_normal_push(canStruct*);
-		uint8_t fifoTxDataCAN_high_push(canStruct*);
-
-
-		void can_init();
-
-
-	#endif
-
+#endif
 
 #endif
