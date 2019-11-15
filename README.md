@@ -17,6 +17,9 @@
 - **Speed**  
     - **Speed1:** is the speed calculated with the real circumference of the encoder `mult fact = 3.9303482587064676616`  
     - **Speed2:** is the speed caluclated with the resolution and the cpr of the encoder `mult fact = 3.8778125`  
+- **Price**  
+    - ???
+    
 
 ## How it works
 The sensor is made from two components: 
