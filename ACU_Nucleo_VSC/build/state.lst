@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccv27NRj.s 			page 1
+ARM GAS  /tmp/cc4nMVXx.s 			page 1
 
 
    1              		.cpu cortex-m7
@@ -58,7 +58,7 @@ ARM GAS  /tmp/ccv27NRj.s 			page 1
   30:Src/state.c   **** 
   31:Src/state.c   **** 	}
   32:Src/state.c   **** 	current_state = STATE_IDLE;
-ARM GAS  /tmp/ccv27NRj.s 			page 2
+ARM GAS  /tmp/cc4nMVXx.s 			page 2
 
 
   33:Src/state.c   **** }
@@ -118,7 +118,7 @@ ARM GAS  /tmp/ccv27NRj.s 			page 1
   87:Src/state.c   ****  *                        START SETUP STATE
   88:Src/state.c   ****  *******************************************************************/
   89:Src/state.c   **** void setup(){
-ARM GAS  /tmp/ccv27NRj.s 			page 3
+ARM GAS  /tmp/cc4nMVXx.s 			page 3
 
 
   90:Src/state.c   **** 	if(fifoRxDataCAN_pop(&can1)){
@@ -178,7 +178,7 @@ ARM GAS  /tmp/ccv27NRj.s 			page 1
   34              		.cfi_offset 4, -12
   35              		.cfi_offset 5, -8
   36              		.cfi_offset 14, -4
-ARM GAS  /tmp/ccv27NRj.s 			page 4
+ARM GAS  /tmp/cc4nMVXx.s 			page 4
 
 
   37 0002 85B0     		sub	sp, sp, #20
@@ -238,7 +238,7 @@ ARM GAS  /tmp/ccv27NRj.s 			page 1
  161:Src/state.c   **** 				,can1.configFilter_status,can1.activateNotif_status,can1.canStart_status);
  162:Src/state.c   **** 		HAL_UART_Transmit(&huart3,(uint8_t*)debug_tx, strlen(debug_tx), 100);
  163:Src/state.c   **** 		sprintf(debug_tx,
-ARM GAS  /tmp/ccv27NRj.s 			page 5
+ARM GAS  /tmp/cc4nMVXx.s 			page 5
 
 
  164:Src/state.c   **** 				"CAN3 status:\r\n"
@@ -298,7 +298,7 @@ ARM GAS  /tmp/ccv27NRj.s 			page 1
   75 0040 674C     		ldr	r4, .L22+24
   76 0042 624A     		ldr	r2, .L22+4
   77 0044 6749     		ldr	r1, .L22+28
-ARM GAS  /tmp/ccv27NRj.s 			page 6
+ARM GAS  /tmp/cc4nMVXx.s 			page 6
 
 
   78 0046 2046     		mov	r0, r4
@@ -358,7 +358,7 @@ ARM GAS  /tmp/ccv27NRj.s 			page 1
  126 008a 6423     		movs	r3, #100
  127 008c 82B2     		uxth	r2, r0
  128 008e 2146     		mov	r1, r4
-ARM GAS  /tmp/ccv27NRj.s 			page 7
+ARM GAS  /tmp/cc4nMVXx.s 			page 7
 
 
  129 0090 5548     		ldr	r0, .L22+32
@@ -418,7 +418,7 @@ ARM GAS  /tmp/ccv27NRj.s 			page 1
  178 00ea 3F4D     		ldr	r5, .L22+32
  179 00ec 6423     		movs	r3, #100
  180 00ee 82B2     		uxth	r2, r0
-ARM GAS  /tmp/ccv27NRj.s 			page 8
+ARM GAS  /tmp/cc4nMVXx.s 			page 8
 
 
  181 00f0 2146     		mov	r1, r4
@@ -478,7 +478,7 @@ ARM GAS  /tmp/ccv27NRj.s 			page 1
  227 0140 0978     		ldrb	r1, [r1]	@ zero_extendqisi2
  228 0142 0291     		str	r1, [sp, #8]
  229 0144 3849     		ldr	r1, .L22+96
-ARM GAS  /tmp/ccv27NRj.s 			page 9
+ARM GAS  /tmp/cc4nMVXx.s 			page 9
 
 
  230 0146 0978     		ldrb	r1, [r1]	@ zero_extendqisi2
@@ -538,7 +538,7 @@ ARM GAS  /tmp/ccv27NRj.s 			page 1
  279 0196 6423     		movs	r3, #100
  280 0198 1C22     		movs	r2, #28
  281 019a 2949     		ldr	r1, .L22+120
-ARM GAS  /tmp/ccv27NRj.s 			page 10
+ARM GAS  /tmp/cc4nMVXx.s 			page 10
 
 
  282 019c 1248     		ldr	r0, .L22+32
@@ -598,7 +598,7 @@ ARM GAS  /tmp/ccv27NRj.s 			page 1
  334 0230 74020000 		.word	.LC12
  335 0234 F4010000 		.word	.LC8
  336 0238 14020000 		.word	.LC9
-ARM GAS  /tmp/ccv27NRj.s 			page 11
+ARM GAS  /tmp/cc4nMVXx.s 			page 11
 
 
  337 023c 34020000 		.word	.LC10
@@ -658,7 +658,7 @@ ARM GAS  /tmp/ccv27NRj.s 			page 1
  385 0024 FFF7FEFF 		bl	HAL_UART_Transmit
  386              	.LVL32:
  387 0028 F4E7     		b	.L25
-ARM GAS  /tmp/ccv27NRj.s 			page 12
+ARM GAS  /tmp/cc4nMVXx.s 			page 12
 
 
  388              	.L29:
@@ -718,7 +718,7 @@ ARM GAS  /tmp/ccv27NRj.s 			page 1
   32:Src/state.c   **** }
  439              		.loc 1 32 0
  440 0024 0122     		movs	r2, #1
-ARM GAS  /tmp/ccv27NRj.s 			page 13
+ARM GAS  /tmp/cc4nMVXx.s 			page 13
 
 
  441 0026 094B     		ldr	r3, .L37+12
@@ -778,25 +778,25 @@ ARM GAS  /tmp/ccv27NRj.s 			page 1
  491              		.cfi_offset 14, -4
  222:Src/state.c   **** 	atc_connected = 1;
  492              		.loc 1 222 0
-ARM GAS  /tmp/ccv27NRj.s 			page 14
+ARM GAS  /tmp/cc4nMVXx.s 			page 14
 
 
  493 0002 0122     		movs	r2, #1
- 494 0004 324B     		ldr	r3, .L45
+ 494 0004 354B     		ldr	r3, .L45
  495 0006 1A70     		strb	r2, [r3]
  223:Src/state.c   **** 	count_atc = 0;
  496              		.loc 1 223 0
  497 0008 0022     		movs	r2, #0
- 498 000a 324B     		ldr	r3, .L45+4
+ 498 000a 354B     		ldr	r3, .L45+4
  499 000c 1A80     		strh	r2, [r3]	@ movhi
  224:Src/state.c   **** 	accel.pot1_val = can1.dataRx[0]*256 + can1.dataRx[1];
  500              		.loc 1 224 0
- 501 000e 324C     		ldr	r4, .L45+8
+ 501 000e 354C     		ldr	r4, .L45+8
  502 0010 237C     		ldrb	r3, [r4, #16]	@ zero_extendqisi2
  503 0012 607C     		ldrb	r0, [r4, #17]	@ zero_extendqisi2
  504 0014 00EB0320 		add	r0, r0, r3, lsl #8
  505 0018 80B2     		uxth	r0, r0
- 506 001a 304D     		ldr	r5, .L45+12
+ 506 001a 334D     		ldr	r5, .L45+12
  507 001c 2880     		strh	r0, [r5]	@ movhi
  225:Src/state.c   **** 	accel.pot2_val = can1.dataRx[2]*256 + can1.dataRx[3];
  508              		.loc 1 225 0
@@ -811,7 +811,7 @@ ARM GAS  /tmp/ccv27NRj.s 			page 1
  516 002c 627D     		ldrb	r2, [r4, #21]	@ zero_extendqisi2
  517 002e 02EB0322 		add	r2, r2, r3, lsl #8
  518 0032 92B2     		uxth	r2, r2
- 519 0034 2A4E     		ldr	r6, .L45+16
+ 519 0034 2D4E     		ldr	r6, .L45+16
  520 0036 3280     		strh	r2, [r6]	@ movhi
  227:Src/state.c   **** 	brake.pot2_val = can1.dataRx[6]*256 + can1.dataRx[7];
  521              		.loc 1 227 0
@@ -838,7 +838,7 @@ ARM GAS  /tmp/ccv27NRj.s 			page 1
  538 0058 00EB8000 		add	r0, r0, r0, lsl #2
  539 005c 8400     		lsls	r4, r0, #2
  540 005e AC70     		strb	r4, [r5, #2]
-ARM GAS  /tmp/ccv27NRj.s 			page 15
+ARM GAS  /tmp/cc4nMVXx.s 			page 15
 
 
  232:Src/state.c   **** 		accel.pot2_val_100 = (accel.pot2_val - accel.pot2_min_val)/(accel.pot2_range)*100;
@@ -854,11 +854,11 @@ ARM GAS  /tmp/ccv27NRj.s 			page 1
  233:Src/state.c   **** 	}
  234:Src/state.c   **** 	if(brake.pot1_range != 0 && brake.pot2_range != 0){
  550              		.loc 1 234 0
- 551 0074 1A49     		ldr	r1, .L45+16
+ 551 0074 1D49     		ldr	r1, .L45+16
  552 0076 8989     		ldrh	r1, [r1, #12]
  553 0078 B1B1     		cbz	r1, .L41
  554              		.loc 1 234 0 is_stmt 0 discriminator 1
- 555 007a 1948     		ldr	r0, .L45+16
+ 555 007a 1C48     		ldr	r0, .L45+16
  556 007c 448A     		ldrh	r4, [r0, #18]
  557 007e 9CB1     		cbz	r4, .L41
  235:Src/state.c   **** 		brake.pot1_val_100 = (brake.pot1_val - brake.pot1_min_val)/(brake.pot1_range)*100;
@@ -882,23 +882,23 @@ ARM GAS  /tmp/ccv27NRj.s 			page 1
  574              	.L41:
  237:Src/state.c   **** 	}
  238:Src/state.c   **** 
- 239:Src/state.c   **** 	if(accel_implausibility_check()){
+ 239:Src/state.c   **** 	if(accel_implausibility_check() == 0){
  575              		.loc 1 239 0
  576 00a8 FFF7FEFF 		bl	accel_implausibility_check
  577              	.LVL37:
- 578 00ac 00B9     		cbnz	r0, .L44
+ 578 00ac 00B1     		cbz	r0, .L44
  579              	.L39:
  580 00ae F8BD     		pop	{r3, r4, r5, r6, r7, pc}
  581              	.L44:
  240:Src/state.c   **** 		accel.pot1_val = 0;
  582              		.loc 1 240 0
- 583 00b0 0A4B     		ldr	r3, .L45+12
+ 583 00b0 0D4B     		ldr	r3, .L45+12
  584 00b2 0022     		movs	r2, #0
  585 00b4 1A80     		strh	r2, [r3]	@ movhi
  241:Src/state.c   **** 		accel.pot2_val = 0;
  586              		.loc 1 241 0
  587 00b6 9A80     		strh	r2, [r3, #4]	@ movhi
-ARM GAS  /tmp/ccv27NRj.s 			page 16
+ARM GAS  /tmp/cc4nMVXx.s 			page 16
 
 
  242:Src/state.c   **** 		accel.pot1_val_100 = 0;
@@ -910,7 +910,7 @@ ARM GAS  /tmp/ccv27NRj.s 			page 1
  244:Src/state.c   **** 		//send error//
  245:Src/state.c   **** 		can1.tx_id = 0x10;
  592              		.loc 1 245 0
- 593 00bc 0648     		ldr	r0, .L45+8
+ 593 00bc 0948     		ldr	r0, .L45+8
  594 00be 1023     		movs	r3, #16
  595 00c0 0362     		str	r3, [r0, #32]
  246:Src/state.c   **** 		can1.dataTx[0] = 1;
@@ -924,591 +924,609 @@ ARM GAS  /tmp/ccv27NRj.s 			page 1
  601              		.loc 1 248 0
  602 00c8 FFF7FEFF 		bl	CAN_Send
  603              	.LVL38:
- 249:Src/state.c   **** 	}else{
- 250:Src/state.c   **** 		
+ 249:Src/state.c   **** 		HAL_UART_Transmit(&huart3,(uint8_t*)"FAILED POT\r\n",strlen("FAILED POT\r\n"),10);
+ 604              		.loc 1 249 0
+ 605 00cc 0A23     		movs	r3, #10
+ 606 00ce 0C22     		movs	r2, #12
+ 607 00d0 0749     		ldr	r1, .L45+20
+ 608 00d2 0848     		ldr	r0, .L45+24
+ 609 00d4 FFF7FEFF 		bl	HAL_UART_Transmit
+ 610              	.LVL39:
+ 250:Src/state.c   **** 	}else{
  251:Src/state.c   **** 		
  252:Src/state.c   **** 		
- 253:Src/state.c   **** 	}
- 254:Src/state.c   **** 	/*if(brake_implausibility_check()){
- 255:Src/state.c   **** 		brake.pot1_val = 0;
- 256:Src/state.c   **** 		brake.pot2_val = 0;
- 257:Src/state.c   **** 	}*/
- 258:Src/state.c   **** 
- 259:Src/state.c   **** }
- 604              		.loc 1 259 0
- 605 00cc EFE7     		b	.L39
- 606              	.L46:
- 607 00ce 00BF     		.align	2
- 608              	.L45:
- 609 00d0 00000000 		.word	atc_connected
- 610 00d4 00000000 		.word	count_atc
- 611 00d8 00000000 		.word	can1
- 612 00dc 00000000 		.word	accel
- 613 00e0 00000000 		.word	brake
- 614              		.cfi_endproc
- 615              	.LFE148:
- 617              		.section	.text.idle,"ax",%progbits
- 618              		.align	1
- 619              		.global	idle
- 620              		.syntax unified
- 621              		.thumb
- 622              		.thumb_func
- 623              		.fpu fpv5-d16
- 625              	idle:
- 626              	.LFB143:
+ 253:Src/state.c   **** 		
+ 254:Src/state.c   **** 	}
+ 255:Src/state.c   **** 	/*if(brake_implausibility_check()){
+ 256:Src/state.c   **** 		brake.pot1_val = 0;
+ 257:Src/state.c   **** 		brake.pot2_val = 0;
+ 258:Src/state.c   **** 	}*/
+ 259:Src/state.c   **** 
+ 260:Src/state.c   **** }
+ 611              		.loc 1 260 0
+ 612 00d8 E9E7     		b	.L39
+ 613              	.L46:
+ 614 00da 00BF     		.align	2
+ 615              	.L45:
+ 616 00dc 00000000 		.word	atc_connected
+ 617 00e0 00000000 		.word	count_atc
+ 618 00e4 00000000 		.word	can1
+ 619 00e8 00000000 		.word	accel
+ 620 00ec 00000000 		.word	brake
+ 621 00f0 00000000 		.word	.LC17
+ 622 00f4 00000000 		.word	huart3
+ 623              		.cfi_endproc
+ 624              	.LFE148:
+ 626              		.section	.text.idle,"ax",%progbits
+ARM GAS  /tmp/cc4nMVXx.s 			page 17
+
+
+ 627              		.align	1
+ 628              		.global	idle
+ 629              		.syntax unified
+ 630              		.thumb
+ 631              		.thumb_func
+ 632              		.fpu fpv5-d16
+ 634              	idle:
+ 635              	.LFB143:
   40:Src/state.c   **** 	if(debug_msg_arrived == 1){
- 627              		.loc 1 40 0
-ARM GAS  /tmp/ccv27NRj.s 			page 17
-
-
- 628              		.cfi_startproc
- 629              		@ args = 0, pretend = 0, frame = 0
- 630              		@ frame_needed = 0, uses_anonymous_args = 0
- 631 0000 08B5     		push	{r3, lr}
- 632              	.LCFI7:
- 633              		.cfi_def_cfa_offset 8
- 634              		.cfi_offset 3, -8
- 635              		.cfi_offset 14, -4
+ 636              		.loc 1 40 0
+ 637              		.cfi_startproc
+ 638              		@ args = 0, pretend = 0, frame = 0
+ 639              		@ frame_needed = 0, uses_anonymous_args = 0
+ 640 0000 08B5     		push	{r3, lr}
+ 641              	.LCFI7:
+ 642              		.cfi_def_cfa_offset 8
+ 643              		.cfi_offset 3, -8
+ 644              		.cfi_offset 14, -4
   41:Src/state.c   **** 		debug_msg_arrived = 0; // reset flag
- 636              		.loc 1 41 0
- 637 0002 1D4B     		ldr	r3, .L58
- 638 0004 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
- 639 0006 012B     		cmp	r3, #1
- 640 0008 0CD0     		beq	.L55
- 641              	.L48:
+ 645              		.loc 1 41 0
+ 646 0002 1D4B     		ldr	r3, .L58
+ 647 0004 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 648 0006 012B     		cmp	r3, #1
+ 649 0008 0CD0     		beq	.L55
+ 650              	.L48:
   45:Src/state.c   **** 		switch(can1.rx_id){
- 642              		.loc 1 45 0
- 643 000a 1C48     		ldr	r0, .L58+4
- 644 000c FFF7FEFF 		bl	fifoRxDataCAN_pop
- 645              	.LVL39:
- 646 0010 38B1     		cbz	r0, .L47
+ 651              		.loc 1 45 0
+ 652 000a 1C48     		ldr	r0, .L58+4
+ 653 000c FFF7FEFF 		bl	fifoRxDataCAN_pop
+ 654              	.LVL40:
+ 655 0010 38B1     		cbz	r0, .L47
   46:Src/state.c   **** 			case ID_ASK_STATE:
- 647              		.loc 1 46 0
- 648 0012 1A4B     		ldr	r3, .L58+4
- 649 0014 5B6A     		ldr	r3, [r3, #36]
- 650 0016 342B     		cmp	r3, #52
- 651 0018 2BD0     		beq	.L50
- 652 001a A02B     		cmp	r3, #160
- 653 001c 1AD0     		beq	.L51
- 654 001e 102B     		cmp	r3, #16
- 655 0020 06D0     		beq	.L56
- 656              	.L47:
- 657 0022 08BD     		pop	{r3, pc}
- 658              	.L55:
+ 656              		.loc 1 46 0
+ 657 0012 1A4B     		ldr	r3, .L58+4
+ 658 0014 5B6A     		ldr	r3, [r3, #36]
+ 659 0016 342B     		cmp	r3, #52
+ 660 0018 2BD0     		beq	.L50
+ 661 001a A02B     		cmp	r3, #160
+ 662 001c 1AD0     		beq	.L51
+ 663 001e 102B     		cmp	r3, #16
+ 664 0020 06D0     		beq	.L56
+ 665              	.L47:
+ 666 0022 08BD     		pop	{r3, pc}
+ 667              	.L55:
   42:Src/state.c   **** 		debug_operations();
- 659              		.loc 1 42 0
- 660 0024 0022     		movs	r2, #0
- 661 0026 144B     		ldr	r3, .L58
- 662 0028 1A70     		strb	r2, [r3]
+ 668              		.loc 1 42 0
+ 669 0024 0022     		movs	r2, #0
+ 670 0026 144B     		ldr	r3, .L58
+ 671 0028 1A70     		strb	r2, [r3]
   43:Src/state.c   **** 	}
- 663              		.loc 1 43 0
- 664 002a FFF7FEFF 		bl	debug_operations
- 665              	.LVL40:
- 666 002e ECE7     		b	.L48
- 667              	.L56:
+ 672              		.loc 1 43 0
+ 673 002a FFF7FEFF 		bl	debug_operations
+ 674              	.LVL41:
+ 675 002e ECE7     		b	.L48
+ 676              	.L56:
   48:Src/state.c   **** 				can1.dataTx[1] = 0;
- 668              		.loc 1 48 0
- 669 0030 134B     		ldr	r3, .L58+8
- 670 0032 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
- 671 0034 1148     		ldr	r0, .L58+4
- 672 0036 0372     		strb	r3, [r0, #8]
+ 677              		.loc 1 48 0
+ARM GAS  /tmp/cc4nMVXx.s 			page 18
+
+
+ 678 0030 134B     		ldr	r3, .L58+8
+ 679 0032 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 680 0034 1148     		ldr	r0, .L58+4
+ 681 0036 0372     		strb	r3, [r0, #8]
   49:Src/state.c   **** 				can1.dataTx[2] = 0;
- 673              		.loc 1 49 0
- 674 0038 0021     		movs	r1, #0
- 675 003a 4172     		strb	r1, [r0, #9]
+ 682              		.loc 1 49 0
+ 683 0038 0021     		movs	r1, #0
+ 684 003a 4172     		strb	r1, [r0, #9]
   50:Src/state.c   **** 				can1.dataTx[3] = 0;
- 676              		.loc 1 50 0
-ARM GAS  /tmp/ccv27NRj.s 			page 18
-
-
- 677 003c 8172     		strb	r1, [r0, #10]
+ 685              		.loc 1 50 0
+ 686 003c 8172     		strb	r1, [r0, #10]
   51:Src/state.c   **** 				can1.dataTx[4] = 0;
- 678              		.loc 1 51 0
- 679 003e C172     		strb	r1, [r0, #11]
+ 687              		.loc 1 51 0
+ 688 003e C172     		strb	r1, [r0, #11]
   52:Src/state.c   **** 				can1.dataTx[5] = 0;
- 680              		.loc 1 52 0
- 681 0040 0173     		strb	r1, [r0, #12]
+ 689              		.loc 1 52 0
+ 690 0040 0173     		strb	r1, [r0, #12]
   53:Src/state.c   **** 				can1.dataTx[6] = 0;
- 682              		.loc 1 53 0
- 683 0042 4173     		strb	r1, [r0, #13]
+ 691              		.loc 1 53 0
+ 692 0042 4173     		strb	r1, [r0, #13]
   54:Src/state.c   **** 				can1.dataTx[7] = 0;
- 684              		.loc 1 54 0
- 685 0044 8173     		strb	r1, [r0, #14]
+ 693              		.loc 1 54 0
+ 694 0044 8173     		strb	r1, [r0, #14]
   55:Src/state.c   **** 				can1.tx_id = ID_ACU_1;
- 686              		.loc 1 55 0
- 687 0046 C173     		strb	r1, [r0, #15]
+ 695              		.loc 1 55 0
+ 696 0046 C173     		strb	r1, [r0, #15]
   56:Src/state.c   **** 				CAN_Send(&can1, normalPriority);
- 688              		.loc 1 56 0
- 689 0048 4FF48073 		mov	r3, #256
- 690 004c 0362     		str	r3, [r0, #32]
+ 697              		.loc 1 56 0
+ 698 0048 4FF48073 		mov	r3, #256
+ 699 004c 0362     		str	r3, [r0, #32]
   57:Src/state.c   **** 				break;
- 691              		.loc 1 57 0
- 692 004e FFF7FEFF 		bl	CAN_Send
- 693              	.LVL41:
+ 700              		.loc 1 57 0
+ 701 004e FFF7FEFF 		bl	CAN_Send
+ 702              	.LVL42:
   58:Src/state.c   **** 			case ID_ASK_INV_DX:
- 694              		.loc 1 58 0
- 695 0052 08BD     		pop	{r3, pc}
- 696              	.L51:
+ 703              		.loc 1 58 0
+ 704 0052 08BD     		pop	{r3, pc}
+ 705              	.L51:
   68:Src/state.c   **** 					current_state = can1.dataRx[1];
- 697              		.loc 1 68 0
- 698 0054 094B     		ldr	r3, .L58+4
- 699 0056 1B7C     		ldrb	r3, [r3, #16]	@ zero_extendqisi2
- 700 0058 022B     		cmp	r3, #2
- 701 005a 05D0     		beq	.L57
+ 706              		.loc 1 68 0
+ 707 0054 094B     		ldr	r3, .L58+4
+ 708 0056 1B7C     		ldrb	r3, [r3, #16]	@ zero_extendqisi2
+ 709 0058 022B     		cmp	r3, #2
+ 710 005a 05D0     		beq	.L57
   70:Src/state.c   **** 					current_state = STATE_SETUP;
- 702              		.loc 1 70 0
- 703 005c 032B     		cmp	r3, #3
- 704 005e E0D1     		bne	.L47
+ 711              		.loc 1 70 0
+ 712 005c 032B     		cmp	r3, #3
+ 713 005e E0D1     		bne	.L47
   71:Src/state.c   **** 				}
- 705              		.loc 1 71 0
- 706 0060 0222     		movs	r2, #2
- 707 0062 074B     		ldr	r3, .L58+8
- 708 0064 1A70     		strb	r2, [r3]
- 709 0066 08BD     		pop	{r3, pc}
- 710              	.L57:
+ 714              		.loc 1 71 0
+ 715 0060 0222     		movs	r2, #2
+ 716 0062 074B     		ldr	r3, .L58+8
+ 717 0064 1A70     		strb	r2, [r3]
+ 718 0066 08BD     		pop	{r3, pc}
+ 719              	.L57:
   69:Src/state.c   **** 				}else if(can1.dataRx[0] == 3){ //----- change state to setup -----//
- 711              		.loc 1 69 0
- 712 0068 044B     		ldr	r3, .L58+4
- 713 006a 5A7C     		ldrb	r2, [r3, #17]	@ zero_extendqisi2
- 714 006c 044B     		ldr	r3, .L58+8
- 715 006e 1A70     		strb	r2, [r3]
- 716 0070 08BD     		pop	{r3, pc}
- 717              	.L50:
+ 720              		.loc 1 69 0
+ARM GAS  /tmp/cc4nMVXx.s 			page 19
+
+
+ 721 0068 044B     		ldr	r3, .L58+4
+ 722 006a 5A7C     		ldrb	r2, [r3, #17]	@ zero_extendqisi2
+ 723 006c 044B     		ldr	r3, .L58+8
+ 724 006e 1A70     		strb	r2, [r3]
+ 725 0070 08BD     		pop	{r3, pc}
+ 726              	.L50:
   75:Src/state.c   **** 				break;
- 718              		.loc 1 75 0
- 719 0072 FFF7FEFF 		bl	atc_pot_operations
- 720              	.LVL42:
-ARM GAS  /tmp/ccv27NRj.s 			page 19
-
-
+ 727              		.loc 1 75 0
+ 728 0072 FFF7FEFF 		bl	atc_pot_operations
+ 729              	.LVL43:
   82:Src/state.c   **** /*******************************************************************
- 721              		.loc 1 82 0
- 722 0076 D4E7     		b	.L47
- 723              	.L59:
- 724              		.align	2
- 725              	.L58:
- 726 0078 00000000 		.word	debug_msg_arrived
- 727 007c 00000000 		.word	can1
- 728 0080 00000000 		.word	current_state
- 729              		.cfi_endproc
- 730              	.LFE143:
- 732              		.section	.text.setup,"ax",%progbits
- 733              		.align	1
- 734              		.global	setup
- 735              		.syntax unified
- 736              		.thumb
- 737              		.thumb_func
- 738              		.fpu fpv5-d16
- 740              	setup:
- 741              	.LFB144:
+ 730              		.loc 1 82 0
+ 731 0076 D4E7     		b	.L47
+ 732              	.L59:
+ 733              		.align	2
+ 734              	.L58:
+ 735 0078 00000000 		.word	debug_msg_arrived
+ 736 007c 00000000 		.word	can1
+ 737 0080 00000000 		.word	current_state
+ 738              		.cfi_endproc
+ 739              	.LFE143:
+ 741              		.section	.text.setup,"ax",%progbits
+ 742              		.align	1
+ 743              		.global	setup
+ 744              		.syntax unified
+ 745              		.thumb
+ 746              		.thumb_func
+ 747              		.fpu fpv5-d16
+ 749              	setup:
+ 750              	.LFB144:
   89:Src/state.c   **** 	if(fifoRxDataCAN_pop(&can1)){
- 742              		.loc 1 89 0
- 743              		.cfi_startproc
- 744              		@ args = 0, pretend = 0, frame = 0
- 745              		@ frame_needed = 0, uses_anonymous_args = 0
- 746 0000 08B5     		push	{r3, lr}
- 747              	.LCFI8:
- 748              		.cfi_def_cfa_offset 8
- 749              		.cfi_offset 3, -8
- 750              		.cfi_offset 14, -4
+ 751              		.loc 1 89 0
+ 752              		.cfi_startproc
+ 753              		@ args = 0, pretend = 0, frame = 0
+ 754              		@ frame_needed = 0, uses_anonymous_args = 0
+ 755 0000 08B5     		push	{r3, lr}
+ 756              	.LCFI8:
+ 757              		.cfi_def_cfa_offset 8
+ 758              		.cfi_offset 3, -8
+ 759              		.cfi_offset 14, -4
   90:Src/state.c   **** 		switch(can1.rx_id){
- 751              		.loc 1 90 0
- 752 0002 1248     		ldr	r0, .L68
- 753 0004 FFF7FEFF 		bl	fifoRxDataCAN_pop
- 754              	.LVL43:
- 755 0008 68B1     		cbz	r0, .L60
+ 760              		.loc 1 90 0
+ 761 0002 1248     		ldr	r0, .L68
+ 762 0004 FFF7FEFF 		bl	fifoRxDataCAN_pop
+ 763              	.LVL44:
+ 764 0008 68B1     		cbz	r0, .L60
   91:Src/state.c   **** 			case ID_STEERING_WEEL_1:
- 756              		.loc 1 91 0
- 757 000a 104B     		ldr	r3, .L68
- 758 000c 5B6A     		ldr	r3, [r3, #36]
- 759 000e 342B     		cmp	r3, #52
- 760 0010 07D0     		beq	.L62
- 761 0012 A02B     		cmp	r3, #160
- 762 0014 07D1     		bne	.L60
+ 765              		.loc 1 91 0
+ 766 000a 104B     		ldr	r3, .L68
+ 767 000c 5B6A     		ldr	r3, [r3, #36]
+ 768 000e 342B     		cmp	r3, #52
+ 769 0010 07D0     		beq	.L62
+ 770 0012 A02B     		cmp	r3, #160
+ 771 0014 07D1     		bne	.L60
   93:Src/state.c   **** 					current_state = STATE_IDLE;
- 763              		.loc 1 93 0
- 764 0016 0D4B     		ldr	r3, .L68
- 765 0018 1B7C     		ldrb	r3, [r3, #16]	@ zero_extendqisi2
- 766 001a 042B     		cmp	r3, #4
- 767 001c 04D0     		beq	.L66
+ 772              		.loc 1 93 0
+ 773 0016 0D4B     		ldr	r3, .L68
+ARM GAS  /tmp/cc4nMVXx.s 			page 20
+
+
+ 774 0018 1B7C     		ldrb	r3, [r3, #16]	@ zero_extendqisi2
+ 775 001a 042B     		cmp	r3, #4
+ 776 001c 04D0     		beq	.L66
   95:Src/state.c   **** 					current_state = STATE_RUN;
- 768              		.loc 1 95 0
- 769 001e 052B     		cmp	r3, #5
- 770 0020 06D0     		beq	.L67
- 771              	.L62:
+ 777              		.loc 1 95 0
+ 778 001e 052B     		cmp	r3, #5
+ 779 0020 06D0     		beq	.L67
+ 780              	.L62:
  103:Src/state.c   **** 				break;
- 772              		.loc 1 103 0
-ARM GAS  /tmp/ccv27NRj.s 			page 20
-
-
- 773 0022 FFF7FEFF 		bl	atc_pot_operations
- 774              	.LVL44:
- 775              	.L60:
- 776 0026 08BD     		pop	{r3, pc}
- 777              	.L66:
+ 781              		.loc 1 103 0
+ 782 0022 FFF7FEFF 		bl	atc_pot_operations
+ 783              	.LVL45:
+ 784              	.L60:
+ 785 0026 08BD     		pop	{r3, pc}
+ 786              	.L66:
   94:Src/state.c   **** 				}else if(can1.dataRx[0] == 5){ //----- change state to run -----//
- 778              		.loc 1 94 0
- 779 0028 0122     		movs	r2, #1
- 780 002a 094B     		ldr	r3, .L68+4
- 781 002c 1A70     		strb	r2, [r3]
- 782 002e F8E7     		b	.L62
- 783              	.L67:
+ 787              		.loc 1 94 0
+ 788 0028 0122     		movs	r2, #1
+ 789 002a 094B     		ldr	r3, .L68+4
+ 790 002c 1A70     		strb	r2, [r3]
+ 791 002e F8E7     		b	.L62
+ 792              	.L67:
   96:Src/state.c   **** 					can1.tx_id = ID_ACU_2;
- 784              		.loc 1 96 0
- 785 0030 0322     		movs	r2, #3
- 786 0032 074B     		ldr	r3, .L68+4
- 787 0034 1A70     		strb	r2, [r3]
+ 793              		.loc 1 96 0
+ 794 0030 0322     		movs	r2, #3
+ 795 0032 074B     		ldr	r3, .L68+4
+ 796 0034 1A70     		strb	r2, [r3]
   97:Src/state.c   **** 					can1.dataRx[0] = 5;
- 788              		.loc 1 97 0
- 789 0036 0548     		ldr	r0, .L68
- 790 0038 5523     		movs	r3, #85
- 791 003a 0362     		str	r3, [r0, #32]
+ 797              		.loc 1 97 0
+ 798 0036 0548     		ldr	r0, .L68
+ 799 0038 5523     		movs	r3, #85
+ 800 003a 0362     		str	r3, [r0, #32]
   98:Src/state.c   **** 					can1.tx_size = 1;
- 792              		.loc 1 98 0
- 793 003c 0523     		movs	r3, #5
- 794 003e 0374     		strb	r3, [r0, #16]
+ 801              		.loc 1 98 0
+ 802 003c 0523     		movs	r3, #5
+ 803 003e 0374     		strb	r3, [r0, #16]
   99:Src/state.c   **** 					CAN_Send(&can1, normalPriority);
- 795              		.loc 1 99 0
- 796 0040 0123     		movs	r3, #1
- 797 0042 0360     		str	r3, [r0]
+ 804              		.loc 1 99 0
+ 805 0040 0123     		movs	r3, #1
+ 806 0042 0360     		str	r3, [r0]
  100:Src/state.c   **** 				}
- 798              		.loc 1 100 0
- 799 0044 0021     		movs	r1, #0
- 800 0046 FFF7FEFF 		bl	CAN_Send
- 801              	.LVL45:
- 802 004a EAE7     		b	.L62
- 803              	.L69:
- 804              		.align	2
- 805              	.L68:
- 806 004c 00000000 		.word	can1
- 807 0050 00000000 		.word	current_state
- 808              		.cfi_endproc
- 809              	.LFE144:
- 811              		.section	.text.run,"ax",%progbits
- 812              		.align	1
- 813              		.global	run
- 814              		.syntax unified
- 815              		.thumb
- 816              		.thumb_func
- 817              		.fpu fpv5-d16
- 819              	run:
- 820              	.LFB145:
+ 807              		.loc 1 100 0
+ 808 0044 0021     		movs	r1, #0
+ 809 0046 FFF7FEFF 		bl	CAN_Send
+ 810              	.LVL46:
+ 811 004a EAE7     		b	.L62
+ 812              	.L69:
+ 813              		.align	2
+ 814              	.L68:
+ 815 004c 00000000 		.word	can1
+ 816 0050 00000000 		.word	current_state
+ 817              		.cfi_endproc
+ 818              	.LFE144:
+ 820              		.section	.text.run,"ax",%progbits
+ 821              		.align	1
+ 822              		.global	run
+ 823              		.syntax unified
+ARM GAS  /tmp/cc4nMVXx.s 			page 21
+
+
+ 824              		.thumb
+ 825              		.thumb_func
+ 826              		.fpu fpv5-d16
+ 828              	run:
+ 829              	.LFB145:
  116:Src/state.c   **** 	if(fifoRxDataCAN_pop(&can1)){
- 821              		.loc 1 116 0
- 822              		.cfi_startproc
- 823              		@ args = 0, pretend = 0, frame = 0
- 824              		@ frame_needed = 0, uses_anonymous_args = 0
-ARM GAS  /tmp/ccv27NRj.s 			page 21
-
-
- 825 0000 08B5     		push	{r3, lr}
- 826              	.LCFI9:
- 827              		.cfi_def_cfa_offset 8
- 828              		.cfi_offset 3, -8
- 829              		.cfi_offset 14, -4
+ 830              		.loc 1 116 0
+ 831              		.cfi_startproc
+ 832              		@ args = 0, pretend = 0, frame = 0
+ 833              		@ frame_needed = 0, uses_anonymous_args = 0
+ 834 0000 08B5     		push	{r3, lr}
+ 835              	.LCFI9:
+ 836              		.cfi_def_cfa_offset 8
+ 837              		.cfi_offset 3, -8
+ 838              		.cfi_offset 14, -4
  117:Src/state.c   **** 		switch(can1.rx_id){
- 830              		.loc 1 117 0
- 831 0002 0A48     		ldr	r0, .L75
- 832 0004 FFF7FEFF 		bl	fifoRxDataCAN_pop
- 833              	.LVL46:
- 834 0008 78B1     		cbz	r0, .L70
+ 839              		.loc 1 117 0
+ 840 0002 0A48     		ldr	r0, .L75
+ 841 0004 FFF7FEFF 		bl	fifoRxDataCAN_pop
+ 842              	.LVL47:
+ 843 0008 78B1     		cbz	r0, .L70
  118:Src/state.c   **** 			case ID_STEERING_WEEL_1:
- 835              		.loc 1 118 0
- 836 000a 084B     		ldr	r3, .L75
- 837 000c 5B6A     		ldr	r3, [r3, #36]
- 838 000e 342B     		cmp	r3, #52
- 839 0010 09D0     		beq	.L72
- 840 0012 A02B     		cmp	r3, #160
- 841 0014 09D1     		bne	.L70
+ 844              		.loc 1 118 0
+ 845 000a 084B     		ldr	r3, .L75
+ 846 000c 5B6A     		ldr	r3, [r3, #36]
+ 847 000e 342B     		cmp	r3, #52
+ 848 0010 09D0     		beq	.L72
+ 849 0012 A02B     		cmp	r3, #160
+ 850 0014 09D1     		bne	.L70
  120:Src/state.c   **** 					current_state = STATE_SETUP;
- 842              		.loc 1 120 0
- 843 0016 054B     		ldr	r3, .L75
- 844 0018 1B7C     		ldrb	r3, [r3, #16]	@ zero_extendqisi2
- 845 001a 062B     		cmp	r3, #6
- 846 001c 05D1     		bne	.L70
+ 851              		.loc 1 120 0
+ 852 0016 054B     		ldr	r3, .L75
+ 853 0018 1B7C     		ldrb	r3, [r3, #16]	@ zero_extendqisi2
+ 854 001a 062B     		cmp	r3, #6
+ 855 001c 05D1     		bne	.L70
  121:Src/state.c   **** 				}
- 847              		.loc 1 121 0
- 848 001e 0222     		movs	r2, #2
- 849 0020 034B     		ldr	r3, .L75+4
- 850 0022 1A70     		strb	r2, [r3]
- 851 0024 08BD     		pop	{r3, pc}
- 852              	.L72:
+ 856              		.loc 1 121 0
+ 857 001e 0222     		movs	r2, #2
+ 858 0020 034B     		ldr	r3, .L75+4
+ 859 0022 1A70     		strb	r2, [r3]
+ 860 0024 08BD     		pop	{r3, pc}
+ 861              	.L72:
  125:Src/state.c   **** 				break;
- 853              		.loc 1 125 0
- 854 0026 FFF7FEFF 		bl	atc_pot_operations
- 855              	.LVL47:
- 856              	.L70:
- 857 002a 08BD     		pop	{r3, pc}
- 858              	.L76:
- 859              		.align	2
- 860              	.L75:
- 861 002c 00000000 		.word	can1
- 862 0030 00000000 		.word	current_state
- 863              		.cfi_endproc
- 864              	.LFE145:
- 866              		.comm	current_state,1,1
- 867              		.section	.rodata.debug_operations.str1.4,"aMS",%progbits,1
+ 862              		.loc 1 125 0
+ 863 0026 FFF7FEFF 		bl	atc_pot_operations
+ 864              	.LVL48:
+ 865              	.L70:
+ 866 002a 08BD     		pop	{r3, pc}
+ 867              	.L76:
  868              		.align	2
- 869              	.LC0:
- 870 0000 68656C70 		.ascii	"help\000"
- 870      00
- 871 0005 000000   		.space	3
- 872              	.LC1:
- 873 0008 0D0A2A2A 		.ascii	"\015\012***********ECU HELP***********\015\012Avaia"
- 873      2A2A2A2A 
- 873      2A2A2A2A 
- 873      2A454355 
-ARM GAS  /tmp/ccv27NRj.s 			page 22
+ 869              	.L75:
+ 870 002c 00000000 		.word	can1
+ 871 0030 00000000 		.word	current_state
+ 872              		.cfi_endproc
+ 873              	.LFE145:
+ 875              		.comm	current_state,1,1
+ 876              		.section	.rodata.atc_pot_operations.str1.4,"aMS",%progbits,1
+ARM GAS  /tmp/cc4nMVXx.s 			page 22
 
 
- 873      2048454C 
- 874 002f 626C6520 		.ascii	"ble msg are:\015\012\011-- status -> print ECU stat"
- 874      6D736720 
- 874      6172653A 
- 874      0D0A092D 
- 874      2D207374 
- 875 0059 75730D0A 		.ascii	"us\015\012\011-- time -> print activity time\015\012"
- 875      092D2D20 
- 875      74696D65 
- 875      202D3E20 
- 875      7072696E 
- 876 007e 092D2D20 		.ascii	"\011-- codev  -> print code version\015\012\000"
- 876      636F6465 
- 876      7620202D 
- 876      3E207072 
- 876      696E7420 
- 877 00a1 000000   		.space	3
- 878              	.LC2:
- 879 00a4 636F6465 		.ascii	"codev\000"
- 879      7600
- 880 00aa 0000     		.space	2
- 881              	.LC3:
- 882 00ac 74696D65 		.ascii	"time\000"
- 882      00
- 883 00b1 000000   		.space	3
- 884              	.LC4:
- 885 00b4 0D0A5469 		.ascii	"\015\012Time: %d hours : %d min : %d sec : %d dec\015"
- 885      6D653A20 
- 885      25642068 
- 885      6F757273 
- 885      203A2025 
- 886 00e0 0A00     		.ascii	"\012\000"
- 887 00e2 0000     		.space	2
- 888              	.LC5:
- 889 00e4 73746174 		.ascii	"status\000"
- 889      757300
- 890 00eb 00       		.space	1
- 891              	.LC6:
- 892 00ec 0D0A0A74 		.ascii	"\015\012\012type of status:\015\012\011 0 = OK\015\012"
- 892      79706520 
- 892      6F662073 
- 892      74617475 
- 892      733A0D0A 
- 893 010a 09203120 		.ascii	"\011 1 = ERROR\015\012\011 2 = BUSY\015\012\011 3 ="
- 893      3D204552 
- 893      524F520D 
- 893      0A092032 
- 893      203D2042 
- 894 0128 2054494D 		.ascii	" TIMEOUT\015\012\012CAN1 status:\015\012\011CAN1 co"
- 894      454F5554 
- 894      0D0A0A43 
- 894      414E3120 
- 894      73746174 
- 895 0149 6E666967 		.ascii	"nfig status: %d \015\012\011CAN1 notification statu"
- 895      20737461 
- 895      7475733A 
- 895      20256420 
-ARM GAS  /tmp/ccv27NRj.s 			page 23
+ 877              		.align	2
+ 878              	.LC17:
+ 879 0000 4641494C 		.ascii	"FAILED POT\015\012\000"
+ 879      45442050 
+ 879      4F540D0A 
+ 879      00
+ 880              		.section	.rodata.debug_operations.str1.4,"aMS",%progbits,1
+ 881              		.align	2
+ 882              	.LC0:
+ 883 0000 68656C70 		.ascii	"help\000"
+ 883      00
+ 884 0005 000000   		.space	3
+ 885              	.LC1:
+ 886 0008 0D0A2A2A 		.ascii	"\015\012***********ECU HELP***********\015\012Avaia"
+ 886      2A2A2A2A 
+ 886      2A2A2A2A 
+ 886      2A454355 
+ 886      2048454C 
+ 887 002f 626C6520 		.ascii	"ble msg are:\015\012\011-- status -> print ECU stat"
+ 887      6D736720 
+ 887      6172653A 
+ 887      0D0A092D 
+ 887      2D207374 
+ 888 0059 75730D0A 		.ascii	"us\015\012\011-- time -> print activity time\015\012"
+ 888      092D2D20 
+ 888      74696D65 
+ 888      202D3E20 
+ 888      7072696E 
+ 889 007e 092D2D20 		.ascii	"\011-- codev  -> print code version\015\012\000"
+ 889      636F6465 
+ 889      7620202D 
+ 889      3E207072 
+ 889      696E7420 
+ 890 00a1 000000   		.space	3
+ 891              	.LC2:
+ 892 00a4 636F6465 		.ascii	"codev\000"
+ 892      7600
+ 893 00aa 0000     		.space	2
+ 894              	.LC3:
+ 895 00ac 74696D65 		.ascii	"time\000"
+ 895      00
+ 896 00b1 000000   		.space	3
+ 897              	.LC4:
+ 898 00b4 0D0A5469 		.ascii	"\015\012Time: %d hours : %d min : %d sec : %d dec\015"
+ 898      6D653A20 
+ 898      25642068 
+ 898      6F757273 
+ 898      203A2025 
+ 899 00e0 0A00     		.ascii	"\012\000"
+ 900 00e2 0000     		.space	2
+ 901              	.LC5:
+ 902 00e4 73746174 		.ascii	"status\000"
+ 902      757300
+ 903 00eb 00       		.space	1
+ 904              	.LC6:
+ 905 00ec 0D0A0A74 		.ascii	"\015\012\012type of status:\015\012\011 0 = OK\015\012"
+ 905      79706520 
+ARM GAS  /tmp/cc4nMVXx.s 			page 23
 
 
- 895      0D0A0943 
- 896 0173 733A2025 		.ascii	"s: %d\015\012\011CAN1 start status: %d\015\012\000"
- 896      640D0A09 
- 896      43414E31 
- 896      20737461 
- 896      72742073 
- 897 0193 00       		.space	1
- 898              	.LC7:
- 899 0194 43414E33 		.ascii	"CAN3 status:\015\012\011CAN3 config status: %d \015"
- 899      20737461 
- 899      7475733A 
- 899      0D0A0943 
- 899      414E3320 
- 900 01bb 0A094341 		.ascii	"\012\011CAN3 notification status: %d\015\012\011CAN"
- 900      4E33206E 
- 900      6F746966 
- 900      69636174 
- 900      696F6E20 
- 901 01df 33207374 		.ascii	"3 start status: %d\015\012\000"
- 901      61727420 
- 901      73746174 
- 901      75733A20 
- 901      25640D0A 
- 902              	.LC8:
- 903 01f4 0D0A4375 		.ascii	"\015\012Current state: STATE_INIT\015\012\000"
- 903      7272656E 
- 903      74207374 
- 903      6174653A 
- 903      20535441 
- 904 0212 0000     		.space	2
- 905              	.LC9:
- 906 0214 0D0A4375 		.ascii	"\015\012Current state: STATE_IDLE\015\012\000"
- 906      7272656E 
- 906      74207374 
- 906      6174653A 
- 906      20535441 
- 907 0232 0000     		.space	2
- 908              	.LC10:
- 909 0234 0D0A4375 		.ascii	"\015\012Current state: STATE_SETUP\015\012\000"
- 909      7272656E 
- 909      74207374 
- 909      6174653A 
- 909      20535441 
- 910 0253 00       		.space	1
- 911              	.LC11:
- 912 0254 0D0A4375 		.ascii	"\015\012Current state: STATE_RUN\015\012\000"
- 912      7272656E 
- 912      74207374 
- 912      6174653A 
- 912      20535441 
- 913 0271 000000   		.space	3
- 914              	.LC12:
- 915 0274 0D0A4465 		.ascii	"\015\012Device connected : (0 = no, 1 = yes)\015\012"
- 915      76696365 
- 915      20636F6E 
- 915      6E656374 
- 915      6564203A 
-ARM GAS  /tmp/ccv27NRj.s 			page 24
+ 905      6F662073 
+ 905      74617475 
+ 905      733A0D0A 
+ 906 010a 09203120 		.ascii	"\011 1 = ERROR\015\012\011 2 = BUSY\015\012\011 3 ="
+ 906      3D204552 
+ 906      524F520D 
+ 906      0A092032 
+ 906      203D2042 
+ 907 0128 2054494D 		.ascii	" TIMEOUT\015\012\012CAN1 status:\015\012\011CAN1 co"
+ 907      454F5554 
+ 907      0D0A0A43 
+ 907      414E3120 
+ 907      73746174 
+ 908 0149 6E666967 		.ascii	"nfig status: %d \015\012\011CAN1 notification statu"
+ 908      20737461 
+ 908      7475733A 
+ 908      20256420 
+ 908      0D0A0943 
+ 909 0173 733A2025 		.ascii	"s: %d\015\012\011CAN1 start status: %d\015\012\000"
+ 909      640D0A09 
+ 909      43414E31 
+ 909      20737461 
+ 909      72742073 
+ 910 0193 00       		.space	1
+ 911              	.LC7:
+ 912 0194 43414E33 		.ascii	"CAN3 status:\015\012\011CAN3 config status: %d \015"
+ 912      20737461 
+ 912      7475733A 
+ 912      0D0A0943 
+ 912      414E3320 
+ 913 01bb 0A094341 		.ascii	"\012\011CAN3 notification status: %d\015\012\011CAN"
+ 913      4E33206E 
+ 913      6F746966 
+ 913      69636174 
+ 913      696F6E20 
+ 914 01df 33207374 		.ascii	"3 start status: %d\015\012\000"
+ 914      61727420 
+ 914      73746174 
+ 914      75733A20 
+ 914      25640D0A 
+ 915              	.LC8:
+ 916 01f4 0D0A4375 		.ascii	"\015\012Current state: STATE_INIT\015\012\000"
+ 916      7272656E 
+ 916      74207374 
+ 916      6174653A 
+ 916      20535441 
+ 917 0212 0000     		.space	2
+ 918              	.LC9:
+ 919 0214 0D0A4375 		.ascii	"\015\012Current state: STATE_IDLE\015\012\000"
+ 919      7272656E 
+ 919      74207374 
+ 919      6174653A 
+ 919      20535441 
+ 920 0232 0000     		.space	2
+ 921              	.LC10:
+ 922 0234 0D0A4375 		.ascii	"\015\012Current state: STATE_SETUP\015\012\000"
+ 922      7272656E 
+ARM GAS  /tmp/cc4nMVXx.s 			page 24
 
 
- 916 029c 0920494D 		.ascii	"\011 IMU -> %d\015\012\011 ITS0 -> %d\015\012\011 I"
- 916      55202D3E 
- 916      2025640D 
- 916      0A092049 
- 916      54533020 
- 917 02ba 54533120 		.ascii	"TS1 -> %d\015\012\011 ITS2 -> %d\015\012\011 ITS3 -"
- 917      2D3E2025 
- 917      640D0A09 
- 917      20495453 
- 917      32202D3E 
- 918 02db 3E202564 		.ascii	"> %d\015\012\000"
- 918      0D0A00
- 919 02e2 0000     		.space	2
- 920              	.LC13:
- 921 02e4 67617900 		.ascii	"gay\000"
- 922              	.LC14:
- 923 02e8 0D0A2020 		.ascii	"\015\012          $\015\012        $   $\015\012   "
- 923      20202020 
- 923      20202020 
- 923      240D0A20 
- 923      20202020 
- 924 0309 20202020 		.ascii	"    $     $\015\012       $$$$$$$\015\012       $$$"
- 924      24202020 
- 924      2020240D 
- 924      0A202020 
- 924      20202020 
- 925 0330 24242424 		.ascii	"$$$$\015\012       $$$$$$$\015\012       $$$$$$$\015"
- 925      0D0A2020 
- 925      20202020 
- 925      20242424 
- 925      24242424 
- 926 0355 0A202020 		.ascii	"\012       $$$$$$$\015\012       $$$$$$$\015\012   "
- 926      20202020 
- 926      24242424 
- 926      2424240D 
- 926      0A202020 
- 927 0379 20202020 		.ascii	"    $$$$$$$\015\012  $$$$$$     $$$$$$\015\012 $$$$"
- 927      24242424 
- 927      2424240D 
- 927      0A202024 
- 927      24242424 
- 928 03a0 24242424 		.ascii	"$$$$   $$$$$$$$\015\012$$$$$$$$$$$$$$$$$$$$\015\012"
- 928      20202024 
- 928      24242424 
- 928      2424240D 
- 928      0A242424 
- 929 03c7 20242424 		.ascii	" $$$$$$$$   $$$$$$$$\015\012  $$$$$$     $$$$$$\015"
- 929      24242424 
- 929      24202020 
- 929      24242424 
- 929      24242424 
- 930 03f1 0A00     		.ascii	"\012\000"
- 931 03f3 00       		.space	1
- 932              	.LC15:
- 933 03f4 0D0A4552 		.ascii	"\015\012ERROR : msg %s doesn't exist\015\012\000"
- 933      524F5220 
- 933      3A206D73 
-ARM GAS  /tmp/ccv27NRj.s 			page 25
+ 922      74207374 
+ 922      6174653A 
+ 922      20535441 
+ 923 0253 00       		.space	1
+ 924              	.LC11:
+ 925 0254 0D0A4375 		.ascii	"\015\012Current state: STATE_RUN\015\012\000"
+ 925      7272656E 
+ 925      74207374 
+ 925      6174653A 
+ 925      20535441 
+ 926 0271 000000   		.space	3
+ 927              	.LC12:
+ 928 0274 0D0A4465 		.ascii	"\015\012Device connected : (0 = no, 1 = yes)\015\012"
+ 928      76696365 
+ 928      20636F6E 
+ 928      6E656374 
+ 928      6564203A 
+ 929 029c 0920494D 		.ascii	"\011 IMU -> %d\015\012\011 ITS0 -> %d\015\012\011 I"
+ 929      55202D3E 
+ 929      2025640D 
+ 929      0A092049 
+ 929      54533020 
+ 930 02ba 54533120 		.ascii	"TS1 -> %d\015\012\011 ITS2 -> %d\015\012\011 ITS3 -"
+ 930      2D3E2025 
+ 930      640D0A09 
+ 930      20495453 
+ 930      32202D3E 
+ 931 02db 3E202564 		.ascii	"> %d\015\012\000"
+ 931      0D0A00
+ 932 02e2 0000     		.space	2
+ 933              	.LC13:
+ 934 02e4 67617900 		.ascii	"gay\000"
+ 935              	.LC14:
+ 936 02e8 0D0A2020 		.ascii	"\015\012          $\015\012        $   $\015\012   "
+ 936      20202020 
+ 936      20202020 
+ 936      240D0A20 
+ 936      20202020 
+ 937 0309 20202020 		.ascii	"    $     $\015\012       $$$$$$$\015\012       $$$"
+ 937      24202020 
+ 937      2020240D 
+ 937      0A202020 
+ 937      20202020 
+ 938 0330 24242424 		.ascii	"$$$$\015\012       $$$$$$$\015\012       $$$$$$$\015"
+ 938      0D0A2020 
+ 938      20202020 
+ 938      20242424 
+ 938      24242424 
+ 939 0355 0A202020 		.ascii	"\012       $$$$$$$\015\012       $$$$$$$\015\012   "
+ 939      20202020 
+ 939      24242424 
+ 939      2424240D 
+ 939      0A202020 
+ 940 0379 20202020 		.ascii	"    $$$$$$$\015\012  $$$$$$     $$$$$$\015\012 $$$$"
+ 940      24242424 
+ 940      2424240D 
+ 940      0A202024 
+ARM GAS  /tmp/cc4nMVXx.s 			page 25
 
 
- 933      67202573 
- 933      20646F65 
- 934              		.section	.rodata.imu_operations.str1.4,"aMS",%progbits,1
- 935              		.align	2
- 936              	.LC16:
- 937 0000 494D5520 		.ascii	"IMU presente\015\012\000"
- 937      70726573 
- 937      656E7465 
- 937      0D0A00
- 938              		.text
- 939              	.Letext0:
- 940              		.file 2 "Drivers/CMSIS/Device/ST/STM32F7xx/Include/stm32f767xx.h"
- 941              		.file 3 "/usr/include/newlib/machine/_default_types.h"
- 942              		.file 4 "/usr/include/newlib/sys/_stdint.h"
- 943              		.file 5 "Inc/state.h"
- 944              		.file 6 "Drivers/CMSIS/Include/core_cm7.h"
- 945              		.file 7 "Drivers/CMSIS/Device/ST/STM32F7xx/Include/system_stm32f7xx.h"
- 946              		.file 8 "Drivers/CMSIS/Device/ST/STM32F7xx/Include/stm32f7xx.h"
- 947              		.file 9 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_def.h"
- 948              		.file 10 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_dma.h"
- 949              		.file 11 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_can.h"
- 950              		.file 12 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart.h"
- 951              		.file 13 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal.h"
- 952              		.file 14 "Inc/can.h"
- 953              		.file 15 "Middlewares/Third_Party/FatFs/src/integer.h"
- 954              		.file 16 "/usr/include/newlib/sys/lock.h"
- 955              		.file 17 "/usr/include/newlib/sys/_types.h"
- 956              		.file 18 "/usr/lib/gcc/arm-none-eabi/6.3.1/include/stddef.h"
- 957              		.file 19 "/usr/include/newlib/sys/reent.h"
- 958              		.file 20 "/usr/include/newlib/stdlib.h"
- 959              		.file 21 "Middlewares/Third_Party/FatFs/src/ff.h"
- 960              		.file 22 "Middlewares/Third_Party/FatFs/src/diskio.h"
- 961              		.file 23 "Middlewares/Third_Party/FatFs/src/ff_gen_drv.h"
- 962              		.file 24 "Inc/sd_diskio.h"
- 963              		.file 25 "Inc/fatfs.h"
- 964              		.file 26 "Inc/pedals.h"
- 965              		.file 27 "Inc/global_variables.h"
- 966              		.file 28 "/usr/include/newlib/string.h"
- 967              		.file 29 "/usr/include/newlib/stdio.h"
-ARM GAS  /tmp/ccv27NRj.s 			page 26
+ 940      24242424 
+ 941 03a0 24242424 		.ascii	"$$$$   $$$$$$$$\015\012$$$$$$$$$$$$$$$$$$$$\015\012"
+ 941      20202024 
+ 941      24242424 
+ 941      2424240D 
+ 941      0A242424 
+ 942 03c7 20242424 		.ascii	" $$$$$$$$   $$$$$$$$\015\012  $$$$$$     $$$$$$\015"
+ 942      24242424 
+ 942      24202020 
+ 942      24242424 
+ 942      24242424 
+ 943 03f1 0A00     		.ascii	"\012\000"
+ 944 03f3 00       		.space	1
+ 945              	.LC15:
+ 946 03f4 0D0A4552 		.ascii	"\015\012ERROR : msg %s doesn't exist\015\012\000"
+ 946      524F5220 
+ 946      3A206D73 
+ 946      67202573 
+ 946      20646F65 
+ 947              		.section	.rodata.imu_operations.str1.4,"aMS",%progbits,1
+ 948              		.align	2
+ 949              	.LC16:
+ 950 0000 494D5520 		.ascii	"IMU presente\015\012\000"
+ 950      70726573 
+ 950      656E7465 
+ 950      0D0A00
+ 951              		.text
+ 952              	.Letext0:
+ 953              		.file 2 "Drivers/CMSIS/Device/ST/STM32F7xx/Include/stm32f767xx.h"
+ 954              		.file 3 "/usr/include/newlib/machine/_default_types.h"
+ 955              		.file 4 "/usr/include/newlib/sys/_stdint.h"
+ 956              		.file 5 "Inc/state.h"
+ 957              		.file 6 "Drivers/CMSIS/Include/core_cm7.h"
+ 958              		.file 7 "Drivers/CMSIS/Device/ST/STM32F7xx/Include/system_stm32f7xx.h"
+ 959              		.file 8 "Drivers/CMSIS/Device/ST/STM32F7xx/Include/stm32f7xx.h"
+ 960              		.file 9 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_def.h"
+ 961              		.file 10 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_dma.h"
+ 962              		.file 11 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_can.h"
+ 963              		.file 12 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart.h"
+ 964              		.file 13 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal.h"
+ 965              		.file 14 "Inc/can.h"
+ 966              		.file 15 "Middlewares/Third_Party/FatFs/src/integer.h"
+ 967              		.file 16 "/usr/include/newlib/sys/lock.h"
+ 968              		.file 17 "/usr/include/newlib/sys/_types.h"
+ 969              		.file 18 "/usr/lib/gcc/arm-none-eabi/6.3.1/include/stddef.h"
+ 970              		.file 19 "/usr/include/newlib/sys/reent.h"
+ 971              		.file 20 "/usr/include/newlib/stdlib.h"
+ 972              		.file 21 "Middlewares/Third_Party/FatFs/src/ff.h"
+ 973              		.file 22 "Middlewares/Third_Party/FatFs/src/diskio.h"
+ 974              		.file 23 "Middlewares/Third_Party/FatFs/src/ff_gen_drv.h"
+ 975              		.file 24 "Inc/sd_diskio.h"
+ 976              		.file 25 "Inc/fatfs.h"
+ 977              		.file 26 "Inc/pedals.h"
+ 978              		.file 27 "Inc/global_variables.h"
+ 979              		.file 28 "/usr/include/newlib/string.h"
+ 980              		.file 29 "/usr/include/newlib/stdio.h"
+ARM GAS  /tmp/cc4nMVXx.s 			page 26
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 state.c
-     /tmp/ccv27NRj.s:17     .text.debug_operations:0000000000000000 $t
-     /tmp/ccv27NRj.s:24     .text.debug_operations:0000000000000000 debug_operations
-     /tmp/ccv27NRj.s:308    .text.debug_operations:00000000000001c8 $d
+     /tmp/cc4nMVXx.s:17     .text.debug_operations:0000000000000000 $t
+     /tmp/cc4nMVXx.s:24     .text.debug_operations:0000000000000000 debug_operations
+     /tmp/cc4nMVXx.s:308    .text.debug_operations:00000000000001c8 $d
                             *COM*:0000000000000001 current_state
-     /tmp/ccv27NRj.s:344    .text.imu_operations:0000000000000000 $t
-     /tmp/ccv27NRj.s:351    .text.imu_operations:0000000000000000 imu_operations
-     /tmp/ccv27NRj.s:391    .text.imu_operations:000000000000002c $d
-     /tmp/ccv27NRj.s:399    .text.init:0000000000000000 $t
-     /tmp/ccv27NRj.s:406    .text.init:0000000000000000 init
-     /tmp/ccv27NRj.s:462    .text.init:0000000000000040 $d
-     /tmp/ccv27NRj.s:470    .text.atc_pot_operations:0000000000000000 $t
-     /tmp/ccv27NRj.s:477    .text.atc_pot_operations:0000000000000000 atc_pot_operations
-     /tmp/ccv27NRj.s:609    .text.atc_pot_operations:00000000000000d0 $d
-     /tmp/ccv27NRj.s:618    .text.idle:0000000000000000 $t
-     /tmp/ccv27NRj.s:625    .text.idle:0000000000000000 idle
-     /tmp/ccv27NRj.s:726    .text.idle:0000000000000078 $d
-     /tmp/ccv27NRj.s:733    .text.setup:0000000000000000 $t
-     /tmp/ccv27NRj.s:740    .text.setup:0000000000000000 setup
-     /tmp/ccv27NRj.s:806    .text.setup:000000000000004c $d
-     /tmp/ccv27NRj.s:812    .text.run:0000000000000000 $t
-     /tmp/ccv27NRj.s:819    .text.run:0000000000000000 run
-     /tmp/ccv27NRj.s:861    .text.run:000000000000002c $d
-     /tmp/ccv27NRj.s:868    .rodata.debug_operations.str1.4:0000000000000000 $d
-     /tmp/ccv27NRj.s:935    .rodata.imu_operations.str1.4:0000000000000000 $d
+     /tmp/cc4nMVXx.s:344    .text.imu_operations:0000000000000000 $t
+     /tmp/cc4nMVXx.s:351    .text.imu_operations:0000000000000000 imu_operations
+     /tmp/cc4nMVXx.s:391    .text.imu_operations:000000000000002c $d
+     /tmp/cc4nMVXx.s:399    .text.init:0000000000000000 $t
+     /tmp/cc4nMVXx.s:406    .text.init:0000000000000000 init
+     /tmp/cc4nMVXx.s:462    .text.init:0000000000000040 $d
+     /tmp/cc4nMVXx.s:470    .text.atc_pot_operations:0000000000000000 $t
+     /tmp/cc4nMVXx.s:477    .text.atc_pot_operations:0000000000000000 atc_pot_operations
+     /tmp/cc4nMVXx.s:616    .text.atc_pot_operations:00000000000000dc $d
+     /tmp/cc4nMVXx.s:627    .text.idle:0000000000000000 $t
+     /tmp/cc4nMVXx.s:634    .text.idle:0000000000000000 idle
+     /tmp/cc4nMVXx.s:735    .text.idle:0000000000000078 $d
+     /tmp/cc4nMVXx.s:742    .text.setup:0000000000000000 $t
+     /tmp/cc4nMVXx.s:749    .text.setup:0000000000000000 setup
+     /tmp/cc4nMVXx.s:815    .text.setup:000000000000004c $d
+     /tmp/cc4nMVXx.s:821    .text.run:0000000000000000 $t
+     /tmp/cc4nMVXx.s:828    .text.run:0000000000000000 run
+     /tmp/cc4nMVXx.s:870    .text.run:000000000000002c $d
+     /tmp/cc4nMVXx.s:877    .rodata.atc_pot_operations.str1.4:0000000000000000 $d
+     /tmp/cc4nMVXx.s:881    .rodata.debug_operations.str1.4:0000000000000000 $d
+     /tmp/cc4nMVXx.s:948    .rodata.imu_operations.str1.4:0000000000000000 $d
                      .debug_frame:0000000000000010 $d
 
 UNDEFINED SYMBOLS
@@ -1539,8 +1557,8 @@ accel_implausibility_check
 CAN_Send
 atc_connected
 count_atc
+ARM GAS  /tmp/cc4nMVXx.s 			page 27
+
+
 accel
-ARM GAS  /tmp/ccv27NRj.s 			page 27
-
-
 brake

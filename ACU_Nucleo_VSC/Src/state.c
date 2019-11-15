@@ -236,7 +236,7 @@ void atc_pot_operations(){
 		brake.pot2_val_100 = (brake.pot2_val - brake.pot2_min_val)/(brake.pot2_range)*100;
 	}
 
-	if(accel_implausibility_check()){
+	if(accel_implausibility_check() == 0){
 		accel.pot1_val = 0;
 		accel.pot2_val = 0;
 		accel.pot1_val_100 = 0;
@@ -246,6 +246,7 @@ void atc_pot_operations(){
 		can1.dataTx[0] = 1;
 		can1.tx_size = 1;
 		CAN_Send(&can1,highPriority);
+		HAL_UART_Transmit(&huart3,(uint8_t*)"FAILED POT\r\n",strlen("FAILED POT\r\n"),10);
 	}else{
 		
 		

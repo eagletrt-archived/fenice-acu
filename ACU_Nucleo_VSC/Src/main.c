@@ -504,8 +504,8 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan){
 			can1.rx_id = header.StdId;
 			can1.rx_size = header.DLC;
 			fifoRxDataCAN_push(&can1);
-			sprintf(txt,"DATA: %d %d %d %d %d %d %d %d\r\n",can1.dataRx[0],can1.dataRx[1],can1.dataRx[2],can1.dataRx[3],can1.dataRx[4],can1.dataRx[5],can1.dataRx[6],can1.dataRx[7]);
-			HAL_UART_Transmit(&huart3, (uint8_t*)txt, strlen(txt), 100);
+			//sprintf(txt,"DATA: %d %d %d %d %d %d %d %d\r\n",can1.dataRx[0],can1.dataRx[1],can1.dataRx[2],can1.dataRx[3],can1.dataRx[4],can1.dataRx[5],can1.dataRx[6],can1.dataRx[7]);
+			//HAL_UART_Transmit(&huart3, (uint8_t*)txt, strlen(txt), 100);
 			//HAL_UART_Transmit(&huart3, (uint8_t*)"ciao2\r\n", strlen("ciao2\r\n"), 10);
 
 
