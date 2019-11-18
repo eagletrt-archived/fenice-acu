@@ -10,7 +10,7 @@
 #define MAX_DEBUG_RX_L 20
 #define MAX_DEBUG_TX_L 500
 
-extern canStruct can1,can3;
+extern canStruct can1, can3;
 
 extern uint16_t count_ms, count_dec, count_sec, count_min, count_hour;
 extern uint16_t count_inverter;
@@ -67,7 +67,7 @@ extern uint8_t pot_values_loaded;
 extern PotStc accel;
 extern PotStc brake;
 extern uint8_t accel_implausibility_check_count_flag;
-extern uint8_t accel_implausibility_check_count;  
+extern uint8_t accel_implausibility_check_count;
 
 //-----------------------------------------//
 //------------------ ID -------------------//
@@ -95,8 +95,10 @@ extern uint8_t accel_implausibility_check_count;
 #define ID_ITS_4_1 0x5BD
 #define ID_ITS_4_2 0x5BE
 #define ID_ITS_4_3 0x5BF
-//from inverter
 
+//from inverter
+//REQ is id that is sent FROM inverter
+//ASK is id that is sent TO inverter
 #define ID_REQ_INV_SX 0x181
 #define ID_REQ_INV_DX 0x182
 #define ID_ASK_INV_SX 0x201
@@ -112,11 +114,5 @@ extern uint8_t accel_implausibility_check_count;
 
 //from ATC (Analog To CAN)
 #define ID_ATC_POT 0x34
-
-
-
-
-
-
 
 #endif
