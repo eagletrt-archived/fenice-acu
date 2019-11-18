@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccg0MXhh.s 			page 1
+ARM GAS  /tmp/ccXyDi1c.s 			page 1
 
 
    1              		.cpu cortex-m7
@@ -17,17 +17,17 @@ ARM GAS  /tmp/ccg0MXhh.s 			page 1
   14              	.Ltext0:
   15              		.cfi_sections	.debug_frame
   16              	.Letext0:
-  17              		.file 1 "/usr/arm-none-eabi/include/machine/_default_types.h"
-  18              		.file 2 "/usr/arm-none-eabi/include/sys/_stdint.h"
+  17              		.file 1 "/usr/include/newlib/machine/_default_types.h"
+  18              		.file 2 "/usr/include/newlib/sys/_stdint.h"
   19              		.file 3 "Drivers/CMSIS/Include/core_cm7.h"
   20              		.file 4 "Drivers/CMSIS/Device/ST/STM32F7xx/Include/system_stm32f7xx.h"
   21              		.file 5 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal.h"
-  22              		.file 6 "/usr/arm-none-eabi/include/sys/lock.h"
-  23              		.file 7 "/usr/arm-none-eabi/include/sys/_types.h"
-  24              		.file 8 "/usr/lib/gcc/arm-none-eabi/9.2.0/include/stddef.h"
-  25              		.file 9 "/usr/arm-none-eabi/include/sys/reent.h"
-  26              		.file 10 "/usr/arm-none-eabi/include/stdlib.h"
-ARM GAS  /tmp/ccg0MXhh.s 			page 2
+  22              		.file 6 "/usr/include/newlib/sys/lock.h"
+  23              		.file 7 "/usr/include/newlib/sys/_types.h"
+  24              		.file 8 "/usr/lib/gcc/arm-none-eabi/6.3.1/include/stddef.h"
+  25              		.file 9 "/usr/include/newlib/sys/reent.h"
+  26              		.file 10 "/usr/include/newlib/stdlib.h"
+ARM GAS  /tmp/ccXyDi1c.s 			page 2
 
 
 DEFINED SYMBOLS

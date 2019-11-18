@@ -35,6 +35,7 @@ typedef struct fifoCanDataType {
 } fifoCanDataType;
 
 typedef struct {
+
 	int tx_size;  // size of data
 	int rx_size;
 	int rx_size_int;

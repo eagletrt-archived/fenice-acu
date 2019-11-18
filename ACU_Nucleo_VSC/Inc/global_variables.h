@@ -8,7 +8,7 @@
 #include "pedals.h"
 
 #define MAX_DEBUG_RX_L 20
-#define MAX_DEBUG_TX_L 500
+#define MAX_DEBUG_TX_L 2000
 
 extern canStruct can1, can3;
 
@@ -39,11 +39,12 @@ extern FIL log_names_f;
 extern TCHAR message[256];
 extern char filename[256];
 extern char filename_1[256];
-extern char filename_pot[14];
-extern char txt[1000];
+extern char filename_pot[];
+extern char txt[2000];
+extern char filename_log[50];
 
 extern int max_files;
-extern int byteswritten;
+extern UINT byteswritten;
 extern int mount_ok;
 extern int msg_counter;
 extern int msg_index;
@@ -52,7 +53,7 @@ extern char buffer[256];
 extern int bytes_read;
 
 extern char *pointer;
-extern char log_names[900];
+extern char log_names[1100];
 
 extern FRESULT res_open;
 extern FRESULT res_mount;

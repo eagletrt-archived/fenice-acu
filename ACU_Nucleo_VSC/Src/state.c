@@ -43,6 +43,14 @@ void init()
  *******************************************************************/
 void idle()
 {
+	if (HAL_GPIO_ReadPin(USER_BUTTON_GPIO_Port,USER_BUTTON_Pin) == GPIO_PIN_SET){
+		sprintf(txt,"%d\r\n%d\r\n%d\r\n%d\r\n",accel.pot1_val,accel.pot2_val,brake.pot1_val,brake.pot2_val);
+		HAL_UART_Transmit(&huart3,(uint8_t*)txt,strlen(txt),10);
+		res_open = f_open(&pot_values_f, (TCHAR const*)&filename_pot, FA_OPEN_ALWAYS | FA_WRITE );
+		f_write(&pot_values_f,(TCHAR const*)&txt,strlen(txt), &byteswritten);
+		f_close(&pot_values_f);
+		HAL_Delay(1000);
+	}
 	if (debug_msg_arrived == 1)
 	{
 		debug_msg_arrived = 0; // reset flag
@@ -269,6 +277,8 @@ void debug_operations()
 				"\r\n***********ECU HELP***********\r\n"
 				"Avaiable msg are:\r\n"
 				"\t-- status -> print ECU status\r\n"
+				"\t-- sd status -> print SD status and the name of file inside\r\n"
+				"\t-- sd file -> print files inside the SD\r\n"
 				"\t-- time -> print activity time\r\n"
 				"\t-- codev  -> print code version\r\n");
 		HAL_UART_Transmit(&huart3, (uint8_t *)debug_tx, strlen(debug_tx), 100);
@@ -342,6 +352,23 @@ void debug_operations()
 				imu_connected, its0_connected, its1_connected, its2_connected,
 				its3_connected);
 		HAL_UART_Transmit(&huart3, (uint8_t *)debug_tx, strlen(debug_tx), 100);
+	}
+	else if (strcmp(debug_rx, "sd status") == 0){
+		if(mount_ok == 1){
+			HAL_UART_Transmit(&huart3, (uint8_t *)"\r\nSd mounted ", strlen("\r\nSd mounted "), 100);
+			if(successfull_opening == 1){
+				sprintf(debug_tx,"Sd successfully opened and created file: %s\r\n",filename_log);
+				HAL_UART_Transmit(&huart3, (uint8_t *)debug_tx, strlen(debug_tx), 100);
+			}else{
+				HAL_UART_Transmit(&huart3, (uint8_t *)"Sd open FAILED\r\n", strlen("Sd open FAILED\r\n"), 100);
+			}
+		}else{
+			HAL_UART_Transmit(&huart3, (uint8_t *)"\r\nSd NOT mounted ", strlen("\r\nSd NOT mounted "), 100);
+		}
+	}
+	else if(strcmp(debug_rx, "sd file") == 0){
+		sprintf(debug_tx,"\r\nFiles inside sd are:\r\n%s",log_names);
+		HAL_UART_Transmit(&huart3, (uint8_t *)debug_tx, strlen(debug_tx), 1000);
 	}
 	else if (strcmp(debug_rx, "gay") == 0)
 	{
