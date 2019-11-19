@@ -64,7 +64,6 @@ extern polA_cont_up;
 extern polA_cont_down;
 extern polB_cont_up;
 extern polB_cont_down;
-extern direction;
 extern cp;
 extern huart2;
 /* USER CODE END EV */
@@ -217,11 +216,11 @@ void EXTI4_IRQHandler(void)
 		sig_a = SET;
 		if(sig_b)
 		{
-			direction = RESET;
+			cp--;
 		}
 		else
 		{
-			direction = SET;
+			cp++;
 		}
 	}
 	else
@@ -230,15 +229,14 @@ void EXTI4_IRQHandler(void)
 		sig_a = RESET;
 		if(sig_b)
 		{
-			direction = SET;
+			cp++;
 		}
 		else
 		{
-			direction = RESET;
+			cp--;
 		}
 	}
 
-	cp++;
 
   /* USER CODE END EXTI4_IRQn 0 */
   HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_4);
@@ -257,30 +255,28 @@ void EXTI9_5_IRQHandler(void)
 	{
 		polB_cont_up++;
 		sig_b = SET;
-		if(sig_b)
+		if(sig_a)
 		{
-			direction = SET;
+			cp++;
 		}
 		else
 		{
-			direction = RESET;
+			cp--;
 		}
 	}
 	else
 	{
 		polB_cont_down++;
 		sig_b = RESET;
-		if(sig_b)
+		if(sig_a)
 		{
-			direction = RESET;
+			cp--;
 		}
 		else
 		{
-			direction = SET;
+			cp++;
 		}
 	}
-
-	cp++;
 
   /* USER CODE END EXTI9_5_IRQn 0 */
   HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_5);

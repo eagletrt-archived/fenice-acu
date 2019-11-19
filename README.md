@@ -43,3 +43,4 @@ The inputs are 2 squared signals **A** and **B** from the LM13 sensor with a off
     ***Period***: 1s
     - **TIM4**: This timer gives the period in which the measurment is maked. In fact, the interrupts on the signals _A_ and _B_ are active only in this period.
     ***Period***: 0.1s 
+        - **DO NOT EXCEED 9s** otherwise you will have an integer overflow

@@ -52,13 +52,11 @@ int polA_cont_up = 0;
 int polA_cont_down = 0;
 int polB_cont_down = 0;
 int polB_cont_up = 0;
-// 1 => Clockwise, 0 => counter-Clockwise
-int direction = SET;
-uint32_t cp;
+int cp;
 double resolution = 0.000005;
 double mult_fact = 3.9303482587;
 double mult_fact2 = 3.8778125;
-double measurment_per = 0.1;
+double measurment_per = 0.4;
 double enc_speed = 0;
 double wheel_speed = 0;
 double wheel_speed2 = 0;
@@ -133,6 +131,8 @@ int main(void)
 
   char message[256] = "";
   char message2[256] = "";
+  char message3[256] = "";
+  char message4[256] = "";
   char mes[200] = "";
   int val = -1;
   int val2 = -1;
@@ -144,15 +144,21 @@ int main(void)
   {
     /* USER CODE END WHILE */
 
-	  sprintf(message, "\r\nCP = %u -- Encoder = %f", cp, enc_speed);
+	  sprintf(message, "\r\nCP = %d -- Encoder = %f", cp, enc_speed);
 	  sprintf(message2, "\r\nSpeed1 = %f -- Speed2 = %f", wheel_speed, wheel_speed2);
 	  print(&huart2, message);
 	  print(&huart2, message2);
 	  val = __HAL_TIM_GET_COUNTER(&htim3);
 	  val2 = __HAL_TIM_GET_COUNTER(&htim4);
-	  sprintf(mes,"\r\n TIM3 = %d -- TIM4 = %d",val,val2);
+	  sprintf(mes,"\r\n\n TIM3 = %d -- TIM4 = %d",val,val2);
 	  print(&huart2, mes);
-	  HAL_Delay(500);
+
+	  sprintf(message, "\r\n\nA_Up = %d -- A_Down = %d", polA_cont_up, polA_cont_down);
+	  sprintf(message2, "\r\nB_Up = %d -- B_Down = %d\n", polB_cont_up, polB_cont_down);
+	  print(&huart2, message);
+	  print(&huart2, message2);
+
+	  HAL_Delay(1000);
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
@@ -256,6 +262,8 @@ static void MX_TIM4_Init(void)
 
   /* USER CODE BEGIN TIM4_Init 0 */
 
+	//DO NOT increase the timer over 9 seconds in order to don't get an integer overflow!!!!!
+
   /* USER CODE END TIM4_Init 0 */
 
   TIM_ClockConfigTypeDef sClockSourceConfig = {0};
@@ -267,8 +275,8 @@ static void MX_TIM4_Init(void)
   htim4.Instance = TIM4;
   htim4.Init.Prescaler = 830;
   htim4.Init.CounterMode = TIM_COUNTERMODE_UP;
-  htim4.Init.Period = 10000;
-  htim4.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+  htim4.Init.Period = 9999;
+  htim4.Init.ClockDivision = TIM_CLOCKDIVISION_DIV4;
   htim4.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
   if (HAL_TIM_Base_Init(&htim4) != HAL_OK)
   {
@@ -429,17 +437,11 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
 		// encoder speed = Resolution*cp/0.1s
 		// wheel speed = encoder speed * sp_mult
 
-		if(direction){
-			enc_speed = resolution*cp*3.60/measurment_per;
-			wheel_speed = enc_speed*mult_fact*3.6;
-			wheel_speed2 = resolution*cp*mult_fact2*3.6/measurment_per;
-		}
-		else
-		{
-			enc_speed = resolution*cp*3.6/measurment_per*-1;
-			wheel_speed = enc_speed*mult_fact*3.6;
-			wheel_speed2 = resolution*cp*mult_fact2*3.6/measurment_per*-1;
-		}
+
+		enc_speed = resolution*cp*-3.60/measurment_per;
+		wheel_speed = enc_speed*mult_fact;
+		wheel_speed2 = resolution*cp*mult_fact2*-3.6/measurment_per;
+
 
 	}
 }
