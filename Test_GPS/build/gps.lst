@@ -1,0 +1,1774 @@
+ARM GAS  /tmp/ccSzq8xP.s 			page 1
+
+
+   1              		.cpu cortex-m7
+   2              		.eabi_attribute 28, 1
+   3              		.eabi_attribute 20, 1
+   4              		.eabi_attribute 21, 1
+   5              		.eabi_attribute 23, 3
+   6              		.eabi_attribute 24, 1
+   7              		.eabi_attribute 25, 1
+   8              		.eabi_attribute 26, 1
+   9              		.eabi_attribute 30, 1
+  10              		.eabi_attribute 34, 1
+  11              		.eabi_attribute 18, 4
+  12              		.file	"gps.c"
+  13              		.text
+  14              	.Ltext0:
+  15              		.cfi_sections	.debug_frame
+  16              		.section	.text.checksum,"ax",%progbits
+  17              		.align	1
+  18              		.syntax unified
+  19              		.thumb
+  20              		.thumb_func
+  21              		.fpu fpv5-d16
+  23              	checksum:
+  24              	.LFB144:
+  25              		.file 1 "Src/gps.c"
+   1:Src/gps.c     **** #include "gps.h"
+   2:Src/gps.c     **** 
+   3:Src/gps.c     **** static int checksum(char *string_checksum, int size_string_checksum);
+   4:Src/gps.c     **** int start_string_gps = 0;
+   5:Src/gps.c     **** char string_gps[100];
+   6:Src/gps.c     **** int cont_string, cont_comma;
+   7:Src/gps.c     **** char data_string_gps;
+   8:Src/gps.c     **** extern char buffer_gps[50];
+   9:Src/gps.c     **** extern int msg_arrived;
+  10:Src/gps.c     **** extern gps_struct gps;
+  11:Src/gps.c     **** extern char msg_gps[3];
+  12:Src/gps.c     **** extern UART_HandleTypeDef huart3;
+  13:Src/gps.c     **** extern UART_HandleTypeDef huart2;
+  14:Src/gps.c     **** 
+  15:Src/gps.c     **** 
+  16:Src/gps.c     **** int gps_init(UART_HandleTypeDef *huart, gps_struct *gps)
+  17:Src/gps.c     **** { //initialization of GPS
+  18:Src/gps.c     **** 
+  19:Src/gps.c     **** 	//if return--> 0=error,1=ok
+  20:Src/gps.c     **** 	huart2.Init.BaudRate = 9600;
+  21:Src/gps.c     ****     if (HAL_UART_DeInit(&huart2) != HAL_OK)
+  22:Src/gps.c     ****     {
+  23:Src/gps.c     ****         HAL_UART_Transmit(&huart3,(uint8_t*)"ERRORE 3\r\n",6,10);
+  24:Src/gps.c     ****     }
+  25:Src/gps.c     **** 	if (HAL_UART_DeInit(&huart2) != HAL_OK)
+  26:Src/gps.c     ****     {
+  27:Src/gps.c     ****         HAL_UART_Transmit(&huart3,(uint8_t*)"ERRORE 4\r\n",6,10);
+  28:Src/gps.c     ****     }
+  29:Src/gps.c     **** 	HAL_UART_Transmit(&huart2, (uint8_t *)PMTK_SET_BAUD_115200, strlen(PMTK_SET_BAUD_115200), 200);
+  30:Src/gps.c     **** 	HAL_Delay(500);
+  31:Src/gps.c     **** 	/*huart->Init.BaudRate = 57600;
+  32:Src/gps.c     ****     HAL_UART_DeInit(huart);
+  33:Src/gps.c     **** 	HAL_UART_Init(huart);
+ARM GAS  /tmp/ccSzq8xP.s 			page 2
+
+
+  34:Src/gps.c     **** 	HAL_UART_Transmit(huart, (uint8_t *)PMTK_SET_BAUD_115200, strlen(PMTK_SET_BAUD_115200), 200);
+  35:Src/gps.c     **** 	HAL_Delay(500);*/
+  36:Src/gps.c     **** 	huart2.Init.BaudRate = 115200;
+  37:Src/gps.c     ****     if (HAL_UART_DeInit(&huart2) != HAL_OK)
+  38:Src/gps.c     ****     {
+  39:Src/gps.c     ****         HAL_UART_Transmit(&huart3,(uint8_t*)"ERRORE 5\r\n",6,10);
+  40:Src/gps.c     ****     }
+  41:Src/gps.c     **** 	if (HAL_UART_DeInit(&huart2) != HAL_OK)
+  42:Src/gps.c     ****     {
+  43:Src/gps.c     ****         HAL_UART_Transmit(&huart3,(uint8_t*)"ERRORE 6\r\n",6,10);
+  44:Src/gps.c     ****     }
+  45:Src/gps.c     **** 	HAL_UART_Transmit(&huart2, (uint8_t *)PMTK_SET_BAUD_115200, strlen(PMTK_SET_BAUD_115200), 200);
+  46:Src/gps.c     **** 	HAL_Delay(500);
+  47:Src/gps.c     **** 	HAL_UART_Transmit(&huart2, (uint8_t *)PMTK_SET_NMEA_UPDATE_10HZ, strlen(PMTK_SET_NMEA_UPDATE_10HZ)
+  48:Src/gps.c     **** 	HAL_Delay(500);
+  49:Src/gps.c     **** 	HAL_UART_Transmit(&huart2, (uint8_t *)PMTK_SET_NMEA_OUTPUT_GGAVTG, strlen(PMTK_SET_NMEA_OUTPUT_GGA
+  50:Src/gps.c     **** 	HAL_Delay(500);
+  51:Src/gps.c     **** 	strcpy(gps->speed, "000.00");
+  52:Src/gps.c     **** 	strcpy(gps->latitude, "0000.0000");
+  53:Src/gps.c     **** 	strcpy(gps->latitude_o, "N");
+  54:Src/gps.c     **** 	strcpy(gps->longitude, "00000.0000");
+  55:Src/gps.c     **** 	strcpy(gps->longitude_o, "W");
+  56:Src/gps.c     **** 	strcpy(gps->altitude, "0000.0");
+  57:Src/gps.c     **** 	strcpy(gps->hour, "00");
+  58:Src/gps.c     ****     strcpy(gps->min, "00");
+  59:Src/gps.c     ****     strcpy(gps->sec, "00");
+  60:Src/gps.c     **** 	//HAL_UART_Receive_IT(huart, (uint8_t *)msg_gps, 1); //request of rx buffer interrupt
+  61:Src/gps.c     **** 
+  62:Src/gps.c     **** 	return 1;
+  63:Src/gps.c     **** }
+  64:Src/gps.c     **** 
+  65:Src/gps.c     **** int gps_read(UART_HandleTypeDef *huart, gps_struct *gps)
+  66:Src/gps.c     **** {
+  67:Src/gps.c     **** 
+  68:Src/gps.c     **** 	int ret = 0; //return--> 0=error,1=ok
+  69:Src/gps.c     **** 
+  70:Src/gps.c     **** 	/*
+  71:Src/gps.c     **** 			* Example of strings
+  72:Src/gps.c     **** 			* $GPGGA,064951.000,2307.1256,N,12016.4438,E,1,8,0.95,39.9,M,17.8,M,,*65
+  73:Src/gps.c     **** 			* $GPGSA,A,3,29,21,26,15,18,09,06,10,,,,,2.32,0.95,2.11*00
+  74:Src/gps.c     **** 			* $GPGSV,3,1,09,29,36,029,42,21,46,314,43,26,44,020,43,15,21,321,39*7D
+  75:Src/gps.c     **** 			  $GPGSV,3,2,09,18,26,314,40,09,57,170,44,06,20,229,37,10,26,084,37*77
+  76:Src/gps.c     **** 			  $GPGSV,3,3,09,07,,,26*73
+  77:Src/gps.c     **** 			* $GPRMC,064951.000,A,2307.1256,N,12016.4438,E,0.03,165.48,260406,3.05,W,A*2C
+  78:Src/gps.c     **** 			* $GPVTG,165.48,T,,M,0.03,N,0.06,K,A*37
+  79:Src/gps.c     **** 			* $PGTOP,11,3 *6F
+  80:Src/gps.c     **** 			*
+  81:Src/gps.c     **** 			*
+  82:Src/gps.c     **** 			*
+  83:Src/gps.c     **** 			* 	$GPBOD - Bearing, origin to destination
+  84:Src/gps.c     **** 				$GPBWC - Bearing and distance to waypoint, great circle
+  85:Src/gps.c     **** 				$GPGGA - Global Positioning System Fix Data
+  86:Src/gps.c     **** 				$GPGLL - Geographic position, latitude / longitude
+  87:Src/gps.c     **** 				$GPGSA - GPS DOP and active satellites
+  88:Src/gps.c     **** 				$GPGSV - GPS Satellites in view
+  89:Src/gps.c     **** 				$GPHDT - Heading, True
+  90:Src/gps.c     **** 				$GPR00 - List of waypoints in currently active route
+ARM GAS  /tmp/ccSzq8xP.s 			page 3
+
+
+  91:Src/gps.c     **** 				$GPRMA - Recommended minimum specific Loran-C data
+  92:Src/gps.c     **** 				$GPRMB - Recommended minimum navigation info
+  93:Src/gps.c     **** 				$GPRMC - Recommended minimum specific GPS/Transit data
+  94:Src/gps.c     **** 				$GPRTE - Routes
+  95:Src/gps.c     **** 				$GPTRF - Transit Fix Data
+  96:Src/gps.c     **** 				$GPSTN - Multiple Data ID
+  97:Src/gps.c     **** 				$GPVBW - Dual Ground / Water Speed
+  98:Src/gps.c     **** 				$GPVTG - Track made good and ground speed
+  99:Src/gps.c     **** 				$GPWPL - Waypoint location
+ 100:Src/gps.c     **** 				$GPXTE - Cross-track error, Measured
+ 101:Src/gps.c     **** 				$GPZDA - Date & Time
+ 102:Src/gps.c     **** 				http://aprs.gids.nl/nmea/
+ 103:Src/gps.c     **** 			*/
+ 104:Src/gps.c     ****     //check if it's the huart_gps interrupt
+ 105:Src/gps.c     ****     int msg_arrived_s = msg_arrived;
+ 106:Src/gps.c     ****     msg_arrived = 0;
+ 107:Src/gps.c     ****     char buffer_gps_s[50]; 
+ 108:Src/gps.c     ****     memcpy(buffer_gps_s, buffer_gps, 50);
+ 109:Src/gps.c     ****     if(msg_arrived_s > 0){
+ 110:Src/gps.c     ****         for(int i = 0; i < msg_arrived_s; i++){
+ 111:Src/gps.c     ****             data_string_gps = buffer_gps_s[i];
+ 112:Src/gps.c     ****             if ((start_string_gps == 1) && (data_string_gps != '$'))
+ 113:Src/gps.c     ****             {											   //check that the new string has not started yet
+ 114:Src/gps.c     ****                 string_gps[cont_string] = data_string_gps; //save the data into the array
+ 115:Src/gps.c     ****                 cont_string++;
+ 116:Src/gps.c     ****                 if (string_gps[cont_string - 1] == '\r' || string_gps[cont_string - 1] == '\n')
+ 117:Src/gps.c     ****                 { //indicates that the string is finishing
+ 118:Src/gps.c     ****                     cont_string--;
+ 119:Src/gps.c     ****                     string_gps[cont_string] = '\0'; // '\0'=end of the string
+ 120:Src/gps.c     ****                     start_string_gps = 0;			//end of string
+ 121:Src/gps.c     ****                     if (string_gps[2] == 'G' && string_gps[3] == 'G' && string_gps[4] == 'A')
+ 122:Src/gps.c     ****                     { // operation when the string is GPGGA //
+ 123:Src/gps.c     ****                         //memcpy(gps->string, "", 100);
+ 124:Src/gps.c     ****                         //memcpy(gps->string, string_gps, strlen(string_gps));
+ 125:Src/gps.c     **** 
+ 126:Src/gps.c     ****                         if (checksum(string_gps, cont_string) == 1)
+ 127:Src/gps.c     ****                         { //check the checksum (if==true -> enter)
+ 128:Src/gps.c     ****                             int cont_comma = 0, cont_latitude = 0, cont_longitude = 0, cont_altitud
+ 129:Src/gps.c     ****                             for (int i = 5; i < 100; i++)
+ 130:Src/gps.c     ****                             {
+ 131:Src/gps.c     ****                                 if (string_gps[i] == ',')
+ 132:Src/gps.c     ****                                     cont_comma++;
+ 133:Src/gps.c     ****                                 else
+ 134:Src/gps.c     ****                                 {
+ 135:Src/gps.c     ****                                     if (cont_comma == 1)
+ 136:Src/gps.c     ****                                     { //save the time
+ 137:Src/gps.c     ****                                         if(cont_time < 2){
+ 138:Src/gps.c     ****                                             gps->hour[cont_time] = string_gps[i];
+ 139:Src/gps.c     ****                                             cont_time++;
+ 140:Src/gps.c     ****                                         }else if(cont_time < 4){
+ 141:Src/gps.c     ****                                             gps->min[cont_time % 2] = string_gps[i];
+ 142:Src/gps.c     ****                                             cont_time++;
+ 143:Src/gps.c     ****                                         }else if(cont_time <6){
+ 144:Src/gps.c     ****                                             gps->sec[cont_time % 2] = string_gps[i];
+ 145:Src/gps.c     ****                                             cont_time++;
+ 146:Src/gps.c     ****                                         }
+ 147:Src/gps.c     ****                                         
+ARM GAS  /tmp/ccSzq8xP.s 			page 4
+
+
+ 148:Src/gps.c     ****                                     }
+ 149:Src/gps.c     ****                                     else if (cont_comma == 2)
+ 150:Src/gps.c     ****                                     { //save latitude
+ 151:Src/gps.c     **** 
+ 152:Src/gps.c     ****                                         gps->latitude[cont_latitude] = string_gps[i];
+ 153:Src/gps.c     ****                                         cont_latitude++;
+ 154:Src/gps.c     ****                                     }
+ 155:Src/gps.c     ****                                     else if (cont_comma == 3)
+ 156:Src/gps.c     ****                                     { //save orientation of latitude
+ 157:Src/gps.c     ****                                         gps->latitude_o[0] = string_gps[i];
+ 158:Src/gps.c     ****                                     }
+ 159:Src/gps.c     ****                                     else if (cont_comma == 4)
+ 160:Src/gps.c     ****                                     { //save longitude
+ 161:Src/gps.c     ****                                         gps->longitude[cont_longitude] = string_gps[i];
+ 162:Src/gps.c     ****                                         cont_longitude++;
+ 163:Src/gps.c     ****                                     }
+ 164:Src/gps.c     ****                                     else if (cont_comma == 5)
+ 165:Src/gps.c     ****                                     { //save orientation of longitude
+ 166:Src/gps.c     ****                                         gps->longitude_o[0] = string_gps[i];
+ 167:Src/gps.c     ****                                     }
+ 168:Src/gps.c     ****                                     else if (cont_comma == 6)
+ 169:Src/gps.c     ****                                     {
+ 170:Src/gps.c     ****                                         gps->fix_status = string_gps[i];
+ 171:Src/gps.c     ****                                     }
+ 172:Src/gps.c     ****                                     else if (cont_comma == 9)
+ 173:Src/gps.c     ****                                     { //save altitude
+ 174:Src/gps.c     ****                                         gps->altitude[cont_altitude] = string_gps[i];
+ 175:Src/gps.c     ****                                         cont_altitude++;
+ 176:Src/gps.c     ****                                     }
+ 177:Src/gps.c     ****                                     else if (cont_comma == 10)
+ 178:Src/gps.c     ****                                     {
+ 179:Src/gps.c     ****                                         i = 100; //end the cicle
+ 180:Src/gps.c     ****                                     }
+ 181:Src/gps.c     ****                                 }
+ 182:Src/gps.c     ****                             }
+ 183:Src/gps.c     **** 
+ 184:Src/gps.c     ****                             //-- operation to split data and send them --//
+ 185:Src/gps.c     ****                             if (gps->fix_status == '0')
+ 186:Src/gps.c     ****                             {
+ 187:Src/gps.c     ****                                 char txt[100];
+ 188:Src/gps.c     ****                                 sprintf(txt,"NO CONNECTION\r\n");
+ 189:Src/gps.c     ****                                 HAL_UART_Transmit(&huart3,(uint8_t*)txt,strlen(txt),10);
+ 190:Src/gps.c     ****                                 gps->latitude_i_h = 0;
+ 191:Src/gps.c     ****                                 gps->latitude_i_l = 0;
+ 192:Src/gps.c     ****                                 gps->longitude_i_h = 0;
+ 193:Src/gps.c     ****                                 gps->longitude_i_l = 0;
+ 194:Src/gps.c     ****                                 gps->altitude_i = 0;
+ 195:Src/gps.c     ****                             }
+ 196:Src/gps.c     ****                             else
+ 197:Src/gps.c     ****                             {
+ 198:Src/gps.c     ****                                 char txt[100];
+ 199:Src/gps.c     ****                                 gps->latitude_i = (long int)(atof(gps->latitude) * 100);
+ 200:Src/gps.c     ****                                 sprintf(txt,"latitude %ld %c", gps->latitude_i, gps->latitude_o[0])
+ 201:Src/gps.c     ****                                 HAL_UART_Transmit(&huart3,(uint8_t*)txt,strlen(txt),10);
+ 202:Src/gps.c     ****                                 gps->longitude_i = (long int)(atof(gps->longitude) * 100);
+ 203:Src/gps.c     ****                                 sprintf(txt,"longitude %ld %c",gps->longitude_i, gps->longitude_o[0
+ 204:Src/gps.c     ****                                 HAL_UART_Transmit(&huart3,(uint8_t*)txt,strlen(txt),10);
+ARM GAS  /tmp/ccSzq8xP.s 			page 5
+
+
+ 205:Src/gps.c     ****                                 sprintf(txt,"time %c%c:%c%c:%c%c", gps->hour[0], gps->hour[1], gps-
+ 206:Src/gps.c     ****                                 HAL_UART_Transmit(&huart3,(uint8_t*)txt,strlen(txt),10);
+ 207:Src/gps.c     ****                                 gps->altitude_i = (int)(atof(gps->altitude) * 10);
+ 208:Src/gps.c     ****                                 gps->latitude_i_h = (int)(gps->latitude_i >> 16);
+ 209:Src/gps.c     ****                                 gps->latitude_i_l = (int)(gps->latitude_i - (gps->latitude_i_h << 1
+ 210:Src/gps.c     ****                                 gps->longitude_i_h = (int)(gps->longitude_i >> 16);
+ 211:Src/gps.c     ****                                 gps->longitude_i_l = (int)(gps->longitude_i - (gps->longitude_i_h <
+ 212:Src/gps.c     ****                             }
+ 213:Src/gps.c     ****                             ret = 1;
+ 214:Src/gps.c     ****                         }
+ 215:Src/gps.c     ****                         else
+ 216:Src/gps.c     ****                         {
+ 217:Src/gps.c     ****                             char txt[100];
+ 218:Src/gps.c     ****                             sprintf(txt,"CHECKSUM FAIL\r\n");
+ 219:Src/gps.c     ****                             HAL_UART_Transmit(&huart3,(uint8_t*)txt,strlen(txt),10);
+ 220:Src/gps.c     ****                             ret = 0; //checksum failed
+ 221:Src/gps.c     ****                         }
+ 222:Src/gps.c     ****                     }
+ 223:Src/gps.c     ****                     else if (string_gps[2] == 'V' && string_gps[3] == 'T' && string_gps[4] == 'G')
+ 224:Src/gps.c     ****                     { // operation when the string is GPVTG //
+ 225:Src/gps.c     ****                         if (checksum(string_gps, cont_string) == 1)
+ 226:Src/gps.c     ****                         { //check the checksum (if==true -> enter)
+ 227:Src/gps.c     ****                             cont_comma = 0;
+ 228:Src/gps.c     ****                             int cont_speed = 0;
+ 229:Src/gps.c     ****                             for (int i = 5; i < cont_string; i++)
+ 230:Src/gps.c     ****                             {
+ 231:Src/gps.c     ****                                 if (string_gps[i] == ',')
+ 232:Src/gps.c     ****                                     cont_comma++;
+ 233:Src/gps.c     ****                                 else
+ 234:Src/gps.c     ****                                 {
+ 235:Src/gps.c     ****                                     if (cont_comma == 7)
+ 236:Src/gps.c     ****                                     { //save the speed
+ 237:Src/gps.c     ****                                         gps->speed[cont_speed] = string_gps[i];
+ 238:Src/gps.c     ****                                         cont_speed++;
+ 239:Src/gps.c     ****                                     }
+ 240:Src/gps.c     ****                                     else if (cont_comma == 8)
+ 241:Src/gps.c     ****                                     {
+ 242:Src/gps.c     ****                                         i = cont_string;
+ 243:Src/gps.c     ****                                     }
+ 244:Src/gps.c     ****                                 }
+ 245:Src/gps.c     ****                             }
+ 246:Src/gps.c     ****                             //-- operation to split data and send them --//
+ 247:Src/gps.c     ****                             if (gps->fix_status == '0')
+ 248:Src/gps.c     ****                             {
+ 249:Src/gps.c     ****                                 char txt[100];
+ 250:Src/gps.c     ****                                 sprintf(txt,"NO CONNECTION\r\n");
+ 251:Src/gps.c     ****                                 HAL_UART_Transmit(&huart3,(uint8_t*)txt,strlen(txt),10);
+ 252:Src/gps.c     ****                                 gps->speed_i = 0;
+ 253:Src/gps.c     ****                             }
+ 254:Src/gps.c     ****                             else
+ 255:Src/gps.c     ****                             {
+ 256:Src/gps.c     ****                                 char txt[100];
+ 257:Src/gps.c     ****                                 gps->speed_i = (int)(atof(gps->speed) * 100);
+ 258:Src/gps.c     ****                                 sprintf(txt,"longitude %d",gps->speed_i);
+ 259:Src/gps.c     ****                                 HAL_UART_Transmit(&huart3,(uint8_t*)txt,strlen(txt),10);
+ 260:Src/gps.c     ****                             }
+ 261:Src/gps.c     **** 
+ARM GAS  /tmp/ccSzq8xP.s 			page 6
+
+
+ 262:Src/gps.c     ****                             ret = 1;
+ 263:Src/gps.c     ****                         }
+ 264:Src/gps.c     ****                         else
+ 265:Src/gps.c     ****                         {
+ 266:Src/gps.c     ****                             char txt[100];
+ 267:Src/gps.c     ****                             sprintf(txt,"CHECKSUM FAIL\r\n");
+ 268:Src/gps.c     ****                             HAL_UART_Transmit(&huart3,(uint8_t*)txt,strlen(txt),10);
+ 269:Src/gps.c     ****                             ret = 0; //checksum failed
+ 270:Src/gps.c     ****                         }
+ 271:Src/gps.c     ****                     }
+ 272:Src/gps.c     ****                     strcpy(string_gps, "");
+ 273:Src/gps.c     ****                 }
+ 274:Src/gps.c     ****             }
+ 275:Src/gps.c     ****             else
+ 276:Src/gps.c     ****             {
+ 277:Src/gps.c     ****                 if (data_string_gps == '$')
+ 278:Src/gps.c     ****                 {						  //check if data indicates the start of new string
+ 279:Src/gps.c     ****                     start_string_gps = 1; //new string started
+ 280:Src/gps.c     ****                     cont_string = 0;	  //set the counter to 1
+ 281:Src/gps.c     ****                 }
+ 282:Src/gps.c     ****             }
+ 283:Src/gps.c     ****         }
+ 284:Src/gps.c     ****         data_string_gps = buffer_gps[0];						  //convert a pointer into a char
+ 285:Src/gps.c     ****     }
+ 286:Src/gps.c     **** 	return ret;
+ 287:Src/gps.c     **** }
+ 288:Src/gps.c     **** static int checksum(char *string_checksum, int size_string_checksum)
+ 289:Src/gps.c     **** { //check the checksum
+  26              		.loc 1 289 0
+  27              		.cfi_startproc
+  28              		@ args = 0, pretend = 0, frame = 8
+  29              		@ frame_needed = 0, uses_anonymous_args = 0
+  30              	.LVL0:
+  31 0000 70B5     		push	{r4, r5, r6, lr}
+  32              	.LCFI0:
+  33              		.cfi_def_cfa_offset 16
+  34              		.cfi_offset 4, -16
+  35              		.cfi_offset 5, -12
+  36              		.cfi_offset 6, -8
+  37              		.cfi_offset 14, -4
+  38 0002 82B0     		sub	sp, sp, #8
+  39              	.LCFI1:
+  40              		.cfi_def_cfa_offset 24
+  41              	.LVL1:
+ 290:Src/gps.c     **** 	//return 1;
+ 291:Src/gps.c     **** 
+ 292:Src/gps.c     **** 	int res = 0;
+ 293:Src/gps.c     **** 	int offset_maiusc = (int)('A') - (int)('a');
+ 294:Src/gps.c     **** 	int i = 0;
+ 295:Src/gps.c     **** 
+ 296:Src/gps.c     **** 	for (i = 0; (i < size_string_checksum) && (string_checksum[i] != '*'); i++)
+  42              		.loc 1 296 0
+  43 0004 0023     		movs	r3, #0
+ 292:Src/gps.c     **** 	int offset_maiusc = (int)('A') - (int)('a');
+  44              		.loc 1 292 0
+  45 0006 1C46     		mov	r4, r3
+  46              		.loc 1 296 0
+ARM GAS  /tmp/ccSzq8xP.s 			page 7
+
+
+  47 0008 01E0     		b	.L2
+  48              	.LVL2:
+  49              	.L4:
+ 297:Src/gps.c     **** 	{
+ 298:Src/gps.c     **** 		res = res ^ string_checksum[i];
+  50              		.loc 1 298 0 discriminator 4
+  51 000a 5440     		eors	r4, r4, r2
+  52              	.LVL3:
+ 296:Src/gps.c     **** 	{
+  53              		.loc 1 296 0 discriminator 4
+  54 000c 0133     		adds	r3, r3, #1
+  55              	.LVL4:
+  56              	.L2:
+ 296:Src/gps.c     **** 	{
+  57              		.loc 1 296 0 is_stmt 0 discriminator 1
+  58 000e 8B42     		cmp	r3, r1
+  59 0010 02DA     		bge	.L3
+ 296:Src/gps.c     **** 	{
+  60              		.loc 1 296 0 discriminator 3
+  61 0012 C25C     		ldrb	r2, [r0, r3]	@ zero_extendqisi2
+  62 0014 2A2A     		cmp	r2, #42
+  63 0016 F8D1     		bne	.L4
+  64              	.L3:
+ 299:Src/gps.c     **** 	}
+ 300:Src/gps.c     **** 	char check[2] = {string_checksum[i + 1], string_checksum[i + 2]};
+  65              		.loc 1 300 0 is_stmt 1
+  66 0018 1844     		add	r0, r0, r3
+  67              	.LVL5:
+  68 001a 4578     		ldrb	r5, [r0, #1]	@ zero_extendqisi2
+  69 001c 8678     		ldrb	r6, [r0, #2]	@ zero_extendqisi2
+ 301:Src/gps.c     **** 	char res_char[3];
+ 302:Src/gps.c     **** 	sprintf(res_char, "%x", res);
+  70              		.loc 1 302 0
+  71 001e 2246     		mov	r2, r4
+  72 0020 1749     		ldr	r1, .L15
+  73              	.LVL6:
+  74 0022 01A8     		add	r0, sp, #4
+  75 0024 FFF7FEFF 		bl	sprintf
+  76              	.LVL7:
+ 303:Src/gps.c     **** 	if (res < 17)
+  77              		.loc 1 303 0
+  78 0028 102C     		cmp	r4, #16
+  79 002a 06DC     		bgt	.L5
+ 304:Src/gps.c     **** 	{
+ 305:Src/gps.c     **** 		res_char[1] = res_char[0];
+  80              		.loc 1 305 0
+  81 002c 9DF80430 		ldrb	r3, [sp, #4]	@ zero_extendqisi2
+  82 0030 8DF80530 		strb	r3, [sp, #5]
+ 306:Src/gps.c     **** 		res_char[0] = '0';
+  83              		.loc 1 306 0
+  84 0034 3023     		movs	r3, #48
+  85 0036 8DF80430 		strb	r3, [sp, #4]
+  86              	.L5:
+ 292:Src/gps.c     **** 	int offset_maiusc = (int)('A') - (int)('a');
+  87              		.loc 1 292 0 discriminator 1
+  88 003a 0023     		movs	r3, #0
+  89 003c 00E0     		b	.L6
+ARM GAS  /tmp/ccSzq8xP.s 			page 8
+
+
+  90              	.LVL8:
+  91              	.L7:
+  92              	.LBB2:
+ 307:Src/gps.c     **** 	}
+ 308:Src/gps.c     **** 	for (int j = 0; j < 2; j++)
+  93              		.loc 1 308 0 discriminator 2
+  94 003e 0133     		adds	r3, r3, #1
+  95              	.LVL9:
+  96              	.L6:
+  97              		.loc 1 308 0 is_stmt 0 discriminator 1
+  98 0040 012B     		cmp	r3, #1
+  99 0042 0EDC     		bgt	.L13
+ 309:Src/gps.c     **** 	{ //convert to upper case letter
+ 310:Src/gps.c     **** 		if ((int)res_char[j] >= 'a' && (int)res_char[j] <= 'f')
+ 100              		.loc 1 310 0 is_stmt 1
+ 101 0044 02AA     		add	r2, sp, #8
+ 102 0046 1A44     		add	r2, r2, r3
+ 103 0048 12F8041C 		ldrb	r1, [r2, #-4]	@ zero_extendqisi2
+ 104 004c A1F16102 		sub	r2, r1, #97
+ 105 0050 D2B2     		uxtb	r2, r2
+ 106 0052 052A     		cmp	r2, #5
+ 107 0054 F3D8     		bhi	.L7
+ 311:Src/gps.c     **** 		{
+ 312:Src/gps.c     **** 			res_char[j] = (char)((int)res_char[j] + offset_maiusc);
+ 108              		.loc 1 312 0
+ 109 0056 2039     		subs	r1, r1, #32
+ 110 0058 02AA     		add	r2, sp, #8
+ 111 005a 1A44     		add	r2, r2, r3
+ 112 005c 02F8041C 		strb	r1, [r2, #-4]
+ 113 0060 EDE7     		b	.L7
+ 114              	.L13:
+ 115              	.LBE2:
+ 313:Src/gps.c     **** 		}
+ 314:Src/gps.c     **** 	}
+ 315:Src/gps.c     **** 	if (res_char[0] == check[0] && res_char[1] == check[1])
+ 116              		.loc 1 315 0
+ 117 0062 9DF80430 		ldrb	r3, [sp, #4]	@ zero_extendqisi2
+ 118              	.LVL10:
+ 119 0066 9D42     		cmp	r5, r3
+ 120 0068 02D0     		beq	.L14
+ 316:Src/gps.c     **** 	{
+ 317:Src/gps.c     **** 		return 1; //checksum is correct
+ 318:Src/gps.c     **** 	}
+ 319:Src/gps.c     **** 	else
+ 320:Src/gps.c     **** 	{
+ 321:Src/gps.c     **** 		return 0; //checksum failed
+ 121              		.loc 1 321 0
+ 122 006a 0020     		movs	r0, #0
+ 123              	.L1:
+ 322:Src/gps.c     **** 	}
+ 323:Src/gps.c     **** }...
+ 124              		.loc 1 323 0
+ 125 006c 02B0     		add	sp, sp, #8
+ 126              	.LCFI2:
+ 127              		.cfi_remember_state
+ 128              		.cfi_def_cfa_offset 16
+ 129              		@ sp needed
+ARM GAS  /tmp/ccSzq8xP.s 			page 9
+
+
+ 130 006e 70BD     		pop	{r4, r5, r6, pc}
+ 131              	.LVL11:
+ 132              	.L14:
+ 133              	.LCFI3:
+ 134              		.cfi_restore_state
+ 315:Src/gps.c     **** 	if (res_char[0] == check[0] && res_char[1] == check[1])
+ 135              		.loc 1 315 0 discriminator 1
+ 136 0070 9DF80530 		ldrb	r3, [sp, #5]	@ zero_extendqisi2
+ 137 0074 9E42     		cmp	r6, r3
+ 138 0076 01D0     		beq	.L11
+ 321:Src/gps.c     **** 		return 0; //checksum failed
+ 139              		.loc 1 321 0
+ 140 0078 0020     		movs	r0, #0
+ 141 007a F7E7     		b	.L1
+ 142              	.L11:
+ 317:Src/gps.c     **** 		return 1; //checksum is correct
+ 143              		.loc 1 317 0
+ 144 007c 0120     		movs	r0, #1
+ 145 007e F5E7     		b	.L1
+ 146              	.L16:
+ 147              		.align	2
+ 148              	.L15:
+ 149 0080 00000000 		.word	.LC0
+ 150              		.cfi_endproc
+ 151              	.LFE144:
+ 153              		.section	.text.gps_init,"ax",%progbits
+ 154              		.align	1
+ 155              		.global	gps_init
+ 156              		.syntax unified
+ 157              		.thumb
+ 158              		.thumb_func
+ 159              		.fpu fpv5-d16
+ 161              	gps_init:
+ 162              	.LFB142:
+  17:Src/gps.c     **** { //initialization of GPS
+ 163              		.loc 1 17 0
+ 164              		.cfi_startproc
+ 165              		@ args = 0, pretend = 0, frame = 0
+ 166              		@ frame_needed = 0, uses_anonymous_args = 0
+ 167              	.LVL12:
+ 168 0000 38B5     		push	{r3, r4, r5, lr}
+ 169              	.LCFI4:
+ 170              		.cfi_def_cfa_offset 16
+ 171              		.cfi_offset 3, -16
+ 172              		.cfi_offset 4, -12
+ 173              		.cfi_offset 5, -8
+ 174              		.cfi_offset 14, -4
+ 175 0002 0C46     		mov	r4, r1
+  20:Src/gps.c     **** 	huart2.Init.BaudRate = 9600;
+ 176              		.loc 1 20 0
+ 177 0004 4A48     		ldr	r0, .L27
+ 178              	.LVL13:
+ 179 0006 4FF41653 		mov	r3, #9600
+ 180 000a 4360     		str	r3, [r0, #4]
+  21:Src/gps.c     ****     if (HAL_UART_DeInit(&huart2) != HAL_OK)
+ 181              		.loc 1 21 0
+ 182 000c FFF7FEFF 		bl	HAL_UART_DeInit
+ARM GAS  /tmp/ccSzq8xP.s 			page 10
+
+
+ 183              	.LVL14:
+ 184 0010 0028     		cmp	r0, #0
+ 185 0012 71D1     		bne	.L23
+ 186              	.L18:
+  25:Src/gps.c     **** 	if (HAL_UART_DeInit(&huart2) != HAL_OK)
+ 187              		.loc 1 25 0
+ 188 0014 4648     		ldr	r0, .L27
+ 189 0016 FFF7FEFF 		bl	HAL_UART_DeInit
+ 190              	.LVL15:
+ 191 001a 0028     		cmp	r0, #0
+ 192 001c 73D1     		bne	.L24
+ 193              	.L19:
+  29:Src/gps.c     **** 	HAL_UART_Transmit(&huart2, (uint8_t *)PMTK_SET_BAUD_115200, strlen(PMTK_SET_BAUD_115200), 200);
+ 194              		.loc 1 29 0
+ 195 001e 444D     		ldr	r5, .L27
+ 196 0020 C823     		movs	r3, #200
+ 197 0022 1422     		movs	r2, #20
+ 198 0024 4349     		ldr	r1, .L27+4
+ 199 0026 2846     		mov	r0, r5
+ 200 0028 FFF7FEFF 		bl	HAL_UART_Transmit
+ 201              	.LVL16:
+  30:Src/gps.c     **** 	HAL_Delay(500);
+ 202              		.loc 1 30 0
+ 203 002c 4FF4FA70 		mov	r0, #500
+ 204 0030 FFF7FEFF 		bl	HAL_Delay
+ 205              	.LVL17:
+  36:Src/gps.c     **** 	huart2.Init.BaudRate = 115200;
+ 206              		.loc 1 36 0
+ 207 0034 4FF4E133 		mov	r3, #115200
+ 208 0038 6B60     		str	r3, [r5, #4]
+  37:Src/gps.c     ****     if (HAL_UART_DeInit(&huart2) != HAL_OK)
+ 209              		.loc 1 37 0
+ 210 003a 2846     		mov	r0, r5
+ 211 003c FFF7FEFF 		bl	HAL_UART_DeInit
+ 212              	.LVL18:
+ 213 0040 0028     		cmp	r0, #0
+ 214 0042 67D1     		bne	.L25
+ 215              	.L20:
+  41:Src/gps.c     **** 	if (HAL_UART_DeInit(&huart2) != HAL_OK)
+ 216              		.loc 1 41 0
+ 217 0044 3A48     		ldr	r0, .L27
+ 218 0046 FFF7FEFF 		bl	HAL_UART_DeInit
+ 219              	.LVL19:
+ 220 004a 0028     		cmp	r0, #0
+ 221 004c 69D1     		bne	.L26
+ 222              	.L21:
+  45:Src/gps.c     **** 	HAL_UART_Transmit(&huart2, (uint8_t *)PMTK_SET_BAUD_115200, strlen(PMTK_SET_BAUD_115200), 200);
+ 223              		.loc 1 45 0
+ 224 004e 384D     		ldr	r5, .L27
+ 225 0050 C823     		movs	r3, #200
+ 226 0052 1422     		movs	r2, #20
+ 227 0054 3749     		ldr	r1, .L27+4
+ 228 0056 2846     		mov	r0, r5
+ 229 0058 FFF7FEFF 		bl	HAL_UART_Transmit
+ 230              	.LVL20:
+  46:Src/gps.c     **** 	HAL_Delay(500);
+ 231              		.loc 1 46 0
+ARM GAS  /tmp/ccSzq8xP.s 			page 11
+
+
+ 232 005c 4FF4FA70 		mov	r0, #500
+ 233 0060 FFF7FEFF 		bl	HAL_Delay
+ 234              	.LVL21:
+  47:Src/gps.c     **** 	HAL_UART_Transmit(&huart2, (uint8_t *)PMTK_SET_NMEA_UPDATE_10HZ, strlen(PMTK_SET_NMEA_UPDATE_10HZ)
+ 235              		.loc 1 47 0
+ 236 0064 C823     		movs	r3, #200
+ 237 0066 1122     		movs	r2, #17
+ 238 0068 3349     		ldr	r1, .L27+8
+ 239 006a 2846     		mov	r0, r5
+ 240 006c FFF7FEFF 		bl	HAL_UART_Transmit
+ 241              	.LVL22:
+  48:Src/gps.c     **** 	HAL_Delay(500);
+ 242              		.loc 1 48 0
+ 243 0070 4FF4FA70 		mov	r0, #500
+ 244 0074 FFF7FEFF 		bl	HAL_Delay
+ 245              	.LVL23:
+  49:Src/gps.c     **** 	HAL_UART_Transmit(&huart2, (uint8_t *)PMTK_SET_NMEA_OUTPUT_GGAVTG, strlen(PMTK_SET_NMEA_OUTPUT_GGA
+ 246              		.loc 1 49 0
+ 247 0078 C823     		movs	r3, #200
+ 248 007a 3322     		movs	r2, #51
+ 249 007c 2F49     		ldr	r1, .L27+12
+ 250 007e 2846     		mov	r0, r5
+ 251 0080 FFF7FEFF 		bl	HAL_UART_Transmit
+ 252              	.LVL24:
+  50:Src/gps.c     **** 	HAL_Delay(500);
+ 253              		.loc 1 50 0
+ 254 0084 4FF4FA70 		mov	r0, #500
+ 255 0088 FFF7FEFF 		bl	HAL_Delay
+ 256              	.LVL25:
+  51:Src/gps.c     **** 	strcpy(gps->speed, "000.00");
+ 257              		.loc 1 51 0
+ 258 008c 2C4B     		ldr	r3, .L27+16
+ 259 008e 1868     		ldr	r0, [r3]
+ 260 0090 2060     		str	r0, [r4]	@ unaligned
+ 261 0092 9A88     		ldrh	r2, [r3, #4]	@ unaligned
+ 262 0094 9B79     		ldrb	r3, [r3, #6]	@ zero_extendqisi2
+ 263 0096 A280     		strh	r2, [r4, #4]	@ unaligned
+ 264 0098 A371     		strb	r3, [r4, #6]
+  52:Src/gps.c     **** 	strcpy(gps->latitude, "0000.0000");
+ 265              		.loc 1 52 0
+ 266 009a 2A4B     		ldr	r3, .L27+20
+ 267 009c 03CB     		ldmia	r3!, {r0, r1}
+ 268 009e E060     		str	r0, [r4, #12]	@ unaligned
+ 269 00a0 2161     		str	r1, [r4, #16]	@ unaligned
+ 270 00a2 1B88     		ldrh	r3, [r3]	@ unaligned
+ 271 00a4 A382     		strh	r3, [r4, #20]	@ unaligned
+  53:Src/gps.c     **** 	strcpy(gps->latitude_o, "N");
+ 272              		.loc 1 53 0
+ 273 00a6 284B     		ldr	r3, .L27+24
+ 274 00a8 1B88     		ldrh	r3, [r3]	@ unaligned
+ 275 00aa A383     		strh	r3, [r4, #28]	@ unaligned
+  54:Src/gps.c     **** 	strcpy(gps->longitude, "00000.0000");
+ 276              		.loc 1 54 0
+ 277 00ac 274B     		ldr	r3, .L27+28
+ 278 00ae 03CB     		ldmia	r3!, {r0, r1}
+ 279 00b0 E062     		str	r0, [r4, #44]	@ unaligned
+ 280 00b2 2163     		str	r1, [r4, #48]	@ unaligned
+ARM GAS  /tmp/ccSzq8xP.s 			page 12
+
+
+ 281 00b4 1988     		ldrh	r1, [r3]	@ unaligned
+ 282 00b6 9B78     		ldrb	r3, [r3, #2]	@ zero_extendqisi2
+ 283 00b8 A186     		strh	r1, [r4, #52]	@ unaligned
+ 284 00ba 84F83630 		strb	r3, [r4, #54]
+  55:Src/gps.c     **** 	strcpy(gps->longitude_o, "W");
+ 285              		.loc 1 55 0
+ 286 00be 244B     		ldr	r3, .L27+32
+ 287 00c0 1B88     		ldrh	r3, [r3]	@ unaligned
+ 288 00c2 A387     		strh	r3, [r4, #60]	@ unaligned
+  56:Src/gps.c     **** 	strcpy(gps->altitude, "0000.0");
+ 289              		.loc 1 56 0
+ 290 00c4 234B     		ldr	r3, .L27+36
+ 291 00c6 1868     		ldr	r0, [r3]
+ 292 00c8 E064     		str	r0, [r4, #76]	@ unaligned
+ 293 00ca 9988     		ldrh	r1, [r3, #4]	@ unaligned
+ 294 00cc 9B79     		ldrb	r3, [r3, #6]	@ zero_extendqisi2
+ 295 00ce A4F85010 		strh	r1, [r4, #80]	@ unaligned
+ 296 00d2 84F85230 		strb	r3, [r4, #82]
+  57:Src/gps.c     **** 	strcpy(gps->hour, "00");
+ 297              		.loc 1 57 0
+ 298 00d6 204B     		ldr	r3, .L27+40
+ 299 00d8 1A88     		ldrh	r2, [r3]	@ unaligned
+ 300 00da 9B78     		ldrb	r3, [r3, #2]	@ zero_extendqisi2
+ 301 00dc A4F85820 		strh	r2, [r4, #88]	@ unaligned
+ 302 00e0 84F85A30 		strb	r3, [r4, #90]
+  58:Src/gps.c     ****     strcpy(gps->min, "00");
+ 303              		.loc 1 58 0
+ 304 00e4 A4F85B20 		strh	r2, [r4, #91]	@ unaligned
+ 305 00e8 84F85D30 		strb	r3, [r4, #93]
+  59:Src/gps.c     ****     strcpy(gps->sec, "00");
+ 306              		.loc 1 59 0
+ 307 00ec A4F85E20 		strh	r2, [r4, #94]	@ unaligned
+ 308 00f0 84F86030 		strb	r3, [r4, #96]
+  63:Src/gps.c     **** }
+ 309              		.loc 1 63 0
+ 310 00f4 0120     		movs	r0, #1
+ 311 00f6 38BD     		pop	{r3, r4, r5, pc}
+ 312              	.LVL26:
+ 313              	.L23:
+  23:Src/gps.c     ****         HAL_UART_Transmit(&huart3,(uint8_t*)"ERRORE 3\r\n",6,10);
+ 314              		.loc 1 23 0
+ 315 00f8 0A23     		movs	r3, #10
+ 316 00fa 0622     		movs	r2, #6
+ 317 00fc 1749     		ldr	r1, .L27+44
+ 318 00fe 1848     		ldr	r0, .L27+48
+ 319 0100 FFF7FEFF 		bl	HAL_UART_Transmit
+ 320              	.LVL27:
+ 321 0104 86E7     		b	.L18
+ 322              	.L24:
+  27:Src/gps.c     ****         HAL_UART_Transmit(&huart3,(uint8_t*)"ERRORE 4\r\n",6,10);
+ 323              		.loc 1 27 0
+ 324 0106 0A23     		movs	r3, #10
+ 325 0108 0622     		movs	r2, #6
+ 326 010a 1649     		ldr	r1, .L27+52
+ 327 010c 1448     		ldr	r0, .L27+48
+ 328 010e FFF7FEFF 		bl	HAL_UART_Transmit
+ 329              	.LVL28:
+ARM GAS  /tmp/ccSzq8xP.s 			page 13
+
+
+ 330 0112 84E7     		b	.L19
+ 331              	.L25:
+  39:Src/gps.c     ****         HAL_UART_Transmit(&huart3,(uint8_t*)"ERRORE 5\r\n",6,10);
+ 332              		.loc 1 39 0
+ 333 0114 0A23     		movs	r3, #10
+ 334 0116 0622     		movs	r2, #6
+ 335 0118 1349     		ldr	r1, .L27+56
+ 336 011a 1148     		ldr	r0, .L27+48
+ 337 011c FFF7FEFF 		bl	HAL_UART_Transmit
+ 338              	.LVL29:
+ 339 0120 90E7     		b	.L20
+ 340              	.L26:
+  43:Src/gps.c     ****         HAL_UART_Transmit(&huart3,(uint8_t*)"ERRORE 6\r\n",6,10);
+ 341              		.loc 1 43 0
+ 342 0122 0A23     		movs	r3, #10
+ 343 0124 0622     		movs	r2, #6
+ 344 0126 1149     		ldr	r1, .L27+60
+ 345 0128 0D48     		ldr	r0, .L27+48
+ 346 012a FFF7FEFF 		bl	HAL_UART_Transmit
+ 347              	.LVL30:
+ 348 012e 8EE7     		b	.L21
+ 349              	.L28:
+ 350              		.align	2
+ 351              	.L27:
+ 352 0130 00000000 		.word	huart2
+ 353 0134 18000000 		.word	.LC3
+ 354 0138 48000000 		.word	.LC6
+ 355 013c 5C000000 		.word	.LC7
+ 356 0140 90000000 		.word	.LC8
+ 357 0144 98000000 		.word	.LC9
+ 358 0148 A4000000 		.word	.LC10
+ 359 014c A8000000 		.word	.LC11
+ 360 0150 B4000000 		.word	.LC12
+ 361 0154 B8000000 		.word	.LC13
+ 362 0158 C0000000 		.word	.LC14
+ 363 015c 00000000 		.word	.LC1
+ 364 0160 00000000 		.word	huart3
+ 365 0164 0C000000 		.word	.LC2
+ 366 0168 30000000 		.word	.LC4
+ 367 016c 3C000000 		.word	.LC5
+ 368              		.cfi_endproc
+ 369              	.LFE142:
+ 371              		.section	.text.gps_read,"ax",%progbits
+ 372              		.align	1
+ 373              		.global	gps_read
+ 374              		.syntax unified
+ 375              		.thumb
+ 376              		.thumb_func
+ 377              		.fpu fpv5-d16
+ 379              	gps_read:
+ 380              	.LFB143:
+  66:Src/gps.c     **** {
+ 381              		.loc 1 66 0
+ 382              		.cfi_startproc
+ 383              		@ args = 0, pretend = 0, frame = 152
+ 384              		@ frame_needed = 0, uses_anonymous_args = 0
+ 385              	.LVL31:
+ARM GAS  /tmp/ccSzq8xP.s 			page 14
+
+
+ 386 0000 2DE9F043 		push	{r4, r5, r6, r7, r8, r9, lr}
+ 387              	.LCFI5:
+ 388              		.cfi_def_cfa_offset 28
+ 389              		.cfi_offset 4, -28
+ 390              		.cfi_offset 5, -24
+ 391              		.cfi_offset 6, -20
+ 392              		.cfi_offset 7, -16
+ 393              		.cfi_offset 8, -12
+ 394              		.cfi_offset 9, -8
+ 395              		.cfi_offset 14, -4
+ 396 0004 2DED028B 		vpush.64	{d8}
+ 397              	.LCFI6:
+ 398              		.cfi_def_cfa_offset 36
+ 399              		.cfi_offset 80, -36
+ 400              		.cfi_offset 81, -32
+ 401 0008 ABB0     		sub	sp, sp, #172
+ 402              	.LCFI7:
+ 403              		.cfi_def_cfa_offset 208
+ 404 000a 0E46     		mov	r6, r1
+ 405              	.LVL32:
+ 105:Src/gps.c     ****     int msg_arrived_s = msg_arrived;
+ 406              		.loc 1 105 0
+ 407 000c BE4B     		ldr	r3, .L88+8
+ 408 000e 1D68     		ldr	r5, [r3]
+ 409              	.LVL33:
+ 106:Src/gps.c     ****     msg_arrived = 0;
+ 410              		.loc 1 106 0
+ 411 0010 0022     		movs	r2, #0
+ 412 0012 1A60     		str	r2, [r3]
+ 108:Src/gps.c     ****     memcpy(buffer_gps_s, buffer_gps, 50);
+ 413              		.loc 1 108 0
+ 414 0014 BD4C     		ldr	r4, .L88+12
+ 415 0016 0DF1740E 		add	lr, sp, #116
+ 416 001a 04F1300C 		add	ip, r4, #48
+ 417              	.LVL34:
+ 418              	.L30:
+ 419 001e 7746     		mov	r7, lr
+ 420 0020 2068     		ldr	r0, [r4]	@ unaligned
+ 421 0022 6168     		ldr	r1, [r4, #4]	@ unaligned
+ 422 0024 A268     		ldr	r2, [r4, #8]	@ unaligned
+ 423 0026 E368     		ldr	r3, [r4, #12]	@ unaligned
+ 424 0028 0FC7     		stmia	r7!, {r0, r1, r2, r3}
+ 425 002a 1034     		adds	r4, r4, #16
+ 426 002c BE46     		mov	lr, r7
+ 427 002e 6445     		cmp	r4, ip
+ 428 0030 F5D1     		bne	.L30
+ 429 0032 2388     		ldrh	r3, [r4]	@ unaligned
+ 430 0034 3B80     		strh	r3, [r7]	@ unaligned
+ 109:Src/gps.c     ****     if(msg_arrived_s > 0){
+ 431              		.loc 1 109 0
+ 432 0036 002D     		cmp	r5, #0
+ 433 0038 02DD     		ble	.L66
+ 434 003a 0024     		movs	r4, #0
+ 435 003c 2746     		mov	r7, r4
+ 436 003e 1DE0     		b	.L31
+ 437              	.L66:
+  68:Src/gps.c     **** 	int ret = 0; //return--> 0=error,1=ok
+ARM GAS  /tmp/ccSzq8xP.s 			page 15
+
+
+ 438              		.loc 1 68 0
+ 439 0040 0027     		movs	r7, #0
+ 440 0042 CEE1     		b	.L29
+ 441              	.LVL35:
+ 442              	.L70:
+ 443              	.LBB3:
+ 112:Src/gps.c     ****             if ((start_string_gps == 1) && (data_string_gps != '$'))
+ 444              		.loc 1 112 0 discriminator 1
+ 445 0044 242B     		cmp	r3, #36
+ 446 0046 26D0     		beq	.L33
+ 114:Src/gps.c     ****                 string_gps[cont_string] = data_string_gps; //save the data into the array
+ 447              		.loc 1 114 0
+ 448 0048 B14A     		ldr	r2, .L88+16
+ 449 004a 1168     		ldr	r1, [r2]
+ 450 004c B148     		ldr	r0, .L88+20
+ 451 004e 4354     		strb	r3, [r0, r1]
+ 115:Src/gps.c     ****                 cont_string++;
+ 452              		.loc 1 115 0
+ 453 0050 481C     		adds	r0, r1, #1
+ 454 0052 1060     		str	r0, [r2]
+ 116:Src/gps.c     ****                 if (string_gps[cont_string - 1] == '\r' || string_gps[cont_string - 1] == '\n')
+ 455              		.loc 1 116 0
+ 456 0054 0A2B     		cmp	r3, #10
+ 457 0056 18BF     		it	ne
+ 458 0058 0D2B     		cmpne	r3, #13
+ 459 005a 0ED1     		bne	.L34
+ 118:Src/gps.c     ****                     cont_string--;
+ 460              		.loc 1 118 0
+ 461 005c 1160     		str	r1, [r2]
+ 119:Src/gps.c     ****                     string_gps[cont_string] = '\0'; // '\0'=end of the string
+ 462              		.loc 1 119 0
+ 463 005e AD4B     		ldr	r3, .L88+20
+ 464 0060 0022     		movs	r2, #0
+ 465 0062 5A54     		strb	r2, [r3, r1]
+ 120:Src/gps.c     ****                     start_string_gps = 0;			//end of string
+ 466              		.loc 1 120 0
+ 467 0064 AC48     		ldr	r0, .L88+24
+ 468 0066 0260     		str	r2, [r0]
+ 121:Src/gps.c     ****                     if (string_gps[2] == 'G' && string_gps[3] == 'G' && string_gps[4] == 'A')
+ 469              		.loc 1 121 0
+ 470 0068 9B78     		ldrb	r3, [r3, #2]	@ zero_extendqisi2
+ 471 006a 472B     		cmp	r3, #71
+ 472 006c 1CD0     		beq	.L67
+ 473              	.L35:
+ 223:Src/gps.c     ****                     else if (string_gps[2] == 'V' && string_gps[3] == 'T' && string_gps[4] == 'G')
+ 474              		.loc 1 223 0
+ 475 006e 562B     		cmp	r3, #86
+ 476 0070 00F02381 		beq	.L68
+ 477              	.LVL36:
+ 478              	.L51:
+ 272:Src/gps.c     ****                     strcpy(string_gps, "");
+ 479              		.loc 1 272 0
+ 480 0074 0022     		movs	r2, #0
+ 481 0076 A74B     		ldr	r3, .L88+20
+ 482 0078 1A70     		strb	r2, [r3]
+ 483              	.L34:
+ 110:Src/gps.c     ****         for(int i = 0; i < msg_arrived_s; i++){
+ARM GAS  /tmp/ccSzq8xP.s 			page 16
+
+
+ 484              		.loc 1 110 0 discriminator 2
+ 485 007a 0134     		adds	r4, r4, #1
+ 486              	.LVL37:
+ 487              	.L31:
+ 110:Src/gps.c     ****         for(int i = 0; i < msg_arrived_s; i++){
+ 488              		.loc 1 110 0 is_stmt 0 discriminator 1
+ 489 007c AC42     		cmp	r4, r5
+ 490 007e 80F2AC81 		bge	.L69
+ 111:Src/gps.c     ****             data_string_gps = buffer_gps_s[i];
+ 491              		.loc 1 111 0 is_stmt 1
+ 492 0082 2AAB     		add	r3, sp, #168
+ 493 0084 2344     		add	r3, r3, r4
+ 494 0086 13F8343C 		ldrb	r3, [r3, #-52]	@ zero_extendqisi2
+ 495 008a A44A     		ldr	r2, .L88+28
+ 496 008c 1370     		strb	r3, [r2]
+ 112:Src/gps.c     ****             if ((start_string_gps == 1) && (data_string_gps != '$'))
+ 497              		.loc 1 112 0
+ 498 008e A24A     		ldr	r2, .L88+24
+ 499 0090 1268     		ldr	r2, [r2]
+ 500 0092 012A     		cmp	r2, #1
+ 501 0094 D6D0     		beq	.L70
+ 502              	.L33:
+ 277:Src/gps.c     ****                 if (data_string_gps == '$')
+ 503              		.loc 1 277 0
+ 504 0096 242B     		cmp	r3, #36
+ 505 0098 EFD1     		bne	.L34
+ 279:Src/gps.c     ****                     start_string_gps = 1; //new string started
+ 506              		.loc 1 279 0
+ 507 009a 0122     		movs	r2, #1
+ 508 009c 9E4B     		ldr	r3, .L88+24
+ 509 009e 1A60     		str	r2, [r3]
+ 280:Src/gps.c     ****                     cont_string = 0;	  //set the counter to 1
+ 510              		.loc 1 280 0
+ 511 00a0 0022     		movs	r2, #0
+ 512 00a2 9B4B     		ldr	r3, .L88+16
+ 513 00a4 1A60     		str	r2, [r3]
+ 514 00a6 E8E7     		b	.L34
+ 515              	.L67:
+ 121:Src/gps.c     ****                     if (string_gps[2] == 'G' && string_gps[3] == 'G' && string_gps[4] == 'A')
+ 516              		.loc 1 121 0 discriminator 1
+ 517 00a8 9A4A     		ldr	r2, .L88+20
+ 518 00aa D278     		ldrb	r2, [r2, #3]	@ zero_extendqisi2
+ 519 00ac 472A     		cmp	r2, #71
+ 520 00ae DED1     		bne	.L35
+ 121:Src/gps.c     ****                     if (string_gps[2] == 'G' && string_gps[3] == 'G' && string_gps[4] == 'A')
+ 521              		.loc 1 121 0 is_stmt 0 discriminator 2
+ 522 00b0 984A     		ldr	r2, .L88+20
+ 523 00b2 1279     		ldrb	r2, [r2, #4]	@ zero_extendqisi2
+ 524 00b4 412A     		cmp	r2, #65
+ 525 00b6 DAD1     		bne	.L35
+ 126:Src/gps.c     ****                         if (checksum(string_gps, cont_string) == 1)
+ 526              		.loc 1 126 0 is_stmt 1
+ 527 00b8 9648     		ldr	r0, .L88+20
+ 528 00ba FFF7FEFF 		bl	checksum
+ 529              	.LVL38:
+ 530 00be 0746     		mov	r7, r0
+ 531              	.LVL39:
+ARM GAS  /tmp/ccSzq8xP.s 			page 17
+
+
+ 532 00c0 0128     		cmp	r0, #1
+ 533 00c2 68D0     		beq	.L71
+ 534              	.LBB4:
+ 218:Src/gps.c     ****                             sprintf(txt,"CHECKSUM FAIL\r\n");
+ 535              		.loc 1 218 0
+ 536 00c4 04AF     		add	r7, sp, #16
+ 537 00c6 964B     		ldr	r3, .L88+32
+ 538 00c8 0FCB     		ldm	r3, {r0, r1, r2, r3}
+ 539 00ca 87E80F00 		stm	r7, {r0, r1, r2, r3}
+ 219:Src/gps.c     ****                             HAL_UART_Transmit(&huart3,(uint8_t*)txt,strlen(txt),10);
+ 540              		.loc 1 219 0
+ 541 00ce 3846     		mov	r0, r7
+ 542 00d0 FFF7FEFF 		bl	strlen
+ 543              	.LVL40:
+ 544 00d4 0A23     		movs	r3, #10
+ 545 00d6 82B2     		uxth	r2, r0
+ 546 00d8 3946     		mov	r1, r7
+ 547 00da 9248     		ldr	r0, .L88+36
+ 548 00dc FFF7FEFF 		bl	HAL_UART_Transmit
+ 549              	.LVL41:
+ 220:Src/gps.c     ****                             ret = 0; //checksum failed
+ 550              		.loc 1 220 0
+ 551 00e0 0027     		movs	r7, #0
+ 552 00e2 C7E7     		b	.L51
+ 553              	.LVL42:
+ 554              	.L73:
+ 555              	.LBE4:
+ 556              	.LBB5:
+ 557              	.LBB6:
+ 132:Src/gps.c     ****                                     cont_comma++;
+ 558              		.loc 1 132 0
+ 559 00e4 0130     		adds	r0, r0, #1
+ 560              	.LVL43:
+ 561              	.L39:
+ 129:Src/gps.c     ****                             for (int i = 5; i < 100; i++)
+ 562              		.loc 1 129 0 discriminator 2
+ 563 00e6 0133     		adds	r3, r3, #1
+ 564              	.LVL44:
+ 565              	.L36:
+ 129:Src/gps.c     ****                             for (int i = 5; i < 100; i++)
+ 566              		.loc 1 129 0 is_stmt 0 discriminator 1
+ 567 00e8 632B     		cmp	r3, #99
+ 568 00ea 5BDC     		bgt	.L72
+ 131:Src/gps.c     ****                                 if (string_gps[i] == ',')
+ 569              		.loc 1 131 0 is_stmt 1
+ 570 00ec 8949     		ldr	r1, .L88+20
+ 571 00ee C95C     		ldrb	r1, [r1, r3]	@ zero_extendqisi2
+ 572 00f0 2C29     		cmp	r1, #44
+ 573 00f2 F7D0     		beq	.L73
+ 135:Src/gps.c     ****                                     if (cont_comma == 1)
+ 574              		.loc 1 135 0
+ 575 00f4 0128     		cmp	r0, #1
+ 576 00f6 0FD0     		beq	.L74
+ 149:Src/gps.c     ****                                     else if (cont_comma == 2)
+ 577              		.loc 1 149 0
+ 578 00f8 0228     		cmp	r0, #2
+ 579 00fa 2FD0     		beq	.L75
+ARM GAS  /tmp/ccSzq8xP.s 			page 18
+
+
+ 155:Src/gps.c     ****                                     else if (cont_comma == 3)
+ 580              		.loc 1 155 0
+ 581 00fc 0328     		cmp	r0, #3
+ 582 00fe 34D0     		beq	.L76
+ 159:Src/gps.c     ****                                     else if (cont_comma == 4)
+ 583              		.loc 1 159 0
+ 584 0100 0428     		cmp	r0, #4
+ 585 0102 34D0     		beq	.L77
+ 164:Src/gps.c     ****                                     else if (cont_comma == 5)
+ 586              		.loc 1 164 0
+ 587 0104 0528     		cmp	r0, #5
+ 588 0106 39D0     		beq	.L78
+ 168:Src/gps.c     ****                                     else if (cont_comma == 6)
+ 589              		.loc 1 168 0
+ 590 0108 0628     		cmp	r0, #6
+ 591 010a 3AD0     		beq	.L79
+ 172:Src/gps.c     ****                                     else if (cont_comma == 9)
+ 592              		.loc 1 172 0
+ 593 010c 0928     		cmp	r0, #9
+ 594 010e 3BD0     		beq	.L80
+ 177:Src/gps.c     ****                                     else if (cont_comma == 10)
+ 595              		.loc 1 177 0
+ 596 0110 0A28     		cmp	r0, #10
+ 597 0112 E8D1     		bne	.L39
+ 179:Src/gps.c     ****                                         i = 100; //end the cicle
+ 598              		.loc 1 179 0
+ 599 0114 6423     		movs	r3, #100
+ 600              	.LVL45:
+ 601 0116 E6E7     		b	.L39
+ 602              	.LVL46:
+ 603              	.L74:
+ 137:Src/gps.c     ****                                         if(cont_time < 2){
+ 604              		.loc 1 137 0
+ 605 0118 012A     		cmp	r2, #1
+ 606 011a 0CDD     		ble	.L81
+ 140:Src/gps.c     ****                                         }else if(cont_time < 4){
+ 607              		.loc 1 140 0
+ 608 011c 032A     		cmp	r2, #3
+ 609 011e 10DC     		bgt	.L42
+ 141:Src/gps.c     ****                                             gps->min[cont_time % 2] = string_gps[i];
+ 610              		.loc 1 141 0
+ 611 0120 002A     		cmp	r2, #0
+ 612 0122 02F0010E 		and	lr, r2, #1
+ 613 0126 B8BF     		it	lt
+ 614 0128 CEF1000E 		rsblt	lr, lr, #0
+ 615 012c B644     		add	lr, lr, r6
+ 616 012e 8EF85B10 		strb	r1, [lr, #91]
+ 142:Src/gps.c     ****                                             cont_time++;
+ 617              		.loc 1 142 0
+ 618 0132 0132     		adds	r2, r2, #1
+ 619              	.LVL47:
+ 620 0134 D7E7     		b	.L39
+ 621              	.L81:
+ 138:Src/gps.c     ****                                             gps->hour[cont_time] = string_gps[i];
+ 622              		.loc 1 138 0
+ 623 0136 06EB020E 		add	lr, r6, r2
+ 624 013a 8EF85810 		strb	r1, [lr, #88]
+ARM GAS  /tmp/ccSzq8xP.s 			page 19
+
+
+ 139:Src/gps.c     ****                                             cont_time++;
+ 625              		.loc 1 139 0
+ 626 013e 0132     		adds	r2, r2, #1
+ 627              	.LVL48:
+ 628 0140 D1E7     		b	.L39
+ 629              	.L42:
+ 143:Src/gps.c     ****                                         }else if(cont_time <6){
+ 630              		.loc 1 143 0
+ 631 0142 052A     		cmp	r2, #5
+ 632 0144 CFDC     		bgt	.L39
+ 144:Src/gps.c     ****                                             gps->sec[cont_time % 2] = string_gps[i];
+ 633              		.loc 1 144 0
+ 634 0146 002A     		cmp	r2, #0
+ 635 0148 02F0010E 		and	lr, r2, #1
+ 636 014c B8BF     		it	lt
+ 637 014e CEF1000E 		rsblt	lr, lr, #0
+ 638 0152 B644     		add	lr, lr, r6
+ 639 0154 8EF85E10 		strb	r1, [lr, #94]
+ 145:Src/gps.c     ****                                             cont_time++;
+ 640              		.loc 1 145 0
+ 641 0158 0132     		adds	r2, r2, #1
+ 642              	.LVL49:
+ 643 015a C4E7     		b	.L39
+ 644              	.L75:
+ 152:Src/gps.c     ****                                         gps->latitude[cont_latitude] = string_gps[i];
+ 645              		.loc 1 152 0
+ 646 015c 06EB0C0E 		add	lr, r6, ip
+ 647 0160 8EF80C10 		strb	r1, [lr, #12]
+ 153:Src/gps.c     ****                                         cont_latitude++;
+ 648              		.loc 1 153 0
+ 649 0164 0CF1010C 		add	ip, ip, #1
+ 650              	.LVL50:
+ 651 0168 BDE7     		b	.L39
+ 652              	.L76:
+ 157:Src/gps.c     ****                                         gps->latitude_o[0] = string_gps[i];
+ 653              		.loc 1 157 0
+ 654 016a 3177     		strb	r1, [r6, #28]
+ 655 016c BBE7     		b	.L39
+ 656              	.L77:
+ 161:Src/gps.c     ****                                         gps->longitude[cont_longitude] = string_gps[i];
+ 657              		.loc 1 161 0
+ 658 016e 06EB080E 		add	lr, r6, r8
+ 659 0172 8EF82C10 		strb	r1, [lr, #44]
+ 162:Src/gps.c     ****                                         cont_longitude++;
+ 660              		.loc 1 162 0
+ 661 0176 08F10108 		add	r8, r8, #1
+ 662              	.LVL51:
+ 663 017a B4E7     		b	.L39
+ 664              	.L78:
+ 166:Src/gps.c     ****                                         gps->longitude_o[0] = string_gps[i];
+ 665              		.loc 1 166 0
+ 666 017c 86F83C10 		strb	r1, [r6, #60]
+ 667 0180 B1E7     		b	.L39
+ 668              	.L79:
+ 170:Src/gps.c     ****                                         gps->fix_status = string_gps[i];
+ 669              		.loc 1 170 0
+ 670 0182 86F86110 		strb	r1, [r6, #97]
+ARM GAS  /tmp/ccSzq8xP.s 			page 20
+
+
+ 671 0186 AEE7     		b	.L39
+ 672              	.L80:
+ 174:Src/gps.c     ****                                         gps->altitude[cont_altitude] = string_gps[i];
+ 673              		.loc 1 174 0
+ 674 0188 06EB090E 		add	lr, r6, r9
+ 675 018c 8EF84C10 		strb	r1, [lr, #76]
+ 175:Src/gps.c     ****                                         cont_altitude++;
+ 676              		.loc 1 175 0
+ 677 0190 09F10109 		add	r9, r9, #1
+ 678              	.LVL52:
+ 679 0194 A7E7     		b	.L39
+ 680              	.LVL53:
+ 681              	.L71:
+ 682              	.LBE6:
+ 683              	.LBE5:
+ 684 0196 0523     		movs	r3, #5
+ 685 0198 0022     		movs	r2, #0
+ 686 019a 9146     		mov	r9, r2
+ 687 019c 9046     		mov	r8, r2
+ 688 019e 9446     		mov	ip, r2
+ 689 01a0 1046     		mov	r0, r2
+ 690 01a2 A1E7     		b	.L36
+ 691              	.LVL54:
+ 692              	.L72:
+ 693              	.LBB9:
+ 185:Src/gps.c     ****                             if (gps->fix_status == '0')
+ 694              		.loc 1 185 0
+ 695 01a4 96F86130 		ldrb	r3, [r6, #97]	@ zero_extendqisi2
+ 696              	.LVL55:
+ 697 01a8 302B     		cmp	r3, #48
+ 698 01aa 70D0     		beq	.L82
+ 699              	.LBB7:
+ 199:Src/gps.c     ****                                 gps->latitude_i = (long int)(atof(gps->latitude) * 100);
+ 700              		.loc 1 199 0
+ 701 01ac 06F10C00 		add	r0, r6, #12
+ 702              	.LVL56:
+ 703 01b0 FFF7FEFF 		bl	atof
+ 704              	.LVL57:
+ 705 01b4 9FED528B 		vldr.64	d8, .L88
+ 706 01b8 20EE080B 		vmul.f64	d0, d0, d8
+ 707 01bc FDEEC07B 		vcvt.s32.f64	s15, d0
+ 708 01c0 17EE902A 		vmov	r2, s15	@ int
+ 709 01c4 C6ED087A 		vstr.32	s15, [r6, #32]	@ int
+ 200:Src/gps.c     ****                                 sprintf(txt,"latitude %ld %c", gps->latitude_i, gps->latitude_o[0])
+ 710              		.loc 1 200 0
+ 711 01c8 337F     		ldrb	r3, [r6, #28]	@ zero_extendqisi2
+ 712 01ca 5749     		ldr	r1, .L88+40
+ 713 01cc 04A8     		add	r0, sp, #16
+ 714 01ce FFF7FEFF 		bl	sprintf
+ 715              	.LVL58:
+ 201:Src/gps.c     ****                                 HAL_UART_Transmit(&huart3,(uint8_t*)txt,strlen(txt),10);
+ 716              		.loc 1 201 0
+ 717 01d2 04A8     		add	r0, sp, #16
+ 718 01d4 FFF7FEFF 		bl	strlen
+ 719              	.LVL59:
+ 720 01d8 DFF84881 		ldr	r8, .L88+36
+ 721              	.LVL60:
+ARM GAS  /tmp/ccSzq8xP.s 			page 21
+
+
+ 722 01dc 0A23     		movs	r3, #10
+ 723 01de 82B2     		uxth	r2, r0
+ 724 01e0 04A9     		add	r1, sp, #16
+ 725 01e2 4046     		mov	r0, r8
+ 726 01e4 FFF7FEFF 		bl	HAL_UART_Transmit
+ 727              	.LVL61:
+ 202:Src/gps.c     ****                                 gps->longitude_i = (long int)(atof(gps->longitude) * 100);
+ 728              		.loc 1 202 0
+ 729 01e8 06F12C00 		add	r0, r6, #44
+ 730 01ec FFF7FEFF 		bl	atof
+ 731              	.LVL62:
+ 732 01f0 20EE080B 		vmul.f64	d0, d0, d8
+ 733 01f4 FDEEC07B 		vcvt.s32.f64	s15, d0
+ 734 01f8 17EE902A 		vmov	r2, s15	@ int
+ 735 01fc C6ED107A 		vstr.32	s15, [r6, #64]	@ int
+ 203:Src/gps.c     ****                                 sprintf(txt,"longitude %ld %c",gps->longitude_i, gps->longitude_o[0
+ 736              		.loc 1 203 0
+ 737 0200 96F83C30 		ldrb	r3, [r6, #60]	@ zero_extendqisi2
+ 738 0204 4949     		ldr	r1, .L88+44
+ 739 0206 04A8     		add	r0, sp, #16
+ 740 0208 FFF7FEFF 		bl	sprintf
+ 741              	.LVL63:
+ 204:Src/gps.c     ****                                 HAL_UART_Transmit(&huart3,(uint8_t*)txt,strlen(txt),10);
+ 742              		.loc 1 204 0
+ 743 020c 04A8     		add	r0, sp, #16
+ 744 020e FFF7FEFF 		bl	strlen
+ 745              	.LVL64:
+ 746 0212 0A23     		movs	r3, #10
+ 747 0214 82B2     		uxth	r2, r0
+ 748 0216 04A9     		add	r1, sp, #16
+ 749 0218 4046     		mov	r0, r8
+ 750 021a FFF7FEFF 		bl	HAL_UART_Transmit
+ 751              	.LVL65:
+ 205:Src/gps.c     ****                                 sprintf(txt,"time %c%c:%c%c:%c%c", gps->hour[0], gps->hour[1], gps-
+ 752              		.loc 1 205 0
+ 753 021e 96F85820 		ldrb	r2, [r6, #88]	@ zero_extendqisi2
+ 754 0222 96F85930 		ldrb	r3, [r6, #89]	@ zero_extendqisi2
+ 755 0226 96F85B10 		ldrb	r1, [r6, #91]	@ zero_extendqisi2
+ 756 022a 96F85C00 		ldrb	r0, [r6, #92]	@ zero_extendqisi2
+ 757 022e 96F85EE0 		ldrb	lr, [r6, #94]	@ zero_extendqisi2
+ 758 0232 96F85FC0 		ldrb	ip, [r6, #95]	@ zero_extendqisi2
+ 759 0236 CDF80CC0 		str	ip, [sp, #12]
+ 760 023a CDF808E0 		str	lr, [sp, #8]
+ 761 023e 0190     		str	r0, [sp, #4]
+ 762 0240 0091     		str	r1, [sp]
+ 763 0242 3B49     		ldr	r1, .L88+48
+ 764 0244 04A8     		add	r0, sp, #16
+ 765 0246 FFF7FEFF 		bl	sprintf
+ 766              	.LVL66:
+ 206:Src/gps.c     ****                                 HAL_UART_Transmit(&huart3,(uint8_t*)txt,strlen(txt),10);
+ 767              		.loc 1 206 0
+ 768 024a 04A8     		add	r0, sp, #16
+ 769 024c FFF7FEFF 		bl	strlen
+ 770              	.LVL67:
+ 771 0250 0A23     		movs	r3, #10
+ 772 0252 82B2     		uxth	r2, r0
+ 773 0254 04A9     		add	r1, sp, #16
+ARM GAS  /tmp/ccSzq8xP.s 			page 22
+
+
+ 774 0256 4046     		mov	r0, r8
+ 775 0258 FFF7FEFF 		bl	HAL_UART_Transmit
+ 776              	.LVL68:
+ 207:Src/gps.c     ****                                 gps->altitude_i = (int)(atof(gps->altitude) * 10);
+ 777              		.loc 1 207 0
+ 778 025c 06F14C00 		add	r0, r6, #76
+ 779 0260 FFF7FEFF 		bl	atof
+ 780              	.LVL69:
+ 781 0264 B2EE047B 		vmov.f64	d7, #1.0e+1
+ 782 0268 20EE077B 		vmul.f64	d7, d0, d7
+ 783 026c BDEEC77B 		vcvt.s32.f64	s14, d7
+ 784 0270 86ED157A 		vstr.32	s14, [r6, #84]	@ int
+ 208:Src/gps.c     ****                                 gps->latitude_i_h = (int)(gps->latitude_i >> 16);
+ 785              		.loc 1 208 0
+ 786 0274 336A     		ldr	r3, [r6, #32]
+ 787 0276 1A14     		asrs	r2, r3, #16
+ 788 0278 7262     		str	r2, [r6, #36]
+ 209:Src/gps.c     ****                                 gps->latitude_i_l = (int)(gps->latitude_i - (gps->latitude_i_h << 1
+ 789              		.loc 1 209 0
+ 790 027a A3EB0243 		sub	r3, r3, r2, lsl #16
+ 791 027e B362     		str	r3, [r6, #40]
+ 210:Src/gps.c     ****                                 gps->longitude_i_h = (int)(gps->longitude_i >> 16);
+ 792              		.loc 1 210 0
+ 793 0280 336C     		ldr	r3, [r6, #64]
+ 794 0282 1A14     		asrs	r2, r3, #16
+ 795 0284 7264     		str	r2, [r6, #68]
+ 211:Src/gps.c     ****                                 gps->longitude_i_l = (int)(gps->longitude_i - (gps->longitude_i_h <
+ 796              		.loc 1 211 0
+ 797 0286 A3EB0243 		sub	r3, r3, r2, lsl #16
+ 798 028a B364     		str	r3, [r6, #72]
+ 799 028c F2E6     		b	.L51
+ 800              	.LVL70:
+ 801              	.L82:
+ 802              	.LBE7:
+ 803              	.LBB8:
+ 188:Src/gps.c     ****                                 sprintf(txt,"NO CONNECTION\r\n");
+ 804              		.loc 1 188 0
+ 805 028e 0DF11008 		add	r8, sp, #16
+ 806              	.LVL71:
+ 807 0292 284B     		ldr	r3, .L88+52
+ 808 0294 0FCB     		ldm	r3, {r0, r1, r2, r3}
+ 809              	.LVL72:
+ 810 0296 88E80F00 		stm	r8, {r0, r1, r2, r3}
+ 189:Src/gps.c     ****                                 HAL_UART_Transmit(&huart3,(uint8_t*)txt,strlen(txt),10);
+ 811              		.loc 1 189 0
+ 812 029a 4046     		mov	r0, r8
+ 813 029c FFF7FEFF 		bl	strlen
+ 814              	.LVL73:
+ 815 02a0 0A23     		movs	r3, #10
+ 816 02a2 82B2     		uxth	r2, r0
+ 817 02a4 4146     		mov	r1, r8
+ 818 02a6 1F48     		ldr	r0, .L88+36
+ 819 02a8 FFF7FEFF 		bl	HAL_UART_Transmit
+ 820              	.LVL74:
+ 190:Src/gps.c     ****                                 gps->latitude_i_h = 0;
+ 821              		.loc 1 190 0
+ 822 02ac 0023     		movs	r3, #0
+ARM GAS  /tmp/ccSzq8xP.s 			page 23
+
+
+ 823 02ae 7362     		str	r3, [r6, #36]
+ 191:Src/gps.c     ****                                 gps->latitude_i_l = 0;
+ 824              		.loc 1 191 0
+ 825 02b0 B362     		str	r3, [r6, #40]
+ 192:Src/gps.c     ****                                 gps->longitude_i_h = 0;
+ 826              		.loc 1 192 0
+ 827 02b2 7364     		str	r3, [r6, #68]
+ 193:Src/gps.c     ****                                 gps->longitude_i_l = 0;
+ 828              		.loc 1 193 0
+ 829 02b4 B364     		str	r3, [r6, #72]
+ 194:Src/gps.c     ****                                 gps->altitude_i = 0;
+ 830              		.loc 1 194 0
+ 831 02b6 7365     		str	r3, [r6, #84]
+ 832              	.LBE8:
+ 833 02b8 DCE6     		b	.L51
+ 834              	.LVL75:
+ 835              	.L68:
+ 836              	.LBE9:
+ 223:Src/gps.c     ****                     else if (string_gps[2] == 'V' && string_gps[3] == 'T' && string_gps[4] == 'G')
+ 837              		.loc 1 223 0 discriminator 1
+ 838 02ba 164B     		ldr	r3, .L88+20
+ 839 02bc DB78     		ldrb	r3, [r3, #3]	@ zero_extendqisi2
+ 840 02be 542B     		cmp	r3, #84
+ 841 02c0 7FF4D8AE 		bne	.L51
+ 223:Src/gps.c     ****                     else if (string_gps[2] == 'V' && string_gps[3] == 'T' && string_gps[4] == 'G')
+ 842              		.loc 1 223 0 is_stmt 0 discriminator 2
+ 843 02c4 134B     		ldr	r3, .L88+20
+ 844 02c6 1B79     		ldrb	r3, [r3, #4]	@ zero_extendqisi2
+ 845 02c8 472B     		cmp	r3, #71
+ 846 02ca 7FF4D3AE 		bne	.L51
+ 225:Src/gps.c     ****                         if (checksum(string_gps, cont_string) == 1)
+ 847              		.loc 1 225 0 is_stmt 1
+ 848 02ce 1148     		ldr	r0, .L88+20
+ 849 02d0 FFF7FEFF 		bl	checksum
+ 850              	.LVL76:
+ 851 02d4 0746     		mov	r7, r0
+ 852              	.LVL77:
+ 853 02d6 0128     		cmp	r0, #1
+ 854 02d8 2ED0     		beq	.L83
+ 855              	.LBB10:
+ 267:Src/gps.c     ****                             sprintf(txt,"CHECKSUM FAIL\r\n");
+ 856              		.loc 1 267 0
+ 857 02da 04AF     		add	r7, sp, #16
+ 858 02dc 104B     		ldr	r3, .L88+32
+ 859 02de 0FCB     		ldm	r3, {r0, r1, r2, r3}
+ 860 02e0 87E80F00 		stm	r7, {r0, r1, r2, r3}
+ 268:Src/gps.c     ****                             HAL_UART_Transmit(&huart3,(uint8_t*)txt,strlen(txt),10);
+ 861              		.loc 1 268 0
+ 862 02e4 3846     		mov	r0, r7
+ 863 02e6 FFF7FEFF 		bl	strlen
+ 864              	.LVL78:
+ 865 02ea 0A23     		movs	r3, #10
+ 866 02ec 82B2     		uxth	r2, r0
+ 867 02ee 3946     		mov	r1, r7
+ 868 02f0 0C48     		ldr	r0, .L88+36
+ 869 02f2 FFF7FEFF 		bl	HAL_UART_Transmit
+ 870              	.LVL79:
+ARM GAS  /tmp/ccSzq8xP.s 			page 24
+
+
+ 269:Src/gps.c     ****                             ret = 0; //checksum failed
+ 871              		.loc 1 269 0
+ 872 02f6 0027     		movs	r7, #0
+ 873 02f8 BCE6     		b	.L51
+ 874              	.L89:
+ 875 02fa 00BFAFF3 		.align	3
+ 875      0080
+ 876              	.L88:
+ 877 0300 00000000 		.word	0
+ 878 0304 00005940 		.word	1079574528
+ 879 0308 00000000 		.word	msg_arrived
+ 880 030c 00000000 		.word	buffer_gps
+ 881 0310 00000000 		.word	cont_string
+ 882 0314 00000000 		.word	string_gps
+ 883 0318 00000000 		.word	.LANCHOR0
+ 884 031c 00000000 		.word	data_string_gps
+ 885 0320 48000000 		.word	.LC19
+ 886 0324 00000000 		.word	huart3
+ 887 0328 10000000 		.word	.LC16
+ 888 032c 20000000 		.word	.LC17
+ 889 0330 34000000 		.word	.LC18
+ 890 0334 00000000 		.word	.LC15
+ 891              	.LVL80:
+ 892              	.L83:
+ 893              	.LBE10:
+ 894              	.LBB11:
+ 227:Src/gps.c     ****                             cont_comma = 0;
+ 895              		.loc 1 227 0
+ 896 0338 0022     		movs	r2, #0
+ 897 033a 2F4B     		ldr	r3, .L90+8
+ 898 033c 1A60     		str	r2, [r3]
+ 899              	.LVL81:
+ 900              	.LBB12:
+ 229:Src/gps.c     ****                             for (int i = 5; i < cont_string; i++)
+ 901              		.loc 1 229 0
+ 902 033e 0523     		movs	r3, #5
+ 903              	.LBE12:
+ 228:Src/gps.c     ****                             int cont_speed = 0;
+ 904              		.loc 1 228 0
+ 905 0340 9646     		mov	lr, r2
+ 906              	.LBB13:
+ 229:Src/gps.c     ****                             for (int i = 5; i < cont_string; i++)
+ 907              		.loc 1 229 0
+ 908 0342 04E0     		b	.L53
+ 909              	.LVL82:
+ 910              	.L85:
+ 232:Src/gps.c     ****                                     cont_comma++;
+ 911              		.loc 1 232 0
+ 912 0344 2C49     		ldr	r1, .L90+8
+ 913 0346 0A68     		ldr	r2, [r1]
+ 914 0348 0132     		adds	r2, r2, #1
+ 915 034a 0A60     		str	r2, [r1]
+ 916              	.LVL83:
+ 917              	.L55:
+ 229:Src/gps.c     ****                             for (int i = 5; i < cont_string; i++)
+ 918              		.loc 1 229 0 discriminator 2
+ 919 034c 0133     		adds	r3, r3, #1
+ARM GAS  /tmp/ccSzq8xP.s 			page 25
+
+
+ 920              	.LVL84:
+ 921              	.L53:
+ 229:Src/gps.c     ****                             for (int i = 5; i < cont_string; i++)
+ 922              		.loc 1 229 0 is_stmt 0 discriminator 1
+ 923 034e 2B4A     		ldr	r2, .L90+12
+ 924 0350 1268     		ldr	r2, [r2]
+ 925 0352 9342     		cmp	r3, r2
+ 926 0354 10DA     		bge	.L84
+ 231:Src/gps.c     ****                                 if (string_gps[i] == ',')
+ 927              		.loc 1 231 0 is_stmt 1
+ 928 0356 2A49     		ldr	r1, .L90+16
+ 929 0358 C95C     		ldrb	r1, [r1, r3]	@ zero_extendqisi2
+ 930 035a 2C29     		cmp	r1, #44
+ 931 035c F2D0     		beq	.L85
+ 235:Src/gps.c     ****                                     if (cont_comma == 7)
+ 932              		.loc 1 235 0
+ 933 035e 2648     		ldr	r0, .L90+8
+ 934 0360 0068     		ldr	r0, [r0]
+ 935 0362 0728     		cmp	r0, #7
+ 936 0364 03D0     		beq	.L86
+ 240:Src/gps.c     ****                                     else if (cont_comma == 8)
+ 937              		.loc 1 240 0
+ 938 0366 0828     		cmp	r0, #8
+ 939 0368 F0D1     		bne	.L55
+ 242:Src/gps.c     ****                                         i = cont_string;
+ 940              		.loc 1 242 0
+ 941 036a 1346     		mov	r3, r2
+ 942              	.LVL85:
+ 943 036c EEE7     		b	.L55
+ 944              	.LVL86:
+ 945              	.L86:
+ 237:Src/gps.c     ****                                         gps->speed[cont_speed] = string_gps[i];
+ 946              		.loc 1 237 0
+ 947 036e 06F80E10 		strb	r1, [r6, lr]
+ 238:Src/gps.c     ****                                         cont_speed++;
+ 948              		.loc 1 238 0
+ 949 0372 0EF1010E 		add	lr, lr, #1
+ 950              	.LVL87:
+ 951 0376 E9E7     		b	.L55
+ 952              	.L84:
+ 953              	.LBE13:
+ 247:Src/gps.c     ****                             if (gps->fix_status == '0')
+ 954              		.loc 1 247 0
+ 955 0378 96F86130 		ldrb	r3, [r6, #97]	@ zero_extendqisi2
+ 956              	.LVL88:
+ 957 037c 302B     		cmp	r3, #48
+ 958 037e 1AD0     		beq	.L87
+ 959              	.LBB14:
+ 257:Src/gps.c     ****                                 gps->speed_i = (int)(atof(gps->speed) * 100);
+ 960              		.loc 1 257 0
+ 961 0380 3046     		mov	r0, r6
+ 962 0382 FFF7FEFF 		bl	atof
+ 963              	.LVL89:
+ 964 0386 9FED1A7B 		vldr.64	d7, .L90
+ 965 038a 20EE077B 		vmul.f64	d7, d0, d7
+ 966 038e FDEEC77B 		vcvt.s32.f64	s15, d7
+ 967 0392 17EE902A 		vmov	r2, s15	@ int
+ARM GAS  /tmp/ccSzq8xP.s 			page 26
+
+
+ 968 0396 C6ED027A 		vstr.32	s15, [r6, #8]	@ int
+ 258:Src/gps.c     ****                                 sprintf(txt,"longitude %d",gps->speed_i);
+ 969              		.loc 1 258 0
+ 970 039a 1A49     		ldr	r1, .L90+20
+ 971 039c 04A8     		add	r0, sp, #16
+ 972 039e FFF7FEFF 		bl	sprintf
+ 973              	.LVL90:
+ 259:Src/gps.c     ****                                 HAL_UART_Transmit(&huart3,(uint8_t*)txt,strlen(txt),10);
+ 974              		.loc 1 259 0
+ 975 03a2 04A8     		add	r0, sp, #16
+ 976 03a4 FFF7FEFF 		bl	strlen
+ 977              	.LVL91:
+ 978 03a8 0A23     		movs	r3, #10
+ 979 03aa 82B2     		uxth	r2, r0
+ 980 03ac 04A9     		add	r1, sp, #16
+ 981 03ae 1648     		ldr	r0, .L90+24
+ 982 03b0 FFF7FEFF 		bl	HAL_UART_Transmit
+ 983              	.LVL92:
+ 984 03b4 5EE6     		b	.L51
+ 985              	.LVL93:
+ 986              	.L87:
+ 987              	.LBE14:
+ 988              	.LBB15:
+ 250:Src/gps.c     ****                                 sprintf(txt,"NO CONNECTION\r\n");
+ 989              		.loc 1 250 0
+ 990 03b6 0DF11008 		add	r8, sp, #16
+ 991 03ba 144B     		ldr	r3, .L90+28
+ 992 03bc 0FCB     		ldm	r3, {r0, r1, r2, r3}
+ 993 03be 88E80F00 		stm	r8, {r0, r1, r2, r3}
+ 251:Src/gps.c     ****                                 HAL_UART_Transmit(&huart3,(uint8_t*)txt,strlen(txt),10);
+ 994              		.loc 1 251 0
+ 995 03c2 4046     		mov	r0, r8
+ 996 03c4 FFF7FEFF 		bl	strlen
+ 997              	.LVL94:
+ 998 03c8 0A23     		movs	r3, #10
+ 999 03ca 82B2     		uxth	r2, r0
+ 1000 03cc 4146     		mov	r1, r8
+ 1001 03ce 0E48     		ldr	r0, .L90+24
+ 1002 03d0 FFF7FEFF 		bl	HAL_UART_Transmit
+ 1003              	.LVL95:
+ 252:Src/gps.c     ****                                 gps->speed_i = 0;
+ 1004              		.loc 1 252 0
+ 1005 03d4 0023     		movs	r3, #0
+ 1006 03d6 B360     		str	r3, [r6, #8]
+ 1007              	.LBE15:
+ 1008 03d8 4CE6     		b	.L51
+ 1009              	.LVL96:
+ 1010              	.L69:
+ 1011              	.LBE11:
+ 1012              	.LBE3:
+ 284:Src/gps.c     ****         data_string_gps = buffer_gps[0];						  //convert a pointer into a char
+ 1013              		.loc 1 284 0
+ 1014 03da 0D4B     		ldr	r3, .L90+32
+ 1015 03dc 1A78     		ldrb	r2, [r3]	@ zero_extendqisi2
+ 1016 03de 0D4B     		ldr	r3, .L90+36
+ 1017 03e0 1A70     		strb	r2, [r3]
+ 1018              	.LVL97:
+ARM GAS  /tmp/ccSzq8xP.s 			page 27
+
+
+ 1019              	.L29:
+ 287:Src/gps.c     **** }
+ 1020              		.loc 1 287 0
+ 1021 03e2 3846     		mov	r0, r7
+ 1022 03e4 2BB0     		add	sp, sp, #172
+ 1023              	.LCFI8:
+ 1024              		.cfi_def_cfa_offset 36
+ 1025              		@ sp needed
+ 1026 03e6 BDEC028B 		vldm	sp!, {d8}
+ 1027              	.LCFI9:
+ 1028              		.cfi_restore 80
+ 1029              		.cfi_restore 81
+ 1030              		.cfi_def_cfa_offset 28
+ 1031 03ea BDE8F083 		pop	{r4, r5, r6, r7, r8, r9, pc}
+ 1032              	.LVL98:
+ 1033              	.L91:
+ 1034 03ee 00BF     		.align	3
+ 1035              	.L90:
+ 1036 03f0 00000000 		.word	0
+ 1037 03f4 00005940 		.word	1079574528
+ 1038 03f8 00000000 		.word	cont_comma
+ 1039 03fc 00000000 		.word	cont_string
+ 1040 0400 00000000 		.word	string_gps
+ 1041 0404 58000000 		.word	.LC20
+ 1042 0408 00000000 		.word	huart3
+ 1043 040c 00000000 		.word	.LC15
+ 1044 0410 00000000 		.word	buffer_gps
+ 1045 0414 00000000 		.word	data_string_gps
+ 1046              		.cfi_endproc
+ 1047              	.LFE143:
+ 1049              		.comm	data_string_gps,1,1
+ 1050              		.comm	cont_comma,4,4
+ 1051              		.comm	cont_string,4,4
+ 1052              		.comm	string_gps,100,4
+ 1053              		.global	start_string_gps
+ 1054              		.section	.bss.start_string_gps,"aw",%nobits
+ 1055              		.align	2
+ 1056              		.set	.LANCHOR0,. + 0
+ 1059              	start_string_gps:
+ 1060 0000 00000000 		.space	4
+ 1061              		.section	.rodata.checksum.str1.4,"aMS",%progbits,1
+ 1062              		.align	2
+ 1063              	.LC0:
+ 1064 0000 257800   		.ascii	"%x\000"
+ 1065              		.section	.rodata.gps_init.str1.4,"aMS",%progbits,1
+ 1066              		.align	2
+ 1067              	.LC1:
+ 1068 0000 4552524F 		.ascii	"ERRORE 3\015\012\000"
+ 1068      52452033 
+ 1068      0D0A00
+ 1069 000b 00       		.space	1
+ 1070              	.LC2:
+ 1071 000c 4552524F 		.ascii	"ERRORE 4\015\012\000"
+ 1071      52452034 
+ 1071      0D0A00
+ 1072 0017 00       		.space	1
+ 1073              	.LC3:
+ARM GAS  /tmp/ccSzq8xP.s 			page 28
+
+
+ 1074 0018 24504D54 		.ascii	"$PMTK251,115200*1F\015\012\000"
+ 1074      4B323531 
+ 1074      2C313135 
+ 1074      3230302A 
+ 1074      31460D0A 
+ 1075 002d 000000   		.space	3
+ 1076              	.LC4:
+ 1077 0030 4552524F 		.ascii	"ERRORE 5\015\012\000"
+ 1077      52452035 
+ 1077      0D0A00
+ 1078 003b 00       		.space	1
+ 1079              	.LC5:
+ 1080 003c 4552524F 		.ascii	"ERRORE 6\015\012\000"
+ 1080      52452036 
+ 1080      0D0A00
+ 1081 0047 00       		.space	1
+ 1082              	.LC6:
+ 1083 0048 24504D54 		.ascii	"$PMTK220,100*2F\015\012\000"
+ 1083      4B323230 
+ 1083      2C313030 
+ 1083      2A32460D 
+ 1083      0A00
+ 1084 005a 0000     		.space	2
+ 1085              	.LC7:
+ 1086 005c 24504D54 		.ascii	"$PMTK314,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0*28\015"
+ 1086      4B333134 
+ 1086      2C302C30 
+ 1086      2C312C31 
+ 1086      2C302C30 
+ 1087 008e 0A00     		.ascii	"\012\000"
+ 1088              	.LC8:
+ 1089 0090 3030302E 		.ascii	"000.00\000"
+ 1089      303000
+ 1090 0097 00       		.space	1
+ 1091              	.LC9:
+ 1092 0098 30303030 		.ascii	"0000.0000\000"
+ 1092      2E303030 
+ 1092      3000
+ 1093 00a2 0000     		.space	2
+ 1094              	.LC10:
+ 1095 00a4 4E00     		.ascii	"N\000"
+ 1096 00a6 0000     		.space	2
+ 1097              	.LC11:
+ 1098 00a8 30303030 		.ascii	"00000.0000\000"
+ 1098      302E3030 
+ 1098      303000
+ 1099 00b3 00       		.space	1
+ 1100              	.LC12:
+ 1101 00b4 5700     		.ascii	"W\000"
+ 1102 00b6 0000     		.space	2
+ 1103              	.LC13:
+ 1104 00b8 30303030 		.ascii	"0000.0\000"
+ 1104      2E3000
+ 1105 00bf 00       		.space	1
+ 1106              	.LC14:
+ 1107 00c0 303000   		.ascii	"00\000"
+ 1108              		.section	.rodata.gps_read.str1.4,"aMS",%progbits,1
+ARM GAS  /tmp/ccSzq8xP.s 			page 29
+
+
+ 1109              		.align	2
+ 1110              	.LC15:
+ 1111 0000 4E4F2043 		.ascii	"NO CONNECTION\015\012\000"
+ 1111      4F4E4E45 
+ 1111      4354494F 
+ 1111      4E0D0A00 
+ 1112              	.LC16:
+ 1113 0010 6C617469 		.ascii	"latitude %ld %c\000"
+ 1113      74756465 
+ 1113      20256C64 
+ 1113      20256300 
+ 1114              	.LC17:
+ 1115 0020 6C6F6E67 		.ascii	"longitude %ld %c\000"
+ 1115      69747564 
+ 1115      6520256C 
+ 1115      64202563 
+ 1115      00
+ 1116 0031 000000   		.space	3
+ 1117              	.LC18:
+ 1118 0034 74696D65 		.ascii	"time %c%c:%c%c:%c%c\000"
+ 1118      20256325 
+ 1118      633A2563 
+ 1118      25633A25 
+ 1118      63256300 
+ 1119              	.LC19:
+ 1120 0048 43484543 		.ascii	"CHECKSUM FAIL\015\012\000"
+ 1120      4B53554D 
+ 1120      20464149 
+ 1120      4C0D0A00 
+ 1121              	.LC20:
+ 1122 0058 6C6F6E67 		.ascii	"longitude %d\000"
+ 1122      69747564 
+ 1122      65202564 
+ 1122      00
+ 1123              		.text
+ 1124              	.Letext0:
+ 1125              		.file 2 "/usr/include/newlib/machine/_default_types.h"
+ 1126              		.file 3 "/usr/include/newlib/sys/_stdint.h"
+ 1127              		.file 4 "Drivers/CMSIS/Include/core_cm7.h"
+ 1128              		.file 5 "Drivers/CMSIS/Device/ST/STM32F7xx/Include/system_stm32f7xx.h"
+ 1129              		.file 6 "Drivers/CMSIS/Device/ST/STM32F7xx/Include/stm32f767xx.h"
+ 1130              		.file 7 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_def.h"
+ 1131              		.file 8 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_dma.h"
+ 1132              		.file 9 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart.h"
+ 1133              		.file 10 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal.h"
+ 1134              		.file 11 "/usr/include/newlib/sys/lock.h"
+ 1135              		.file 12 "/usr/include/newlib/sys/_types.h"
+ 1136              		.file 13 "/usr/lib/gcc/arm-none-eabi/6.3.1/include/stddef.h"
+ 1137              		.file 14 "/usr/include/newlib/sys/reent.h"
+ 1138              		.file 15 "/usr/include/newlib/stdlib.h"
+ 1139              		.file 16 "Inc/gps.h"
+ 1140              		.file 17 "/usr/include/newlib/stdio.h"
+ 1141              		.file 18 "/usr/include/newlib/string.h"
+ARM GAS  /tmp/ccSzq8xP.s 			page 30
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 gps.c
+     /tmp/ccSzq8xP.s:17     .text.checksum:0000000000000000 $t
+     /tmp/ccSzq8xP.s:23     .text.checksum:0000000000000000 checksum
+     /tmp/ccSzq8xP.s:149    .text.checksum:0000000000000080 $d
+     /tmp/ccSzq8xP.s:154    .text.gps_init:0000000000000000 $t
+     /tmp/ccSzq8xP.s:161    .text.gps_init:0000000000000000 gps_init
+     /tmp/ccSzq8xP.s:352    .text.gps_init:0000000000000130 $d
+     /tmp/ccSzq8xP.s:372    .text.gps_read:0000000000000000 $t
+     /tmp/ccSzq8xP.s:379    .text.gps_read:0000000000000000 gps_read
+     /tmp/ccSzq8xP.s:877    .text.gps_read:0000000000000300 $d
+                            *COM*:0000000000000004 cont_string
+                            *COM*:0000000000000064 string_gps
+                            *COM*:0000000000000001 data_string_gps
+     /tmp/ccSzq8xP.s:896    .text.gps_read:0000000000000338 $t
+     /tmp/ccSzq8xP.s:1036   .text.gps_read:00000000000003f0 $d
+                            *COM*:0000000000000004 cont_comma
+     /tmp/ccSzq8xP.s:1059   .bss.start_string_gps:0000000000000000 start_string_gps
+     /tmp/ccSzq8xP.s:1055   .bss.start_string_gps:0000000000000000 $d
+     /tmp/ccSzq8xP.s:1062   .rodata.checksum.str1.4:0000000000000000 $d
+     /tmp/ccSzq8xP.s:1066   .rodata.gps_init.str1.4:0000000000000000 $d
+     /tmp/ccSzq8xP.s:1109   .rodata.gps_read.str1.4:0000000000000000 $d
+                     .debug_frame:0000000000000010 $d
+
+UNDEFINED SYMBOLS
+sprintf
+HAL_UART_DeInit
+HAL_UART_Transmit
+HAL_Delay
+huart2
+huart3
+strlen
+atof
+msg_arrived
+buffer_gps
