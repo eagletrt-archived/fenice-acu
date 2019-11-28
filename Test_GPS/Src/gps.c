@@ -18,11 +18,19 @@ int gps_init(UART_HandleTypeDef *huart, gps_struct *gps)
 
 	//if return--> 0=error,1=ok
 	huart2.Init.BaudRate = 9600;
+    huart2.Init.WordLength = UART_WORDLENGTH_8B;
+    huart2.Init.StopBits = UART_STOPBITS_1;
+    huart2.Init.Parity = UART_PARITY_NONE;
+    huart2.Init.Mode = UART_MODE_TX_RX;
+    huart2.Init.HwFlowCtl = UART_HWCONTROL_NONE;
+    huart2.Init.OverSampling = UART_OVERSAMPLING_16;
+    huart2.Init.OneBitSampling = UART_ONE_BIT_SAMPLE_DISABLE;
+    huart2.AdvancedInit.AdvFeatureInit = UART_ADVFEATURE_NO_INIT;
     if (HAL_UART_DeInit(&huart2) != HAL_OK)
     {
         HAL_UART_Transmit(&huart3,(uint8_t*)"ERRORE 3\r\n",6,10);
     }
-	if (HAL_UART_DeInit(&huart2) != HAL_OK)
+	if (HAL_UART_Init(&huart2) != HAL_OK)
     {
         HAL_UART_Transmit(&huart3,(uint8_t*)"ERRORE 4\r\n",6,10);
     }
@@ -38,7 +46,16 @@ int gps_init(UART_HandleTypeDef *huart, gps_struct *gps)
     {
         HAL_UART_Transmit(&huart3,(uint8_t*)"ERRORE 5\r\n",6,10);
     }
-	if (HAL_UART_DeInit(&huart2) != HAL_OK)
+    huart2.Init.BaudRate = 115200;
+    huart2.Init.WordLength = UART_WORDLENGTH_8B;
+    huart2.Init.StopBits = UART_STOPBITS_1;
+    huart2.Init.Parity = UART_PARITY_NONE;
+    huart2.Init.Mode = UART_MODE_TX_RX;
+    huart2.Init.HwFlowCtl = UART_HWCONTROL_NONE;
+    huart2.Init.OverSampling = UART_OVERSAMPLING_16;
+    huart2.Init.OneBitSampling = UART_ONE_BIT_SAMPLE_DISABLE;
+    huart2.AdvancedInit.AdvFeatureInit = UART_ADVFEATURE_NO_INIT;
+	if (HAL_UART_Init(&huart2) != HAL_OK)
     {
         HAL_UART_Transmit(&huart3,(uint8_t*)"ERRORE 6\r\n",6,10);
     }

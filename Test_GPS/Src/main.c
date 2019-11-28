@@ -124,7 +124,13 @@ int main(void)
   }*/
   HAL_UART_Receive_IT(&huart3, (uint8_t *)msg_computer, 1); //request of rx buffer interrupt
   gps_init(&huart2, &gps);
-  HAL_UART_Receive_IT(&huart2, (uint8_t *)msg_gps, 1); //request of rx buffer interrupt
+  /*HAL_NVIC_SetPriority(USART2_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(USART2_IRQn);*/
+  if(HAL_UART_Receive_IT(&huart2, (uint8_t *)msg_gps, 1) != HAL_OK){ //request of rx buffer interrupt
+    char txt[100];
+    sprintf(txt,"HAL_UART_Receive_IT FAILED\r\n");
+    HAL_UART_Transmit(&huart3,(uint8_t*)txt,strlen(txt),10);
+  }
   /* USER CODE END 2 */
 
   /* Infinite loop */
