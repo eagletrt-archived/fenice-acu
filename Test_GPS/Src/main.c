@@ -112,6 +112,7 @@ int main(void)
   MX_NVIC_Init();
   /* USER CODE BEGIN 2 */
   HAL_UART_Transmit(&huart3,(uint8_t*)"ciao\r\n",6,10);
+  gps.huart_gps = &huart2;
   //HAL_GPIO_WritePin(LED_blue_GPIO_Port, LED_blue_Pin, GPIO_PIN_SET);
   /*huart2.Init.BaudRate = 115200;
   if (HAL_UART_DeInit(&huart2) != HAL_OK)
@@ -123,9 +124,11 @@ int main(void)
     HAL_UART_Transmit(&huart3,(uint8_t*)"ERRORE 2\r\n",6,10);
   }*/
   HAL_UART_Receive_IT(&huart3, (uint8_t *)msg_computer, 1); //request of rx buffer interrupt
-  gps_init(&huart2, &gps);
+  //gps_init(&huart2, &gps);
   /*HAL_NVIC_SetPriority(USART2_IRQn, 0, 0);
   HAL_NVIC_EnableIRQ(USART2_IRQn);*/
+  HAL_NVIC_SetPriority(USART2_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(USART2_IRQn);
   if(HAL_UART_Receive_IT(&huart2, (uint8_t *)msg_gps, 1) != HAL_OK){ //request of rx buffer interrupt
     char txt[100];
     sprintf(txt,"HAL_UART_Receive_IT FAILED\r\n");
@@ -137,7 +140,7 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-    //gps_read(&huart2, &gps);
+    gps_read(&huart2, &gps);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -223,9 +226,6 @@ static void MX_NVIC_Init(void)
   /* TIM2_IRQn interrupt configuration */
   HAL_NVIC_SetPriority(TIM2_IRQn, 0, 0);
   HAL_NVIC_EnableIRQ(TIM2_IRQn);
-  /* USART2_IRQn interrupt configuration */
-  HAL_NVIC_SetPriority(USART2_IRQn, 0, 0);
-  HAL_NVIC_EnableIRQ(USART2_IRQn);
   /* USART3_IRQn interrupt configuration */
   HAL_NVIC_SetPriority(USART3_IRQn, 0, 0);
   HAL_NVIC_EnableIRQ(USART3_IRQn);
@@ -418,7 +418,7 @@ static void MX_GPIO_Init(void)
 /* USER CODE BEGIN 4 */
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 {
-    if (huart == &huart2)
+    if (huart == gps.huart_gps)
     {
         buffer_gps[msg_arrived] = msg_gps[0];
         msg_arrived++;
@@ -438,6 +438,12 @@ void HAL_UART_ErrorCallback(UART_HandleTypeDef *huart){
   int errore = HAL_UART_GetError(huart);
   char txt[100];
   sprintf(txt,"CALLBACK ERRORE %d\r\n",errore);
+  HAL_UART_Transmit(&huart3,(uint8_t*)txt,strlen(txt),10);
+}
+void HAL_UART_AbortReceiveCpltCallback(UART_HandleTypeDef *huart){
+  int errore = HAL_UART_GetError(huart);
+  char txt[100];
+  sprintf(txt,"CALLBACK ABORT RECIVE %d\r\n",errore);
   HAL_UART_Transmit(&huart3,(uint8_t*)txt,strlen(txt),10);
 }
 /* USER CODE END 4 */

@@ -91,6 +91,7 @@
 //----------------GPS----------------//
 typedef struct
 {
+	UART_HandleTypeDef* huart_gps;
 	char speed[7];			  //string of speed
 	int speed_i;			  //speed converted into an int
 	char latitude[10];		  //latitude string ddmm.mmmm
@@ -102,14 +103,14 @@ typedef struct
 	char longitude[11];		  //longitude string dddmm.mmmm
 	long int longitude_calib; //longitude_calibration (initial longitude)
 	char longitude_o[2];	  //longitude orientation_string E=east or W=west
-	long int longitude_i;	 //longitude converted into an long int
+	long int longitude_i;	  //longitude converted into an long int
 	int longitude_i_h;		  //high longitude (upper than comma)
 	int longitude_i_l;		  //low longitude (lower than comma)
 	char altitude[8];		  //altitude string
 	int altitude_i;			  //altitude converted into a string
 	char hour[3];			  //hour string
-    char min[3];
-    char sec[3];
+    char min[3];			  //min string
+    char sec[3];			  //sec string
 	char fix_status;
 	char string[100];
 } gps_struct;

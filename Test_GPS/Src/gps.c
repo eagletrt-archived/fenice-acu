@@ -17,53 +17,52 @@ int gps_init(UART_HandleTypeDef *huart, gps_struct *gps)
 { //initialization of GPS
 
 	//if return--> 0=error,1=ok
-	huart2.Init.BaudRate = 9600;
-    huart2.Init.WordLength = UART_WORDLENGTH_8B;
-    huart2.Init.StopBits = UART_STOPBITS_1;
-    huart2.Init.Parity = UART_PARITY_NONE;
-    huart2.Init.Mode = UART_MODE_TX_RX;
-    huart2.Init.HwFlowCtl = UART_HWCONTROL_NONE;
-    huart2.Init.OverSampling = UART_OVERSAMPLING_16;
-    huart2.Init.OneBitSampling = UART_ONE_BIT_SAMPLE_DISABLE;
-    huart2.AdvancedInit.AdvFeatureInit = UART_ADVFEATURE_NO_INIT;
-    if (HAL_UART_DeInit(&huart2) != HAL_OK)
+	huart->Init.BaudRate = 9600;
+    huart->Init.WordLength = UART_WORDLENGTH_8B;
+    huart->Init.StopBits = UART_STOPBITS_1;
+    huart->Init.Parity = UART_PARITY_NONE;
+    huart->Init.Mode = UART_MODE_TX_RX;
+    huart->Init.HwFlowCtl = UART_HWCONTROL_NONE;
+    huart->Init.OverSampling = UART_OVERSAMPLING_16;
+    huart->Init.OneBitSampling = UART_ONE_BIT_SAMPLE_DISABLE;
+    huart->AdvancedInit.AdvFeatureInit = UART_ADVFEATURE_NO_INIT;
+    if (HAL_UART_DeInit(huart) != HAL_OK)
     {
         HAL_UART_Transmit(&huart3,(uint8_t*)"ERRORE 3\r\n",6,10);
     }
-	if (HAL_UART_Init(&huart2) != HAL_OK)
+	if (HAL_UART_Init(huart) != HAL_OK)
     {
         HAL_UART_Transmit(&huart3,(uint8_t*)"ERRORE 4\r\n",6,10);
     }
-	HAL_UART_Transmit(&huart2, (uint8_t *)PMTK_SET_BAUD_115200, strlen(PMTK_SET_BAUD_115200), 200);
+	HAL_UART_Transmit(huart, (uint8_t *)PMTK_SET_BAUD_115200, strlen(PMTK_SET_BAUD_115200), 200);
 	HAL_Delay(500);
 	/*huart->Init.BaudRate = 57600;
     HAL_UART_DeInit(huart);
 	HAL_UART_Init(huart);
 	HAL_UART_Transmit(huart, (uint8_t *)PMTK_SET_BAUD_115200, strlen(PMTK_SET_BAUD_115200), 200);
-	HAL_Delay(500);*/
-	huart2.Init.BaudRate = 115200;
-    if (HAL_UART_DeInit(&huart2) != HAL_OK)
+	HAL_Delay(500);
+    if (HAL_UART_DeInit(huart) != HAL_OK)
     {
         HAL_UART_Transmit(&huart3,(uint8_t*)"ERRORE 5\r\n",6,10);
-    }
-    huart2.Init.BaudRate = 115200;
-    huart2.Init.WordLength = UART_WORDLENGTH_8B;
-    huart2.Init.StopBits = UART_STOPBITS_1;
-    huart2.Init.Parity = UART_PARITY_NONE;
-    huart2.Init.Mode = UART_MODE_TX_RX;
-    huart2.Init.HwFlowCtl = UART_HWCONTROL_NONE;
-    huart2.Init.OverSampling = UART_OVERSAMPLING_16;
-    huart2.Init.OneBitSampling = UART_ONE_BIT_SAMPLE_DISABLE;
-    huart2.AdvancedInit.AdvFeatureInit = UART_ADVFEATURE_NO_INIT;
-	if (HAL_UART_Init(&huart2) != HAL_OK)
+    }*/
+    huart->Init.BaudRate = 115200;
+    huart->Init.WordLength = UART_WORDLENGTH_8B;
+    huart->Init.StopBits = UART_STOPBITS_1;
+    huart->Init.Parity = UART_PARITY_NONE;
+    huart->Init.Mode = UART_MODE_TX_RX;
+    huart->Init.HwFlowCtl = UART_HWCONTROL_NONE;
+    huart->Init.OverSampling = UART_OVERSAMPLING_16;
+    huart->Init.OneBitSampling = UART_ONE_BIT_SAMPLE_DISABLE;
+    huart->AdvancedInit.AdvFeatureInit = UART_ADVFEATURE_NO_INIT;
+	if (HAL_UART_Init(huart) != HAL_OK)
     {
         HAL_UART_Transmit(&huart3,(uint8_t*)"ERRORE 6\r\n",6,10);
     }
-	HAL_UART_Transmit(&huart2, (uint8_t *)PMTK_SET_BAUD_115200, strlen(PMTK_SET_BAUD_115200), 200);
+	HAL_UART_Transmit(huart, (uint8_t *)PMTK_SET_BAUD_115200, strlen(PMTK_SET_BAUD_115200), 200);
 	HAL_Delay(500);
-	HAL_UART_Transmit(&huart2, (uint8_t *)PMTK_SET_NMEA_UPDATE_10HZ, strlen(PMTK_SET_NMEA_UPDATE_10HZ), 200);
+	HAL_UART_Transmit(huart, (uint8_t *)PMTK_SET_NMEA_UPDATE_10HZ, strlen(PMTK_SET_NMEA_UPDATE_10HZ), 200);
 	HAL_Delay(500);
-	HAL_UART_Transmit(&huart2, (uint8_t *)PMTK_SET_NMEA_OUTPUT_GGAVTG, strlen(PMTK_SET_NMEA_OUTPUT_GGAVTG), 200);
+	HAL_UART_Transmit(huart, (uint8_t *)PMTK_SET_NMEA_OUTPUT_GGAVTG, strlen(PMTK_SET_NMEA_OUTPUT_GGAVTG), 200);
 	HAL_Delay(500);
 	strcpy(gps->speed, "000.00");
 	strcpy(gps->latitude, "0000.0000");
@@ -202,7 +201,7 @@ int gps_read(UART_HandleTypeDef *huart, gps_struct *gps)
                             if (gps->fix_status == '0')
                             {
                                 char txt[100];
-                                sprintf(txt,"NO CONNECTION\r\n");
+                                sprintf(txt,"\r\nNO CONNECTION\r\n");
                                 HAL_UART_Transmit(&huart3,(uint8_t*)txt,strlen(txt),10);
                                 gps->latitude_i_h = 0;
                                 gps->latitude_i_l = 0;
@@ -232,7 +231,7 @@ int gps_read(UART_HandleTypeDef *huart, gps_struct *gps)
                         else
                         {
                             char txt[100];
-                            sprintf(txt,"CHECKSUM FAIL\r\n");
+                            sprintf(txt,"\r\nCHECKSUM FAIL\r\n");
                             HAL_UART_Transmit(&huart3,(uint8_t*)txt,strlen(txt),10);
                             ret = 0; //checksum failed
                         }
@@ -264,7 +263,7 @@ int gps_read(UART_HandleTypeDef *huart, gps_struct *gps)
                             if (gps->fix_status == '0')
                             {
                                 char txt[100];
-                                sprintf(txt,"NO CONNECTION\r\n");
+                                sprintf(txt,"\r\nNO CONNECTION\r\n");
                                 HAL_UART_Transmit(&huart3,(uint8_t*)txt,strlen(txt),10);
                                 gps->speed_i = 0;
                             }
@@ -281,7 +280,7 @@ int gps_read(UART_HandleTypeDef *huart, gps_struct *gps)
                         else
                         {
                             char txt[100];
-                            sprintf(txt,"CHECKSUM FAIL\r\n");
+                            sprintf(txt,"\r\nCHECKSUM FAIL\r\n");
                             HAL_UART_Transmit(&huart3,(uint8_t*)txt,strlen(txt),10);
                             ret = 0; //checksum failed
                         }
