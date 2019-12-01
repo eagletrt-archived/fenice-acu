@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccbGHVEI.s 			page 1
+ARM GAS  /tmp/ccYexWBS.s 			page 1
 
 
    1              		.cpu cortex-m7
@@ -58,7 +58,7 @@ ARM GAS  /tmp/ccbGHVEI.s 			page 1
   31:Src/main.c    **** #include "stdio.h"
   32:Src/main.c    **** #include "string.h"
   33:Src/main.c    **** /* USER CODE END Includes */
-ARM GAS  /tmp/ccbGHVEI.s 			page 2
+ARM GAS  /tmp/ccYexWBS.s 			page 2
 
 
   34:Src/main.c    **** 
@@ -118,7 +118,7 @@ ARM GAS  /tmp/ccbGHVEI.s 			page 1
   88:Src/main.c    ****   * @retval int
   89:Src/main.c    ****   */
   90:Src/main.c    **** int main(void)
-ARM GAS  /tmp/ccbGHVEI.s 			page 3
+ARM GAS  /tmp/ccYexWBS.s 			page 3
 
 
   91:Src/main.c    **** {
@@ -178,7 +178,7 @@ ARM GAS  /tmp/ccbGHVEI.s 			page 1
  145:Src/main.c    **** 
  146:Src/main.c    **** 	
  147:Src/main.c    **** 
-ARM GAS  /tmp/ccbGHVEI.s 			page 4
+ARM GAS  /tmp/ccYexWBS.s 			page 4
 
 
  148:Src/main.c    ****   /* USER CODE END 2 */
@@ -238,7 +238,7 @@ ARM GAS  /tmp/ccbGHVEI.s 			page 1
  202:Src/main.c    ****   RCC_OscInitStruct.HSIState = RCC_HSI_ON;
  203:Src/main.c    ****   RCC_OscInitStruct.HSICalibrationValue = RCC_HSICALIBRATION_DEFAULT;
  204:Src/main.c    ****   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
-ARM GAS  /tmp/ccbGHVEI.s 			page 5
+ARM GAS  /tmp/ccYexWBS.s 			page 5
 
 
  205:Src/main.c    ****   RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSI;
@@ -298,7 +298,7 @@ ARM GAS  /tmp/ccbGHVEI.s 			page 1
  259:Src/main.c    ****   /* CAN1_RX1_IRQn interrupt configuration */
  260:Src/main.c    ****   HAL_NVIC_SetPriority(CAN1_RX1_IRQn, 0, 0);
  261:Src/main.c    ****   HAL_NVIC_EnableIRQ(CAN1_RX1_IRQn);
-ARM GAS  /tmp/ccbGHVEI.s 			page 6
+ARM GAS  /tmp/ccYexWBS.s 			page 6
 
 
  262:Src/main.c    ****   /* CAN1_RX0_IRQn interrupt configuration */
@@ -358,7 +358,7 @@ ARM GAS  /tmp/ccbGHVEI.s 			page 1
  316:Src/main.c    **** {
   26              		.loc 1 316 0
   27              		.cfi_startproc
-ARM GAS  /tmp/ccbGHVEI.s 			page 7
+ARM GAS  /tmp/ccYexWBS.s 			page 7
 
 
   28              		@ args = 0, pretend = 0, frame = 0
@@ -418,7 +418,7 @@ ARM GAS  /tmp/ccbGHVEI.s 			page 1
  334:Src/main.c    ****   /* USER CODE END SDMMC1_Init 2 */
  335:Src/main.c    **** 
  336:Src/main.c    **** }
-ARM GAS  /tmp/ccbGHVEI.s 			page 8
+ARM GAS  /tmp/ccYexWBS.s 			page 8
 
 
  337:Src/main.c    **** 
@@ -478,7 +478,7 @@ ARM GAS  /tmp/ccbGHVEI.s 			page 1
  391:Src/main.c    ****   /* USER CODE BEGIN USART3_Init 0 */
  392:Src/main.c    **** 
  393:Src/main.c    ****   /* USER CODE END USART3_Init 0 */
-ARM GAS  /tmp/ccbGHVEI.s 			page 9
+ARM GAS  /tmp/ccYexWBS.s 			page 9
 
 
  394:Src/main.c    **** 
@@ -538,7 +538,7 @@ ARM GAS  /tmp/ccbGHVEI.s 			page 1
  427:Src/main.c    ****   /* GPIO Ports Clock Enable */
  428:Src/main.c    ****   __HAL_RCC_GPIOC_CLK_ENABLE();
   88              		.loc 1 428 0
-ARM GAS  /tmp/ccbGHVEI.s 			page 10
+ARM GAS  /tmp/ccYexWBS.s 			page 10
 
 
   89 0010 244B     		ldr	r3, .L6
@@ -598,7 +598,7 @@ ARM GAS  /tmp/ccbGHVEI.s 			page 1
  437:Src/main.c    ****   GPIO_InitStruct.Pin = USER_BUTTON_Pin;
  135              		.loc 1 437 0
  136 0068 4FF40053 		mov	r3, #8192
-ARM GAS  /tmp/ccbGHVEI.s 			page 11
+ARM GAS  /tmp/ccYexWBS.s 			page 11
 
 
  137 006c 0593     		str	r3, [sp, #20]
@@ -658,7 +658,7 @@ ARM GAS  /tmp/ccbGHVEI.s 			page 1
  455:Src/main.c    **** }
  174              		.loc 1 455 0
  175 00a0 0BB0     		add	sp, sp, #44
-ARM GAS  /tmp/ccbGHVEI.s 			page 12
+ARM GAS  /tmp/ccYexWBS.s 			page 12
 
 
  176              	.LCFI2:
@@ -718,7 +718,7 @@ ARM GAS  /tmp/ccbGHVEI.s 			page 1
  227              	.LVL7:
  257:Src/main.c    ****   HAL_NVIC_EnableIRQ(CAN1_SCE_IRQn);
  228              		.loc 1 257 0
-ARM GAS  /tmp/ccbGHVEI.s 			page 13
+ARM GAS  /tmp/ccYexWBS.s 			page 13
 
 
  229 0022 0022     		movs	r2, #0
@@ -778,7 +778,7 @@ ARM GAS  /tmp/ccbGHVEI.s 			page 1
  274              		.loc 1 270 0
  275 006c 1C20     		movs	r0, #28
  276 006e FFF7FEFF 		bl	HAL_NVIC_EnableIRQ
-ARM GAS  /tmp/ccbGHVEI.s 			page 14
+ARM GAS  /tmp/ccYexWBS.s 			page 14
 
 
  277              	.LVL17:
@@ -838,7 +838,7 @@ ARM GAS  /tmp/ccbGHVEI.s 			page 1
  466:Src/main.c    **** 				// TODO: add error messages
  467:Src/main.c    **** 			}
  468:Src/main.c    **** 		}
-ARM GAS  /tmp/ccbGHVEI.s 			page 15
+ARM GAS  /tmp/ccYexWBS.s 			page 15
 
 
  469:Src/main.c    **** 		if (count_ms == 100) {
@@ -898,7 +898,7 @@ ARM GAS  /tmp/ccbGHVEI.s 			page 1
  363 0056 37D0     		beq	.L22
  483:Src/main.c    **** 				10) {  //--- check if Analog To Can is connected ---//
  484:Src/main.c    **** 				// TODO: to implement error functions
-ARM GAS  /tmp/ccbGHVEI.s 			page 16
+ARM GAS  /tmp/ccYexWBS.s 			page 16
 
 
  485:Src/main.c    **** 				atc_connected = 0;
@@ -958,7 +958,7 @@ ARM GAS  /tmp/ccbGHVEI.s 			page 1
  400 008a 0133     		adds	r3, r3, #1
  401 008c 9BB2     		uxth	r3, r3
  402 008e 1380     		strh	r3, [r2]	@ movhi
-ARM GAS  /tmp/ccbGHVEI.s 			page 17
+ARM GAS  /tmp/ccYexWBS.s 			page 17
 
 
  503:Src/main.c    **** 					if (count_min == 60) {
@@ -1018,7 +1018,7 @@ ARM GAS  /tmp/ccbGHVEI.s 			page 1
  443 00c6 C5E7     		b	.L13
  444              	.L22:
  485:Src/main.c    **** 			} else if (count_atc == 11) {
-ARM GAS  /tmp/ccbGHVEI.s 			page 18
+ARM GAS  /tmp/ccYexWBS.s 			page 18
 
 
  445              		.loc 1 485 0
@@ -1078,7 +1078,7 @@ ARM GAS  /tmp/ccbGHVEI.s 			page 1
  496              		.section	.text.HAL_CAN_RxFifo0MsgPendingCallback,"ax",%progbits
  497              		.align	1
  498              		.global	HAL_CAN_RxFifo0MsgPendingCallback
-ARM GAS  /tmp/ccbGHVEI.s 			page 19
+ARM GAS  /tmp/ccYexWBS.s 			page 19
 
 
  499              		.syntax unified
@@ -1138,7 +1138,7 @@ ARM GAS  /tmp/ccbGHVEI.s 			page 1
  534:Src/main.c    **** 			// strlen("ciao2\r\n"), 10);
  535:Src/main.c    **** 		}
  536:Src/main.c    **** 	}
-ARM GAS  /tmp/ccbGHVEI.s 			page 20
+ARM GAS  /tmp/ccYexWBS.s 			page 20
 
 
  537:Src/main.c    **** }
@@ -1198,7 +1198,7 @@ ARM GAS  /tmp/ccbGHVEI.s 			page 1
  580              	.LFE151:
  582              		.section	.text.HAL_CAN_RxFifo1MsgPendingCallback,"ax",%progbits
  583              		.align	1
-ARM GAS  /tmp/ccbGHVEI.s 			page 21
+ARM GAS  /tmp/ccYexWBS.s 			page 21
 
 
  584              		.global	HAL_CAN_RxFifo1MsgPendingCallback
@@ -1258,7 +1258,7 @@ ARM GAS  /tmp/ccbGHVEI.s 			page 1
  634              		.thumb
  635              		.thumb_func
  636              		.fpu fpv5-d16
-ARM GAS  /tmp/ccbGHVEI.s 			page 22
+ARM GAS  /tmp/ccYexWBS.s 			page 22
 
 
  638              	HAL_CAN_RxFifo0FullCallback:
@@ -1318,7 +1318,7 @@ ARM GAS  /tmp/ccbGHVEI.s 			page 1
  687              	.LFB154:
  551:Src/main.c    **** void HAL_CAN_RxFifo1FullCallback(CAN_HandleTypeDef *hcan) {
  688              		.loc 1 551 0
-ARM GAS  /tmp/ccbGHVEI.s 			page 23
+ARM GAS  /tmp/ccYexWBS.s 			page 23
 
 
  689              		.cfi_startproc
@@ -1378,7 +1378,7 @@ ARM GAS  /tmp/ccbGHVEI.s 			page 1
  738              		@ args = 0, pretend = 0, frame = 0
  739              		@ frame_needed = 0, uses_anonymous_args = 0
  740              	.LVL49:
-ARM GAS  /tmp/ccbGHVEI.s 			page 24
+ARM GAS  /tmp/ccYexWBS.s 			page 24
 
 
  741 0000 38B5     		push	{r3, r4, r5, lr}
@@ -1438,7 +1438,7 @@ ARM GAS  /tmp/ccbGHVEI.s 			page 1
  789              	.LVL57:
  790 0042 0028     		cmp	r0, #0
  791 0044 F5D0     		beq	.L52
-ARM GAS  /tmp/ccbGHVEI.s 			page 25
+ARM GAS  /tmp/ccYexWBS.s 			page 25
 
 
  565:Src/main.c    **** 				// TODO: implementare errore
@@ -1498,7 +1498,7 @@ ARM GAS  /tmp/ccbGHVEI.s 			page 1
  599:Src/main.c    **** 			 }
  600:Src/main.c    **** 		 }else{
  601:Src/main.c    **** 			 //TODO: riattivare interrupt
-ARM GAS  /tmp/ccbGHVEI.s 			page 26
+ARM GAS  /tmp/ccYexWBS.s 			page 26
 
 
  602:Src/main.c    **** 			 HAL_UART_Transmit(&huart3,(uint8_t*)("Fifo vuota\r\n"),
@@ -1558,7 +1558,7 @@ ARM GAS  /tmp/ccbGHVEI.s 			page 1
  610:Src/main.c    **** 	HAL_UART_Transmit(&huart3, (uint8_t *)(txt), strlen(txt), 10);
  860              		.loc 1 610 0
  861 0018 2046     		mov	r0, r4
-ARM GAS  /tmp/ccbGHVEI.s 			page 27
+ARM GAS  /tmp/ccYexWBS.s 			page 27
 
 
  862 001a FFF7FEFF 		bl	strlen
@@ -1618,7 +1618,7 @@ ARM GAS  /tmp/ccbGHVEI.s 			page 1
  906 005c FFF7FEFF 		bl	fifoTxDataCAN_normal_pop
  907              	.LVL73:
  908 0060 0028     		cmp	r0, #0
-ARM GAS  /tmp/ccbGHVEI.s 			page 28
+ARM GAS  /tmp/ccYexWBS.s 			page 28
 
 
  909 0062 E9D0     		beq	.L59
@@ -1678,7 +1678,7 @@ ARM GAS  /tmp/ccbGHVEI.s 			page 1
  952              		.loc 1 633 0
  953 0004 194A     		ldr	r2, .L71
  954 0006 1A4C     		ldr	r4, .L71+4
-ARM GAS  /tmp/ccbGHVEI.s 			page 29
+ARM GAS  /tmp/ccYexWBS.s 			page 29
 
 
  955 0008 92F87230 		ldrb	r3, [r2, #114]	@ zero_extendqisi2
@@ -1738,7 +1738,7 @@ ARM GAS  /tmp/ccbGHVEI.s 			page 1
  1000 0052 0948     		ldr	r0, .L71+12
  1001 0054 FFF7FEFF 		bl	HAL_UART_Transmit
  1002              	.LVL84:
-ARM GAS  /tmp/ccbGHVEI.s 			page 30
+ARM GAS  /tmp/ccYexWBS.s 			page 30
 
 
  1003 0058 38BD     		pop	{r3, r4, r5, pc}
@@ -1798,7 +1798,7 @@ ARM GAS  /tmp/ccbGHVEI.s 			page 1
  1044              		@ frame_needed = 0, uses_anonymous_args = 0
  1045              	.LVL88:
  1046 0000 38B5     		push	{r3, r4, r5, lr}
-ARM GAS  /tmp/ccbGHVEI.s 			page 31
+ARM GAS  /tmp/ccYexWBS.s 			page 31
 
 
  1047              	.LCFI15:
@@ -1858,7 +1858,7 @@ ARM GAS  /tmp/ccbGHVEI.s 			page 1
  1095              	.LFE158:
  1097              		.section	.text.HAL_UART_RxCpltCallback,"ax",%progbits
  1098              		.align	1
-ARM GAS  /tmp/ccbGHVEI.s 			page 32
+ARM GAS  /tmp/ccYexWBS.s 			page 32
 
 
  1099              		.global	HAL_UART_RxCpltCallback
@@ -1918,7 +1918,7 @@ ARM GAS  /tmp/ccbGHVEI.s 			page 1
  1146              	.LVL98:
  1147              	.L82:
  672:Src/main.c    **** 		} else {
-ARM GAS  /tmp/ccbGHVEI.s 			page 33
+ARM GAS  /tmp/ccYexWBS.s 			page 33
 
 
  673:Src/main.c    **** 			if (debug_rx_count == MAX_DEBUG_RX_L) {
@@ -1978,7 +1978,7 @@ ARM GAS  /tmp/ccbGHVEI.s 			page 1
  1185 005e E4E7     		b	.L82
  1186              	.L88:
  1187              		.align	2
-ARM GAS  /tmp/ccbGHVEI.s 			page 34
+ARM GAS  /tmp/ccYexWBS.s 			page 34
 
 
  1188              	.L87:
@@ -2038,7 +2038,7 @@ ARM GAS  /tmp/ccbGHVEI.s 			page 1
  1230              	.LVL106:
  700:Src/main.c    **** 
  701:Src/main.c    **** 	HAL_Delay(100);
-ARM GAS  /tmp/ccbGHVEI.s 			page 35
+ARM GAS  /tmp/ccYexWBS.s 			page 35
 
 
  1231              		.loc 1 701 0
@@ -2098,7 +2098,7 @@ ARM GAS  /tmp/ccbGHVEI.s 			page 1
  1279 0018 8361     		str	r3, [r0, #24]
  405:Src/main.c    ****   huart3.Init.OneBitSampling = UART_ONE_BIT_SAMPLE_DISABLE;
  1280              		.loc 1 405 0
-ARM GAS  /tmp/ccbGHVEI.s 			page 36
+ARM GAS  /tmp/ccYexWBS.s 			page 36
 
 
  1281 001a C361     		str	r3, [r0, #28]
@@ -2158,7 +2158,7 @@ ARM GAS  /tmp/ccbGHVEI.s 			page 1
  1329              		.loc 1 289 0
  1330 0008 0323     		movs	r3, #3
  1331 000a 4360     		str	r3, [r0, #4]
-ARM GAS  /tmp/ccbGHVEI.s 			page 37
+ARM GAS  /tmp/ccYexWBS.s 			page 37
 
 
  290:Src/main.c    ****   hcan1.Init.SyncJumpWidth = CAN_SJW_1TQ;
@@ -2218,7 +2218,7 @@ ARM GAS  /tmp/ccbGHVEI.s 			page 1
  1373              		.cfi_endproc
  1374              	.LFE145:
  1376              		.section	.text.MX_TIM2_Init,"ax",%progbits
-ARM GAS  /tmp/ccbGHVEI.s 			page 38
+ARM GAS  /tmp/ccYexWBS.s 			page 38
 
 
  1377              		.align	1
@@ -2278,7 +2278,7 @@ ARM GAS  /tmp/ccbGHVEI.s 			page 1
  1422              		.loc 1 362 0
  1423 002c FFF7FEFF 		bl	HAL_TIM_Base_Init
  1424              	.LVL112:
-ARM GAS  /tmp/ccbGHVEI.s 			page 39
+ARM GAS  /tmp/ccYexWBS.s 			page 39
 
 
  1425 0030 98B9     		cbnz	r0, .L110
@@ -2338,7 +2338,7 @@ ARM GAS  /tmp/ccbGHVEI.s 			page 1
  1470 0066 FFF7FEFF 		bl	Error_Handler
  1471              	.LVL117:
  381:Src/main.c    **** 
-ARM GAS  /tmp/ccbGHVEI.s 			page 40
+ARM GAS  /tmp/ccYexWBS.s 			page 40
 
 
  1472              		.loc 1 381 0
@@ -2398,7 +2398,7 @@ ARM GAS  /tmp/ccbGHVEI.s 			page 1
  1523              		.loc 1 197 0
  1524 0024 294B     		ldr	r3, .L125
  1525 0026 1A6C     		ldr	r2, [r3, #64]
-ARM GAS  /tmp/ccbGHVEI.s 			page 41
+ARM GAS  /tmp/ccYexWBS.s 			page 41
 
 
  1526 0028 42F08052 		orr	r2, r2, #268435456
@@ -2458,7 +2458,7 @@ ARM GAS  /tmp/ccbGHVEI.s 			page 1
  1569 006a 2BA8     		add	r0, sp, #172
  1570 006c FFF7FEFF 		bl	HAL_RCC_OscConfig
  1571              	.LVL120:
-ARM GAS  /tmp/ccbGHVEI.s 			page 42
+ARM GAS  /tmp/ccYexWBS.s 			page 42
 
 
  1572 0070 F8B9     		cbnz	r0, .L121
@@ -2518,7 +2518,7 @@ ARM GAS  /tmp/ccbGHVEI.s 			page 1
  1614              	.LVL123:
  1615 00ac 50B9     		cbnz	r0, .L124
  1616              	.L115:
-ARM GAS  /tmp/ccbGHVEI.s 			page 43
+ARM GAS  /tmp/ccYexWBS.s 			page 43
 
 
  242:Src/main.c    **** 
@@ -2578,7 +2578,7 @@ ARM GAS  /tmp/ccbGHVEI.s 			page 1
  1666              		.loc 1 91 0
  1667              		.cfi_startproc
  1668              		@ Volatile: function does not return.
-ARM GAS  /tmp/ccbGHVEI.s 			page 44
+ARM GAS  /tmp/ccYexWBS.s 			page 44
 
 
  1669              		@ args = 0, pretend = 0, frame = 0
@@ -2638,7 +2638,7 @@ ARM GAS  /tmp/ccbGHVEI.s 			page 1
  1711              		.loc 1 127 0
  1712 0034 1322     		movs	r2, #19
  1713 0036 83F8992D 		strb	r2, [r3, #3481]
-ARM GAS  /tmp/ccbGHVEI.s 			page 45
+ARM GAS  /tmp/ccYexWBS.s 			page 45
 
 
  128:Src/main.c    **** 
@@ -2698,7 +2698,7 @@ ARM GAS  /tmp/ccbGHVEI.s 			page 1
  153:Src/main.c    **** 		can1.dataTx[1] = 0;
  1756              		.loc 1 153 0
  1757 0074 154A     		ldr	r2, .L137+4
-ARM GAS  /tmp/ccbGHVEI.s 			page 46
+ARM GAS  /tmp/ccYexWBS.s 			page 46
 
 
  1758 0076 0023     		movs	r3, #0
@@ -2758,7 +2758,7 @@ ARM GAS  /tmp/ccbGHVEI.s 			page 1
  1800 00b2 DFD1     		bne	.L128
  176:Src/main.c    **** 		}
  1801              		.loc 1 176 0
-ARM GAS  /tmp/ccbGHVEI.s 			page 47
+ARM GAS  /tmp/ccYexWBS.s 			page 47
 
 
  1802 00b4 FFF7FEFF 		bl	run
@@ -2818,7 +2818,7 @@ ARM GAS  /tmp/ccbGHVEI.s 			page 1
  1852      30204655 
  1852      4C4C0D0A 
  1852      00
-ARM GAS  /tmp/ccbGHVEI.s 			page 48
+ARM GAS  /tmp/ccYexWBS.s 			page 48
 
 
  1853              		.section	.rodata.HAL_CAN_RxFifo1FullCallback.str1.4,"aMS",%progbits,1
@@ -2878,7 +2878,7 @@ ARM GAS  /tmp/ccbGHVEI.s 			page 1
  1888              		.file 8 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_def.h"
  1889              		.file 9 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_rcc_ex.h"
  1890              		.file 10 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_rcc.h"
-ARM GAS  /tmp/ccbGHVEI.s 			page 49
+ARM GAS  /tmp/ccYexWBS.s 			page 49
 
 
  1891              		.file 11 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_gpio.h"
@@ -2910,87 +2910,87 @@ ARM GAS  /tmp/ccbGHVEI.s 			page 1
  1917              		.file 37 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_cortex.h"
  1918              		.file 38 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_pwr_ex.h"
  1919              		.file 39 "Inc/sd.h"
-ARM GAS  /tmp/ccbGHVEI.s 			page 50
+ARM GAS  /tmp/ccYexWBS.s 			page 50
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 main.c
-     /tmp/ccbGHVEI.s:17     .text.MX_SDMMC1_SD_Init:0000000000000000 $t
-     /tmp/ccbGHVEI.s:23     .text.MX_SDMMC1_SD_Init:0000000000000000 MX_SDMMC1_SD_Init
-     /tmp/ccbGHVEI.s:53     .text.MX_SDMMC1_SD_Init:0000000000000018 $d
+     /tmp/ccYexWBS.s:17     .text.MX_SDMMC1_SD_Init:0000000000000000 $t
+     /tmp/ccYexWBS.s:23     .text.MX_SDMMC1_SD_Init:0000000000000000 MX_SDMMC1_SD_Init
+     /tmp/ccYexWBS.s:53     .text.MX_SDMMC1_SD_Init:0000000000000018 $d
                             *COM*:0000000000000084 hsd1
-     /tmp/ccbGHVEI.s:59     .text.MX_GPIO_Init:0000000000000000 $t
-     /tmp/ccbGHVEI.s:65     .text.MX_GPIO_Init:0000000000000000 MX_GPIO_Init
-     /tmp/ccbGHVEI.s:183    .text.MX_GPIO_Init:00000000000000a4 $d
-     /tmp/ccbGHVEI.s:191    .text.MX_NVIC_Init:0000000000000000 $t
-     /tmp/ccbGHVEI.s:197    .text.MX_NVIC_Init:0000000000000000 MX_NVIC_Init
-     /tmp/ccbGHVEI.s:283    .text.HAL_TIM_PeriodElapsedCallback:0000000000000000 $t
-     /tmp/ccbGHVEI.s:290    .text.HAL_TIM_PeriodElapsedCallback:0000000000000000 HAL_TIM_PeriodElapsedCallback
-     /tmp/ccbGHVEI.s:478    .text.HAL_TIM_PeriodElapsedCallback:00000000000000f4 $d
+     /tmp/ccYexWBS.s:59     .text.MX_GPIO_Init:0000000000000000 $t
+     /tmp/ccYexWBS.s:65     .text.MX_GPIO_Init:0000000000000000 MX_GPIO_Init
+     /tmp/ccYexWBS.s:183    .text.MX_GPIO_Init:00000000000000a4 $d
+     /tmp/ccYexWBS.s:191    .text.MX_NVIC_Init:0000000000000000 $t
+     /tmp/ccYexWBS.s:197    .text.MX_NVIC_Init:0000000000000000 MX_NVIC_Init
+     /tmp/ccYexWBS.s:283    .text.HAL_TIM_PeriodElapsedCallback:0000000000000000 $t
+     /tmp/ccYexWBS.s:290    .text.HAL_TIM_PeriodElapsedCallback:0000000000000000 HAL_TIM_PeriodElapsedCallback
+     /tmp/ccYexWBS.s:478    .text.HAL_TIM_PeriodElapsedCallback:00000000000000f4 $d
                             *COM*:0000000000000040 htim2
                             *COM*:0000000000000080 huart3
-     /tmp/ccbGHVEI.s:497    .text.HAL_CAN_RxFifo0MsgPendingCallback:0000000000000000 $t
-     /tmp/ccbGHVEI.s:504    .text.HAL_CAN_RxFifo0MsgPendingCallback:0000000000000000 HAL_CAN_RxFifo0MsgPendingCallback
-     /tmp/ccbGHVEI.s:576    .text.HAL_CAN_RxFifo0MsgPendingCallback:0000000000000044 $d
+     /tmp/ccYexWBS.s:497    .text.HAL_CAN_RxFifo0MsgPendingCallback:0000000000000000 $t
+     /tmp/ccYexWBS.s:504    .text.HAL_CAN_RxFifo0MsgPendingCallback:0000000000000000 HAL_CAN_RxFifo0MsgPendingCallback
+     /tmp/ccYexWBS.s:576    .text.HAL_CAN_RxFifo0MsgPendingCallback:0000000000000044 $d
                             *COM*:0000000000000028 hcan1
-     /tmp/ccbGHVEI.s:583    .text.HAL_CAN_RxFifo1MsgPendingCallback:0000000000000000 $t
-     /tmp/ccbGHVEI.s:590    .text.HAL_CAN_RxFifo1MsgPendingCallback:0000000000000000 HAL_CAN_RxFifo1MsgPendingCallback
-     /tmp/ccbGHVEI.s:624    .text.HAL_CAN_RxFifo1MsgPendingCallback:0000000000000018 $d
-     /tmp/ccbGHVEI.s:631    .text.HAL_CAN_RxFifo0FullCallback:0000000000000000 $t
-     /tmp/ccbGHVEI.s:638    .text.HAL_CAN_RxFifo0FullCallback:0000000000000000 HAL_CAN_RxFifo0FullCallback
-     /tmp/ccbGHVEI.s:672    .text.HAL_CAN_RxFifo0FullCallback:0000000000000018 $d
-     /tmp/ccbGHVEI.s:679    .text.HAL_CAN_RxFifo1FullCallback:0000000000000000 $t
-     /tmp/ccbGHVEI.s:686    .text.HAL_CAN_RxFifo1FullCallback:0000000000000000 HAL_CAN_RxFifo1FullCallback
-     /tmp/ccbGHVEI.s:720    .text.HAL_CAN_RxFifo1FullCallback:0000000000000018 $d
-     /tmp/ccbGHVEI.s:727    .text.HAL_CAN_TxMailbox0CompleteCallback:0000000000000000 $t
-     /tmp/ccbGHVEI.s:734    .text.HAL_CAN_TxMailbox0CompleteCallback:0000000000000000 HAL_CAN_TxMailbox0CompleteCallback
-     /tmp/ccbGHVEI.s:817    .text.HAL_CAN_TxMailbox0CompleteCallback:0000000000000068 $d
-     /tmp/ccbGHVEI.s:828    .text.HAL_CAN_TxMailbox1CompleteCallback:0000000000000000 $t
-     /tmp/ccbGHVEI.s:835    .text.HAL_CAN_TxMailbox1CompleteCallback:0000000000000000 HAL_CAN_TxMailbox1CompleteCallback
-     /tmp/ccbGHVEI.s:919    .text.HAL_CAN_TxMailbox1CompleteCallback:000000000000006c $d
-     /tmp/ccbGHVEI.s:930    .text.HAL_CAN_TxMailbox2CompleteCallback:0000000000000000 $t
-     /tmp/ccbGHVEI.s:937    .text.HAL_CAN_TxMailbox2CompleteCallback:0000000000000000 HAL_CAN_TxMailbox2CompleteCallback
-     /tmp/ccbGHVEI.s:1021   .text.HAL_CAN_TxMailbox2CompleteCallback:000000000000006c $d
-     /tmp/ccbGHVEI.s:1032   .text.HAL_CAN_ErrorCallback:0000000000000000 $t
-     /tmp/ccbGHVEI.s:1039   .text.HAL_CAN_ErrorCallback:0000000000000000 HAL_CAN_ErrorCallback
-     /tmp/ccbGHVEI.s:1089   .text.HAL_CAN_ErrorCallback:0000000000000034 $d
-     /tmp/ccbGHVEI.s:1098   .text.HAL_UART_RxCpltCallback:0000000000000000 $t
-     /tmp/ccbGHVEI.s:1105   .text.HAL_UART_RxCpltCallback:0000000000000000 HAL_UART_RxCpltCallback
-     /tmp/ccbGHVEI.s:1189   .text.HAL_UART_RxCpltCallback:0000000000000060 $d
-     /tmp/ccbGHVEI.s:1197   .text.Error_Handler:0000000000000000 $t
-     /tmp/ccbGHVEI.s:1204   .text.Error_Handler:0000000000000000 Error_Handler
-     /tmp/ccbGHVEI.s:1239   .text.Error_Handler:0000000000000028 $d
-     /tmp/ccbGHVEI.s:1244   .text.MX_USART3_UART_Init:0000000000000000 $t
-     /tmp/ccbGHVEI.s:1250   .text.MX_USART3_UART_Init:0000000000000000 MX_USART3_UART_Init
-     /tmp/ccbGHVEI.s:1301   .text.MX_USART3_UART_Init:0000000000000030 $d
-     /tmp/ccbGHVEI.s:1308   .text.MX_CAN1_Init:0000000000000000 $t
-     /tmp/ccbGHVEI.s:1314   .text.MX_CAN1_Init:0000000000000000 MX_CAN1_Init
-     /tmp/ccbGHVEI.s:1371   .text.MX_CAN1_Init:000000000000003c $d
-     /tmp/ccbGHVEI.s:1377   .text.MX_TIM2_Init:0000000000000000 $t
-     /tmp/ccbGHVEI.s:1383   .text.MX_TIM2_Init:0000000000000000 MX_TIM2_Init
-     /tmp/ccbGHVEI.s:1477   .text.MX_TIM2_Init:000000000000006c $d
-     /tmp/ccbGHVEI.s:1482   .text.SystemClock_Config:0000000000000000 $t
-ARM GAS  /tmp/ccbGHVEI.s 			page 51
+     /tmp/ccYexWBS.s:583    .text.HAL_CAN_RxFifo1MsgPendingCallback:0000000000000000 $t
+     /tmp/ccYexWBS.s:590    .text.HAL_CAN_RxFifo1MsgPendingCallback:0000000000000000 HAL_CAN_RxFifo1MsgPendingCallback
+     /tmp/ccYexWBS.s:624    .text.HAL_CAN_RxFifo1MsgPendingCallback:0000000000000018 $d
+     /tmp/ccYexWBS.s:631    .text.HAL_CAN_RxFifo0FullCallback:0000000000000000 $t
+     /tmp/ccYexWBS.s:638    .text.HAL_CAN_RxFifo0FullCallback:0000000000000000 HAL_CAN_RxFifo0FullCallback
+     /tmp/ccYexWBS.s:672    .text.HAL_CAN_RxFifo0FullCallback:0000000000000018 $d
+     /tmp/ccYexWBS.s:679    .text.HAL_CAN_RxFifo1FullCallback:0000000000000000 $t
+     /tmp/ccYexWBS.s:686    .text.HAL_CAN_RxFifo1FullCallback:0000000000000000 HAL_CAN_RxFifo1FullCallback
+     /tmp/ccYexWBS.s:720    .text.HAL_CAN_RxFifo1FullCallback:0000000000000018 $d
+     /tmp/ccYexWBS.s:727    .text.HAL_CAN_TxMailbox0CompleteCallback:0000000000000000 $t
+     /tmp/ccYexWBS.s:734    .text.HAL_CAN_TxMailbox0CompleteCallback:0000000000000000 HAL_CAN_TxMailbox0CompleteCallback
+     /tmp/ccYexWBS.s:817    .text.HAL_CAN_TxMailbox0CompleteCallback:0000000000000068 $d
+     /tmp/ccYexWBS.s:828    .text.HAL_CAN_TxMailbox1CompleteCallback:0000000000000000 $t
+     /tmp/ccYexWBS.s:835    .text.HAL_CAN_TxMailbox1CompleteCallback:0000000000000000 HAL_CAN_TxMailbox1CompleteCallback
+     /tmp/ccYexWBS.s:919    .text.HAL_CAN_TxMailbox1CompleteCallback:000000000000006c $d
+     /tmp/ccYexWBS.s:930    .text.HAL_CAN_TxMailbox2CompleteCallback:0000000000000000 $t
+     /tmp/ccYexWBS.s:937    .text.HAL_CAN_TxMailbox2CompleteCallback:0000000000000000 HAL_CAN_TxMailbox2CompleteCallback
+     /tmp/ccYexWBS.s:1021   .text.HAL_CAN_TxMailbox2CompleteCallback:000000000000006c $d
+     /tmp/ccYexWBS.s:1032   .text.HAL_CAN_ErrorCallback:0000000000000000 $t
+     /tmp/ccYexWBS.s:1039   .text.HAL_CAN_ErrorCallback:0000000000000000 HAL_CAN_ErrorCallback
+     /tmp/ccYexWBS.s:1089   .text.HAL_CAN_ErrorCallback:0000000000000034 $d
+     /tmp/ccYexWBS.s:1098   .text.HAL_UART_RxCpltCallback:0000000000000000 $t
+     /tmp/ccYexWBS.s:1105   .text.HAL_UART_RxCpltCallback:0000000000000000 HAL_UART_RxCpltCallback
+     /tmp/ccYexWBS.s:1189   .text.HAL_UART_RxCpltCallback:0000000000000060 $d
+     /tmp/ccYexWBS.s:1197   .text.Error_Handler:0000000000000000 $t
+     /tmp/ccYexWBS.s:1204   .text.Error_Handler:0000000000000000 Error_Handler
+     /tmp/ccYexWBS.s:1239   .text.Error_Handler:0000000000000028 $d
+     /tmp/ccYexWBS.s:1244   .text.MX_USART3_UART_Init:0000000000000000 $t
+     /tmp/ccYexWBS.s:1250   .text.MX_USART3_UART_Init:0000000000000000 MX_USART3_UART_Init
+     /tmp/ccYexWBS.s:1301   .text.MX_USART3_UART_Init:0000000000000030 $d
+     /tmp/ccYexWBS.s:1308   .text.MX_CAN1_Init:0000000000000000 $t
+     /tmp/ccYexWBS.s:1314   .text.MX_CAN1_Init:0000000000000000 MX_CAN1_Init
+     /tmp/ccYexWBS.s:1371   .text.MX_CAN1_Init:000000000000003c $d
+     /tmp/ccYexWBS.s:1377   .text.MX_TIM2_Init:0000000000000000 $t
+     /tmp/ccYexWBS.s:1383   .text.MX_TIM2_Init:0000000000000000 MX_TIM2_Init
+     /tmp/ccYexWBS.s:1477   .text.MX_TIM2_Init:000000000000006c $d
+     /tmp/ccYexWBS.s:1482   .text.SystemClock_Config:0000000000000000 $t
+ARM GAS  /tmp/ccYexWBS.s 			page 51
 
 
-     /tmp/ccbGHVEI.s:1489   .text.SystemClock_Config:0000000000000000 SystemClock_Config
-     /tmp/ccbGHVEI.s:1650   .text.SystemClock_Config:00000000000000cc $d
-     /tmp/ccbGHVEI.s:1657   .text.main:0000000000000000 $t
-     /tmp/ccbGHVEI.s:1664   .text.main:0000000000000000 main
-     /tmp/ccbGHVEI.s:1818   .text.main:00000000000000c8 $d
+     /tmp/ccYexWBS.s:1489   .text.SystemClock_Config:0000000000000000 SystemClock_Config
+     /tmp/ccYexWBS.s:1650   .text.SystemClock_Config:00000000000000cc $d
+     /tmp/ccYexWBS.s:1657   .text.main:0000000000000000 $t
+     /tmp/ccYexWBS.s:1664   .text.main:0000000000000000 main
+     /tmp/ccYexWBS.s:1818   .text.main:00000000000000c8 $d
                             *COM*:0000000000000001 current_state
-     /tmp/ccbGHVEI.s:1843   .bss.counter:0000000000000000 counter
+     /tmp/ccYexWBS.s:1843   .bss.counter:0000000000000000 counter
                             *COM*:0000000000000028 sFilter
                             *COM*:0000000000000001 i_debug
-     /tmp/ccbGHVEI.s:1839   .bss.counter:0000000000000000 $d
-     /tmp/ccbGHVEI.s:1846   .rodata.HAL_CAN_ErrorCallback.str1.4:0000000000000000 $d
-     /tmp/ccbGHVEI.s:1850   .rodata.HAL_CAN_RxFifo0FullCallback.str1.4:0000000000000000 $d
-     /tmp/ccbGHVEI.s:1854   .rodata.HAL_CAN_RxFifo1FullCallback.str1.4:0000000000000000 $d
-     /tmp/ccbGHVEI.s:1858   .rodata.HAL_CAN_RxFifo1MsgPendingCallback.str1.4:0000000000000000 $d
-     /tmp/ccbGHVEI.s:1862   .rodata.HAL_CAN_TxMailbox0CompleteCallback.str1.4:0000000000000000 $d
-     /tmp/ccbGHVEI.s:1869   .rodata.HAL_CAN_TxMailbox1CompleteCallback.str1.4:0000000000000000 $d
-     /tmp/ccbGHVEI.s:1873   .rodata.HAL_CAN_TxMailbox2CompleteCallback.str1.4:0000000000000000 $d
-     /tmp/ccbGHVEI.s:1877   .rodata.HAL_TIM_PeriodElapsedCallback.str1.4:0000000000000000 $d
+     /tmp/ccYexWBS.s:1839   .bss.counter:0000000000000000 $d
+     /tmp/ccYexWBS.s:1846   .rodata.HAL_CAN_ErrorCallback.str1.4:0000000000000000 $d
+     /tmp/ccYexWBS.s:1850   .rodata.HAL_CAN_RxFifo0FullCallback.str1.4:0000000000000000 $d
+     /tmp/ccYexWBS.s:1854   .rodata.HAL_CAN_RxFifo1FullCallback.str1.4:0000000000000000 $d
+     /tmp/ccYexWBS.s:1858   .rodata.HAL_CAN_RxFifo1MsgPendingCallback.str1.4:0000000000000000 $d
+     /tmp/ccYexWBS.s:1862   .rodata.HAL_CAN_TxMailbox0CompleteCallback.str1.4:0000000000000000 $d
+     /tmp/ccYexWBS.s:1869   .rodata.HAL_CAN_TxMailbox1CompleteCallback.str1.4:0000000000000000 $d
+     /tmp/ccYexWBS.s:1873   .rodata.HAL_CAN_TxMailbox2CompleteCallback.str1.4:0000000000000000 $d
+     /tmp/ccYexWBS.s:1877   .rodata.HAL_TIM_PeriodElapsedCallback.str1.4:0000000000000000 $d
                      .debug_frame:0000000000000010 $d
 
 UNDEFINED SYMBOLS
@@ -3030,7 +3030,7 @@ debug_msg_arrived
 HAL_Delay
 HAL_UART_Init
 HAL_CAN_Init
-ARM GAS  /tmp/ccbGHVEI.s 			page 52
+ARM GAS  /tmp/ccYexWBS.s 			page 52
 
 
 HAL_TIM_Base_Init

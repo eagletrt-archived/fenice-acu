@@ -109,6 +109,7 @@ extern uint8_t accel_implausibility_check_count;
 //from steer
 #define ID_STEERING_WEEL_1 0xA0
 #define ID_STEERING_WEEL_2 0xAF
+#define REQUEST_TS_ON 2
 //from BMS
 #define ID_BMS_HV 0xAA
 #define ID_BMS_LV 0xFF

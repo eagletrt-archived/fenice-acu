@@ -5,6 +5,11 @@
 #include "stm32f7xx_hal.h"
 #include "string.h"
 
+/*******************************************************************
+ *                         STATE VARIABLES
+ *******************************************************************/ 
+int setup_init = 0;
+int critical_errors = 0;
 // Default state
 // Init variables
 /*******************************************************************
@@ -33,7 +38,7 @@ void init()
 	if (fifoRxDataCAN_pop(&can3))
 	{
 	}
-	current_state = STATE_IDLE;
+	current_state = STATE_IDLE; // Change state to STATE_IDLE
 }
 /*******************************************************************
  *                         END INIT STATE
@@ -56,19 +61,13 @@ void idle()
 		debug_msg_arrived = 0; // reset flag
 		debug_operations();
 	}
-	if (fifoRxDataCAN_pop(&can1))
+	if (fifoRxDataCAN_pop(&can1)) // Check if there are messages on CAN1 fifo
 	{
 		switch (can1.rx_id)
 		{
 		case ID_ASK_STATE:
 			can1.dataTx[0] = (uint8_t)current_state;
-			can1.dataTx[1] = 0;
-			can1.dataTx[2] = 0;
-			can1.dataTx[3] = 0;
-			can1.dataTx[4] = 0;
-			can1.dataTx[5] = 0;
-			can1.dataTx[6] = 0;
-			can1.dataTx[7] = 0;
+			can1.tx_size = 1;
 			can1.tx_id = ID_ACU_1;
 			CAN_Send(&can1, normalPriority);
 			break;
@@ -89,13 +88,13 @@ void idle()
 		case ID_BMS_LV:
 			break;
 		case ID_STEERING_WEEL_1:
-			if (can1.dataRx[0] == 2)
-			{ //----- change the current state -----//
-				current_state = can1.dataRx[1];
-			}
-			else if (can1.dataRx[0] == 3)
-			{ //----- change state to setup -----//
+			switch (can1.dataRx[0])
+			{
+			case REQUEST_TS_ON:
+				//If req Tractive System ON msg arrives -> go to setup state
 				current_state = STATE_SETUP;
+			default:
+				break;
 			}
 			break;
 		case ID_ATC_POT:
@@ -114,6 +113,23 @@ void idle()
  *******************************************************************/
 void setup()
 {
+	if(setup_init == 0){
+		setup_init = 1; //set that setup procedure is started
+		if((atc_connected == 1) && (brake.pot_avr_100 > 50) && (critical_errors = 0)){
+			//If Analog to CAN device is connected, brake is pressed and there aren't critical erros -> send request of TS ON to BMS_HV
+			can1.dataTx[0] = 1;
+			can1.tx_size = 1;
+			can1.tx_id = ID_ACU_1;
+			CAN_Send(&can1, normalPriority);
+		}else{
+			//Can't turn on TS caused by some errors
+			current_state = STATE_IDLE; //return to idle state
+			can1.dataTx[0] = 1;
+			can1.tx_size = 1;
+			can1.tx_id = ID_ACU_2;
+			CAN_Send(&can1, highPriority);
+		}
+	}
 	if (fifoRxDataCAN_pop(&can1))
 	{
 		switch (can1.rx_id)
@@ -121,10 +137,6 @@ void setup()
 		case ID_STEERING_WEEL_1:
 			switch (can1.dataRx[0])
 			{
-			//----- change state to idle -----//
-			case 4:
-				current_state = STATE_IDLE;
-				break;
 			//----- change state to run -----//
 			case 5:
 				// If inverter are ON and Brake is Pressed
@@ -142,7 +154,10 @@ void setup()
 			case 9:
 				// if Iverter Temp < 80
 				break;
+			default:
+				break;
 			}
+			break;
 		case ID_BMS_HV:
 			switch (can1.dataRx[0])
 			{

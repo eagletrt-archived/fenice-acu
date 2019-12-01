@@ -1,4 +1,4 @@
-ARM GAS  /tmp/cciboz87.s 			page 1
+ARM GAS  /tmp/ccoURhjd.s 			page 1
 
 
    1              		.cpu cortex-m7
@@ -58,7 +58,7 @@ ARM GAS  /tmp/cciboz87.s 			page 1
   30:Src/sd.c      **** 
   31:Src/sd.c      **** char *pointer;
   32:Src/sd.c      **** char log_names[1100];
-ARM GAS  /tmp/cciboz87.s 			page 2
+ARM GAS  /tmp/ccoURhjd.s 			page 2
 
 
   33:Src/sd.c      **** 
@@ -118,7 +118,7 @@ ARM GAS  /tmp/cciboz87.s 			page 1
   63:Src/sd.c      **** 			sprintf(name, "log_%d ", i);
   64:Src/sd.c      **** 
   65:Src/sd.c      **** 			pointer = strstr(log_names, name);
-ARM GAS  /tmp/cciboz87.s 			page 3
+ARM GAS  /tmp/ccoURhjd.s 			page 3
 
 
   66:Src/sd.c      **** 
@@ -178,7 +178,7 @@ ARM GAS  /tmp/cciboz87.s 			page 1
  120:Src/sd.c      **** 				break;
  121:Src/sd.c      **** 			}
  122:Src/sd.c      **** 		}
-ARM GAS  /tmp/cciboz87.s 			page 4
+ARM GAS  /tmp/ccoURhjd.s 			page 4
 
 
  123:Src/sd.c      **** 
@@ -238,7 +238,7 @@ ARM GAS  /tmp/cciboz87.s 			page 1
  172:Src/sd.c      **** }...
   56              		.loc 1 172 0
   57 001a 46B0     		add	sp, sp, #280
-ARM GAS  /tmp/cciboz87.s 			page 5
+ARM GAS  /tmp/ccoURhjd.s 			page 5
 
 
   58              	.LCFI2:
@@ -298,7 +298,7 @@ ARM GAS  /tmp/cciboz87.s 			page 1
  106 005e 2046     		mov	r0, r4
  107 0060 FFF7FEFF 		bl	f_close
  108              	.LVL6:
-ARM GAS  /tmp/cciboz87.s 			page 6
+ARM GAS  /tmp/ccoURhjd.s 			page 6
 
 
   59:Src/sd.c      **** 		f_open(&log_names_f, (TCHAR const*)&name_txt, FA_OPEN_APPEND | FA_OPEN_ALWAYS | FA_WRITE );
@@ -358,7 +358,7 @@ ARM GAS  /tmp/cciboz87.s 			page 1
  156 00a6 7948     		ldr	r0, .L18+28
  157 00a8 FFF7FEFF 		bl	HAL_UART_Transmit
  158              	.LVL14:
-ARM GAS  /tmp/cciboz87.s 			page 7
+ARM GAS  /tmp/ccoURhjd.s 			page 7
 
 
   77:Src/sd.c      **** 				successfull_opening = 1;
@@ -418,7 +418,7 @@ ARM GAS  /tmp/cciboz87.s 			page 1
  205              		.loc 1 156 0
  206 00f6 042B     		cmp	r3, #4
  207 00f8 00F08680 		beq	.L15
-ARM GAS  /tmp/cciboz87.s 			page 8
+ARM GAS  /tmp/ccoURhjd.s 			page 8
 
 
  208              	.L10:
@@ -478,7 +478,7 @@ ARM GAS  /tmp/cciboz87.s 			page 1
  253 0134 0028     		cmp	r0, #0
  254 0136 E5D1     		bne	.L7
   84:Src/sd.c      **** 				sprintf(filename_log, "log_0 \r\n");
-ARM GAS  /tmp/cciboz87.s 			page 9
+ARM GAS  /tmp/ccoURhjd.s 			page 9
 
 
  255              		.loc 1 84 0 is_stmt 1
@@ -538,7 +538,7 @@ ARM GAS  /tmp/cciboz87.s 			page 1
  303              	.LVL31:
   97:Src/sd.c      **** 				successfull_opening = 1;
  304              		.loc 1 97 0
-ARM GAS  /tmp/cciboz87.s 			page 10
+ARM GAS  /tmp/ccoURhjd.s 			page 10
 
 
  305 018a 0122     		movs	r2, #1
@@ -598,7 +598,7 @@ ARM GAS  /tmp/cciboz87.s 			page 1
  114:Src/sd.c      **** 				HAL_UART_Transmit(&huart3,(uint8_t*)"\r\ncreated -> ",strlen("\r\ncreated -> "),10);
  352              		.loc 1 114 0
  353 01d4 2D4C     		ldr	r4, .L18+28
-ARM GAS  /tmp/cciboz87.s 			page 11
+ARM GAS  /tmp/ccoURhjd.s 			page 11
 
 
  354 01d6 0A23     		movs	r3, #10
@@ -658,7 +658,7 @@ ARM GAS  /tmp/cciboz87.s 			page 1
  401              	.LVL47:
  402 0224 6423     		movs	r3, #100
  403 0226 82B2     		uxth	r2, r0
-ARM GAS  /tmp/cciboz87.s 			page 12
+ARM GAS  /tmp/ccoURhjd.s 			page 12
 
 
  404 0228 2146     		mov	r1, r4
@@ -718,7 +718,7 @@ ARM GAS  /tmp/cciboz87.s 			page 1
  454 029c 00000000 		.word	bytes_read
  455 02a0 00000000 		.word	log_names
  456 02a4 00000000 		.word	filename_log
-ARM GAS  /tmp/cciboz87.s 			page 13
+ARM GAS  /tmp/ccoURhjd.s 			page 13
 
 
  457 02a8 34000000 		.word	.LC3
@@ -778,7 +778,7 @@ ARM GAS  /tmp/cciboz87.s 			page 1
  516              		.section	.bss.msg_index,"aw",%nobits
  517              		.align	2
  520              	msg_index:
-ARM GAS  /tmp/cciboz87.s 			page 14
+ARM GAS  /tmp/ccoURhjd.s 			page 14
 
 
  521 0000 00000000 		.space	4
@@ -838,7 +838,7 @@ ARM GAS  /tmp/cciboz87.s 			page 1
  568      2D3E2064 
  568      65666175 
  568      6C742E74 
-ARM GAS  /tmp/cciboz87.s 			page 15
+ARM GAS  /tmp/ccoURhjd.s 			page 15
 
 
  569 0059 000000   		.space	3
@@ -898,7 +898,7 @@ ARM GAS  /tmp/cciboz87.s 			page 1
  598      323A2025 
  598      640D0A00 
  599              	.LC15:
-ARM GAS  /tmp/cciboz87.s 			page 16
+ARM GAS  /tmp/ccoURhjd.s 			page 16
 
 
  600 00f0 30303030 		.ascii	"0000\015\0124096\015\0120000\015\0124096\000"
@@ -935,14 +935,14 @@ ARM GAS  /tmp/cciboz87.s 			page 1
  627              		.file 26 "Inc/global_variables.h"
  628              		.file 27 "/usr/include/newlib/stdio.h"
  629              		.file 28 "/usr/include/newlib/string.h"
-ARM GAS  /tmp/cciboz87.s 			page 17
+ARM GAS  /tmp/ccoURhjd.s 			page 17
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 sd.c
-     /tmp/cciboz87.s:17     .text.init_sd:0000000000000000 $t
-     /tmp/cciboz87.s:24     .text.init_sd:0000000000000000 init_sd
-     /tmp/cciboz87.s:443    .text.init_sd:0000000000000270 $d
+     /tmp/ccoURhjd.s:17     .text.init_sd:0000000000000000 $t
+     /tmp/ccoURhjd.s:24     .text.init_sd:0000000000000000 init_sd
+     /tmp/ccoURhjd.s:443    .text.init_sd:0000000000000270 $d
                             *COM*:0000000000000001 res_mount
                             *COM*:0000000000000230 log_names_f
                             *COM*:0000000000000001 res_open
@@ -954,24 +954,24 @@ DEFINED SYMBOLS
                             *COM*:0000000000000230 pot_values_f
                             *COM*:0000000000000004 pointer
                             *COM*:0000000000000004 byteswritten
-     /tmp/cciboz87.s:532    .bss.successfull_opening:0000000000000000 successfull_opening
-     /tmp/cciboz87.s:525    .bss.pot_values_loaded:0000000000000000 pot_values_loaded
-     /tmp/cciboz87.s:520    .bss.msg_index:0000000000000000 msg_index
-     /tmp/cciboz87.s:514    .bss.msg_counter:0000000000000000 msg_counter
-     /tmp/cciboz87.s:508    .bss.mount_ok:0000000000000000 mount_ok
-     /tmp/cciboz87.s:546    .data.max_files:0000000000000000 max_files
-     /tmp/cciboz87.s:539    .data.filename_pot:0000000000000000 filename_pot
-     /tmp/cciboz87.s:553    .data.name_txt:0000000000000000 name_txt
+     /tmp/ccoURhjd.s:532    .bss.successfull_opening:0000000000000000 successfull_opening
+     /tmp/ccoURhjd.s:525    .bss.pot_values_loaded:0000000000000000 pot_values_loaded
+     /tmp/ccoURhjd.s:520    .bss.msg_index:0000000000000000 msg_index
+     /tmp/ccoURhjd.s:514    .bss.msg_counter:0000000000000000 msg_counter
+     /tmp/ccoURhjd.s:508    .bss.mount_ok:0000000000000000 mount_ok
+     /tmp/ccoURhjd.s:546    .data.max_files:0000000000000000 max_files
+     /tmp/ccoURhjd.s:539    .data.filename_pot:0000000000000000 filename_pot
+     /tmp/ccoURhjd.s:553    .data.name_txt:0000000000000000 name_txt
                             *COM*:0000000000000100 message
-     /tmp/cciboz87.s:504    .bss.mount_ok:0000000000000000 $d
-     /tmp/cciboz87.s:511    .bss.msg_counter:0000000000000000 $d
-     /tmp/cciboz87.s:517    .bss.msg_index:0000000000000000 $d
-     /tmp/cciboz87.s:526    .bss.pot_values_loaded:0000000000000000 $d
-     /tmp/cciboz87.s:528    .bss.successfull_opening:0000000000000000 $d
-     /tmp/cciboz87.s:535    .data.filename_pot:0000000000000000 $d
-     /tmp/cciboz87.s:542    .data.max_files:0000000000000000 $d
-     /tmp/cciboz87.s:549    .data.name_txt:0000000000000000 $d
-     /tmp/cciboz87.s:556    .rodata.init_sd.str1.4:0000000000000000 $d
+     /tmp/ccoURhjd.s:504    .bss.mount_ok:0000000000000000 $d
+     /tmp/ccoURhjd.s:511    .bss.msg_counter:0000000000000000 $d
+     /tmp/ccoURhjd.s:517    .bss.msg_index:0000000000000000 $d
+     /tmp/ccoURhjd.s:526    .bss.pot_values_loaded:0000000000000000 $d
+     /tmp/ccoURhjd.s:528    .bss.successfull_opening:0000000000000000 $d
+     /tmp/ccoURhjd.s:535    .data.filename_pot:0000000000000000 $d
+     /tmp/ccoURhjd.s:542    .data.max_files:0000000000000000 $d
+     /tmp/ccoURhjd.s:549    .data.name_txt:0000000000000000 $d
+     /tmp/ccoURhjd.s:556    .rodata.init_sd.str1.4:0000000000000000 $d
                      .debug_frame:0000000000000010 $d
 
 UNDEFINED SYMBOLS

@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccWGVQrs.s 			page 1
+ARM GAS  /tmp/ccw6FPXZ.s 			page 1
 
 
    1              		.cpu cortex-m7
@@ -33,288 +33,297 @@ ARM GAS  /tmp/ccWGVQrs.s 			page 1
    5:Src/state.c   **** #include "stm32f7xx_hal.h"
    6:Src/state.c   **** #include "string.h"
    7:Src/state.c   **** 
-   8:Src/state.c   **** // Default state
-   9:Src/state.c   **** // Init variables
-  10:Src/state.c   **** /*******************************************************************
-  11:Src/state.c   ****  *                         START INIT STATE
-  12:Src/state.c   ****  *******************************************************************/
-  13:Src/state.c   **** void init()
-  14:Src/state.c   **** {
-  15:Src/state.c   **** 	if (debug_msg_arrived == 1)
-  16:Src/state.c   **** 	{
-  17:Src/state.c   **** 		debug_msg_arrived = 0; // reset flag
-  18:Src/state.c   **** 		debug_operations();
-  19:Src/state.c   **** 	}
-  20:Src/state.c   **** 	if (fifoRxDataCAN_pop(&can1))
+   8:Src/state.c   **** /*******************************************************************
+   9:Src/state.c   ****  *                         STATE VARIABLES
+  10:Src/state.c   ****  *******************************************************************/ 
+  11:Src/state.c   **** int setup_init = 0;
+  12:Src/state.c   **** int critical_errors = 0;
+  13:Src/state.c   **** // Default state
+  14:Src/state.c   **** // Init variables
+  15:Src/state.c   **** /*******************************************************************
+  16:Src/state.c   ****  *                         START INIT STATE
+  17:Src/state.c   ****  *******************************************************************/
+  18:Src/state.c   **** void init()
+  19:Src/state.c   **** {
+  20:Src/state.c   **** 	if (debug_msg_arrived == 1)
   21:Src/state.c   **** 	{
-  22:Src/state.c   **** 		switch (can1.rx_id)
-  23:Src/state.c   **** 		{
-  24:Src/state.c   **** 		case ID_imu_acceleration:
-  25:Src/state.c   **** 		case ID_imu_angular_rate:
-  26:Src/state.c   **** 			imu_operations();
-  27:Src/state.c   **** 			break;
-  28:Src/state.c   **** 
-  29:Src/state.c   **** 		default:
-  30:Src/state.c   **** 			break;
-  31:Src/state.c   **** 		}
-  32:Src/state.c   **** 	}
-ARM GAS  /tmp/ccWGVQrs.s 			page 2
+  22:Src/state.c   **** 		debug_msg_arrived = 0; // reset flag
+  23:Src/state.c   **** 		debug_operations();
+  24:Src/state.c   **** 	}
+  25:Src/state.c   **** 	if (fifoRxDataCAN_pop(&can1))
+  26:Src/state.c   **** 	{
+  27:Src/state.c   **** 		switch (can1.rx_id)
+  28:Src/state.c   **** 		{
+  29:Src/state.c   **** 		case ID_imu_acceleration:
+  30:Src/state.c   **** 		case ID_imu_angular_rate:
+  31:Src/state.c   **** 			imu_operations();
+  32:Src/state.c   **** 			break;
+ARM GAS  /tmp/ccw6FPXZ.s 			page 2
 
 
-  33:Src/state.c   **** 	if (fifoRxDataCAN_pop(&can3))
-  34:Src/state.c   **** 	{
-  35:Src/state.c   **** 	}
-  36:Src/state.c   **** 	current_state = STATE_IDLE;
-  37:Src/state.c   **** }
-  38:Src/state.c   **** /*******************************************************************
-  39:Src/state.c   ****  *                         END INIT STATE
-  40:Src/state.c   ****  *******************************************************************/
-  41:Src/state.c   **** /*******************************************************************
-  42:Src/state.c   ****  *                        START IDLE STATE
-  43:Src/state.c   ****  *******************************************************************/
-  44:Src/state.c   **** void idle()
-  45:Src/state.c   **** {
-  46:Src/state.c   **** 	if (HAL_GPIO_ReadPin(USER_BUTTON_GPIO_Port,USER_BUTTON_Pin) == GPIO_PIN_SET){
-  47:Src/state.c   **** 		sprintf(txt,"%d\r\n%d\r\n%d\r\n%d\r\n",accel.pot1_val,accel.pot2_val,brake.pot1_val,brake.pot2_va
-  48:Src/state.c   **** 		HAL_UART_Transmit(&huart3,(uint8_t*)txt,strlen(txt),10);
-  49:Src/state.c   **** 		res_open = f_open(&pot_values_f, (TCHAR const*)&filename_pot, FA_OPEN_ALWAYS | FA_WRITE );
-  50:Src/state.c   **** 		f_write(&pot_values_f,(TCHAR const*)&txt,strlen(txt), &byteswritten);
-  51:Src/state.c   **** 		f_close(&pot_values_f);
-  52:Src/state.c   **** 		HAL_Delay(1000);
-  53:Src/state.c   **** 	}
-  54:Src/state.c   **** 	if (debug_msg_arrived == 1)
-  55:Src/state.c   **** 	{
-  56:Src/state.c   **** 		debug_msg_arrived = 0; // reset flag
-  57:Src/state.c   **** 		debug_operations();
+  33:Src/state.c   **** 
+  34:Src/state.c   **** 		default:
+  35:Src/state.c   **** 			break;
+  36:Src/state.c   **** 		}
+  37:Src/state.c   **** 	}
+  38:Src/state.c   **** 	if (fifoRxDataCAN_pop(&can3))
+  39:Src/state.c   **** 	{
+  40:Src/state.c   **** 	}
+  41:Src/state.c   **** 	current_state = STATE_IDLE; // Change state to STATE_IDLE
+  42:Src/state.c   **** }
+  43:Src/state.c   **** /*******************************************************************
+  44:Src/state.c   ****  *                         END INIT STATE
+  45:Src/state.c   ****  *******************************************************************/
+  46:Src/state.c   **** /*******************************************************************
+  47:Src/state.c   ****  *                        START IDLE STATE
+  48:Src/state.c   ****  *******************************************************************/
+  49:Src/state.c   **** void idle()
+  50:Src/state.c   **** {
+  51:Src/state.c   **** 	if (HAL_GPIO_ReadPin(USER_BUTTON_GPIO_Port,USER_BUTTON_Pin) == GPIO_PIN_SET){
+  52:Src/state.c   **** 		sprintf(txt,"%d\r\n%d\r\n%d\r\n%d\r\n",accel.pot1_val,accel.pot2_val,brake.pot1_val,brake.pot2_va
+  53:Src/state.c   **** 		HAL_UART_Transmit(&huart3,(uint8_t*)txt,strlen(txt),10);
+  54:Src/state.c   **** 		res_open = f_open(&pot_values_f, (TCHAR const*)&filename_pot, FA_OPEN_ALWAYS | FA_WRITE );
+  55:Src/state.c   **** 		f_write(&pot_values_f,(TCHAR const*)&txt,strlen(txt), &byteswritten);
+  56:Src/state.c   **** 		f_close(&pot_values_f);
+  57:Src/state.c   **** 		HAL_Delay(1000);
   58:Src/state.c   **** 	}
-  59:Src/state.c   **** 	if (fifoRxDataCAN_pop(&can1))
+  59:Src/state.c   **** 	if (debug_msg_arrived == 1)
   60:Src/state.c   **** 	{
-  61:Src/state.c   **** 		switch (can1.rx_id)
-  62:Src/state.c   **** 		{
-  63:Src/state.c   **** 		case ID_ASK_STATE:
-  64:Src/state.c   **** 			can1.dataTx[0] = (uint8_t)current_state;
-  65:Src/state.c   **** 			can1.dataTx[1] = 0;
-  66:Src/state.c   **** 			can1.dataTx[2] = 0;
-  67:Src/state.c   **** 			can1.dataTx[3] = 0;
-  68:Src/state.c   **** 			can1.dataTx[4] = 0;
-  69:Src/state.c   **** 			can1.dataTx[5] = 0;
-  70:Src/state.c   **** 			can1.dataTx[6] = 0;
-  71:Src/state.c   **** 			can1.dataTx[7] = 0;
-  72:Src/state.c   **** 			can1.tx_id = ID_ACU_1;
-  73:Src/state.c   **** 			CAN_Send(&can1, normalPriority);
-  74:Src/state.c   **** 			break;
-  75:Src/state.c   **** 		case ID_ASK_INV_DX:
-  76:Src/state.c   **** 			break;
-  77:Src/state.c   **** 		case ID_ASK_INV_SX:
-  78:Src/state.c   **** 			break;
-  79:Src/state.c   **** 		case ID_BMS_HV:
-  80:Src/state.c   **** 			if (can1.dataRx[0] == 0x03)
-  81:Src/state.c   **** 			{
-  82:Src/state.c   **** 				// Turn ON tractive system
-  83:Src/state.c   **** 			}
-  84:Src/state.c   **** 			else if (can1.dataRx[0] == 0x04)
-  85:Src/state.c   **** 			{
-  86:Src/state.c   **** 				// Turn OFF tractive system
-  87:Src/state.c   **** 			}
-  88:Src/state.c   **** 			break;
-  89:Src/state.c   **** 		case ID_BMS_LV:
-ARM GAS  /tmp/ccWGVQrs.s 			page 3
+  61:Src/state.c   **** 		debug_msg_arrived = 0; // reset flag
+  62:Src/state.c   **** 		debug_operations();
+  63:Src/state.c   **** 	}
+  64:Src/state.c   **** 	if (fifoRxDataCAN_pop(&can1)) // Check if there are messages on CAN1 fifo
+  65:Src/state.c   **** 	{
+  66:Src/state.c   **** 		switch (can1.rx_id)
+  67:Src/state.c   **** 		{
+  68:Src/state.c   **** 		case ID_ASK_STATE:
+  69:Src/state.c   **** 			can1.dataTx[0] = (uint8_t)current_state;
+  70:Src/state.c   **** 			can1.tx_size = 1;
+  71:Src/state.c   **** 			can1.tx_id = ID_ACU_1;
+  72:Src/state.c   **** 			CAN_Send(&can1, normalPriority);
+  73:Src/state.c   **** 			break;
+  74:Src/state.c   **** 		case ID_ASK_INV_DX:
+  75:Src/state.c   **** 			break;
+  76:Src/state.c   **** 		case ID_ASK_INV_SX:
+  77:Src/state.c   **** 			break;
+  78:Src/state.c   **** 		case ID_BMS_HV:
+  79:Src/state.c   **** 			if (can1.dataRx[0] == 0x03)
+  80:Src/state.c   **** 			{
+  81:Src/state.c   **** 				// Turn ON tractive system
+  82:Src/state.c   **** 			}
+  83:Src/state.c   **** 			else if (can1.dataRx[0] == 0x04)
+  84:Src/state.c   **** 			{
+  85:Src/state.c   **** 				// Turn OFF tractive system
+  86:Src/state.c   **** 			}
+  87:Src/state.c   **** 			break;
+  88:Src/state.c   **** 		case ID_BMS_LV:
+  89:Src/state.c   **** 			break;
+ARM GAS  /tmp/ccw6FPXZ.s 			page 3
 
 
-  90:Src/state.c   **** 			break;
-  91:Src/state.c   **** 		case ID_STEERING_WEEL_1:
-  92:Src/state.c   **** 			if (can1.dataRx[0] == 2)
-  93:Src/state.c   **** 			{ //----- change the current state -----//
-  94:Src/state.c   **** 				current_state = can1.dataRx[1];
-  95:Src/state.c   **** 			}
-  96:Src/state.c   **** 			else if (can1.dataRx[0] == 3)
-  97:Src/state.c   **** 			{ //----- change state to setup -----//
-  98:Src/state.c   **** 				current_state = STATE_SETUP;
-  99:Src/state.c   **** 			}
- 100:Src/state.c   **** 			break;
- 101:Src/state.c   **** 		case ID_ATC_POT:
- 102:Src/state.c   **** 			atc_pot_operations();
- 103:Src/state.c   **** 			break;
- 104:Src/state.c   **** 		default:
- 105:Src/state.c   **** 			break;
- 106:Src/state.c   **** 		}
- 107:Src/state.c   **** 	}
- 108:Src/state.c   **** }
- 109:Src/state.c   **** /*******************************************************************
- 110:Src/state.c   ****  *                         END IDLE STATE
- 111:Src/state.c   ****  *******************************************************************/
- 112:Src/state.c   **** /*******************************************************************
- 113:Src/state.c   ****  *                        START SETUP STATE
- 114:Src/state.c   ****  *******************************************************************/
- 115:Src/state.c   **** void setup()
- 116:Src/state.c   **** {
- 117:Src/state.c   **** 	if (fifoRxDataCAN_pop(&can1))
- 118:Src/state.c   **** 	{
- 119:Src/state.c   **** 		switch (can1.rx_id)
- 120:Src/state.c   **** 		{
- 121:Src/state.c   **** 		case ID_STEERING_WEEL_1:
- 122:Src/state.c   **** 			switch (can1.dataRx[0])
- 123:Src/state.c   **** 			{
- 124:Src/state.c   **** 			//----- change state to idle -----//
- 125:Src/state.c   **** 			case 4:
- 126:Src/state.c   **** 				current_state = STATE_IDLE;
- 127:Src/state.c   **** 				break;
- 128:Src/state.c   **** 			//----- change state to run -----//
- 129:Src/state.c   **** 			case 5:
- 130:Src/state.c   **** 				// If inverter are ON and Brake is Pressed
- 131:Src/state.c   **** 				current_state = STATE_RUN;
- 132:Src/state.c   **** 				can1.tx_id = ID_ACU_2;
- 133:Src/state.c   **** 				can1.dataRx[0] = 5;
- 134:Src/state.c   **** 				can1.tx_size = 1;
- 135:Src/state.c   **** 				CAN_Send(&can1, normalPriority);
- 136:Src/state.c   **** 				break;
- 137:Src/state.c   **** 			// Turn On inverter Dx
- 138:Src/state.c   **** 			case 8:
- 139:Src/state.c   **** 				// If Inverter Temp < 80
- 140:Src/state.c   **** 				break;
- 141:Src/state.c   **** 			// Turn On inverter Sx
- 142:Src/state.c   **** 			case 9:
- 143:Src/state.c   **** 				// if Iverter Temp < 80
- 144:Src/state.c   **** 				break;
- 145:Src/state.c   **** 			}
- 146:Src/state.c   **** 		case ID_BMS_HV:
-ARM GAS  /tmp/ccWGVQrs.s 			page 4
+  90:Src/state.c   **** 		case ID_STEERING_WEEL_1:
+  91:Src/state.c   **** 			switch (can1.dataRx[0])
+  92:Src/state.c   **** 			{
+  93:Src/state.c   **** 			case REQUEST_TS_ON:
+  94:Src/state.c   **** 				//If req Tractive System ON msg arrives -> go to setup state
+  95:Src/state.c   **** 				current_state = STATE_SETUP;
+  96:Src/state.c   **** 			default:
+  97:Src/state.c   **** 				break;
+  98:Src/state.c   **** 			}
+  99:Src/state.c   **** 			break;
+ 100:Src/state.c   **** 		case ID_ATC_POT:
+ 101:Src/state.c   **** 			atc_pot_operations();
+ 102:Src/state.c   **** 			break;
+ 103:Src/state.c   **** 		default:
+ 104:Src/state.c   **** 			break;
+ 105:Src/state.c   **** 		}
+ 106:Src/state.c   **** 	}
+ 107:Src/state.c   **** }
+ 108:Src/state.c   **** /*******************************************************************
+ 109:Src/state.c   ****  *                         END IDLE STATE
+ 110:Src/state.c   ****  *******************************************************************/
+ 111:Src/state.c   **** /*******************************************************************
+ 112:Src/state.c   ****  *                        START SETUP STATE
+ 113:Src/state.c   ****  *******************************************************************/
+ 114:Src/state.c   **** void setup()
+ 115:Src/state.c   **** {
+ 116:Src/state.c   **** 	if(setup_init == 0){
+ 117:Src/state.c   **** 		setup_init = 1; //set that setup procedure is started
+ 118:Src/state.c   **** 		if((atc_connected == 1) && (brake.pot_avr_100 > 50) && (critical_errors = 0)){
+ 119:Src/state.c   **** 			//If Analog to CAN device is connected, brake is pressed and there aren't critical erros -> send
+ 120:Src/state.c   **** 			
+ 121:Src/state.c   **** 		}
+ 122:Src/state.c   **** 		can1.dataTx[0] = (uint8_t)current_state;
+ 123:Src/state.c   **** 		can1.tx_size = 1;
+ 124:Src/state.c   **** 		can1.tx_id = ID_ACU_1;
+ 125:Src/state.c   **** 		CAN_Send(&can1, normalPriority);
+ 126:Src/state.c   **** 	}
+ 127:Src/state.c   **** 	if (fifoRxDataCAN_pop(&can1))
+ 128:Src/state.c   **** 	{
+ 129:Src/state.c   **** 		switch (can1.rx_id)
+ 130:Src/state.c   **** 		{
+ 131:Src/state.c   **** 		case ID_STEERING_WEEL_1:
+ 132:Src/state.c   **** 			switch (can1.dataRx[0])
+ 133:Src/state.c   **** 			{
+ 134:Src/state.c   **** 			//----- change state to run -----//
+ 135:Src/state.c   **** 			case 5:
+ 136:Src/state.c   **** 				// If inverter are ON and Brake is Pressed
+ 137:Src/state.c   **** 				current_state = STATE_RUN;
+ 138:Src/state.c   **** 				can1.tx_id = ID_ACU_2;
+ 139:Src/state.c   **** 				can1.dataRx[0] = 5;
+ 140:Src/state.c   **** 				can1.tx_size = 1;
+ 141:Src/state.c   **** 				CAN_Send(&can1, normalPriority);
+ 142:Src/state.c   **** 				break;
+ 143:Src/state.c   **** 			// Turn On inverter Dx
+ 144:Src/state.c   **** 			case 8:
+ 145:Src/state.c   **** 				// If Inverter Temp < 80
+ 146:Src/state.c   **** 				break;
+ARM GAS  /tmp/ccw6FPXZ.s 			page 4
 
 
- 147:Src/state.c   **** 			switch (can1.dataRx[0])
- 148:Src/state.c   **** 			{
- 149:Src/state.c   **** 			case 4:
- 150:Src/state.c   **** 				// Shutdown Confirmed
- 151:Src/state.c   **** 				break;
- 152:Src/state.c   **** 			case 8:
- 153:Src/state.c   **** 				// Shutdown from Error
- 154:Src/state.c   **** 				break;
- 155:Src/state.c   **** 			}
- 156:Src/state.c   **** 			break;
- 157:Src/state.c   **** 		case ID_ATC_POT:
- 158:Src/state.c   **** 			atc_pot_operations();
- 159:Src/state.c   **** 			break;
- 160:Src/state.c   **** 		case ID_REQ_INV_DX:
- 161:Src/state.c   **** 			switch (can1.dataRx[0])
- 162:Src/state.c   **** 			{
- 163:Src/state.c   **** 			case 0x4A:
- 164:Src/state.c   **** 				// Update Inverter Dx Temp = (can1.RxData[2] * 256 + can1.RxData[1] - 15797) / 112.1182
- 165:Src/state.c   **** 				break;
- 166:Src/state.c   **** 			case 0xD8:
- 167:Src/state.c   **** 				if (can1.dataRx[2] == 0x0C /* && request of shutdown == false*/)
- 168:Src/state.c   **** 				{
- 169:Src/state.c   **** 					can1.dataTx[0] = 0x09;
- 170:Src/state.c   **** 					can1.dataTx[1] = 0;
- 171:Src/state.c   **** 					can1.dataTx[2] = 0;
- 172:Src/state.c   **** 					can1.dataTx[3] = 0;
- 173:Src/state.c   **** 					can1.dataTx[4] = 0;
- 174:Src/state.c   **** 					can1.dataTx[5] = 0;
- 175:Src/state.c   **** 					can1.dataTx[6] = 0;
- 176:Src/state.c   **** 					can1.dataTx[7] = 0;
- 177:Src/state.c   **** 					can1.tx_id = ID_ACU_1;
- 178:Src/state.c   **** 					CAN_Send(&can1, normalPriority);
- 179:Src/state.c   **** 					// Inverter Dx true
- 180:Src/state.c   **** 				}
- 181:Src/state.c   **** 				else
- 182:Src/state.c   **** 				{
- 183:Src/state.c   **** 					can1.dataTx[0] = 0xD0;
- 184:Src/state.c   **** 					can1.dataTx[1] = 0;
- 185:Src/state.c   **** 					can1.dataTx[2] = 0;
- 186:Src/state.c   **** 					can1.dataTx[3] = 0;
- 187:Src/state.c   **** 					can1.dataTx[4] = 0;
- 188:Src/state.c   **** 					can1.dataTx[5] = 0;
- 189:Src/state.c   **** 					can1.dataTx[6] = 0;
- 190:Src/state.c   **** 					can1.dataTx[7] = 0;
- 191:Src/state.c   **** 					can1.tx_id = ID_ACU_1;
- 192:Src/state.c   **** 					CAN_Send(&can1, normalPriority);
- 193:Src/state.c   **** 					// Inverter Dx false
- 194:Src/state.c   **** 				}
- 195:Src/state.c   **** 				break;
- 196:Src/state.c   **** 			}
- 197:Src/state.c   **** 			break;
- 198:Src/state.c   **** 		case ID_REQ_INV_SX:
- 199:Src/state.c   **** 			switch (can1.dataRx[0])
- 200:Src/state.c   **** 			{
- 201:Src/state.c   **** 			case 0x4A:
- 202:Src/state.c   **** 				// Update Inverter Sx Temp = (can1.RxData[2] * 256 + can1.RxData[1] - 15797) / 112.1182
- 203:Src/state.c   **** 				break;
-ARM GAS  /tmp/ccWGVQrs.s 			page 5
+ 147:Src/state.c   **** 			// Turn On inverter Sx
+ 148:Src/state.c   **** 			case 9:
+ 149:Src/state.c   **** 				// if Iverter Temp < 80
+ 150:Src/state.c   **** 				break;
+ 151:Src/state.c   **** 			default:
+ 152:Src/state.c   **** 				break;
+ 153:Src/state.c   **** 			}
+ 154:Src/state.c   **** 			break;
+ 155:Src/state.c   **** 		case ID_BMS_HV:
+ 156:Src/state.c   **** 			switch (can1.dataRx[0])
+ 157:Src/state.c   **** 			{
+ 158:Src/state.c   **** 			case 4:
+ 159:Src/state.c   **** 				// Shutdown Confirmed
+ 160:Src/state.c   **** 				break;
+ 161:Src/state.c   **** 			case 8:
+ 162:Src/state.c   **** 				// Shutdown from Error
+ 163:Src/state.c   **** 				break;
+ 164:Src/state.c   **** 			}
+ 165:Src/state.c   **** 			break;
+ 166:Src/state.c   **** 		case ID_ATC_POT:
+ 167:Src/state.c   **** 			atc_pot_operations();
+ 168:Src/state.c   **** 			break;
+ 169:Src/state.c   **** 		case ID_REQ_INV_DX:
+ 170:Src/state.c   **** 			switch (can1.dataRx[0])
+ 171:Src/state.c   **** 			{
+ 172:Src/state.c   **** 			case 0x4A:
+ 173:Src/state.c   **** 				// Update Inverter Dx Temp = (can1.RxData[2] * 256 + can1.RxData[1] - 15797) / 112.1182
+ 174:Src/state.c   **** 				break;
+ 175:Src/state.c   **** 			case 0xD8:
+ 176:Src/state.c   **** 				if (can1.dataRx[2] == 0x0C /* && request of shutdown == false*/)
+ 177:Src/state.c   **** 				{
+ 178:Src/state.c   **** 					can1.dataTx[0] = 0x09;
+ 179:Src/state.c   **** 					can1.dataTx[1] = 0;
+ 180:Src/state.c   **** 					can1.dataTx[2] = 0;
+ 181:Src/state.c   **** 					can1.dataTx[3] = 0;
+ 182:Src/state.c   **** 					can1.dataTx[4] = 0;
+ 183:Src/state.c   **** 					can1.dataTx[5] = 0;
+ 184:Src/state.c   **** 					can1.dataTx[6] = 0;
+ 185:Src/state.c   **** 					can1.dataTx[7] = 0;
+ 186:Src/state.c   **** 					can1.tx_id = ID_ACU_1;
+ 187:Src/state.c   **** 					CAN_Send(&can1, normalPriority);
+ 188:Src/state.c   **** 					// Inverter Dx true
+ 189:Src/state.c   **** 				}
+ 190:Src/state.c   **** 				else
+ 191:Src/state.c   **** 				{
+ 192:Src/state.c   **** 					can1.dataTx[0] = 0xD0;
+ 193:Src/state.c   **** 					can1.dataTx[1] = 0;
+ 194:Src/state.c   **** 					can1.dataTx[2] = 0;
+ 195:Src/state.c   **** 					can1.dataTx[3] = 0;
+ 196:Src/state.c   **** 					can1.dataTx[4] = 0;
+ 197:Src/state.c   **** 					can1.dataTx[5] = 0;
+ 198:Src/state.c   **** 					can1.dataTx[6] = 0;
+ 199:Src/state.c   **** 					can1.dataTx[7] = 0;
+ 200:Src/state.c   **** 					can1.tx_id = ID_ACU_1;
+ 201:Src/state.c   **** 					CAN_Send(&can1, normalPriority);
+ 202:Src/state.c   **** 					// Inverter Dx false
+ 203:Src/state.c   **** 				}
+ARM GAS  /tmp/ccw6FPXZ.s 			page 5
 
 
- 204:Src/state.c   **** 			case 0xD8:
- 205:Src/state.c   **** 				if (can1.dataRx[2] == 0x0C /* && request of shutdown == false*/)
- 206:Src/state.c   **** 				{
- 207:Src/state.c   **** 					can1.dataTx[0] = 0x08;
- 208:Src/state.c   **** 					can1.dataTx[1] = 0;
- 209:Src/state.c   **** 					can1.dataTx[2] = 0;
- 210:Src/state.c   **** 					can1.dataTx[3] = 0;
- 211:Src/state.c   **** 					can1.dataTx[4] = 0;
- 212:Src/state.c   **** 					can1.dataTx[5] = 0;
- 213:Src/state.c   **** 					can1.dataTx[6] = 0;
- 214:Src/state.c   **** 					can1.dataTx[7] = 0;
- 215:Src/state.c   **** 					can1.tx_id = ID_ACU_1;
- 216:Src/state.c   **** 					CAN_Send(&can1, normalPriority);
- 217:Src/state.c   **** 					// Inverter Sx true
- 218:Src/state.c   **** 				}
- 219:Src/state.c   **** 				else
- 220:Src/state.c   **** 				{
- 221:Src/state.c   **** 					can1.dataTx[0] = 0x0C;
- 222:Src/state.c   **** 					can1.dataTx[1] = 0;
- 223:Src/state.c   **** 					can1.dataTx[2] = 0;
- 224:Src/state.c   **** 					can1.dataTx[3] = 0;
- 225:Src/state.c   **** 					can1.dataTx[4] = 0;
- 226:Src/state.c   **** 					can1.dataTx[5] = 0;
- 227:Src/state.c   **** 					can1.dataTx[6] = 0;
- 228:Src/state.c   **** 					can1.dataTx[7] = 0;
- 229:Src/state.c   **** 					can1.tx_id = ID_ACU_1;
- 230:Src/state.c   **** 					CAN_Send(&can1, normalPriority);
- 231:Src/state.c   **** 					// Inverter Sx false
- 232:Src/state.c   **** 				}
- 233:Src/state.c   **** 				break;
- 234:Src/state.c   **** 			}
- 235:Src/state.c   **** 			break;
- 236:Src/state.c   **** 		default:
- 237:Src/state.c   **** 			break;
- 238:Src/state.c   **** 		}
- 239:Src/state.c   **** 	}
- 240:Src/state.c   **** }
- 241:Src/state.c   **** /*******************************************************************
- 242:Src/state.c   ****  *                         END SETUP STATE
- 243:Src/state.c   ****  *******************************************************************/
- 244:Src/state.c   **** /*******************************************************************
- 245:Src/state.c   ****  *                         START RUN STATE
- 246:Src/state.c   ****  *******************************************************************/
- 247:Src/state.c   **** void run()
- 248:Src/state.c   **** {
- 249:Src/state.c   **** 	if (fifoRxDataCAN_pop(&can1))
- 250:Src/state.c   **** 	{
- 251:Src/state.c   **** 		switch (can1.rx_id)
- 252:Src/state.c   **** 		{
- 253:Src/state.c   **** 		case ID_STEERING_WEEL_1:
- 254:Src/state.c   **** 			if (can1.dataRx[0] ==
- 255:Src/state.c   **** 				6)
- 256:Src/state.c   **** 			{ //----- change state to setup -----//
- 257:Src/state.c   **** 				current_state = STATE_SETUP;
- 258:Src/state.c   **** 			}
- 259:Src/state.c   **** 			break;
- 260:Src/state.c   **** 		case ID_ATC_POT:
-ARM GAS  /tmp/ccWGVQrs.s 			page 6
+ 204:Src/state.c   **** 				break;
+ 205:Src/state.c   **** 			}
+ 206:Src/state.c   **** 			break;
+ 207:Src/state.c   **** 		case ID_REQ_INV_SX:
+ 208:Src/state.c   **** 			switch (can1.dataRx[0])
+ 209:Src/state.c   **** 			{
+ 210:Src/state.c   **** 			case 0x4A:
+ 211:Src/state.c   **** 				// Update Inverter Sx Temp = (can1.RxData[2] * 256 + can1.RxData[1] - 15797) / 112.1182
+ 212:Src/state.c   **** 				break;
+ 213:Src/state.c   **** 			case 0xD8:
+ 214:Src/state.c   **** 				if (can1.dataRx[2] == 0x0C /* && request of shutdown == false*/)
+ 215:Src/state.c   **** 				{
+ 216:Src/state.c   **** 					can1.dataTx[0] = 0x08;
+ 217:Src/state.c   **** 					can1.dataTx[1] = 0;
+ 218:Src/state.c   **** 					can1.dataTx[2] = 0;
+ 219:Src/state.c   **** 					can1.dataTx[3] = 0;
+ 220:Src/state.c   **** 					can1.dataTx[4] = 0;
+ 221:Src/state.c   **** 					can1.dataTx[5] = 0;
+ 222:Src/state.c   **** 					can1.dataTx[6] = 0;
+ 223:Src/state.c   **** 					can1.dataTx[7] = 0;
+ 224:Src/state.c   **** 					can1.tx_id = ID_ACU_1;
+ 225:Src/state.c   **** 					CAN_Send(&can1, normalPriority);
+ 226:Src/state.c   **** 					// Inverter Sx true
+ 227:Src/state.c   **** 				}
+ 228:Src/state.c   **** 				else
+ 229:Src/state.c   **** 				{
+ 230:Src/state.c   **** 					can1.dataTx[0] = 0x0C;
+ 231:Src/state.c   **** 					can1.dataTx[1] = 0;
+ 232:Src/state.c   **** 					can1.dataTx[2] = 0;
+ 233:Src/state.c   **** 					can1.dataTx[3] = 0;
+ 234:Src/state.c   **** 					can1.dataTx[4] = 0;
+ 235:Src/state.c   **** 					can1.dataTx[5] = 0;
+ 236:Src/state.c   **** 					can1.dataTx[6] = 0;
+ 237:Src/state.c   **** 					can1.dataTx[7] = 0;
+ 238:Src/state.c   **** 					can1.tx_id = ID_ACU_1;
+ 239:Src/state.c   **** 					CAN_Send(&can1, normalPriority);
+ 240:Src/state.c   **** 					// Inverter Sx false
+ 241:Src/state.c   **** 				}
+ 242:Src/state.c   **** 				break;
+ 243:Src/state.c   **** 			}
+ 244:Src/state.c   **** 			break;
+ 245:Src/state.c   **** 		default:
+ 246:Src/state.c   **** 			break;
+ 247:Src/state.c   **** 		}
+ 248:Src/state.c   **** 	}
+ 249:Src/state.c   **** }
+ 250:Src/state.c   **** /*******************************************************************
+ 251:Src/state.c   ****  *                         END SETUP STATE
+ 252:Src/state.c   ****  *******************************************************************/
+ 253:Src/state.c   **** /*******************************************************************
+ 254:Src/state.c   ****  *                         START RUN STATE
+ 255:Src/state.c   ****  *******************************************************************/
+ 256:Src/state.c   **** void run()
+ 257:Src/state.c   **** {
+ 258:Src/state.c   **** 	if (fifoRxDataCAN_pop(&can1))
+ 259:Src/state.c   **** 	{
+ 260:Src/state.c   **** 		switch (can1.rx_id)
+ARM GAS  /tmp/ccw6FPXZ.s 			page 6
 
 
- 261:Src/state.c   **** 			atc_pot_operations();
- 262:Src/state.c   **** 			break;
- 263:Src/state.c   **** 		default:
- 264:Src/state.c   **** 			break;
- 265:Src/state.c   **** 		}
- 266:Src/state.c   **** 	}
- 267:Src/state.c   **** }
- 268:Src/state.c   **** /*******************************************************************
- 269:Src/state.c   ****  *                         END RUN STATE
- 270:Src/state.c   ****  *******************************************************************/
- 271:Src/state.c   **** 
- 272:Src/state.c   **** void debug_operations()
- 273:Src/state.c   **** {
-  27              		.loc 1 273 0
+ 261:Src/state.c   **** 		{
+ 262:Src/state.c   **** 		case ID_STEERING_WEEL_1:
+ 263:Src/state.c   **** 			if (can1.dataRx[0] ==
+ 264:Src/state.c   **** 				6)
+ 265:Src/state.c   **** 			{ //----- change state to setup -----//
+ 266:Src/state.c   **** 				current_state = STATE_SETUP;
+ 267:Src/state.c   **** 			}
+ 268:Src/state.c   **** 			break;
+ 269:Src/state.c   **** 		case ID_ATC_POT:
+ 270:Src/state.c   **** 			atc_pot_operations();
+ 271:Src/state.c   **** 			break;
+ 272:Src/state.c   **** 		default:
+ 273:Src/state.c   **** 			break;
+ 274:Src/state.c   **** 		}
+ 275:Src/state.c   **** 	}
+ 276:Src/state.c   **** }
+ 277:Src/state.c   **** /*******************************************************************
+ 278:Src/state.c   ****  *                         END RUN STATE
+ 279:Src/state.c   ****  *******************************************************************/
+ 280:Src/state.c   **** 
+ 281:Src/state.c   **** void debug_operations()
+ 282:Src/state.c   **** {
+  27              		.loc 1 282 0
   28              		.cfi_startproc
   29              		@ args = 0, pretend = 0, frame = 0
   30              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -327,166 +336,166 @@ ARM GAS  /tmp/ccWGVQrs.s 			page 1
   37 0002 85B0     		sub	sp, sp, #20
   38              	.LCFI1:
   39              		.cfi_def_cfa_offset 32
- 274:Src/state.c   **** 	if (strcmp(debug_rx, "help") == 0)
-  40              		.loc 1 274 0
+ 283:Src/state.c   **** 	if (strcmp(debug_rx, "help") == 0)
+  40              		.loc 1 283 0
   41 0004 9449     		ldr	r1, .L29
   42 0006 9548     		ldr	r0, .L29+4
   43 0008 FFF7FEFF 		bl	strcmp
   44              	.LVL0:
   45 000c 20B3     		cbz	r0, .L17
- 275:Src/state.c   **** 	{
- 276:Src/state.c   **** 		sprintf(debug_tx,
- 277:Src/state.c   **** 				"\r\n***********ECU HELP***********\r\n"
- 278:Src/state.c   **** 				"Avaiable msg are:\r\n"
- 279:Src/state.c   **** 				"\t-- status -> print ECU status\r\n"
- 280:Src/state.c   **** 				"\t-- sd status -> print SD status and the name of file inside\r\n"
- 281:Src/state.c   **** 				"\t-- sd file -> print files inside the SD\r\n"
- 282:Src/state.c   **** 				"\t-- time -> print activity time\r\n"
- 283:Src/state.c   **** 				"\t-- codev  -> print code version\r\n");
- 284:Src/state.c   **** 		HAL_UART_Transmit(&huart3, (uint8_t *)debug_tx, strlen(debug_tx), 100);
- 285:Src/state.c   **** 	}
- 286:Src/state.c   **** 	else if (strcmp(debug_rx, "codev") == 0)
-  46              		.loc 1 286 0
+ 284:Src/state.c   **** 	{
+ 285:Src/state.c   **** 		sprintf(debug_tx,
+ 286:Src/state.c   **** 				"\r\n***********ECU HELP***********\r\n"
+ 287:Src/state.c   **** 				"Avaiable msg are:\r\n"
+ 288:Src/state.c   **** 				"\t-- status -> print ECU status\r\n"
+ 289:Src/state.c   **** 				"\t-- sd status -> print SD status and the name of file inside\r\n"
+ 290:Src/state.c   **** 				"\t-- sd file -> print files inside the SD\r\n"
+ 291:Src/state.c   **** 				"\t-- time -> print activity time\r\n"
+ 292:Src/state.c   **** 				"\t-- codev  -> print code version\r\n");
+ 293:Src/state.c   **** 		HAL_UART_Transmit(&huart3, (uint8_t *)debug_tx, strlen(debug_tx), 100);
+ 294:Src/state.c   **** 	}
+ 295:Src/state.c   **** 	else if (strcmp(debug_rx, "codev") == 0)
+  46              		.loc 1 295 0
   47 000e 9449     		ldr	r1, .L29+8
   48 0010 9248     		ldr	r0, .L29+4
+ARM GAS  /tmp/ccw6FPXZ.s 			page 7
+
+
   49 0012 FFF7FEFF 		bl	strcmp
   50              	.LVL1:
   51 0016 0028     		cmp	r0, #0
   52 0018 30D0     		beq	.L18
- 287:Src/state.c   **** 	{
- 288:Src/state.c   **** 		HAL_UART_Transmit(&huart3, (uint8_t *)code_version, strlen(code_version),
- 289:Src/state.c   **** 						  100);
- 290:Src/state.c   **** 	}
- 291:Src/state.c   **** 	else if (strcmp(debug_rx, "time") == 0)
-ARM GAS  /tmp/ccWGVQrs.s 			page 7
-
-
-  53              		.loc 1 291 0
+ 296:Src/state.c   **** 	{
+ 297:Src/state.c   **** 		HAL_UART_Transmit(&huart3, (uint8_t *)code_version, strlen(code_version),
+ 298:Src/state.c   **** 						  100);
+ 299:Src/state.c   **** 	}
+ 300:Src/state.c   **** 	else if (strcmp(debug_rx, "time") == 0)
+  53              		.loc 1 300 0
   54 001a 9249     		ldr	r1, .L29+12
   55 001c 8F48     		ldr	r0, .L29+4
   56 001e FFF7FEFF 		bl	strcmp
   57              	.LVL2:
   58 0022 0028     		cmp	r0, #0
   59 0024 35D0     		beq	.L19
- 292:Src/state.c   **** 	{
- 293:Src/state.c   **** 		sprintf(debug_tx, "\r\nTime: %d hours : %d min : %d sec : %d dec\r\n",
- 294:Src/state.c   **** 				count_hour, count_min, count_sec, count_dec);
- 295:Src/state.c   **** 		HAL_UART_Transmit(&huart3, (uint8_t *)debug_tx, strlen(debug_tx), 100);
- 296:Src/state.c   **** 	}
- 297:Src/state.c   **** 	else if (strcmp(debug_rx, "status") == 0)
-  60              		.loc 1 297 0
+ 301:Src/state.c   **** 	{
+ 302:Src/state.c   **** 		sprintf(debug_tx, "\r\nTime: %d hours : %d min : %d sec : %d dec\r\n",
+ 303:Src/state.c   **** 				count_hour, count_min, count_sec, count_dec);
+ 304:Src/state.c   **** 		HAL_UART_Transmit(&huart3, (uint8_t *)debug_tx, strlen(debug_tx), 100);
+ 305:Src/state.c   **** 	}
+ 306:Src/state.c   **** 	else if (strcmp(debug_rx, "status") == 0)
+  60              		.loc 1 306 0
   61 0026 9049     		ldr	r1, .L29+16
   62 0028 8C48     		ldr	r0, .L29+4
   63 002a FFF7FEFF 		bl	strcmp
   64              	.LVL3:
   65 002e 0028     		cmp	r0, #0
   66 0030 48D0     		beq	.L20
- 298:Src/state.c   **** 	{
- 299:Src/state.c   **** 		sprintf(debug_tx,
- 300:Src/state.c   **** 				"\r\n\ntype of status:\r\n"
- 301:Src/state.c   **** 				"\t 0 = OK\r\n"
- 302:Src/state.c   **** 				"\t 1 = ERROR\r\n"
- 303:Src/state.c   **** 				"\t 2 = BUSY\r\n"
- 304:Src/state.c   **** 				"\t 3 = TIMEOUT\r\n\n"
- 305:Src/state.c   **** 				"CAN1 status:\r\n"
- 306:Src/state.c   **** 				"\tCAN1 config status: %d \r\n"
- 307:Src/state.c   **** 				"\tCAN1 notification status: %d\r\n"
- 308:Src/state.c   **** 				"\tCAN1 start status: %d\r\n",
- 309:Src/state.c   **** 				can1.configFilter_status, can1.activateNotif_status,
- 310:Src/state.c   **** 				can1.canStart_status);
- 311:Src/state.c   **** 		HAL_UART_Transmit(&huart3, (uint8_t *)debug_tx, strlen(debug_tx), 100);
- 312:Src/state.c   **** 		sprintf(debug_tx,
- 313:Src/state.c   **** 				"CAN3 status:\r\n"
- 314:Src/state.c   **** 				"\tCAN3 config status: %d \r\n"
- 315:Src/state.c   **** 				"\tCAN3 notification status: %d\r\n"
- 316:Src/state.c   **** 				"\tCAN3 start status: %d\r\n",
- 317:Src/state.c   **** 				can3.configFilter_status, can3.activateNotif_status,
- 318:Src/state.c   **** 				can3.canStart_status);
- 319:Src/state.c   **** 		HAL_UART_Transmit(&huart3, (uint8_t *)debug_tx, strlen(debug_tx), 100);
- 320:Src/state.c   **** 		if (current_state == STATE_INIT)
- 321:Src/state.c   **** 		{
- 322:Src/state.c   **** 			HAL_UART_Transmit(&huart3,
- 323:Src/state.c   **** 							  (uint8_t *)"\r\nCurrent state: STATE_INIT\r\n",
- 324:Src/state.c   **** 							  strlen("\r\nCurrent state: STATE_INIT\r\n"), 100);
- 325:Src/state.c   **** 		}
- 326:Src/state.c   **** 		else if (current_state == STATE_IDLE)
- 327:Src/state.c   **** 		{
- 328:Src/state.c   **** 			HAL_UART_Transmit(&huart3,
- 329:Src/state.c   **** 							  (uint8_t *)"\r\nCurrent state: STATE_IDLE\r\n",
- 330:Src/state.c   **** 							  strlen("\r\nCurrent state: STATE_IDLE\r\n"), 100);
- 331:Src/state.c   **** 		}
- 332:Src/state.c   **** 		else if (current_state == STATE_SETUP)
- 333:Src/state.c   **** 		{
- 334:Src/state.c   **** 			HAL_UART_Transmit(
-ARM GAS  /tmp/ccWGVQrs.s 			page 8
+ 307:Src/state.c   **** 	{
+ 308:Src/state.c   **** 		sprintf(debug_tx,
+ 309:Src/state.c   **** 				"\r\n\ntype of status:\r\n"
+ 310:Src/state.c   **** 				"\t 0 = OK\r\n"
+ 311:Src/state.c   **** 				"\t 1 = ERROR\r\n"
+ 312:Src/state.c   **** 				"\t 2 = BUSY\r\n"
+ 313:Src/state.c   **** 				"\t 3 = TIMEOUT\r\n\n"
+ 314:Src/state.c   **** 				"CAN1 status:\r\n"
+ 315:Src/state.c   **** 				"\tCAN1 config status: %d \r\n"
+ 316:Src/state.c   **** 				"\tCAN1 notification status: %d\r\n"
+ 317:Src/state.c   **** 				"\tCAN1 start status: %d\r\n",
+ 318:Src/state.c   **** 				can1.configFilter_status, can1.activateNotif_status,
+ 319:Src/state.c   **** 				can1.canStart_status);
+ 320:Src/state.c   **** 		HAL_UART_Transmit(&huart3, (uint8_t *)debug_tx, strlen(debug_tx), 100);
+ 321:Src/state.c   **** 		sprintf(debug_tx,
+ 322:Src/state.c   **** 				"CAN3 status:\r\n"
+ 323:Src/state.c   **** 				"\tCAN3 config status: %d \r\n"
+ 324:Src/state.c   **** 				"\tCAN3 notification status: %d\r\n"
+ 325:Src/state.c   **** 				"\tCAN3 start status: %d\r\n",
+ 326:Src/state.c   **** 				can3.configFilter_status, can3.activateNotif_status,
+ 327:Src/state.c   **** 				can3.canStart_status);
+ 328:Src/state.c   **** 		HAL_UART_Transmit(&huart3, (uint8_t *)debug_tx, strlen(debug_tx), 100);
+ 329:Src/state.c   **** 		if (current_state == STATE_INIT)
+ 330:Src/state.c   **** 		{
+ 331:Src/state.c   **** 			HAL_UART_Transmit(&huart3,
+ 332:Src/state.c   **** 							  (uint8_t *)"\r\nCurrent state: STATE_INIT\r\n",
+ 333:Src/state.c   **** 							  strlen("\r\nCurrent state: STATE_INIT\r\n"), 100);
+ 334:Src/state.c   **** 		}
+ARM GAS  /tmp/ccw6FPXZ.s 			page 8
 
 
- 335:Src/state.c   **** 				&huart3, (uint8_t *)"\r\nCurrent state: STATE_SETUP\r\n",
- 336:Src/state.c   **** 				strlen("\r\nCurrent state: STATE_SETUP\r\n"), 100);
- 337:Src/state.c   **** 		}
- 338:Src/state.c   **** 		else if (current_state == STATE_RUN)
- 339:Src/state.c   **** 		{
- 340:Src/state.c   **** 			HAL_UART_Transmit(&huart3,
- 341:Src/state.c   **** 							  (uint8_t *)"\r\nCurrent state: STATE_RUN\r\n",
- 342:Src/state.c   **** 							  strlen("\r\nCurrent state: STATE_RUN\r\n"), 100);
- 343:Src/state.c   **** 		}
- 344:Src/state.c   **** 		sprintf(debug_tx,
- 345:Src/state.c   **** 				"\r\n"
- 346:Src/state.c   **** 				"Device connected : (0 = no, 1 = yes)\r\n"
- 347:Src/state.c   **** 				"\t IMU -> %d\r\n"
- 348:Src/state.c   **** 				"\t ITS0 -> %d\r\n"
- 349:Src/state.c   **** 				"\t ITS1 -> %d\r\n"
- 350:Src/state.c   **** 				"\t ITS2 -> %d\r\n"
- 351:Src/state.c   **** 				"\t ITS3 -> %d\r\n",
- 352:Src/state.c   **** 				imu_connected, its0_connected, its1_connected, its2_connected,
- 353:Src/state.c   **** 				its3_connected);
- 354:Src/state.c   **** 		HAL_UART_Transmit(&huart3, (uint8_t *)debug_tx, strlen(debug_tx), 100);
- 355:Src/state.c   **** 	}
- 356:Src/state.c   **** 	else if (strcmp(debug_rx, "sd status") == 0){
-  67              		.loc 1 356 0
+ 335:Src/state.c   **** 		else if (current_state == STATE_IDLE)
+ 336:Src/state.c   **** 		{
+ 337:Src/state.c   **** 			HAL_UART_Transmit(&huart3,
+ 338:Src/state.c   **** 							  (uint8_t *)"\r\nCurrent state: STATE_IDLE\r\n",
+ 339:Src/state.c   **** 							  strlen("\r\nCurrent state: STATE_IDLE\r\n"), 100);
+ 340:Src/state.c   **** 		}
+ 341:Src/state.c   **** 		else if (current_state == STATE_SETUP)
+ 342:Src/state.c   **** 		{
+ 343:Src/state.c   **** 			HAL_UART_Transmit(
+ 344:Src/state.c   **** 				&huart3, (uint8_t *)"\r\nCurrent state: STATE_SETUP\r\n",
+ 345:Src/state.c   **** 				strlen("\r\nCurrent state: STATE_SETUP\r\n"), 100);
+ 346:Src/state.c   **** 		}
+ 347:Src/state.c   **** 		else if (current_state == STATE_RUN)
+ 348:Src/state.c   **** 		{
+ 349:Src/state.c   **** 			HAL_UART_Transmit(&huart3,
+ 350:Src/state.c   **** 							  (uint8_t *)"\r\nCurrent state: STATE_RUN\r\n",
+ 351:Src/state.c   **** 							  strlen("\r\nCurrent state: STATE_RUN\r\n"), 100);
+ 352:Src/state.c   **** 		}
+ 353:Src/state.c   **** 		sprintf(debug_tx,
+ 354:Src/state.c   **** 				"\r\n"
+ 355:Src/state.c   **** 				"Device connected : (0 = no, 1 = yes)\r\n"
+ 356:Src/state.c   **** 				"\t IMU -> %d\r\n"
+ 357:Src/state.c   **** 				"\t ITS0 -> %d\r\n"
+ 358:Src/state.c   **** 				"\t ITS1 -> %d\r\n"
+ 359:Src/state.c   **** 				"\t ITS2 -> %d\r\n"
+ 360:Src/state.c   **** 				"\t ITS3 -> %d\r\n",
+ 361:Src/state.c   **** 				imu_connected, its0_connected, its1_connected, its2_connected,
+ 362:Src/state.c   **** 				its3_connected);
+ 363:Src/state.c   **** 		HAL_UART_Transmit(&huart3, (uint8_t *)debug_tx, strlen(debug_tx), 100);
+ 364:Src/state.c   **** 	}
+ 365:Src/state.c   **** 	else if (strcmp(debug_rx, "sd status") == 0){
+  67              		.loc 1 365 0
   68 0032 8E49     		ldr	r1, .L29+20
   69 0034 8948     		ldr	r0, .L29+4
   70 0036 FFF7FEFF 		bl	strcmp
   71              	.LVL4:
   72 003a 0028     		cmp	r0, #0
   73 003c 40F0D080 		bne	.L11
- 357:Src/state.c   **** 		if(mount_ok == 1){
-  74              		.loc 1 357 0
+ 366:Src/state.c   **** 		if(mount_ok == 1){
+  74              		.loc 1 366 0
   75 0040 8B4B     		ldr	r3, .L29+24
   76 0042 1B68     		ldr	r3, [r3]
   77 0044 012B     		cmp	r3, #1
   78 0046 00F0AA80 		beq	.L21
- 358:Src/state.c   **** 			HAL_UART_Transmit(&huart3, (uint8_t *)"\r\nSd mounted ", strlen("\r\nSd mounted "), 100);
- 359:Src/state.c   **** 			if(successfull_opening == 1){
- 360:Src/state.c   **** 				sprintf(debug_tx,"Sd successfully opened and created file: %s\r\n",filename_log);
- 361:Src/state.c   **** 				HAL_UART_Transmit(&huart3, (uint8_t *)debug_tx, strlen(debug_tx), 100);
- 362:Src/state.c   **** 			}else{
- 363:Src/state.c   **** 				HAL_UART_Transmit(&huart3, (uint8_t *)"Sd open FAILED\r\n", strlen("Sd open FAILED\r\n"), 100);
- 364:Src/state.c   **** 			}
- 365:Src/state.c   **** 		}else{
- 366:Src/state.c   **** 			HAL_UART_Transmit(&huart3, (uint8_t *)"\r\nSd NOT mounted ", strlen("\r\nSd NOT mounted "), 100)
-  79              		.loc 1 366 0
+ 367:Src/state.c   **** 			HAL_UART_Transmit(&huart3, (uint8_t *)"\r\nSd mounted ", strlen("\r\nSd mounted "), 100);
+ 368:Src/state.c   **** 			if(successfull_opening == 1){
+ 369:Src/state.c   **** 				sprintf(debug_tx,"Sd successfully opened and created file: %s\r\n",filename_log);
+ 370:Src/state.c   **** 				HAL_UART_Transmit(&huart3, (uint8_t *)debug_tx, strlen(debug_tx), 100);
+ 371:Src/state.c   **** 			}else{
+ 372:Src/state.c   **** 				HAL_UART_Transmit(&huart3, (uint8_t *)"Sd open FAILED\r\n", strlen("Sd open FAILED\r\n"), 100);
+ 373:Src/state.c   **** 			}
+ 374:Src/state.c   **** 		}else{
+ 375:Src/state.c   **** 			HAL_UART_Transmit(&huart3, (uint8_t *)"\r\nSd NOT mounted ", strlen("\r\nSd NOT mounted "), 100)
+  79              		.loc 1 375 0
   80 004a 6423     		movs	r3, #100
   81 004c 1122     		movs	r2, #17
   82 004e 8949     		ldr	r1, .L29+28
+ARM GAS  /tmp/ccw6FPXZ.s 			page 9
+
+
   83 0050 8948     		ldr	r0, .L29+32
   84 0052 FFF7FEFF 		bl	HAL_UART_Transmit
   85              	.LVL5:
   86 0056 0FE0     		b	.L1
   87              	.L17:
- 276:Src/state.c   **** 				"\r\n***********ECU HELP***********\r\n"
-  88              		.loc 1 276 0
+ 285:Src/state.c   **** 				"\r\n***********ECU HELP***********\r\n"
+  88              		.loc 1 285 0
   89 0058 884C     		ldr	r4, .L29+36
   90 005a 40F20112 		movw	r2, #257
-ARM GAS  /tmp/ccWGVQrs.s 			page 9
-
-
   91 005e 8849     		ldr	r1, .L29+40
   92 0060 2046     		mov	r0, r4
   93 0062 FFF7FEFF 		bl	memcpy
   94              	.LVL6:
- 284:Src/state.c   **** 	}
-  95              		.loc 1 284 0
+ 293:Src/state.c   **** 	}
+  95              		.loc 1 293 0
   96 0066 2046     		mov	r0, r4
   97 0068 FFF7FEFF 		bl	strlen
   98              	.LVL7:
@@ -497,38 +506,41 @@ ARM GAS  /tmp/ccWGVQrs.s 			page 1
  103 0074 FFF7FEFF 		bl	HAL_UART_Transmit
  104              	.LVL8:
  105              	.L1:
- 367:Src/state.c   **** 		}
- 368:Src/state.c   **** 	}
- 369:Src/state.c   **** 	else if(strcmp(debug_rx, "sd file") == 0){
- 370:Src/state.c   **** 		sprintf(debug_tx,"\r\nFiles inside sd are:\r\n%s",log_names);
- 371:Src/state.c   **** 		HAL_UART_Transmit(&huart3, (uint8_t *)debug_tx, strlen(debug_tx), 1000);
- 372:Src/state.c   **** 	}
- 373:Src/state.c   **** 	else if (strcmp(debug_rx, "gay") == 0)
- 374:Src/state.c   **** 	{
- 375:Src/state.c   **** 		sprintf(debug_tx,
- 376:Src/state.c   **** 				"\r\n"
- 377:Src/state.c   **** 				"          $\r\n"
- 378:Src/state.c   **** 				"        $   $\r\n"
- 379:Src/state.c   **** 				"       $     $\r\n"
- 380:Src/state.c   **** 				"       $$$$$$$\r\n"
- 381:Src/state.c   **** 				"       $$$$$$$\r\n"
- 382:Src/state.c   **** 				"       $$$$$$$\r\n"
- 383:Src/state.c   **** 				"       $$$$$$$\r\n"
- 384:Src/state.c   **** 				"  $$$$$$     $$$$$$\r\n"
- 385:Src/state.c   **** 				" $$$$$$$$   $$$$$$$$\r\n"
- 386:Src/state.c   **** 				"$$$$$$$$$$$$$$$$$$$$\r\n"
- 387:Src/state.c   **** 				" $$$$$$$$   $$$$$$$$\r\n"
- 388:Src/state.c   **** 				"  $$$$$$     $$$$$$\r\n");
- 389:Src/state.c   **** 		HAL_UART_Transmit(&huart3, (uint8_t *)debug_tx, strlen(debug_tx), 100);
- 390:Src/state.c   **** 	}
- 391:Src/state.c   **** 	else
- 392:Src/state.c   **** 	{
- 393:Src/state.c   **** 		sprintf(debug_tx, "\r\nERROR : msg %s doesn't exist\r\n", debug_rx);
- 394:Src/state.c   **** 		HAL_UART_Transmit(&huart3, (uint8_t *)debug_tx, strlen(debug_tx), 100);
- 395:Src/state.c   **** 	}
- 396:Src/state.c   **** }
- 106              		.loc 1 396 0
+ 376:Src/state.c   **** 		}
+ 377:Src/state.c   **** 	}
+ 378:Src/state.c   **** 	else if(strcmp(debug_rx, "sd file") == 0){
+ 379:Src/state.c   **** 		sprintf(debug_tx,"\r\nFiles inside sd are:\r\n%s",log_names);
+ 380:Src/state.c   **** 		HAL_UART_Transmit(&huart3, (uint8_t *)debug_tx, strlen(debug_tx), 1000);
+ 381:Src/state.c   **** 	}
+ 382:Src/state.c   **** 	else if (strcmp(debug_rx, "gay") == 0)
+ 383:Src/state.c   **** 	{
+ 384:Src/state.c   **** 		sprintf(debug_tx,
+ 385:Src/state.c   **** 				"\r\n"
+ 386:Src/state.c   **** 				"          $\r\n"
+ 387:Src/state.c   **** 				"        $   $\r\n"
+ 388:Src/state.c   **** 				"       $     $\r\n"
+ 389:Src/state.c   **** 				"       $$$$$$$\r\n"
+ 390:Src/state.c   **** 				"       $$$$$$$\r\n"
+ 391:Src/state.c   **** 				"       $$$$$$$\r\n"
+ 392:Src/state.c   **** 				"       $$$$$$$\r\n"
+ 393:Src/state.c   **** 				"  $$$$$$     $$$$$$\r\n"
+ 394:Src/state.c   **** 				" $$$$$$$$   $$$$$$$$\r\n"
+ 395:Src/state.c   **** 				"$$$$$$$$$$$$$$$$$$$$\r\n"
+ 396:Src/state.c   **** 				" $$$$$$$$   $$$$$$$$\r\n"
+ 397:Src/state.c   **** 				"  $$$$$$     $$$$$$\r\n");
+ 398:Src/state.c   **** 		HAL_UART_Transmit(&huart3, (uint8_t *)debug_tx, strlen(debug_tx), 100);
+ 399:Src/state.c   **** 	}
+ 400:Src/state.c   **** 	else
+ 401:Src/state.c   **** 	{
+ 402:Src/state.c   **** 		sprintf(debug_tx, "\r\nERROR : msg %s doesn't exist\r\n", debug_rx);
+ 403:Src/state.c   **** 		HAL_UART_Transmit(&huart3, (uint8_t *)debug_tx, strlen(debug_tx), 100);
+ 404:Src/state.c   **** 	}
+ 405:Src/state.c   **** }
+ 106              		.loc 1 405 0
  107 0078 05B0     		add	sp, sp, #20
+ARM GAS  /tmp/ccw6FPXZ.s 			page 10
+
+
  108              	.LCFI2:
  109              		.cfi_remember_state
  110              		.cfi_def_cfa_offset 12
@@ -537,11 +549,8 @@ ARM GAS  /tmp/ccWGVQrs.s 			page 1
  113              	.L18:
  114              	.LCFI3:
  115              		.cfi_restore_state
- 288:Src/state.c   **** 						  100);
-ARM GAS  /tmp/ccWGVQrs.s 			page 10
-
-
- 116              		.loc 1 288 0
+ 297:Src/state.c   **** 						  100);
+ 116              		.loc 1 297 0
  117 007c 814C     		ldr	r4, .L29+44
  118 007e 2046     		mov	r0, r4
  119 0080 FFF7FEFF 		bl	strlen
@@ -554,8 +563,8 @@ ARM GAS  /tmp/ccWGVQrs.s 			page 1
  126              	.LVL10:
  127 0090 F2E7     		b	.L1
  128              	.L19:
- 293:Src/state.c   **** 				count_hour, count_min, count_sec, count_dec);
- 129              		.loc 1 293 0
+ 302:Src/state.c   **** 				count_hour, count_min, count_sec, count_dec);
+ 129              		.loc 1 302 0
  130 0092 7D4B     		ldr	r3, .L29+48
  131 0094 1B88     		ldrh	r3, [r3]
  132 0096 7D4A     		ldr	r2, .L29+52
@@ -571,8 +580,8 @@ ARM GAS  /tmp/ccWGVQrs.s 			page 1
  142 00aa 2046     		mov	r0, r4
  143 00ac FFF7FEFF 		bl	sprintf
  144              	.LVL11:
- 295:Src/state.c   **** 	}
- 145              		.loc 1 295 0
+ 304:Src/state.c   **** 	}
+ 145              		.loc 1 304 0
  146 00b0 2046     		mov	r0, r4
  147 00b2 FFF7FEFF 		bl	strlen
  148              	.LVL12:
@@ -584,27 +593,27 @@ ARM GAS  /tmp/ccWGVQrs.s 			page 1
  154              	.LVL13:
  155 00c2 D9E7     		b	.L1
  156              	.L20:
- 309:Src/state.c   **** 				can1.canStart_status);
- 157              		.loc 1 309 0
+ 318:Src/state.c   **** 				can1.canStart_status);
+ 157              		.loc 1 318 0
  158 00c4 7549     		ldr	r1, .L29+68
  159 00c6 91F86C20 		ldrb	r2, [r1, #108]	@ zero_extendqisi2
  160 00ca 91F86D30 		ldrb	r3, [r1, #109]	@ zero_extendqisi2
- 310:Src/state.c   **** 		HAL_UART_Transmit(&huart3, (uint8_t *)debug_tx, strlen(debug_tx), 100);
- 161              		.loc 1 310 0
+ARM GAS  /tmp/ccw6FPXZ.s 			page 11
+
+
+ 319:Src/state.c   **** 		HAL_UART_Transmit(&huart3, (uint8_t *)debug_tx, strlen(debug_tx), 100);
+ 161              		.loc 1 319 0
  162 00ce 91F86E10 		ldrb	r1, [r1, #110]	@ zero_extendqisi2
- 299:Src/state.c   **** 				"\r\n\ntype of status:\r\n"
- 163              		.loc 1 299 0
+ 308:Src/state.c   **** 				"\r\n\ntype of status:\r\n"
+ 163              		.loc 1 308 0
  164 00d2 6A4C     		ldr	r4, .L29+36
  165 00d4 0091     		str	r1, [sp]
  166 00d6 7249     		ldr	r1, .L29+72
  167 00d8 2046     		mov	r0, r4
-ARM GAS  /tmp/ccWGVQrs.s 			page 11
-
-
  168 00da FFF7FEFF 		bl	sprintf
  169              	.LVL14:
- 311:Src/state.c   **** 		sprintf(debug_tx,
- 170              		.loc 1 311 0
+ 320:Src/state.c   **** 		sprintf(debug_tx,
+ 170              		.loc 1 320 0
  171 00de 2046     		mov	r0, r4
  172 00e0 FFF7FEFF 		bl	strlen
  173              	.LVL15:
@@ -615,23 +624,23 @@ ARM GAS  /tmp/ccWGVQrs.s 			page 1
  178 00ec 2846     		mov	r0, r5
  179 00ee FFF7FEFF 		bl	HAL_UART_Transmit
  180              	.LVL16:
- 317:Src/state.c   **** 				can3.canStart_status);
- 181              		.loc 1 317 0
+ 326:Src/state.c   **** 				can3.canStart_status);
+ 181              		.loc 1 326 0
  182 00f2 6C49     		ldr	r1, .L29+76
  183 00f4 91F86C20 		ldrb	r2, [r1, #108]	@ zero_extendqisi2
  184 00f8 91F86D30 		ldrb	r3, [r1, #109]	@ zero_extendqisi2
- 318:Src/state.c   **** 		HAL_UART_Transmit(&huart3, (uint8_t *)debug_tx, strlen(debug_tx), 100);
- 185              		.loc 1 318 0
+ 327:Src/state.c   **** 		HAL_UART_Transmit(&huart3, (uint8_t *)debug_tx, strlen(debug_tx), 100);
+ 185              		.loc 1 327 0
  186 00fc 91F86E10 		ldrb	r1, [r1, #110]	@ zero_extendqisi2
- 312:Src/state.c   **** 				"CAN3 status:\r\n"
- 187              		.loc 1 312 0
+ 321:Src/state.c   **** 				"CAN3 status:\r\n"
+ 187              		.loc 1 321 0
  188 0100 0091     		str	r1, [sp]
  189 0102 6949     		ldr	r1, .L29+80
  190 0104 2046     		mov	r0, r4
  191 0106 FFF7FEFF 		bl	sprintf
  192              	.LVL17:
- 319:Src/state.c   **** 		if (current_state == STATE_INIT)
- 193              		.loc 1 319 0
+ 328:Src/state.c   **** 		if (current_state == STATE_INIT)
+ 193              		.loc 1 328 0
  194 010a 2046     		mov	r0, r4
  195 010c FFF7FEFF 		bl	strlen
  196              	.LVL18:
@@ -641,29 +650,29 @@ ARM GAS  /tmp/ccWGVQrs.s 			page 1
  200 0116 2846     		mov	r0, r5
  201 0118 FFF7FEFF 		bl	HAL_UART_Transmit
  202              	.LVL19:
- 320:Src/state.c   **** 		{
- 203              		.loc 1 320 0
+ 329:Src/state.c   **** 		{
+ 203              		.loc 1 329 0
  204 011c 634B     		ldr	r3, .L29+84
  205 011e 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
  206 0120 0BB3     		cbz	r3, .L22
- 326:Src/state.c   **** 		{
- 207              		.loc 1 326 0
+ 335:Src/state.c   **** 		{
+ 207              		.loc 1 335 0
  208 0122 012B     		cmp	r3, #1
+ARM GAS  /tmp/ccw6FPXZ.s 			page 12
+
+
  209 0124 26D0     		beq	.L23
- 332:Src/state.c   **** 		{
- 210              		.loc 1 332 0
+ 341:Src/state.c   **** 		{
+ 210              		.loc 1 341 0
  211 0126 022B     		cmp	r3, #2
  212 0128 2BD0     		beq	.L24
- 338:Src/state.c   **** 		{
- 213              		.loc 1 338 0
+ 347:Src/state.c   **** 		{
+ 213              		.loc 1 347 0
  214 012a 032B     		cmp	r3, #3
  215 012c 30D0     		beq	.L25
-ARM GAS  /tmp/ccWGVQrs.s 			page 12
-
-
  216              	.L8:
- 344:Src/state.c   **** 				"\r\n"
- 217              		.loc 1 344 0
+ 353:Src/state.c   **** 				"\r\n"
+ 217              		.loc 1 353 0
  218 012e 604B     		ldr	r3, .L29+88
  219 0130 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
  220 0132 604A     		ldr	r2, .L29+92
@@ -682,8 +691,8 @@ ARM GAS  /tmp/ccWGVQrs.s 			page 1
  233 014c 2046     		mov	r0, r4
  234 014e FFF7FEFF 		bl	sprintf
  235              	.LVL20:
- 354:Src/state.c   **** 	}
- 236              		.loc 1 354 0
+ 363:Src/state.c   **** 	}
+ 236              		.loc 1 363 0
  237 0152 2046     		mov	r0, r4
  238 0154 FFF7FEFF 		bl	strlen
  239              	.LVL21:
@@ -695,8 +704,8 @@ ARM GAS  /tmp/ccWGVQrs.s 			page 1
  245              	.LVL22:
  246 0164 88E7     		b	.L1
  247              	.L22:
- 322:Src/state.c   **** 							  (uint8_t *)"\r\nCurrent state: STATE_INIT\r\n",
- 248              		.loc 1 322 0
+ 331:Src/state.c   **** 							  (uint8_t *)"\r\nCurrent state: STATE_INIT\r\n",
+ 248              		.loc 1 331 0
  249 0166 6423     		movs	r3, #100
  250 0168 1D22     		movs	r2, #29
  251 016a 5749     		ldr	r1, .L29+112
@@ -705,22 +714,22 @@ ARM GAS  /tmp/ccWGVQrs.s 			page 1
  254              	.LVL23:
  255 0172 DCE7     		b	.L8
  256              	.L23:
- 328:Src/state.c   **** 							  (uint8_t *)"\r\nCurrent state: STATE_IDLE\r\n",
- 257              		.loc 1 328 0
+ 337:Src/state.c   **** 							  (uint8_t *)"\r\nCurrent state: STATE_IDLE\r\n",
+ 257              		.loc 1 337 0
  258 0174 6423     		movs	r3, #100
  259 0176 1D22     		movs	r2, #29
+ARM GAS  /tmp/ccw6FPXZ.s 			page 13
+
+
  260 0178 5449     		ldr	r1, .L29+116
  261 017a 3F48     		ldr	r0, .L29+32
  262 017c FFF7FEFF 		bl	HAL_UART_Transmit
  263              	.LVL24:
  264 0180 D5E7     		b	.L8
  265              	.L24:
- 334:Src/state.c   **** 				&huart3, (uint8_t *)"\r\nCurrent state: STATE_SETUP\r\n",
- 266              		.loc 1 334 0
+ 343:Src/state.c   **** 				&huart3, (uint8_t *)"\r\nCurrent state: STATE_SETUP\r\n",
+ 266              		.loc 1 343 0
  267 0182 6423     		movs	r3, #100
-ARM GAS  /tmp/ccWGVQrs.s 			page 13
-
-
  268 0184 1E22     		movs	r2, #30
  269 0186 5249     		ldr	r1, .L29+120
  270 0188 3B48     		ldr	r0, .L29+32
@@ -728,8 +737,8 @@ ARM GAS  /tmp/ccWGVQrs.s 			page 1
  272              	.LVL25:
  273 018e CEE7     		b	.L8
  274              	.L25:
- 340:Src/state.c   **** 							  (uint8_t *)"\r\nCurrent state: STATE_RUN\r\n",
- 275              		.loc 1 340 0
+ 349:Src/state.c   **** 							  (uint8_t *)"\r\nCurrent state: STATE_RUN\r\n",
+ 275              		.loc 1 349 0
  276 0190 6423     		movs	r3, #100
  277 0192 1C22     		movs	r2, #28
  278 0194 4F49     		ldr	r1, .L29+124
@@ -738,22 +747,22 @@ ARM GAS  /tmp/ccWGVQrs.s 			page 1
  281              	.LVL26:
  282 019c C7E7     		b	.L8
  283              	.L21:
- 358:Src/state.c   **** 			if(successfull_opening == 1){
- 284              		.loc 1 358 0
+ 367:Src/state.c   **** 			if(successfull_opening == 1){
+ 284              		.loc 1 367 0
  285 019e 6423     		movs	r3, #100
  286 01a0 0D22     		movs	r2, #13
  287 01a2 4D49     		ldr	r1, .L29+128
  288 01a4 3448     		ldr	r0, .L29+32
  289 01a6 FFF7FEFF 		bl	HAL_UART_Transmit
  290              	.LVL27:
- 359:Src/state.c   **** 				sprintf(debug_tx,"Sd successfully opened and created file: %s\r\n",filename_log);
- 291              		.loc 1 359 0
+ 368:Src/state.c   **** 				sprintf(debug_tx,"Sd successfully opened and created file: %s\r\n",filename_log);
+ 291              		.loc 1 368 0
  292 01aa 4C4B     		ldr	r3, .L29+132
  293 01ac 1B68     		ldr	r3, [r3]
  294 01ae 012B     		cmp	r3, #1
  295 01b0 06D0     		beq	.L26
- 363:Src/state.c   **** 			}
- 296              		.loc 1 363 0
+ 372:Src/state.c   **** 			}
+ 296              		.loc 1 372 0
  297 01b2 6423     		movs	r3, #100
  298 01b4 1022     		movs	r2, #16
  299 01b6 4A49     		ldr	r1, .L29+136
@@ -762,54 +771,54 @@ ARM GAS  /tmp/ccWGVQrs.s 			page 1
  302              	.LVL28:
  303 01be 5BE7     		b	.L1
  304              	.L26:
- 360:Src/state.c   **** 				HAL_UART_Transmit(&huart3, (uint8_t *)debug_tx, strlen(debug_tx), 100);
- 305              		.loc 1 360 0
+ 369:Src/state.c   **** 				HAL_UART_Transmit(&huart3, (uint8_t *)debug_tx, strlen(debug_tx), 100);
+ 305              		.loc 1 369 0
  306 01c0 2E4C     		ldr	r4, .L29+36
  307 01c2 484A     		ldr	r2, .L29+140
  308 01c4 4849     		ldr	r1, .L29+144
  309 01c6 2046     		mov	r0, r4
  310 01c8 FFF7FEFF 		bl	sprintf
+ARM GAS  /tmp/ccw6FPXZ.s 			page 14
+
+
  311              	.LVL29:
- 361:Src/state.c   **** 			}else{
- 312              		.loc 1 361 0
+ 370:Src/state.c   **** 			}else{
+ 312              		.loc 1 370 0
  313 01cc 2046     		mov	r0, r4
  314 01ce FFF7FEFF 		bl	strlen
  315              	.LVL30:
  316 01d2 6423     		movs	r3, #100
  317 01d4 82B2     		uxth	r2, r0
  318 01d6 2146     		mov	r1, r4
-ARM GAS  /tmp/ccWGVQrs.s 			page 14
-
-
  319 01d8 2748     		ldr	r0, .L29+32
  320 01da FFF7FEFF 		bl	HAL_UART_Transmit
  321              	.LVL31:
  322 01de 4BE7     		b	.L1
  323              	.L11:
- 369:Src/state.c   **** 		sprintf(debug_tx,"\r\nFiles inside sd are:\r\n%s",log_names);
- 324              		.loc 1 369 0
+ 378:Src/state.c   **** 		sprintf(debug_tx,"\r\nFiles inside sd are:\r\n%s",log_names);
+ 324              		.loc 1 378 0
  325 01e0 4249     		ldr	r1, .L29+148
  326 01e2 1E48     		ldr	r0, .L29+4
  327 01e4 FFF7FEFF 		bl	strcmp
  328              	.LVL32:
  329 01e8 A0B1     		cbz	r0, .L27
- 373:Src/state.c   **** 	{
- 330              		.loc 1 373 0
+ 382:Src/state.c   **** 	{
+ 330              		.loc 1 382 0
  331 01ea 4149     		ldr	r1, .L29+152
  332 01ec 1B48     		ldr	r0, .L29+4
  333 01ee FFF7FEFF 		bl	strcmp
  334              	.LVL33:
  335 01f2 00B3     		cbz	r0, .L28
- 393:Src/state.c   **** 		HAL_UART_Transmit(&huart3, (uint8_t *)debug_tx, strlen(debug_tx), 100);
- 336              		.loc 1 393 0
+ 402:Src/state.c   **** 		HAL_UART_Transmit(&huart3, (uint8_t *)debug_tx, strlen(debug_tx), 100);
+ 336              		.loc 1 402 0
  337 01f4 214C     		ldr	r4, .L29+36
  338 01f6 194A     		ldr	r2, .L29+4
  339 01f8 3E49     		ldr	r1, .L29+156
  340 01fa 2046     		mov	r0, r4
  341 01fc FFF7FEFF 		bl	sprintf
  342              	.LVL34:
- 394:Src/state.c   **** 	}
- 343              		.loc 1 394 0
+ 403:Src/state.c   **** 	}
+ 343              		.loc 1 403 0
  344 0200 2046     		mov	r0, r4
  345 0202 FFF7FEFF 		bl	strlen
  346              	.LVL35:
@@ -819,43 +828,43 @@ ARM GAS  /tmp/ccWGVQrs.s 			page 1
  350 020c 1A48     		ldr	r0, .L29+32
  351 020e FFF7FEFF 		bl	HAL_UART_Transmit
  352              	.LVL36:
- 353              		.loc 1 396 0
+ 353              		.loc 1 405 0
  354 0212 31E7     		b	.L1
  355              	.L27:
- 370:Src/state.c   **** 		HAL_UART_Transmit(&huart3, (uint8_t *)debug_tx, strlen(debug_tx), 1000);
- 356              		.loc 1 370 0
+ 379:Src/state.c   **** 		HAL_UART_Transmit(&huart3, (uint8_t *)debug_tx, strlen(debug_tx), 1000);
+ 356              		.loc 1 379 0
  357 0214 194C     		ldr	r4, .L29+36
  358 0216 384A     		ldr	r2, .L29+160
  359 0218 3849     		ldr	r1, .L29+164
  360 021a 2046     		mov	r0, r4
  361 021c FFF7FEFF 		bl	sprintf
+ARM GAS  /tmp/ccw6FPXZ.s 			page 15
+
+
  362              	.LVL37:
- 371:Src/state.c   **** 	}
- 363              		.loc 1 371 0
+ 380:Src/state.c   **** 	}
+ 363              		.loc 1 380 0
  364 0220 2046     		mov	r0, r4
  365 0222 FFF7FEFF 		bl	strlen
  366              	.LVL38:
  367 0226 4FF47A73 		mov	r3, #1000
  368 022a 82B2     		uxth	r2, r0
  369 022c 2146     		mov	r1, r4
-ARM GAS  /tmp/ccWGVQrs.s 			page 15
-
-
  370 022e 1248     		ldr	r0, .L29+32
  371 0230 FFF7FEFF 		bl	HAL_UART_Transmit
  372              	.LVL39:
  373 0234 20E7     		b	.L1
  374              	.L28:
- 375:Src/state.c   **** 				"\r\n"
- 375              		.loc 1 375 0
+ 384:Src/state.c   **** 				"\r\n"
+ 375              		.loc 1 384 0
  376 0236 114C     		ldr	r4, .L29+36
  377 0238 DB22     		movs	r2, #219
  378 023a 3149     		ldr	r1, .L29+168
  379 023c 2046     		mov	r0, r4
  380 023e FFF7FEFF 		bl	memcpy
  381              	.LVL40:
- 389:Src/state.c   **** 	}
- 382              		.loc 1 389 0
+ 398:Src/state.c   **** 	}
+ 382              		.loc 1 398 0
  383 0242 2046     		mov	r0, r4
  384 0244 FFF7FEFF 		bl	strlen
  385              	.LVL41:
@@ -889,6 +898,9 @@ ARM GAS  /tmp/ccWGVQrs.s 			page 1
  413 029c 00000000 		.word	can1
  414 02a0 54010000 		.word	.LC6
  415 02a4 00000000 		.word	can3
+ARM GAS  /tmp/ccw6FPXZ.s 			page 16
+
+
  416 02a8 FC010000 		.word	.LC7
  417 02ac 00000000 		.word	current_state
  418 02b0 00000000 		.word	its0_connected
@@ -898,9 +910,6 @@ ARM GAS  /tmp/ccWGVQrs.s 			page 1
  422 02c0 00000000 		.word	its1_connected
  423 02c4 DC020000 		.word	.LC12
  424 02c8 5C020000 		.word	.LC8
-ARM GAS  /tmp/ccWGVQrs.s 			page 16
-
-
  425 02cc 7C020000 		.word	.LC9
  426 02d0 9C020000 		.word	.LC10
  427 02d4 BC020000 		.word	.LC11
@@ -926,10 +935,10 @@ ARM GAS  /tmp/ccWGVQrs.s 			page 1
  448              		.fpu fpv5-d16
  450              	imu_operations:
  451              	.LFB147:
- 397:Src/state.c   **** 
- 398:Src/state.c   **** void imu_operations()
- 399:Src/state.c   **** {
- 452              		.loc 1 399 0
+ 406:Src/state.c   **** 
+ 407:Src/state.c   **** void imu_operations()
+ 408:Src/state.c   **** {
+ 452              		.loc 1 408 0
  453              		.cfi_startproc
  454              		@ args = 0, pretend = 0, frame = 0
  455              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -938,36 +947,36 @@ ARM GAS  /tmp/ccWGVQrs.s 			page 1
  458              		.cfi_def_cfa_offset 8
  459              		.cfi_offset 3, -8
  460              		.cfi_offset 14, -4
- 400:Src/state.c   **** 	imu_connected = 1; // imu connected true
- 461              		.loc 1 400 0
+ 409:Src/state.c   **** 	imu_connected = 1; // imu connected true
+ 461              		.loc 1 409 0
  462 0002 0122     		movs	r2, #1
  463 0004 094B     		ldr	r3, .L35
  464 0006 1A70     		strb	r2, [r3]
- 401:Src/state.c   **** 	if (count_imu == 10 || count_imu == 11)
- 465              		.loc 1 401 0
+ 410:Src/state.c   **** 	if (count_imu == 10 || count_imu == 11)
+ 465              		.loc 1 410 0
  466 0008 094B     		ldr	r3, .L35+4
  467 000a 1B88     		ldrh	r3, [r3]
  468 000c 0A3B     		subs	r3, r3, #10
  469 000e 9BB2     		uxth	r3, r3
+ARM GAS  /tmp/ccw6FPXZ.s 			page 17
+
+
  470 0010 9342     		cmp	r3, r2
  471 0012 03D9     		bls	.L34
  472              	.L32:
- 402:Src/state.c   **** 	{
- 403:Src/state.c   **** 		HAL_UART_Transmit(&huart3, (uint8_t *)"IMU presente\r\n",
- 404:Src/state.c   **** 						  strlen("IMU presente\r\n"), 10);
- 405:Src/state.c   **** 	}
- 406:Src/state.c   **** 	count_imu = 0;
- 473              		.loc 1 406 0
-ARM GAS  /tmp/ccWGVQrs.s 			page 17
-
-
+ 411:Src/state.c   **** 	{
+ 412:Src/state.c   **** 		HAL_UART_Transmit(&huart3, (uint8_t *)"IMU presente\r\n",
+ 413:Src/state.c   **** 						  strlen("IMU presente\r\n"), 10);
+ 414:Src/state.c   **** 	}
+ 415:Src/state.c   **** 	count_imu = 0;
+ 473              		.loc 1 415 0
  474 0014 0022     		movs	r2, #0
  475 0016 064B     		ldr	r3, .L35+4
  476 0018 1A80     		strh	r2, [r3]	@ movhi
  477 001a 08BD     		pop	{r3, pc}
  478              	.L34:
- 403:Src/state.c   **** 						  strlen("IMU presente\r\n"), 10);
- 479              		.loc 1 403 0
+ 412:Src/state.c   **** 						  strlen("IMU presente\r\n"), 10);
+ 479              		.loc 1 412 0
  480 001c 0A23     		movs	r3, #10
  481 001e 0E22     		movs	r2, #14
  482 0020 0449     		ldr	r1, .L35+8
@@ -993,8 +1002,8 @@ ARM GAS  /tmp/ccWGVQrs.s 			page 1
  503              		.fpu fpv5-d16
  505              	init:
  506              	.LFB142:
-  14:Src/state.c   **** 	if (debug_msg_arrived == 1)
- 507              		.loc 1 14 0
+  19:Src/state.c   **** 	if (debug_msg_arrived == 1)
+ 507              		.loc 1 19 0
  508              		.cfi_startproc
  509              		@ args = 0, pretend = 0, frame = 0
  510              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -1003,59 +1012,59 @@ ARM GAS  /tmp/ccWGVQrs.s 			page 1
  513              		.cfi_def_cfa_offset 8
  514              		.cfi_offset 3, -8
  515              		.cfi_offset 14, -4
-  15:Src/state.c   **** 	{
- 516              		.loc 1 15 0
+  20:Src/state.c   **** 	{
+ 516              		.loc 1 20 0
  517 0002 0F4B     		ldr	r3, .L44
  518 0004 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
  519 0006 012B     		cmp	r3, #1
  520 0008 10D0     		beq	.L42
+ARM GAS  /tmp/ccw6FPXZ.s 			page 18
+
+
  521              	.L38:
-  20:Src/state.c   **** 	{
- 522              		.loc 1 20 0
+  25:Src/state.c   **** 	{
+ 522              		.loc 1 25 0
  523 000a 0E48     		ldr	r0, .L44+4
  524 000c FFF7FEFF 		bl	fifoRxDataCAN_pop
  525              	.LVL44:
  526 0010 28B1     		cbz	r0, .L39
-  22:Src/state.c   **** 		{
- 527              		.loc 1 22 0
-ARM GAS  /tmp/ccWGVQrs.s 			page 18
-
-
+  27:Src/state.c   **** 		{
+ 527              		.loc 1 27 0
  528 0012 0C4B     		ldr	r3, .L44+4
  529 0014 1B6B     		ldr	r3, [r3, #48]
  530 0016 A3F2EC43 		subw	r3, r3, #1260
  531 001a 012B     		cmp	r3, #1
  532 001c 0CD9     		bls	.L43
  533              	.L39:
-  33:Src/state.c   **** 	{
- 534              		.loc 1 33 0
+  38:Src/state.c   **** 	{
+ 534              		.loc 1 38 0
  535 001e 0A48     		ldr	r0, .L44+8
  536 0020 FFF7FEFF 		bl	fifoRxDataCAN_pop
  537              	.LVL45:
-  36:Src/state.c   **** }
- 538              		.loc 1 36 0
+  41:Src/state.c   **** }
+ 538              		.loc 1 41 0
  539 0024 0122     		movs	r2, #1
  540 0026 094B     		ldr	r3, .L44+12
  541 0028 1A70     		strb	r2, [r3]
  542 002a 08BD     		pop	{r3, pc}
  543              	.L42:
-  17:Src/state.c   **** 		debug_operations();
- 544              		.loc 1 17 0
+  22:Src/state.c   **** 		debug_operations();
+ 544              		.loc 1 22 0
  545 002c 0022     		movs	r2, #0
  546 002e 044B     		ldr	r3, .L44
  547 0030 1A70     		strb	r2, [r3]
-  18:Src/state.c   **** 	}
- 548              		.loc 1 18 0
+  23:Src/state.c   **** 	}
+ 548              		.loc 1 23 0
  549 0032 FFF7FEFF 		bl	debug_operations
  550              	.LVL46:
  551 0036 E8E7     		b	.L38
  552              	.L43:
-  26:Src/state.c   **** 			break;
- 553              		.loc 1 26 0
+  31:Src/state.c   **** 			break;
+ 553              		.loc 1 31 0
  554 0038 FFF7FEFF 		bl	imu_operations
  555              	.LVL47:
-  27:Src/state.c   **** 
- 556              		.loc 1 27 0
+  32:Src/state.c   **** 
+ 556              		.loc 1 32 0
  557 003c EFE7     		b	.L39
  558              	.L45:
  559 003e 00BF     		.align	2
@@ -1069,19 +1078,19 @@ ARM GAS  /tmp/ccWGVQrs.s 			page 1
  568              		.section	.text.atc_pot_operations,"ax",%progbits
  569              		.align	1
  570              		.global	atc_pot_operations
+ARM GAS  /tmp/ccw6FPXZ.s 			page 19
+
+
  571              		.syntax unified
  572              		.thumb
  573              		.thumb_func
  574              		.fpu fpv5-d16
  576              	atc_pot_operations:
  577              	.LFB148:
- 407:Src/state.c   **** }
- 408:Src/state.c   **** void atc_pot_operations()
- 409:Src/state.c   **** {
-ARM GAS  /tmp/ccWGVQrs.s 			page 19
-
-
- 578              		.loc 1 409 0
+ 416:Src/state.c   **** }
+ 417:Src/state.c   **** void atc_pot_operations()
+ 418:Src/state.c   **** {
+ 578              		.loc 1 418 0
  579              		.cfi_startproc
  580              		@ args = 0, pretend = 0, frame = 0
  581              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -1092,18 +1101,18 @@ ARM GAS  /tmp/ccWGVQrs.s 			page 1
  586              		.cfi_offset 4, -12
  587              		.cfi_offset 5, -8
  588              		.cfi_offset 14, -4
- 410:Src/state.c   **** 	atc_connected = 1;
- 589              		.loc 1 410 0
+ 419:Src/state.c   **** 	atc_connected = 1;
+ 589              		.loc 1 419 0
  590 0002 0122     		movs	r2, #1
  591 0004 3C4B     		ldr	r3, .L54
  592 0006 1A70     		strb	r2, [r3]
- 411:Src/state.c   **** 	count_atc = 0;
- 593              		.loc 1 411 0
+ 420:Src/state.c   **** 	count_atc = 0;
+ 593              		.loc 1 420 0
  594 0008 0022     		movs	r2, #0
  595 000a 3C4B     		ldr	r3, .L54+4
  596 000c 1A80     		strh	r2, [r3]	@ movhi
- 412:Src/state.c   **** 	accel.pot1_val = can1.dataRx[0] * 256 + can1.dataRx[1];
- 597              		.loc 1 412 0
+ 421:Src/state.c   **** 	accel.pot1_val = can1.dataRx[0] * 256 + can1.dataRx[1];
+ 597              		.loc 1 421 0
  598 000e 3C49     		ldr	r1, .L54+8
  599 0010 0A7D     		ldrb	r2, [r1, #20]	@ zero_extendqisi2
  600 0012 4B7D     		ldrb	r3, [r1, #21]	@ zero_extendqisi2
@@ -1111,160 +1120,160 @@ ARM GAS  /tmp/ccWGVQrs.s 			page 1
  602 0018 9BB2     		uxth	r3, r3
  603 001a 3A48     		ldr	r0, .L54+12
  604 001c 0380     		strh	r3, [r0]	@ movhi
- 413:Src/state.c   **** 	accel.pot2_val = can1.dataRx[2] * 256 + can1.dataRx[3];
- 605              		.loc 1 413 0
+ 422:Src/state.c   **** 	accel.pot2_val = can1.dataRx[2] * 256 + can1.dataRx[3];
+ 605              		.loc 1 422 0
  606 001e 8C7D     		ldrb	r4, [r1, #22]	@ zero_extendqisi2
  607 0020 CA7D     		ldrb	r2, [r1, #23]	@ zero_extendqisi2
  608 0022 02EB0422 		add	r2, r2, r4, lsl #8
  609 0026 92B2     		uxth	r2, r2
  610 0028 8280     		strh	r2, [r0, #4]	@ movhi
- 414:Src/state.c   **** 	// brake.pot1_val = can1.dataRx[4] * 256 + can1.dataRx[5];
- 415:Src/state.c   **** 	// brake.pot2_val = can1.dataRx[6] * 256 + can1.dataRx[7];
- 416:Src/state.c   **** 	/*sprintf(txt, "CAN: %d %d %d %d\r\n ", can1.dataRx[0], can1.dataRx[1],
- 417:Src/state.c   **** 			can1.dataRx[2], can1.dataRx[3]);
- 418:Src/state.c   **** 	HAL_UART_Transmit(&huart3, (uint8_t*)txt, strlen(txt), 10);*/
- 419:Src/state.c   **** 	// val100 = (val - pot_min_val)/(pot_max_val - pot_min_val)*100
- 420:Src/state.c   **** 
- 421:Src/state.c   **** 	if (accel.pot1_range != 0 && accel.pot2_range != 0)
- 611              		.loc 1 421 0
+ 423:Src/state.c   **** 	// brake.pot1_val = can1.dataRx[4] * 256 + can1.dataRx[5];
+ 424:Src/state.c   **** 	// brake.pot2_val = can1.dataRx[6] * 256 + can1.dataRx[7];
+ 425:Src/state.c   **** 	/*sprintf(txt, "CAN: %d %d %d %d\r\n ", can1.dataRx[0], can1.dataRx[1],
+ 426:Src/state.c   **** 			can1.dataRx[2], can1.dataRx[3]);
+ 427:Src/state.c   **** 	HAL_UART_Transmit(&huart3, (uint8_t*)txt, strlen(txt), 10);*/
+ 428:Src/state.c   **** 	// val100 = (val - pot_min_val)/(pot_max_val - pot_min_val)*100
+ 429:Src/state.c   **** 
+ 430:Src/state.c   **** 	if (accel.pot1_range != 0 && accel.pot2_range != 0)
+ 611              		.loc 1 430 0
  612 002a 8189     		ldrh	r1, [r0, #12]
  613 002c 89B1     		cbz	r1, .L47
- 614              		.loc 1 421 0 is_stmt 0 discriminator 1
+ARM GAS  /tmp/ccw6FPXZ.s 			page 20
+
+
+ 614              		.loc 1 430 0 is_stmt 0 discriminator 1
  615 002e 458A     		ldrh	r5, [r0, #18]
  616 0030 7DB1     		cbz	r5, .L47
- 422:Src/state.c   **** 	{
- 423:Src/state.c   **** 		accel.pot1_val_100 =
- 424:Src/state.c   **** 			((accel.pot1_val - accel.pot1_min_val) * 100) / (accel.pot1_range);
- 617              		.loc 1 424 0 is_stmt 1
+ 431:Src/state.c   **** 	{
+ 432:Src/state.c   **** 		accel.pot1_val_100 =
+ 433:Src/state.c   **** 			((accel.pot1_val - accel.pot1_min_val) * 100) / (accel.pot1_range);
+ 617              		.loc 1 433 0 is_stmt 1
  618 0032 0446     		mov	r4, r0
  619 0034 C089     		ldrh	r0, [r0, #14]
-ARM GAS  /tmp/ccWGVQrs.s 			page 20
-
-
  620 0036 1B1A     		subs	r3, r3, r0
  621 0038 6420     		movs	r0, #100
  622 003a 00FB03F3 		mul	r3, r0, r3
  623 003e 93FBF1F3 		sdiv	r3, r3, r1
- 423:Src/state.c   **** 			((accel.pot1_val - accel.pot1_min_val) * 100) / (accel.pot1_range);
- 624              		.loc 1 423 0
+ 432:Src/state.c   **** 			((accel.pot1_val - accel.pot1_min_val) * 100) / (accel.pot1_range);
+ 624              		.loc 1 432 0
  625 0042 A370     		strb	r3, [r4, #2]
- 425:Src/state.c   **** 		accel.pot2_val_100 =
- 426:Src/state.c   **** 			((accel.pot2_val - accel.pot2_min_val) * 100) / (accel.pot2_range);
- 626              		.loc 1 426 0
+ 434:Src/state.c   **** 		accel.pot2_val_100 =
+ 435:Src/state.c   **** 			((accel.pot2_val - accel.pot2_min_val) * 100) / (accel.pot2_range);
+ 626              		.loc 1 435 0
  627 0044 238A     		ldrh	r3, [r4, #16]
  628 0046 D21A     		subs	r2, r2, r3
  629 0048 00FB02F2 		mul	r2, r0, r2
  630 004c 92FBF5F2 		sdiv	r2, r2, r5
- 425:Src/state.c   **** 		accel.pot2_val_100 =
- 631              		.loc 1 425 0
+ 434:Src/state.c   **** 		accel.pot2_val_100 =
+ 631              		.loc 1 434 0
  632 0050 A271     		strb	r2, [r4, #6]
  633              	.L47:
- 427:Src/state.c   **** 	}
- 428:Src/state.c   **** 	if (brake.pot1_range != 0 && brake.pot2_range != 0)
- 634              		.loc 1 428 0
+ 436:Src/state.c   **** 	}
+ 437:Src/state.c   **** 	if (brake.pot1_range != 0 && brake.pot2_range != 0)
+ 634              		.loc 1 437 0
  635 0052 2D4B     		ldr	r3, .L54+16
  636 0054 9989     		ldrh	r1, [r3, #12]
  637 0056 C1B1     		cbz	r1, .L48
- 638              		.loc 1 428 0 is_stmt 0 discriminator 1
+ 638              		.loc 1 437 0 is_stmt 0 discriminator 1
  639 0058 5C8A     		ldrh	r4, [r3, #18]
  640 005a B4B1     		cbz	r4, .L48
- 429:Src/state.c   **** 	{
- 430:Src/state.c   **** 		brake.pot1_val_100 =
- 431:Src/state.c   **** 			(brake.pot1_val - brake.pot1_min_val) / (brake.pot1_range) * 100;
- 641              		.loc 1 431 0 is_stmt 1
+ 438:Src/state.c   **** 	{
+ 439:Src/state.c   **** 		brake.pot1_val_100 =
+ 440:Src/state.c   **** 			(brake.pot1_val - brake.pot1_min_val) / (brake.pot1_range) * 100;
+ 641              		.loc 1 440 0 is_stmt 1
  642 005c 1846     		mov	r0, r3
  643 005e 1A88     		ldrh	r2, [r3]
  644 0060 DB89     		ldrh	r3, [r3, #14]
  645 0062 D21A     		subs	r2, r2, r3
  646 0064 92FBF1F2 		sdiv	r2, r2, r1
- 430:Src/state.c   **** 			(brake.pot1_val - brake.pot1_min_val) / (brake.pot1_range) * 100;
- 647              		.loc 1 430 0
+ 439:Src/state.c   **** 			(brake.pot1_val - brake.pot1_min_val) / (brake.pot1_range) * 100;
+ 647              		.loc 1 439 0
  648 0068 02EB8202 		add	r2, r2, r2, lsl #2
  649 006c 02EB8202 		add	r2, r2, r2, lsl #2
  650 0070 9300     		lsls	r3, r2, #2
  651 0072 8370     		strb	r3, [r0, #2]
- 432:Src/state.c   **** 		brake.pot2_val_100 =
- 433:Src/state.c   **** 			(brake.pot2_val - brake.pot2_min_val) / (brake.pot2_range) * 100;
- 652              		.loc 1 433 0
+ 441:Src/state.c   **** 		brake.pot2_val_100 =
+ 442:Src/state.c   **** 			(brake.pot2_val - brake.pot2_min_val) / (brake.pot2_range) * 100;
+ 652              		.loc 1 442 0
  653 0074 8388     		ldrh	r3, [r0, #4]
  654 0076 028A     		ldrh	r2, [r0, #16]
  655 0078 9B1A     		subs	r3, r3, r2
+ARM GAS  /tmp/ccw6FPXZ.s 			page 21
+
+
  656 007a 93FBF4F3 		sdiv	r3, r3, r4
- 432:Src/state.c   **** 		brake.pot2_val_100 =
- 657              		.loc 1 432 0
+ 441:Src/state.c   **** 		brake.pot2_val_100 =
+ 657              		.loc 1 441 0
  658 007e 03EB8303 		add	r3, r3, r3, lsl #2
  659 0082 03EB8303 		add	r3, r3, r3, lsl #2
  660 0086 9A00     		lsls	r2, r3, #2
  661 0088 8271     		strb	r2, [r0, #6]
  662              	.L48:
- 434:Src/state.c   **** 	}
-ARM GAS  /tmp/ccWGVQrs.s 			page 21
-
-
- 435:Src/state.c   **** 	/*sprintf(txt, "size: %d ", can1.rx_size);
- 436:Src/state.c   **** 	HAL_UART_Transmit(&huart3, (uint8_t*)txt, strlen(txt), 10);*/
- 437:Src/state.c   **** 	/*sprintf(txt, "%d %d\r\n", accel.pot1_val, accel.pot2_val);
- 438:Src/state.c   **** 	HAL_UART_Transmit(&huart3, (uint8_t*)txt, strlen(txt), 10);*/
- 439:Src/state.c   **** 	/*sprintf(txt, "%d %d\r\n", accel.pot1_val_100, accel.pot2_val_100);
- 440:Src/state.c   **** 	HAL_UART_Transmit(&huart3, (uint8_t*)txt, strlen(txt), 10);*/
- 441:Src/state.c   **** 	if (accel_implausibility_check() == 1)
- 663              		.loc 1 441 0
+ 443:Src/state.c   **** 	}
+ 444:Src/state.c   **** 	/*sprintf(txt, "size: %d ", can1.rx_size);
+ 445:Src/state.c   **** 	HAL_UART_Transmit(&huart3, (uint8_t*)txt, strlen(txt), 10);*/
+ 446:Src/state.c   **** 	/*sprintf(txt, "%d %d\r\n", accel.pot1_val, accel.pot2_val);
+ 447:Src/state.c   **** 	HAL_UART_Transmit(&huart3, (uint8_t*)txt, strlen(txt), 10);*/
+ 448:Src/state.c   **** 	/*sprintf(txt, "%d %d\r\n", accel.pot1_val_100, accel.pot2_val_100);
+ 449:Src/state.c   **** 	HAL_UART_Transmit(&huart3, (uint8_t*)txt, strlen(txt), 10);*/
+ 450:Src/state.c   **** 	if (accel_implausibility_check() == 1)
+ 663              		.loc 1 450 0
  664 008a FFF7FEFF 		bl	accel_implausibility_check
  665              	.LVL48:
  666 008e 0128     		cmp	r0, #1
  667 0090 03D0     		beq	.L52
- 442:Src/state.c   **** 	{
- 443:Src/state.c   **** 		accel.pot1_val = 0;
- 444:Src/state.c   **** 		accel.pot2_val = 0;
- 445:Src/state.c   **** 		accel.pot1_val_100 = 0;
- 446:Src/state.c   **** 		accel.pot2_val_100 = 0;
- 447:Src/state.c   **** 		// send error//
- 448:Src/state.c   **** 		can1.tx_id = 0x10;
- 449:Src/state.c   **** 		can1.dataTx[0] = 1;
- 450:Src/state.c   **** 		can1.tx_size = 1;
- 451:Src/state.c   **** 		// CAN_Send(&can1, highPriority);
- 452:Src/state.c   **** 		sprintf(txt, "POT FAIL %d\r\n", accel_implausibility_check_count_flag);
- 453:Src/state.c   **** 		HAL_UART_Transmit(&huart3, (uint8_t *)txt, strlen(txt), 10);
- 454:Src/state.c   **** 	}
- 455:Src/state.c   **** 	else if (accel_implausibility_check() == 0)
- 668              		.loc 1 455 0
+ 451:Src/state.c   **** 	{
+ 452:Src/state.c   **** 		accel.pot1_val = 0;
+ 453:Src/state.c   **** 		accel.pot2_val = 0;
+ 454:Src/state.c   **** 		accel.pot1_val_100 = 0;
+ 455:Src/state.c   **** 		accel.pot2_val_100 = 0;
+ 456:Src/state.c   **** 		// send error//
+ 457:Src/state.c   **** 		can1.tx_id = 0x10;
+ 458:Src/state.c   **** 		can1.dataTx[0] = 1;
+ 459:Src/state.c   **** 		can1.tx_size = 1;
+ 460:Src/state.c   **** 		// CAN_Send(&can1, highPriority);
+ 461:Src/state.c   **** 		sprintf(txt, "POT FAIL %d\r\n", accel_implausibility_check_count_flag);
+ 462:Src/state.c   **** 		HAL_UART_Transmit(&huart3, (uint8_t *)txt, strlen(txt), 10);
+ 463:Src/state.c   **** 	}
+ 464:Src/state.c   **** 	else if (accel_implausibility_check() == 0)
+ 668              		.loc 1 464 0
  669 0092 FFF7FEFF 		bl	accel_implausibility_check
  670              	.LVL49:
  671 0096 E8B1     		cbz	r0, .L53
  672              	.L46:
  673 0098 38BD     		pop	{r3, r4, r5, pc}
  674              	.L52:
- 443:Src/state.c   **** 		accel.pot2_val = 0;
- 675              		.loc 1 443 0
+ 452:Src/state.c   **** 		accel.pot2_val = 0;
+ 675              		.loc 1 452 0
  676 009a 1A4B     		ldr	r3, .L54+12
  677 009c 0022     		movs	r2, #0
  678 009e 1A80     		strh	r2, [r3]	@ movhi
- 444:Src/state.c   **** 		accel.pot1_val_100 = 0;
- 679              		.loc 1 444 0
+ 453:Src/state.c   **** 		accel.pot1_val_100 = 0;
+ 679              		.loc 1 453 0
  680 00a0 9A80     		strh	r2, [r3, #4]	@ movhi
- 445:Src/state.c   **** 		accel.pot2_val_100 = 0;
- 681              		.loc 1 445 0
+ 454:Src/state.c   **** 		accel.pot2_val_100 = 0;
+ 681              		.loc 1 454 0
  682 00a2 9A70     		strb	r2, [r3, #2]
- 446:Src/state.c   **** 		// send error//
- 683              		.loc 1 446 0
+ 455:Src/state.c   **** 		// send error//
+ 683              		.loc 1 455 0
  684 00a4 9A71     		strb	r2, [r3, #6]
- 448:Src/state.c   **** 		can1.dataTx[0] = 1;
- 685              		.loc 1 448 0
+ 457:Src/state.c   **** 		can1.dataTx[0] = 1;
+ARM GAS  /tmp/ccw6FPXZ.s 			page 22
+
+
+ 685              		.loc 1 457 0
  686 00a6 164B     		ldr	r3, .L54+8
  687 00a8 1022     		movs	r2, #16
  688 00aa DA62     		str	r2, [r3, #44]
- 449:Src/state.c   **** 		can1.tx_size = 1;
- 689              		.loc 1 449 0
+ 458:Src/state.c   **** 		can1.tx_size = 1;
+ 689              		.loc 1 458 0
  690 00ac 0122     		movs	r2, #1
  691 00ae 1A73     		strb	r2, [r3, #12]
- 450:Src/state.c   **** 		// CAN_Send(&can1, highPriority);
-ARM GAS  /tmp/ccWGVQrs.s 			page 22
-
-
- 692              		.loc 1 450 0
+ 459:Src/state.c   **** 		// CAN_Send(&can1, highPriority);
+ 692              		.loc 1 459 0
  693 00b0 1A60     		str	r2, [r3]
- 452:Src/state.c   **** 		HAL_UART_Transmit(&huart3, (uint8_t *)txt, strlen(txt), 10);
- 694              		.loc 1 452 0
+ 461:Src/state.c   **** 		HAL_UART_Transmit(&huart3, (uint8_t *)txt, strlen(txt), 10);
+ 694              		.loc 1 461 0
  695 00b2 164C     		ldr	r4, .L54+20
  696 00b4 164B     		ldr	r3, .L54+24
  697 00b6 1A78     		ldrb	r2, [r3]	@ zero_extendqisi2
@@ -1272,8 +1281,8 @@ ARM GAS  /tmp/ccWGVQrs.s 			page 1
  699 00ba 2046     		mov	r0, r4
  700 00bc FFF7FEFF 		bl	sprintf
  701              	.LVL50:
- 453:Src/state.c   **** 	}
- 702              		.loc 1 453 0
+ 462:Src/state.c   **** 	}
+ 702              		.loc 1 462 0
  703 00c0 2046     		mov	r0, r4
  704 00c2 FFF7FEFF 		bl	strlen
  705              	.LVL51:
@@ -1285,9 +1294,9 @@ ARM GAS  /tmp/ccWGVQrs.s 			page 1
  711              	.LVL52:
  712 00d2 38BD     		pop	{r3, r4, r5, pc}
  713              	.L53:
- 456:Src/state.c   **** 	{
- 457:Src/state.c   **** 		sprintf(txt, "POT WORK %d %d\r\n", accel.pot1_val_100,
- 714              		.loc 1 457 0
+ 465:Src/state.c   **** 	{
+ 466:Src/state.c   **** 		sprintf(txt, "POT WORK %d %d\r\n", accel.pot1_val_100,
+ 714              		.loc 1 466 0
  715 00d4 0B4A     		ldr	r2, .L54+12
  716 00d6 0D4C     		ldr	r4, .L54+20
  717 00d8 9379     		ldrb	r3, [r2, #6]	@ zero_extendqisi2
@@ -1296,9 +1305,9 @@ ARM GAS  /tmp/ccWGVQrs.s 			page 1
  720 00de 2046     		mov	r0, r4
  721 00e0 FFF7FEFF 		bl	sprintf
  722              	.LVL53:
- 458:Src/state.c   **** 				accel.pot2_val_100);
- 459:Src/state.c   **** 		HAL_UART_Transmit(&huart3, (uint8_t *)txt, strlen(txt), 10);
- 723              		.loc 1 459 0
+ 467:Src/state.c   **** 				accel.pot2_val_100);
+ 468:Src/state.c   **** 		HAL_UART_Transmit(&huart3, (uint8_t *)txt, strlen(txt), 10);
+ 723              		.loc 1 468 0
  724 00e4 2046     		mov	r0, r4
  725 00e6 FFF7FEFF 		bl	strlen
  726              	.LVL54:
@@ -1308,19 +1317,19 @@ ARM GAS  /tmp/ccWGVQrs.s 			page 1
  730 00f0 0948     		ldr	r0, .L54+32
  731 00f2 FFF7FEFF 		bl	HAL_UART_Transmit
  732              	.LVL55:
- 460:Src/state.c   **** 	}
- 461:Src/state.c   **** 	/*if(brake_implausibility_check()){
- 462:Src/state.c   **** 		brake.pot1_val = 0;
- 463:Src/state.c   **** 		brake.pot2_val = 0;
- 464:Src/state.c   **** 	}*/
- 465:Src/state.c   **** }
- 733              		.loc 1 465 0
+ 469:Src/state.c   **** 	}
+ARM GAS  /tmp/ccw6FPXZ.s 			page 23
+
+
+ 470:Src/state.c   **** 	/*if(brake_implausibility_check()){
+ 471:Src/state.c   **** 		brake.pot1_val = 0;
+ 472:Src/state.c   **** 		brake.pot2_val = 0;
+ 473:Src/state.c   **** 	}*/
+ 474:Src/state.c   **** }
+ 733              		.loc 1 474 0
  734 00f6 CFE7     		b	.L46
  735              	.L55:
  736              		.align	2
-ARM GAS  /tmp/ccWGVQrs.s 			page 23
-
-
  737              	.L54:
  738 00f8 00000000 		.word	atc_connected
  739 00fc 00000000 		.word	count_atc
@@ -1343,8 +1352,8 @@ ARM GAS  /tmp/ccWGVQrs.s 			page 1
  757              		.fpu fpv5-d16
  759              	idle:
  760              	.LFB143:
-  45:Src/state.c   **** 	if (HAL_GPIO_ReadPin(USER_BUTTON_GPIO_Port,USER_BUTTON_Pin) == GPIO_PIN_SET){
- 761              		.loc 1 45 0
+  50:Src/state.c   **** 	if (HAL_GPIO_ReadPin(USER_BUTTON_GPIO_Port,USER_BUTTON_Pin) == GPIO_PIN_SET){
+ 761              		.loc 1 50 0
  762              		.cfi_startproc
  763              		@ args = 0, pretend = 0, frame = 0
  764              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -1357,44 +1366,44 @@ ARM GAS  /tmp/ccWGVQrs.s 			page 1
  771 0002 83B0     		sub	sp, sp, #12
  772              	.LCFI8:
  773              		.cfi_def_cfa_offset 24
-  46:Src/state.c   **** 		sprintf(txt,"%d\r\n%d\r\n%d\r\n%d\r\n",accel.pot1_val,accel.pot2_val,brake.pot1_val,brake.pot2_va
- 774              		.loc 1 46 0
+  51:Src/state.c   **** 		sprintf(txt,"%d\r\n%d\r\n%d\r\n%d\r\n",accel.pot1_val,accel.pot2_val,brake.pot1_val,brake.pot2_va
+ 774              		.loc 1 51 0
  775 0004 4FF40051 		mov	r1, #8192
- 776 0008 3748     		ldr	r0, .L69
+ 776 0008 3148     		ldr	r0, .L68
  777 000a FFF7FEFF 		bl	HAL_GPIO_ReadPin
  778              	.LVL56:
  779 000e 0128     		cmp	r0, #1
  780 0010 11D0     		beq	.L65
  781              	.L57:
-  54:Src/state.c   **** 	{
- 782              		.loc 1 54 0
- 783 0012 364B     		ldr	r3, .L69+4
+  59:Src/state.c   **** 	{
+ 782              		.loc 1 59 0
+ 783 0012 304B     		ldr	r3, .L68+4
+ARM GAS  /tmp/ccw6FPXZ.s 			page 24
+
+
  784 0014 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
  785 0016 012B     		cmp	r3, #1
  786 0018 3CD0     		beq	.L66
  787              	.L58:
-  59:Src/state.c   **** 	{
- 788              		.loc 1 59 0
- 789 001a 3548     		ldr	r0, .L69+8
+  64:Src/state.c   **** 	{
+ 788              		.loc 1 64 0
+ 789 001a 2F48     		ldr	r0, .L68+8
  790 001c FFF7FEFF 		bl	fifoRxDataCAN_pop
  791              	.LVL57:
-ARM GAS  /tmp/ccWGVQrs.s 			page 24
-
-
  792 0020 38B1     		cbz	r0, .L56
-  61:Src/state.c   **** 		{
- 793              		.loc 1 61 0
- 794 0022 334B     		ldr	r3, .L69+8
+  66:Src/state.c   **** 		{
+ 793              		.loc 1 66 0
+ 794 0022 2D4B     		ldr	r3, .L68+8
  795 0024 1B6B     		ldr	r3, [r3, #48]
  796 0026 342B     		cmp	r3, #52
- 797 0028 5BD0     		beq	.L60
+ 797 0028 4FD0     		beq	.L60
  798 002a A02B     		cmp	r3, #160
- 799 002c 4AD0     		beq	.L61
+ 799 002c 45D0     		beq	.L61
  800 002e 102B     		cmp	r3, #16
  801 0030 36D0     		beq	.L67
  802              	.L56:
- 108:Src/state.c   **** /*******************************************************************
- 803              		.loc 1 108 0
+ 107:Src/state.c   **** /*******************************************************************
+ 803              		.loc 1 107 0
  804 0032 03B0     		add	sp, sp, #12
  805              	.LCFI9:
  806              		.cfi_remember_state
@@ -1404,873 +1413,903 @@ ARM GAS  /tmp/ccWGVQrs.s 			page 1
  810              	.L65:
  811              	.LCFI10:
  812              		.cfi_restore_state
-  47:Src/state.c   **** 		HAL_UART_Transmit(&huart3,(uint8_t*)txt,strlen(txt),10);
- 813              		.loc 1 47 0
- 814 0036 2F4B     		ldr	r3, .L69+12
+  52:Src/state.c   **** 		HAL_UART_Transmit(&huart3,(uint8_t*)txt,strlen(txt),10);
+ 813              		.loc 1 52 0
+ 814 0036 294B     		ldr	r3, .L68+12
  815 0038 1A88     		ldrh	r2, [r3]
  816 003a 9B88     		ldrh	r3, [r3, #4]
- 817 003c 2E49     		ldr	r1, .L69+16
+ 817 003c 2849     		ldr	r1, .L68+16
  818 003e 0888     		ldrh	r0, [r1]
  819 0040 8988     		ldrh	r1, [r1, #4]
- 820 0042 2E4C     		ldr	r4, .L69+20
+ 820 0042 284C     		ldr	r4, .L68+20
  821 0044 0191     		str	r1, [sp, #4]
  822 0046 0090     		str	r0, [sp]
- 823 0048 2D49     		ldr	r1, .L69+24
+ 823 0048 2749     		ldr	r1, .L68+24
  824 004a 2046     		mov	r0, r4
  825 004c FFF7FEFF 		bl	sprintf
  826              	.LVL58:
-  48:Src/state.c   **** 		res_open = f_open(&pot_values_f, (TCHAR const*)&filename_pot, FA_OPEN_ALWAYS | FA_WRITE );
- 827              		.loc 1 48 0
+  53:Src/state.c   **** 		res_open = f_open(&pot_values_f, (TCHAR const*)&filename_pot, FA_OPEN_ALWAYS | FA_WRITE );
+ 827              		.loc 1 53 0
  828 0050 2046     		mov	r0, r4
  829 0052 FFF7FEFF 		bl	strlen
  830              	.LVL59:
  831 0056 0A23     		movs	r3, #10
  832 0058 82B2     		uxth	r2, r0
  833 005a 2146     		mov	r1, r4
- 834 005c 2948     		ldr	r0, .L69+28
+ 834 005c 2348     		ldr	r0, .L68+28
  835 005e FFF7FEFF 		bl	HAL_UART_Transmit
+ARM GAS  /tmp/ccw6FPXZ.s 			page 25
+
+
  836              	.LVL60:
-  49:Src/state.c   **** 		f_write(&pot_values_f,(TCHAR const*)&txt,strlen(txt), &byteswritten);
- 837              		.loc 1 49 0
- 838 0062 294D     		ldr	r5, .L69+32
+  54:Src/state.c   **** 		f_write(&pot_values_f,(TCHAR const*)&txt,strlen(txt), &byteswritten);
+ 837              		.loc 1 54 0
+ 838 0062 234D     		ldr	r5, .L68+32
  839 0064 1222     		movs	r2, #18
- 840 0066 2949     		ldr	r1, .L69+36
+ 840 0066 2349     		ldr	r1, .L68+36
  841 0068 2846     		mov	r0, r5
  842 006a FFF7FEFF 		bl	f_open
  843              	.LVL61:
-ARM GAS  /tmp/ccWGVQrs.s 			page 25
-
-
- 844 006e 284B     		ldr	r3, .L69+40
+ 844 006e 224B     		ldr	r3, .L68+40
  845 0070 1870     		strb	r0, [r3]
-  50:Src/state.c   **** 		f_close(&pot_values_f);
- 846              		.loc 1 50 0
+  55:Src/state.c   **** 		f_close(&pot_values_f);
+ 846              		.loc 1 55 0
  847 0072 2046     		mov	r0, r4
  848 0074 FFF7FEFF 		bl	strlen
  849              	.LVL62:
- 850 0078 264B     		ldr	r3, .L69+44
+ 850 0078 204B     		ldr	r3, .L68+44
  851 007a 0246     		mov	r2, r0
  852 007c 2146     		mov	r1, r4
  853 007e 2846     		mov	r0, r5
  854 0080 FFF7FEFF 		bl	f_write
  855              	.LVL63:
-  51:Src/state.c   **** 		HAL_Delay(1000);
- 856              		.loc 1 51 0
+  56:Src/state.c   **** 		HAL_Delay(1000);
+ 856              		.loc 1 56 0
  857 0084 2846     		mov	r0, r5
  858 0086 FFF7FEFF 		bl	f_close
  859              	.LVL64:
-  52:Src/state.c   **** 	}
- 860              		.loc 1 52 0
+  57:Src/state.c   **** 	}
+ 860              		.loc 1 57 0
  861 008a 4FF47A70 		mov	r0, #1000
  862 008e FFF7FEFF 		bl	HAL_Delay
  863              	.LVL65:
  864 0092 BEE7     		b	.L57
  865              	.L66:
-  56:Src/state.c   **** 		debug_operations();
- 866              		.loc 1 56 0
+  61:Src/state.c   **** 		debug_operations();
+ 866              		.loc 1 61 0
  867 0094 0022     		movs	r2, #0
- 868 0096 154B     		ldr	r3, .L69+4
+ 868 0096 0F4B     		ldr	r3, .L68+4
  869 0098 1A70     		strb	r2, [r3]
-  57:Src/state.c   **** 	}
- 870              		.loc 1 57 0
+  62:Src/state.c   **** 	}
+ 870              		.loc 1 62 0
  871 009a FFF7FEFF 		bl	debug_operations
  872              	.LVL66:
  873 009e BCE7     		b	.L58
  874              	.L67:
-  64:Src/state.c   **** 			can1.dataTx[1] = 0;
- 875              		.loc 1 64 0
- 876 00a0 1D4B     		ldr	r3, .L69+48
+  69:Src/state.c   **** 			can1.tx_size = 1;
+ 875              		.loc 1 69 0
+ 876 00a0 174B     		ldr	r3, .L68+48
  877 00a2 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
- 878 00a4 1248     		ldr	r0, .L69+8
+ 878 00a4 0C48     		ldr	r0, .L68+8
  879 00a6 0373     		strb	r3, [r0, #12]
-  65:Src/state.c   **** 			can1.dataTx[2] = 0;
- 880              		.loc 1 65 0
- 881 00a8 0021     		movs	r1, #0
- 882 00aa 4173     		strb	r1, [r0, #13]
-  66:Src/state.c   **** 			can1.dataTx[3] = 0;
- 883              		.loc 1 66 0
- 884 00ac 8173     		strb	r1, [r0, #14]
-  67:Src/state.c   **** 			can1.dataTx[4] = 0;
- 885              		.loc 1 67 0
- 886 00ae C173     		strb	r1, [r0, #15]
-  68:Src/state.c   **** 			can1.dataTx[5] = 0;
- 887              		.loc 1 68 0
- 888 00b0 0174     		strb	r1, [r0, #16]
-  69:Src/state.c   **** 			can1.dataTx[6] = 0;
- 889              		.loc 1 69 0
-ARM GAS  /tmp/ccWGVQrs.s 			page 26
+  70:Src/state.c   **** 			can1.tx_id = ID_ACU_1;
+ 880              		.loc 1 70 0
+ 881 00a8 0123     		movs	r3, #1
+ 882 00aa 0360     		str	r3, [r0]
+  71:Src/state.c   **** 			CAN_Send(&can1, normalPriority);
+ 883              		.loc 1 71 0
+ARM GAS  /tmp/ccw6FPXZ.s 			page 26
 
 
- 890 00b2 4174     		strb	r1, [r0, #17]
-  70:Src/state.c   **** 			can1.dataTx[7] = 0;
- 891              		.loc 1 70 0
- 892 00b4 8174     		strb	r1, [r0, #18]
-  71:Src/state.c   **** 			can1.tx_id = ID_ACU_1;
- 893              		.loc 1 71 0
- 894 00b6 C174     		strb	r1, [r0, #19]
-  72:Src/state.c   **** 			CAN_Send(&can1, normalPriority);
- 895              		.loc 1 72 0
- 896 00b8 4FF48073 		mov	r3, #256
- 897 00bc C362     		str	r3, [r0, #44]
-  73:Src/state.c   **** 			break;
- 898              		.loc 1 73 0
- 899 00be FFF7FEFF 		bl	CAN_Send
- 900              	.LVL67:
-  74:Src/state.c   **** 		case ID_ASK_INV_DX:
- 901              		.loc 1 74 0
- 902 00c2 B6E7     		b	.L56
- 903              	.L61:
-  92:Src/state.c   **** 			{ //----- change the current state -----//
- 904              		.loc 1 92 0
- 905 00c4 0A4B     		ldr	r3, .L69+8
- 906 00c6 1B7D     		ldrb	r3, [r3, #20]	@ zero_extendqisi2
- 907 00c8 022B     		cmp	r3, #2
- 908 00ca 05D0     		beq	.L68
-  96:Src/state.c   **** 			{ //----- change state to setup -----//
- 909              		.loc 1 96 0
- 910 00cc 032B     		cmp	r3, #3
- 911 00ce B0D1     		bne	.L56
-  98:Src/state.c   **** 			}
- 912              		.loc 1 98 0
- 913 00d0 0222     		movs	r2, #2
- 914 00d2 114B     		ldr	r3, .L69+48
- 915 00d4 1A70     		strb	r2, [r3]
- 916 00d6 ACE7     		b	.L56
- 917              	.L68:
-  94:Src/state.c   **** 			}
- 918              		.loc 1 94 0
- 919 00d8 054B     		ldr	r3, .L69+8
- 920 00da 5A7D     		ldrb	r2, [r3, #21]	@ zero_extendqisi2
- 921 00dc 0E4B     		ldr	r3, .L69+48
- 922 00de 1A70     		strb	r2, [r3]
- 923 00e0 A7E7     		b	.L56
- 924              	.L60:
- 102:Src/state.c   **** 			break;
- 925              		.loc 1 102 0
- 926 00e2 FFF7FEFF 		bl	atc_pot_operations
- 927              	.LVL68:
- 108:Src/state.c   **** /*******************************************************************
- 928              		.loc 1 108 0
- 929 00e6 A4E7     		b	.L56
- 930              	.L70:
- 931              		.align	2
- 932              	.L69:
- 933 00e8 00080240 		.word	1073874944
- 934 00ec 00000000 		.word	debug_msg_arrived
- 935 00f0 00000000 		.word	can1
-ARM GAS  /tmp/ccWGVQrs.s 			page 27
+ 884 00ac 4FF48073 		mov	r3, #256
+ 885 00b0 C362     		str	r3, [r0, #44]
+  72:Src/state.c   **** 			break;
+ 886              		.loc 1 72 0
+ 887 00b2 0021     		movs	r1, #0
+ 888 00b4 FFF7FEFF 		bl	CAN_Send
+ 889              	.LVL67:
+  73:Src/state.c   **** 		case ID_ASK_INV_DX:
+ 890              		.loc 1 73 0
+ 891 00b8 BBE7     		b	.L56
+ 892              	.L61:
+  91:Src/state.c   **** 			{
+ 893              		.loc 1 91 0
+ 894 00ba 074B     		ldr	r3, .L68+8
+ 895 00bc 1B7D     		ldrb	r3, [r3, #20]	@ zero_extendqisi2
+ 896 00be 022B     		cmp	r3, #2
+ 897 00c0 B7D1     		bne	.L56
+  95:Src/state.c   **** 			default:
+ 898              		.loc 1 95 0
+ 899 00c2 0222     		movs	r2, #2
+ 900 00c4 0E4B     		ldr	r3, .L68+48
+ 901 00c6 1A70     		strb	r2, [r3]
+ 902 00c8 B3E7     		b	.L56
+ 903              	.L60:
+ 101:Src/state.c   **** 			break;
+ 904              		.loc 1 101 0
+ 905 00ca FFF7FEFF 		bl	atc_pot_operations
+ 906              	.LVL68:
+ 107:Src/state.c   **** /*******************************************************************
+ 907              		.loc 1 107 0
+ 908 00ce B0E7     		b	.L56
+ 909              	.L69:
+ 910              		.align	2
+ 911              	.L68:
+ 912 00d0 00080240 		.word	1073874944
+ 913 00d4 00000000 		.word	debug_msg_arrived
+ 914 00d8 00000000 		.word	can1
+ 915 00dc 00000000 		.word	accel
+ 916 00e0 00000000 		.word	brake
+ 917 00e4 00000000 		.word	txt
+ 918 00e8 00000000 		.word	.LC26
+ 919 00ec 00000000 		.word	huart3
+ 920 00f0 00000000 		.word	pot_values_f
+ 921 00f4 00000000 		.word	filename_pot
+ 922 00f8 00000000 		.word	res_open
+ 923 00fc 00000000 		.word	byteswritten
+ 924 0100 00000000 		.word	current_state
+ 925              		.cfi_endproc
+ 926              	.LFE143:
+ 928              		.section	.text.setup,"ax",%progbits
+ 929              		.align	1
+ 930              		.global	setup
+ 931              		.syntax unified
+ 932              		.thumb
+ 933              		.thumb_func
+ 934              		.fpu fpv5-d16
+ 936              	setup:
+ARM GAS  /tmp/ccw6FPXZ.s 			page 27
 
 
- 936 00f4 00000000 		.word	accel
- 937 00f8 00000000 		.word	brake
- 938 00fc 00000000 		.word	txt
- 939 0100 00000000 		.word	.LC26
- 940 0104 00000000 		.word	huart3
- 941 0108 00000000 		.word	pot_values_f
- 942 010c 00000000 		.word	filename_pot
- 943 0110 00000000 		.word	res_open
- 944 0114 00000000 		.word	byteswritten
- 945 0118 00000000 		.word	current_state
- 946              		.cfi_endproc
- 947              	.LFE143:
- 949              		.section	.text.setup,"ax",%progbits
- 950              		.align	1
- 951              		.global	setup
- 952              		.syntax unified
- 953              		.thumb
- 954              		.thumb_func
- 955              		.fpu fpv5-d16
- 957              	setup:
- 958              	.LFB144:
- 116:Src/state.c   **** 	if (fifoRxDataCAN_pop(&can1))
- 959              		.loc 1 116 0
- 960              		.cfi_startproc
- 961              		@ args = 0, pretend = 0, frame = 0
- 962              		@ frame_needed = 0, uses_anonymous_args = 0
- 963 0000 08B5     		push	{r3, lr}
- 964              	.LCFI11:
- 965              		.cfi_def_cfa_offset 8
- 966              		.cfi_offset 3, -8
- 967              		.cfi_offset 14, -4
- 117:Src/state.c   **** 	{
- 968              		.loc 1 117 0
- 969 0002 4348     		ldr	r0, .L90
- 970 0004 FFF7FEFF 		bl	fifoRxDataCAN_pop
- 971              	.LVL69:
- 972 0008 0028     		cmp	r0, #0
- 973 000a 6FD0     		beq	.L71
- 119:Src/state.c   **** 		{
- 974              		.loc 1 119 0
- 975 000c 404B     		ldr	r3, .L90
- 976 000e 1B6B     		ldr	r3, [r3, #48]
- 977 0010 AA2B     		cmp	r3, #170
- 978 0012 6BD0     		beq	.L71
- 979 0014 0BD8     		bhi	.L74
- 980 0016 342B     		cmp	r3, #52
- 981 0018 3CD0     		beq	.L75
- 982 001a A02B     		cmp	r3, #160
- 983 001c 06D1     		bne	.L86
- 122:Src/state.c   **** 			{
- 984              		.loc 1 122 0
- 985 001e 3C4B     		ldr	r3, .L90
- 986 0020 1B7D     		ldrb	r3, [r3, #20]	@ zero_extendqisi2
- 987 0022 042B     		cmp	r3, #4
- 988 0024 24D0     		beq	.L79
- 989 0026 052B     		cmp	r3, #5
- 990 0028 26D0     		beq	.L80
-ARM GAS  /tmp/ccWGVQrs.s 			page 28
+ 937              	.LFB144:
+ 115:Src/state.c   **** 	if(setup_init == 0){
+ 938              		.loc 1 115 0
+ 939              		.cfi_startproc
+ 940              		@ args = 0, pretend = 0, frame = 0
+ 941              		@ frame_needed = 0, uses_anonymous_args = 0
+ 942 0000 08B5     		push	{r3, lr}
+ 943              	.LCFI11:
+ 944              		.cfi_def_cfa_offset 8
+ 945              		.cfi_offset 3, -8
+ 946              		.cfi_offset 14, -4
+ 116:Src/state.c   **** 		setup_init = 1; //set that setup procedure is started
+ 947              		.loc 1 116 0
+ 948 0002 4E4B     		ldr	r3, .L92
+ 949 0004 1B68     		ldr	r3, [r3]
+ 950 0006 93B9     		cbnz	r3, .L71
+ 117:Src/state.c   **** 		if((atc_connected == 1) && (brake.pot_avr_100 > 50) && (critical_errors = 0)){
+ 951              		.loc 1 117 0
+ 952 0008 0122     		movs	r2, #1
+ 953 000a 4C4B     		ldr	r3, .L92
+ 954 000c 1A60     		str	r2, [r3]
+ 118:Src/state.c   **** 			//If Analog to CAN device is connected, brake is pressed and there aren't critical erros -> send
+ 955              		.loc 1 118 0
+ 956 000e 4C4B     		ldr	r3, .L92+4
+ 957 0010 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 958 0012 9342     		cmp	r3, r2
+ 959 0014 35D0     		beq	.L85
+ 960              	.L72:
+ 122:Src/state.c   **** 		can1.tx_size = 1;
+ 961              		.loc 1 122 0
+ 962 0016 4B4B     		ldr	r3, .L92+8
+ 963 0018 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 964 001a 4B48     		ldr	r0, .L92+12
+ 965 001c 0373     		strb	r3, [r0, #12]
+ 123:Src/state.c   **** 		can1.tx_id = ID_ACU_1;
+ 966              		.loc 1 123 0
+ 967 001e 0123     		movs	r3, #1
+ 968 0020 0360     		str	r3, [r0]
+ 124:Src/state.c   **** 		CAN_Send(&can1, normalPriority);
+ 969              		.loc 1 124 0
+ 970 0022 4FF48073 		mov	r3, #256
+ 971 0026 C362     		str	r3, [r0, #44]
+ 125:Src/state.c   **** 	}
+ 972              		.loc 1 125 0
+ 973 0028 0021     		movs	r1, #0
+ 974 002a FFF7FEFF 		bl	CAN_Send
+ 975              	.LVL69:
+ 976              	.L71:
+ 127:Src/state.c   **** 	{
+ 977              		.loc 1 127 0
+ 978 002e 4648     		ldr	r0, .L92+12
+ 979 0030 FFF7FEFF 		bl	fifoRxDataCAN_pop
+ 980              	.LVL70:
+ 981 0034 0028     		cmp	r0, #0
+ 982 0036 37D0     		beq	.L70
+ 129:Src/state.c   **** 		{
+ 983              		.loc 1 129 0
+ARM GAS  /tmp/ccw6FPXZ.s 			page 28
 
 
- 991 002a 08BD     		pop	{r3, pc}
- 992              	.L86:
- 993 002c 08BD     		pop	{r3, pc}
- 994              	.L74:
- 119:Src/state.c   **** 		{
- 995              		.loc 1 119 0
- 996 002e 40F28112 		movw	r2, #385
- 997 0032 9342     		cmp	r3, r2
- 998 0034 42D0     		beq	.L77
- 999 0036 B3F5C17F 		cmp	r3, #386
- 1000 003a 18D1     		bne	.L87
- 161:Src/state.c   **** 			{
- 1001              		.loc 1 161 0
- 1002 003c 344B     		ldr	r3, .L90
- 1003 003e 1B7D     		ldrb	r3, [r3, #20]	@ zero_extendqisi2
- 1004 0040 D82B     		cmp	r3, #216
- 1005 0042 53D1     		bne	.L71
- 167:Src/state.c   **** 				{
- 1006              		.loc 1 167 0
- 1007 0044 324B     		ldr	r3, .L90
- 1008 0046 9B7D     		ldrb	r3, [r3, #22]	@ zero_extendqisi2
- 1009 0048 0C2B     		cmp	r3, #12
- 1010 004a 26D0     		beq	.L88
- 183:Src/state.c   **** 					can1.dataTx[1] = 0;
- 1011              		.loc 1 183 0
- 1012 004c 3048     		ldr	r0, .L90
- 1013 004e D023     		movs	r3, #208
- 1014 0050 0373     		strb	r3, [r0, #12]
- 184:Src/state.c   **** 					can1.dataTx[2] = 0;
- 1015              		.loc 1 184 0
- 1016 0052 0021     		movs	r1, #0
- 1017 0054 4173     		strb	r1, [r0, #13]
- 185:Src/state.c   **** 					can1.dataTx[3] = 0;
- 1018              		.loc 1 185 0
- 1019 0056 8173     		strb	r1, [r0, #14]
- 186:Src/state.c   **** 					can1.dataTx[4] = 0;
- 1020              		.loc 1 186 0
- 1021 0058 C173     		strb	r1, [r0, #15]
- 187:Src/state.c   **** 					can1.dataTx[5] = 0;
- 1022              		.loc 1 187 0
- 1023 005a 0174     		strb	r1, [r0, #16]
- 188:Src/state.c   **** 					can1.dataTx[6] = 0;
- 1024              		.loc 1 188 0
- 1025 005c 4174     		strb	r1, [r0, #17]
- 189:Src/state.c   **** 					can1.dataTx[7] = 0;
- 1026              		.loc 1 189 0
- 1027 005e 8174     		strb	r1, [r0, #18]
- 190:Src/state.c   **** 					can1.tx_id = ID_ACU_1;
- 1028              		.loc 1 190 0
- 1029 0060 C174     		strb	r1, [r0, #19]
- 191:Src/state.c   **** 					CAN_Send(&can1, normalPriority);
- 1030              		.loc 1 191 0
- 1031 0062 4FF48073 		mov	r3, #256
- 1032 0066 C362     		str	r3, [r0, #44]
- 192:Src/state.c   **** 					// Inverter Dx false
- 1033              		.loc 1 192 0
- 1034 0068 FFF7FEFF 		bl	CAN_Send
-ARM GAS  /tmp/ccWGVQrs.s 			page 29
+ 984 0038 434B     		ldr	r3, .L92+12
+ 985 003a 1B6B     		ldr	r3, [r3, #48]
+ 986 003c A02B     		cmp	r3, #160
+ 987 003e 2FD0     		beq	.L74
+ 988 0040 27D9     		bls	.L86
+ 989 0042 40F28112 		movw	r2, #385
+ 990 0046 9342     		cmp	r3, r2
+ 991 0048 4ED0     		beq	.L77
+ 992 004a B3F5C17F 		cmp	r3, #386
+ 993 004e 26D1     		bne	.L87
+ 170:Src/state.c   **** 			{
+ 994              		.loc 1 170 0
+ 995 0050 3D4B     		ldr	r3, .L92+12
+ 996 0052 1B7D     		ldrb	r3, [r3, #20]	@ zero_extendqisi2
+ 997 0054 D82B     		cmp	r3, #216
+ 998 0056 27D1     		bne	.L70
+ 176:Src/state.c   **** 				{
+ 999              		.loc 1 176 0
+ 1000 0058 3B4B     		ldr	r3, .L92+12
+ 1001 005a 9B7D     		ldrb	r3, [r3, #22]	@ zero_extendqisi2
+ 1002 005c 0C2B     		cmp	r3, #12
+ 1003 005e 32D0     		beq	.L88
+ 192:Src/state.c   **** 					can1.dataTx[1] = 0;
+ 1004              		.loc 1 192 0
+ 1005 0060 3948     		ldr	r0, .L92+12
+ 1006 0062 D023     		movs	r3, #208
+ 1007 0064 0373     		strb	r3, [r0, #12]
+ 193:Src/state.c   **** 					can1.dataTx[2] = 0;
+ 1008              		.loc 1 193 0
+ 1009 0066 0021     		movs	r1, #0
+ 1010 0068 4173     		strb	r1, [r0, #13]
+ 194:Src/state.c   **** 					can1.dataTx[3] = 0;
+ 1011              		.loc 1 194 0
+ 1012 006a 8173     		strb	r1, [r0, #14]
+ 195:Src/state.c   **** 					can1.dataTx[4] = 0;
+ 1013              		.loc 1 195 0
+ 1014 006c C173     		strb	r1, [r0, #15]
+ 196:Src/state.c   **** 					can1.dataTx[5] = 0;
+ 1015              		.loc 1 196 0
+ 1016 006e 0174     		strb	r1, [r0, #16]
+ 197:Src/state.c   **** 					can1.dataTx[6] = 0;
+ 1017              		.loc 1 197 0
+ 1018 0070 4174     		strb	r1, [r0, #17]
+ 198:Src/state.c   **** 					can1.dataTx[7] = 0;
+ 1019              		.loc 1 198 0
+ 1020 0072 8174     		strb	r1, [r0, #18]
+ 199:Src/state.c   **** 					can1.tx_id = ID_ACU_1;
+ 1021              		.loc 1 199 0
+ 1022 0074 C174     		strb	r1, [r0, #19]
+ 200:Src/state.c   **** 					CAN_Send(&can1, normalPriority);
+ 1023              		.loc 1 200 0
+ 1024 0076 4FF48073 		mov	r3, #256
+ 1025 007a C362     		str	r3, [r0, #44]
+ 201:Src/state.c   **** 					// Inverter Dx false
+ 1026              		.loc 1 201 0
+ 1027 007c FFF7FEFF 		bl	CAN_Send
+ 1028              	.LVL71:
+ARM GAS  /tmp/ccw6FPXZ.s 			page 29
 
 
- 1035              	.LVL70:
- 1036 006c 08BD     		pop	{r3, pc}
- 1037              	.L87:
- 1038 006e 08BD     		pop	{r3, pc}
- 1039              	.L79:
- 126:Src/state.c   **** 				break;
- 1040              		.loc 1 126 0
- 1041 0070 0122     		movs	r2, #1
- 1042 0072 284B     		ldr	r3, .L90+4
- 1043 0074 1A70     		strb	r2, [r3]
- 127:Src/state.c   **** 			//----- change state to run -----//
- 1044              		.loc 1 127 0
- 1045 0076 08BD     		pop	{r3, pc}
- 1046              	.L80:
- 131:Src/state.c   **** 				can1.tx_id = ID_ACU_2;
- 1047              		.loc 1 131 0
- 1048 0078 0322     		movs	r2, #3
- 1049 007a 264B     		ldr	r3, .L90+4
- 1050 007c 1A70     		strb	r2, [r3]
- 132:Src/state.c   **** 				can1.dataRx[0] = 5;
- 1051              		.loc 1 132 0
- 1052 007e 2448     		ldr	r0, .L90
- 1053 0080 5523     		movs	r3, #85
- 1054 0082 C362     		str	r3, [r0, #44]
- 133:Src/state.c   **** 				can1.tx_size = 1;
- 1055              		.loc 1 133 0
- 1056 0084 0523     		movs	r3, #5
- 1057 0086 0375     		strb	r3, [r0, #20]
- 134:Src/state.c   **** 				CAN_Send(&can1, normalPriority);
- 1058              		.loc 1 134 0
- 1059 0088 0123     		movs	r3, #1
- 1060 008a 0360     		str	r3, [r0]
- 135:Src/state.c   **** 				break;
- 1061              		.loc 1 135 0
- 1062 008c 0021     		movs	r1, #0
- 1063 008e FFF7FEFF 		bl	CAN_Send
- 1064              	.LVL71:
- 136:Src/state.c   **** 			// Turn On inverter Dx
- 1065              		.loc 1 136 0
- 1066 0092 08BD     		pop	{r3, pc}
- 1067              	.L75:
- 158:Src/state.c   **** 			break;
- 1068              		.loc 1 158 0
- 1069 0094 FFF7FEFF 		bl	atc_pot_operations
- 1070              	.LVL72:
- 159:Src/state.c   **** 		case ID_REQ_INV_DX:
- 1071              		.loc 1 159 0
- 1072 0098 08BD     		pop	{r3, pc}
- 1073              	.L88:
- 169:Src/state.c   **** 					can1.dataTx[1] = 0;
- 1074              		.loc 1 169 0
- 1075 009a 1D48     		ldr	r0, .L90
- 1076 009c 0923     		movs	r3, #9
- 1077 009e 0373     		strb	r3, [r0, #12]
- 170:Src/state.c   **** 					can1.dataTx[2] = 0;
- 1078              		.loc 1 170 0
- 1079 00a0 0021     		movs	r1, #0
-ARM GAS  /tmp/ccWGVQrs.s 			page 30
+ 1029 0080 08BD     		pop	{r3, pc}
+ 1030              	.L85:
+ 118:Src/state.c   **** 			//If Analog to CAN device is connected, brake is pressed and there aren't critical erros -> send
+ 1031              		.loc 1 118 0 discriminator 1
+ 1032 0082 324B     		ldr	r3, .L92+16
+ 1033 0084 DB79     		ldrb	r3, [r3, #7]	@ zero_extendqisi2
+ 1034 0086 322B     		cmp	r3, #50
+ 1035 0088 C5D9     		bls	.L72
+ 118:Src/state.c   **** 			//If Analog to CAN device is connected, brake is pressed and there aren't critical erros -> send
+ 1036              		.loc 1 118 0 is_stmt 0 discriminator 2
+ 1037 008a 0022     		movs	r2, #0
+ 1038 008c 304B     		ldr	r3, .L92+20
+ 1039 008e 1A60     		str	r2, [r3]
+ 1040 0090 C1E7     		b	.L72
+ 1041              	.L86:
+ 129:Src/state.c   **** 		{
+ 1042              		.loc 1 129 0 is_stmt 1
+ 1043 0092 342B     		cmp	r3, #52
+ 1044 0094 02D1     		bne	.L89
+ 167:Src/state.c   **** 			break;
+ 1045              		.loc 1 167 0
+ 1046 0096 FFF7FEFF 		bl	atc_pot_operations
+ 1047              	.LVL72:
+ 168:Src/state.c   **** 		case ID_REQ_INV_DX:
+ 1048              		.loc 1 168 0
+ 1049 009a 08BD     		pop	{r3, pc}
+ 1050              	.L89:
+ 1051 009c 08BD     		pop	{r3, pc}
+ 1052              	.L87:
+ 1053 009e 08BD     		pop	{r3, pc}
+ 1054              	.L74:
+ 132:Src/state.c   **** 			{
+ 1055              		.loc 1 132 0
+ 1056 00a0 294B     		ldr	r3, .L92+12
+ 1057 00a2 1B7D     		ldrb	r3, [r3, #20]	@ zero_extendqisi2
+ 1058 00a4 052B     		cmp	r3, #5
+ 1059 00a6 00D0     		beq	.L90
+ 1060              	.L70:
+ 1061 00a8 08BD     		pop	{r3, pc}
+ 1062              	.L90:
+ 137:Src/state.c   **** 				can1.tx_id = ID_ACU_2;
+ 1063              		.loc 1 137 0
+ 1064 00aa 0322     		movs	r2, #3
+ 1065 00ac 254B     		ldr	r3, .L92+8
+ 1066 00ae 1A70     		strb	r2, [r3]
+ 138:Src/state.c   **** 				can1.dataRx[0] = 5;
+ 1067              		.loc 1 138 0
+ 1068 00b0 2548     		ldr	r0, .L92+12
+ 1069 00b2 5523     		movs	r3, #85
+ 1070 00b4 C362     		str	r3, [r0, #44]
+ 139:Src/state.c   **** 				can1.tx_size = 1;
+ 1071              		.loc 1 139 0
+ 1072 00b6 0523     		movs	r3, #5
+ 1073 00b8 0375     		strb	r3, [r0, #20]
+ 140:Src/state.c   **** 				CAN_Send(&can1, normalPriority);
+ 1074              		.loc 1 140 0
+ 1075 00ba 0123     		movs	r3, #1
+ARM GAS  /tmp/ccw6FPXZ.s 			page 30
 
 
- 1080 00a2 4173     		strb	r1, [r0, #13]
- 171:Src/state.c   **** 					can1.dataTx[3] = 0;
- 1081              		.loc 1 171 0
- 1082 00a4 8173     		strb	r1, [r0, #14]
- 172:Src/state.c   **** 					can1.dataTx[4] = 0;
- 1083              		.loc 1 172 0
- 1084 00a6 C173     		strb	r1, [r0, #15]
- 173:Src/state.c   **** 					can1.dataTx[5] = 0;
- 1085              		.loc 1 173 0
- 1086 00a8 0174     		strb	r1, [r0, #16]
- 174:Src/state.c   **** 					can1.dataTx[6] = 0;
- 1087              		.loc 1 174 0
- 1088 00aa 4174     		strb	r1, [r0, #17]
- 175:Src/state.c   **** 					can1.dataTx[7] = 0;
- 1089              		.loc 1 175 0
- 1090 00ac 8174     		strb	r1, [r0, #18]
- 176:Src/state.c   **** 					can1.tx_id = ID_ACU_1;
- 1091              		.loc 1 176 0
- 1092 00ae C174     		strb	r1, [r0, #19]
- 177:Src/state.c   **** 					CAN_Send(&can1, normalPriority);
- 1093              		.loc 1 177 0
- 1094 00b0 4FF48073 		mov	r3, #256
- 1095 00b4 C362     		str	r3, [r0, #44]
- 178:Src/state.c   **** 					// Inverter Dx true
- 1096              		.loc 1 178 0
- 1097 00b6 FFF7FEFF 		bl	CAN_Send
- 1098              	.LVL73:
- 1099 00ba 08BD     		pop	{r3, pc}
- 1100              	.L77:
- 199:Src/state.c   **** 			{
- 1101              		.loc 1 199 0
- 1102 00bc 144B     		ldr	r3, .L90
- 1103 00be 1B7D     		ldrb	r3, [r3, #20]	@ zero_extendqisi2
- 1104 00c0 D82B     		cmp	r3, #216
- 1105 00c2 13D1     		bne	.L71
- 205:Src/state.c   **** 				{
- 1106              		.loc 1 205 0
- 1107 00c4 124B     		ldr	r3, .L90
- 1108 00c6 9B7D     		ldrb	r3, [r3, #22]	@ zero_extendqisi2
- 1109 00c8 0C2B     		cmp	r3, #12
- 1110 00ca 10D0     		beq	.L89
- 221:Src/state.c   **** 					can1.dataTx[1] = 0;
- 1111              		.loc 1 221 0
- 1112 00cc 1048     		ldr	r0, .L90
- 1113 00ce 0C23     		movs	r3, #12
- 1114 00d0 0373     		strb	r3, [r0, #12]
- 222:Src/state.c   **** 					can1.dataTx[2] = 0;
- 1115              		.loc 1 222 0
- 1116 00d2 0021     		movs	r1, #0
- 1117 00d4 4173     		strb	r1, [r0, #13]
- 223:Src/state.c   **** 					can1.dataTx[3] = 0;
- 1118              		.loc 1 223 0
- 1119 00d6 8173     		strb	r1, [r0, #14]
- 224:Src/state.c   **** 					can1.dataTx[4] = 0;
- 1120              		.loc 1 224 0
- 1121 00d8 C173     		strb	r1, [r0, #15]
- 225:Src/state.c   **** 					can1.dataTx[5] = 0;
-ARM GAS  /tmp/ccWGVQrs.s 			page 31
+ 1076 00bc 0360     		str	r3, [r0]
+ 141:Src/state.c   **** 				break;
+ 1077              		.loc 1 141 0
+ 1078 00be 0021     		movs	r1, #0
+ 1079 00c0 FFF7FEFF 		bl	CAN_Send
+ 1080              	.LVL73:
+ 142:Src/state.c   **** 			// Turn On inverter Dx
+ 1081              		.loc 1 142 0
+ 1082 00c4 08BD     		pop	{r3, pc}
+ 1083              	.L88:
+ 178:Src/state.c   **** 					can1.dataTx[1] = 0;
+ 1084              		.loc 1 178 0
+ 1085 00c6 2048     		ldr	r0, .L92+12
+ 1086 00c8 0923     		movs	r3, #9
+ 1087 00ca 0373     		strb	r3, [r0, #12]
+ 179:Src/state.c   **** 					can1.dataTx[2] = 0;
+ 1088              		.loc 1 179 0
+ 1089 00cc 0021     		movs	r1, #0
+ 1090 00ce 4173     		strb	r1, [r0, #13]
+ 180:Src/state.c   **** 					can1.dataTx[3] = 0;
+ 1091              		.loc 1 180 0
+ 1092 00d0 8173     		strb	r1, [r0, #14]
+ 181:Src/state.c   **** 					can1.dataTx[4] = 0;
+ 1093              		.loc 1 181 0
+ 1094 00d2 C173     		strb	r1, [r0, #15]
+ 182:Src/state.c   **** 					can1.dataTx[5] = 0;
+ 1095              		.loc 1 182 0
+ 1096 00d4 0174     		strb	r1, [r0, #16]
+ 183:Src/state.c   **** 					can1.dataTx[6] = 0;
+ 1097              		.loc 1 183 0
+ 1098 00d6 4174     		strb	r1, [r0, #17]
+ 184:Src/state.c   **** 					can1.dataTx[7] = 0;
+ 1099              		.loc 1 184 0
+ 1100 00d8 8174     		strb	r1, [r0, #18]
+ 185:Src/state.c   **** 					can1.tx_id = ID_ACU_1;
+ 1101              		.loc 1 185 0
+ 1102 00da C174     		strb	r1, [r0, #19]
+ 186:Src/state.c   **** 					CAN_Send(&can1, normalPriority);
+ 1103              		.loc 1 186 0
+ 1104 00dc 4FF48073 		mov	r3, #256
+ 1105 00e0 C362     		str	r3, [r0, #44]
+ 187:Src/state.c   **** 					// Inverter Dx true
+ 1106              		.loc 1 187 0
+ 1107 00e2 FFF7FEFF 		bl	CAN_Send
+ 1108              	.LVL74:
+ 1109 00e6 08BD     		pop	{r3, pc}
+ 1110              	.L77:
+ 208:Src/state.c   **** 			{
+ 1111              		.loc 1 208 0
+ 1112 00e8 174B     		ldr	r3, .L92+12
+ 1113 00ea 1B7D     		ldrb	r3, [r3, #20]	@ zero_extendqisi2
+ 1114 00ec D82B     		cmp	r3, #216
+ 1115 00ee DBD1     		bne	.L70
+ 214:Src/state.c   **** 				{
+ 1116              		.loc 1 214 0
+ 1117 00f0 154B     		ldr	r3, .L92+12
+ 1118 00f2 9B7D     		ldrb	r3, [r3, #22]	@ zero_extendqisi2
+ARM GAS  /tmp/ccw6FPXZ.s 			page 31
 
 
- 1122              		.loc 1 225 0
- 1123 00da 0174     		strb	r1, [r0, #16]
- 226:Src/state.c   **** 					can1.dataTx[6] = 0;
- 1124              		.loc 1 226 0
- 1125 00dc 4174     		strb	r1, [r0, #17]
- 227:Src/state.c   **** 					can1.dataTx[7] = 0;
- 1126              		.loc 1 227 0
- 1127 00de 8174     		strb	r1, [r0, #18]
- 228:Src/state.c   **** 					can1.tx_id = ID_ACU_1;
- 1128              		.loc 1 228 0
- 1129 00e0 C174     		strb	r1, [r0, #19]
- 229:Src/state.c   **** 					CAN_Send(&can1, normalPriority);
- 1130              		.loc 1 229 0
- 1131 00e2 4FF48073 		mov	r3, #256
- 1132 00e6 C362     		str	r3, [r0, #44]
- 230:Src/state.c   **** 					// Inverter Sx false
- 1133              		.loc 1 230 0
- 1134 00e8 FFF7FEFF 		bl	CAN_Send
- 1135              	.LVL74:
- 1136              	.L71:
- 1137 00ec 08BD     		pop	{r3, pc}
- 1138              	.L89:
- 207:Src/state.c   **** 					can1.dataTx[1] = 0;
- 1139              		.loc 1 207 0
- 1140 00ee 0848     		ldr	r0, .L90
- 1141 00f0 0823     		movs	r3, #8
- 1142 00f2 0373     		strb	r3, [r0, #12]
- 208:Src/state.c   **** 					can1.dataTx[2] = 0;
- 1143              		.loc 1 208 0
- 1144 00f4 0021     		movs	r1, #0
- 1145 00f6 4173     		strb	r1, [r0, #13]
- 209:Src/state.c   **** 					can1.dataTx[3] = 0;
- 1146              		.loc 1 209 0
- 1147 00f8 8173     		strb	r1, [r0, #14]
- 210:Src/state.c   **** 					can1.dataTx[4] = 0;
- 1148              		.loc 1 210 0
- 1149 00fa C173     		strb	r1, [r0, #15]
- 211:Src/state.c   **** 					can1.dataTx[5] = 0;
- 1150              		.loc 1 211 0
- 1151 00fc 0174     		strb	r1, [r0, #16]
- 212:Src/state.c   **** 					can1.dataTx[6] = 0;
- 1152              		.loc 1 212 0
- 1153 00fe 4174     		strb	r1, [r0, #17]
- 213:Src/state.c   **** 					can1.dataTx[7] = 0;
- 1154              		.loc 1 213 0
- 1155 0100 8174     		strb	r1, [r0, #18]
- 214:Src/state.c   **** 					can1.tx_id = ID_ACU_1;
- 1156              		.loc 1 214 0
- 1157 0102 C174     		strb	r1, [r0, #19]
- 215:Src/state.c   **** 					CAN_Send(&can1, normalPriority);
- 1158              		.loc 1 215 0
- 1159 0104 4FF48073 		mov	r3, #256
- 1160 0108 C362     		str	r3, [r0, #44]
- 216:Src/state.c   **** 					// Inverter Sx true
- 1161              		.loc 1 216 0
- 1162 010a FFF7FEFF 		bl	CAN_Send
- 1163              	.LVL75:
-ARM GAS  /tmp/ccWGVQrs.s 			page 32
+ 1119 00f4 0C2B     		cmp	r3, #12
+ 1120 00f6 10D0     		beq	.L91
+ 230:Src/state.c   **** 					can1.dataTx[1] = 0;
+ 1121              		.loc 1 230 0
+ 1122 00f8 1348     		ldr	r0, .L92+12
+ 1123 00fa 0C23     		movs	r3, #12
+ 1124 00fc 0373     		strb	r3, [r0, #12]
+ 231:Src/state.c   **** 					can1.dataTx[2] = 0;
+ 1125              		.loc 1 231 0
+ 1126 00fe 0021     		movs	r1, #0
+ 1127 0100 4173     		strb	r1, [r0, #13]
+ 232:Src/state.c   **** 					can1.dataTx[3] = 0;
+ 1128              		.loc 1 232 0
+ 1129 0102 8173     		strb	r1, [r0, #14]
+ 233:Src/state.c   **** 					can1.dataTx[4] = 0;
+ 1130              		.loc 1 233 0
+ 1131 0104 C173     		strb	r1, [r0, #15]
+ 234:Src/state.c   **** 					can1.dataTx[5] = 0;
+ 1132              		.loc 1 234 0
+ 1133 0106 0174     		strb	r1, [r0, #16]
+ 235:Src/state.c   **** 					can1.dataTx[6] = 0;
+ 1134              		.loc 1 235 0
+ 1135 0108 4174     		strb	r1, [r0, #17]
+ 236:Src/state.c   **** 					can1.dataTx[7] = 0;
+ 1136              		.loc 1 236 0
+ 1137 010a 8174     		strb	r1, [r0, #18]
+ 237:Src/state.c   **** 					can1.tx_id = ID_ACU_1;
+ 1138              		.loc 1 237 0
+ 1139 010c C174     		strb	r1, [r0, #19]
+ 238:Src/state.c   **** 					CAN_Send(&can1, normalPriority);
+ 1140              		.loc 1 238 0
+ 1141 010e 4FF48073 		mov	r3, #256
+ 1142 0112 C362     		str	r3, [r0, #44]
+ 239:Src/state.c   **** 					// Inverter Sx false
+ 1143              		.loc 1 239 0
+ 1144 0114 FFF7FEFF 		bl	CAN_Send
+ 1145              	.LVL75:
+ 249:Src/state.c   **** /*******************************************************************
+ 1146              		.loc 1 249 0
+ 1147 0118 C6E7     		b	.L70
+ 1148              	.L91:
+ 216:Src/state.c   **** 					can1.dataTx[1] = 0;
+ 1149              		.loc 1 216 0
+ 1150 011a 0B48     		ldr	r0, .L92+12
+ 1151 011c 0823     		movs	r3, #8
+ 1152 011e 0373     		strb	r3, [r0, #12]
+ 217:Src/state.c   **** 					can1.dataTx[2] = 0;
+ 1153              		.loc 1 217 0
+ 1154 0120 0021     		movs	r1, #0
+ 1155 0122 4173     		strb	r1, [r0, #13]
+ 218:Src/state.c   **** 					can1.dataTx[3] = 0;
+ 1156              		.loc 1 218 0
+ 1157 0124 8173     		strb	r1, [r0, #14]
+ 219:Src/state.c   **** 					can1.dataTx[4] = 0;
+ 1158              		.loc 1 219 0
+ 1159 0126 C173     		strb	r1, [r0, #15]
+ 220:Src/state.c   **** 					can1.dataTx[5] = 0;
+ARM GAS  /tmp/ccw6FPXZ.s 			page 32
 
 
- 1164 010e 08BD     		pop	{r3, pc}
- 1165              	.L91:
- 1166              		.align	2
- 1167              	.L90:
- 1168 0110 00000000 		.word	can1
- 1169 0114 00000000 		.word	current_state
- 1170              		.cfi_endproc
- 1171              	.LFE144:
- 1173              		.section	.text.run,"ax",%progbits
- 1174              		.align	1
- 1175              		.global	run
- 1176              		.syntax unified
- 1177              		.thumb
- 1178              		.thumb_func
- 1179              		.fpu fpv5-d16
- 1181              	run:
- 1182              	.LFB145:
- 248:Src/state.c   **** 	if (fifoRxDataCAN_pop(&can1))
- 1183              		.loc 1 248 0
- 1184              		.cfi_startproc
- 1185              		@ args = 0, pretend = 0, frame = 0
- 1186              		@ frame_needed = 0, uses_anonymous_args = 0
- 1187 0000 08B5     		push	{r3, lr}
- 1188              	.LCFI12:
- 1189              		.cfi_def_cfa_offset 8
- 1190              		.cfi_offset 3, -8
- 1191              		.cfi_offset 14, -4
- 249:Src/state.c   **** 	{
- 1192              		.loc 1 249 0
- 1193 0002 0A48     		ldr	r0, .L97
- 1194 0004 FFF7FEFF 		bl	fifoRxDataCAN_pop
- 1195              	.LVL76:
- 1196 0008 78B1     		cbz	r0, .L92
- 251:Src/state.c   **** 		{
- 1197              		.loc 1 251 0
- 1198 000a 084B     		ldr	r3, .L97
- 1199 000c 1B6B     		ldr	r3, [r3, #48]
- 1200 000e 342B     		cmp	r3, #52
- 1201 0010 09D0     		beq	.L94
- 1202 0012 A02B     		cmp	r3, #160
- 1203 0014 09D1     		bne	.L92
- 254:Src/state.c   **** 				6)
- 1204              		.loc 1 254 0
- 1205 0016 054B     		ldr	r3, .L97
- 1206 0018 1B7D     		ldrb	r3, [r3, #20]	@ zero_extendqisi2
- 1207 001a 062B     		cmp	r3, #6
- 1208 001c 05D1     		bne	.L92
- 257:Src/state.c   **** 			}
- 1209              		.loc 1 257 0
- 1210 001e 0222     		movs	r2, #2
- 1211 0020 034B     		ldr	r3, .L97+4
- 1212 0022 1A70     		strb	r2, [r3]
- 1213 0024 08BD     		pop	{r3, pc}
- 1214              	.L94:
- 261:Src/state.c   **** 			break;
- 1215              		.loc 1 261 0
- 1216 0026 FFF7FEFF 		bl	atc_pot_operations
-ARM GAS  /tmp/ccWGVQrs.s 			page 33
+ 1160              		.loc 1 220 0
+ 1161 0128 0174     		strb	r1, [r0, #16]
+ 221:Src/state.c   **** 					can1.dataTx[6] = 0;
+ 1162              		.loc 1 221 0
+ 1163 012a 4174     		strb	r1, [r0, #17]
+ 222:Src/state.c   **** 					can1.dataTx[7] = 0;
+ 1164              		.loc 1 222 0
+ 1165 012c 8174     		strb	r1, [r0, #18]
+ 223:Src/state.c   **** 					can1.tx_id = ID_ACU_1;
+ 1166              		.loc 1 223 0
+ 1167 012e C174     		strb	r1, [r0, #19]
+ 224:Src/state.c   **** 					CAN_Send(&can1, normalPriority);
+ 1168              		.loc 1 224 0
+ 1169 0130 4FF48073 		mov	r3, #256
+ 1170 0134 C362     		str	r3, [r0, #44]
+ 225:Src/state.c   **** 					// Inverter Sx true
+ 1171              		.loc 1 225 0
+ 1172 0136 FFF7FEFF 		bl	CAN_Send
+ 1173              	.LVL76:
+ 1174 013a 08BD     		pop	{r3, pc}
+ 1175              	.L93:
+ 1176              		.align	2
+ 1177              	.L92:
+ 1178 013c 00000000 		.word	.LANCHOR0
+ 1179 0140 00000000 		.word	atc_connected
+ 1180 0144 00000000 		.word	current_state
+ 1181 0148 00000000 		.word	can1
+ 1182 014c 00000000 		.word	brake
+ 1183 0150 00000000 		.word	.LANCHOR1
+ 1184              		.cfi_endproc
+ 1185              	.LFE144:
+ 1187              		.section	.text.run,"ax",%progbits
+ 1188              		.align	1
+ 1189              		.global	run
+ 1190              		.syntax unified
+ 1191              		.thumb
+ 1192              		.thumb_func
+ 1193              		.fpu fpv5-d16
+ 1195              	run:
+ 1196              	.LFB145:
+ 257:Src/state.c   **** 	if (fifoRxDataCAN_pop(&can1))
+ 1197              		.loc 1 257 0
+ 1198              		.cfi_startproc
+ 1199              		@ args = 0, pretend = 0, frame = 0
+ 1200              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1201 0000 08B5     		push	{r3, lr}
+ 1202              	.LCFI12:
+ 1203              		.cfi_def_cfa_offset 8
+ 1204              		.cfi_offset 3, -8
+ 1205              		.cfi_offset 14, -4
+ 258:Src/state.c   **** 	{
+ 1206              		.loc 1 258 0
+ 1207 0002 0A48     		ldr	r0, .L99
+ 1208 0004 FFF7FEFF 		bl	fifoRxDataCAN_pop
+ 1209              	.LVL77:
+ 1210 0008 78B1     		cbz	r0, .L94
+ 260:Src/state.c   **** 		{
+ARM GAS  /tmp/ccw6FPXZ.s 			page 33
 
 
- 1217              	.LVL77:
- 1218              	.L92:
- 1219 002a 08BD     		pop	{r3, pc}
- 1220              	.L98:
- 1221              		.align	2
- 1222              	.L97:
- 1223 002c 00000000 		.word	can1
- 1224 0030 00000000 		.word	current_state
- 1225              		.cfi_endproc
- 1226              	.LFE145:
- 1228              		.comm	current_state,1,1
- 1229              		.section	.rodata.atc_pot_operations.str1.4,"aMS",%progbits,1
- 1230              		.align	2
- 1231              	.LC24:
- 1232 0000 504F5420 		.ascii	"POT FAIL %d\015\012\000"
- 1232      4641494C 
- 1232      2025640D 
- 1232      0A00
- 1233 000e 0000     		.space	2
- 1234              	.LC25:
- 1235 0010 504F5420 		.ascii	"POT WORK %d %d\015\012\000"
- 1235      574F524B 
- 1235      20256420 
- 1235      25640D0A 
- 1235      00
- 1236              		.section	.rodata.debug_operations.str1.4,"aMS",%progbits,1
- 1237              		.align	2
- 1238              	.LC0:
- 1239 0000 68656C70 		.ascii	"help\000"
- 1239      00
- 1240 0005 000000   		.space	3
- 1241              	.LC1:
- 1242 0008 0D0A2A2A 		.ascii	"\015\012***********ECU HELP***********\015\012Avaia"
- 1242      2A2A2A2A 
- 1242      2A2A2A2A 
- 1242      2A454355 
- 1242      2048454C 
- 1243 002f 626C6520 		.ascii	"ble msg are:\015\012\011-- status -> print ECU stat"
- 1243      6D736720 
- 1243      6172653A 
- 1243      0D0A092D 
- 1243      2D207374 
- 1244 0059 75730D0A 		.ascii	"us\015\012\011-- sd status -> print SD status and t"
- 1244      092D2D20 
- 1244      73642073 
- 1244      74617475 
- 1244      73202D3E 
- 1245 0083 6865206E 		.ascii	"he name of file inside\015\012\011-- sd file -> pri"
- 1245      616D6520 
- 1245      6F662066 
- 1245      696C6520 
- 1245      696E7369 
- 1246 00ad 6E742066 		.ascii	"nt files inside the SD\015\012\011-- time -> print "
- 1246      696C6573 
- 1246      20696E73 
- 1246      69646520 
- 1246      74686520 
-ARM GAS  /tmp/ccWGVQrs.s 			page 34
+ 1211              		.loc 1 260 0
+ 1212 000a 084B     		ldr	r3, .L99
+ 1213 000c 1B6B     		ldr	r3, [r3, #48]
+ 1214 000e 342B     		cmp	r3, #52
+ 1215 0010 09D0     		beq	.L96
+ 1216 0012 A02B     		cmp	r3, #160
+ 1217 0014 09D1     		bne	.L94
+ 263:Src/state.c   **** 				6)
+ 1218              		.loc 1 263 0
+ 1219 0016 054B     		ldr	r3, .L99
+ 1220 0018 1B7D     		ldrb	r3, [r3, #20]	@ zero_extendqisi2
+ 1221 001a 062B     		cmp	r3, #6
+ 1222 001c 05D1     		bne	.L94
+ 266:Src/state.c   **** 			}
+ 1223              		.loc 1 266 0
+ 1224 001e 0222     		movs	r2, #2
+ 1225 0020 034B     		ldr	r3, .L99+4
+ 1226 0022 1A70     		strb	r2, [r3]
+ 1227 0024 08BD     		pop	{r3, pc}
+ 1228              	.L96:
+ 270:Src/state.c   **** 			break;
+ 1229              		.loc 1 270 0
+ 1230 0026 FFF7FEFF 		bl	atc_pot_operations
+ 1231              	.LVL78:
+ 1232              	.L94:
+ 1233 002a 08BD     		pop	{r3, pc}
+ 1234              	.L100:
+ 1235              		.align	2
+ 1236              	.L99:
+ 1237 002c 00000000 		.word	can1
+ 1238 0030 00000000 		.word	current_state
+ 1239              		.cfi_endproc
+ 1240              	.LFE145:
+ 1242              		.global	critical_errors
+ 1243              		.global	setup_init
+ 1244              		.comm	current_state,1,1
+ 1245              		.section	.bss.critical_errors,"aw",%nobits
+ 1246              		.align	2
+ 1247              		.set	.LANCHOR1,. + 0
+ 1250              	critical_errors:
+ 1251 0000 00000000 		.space	4
+ 1252              		.section	.bss.setup_init,"aw",%nobits
+ 1253              		.align	2
+ 1254              		.set	.LANCHOR0,. + 0
+ 1257              	setup_init:
+ 1258 0000 00000000 		.space	4
+ 1259              		.section	.rodata.atc_pot_operations.str1.4,"aMS",%progbits,1
+ 1260              		.align	2
+ 1261              	.LC24:
+ 1262 0000 504F5420 		.ascii	"POT FAIL %d\015\012\000"
+ 1262      4641494C 
+ 1262      2025640D 
+ 1262      0A00
+ 1263 000e 0000     		.space	2
+ 1264              	.LC25:
+ 1265 0010 504F5420 		.ascii	"POT WORK %d %d\015\012\000"
+ 1265      574F524B 
+ARM GAS  /tmp/ccw6FPXZ.s 			page 34
 
 
- 1247 00d7 61637469 		.ascii	"activity time\015\012\011-- codev  -> print code ve"
- 1247      76697479 
- 1247      2074696D 
- 1247      650D0A09 
- 1247      2D2D2063 
- 1248 0101 7273696F 		.ascii	"rsion\015\012\000"
- 1248      6E0D0A00 
- 1249 0109 000000   		.space	3
- 1250              	.LC2:
- 1251 010c 636F6465 		.ascii	"codev\000"
- 1251      7600
- 1252 0112 0000     		.space	2
- 1253              	.LC3:
- 1254 0114 74696D65 		.ascii	"time\000"
- 1254      00
- 1255 0119 000000   		.space	3
- 1256              	.LC4:
- 1257 011c 0D0A5469 		.ascii	"\015\012Time: %d hours : %d min : %d sec : %d dec\015"
- 1257      6D653A20 
- 1257      25642068 
- 1257      6F757273 
- 1257      203A2025 
- 1258 0148 0A00     		.ascii	"\012\000"
- 1259 014a 0000     		.space	2
- 1260              	.LC5:
- 1261 014c 73746174 		.ascii	"status\000"
- 1261      757300
- 1262 0153 00       		.space	1
- 1263              	.LC6:
- 1264 0154 0D0A0A74 		.ascii	"\015\012\012type of status:\015\012\011 0 = OK\015\012"
- 1264      79706520 
- 1264      6F662073 
- 1264      74617475 
- 1264      733A0D0A 
- 1265 0172 09203120 		.ascii	"\011 1 = ERROR\015\012\011 2 = BUSY\015\012\011 3 ="
- 1265      3D204552 
- 1265      524F520D 
- 1265      0A092032 
- 1265      203D2042 
- 1266 0190 2054494D 		.ascii	" TIMEOUT\015\012\012CAN1 status:\015\012\011CAN1 co"
- 1266      454F5554 
- 1266      0D0A0A43 
- 1266      414E3120 
- 1266      73746174 
- 1267 01b1 6E666967 		.ascii	"nfig status: %d \015\012\011CAN1 notification statu"
- 1267      20737461 
- 1267      7475733A 
- 1267      20256420 
- 1267      0D0A0943 
- 1268 01db 733A2025 		.ascii	"s: %d\015\012\011CAN1 start status: %d\015\012\000"
- 1268      640D0A09 
- 1268      43414E31 
- 1268      20737461 
- 1268      72742073 
- 1269 01fb 00       		.space	1
- 1270              	.LC7:
- 1271 01fc 43414E33 		.ascii	"CAN3 status:\015\012\011CAN3 config status: %d \015"
-ARM GAS  /tmp/ccWGVQrs.s 			page 35
+ 1265      20256420 
+ 1265      25640D0A 
+ 1265      00
+ 1266              		.section	.rodata.debug_operations.str1.4,"aMS",%progbits,1
+ 1267              		.align	2
+ 1268              	.LC0:
+ 1269 0000 68656C70 		.ascii	"help\000"
+ 1269      00
+ 1270 0005 000000   		.space	3
+ 1271              	.LC1:
+ 1272 0008 0D0A2A2A 		.ascii	"\015\012***********ECU HELP***********\015\012Avaia"
+ 1272      2A2A2A2A 
+ 1272      2A2A2A2A 
+ 1272      2A454355 
+ 1272      2048454C 
+ 1273 002f 626C6520 		.ascii	"ble msg are:\015\012\011-- status -> print ECU stat"
+ 1273      6D736720 
+ 1273      6172653A 
+ 1273      0D0A092D 
+ 1273      2D207374 
+ 1274 0059 75730D0A 		.ascii	"us\015\012\011-- sd status -> print SD status and t"
+ 1274      092D2D20 
+ 1274      73642073 
+ 1274      74617475 
+ 1274      73202D3E 
+ 1275 0083 6865206E 		.ascii	"he name of file inside\015\012\011-- sd file -> pri"
+ 1275      616D6520 
+ 1275      6F662066 
+ 1275      696C6520 
+ 1275      696E7369 
+ 1276 00ad 6E742066 		.ascii	"nt files inside the SD\015\012\011-- time -> print "
+ 1276      696C6573 
+ 1276      20696E73 
+ 1276      69646520 
+ 1276      74686520 
+ 1277 00d7 61637469 		.ascii	"activity time\015\012\011-- codev  -> print code ve"
+ 1277      76697479 
+ 1277      2074696D 
+ 1277      650D0A09 
+ 1277      2D2D2063 
+ 1278 0101 7273696F 		.ascii	"rsion\015\012\000"
+ 1278      6E0D0A00 
+ 1279 0109 000000   		.space	3
+ 1280              	.LC2:
+ 1281 010c 636F6465 		.ascii	"codev\000"
+ 1281      7600
+ 1282 0112 0000     		.space	2
+ 1283              	.LC3:
+ 1284 0114 74696D65 		.ascii	"time\000"
+ 1284      00
+ 1285 0119 000000   		.space	3
+ 1286              	.LC4:
+ 1287 011c 0D0A5469 		.ascii	"\015\012Time: %d hours : %d min : %d sec : %d dec\015"
+ 1287      6D653A20 
+ 1287      25642068 
+ 1287      6F757273 
+ 1287      203A2025 
+ARM GAS  /tmp/ccw6FPXZ.s 			page 35
 
 
- 1271      20737461 
- 1271      7475733A 
- 1271      0D0A0943 
- 1271      414E3320 
- 1272 0223 0A094341 		.ascii	"\012\011CAN3 notification status: %d\015\012\011CAN"
- 1272      4E33206E 
- 1272      6F746966 
- 1272      69636174 
- 1272      696F6E20 
- 1273 0247 33207374 		.ascii	"3 start status: %d\015\012\000"
- 1273      61727420 
- 1273      73746174 
- 1273      75733A20 
- 1273      25640D0A 
- 1274              	.LC8:
- 1275 025c 0D0A4375 		.ascii	"\015\012Current state: STATE_INIT\015\012\000"
- 1275      7272656E 
- 1275      74207374 
- 1275      6174653A 
- 1275      20535441 
- 1276 027a 0000     		.space	2
- 1277              	.LC9:
- 1278 027c 0D0A4375 		.ascii	"\015\012Current state: STATE_IDLE\015\012\000"
- 1278      7272656E 
- 1278      74207374 
- 1278      6174653A 
- 1278      20535441 
- 1279 029a 0000     		.space	2
- 1280              	.LC10:
- 1281 029c 0D0A4375 		.ascii	"\015\012Current state: STATE_SETUP\015\012\000"
- 1281      7272656E 
- 1281      74207374 
- 1281      6174653A 
- 1281      20535441 
- 1282 02bb 00       		.space	1
- 1283              	.LC11:
- 1284 02bc 0D0A4375 		.ascii	"\015\012Current state: STATE_RUN\015\012\000"
- 1284      7272656E 
- 1284      74207374 
- 1284      6174653A 
- 1284      20535441 
- 1285 02d9 000000   		.space	3
- 1286              	.LC12:
- 1287 02dc 0D0A4465 		.ascii	"\015\012Device connected : (0 = no, 1 = yes)\015\012"
- 1287      76696365 
- 1287      20636F6E 
- 1287      6E656374 
- 1287      6564203A 
- 1288 0304 0920494D 		.ascii	"\011 IMU -> %d\015\012\011 ITS0 -> %d\015\012\011 I"
- 1288      55202D3E 
- 1288      2025640D 
- 1288      0A092049 
- 1288      54533020 
- 1289 0322 54533120 		.ascii	"TS1 -> %d\015\012\011 ITS2 -> %d\015\012\011 ITS3 -"
- 1289      2D3E2025 
- 1289      640D0A09 
- 1289      20495453 
-ARM GAS  /tmp/ccWGVQrs.s 			page 36
+ 1288 0148 0A00     		.ascii	"\012\000"
+ 1289 014a 0000     		.space	2
+ 1290              	.LC5:
+ 1291 014c 73746174 		.ascii	"status\000"
+ 1291      757300
+ 1292 0153 00       		.space	1
+ 1293              	.LC6:
+ 1294 0154 0D0A0A74 		.ascii	"\015\012\012type of status:\015\012\011 0 = OK\015\012"
+ 1294      79706520 
+ 1294      6F662073 
+ 1294      74617475 
+ 1294      733A0D0A 
+ 1295 0172 09203120 		.ascii	"\011 1 = ERROR\015\012\011 2 = BUSY\015\012\011 3 ="
+ 1295      3D204552 
+ 1295      524F520D 
+ 1295      0A092032 
+ 1295      203D2042 
+ 1296 0190 2054494D 		.ascii	" TIMEOUT\015\012\012CAN1 status:\015\012\011CAN1 co"
+ 1296      454F5554 
+ 1296      0D0A0A43 
+ 1296      414E3120 
+ 1296      73746174 
+ 1297 01b1 6E666967 		.ascii	"nfig status: %d \015\012\011CAN1 notification statu"
+ 1297      20737461 
+ 1297      7475733A 
+ 1297      20256420 
+ 1297      0D0A0943 
+ 1298 01db 733A2025 		.ascii	"s: %d\015\012\011CAN1 start status: %d\015\012\000"
+ 1298      640D0A09 
+ 1298      43414E31 
+ 1298      20737461 
+ 1298      72742073 
+ 1299 01fb 00       		.space	1
+ 1300              	.LC7:
+ 1301 01fc 43414E33 		.ascii	"CAN3 status:\015\012\011CAN3 config status: %d \015"
+ 1301      20737461 
+ 1301      7475733A 
+ 1301      0D0A0943 
+ 1301      414E3320 
+ 1302 0223 0A094341 		.ascii	"\012\011CAN3 notification status: %d\015\012\011CAN"
+ 1302      4E33206E 
+ 1302      6F746966 
+ 1302      69636174 
+ 1302      696F6E20 
+ 1303 0247 33207374 		.ascii	"3 start status: %d\015\012\000"
+ 1303      61727420 
+ 1303      73746174 
+ 1303      75733A20 
+ 1303      25640D0A 
+ 1304              	.LC8:
+ 1305 025c 0D0A4375 		.ascii	"\015\012Current state: STATE_INIT\015\012\000"
+ 1305      7272656E 
+ 1305      74207374 
+ 1305      6174653A 
+ 1305      20535441 
+ 1306 027a 0000     		.space	2
+ 1307              	.LC9:
+ARM GAS  /tmp/ccw6FPXZ.s 			page 36
 
 
- 1289      32202D3E 
- 1290 0343 3E202564 		.ascii	"> %d\015\012\000"
- 1290      0D0A00
- 1291 034a 0000     		.space	2
- 1292              	.LC13:
- 1293 034c 73642073 		.ascii	"sd status\000"
- 1293      74617475 
- 1293      7300
- 1294 0356 0000     		.space	2
- 1295              	.LC14:
- 1296 0358 0D0A5364 		.ascii	"\015\012Sd mounted \000"
- 1296      206D6F75 
- 1296      6E746564 
- 1296      2000
- 1297 0366 0000     		.space	2
- 1298              	.LC15:
- 1299 0368 53642073 		.ascii	"Sd successfully opened and created file: %s\015\012"
- 1299      75636365 
- 1299      73736675 
- 1299      6C6C7920 
- 1299      6F70656E 
- 1300 0395 00       		.ascii	"\000"
- 1301 0396 0000     		.space	2
- 1302              	.LC16:
- 1303 0398 5364206F 		.ascii	"Sd open FAILED\015\012\000"
- 1303      70656E20 
- 1303      4641494C 
- 1303      45440D0A 
- 1303      00
- 1304 03a9 000000   		.space	3
- 1305              	.LC17:
- 1306 03ac 0D0A5364 		.ascii	"\015\012Sd NOT mounted \000"
- 1306      204E4F54 
- 1306      206D6F75 
- 1306      6E746564 
- 1306      2000
- 1307 03be 0000     		.space	2
- 1308              	.LC18:
- 1309 03c0 73642066 		.ascii	"sd file\000"
- 1309      696C6500 
- 1310              	.LC19:
- 1311 03c8 0D0A4669 		.ascii	"\015\012Files inside sd are:\015\012%s\000"
- 1311      6C657320 
- 1311      696E7369 
- 1311      64652073 
- 1311      64206172 
- 1312 03e3 00       		.space	1
- 1313              	.LC20:
- 1314 03e4 67617900 		.ascii	"gay\000"
- 1315              	.LC21:
- 1316 03e8 0D0A2020 		.ascii	"\015\012          $\015\012        $   $\015\012   "
- 1316      20202020 
- 1316      20202020 
- 1316      240D0A20 
- 1316      20202020 
- 1317 0409 20202020 		.ascii	"    $     $\015\012       $$$$$$$\015\012       $$$"
- 1317      24202020 
-ARM GAS  /tmp/ccWGVQrs.s 			page 37
+ 1308 027c 0D0A4375 		.ascii	"\015\012Current state: STATE_IDLE\015\012\000"
+ 1308      7272656E 
+ 1308      74207374 
+ 1308      6174653A 
+ 1308      20535441 
+ 1309 029a 0000     		.space	2
+ 1310              	.LC10:
+ 1311 029c 0D0A4375 		.ascii	"\015\012Current state: STATE_SETUP\015\012\000"
+ 1311      7272656E 
+ 1311      74207374 
+ 1311      6174653A 
+ 1311      20535441 
+ 1312 02bb 00       		.space	1
+ 1313              	.LC11:
+ 1314 02bc 0D0A4375 		.ascii	"\015\012Current state: STATE_RUN\015\012\000"
+ 1314      7272656E 
+ 1314      74207374 
+ 1314      6174653A 
+ 1314      20535441 
+ 1315 02d9 000000   		.space	3
+ 1316              	.LC12:
+ 1317 02dc 0D0A4465 		.ascii	"\015\012Device connected : (0 = no, 1 = yes)\015\012"
+ 1317      76696365 
+ 1317      20636F6E 
+ 1317      6E656374 
+ 1317      6564203A 
+ 1318 0304 0920494D 		.ascii	"\011 IMU -> %d\015\012\011 ITS0 -> %d\015\012\011 I"
+ 1318      55202D3E 
+ 1318      2025640D 
+ 1318      0A092049 
+ 1318      54533020 
+ 1319 0322 54533120 		.ascii	"TS1 -> %d\015\012\011 ITS2 -> %d\015\012\011 ITS3 -"
+ 1319      2D3E2025 
+ 1319      640D0A09 
+ 1319      20495453 
+ 1319      32202D3E 
+ 1320 0343 3E202564 		.ascii	"> %d\015\012\000"
+ 1320      0D0A00
+ 1321 034a 0000     		.space	2
+ 1322              	.LC13:
+ 1323 034c 73642073 		.ascii	"sd status\000"
+ 1323      74617475 
+ 1323      7300
+ 1324 0356 0000     		.space	2
+ 1325              	.LC14:
+ 1326 0358 0D0A5364 		.ascii	"\015\012Sd mounted \000"
+ 1326      206D6F75 
+ 1326      6E746564 
+ 1326      2000
+ 1327 0366 0000     		.space	2
+ 1328              	.LC15:
+ 1329 0368 53642073 		.ascii	"Sd successfully opened and created file: %s\015\012"
+ 1329      75636365 
+ 1329      73736675 
+ 1329      6C6C7920 
+ 1329      6F70656E 
+ 1330 0395 00       		.ascii	"\000"
+ARM GAS  /tmp/ccw6FPXZ.s 			page 37
 
 
- 1317      2020240D 
- 1317      0A202020 
- 1317      20202020 
- 1318 0430 24242424 		.ascii	"$$$$\015\012       $$$$$$$\015\012       $$$$$$$\015"
- 1318      0D0A2020 
- 1318      20202020 
- 1318      20242424 
- 1318      24242424 
- 1319 0455 0A202024 		.ascii	"\012  $$$$$$     $$$$$$\015\012 $$$$$$$$   $$$$$$$$"
- 1319      24242424 
- 1319      24202020 
- 1319      20202424 
- 1319      24242424 
- 1320 047f 0D0A2424 		.ascii	"\015\012$$$$$$$$$$$$$$$$$$$$\015\012 $$$$$$$$   $$$"
- 1320      24242424 
- 1320      24242424 
- 1320      24242424 
- 1320      24242424 
- 1321 04a6 24242424 		.ascii	"$$$$$\015\012  $$$$$$     $$$$$$\015\012\000"
- 1321      240D0A20 
- 1321      20242424 
- 1321      24242420 
- 1321      20202020 
- 1322 04c3 00       		.space	1
- 1323              	.LC22:
- 1324 04c4 0D0A4552 		.ascii	"\015\012ERROR : msg %s doesn't exist\015\012\000"
- 1324      524F5220 
- 1324      3A206D73 
- 1324      67202573 
- 1324      20646F65 
- 1325              		.section	.rodata.idle.str1.4,"aMS",%progbits,1
- 1326              		.align	2
- 1327              	.LC26:
- 1328 0000 25640D0A 		.ascii	"%d\015\012%d\015\012%d\015\012%d\015\012\000"
- 1328      25640D0A 
- 1328      25640D0A 
- 1328      25640D0A 
- 1328      00
- 1329              		.section	.rodata.imu_operations.str1.4,"aMS",%progbits,1
- 1330              		.align	2
- 1331              	.LC23:
- 1332 0000 494D5520 		.ascii	"IMU presente\015\012\000"
- 1332      70726573 
- 1332      656E7465 
- 1332      0D0A00
- 1333              		.text
- 1334              	.Letext0:
- 1335              		.file 2 "Drivers/CMSIS/Device/ST/STM32F7xx/Include/stm32f767xx.h"
- 1336              		.file 3 "/usr/include/newlib/machine/_default_types.h"
- 1337              		.file 4 "/usr/include/newlib/sys/_stdint.h"
- 1338              		.file 5 "Inc/state.h"
- 1339              		.file 6 "Drivers/CMSIS/Include/core_cm7.h"
- 1340              		.file 7 "Drivers/CMSIS/Device/ST/STM32F7xx/Include/system_stm32f7xx.h"
- 1341              		.file 8 "Drivers/CMSIS/Device/ST/STM32F7xx/Include/stm32f7xx.h"
- 1342              		.file 9 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_def.h"
- 1343              		.file 10 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_gpio.h"
- 1344              		.file 11 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_dma.h"
-ARM GAS  /tmp/ccWGVQrs.s 			page 38
+ 1331 0396 0000     		.space	2
+ 1332              	.LC16:
+ 1333 0398 5364206F 		.ascii	"Sd open FAILED\015\012\000"
+ 1333      70656E20 
+ 1333      4641494C 
+ 1333      45440D0A 
+ 1333      00
+ 1334 03a9 000000   		.space	3
+ 1335              	.LC17:
+ 1336 03ac 0D0A5364 		.ascii	"\015\012Sd NOT mounted \000"
+ 1336      204E4F54 
+ 1336      206D6F75 
+ 1336      6E746564 
+ 1336      2000
+ 1337 03be 0000     		.space	2
+ 1338              	.LC18:
+ 1339 03c0 73642066 		.ascii	"sd file\000"
+ 1339      696C6500 
+ 1340              	.LC19:
+ 1341 03c8 0D0A4669 		.ascii	"\015\012Files inside sd are:\015\012%s\000"
+ 1341      6C657320 
+ 1341      696E7369 
+ 1341      64652073 
+ 1341      64206172 
+ 1342 03e3 00       		.space	1
+ 1343              	.LC20:
+ 1344 03e4 67617900 		.ascii	"gay\000"
+ 1345              	.LC21:
+ 1346 03e8 0D0A2020 		.ascii	"\015\012          $\015\012        $   $\015\012   "
+ 1346      20202020 
+ 1346      20202020 
+ 1346      240D0A20 
+ 1346      20202020 
+ 1347 0409 20202020 		.ascii	"    $     $\015\012       $$$$$$$\015\012       $$$"
+ 1347      24202020 
+ 1347      2020240D 
+ 1347      0A202020 
+ 1347      20202020 
+ 1348 0430 24242424 		.ascii	"$$$$\015\012       $$$$$$$\015\012       $$$$$$$\015"
+ 1348      0D0A2020 
+ 1348      20202020 
+ 1348      20242424 
+ 1348      24242424 
+ 1349 0455 0A202024 		.ascii	"\012  $$$$$$     $$$$$$\015\012 $$$$$$$$   $$$$$$$$"
+ 1349      24242424 
+ 1349      24202020 
+ 1349      20202424 
+ 1349      24242424 
+ 1350 047f 0D0A2424 		.ascii	"\015\012$$$$$$$$$$$$$$$$$$$$\015\012 $$$$$$$$   $$$"
+ 1350      24242424 
+ 1350      24242424 
+ 1350      24242424 
+ 1350      24242424 
+ 1351 04a6 24242424 		.ascii	"$$$$$\015\012  $$$$$$     $$$$$$\015\012\000"
+ 1351      240D0A20 
+ 1351      20242424 
+ 1351      24242420 
+ARM GAS  /tmp/ccw6FPXZ.s 			page 38
 
 
- 1345              		.file 12 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_can.h"
- 1346              		.file 13 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart.h"
- 1347              		.file 14 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal.h"
- 1348              		.file 15 "Inc/can.h"
- 1349              		.file 16 "Middlewares/Third_Party/FatFs/src/integer.h"
- 1350              		.file 17 "/usr/include/newlib/sys/lock.h"
- 1351              		.file 18 "/usr/include/newlib/sys/_types.h"
- 1352              		.file 19 "/usr/lib/gcc/arm-none-eabi/6.3.1/include/stddef.h"
- 1353              		.file 20 "/usr/include/newlib/sys/reent.h"
- 1354              		.file 21 "/usr/include/newlib/stdlib.h"
- 1355              		.file 22 "Middlewares/Third_Party/FatFs/src/ff.h"
- 1356              		.file 23 "Middlewares/Third_Party/FatFs/src/diskio.h"
- 1357              		.file 24 "Middlewares/Third_Party/FatFs/src/ff_gen_drv.h"
- 1358              		.file 25 "Inc/sd_diskio.h"
- 1359              		.file 26 "Inc/fatfs.h"
- 1360              		.file 27 "Inc/pedals.h"
- 1361              		.file 28 "Inc/global_variables.h"
- 1362              		.file 29 "/usr/include/newlib/stdio.h"
- 1363              		.file 30 "/usr/include/newlib/string.h"
-ARM GAS  /tmp/ccWGVQrs.s 			page 39
+ 1351      20202020 
+ 1352 04c3 00       		.space	1
+ 1353              	.LC22:
+ 1354 04c4 0D0A4552 		.ascii	"\015\012ERROR : msg %s doesn't exist\015\012\000"
+ 1354      524F5220 
+ 1354      3A206D73 
+ 1354      67202573 
+ 1354      20646F65 
+ 1355              		.section	.rodata.idle.str1.4,"aMS",%progbits,1
+ 1356              		.align	2
+ 1357              	.LC26:
+ 1358 0000 25640D0A 		.ascii	"%d\015\012%d\015\012%d\015\012%d\015\012\000"
+ 1358      25640D0A 
+ 1358      25640D0A 
+ 1358      25640D0A 
+ 1358      00
+ 1359              		.section	.rodata.imu_operations.str1.4,"aMS",%progbits,1
+ 1360              		.align	2
+ 1361              	.LC23:
+ 1362 0000 494D5520 		.ascii	"IMU presente\015\012\000"
+ 1362      70726573 
+ 1362      656E7465 
+ 1362      0D0A00
+ 1363              		.text
+ 1364              	.Letext0:
+ 1365              		.file 2 "Drivers/CMSIS/Device/ST/STM32F7xx/Include/stm32f767xx.h"
+ 1366              		.file 3 "/usr/include/newlib/machine/_default_types.h"
+ 1367              		.file 4 "/usr/include/newlib/sys/_stdint.h"
+ 1368              		.file 5 "Inc/state.h"
+ 1369              		.file 6 "Drivers/CMSIS/Include/core_cm7.h"
+ 1370              		.file 7 "Drivers/CMSIS/Device/ST/STM32F7xx/Include/system_stm32f7xx.h"
+ 1371              		.file 8 "Drivers/CMSIS/Device/ST/STM32F7xx/Include/stm32f7xx.h"
+ 1372              		.file 9 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_def.h"
+ 1373              		.file 10 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_gpio.h"
+ 1374              		.file 11 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_dma.h"
+ 1375              		.file 12 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_can.h"
+ 1376              		.file 13 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart.h"
+ 1377              		.file 14 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal.h"
+ 1378              		.file 15 "Inc/can.h"
+ 1379              		.file 16 "Middlewares/Third_Party/FatFs/src/integer.h"
+ 1380              		.file 17 "/usr/include/newlib/sys/lock.h"
+ 1381              		.file 18 "/usr/include/newlib/sys/_types.h"
+ 1382              		.file 19 "/usr/lib/gcc/arm-none-eabi/6.3.1/include/stddef.h"
+ 1383              		.file 20 "/usr/include/newlib/sys/reent.h"
+ 1384              		.file 21 "/usr/include/newlib/stdlib.h"
+ 1385              		.file 22 "Middlewares/Third_Party/FatFs/src/ff.h"
+ 1386              		.file 23 "Middlewares/Third_Party/FatFs/src/diskio.h"
+ 1387              		.file 24 "Middlewares/Third_Party/FatFs/src/ff_gen_drv.h"
+ 1388              		.file 25 "Inc/sd_diskio.h"
+ 1389              		.file 26 "Inc/fatfs.h"
+ 1390              		.file 27 "Inc/pedals.h"
+ 1391              		.file 28 "Inc/global_variables.h"
+ 1392              		.file 29 "/usr/include/newlib/stdio.h"
+ 1393              		.file 30 "/usr/include/newlib/string.h"
+ARM GAS  /tmp/ccw6FPXZ.s 			page 39
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 state.c
-     /tmp/ccWGVQrs.s:17     .text.debug_operations:0000000000000000 $t
-     /tmp/ccWGVQrs.s:24     .text.debug_operations:0000000000000000 debug_operations
-     /tmp/ccWGVQrs.s:396    .text.debug_operations:0000000000000258 $d
+     /tmp/ccw6FPXZ.s:17     .text.debug_operations:0000000000000000 $t
+     /tmp/ccw6FPXZ.s:24     .text.debug_operations:0000000000000000 debug_operations
+     /tmp/ccw6FPXZ.s:396    .text.debug_operations:0000000000000258 $d
                             *COM*:0000000000000001 current_state
-     /tmp/ccWGVQrs.s:443    .text.imu_operations:0000000000000000 $t
-     /tmp/ccWGVQrs.s:450    .text.imu_operations:0000000000000000 imu_operations
-     /tmp/ccWGVQrs.s:490    .text.imu_operations:000000000000002c $d
-     /tmp/ccWGVQrs.s:498    .text.init:0000000000000000 $t
-     /tmp/ccWGVQrs.s:505    .text.init:0000000000000000 init
-     /tmp/ccWGVQrs.s:561    .text.init:0000000000000040 $d
-     /tmp/ccWGVQrs.s:569    .text.atc_pot_operations:0000000000000000 $t
-     /tmp/ccWGVQrs.s:576    .text.atc_pot_operations:0000000000000000 atc_pot_operations
-     /tmp/ccWGVQrs.s:738    .text.atc_pot_operations:00000000000000f8 $d
-     /tmp/ccWGVQrs.s:752    .text.idle:0000000000000000 $t
-     /tmp/ccWGVQrs.s:759    .text.idle:0000000000000000 idle
-     /tmp/ccWGVQrs.s:933    .text.idle:00000000000000e8 $d
-     /tmp/ccWGVQrs.s:950    .text.setup:0000000000000000 $t
-     /tmp/ccWGVQrs.s:957    .text.setup:0000000000000000 setup
-     /tmp/ccWGVQrs.s:1168   .text.setup:0000000000000110 $d
-     /tmp/ccWGVQrs.s:1174   .text.run:0000000000000000 $t
-     /tmp/ccWGVQrs.s:1181   .text.run:0000000000000000 run
-     /tmp/ccWGVQrs.s:1223   .text.run:000000000000002c $d
-     /tmp/ccWGVQrs.s:1230   .rodata.atc_pot_operations.str1.4:0000000000000000 $d
-     /tmp/ccWGVQrs.s:1237   .rodata.debug_operations.str1.4:0000000000000000 $d
-     /tmp/ccWGVQrs.s:1326   .rodata.idle.str1.4:0000000000000000 $d
-     /tmp/ccWGVQrs.s:1330   .rodata.imu_operations.str1.4:0000000000000000 $d
+     /tmp/ccw6FPXZ.s:443    .text.imu_operations:0000000000000000 $t
+     /tmp/ccw6FPXZ.s:450    .text.imu_operations:0000000000000000 imu_operations
+     /tmp/ccw6FPXZ.s:490    .text.imu_operations:000000000000002c $d
+     /tmp/ccw6FPXZ.s:498    .text.init:0000000000000000 $t
+     /tmp/ccw6FPXZ.s:505    .text.init:0000000000000000 init
+     /tmp/ccw6FPXZ.s:561    .text.init:0000000000000040 $d
+     /tmp/ccw6FPXZ.s:569    .text.atc_pot_operations:0000000000000000 $t
+     /tmp/ccw6FPXZ.s:576    .text.atc_pot_operations:0000000000000000 atc_pot_operations
+     /tmp/ccw6FPXZ.s:738    .text.atc_pot_operations:00000000000000f8 $d
+     /tmp/ccw6FPXZ.s:752    .text.idle:0000000000000000 $t
+     /tmp/ccw6FPXZ.s:759    .text.idle:0000000000000000 idle
+     /tmp/ccw6FPXZ.s:912    .text.idle:00000000000000d0 $d
+     /tmp/ccw6FPXZ.s:929    .text.setup:0000000000000000 $t
+     /tmp/ccw6FPXZ.s:936    .text.setup:0000000000000000 setup
+     /tmp/ccw6FPXZ.s:1178   .text.setup:000000000000013c $d
+     /tmp/ccw6FPXZ.s:1188   .text.run:0000000000000000 $t
+     /tmp/ccw6FPXZ.s:1195   .text.run:0000000000000000 run
+     /tmp/ccw6FPXZ.s:1237   .text.run:000000000000002c $d
+     /tmp/ccw6FPXZ.s:1250   .bss.critical_errors:0000000000000000 critical_errors
+     /tmp/ccw6FPXZ.s:1257   .bss.setup_init:0000000000000000 setup_init
+     /tmp/ccw6FPXZ.s:1246   .bss.critical_errors:0000000000000000 $d
+     /tmp/ccw6FPXZ.s:1253   .bss.setup_init:0000000000000000 $d
+     /tmp/ccw6FPXZ.s:1260   .rodata.atc_pot_operations.str1.4:0000000000000000 $d
+     /tmp/ccw6FPXZ.s:1267   .rodata.debug_operations.str1.4:0000000000000000 $d
+     /tmp/ccw6FPXZ.s:1356   .rodata.idle.str1.4:0000000000000000 $d
+     /tmp/ccw6FPXZ.s:1360   .rodata.imu_operations.str1.4:0000000000000000 $d
                      .debug_frame:0000000000000010 $d
 
 UNDEFINED SYMBOLS
@@ -2296,13 +2335,13 @@ its3_connected
 its2_connected
 its1_connected
 successfull_opening
+ARM GAS  /tmp/ccw6FPXZ.s 			page 40
+
+
 filename_log
 log_names
 count_imu
 fifoRxDataCAN_pop
-ARM GAS  /tmp/ccWGVQrs.s 			page 40
-
-
 debug_msg_arrived
 accel_implausibility_check
 atc_connected

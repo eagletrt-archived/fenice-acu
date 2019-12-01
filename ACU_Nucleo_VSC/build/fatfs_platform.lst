@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccsAPMNu.s 			page 1
+ARM GAS  /tmp/ccAAkr6H.s 			page 1
 
 
    1              		.cpu cortex-m7
@@ -58,7 +58,7 @@ ARM GAS  /tmp/ccsAPMNu.s 			page 1
   36              	.LVL0:
   21:Src/fatfs_platform.c ****     uint8_t status = SD_PRESENT;
   22:Src/fatfs_platform.c ****     /* Check SD card detect pin */
-ARM GAS  /tmp/ccsAPMNu.s 			page 2
+ARM GAS  /tmp/ccAAkr6H.s 			page 2
 
 
   23:Src/fatfs_platform.c ****     if(HAL_GPIO_ReadPin(SD_DETECT_GPIO_PORT, SD_DETECT_PIN) != GPIO_PIN_RESET)
@@ -102,14 +102,14 @@ ARM GAS  /tmp/ccsAPMNu.s 			page 1
   66              		.file 6 "Drivers/CMSIS/Device/ST/STM32F7xx/Include/stm32f767xx.h"
   67              		.file 7 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_gpio.h"
   68              		.file 8 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal.h"
-ARM GAS  /tmp/ccsAPMNu.s 			page 3
+ARM GAS  /tmp/ccAAkr6H.s 			page 3
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 fatfs_platform.c
-     /tmp/ccsAPMNu.s:17     .text.BSP_PlatformIsDetected:0000000000000000 $t
-     /tmp/ccsAPMNu.s:24     .text.BSP_PlatformIsDetected:0000000000000000 BSP_PlatformIsDetected
-     /tmp/ccsAPMNu.s:56     .text.BSP_PlatformIsDetected:0000000000000014 $d
+     /tmp/ccAAkr6H.s:17     .text.BSP_PlatformIsDetected:0000000000000000 $t
+     /tmp/ccAAkr6H.s:24     .text.BSP_PlatformIsDetected:0000000000000000 BSP_PlatformIsDetected
+     /tmp/ccAAkr6H.s:56     .text.BSP_PlatformIsDetected:0000000000000014 $d
                      .debug_frame:0000000000000010 $d
 
 UNDEFINED SYMBOLS

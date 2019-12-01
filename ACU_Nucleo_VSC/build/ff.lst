@@ -1,4 +1,4 @@
-ARM GAS  /tmp/cccTBT9O.s 			page 1
+ARM GAS  /tmp/cc6g2I8d.s 			page 1
 
 
    1              		.cpu cortex-m7
@@ -58,7 +58,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
   31:Middlewares/Third_Party/FatFs/src/ff.c **** #if _FATFS != 68300	/* Revision ID */
   32:Middlewares/Third_Party/FatFs/src/ff.c **** #error Wrong include file (ff.h).
   33:Middlewares/Third_Party/FatFs/src/ff.c **** #endif
-ARM GAS  /tmp/cccTBT9O.s 			page 2
+ARM GAS  /tmp/cc6g2I8d.s 			page 2
 
 
   34:Middlewares/Third_Party/FatFs/src/ff.c **** 
@@ -118,7 +118,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
   88:Middlewares/Third_Party/FatFs/src/ff.c **** 				0x90,0x91,0x92,0x93,0x94,0x95,0x96,0x97,0x98,0x99,0x9A,0x9B,0x9C,0x9D,0x9E,0x9F, \
   89:Middlewares/Third_Party/FatFs/src/ff.c **** 				0xA0,0xA1,0xA2,0xA3,0xA4,0xA5,0xA6,0xA7,0xA8,0xA9,0xAA,0xAB,0xAC,0xAD,0xAE,0xAF, \
   90:Middlewares/Third_Party/FatFs/src/ff.c **** 				0xB0,0xB1,0xB2,0xB3,0xB4,0xB5,0xB6,0xB7,0xB8,0xB9,0xBA,0xBB,0xBC,0xBD,0xBE,0xBF, \
-ARM GAS  /tmp/cccTBT9O.s 			page 3
+ARM GAS  /tmp/cc6g2I8d.s 			page 3
 
 
   91:Middlewares/Third_Party/FatFs/src/ff.c **** 				0xC0,0xC1,0xC2,0xC3,0xC4,0xC5,0xC6,0xC7,0xC8,0xC9,0xCA,0xCB,0xCC,0xCD,0xCE,0xCF, \
@@ -178,7 +178,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  145:Middlewares/Third_Party/FatFs/src/ff.c **** 				0xB0,0xB1,0xB2,0xB3,0xB4,0xB5,0xB6,0xB7,0xB8,0xB9,0xBA,0xBB,0xBC,0xBD,0xBD,0xBF, \
  146:Middlewares/Third_Party/FatFs/src/ff.c **** 				0xC0,0xC1,0xC2,0xC3,0xC4,0xC5,0xC6,0xC6,0xC8,0xC9,0xCA,0xCB,0xCC,0xCD,0xCE,0xCF, \
  147:Middlewares/Third_Party/FatFs/src/ff.c **** 				0xD1,0xD1,0xD2,0xD3,0xD2,0xD5,0xD6,0xD7,0xB7,0xD9,0xDA,0xDB,0xDC,0xDD,0xDE,0xDF, \
-ARM GAS  /tmp/cccTBT9O.s 			page 4
+ARM GAS  /tmp/cc6g2I8d.s 			page 4
 
 
  148:Middlewares/Third_Party/FatFs/src/ff.c **** 				0xE0,0xE1,0xE2,0xE3,0xE3,0xD5,0xE6,0xE6,0xE8,0xE9,0xE8,0xEB,0xED,0xED,0xDD,0xEF, \
@@ -238,7 +238,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  202:Middlewares/Third_Party/FatFs/src/ff.c **** 				0xD0,0xD1,0xD2,0xD3,0xD4,0xD5,0xD6,0xD7,0xD8,0xD9,0xDA,0xDB,0xDC,0xDD,0xDE,0xDF, \
  203:Middlewares/Third_Party/FatFs/src/ff.c **** 				0xE0,0xE1,0xE2,0xE3,0xE4,0xE5,0xE6,0xE7,0xE8,0xE9,0xEA,0xEB,0xEC,0xED,0xEE,0xEF, \
  204:Middlewares/Third_Party/FatFs/src/ff.c **** 				0xF0,0xF1,0xF2,0xF3,0xF4,0xF5,0xF6,0xF7,0xF8,0xF9,0xFA,0xFB,0xFC,0xFD,0xFE,0xFF}
-ARM GAS  /tmp/cccTBT9O.s 			page 5
+ARM GAS  /tmp/cc6g2I8d.s 			page 5
 
 
  205:Middlewares/Third_Party/FatFs/src/ff.c **** 
@@ -298,7 +298,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  259:Middlewares/Third_Party/FatFs/src/ff.c **** 				0xF0,0xF1,0xD1,0xD2,0xD3,0xF5,0xD4,0xF7,0xF8,0xF9,0xD5,0x96,0x95,0x98,0xFE,0xFF}
  260:Middlewares/Third_Party/FatFs/src/ff.c **** 
  261:Middlewares/Third_Party/FatFs/src/ff.c **** #elif _CODE_PAGE == 1	/* ASCII (for only non-LFN cfg) */
-ARM GAS  /tmp/cccTBT9O.s 			page 6
+ARM GAS  /tmp/cc6g2I8d.s 			page 6
 
 
  262:Middlewares/Third_Party/FatFs/src/ff.c **** #if _USE_LFN != 0
@@ -358,7 +358,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  316:Middlewares/Third_Party/FatFs/src/ff.c **** #define NS_LAST		0x04	/* Last segment */
  317:Middlewares/Third_Party/FatFs/src/ff.c **** #define NS_BODY		0x08	/* Lower case flag (body) */
  318:Middlewares/Third_Party/FatFs/src/ff.c **** #define NS_EXT		0x10	/* Lower case flag (ext) */
-ARM GAS  /tmp/cccTBT9O.s 			page 7
+ARM GAS  /tmp/cc6g2I8d.s 			page 7
 
 
  319:Middlewares/Third_Party/FatFs/src/ff.c **** #define NS_DOT		0x20	/* Dot entry */
@@ -418,7 +418,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  373:Middlewares/Third_Party/FatFs/src/ff.c **** #define BPB_ZeroedEx		11		/* exFAT: MBZ field (53-byte) */
  374:Middlewares/Third_Party/FatFs/src/ff.c **** #define BPB_VolOfsEx		64		/* exFAT: Volume offset from top of the drive [sector] (QWORD) */
  375:Middlewares/Third_Party/FatFs/src/ff.c **** #define BPB_TotSecEx		72		/* exFAT: Volume size [sector] (QWORD) */
-ARM GAS  /tmp/cccTBT9O.s 			page 8
+ARM GAS  /tmp/cc6g2I8d.s 			page 8
 
 
  376:Middlewares/Third_Party/FatFs/src/ff.c **** #define BPB_FatOfsEx		80		/* exFAT: FAT offset from top of the volume [sector] (DWORD) */
@@ -478,7 +478,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  430:Middlewares/Third_Party/FatFs/src/ff.c **** #define	SZDIRE				32		/* Size of a directory entry */
  431:Middlewares/Third_Party/FatFs/src/ff.c **** #define	DDEM				0xE5	/* Deleted directory entry mark set to DIR_Name[0] */
  432:Middlewares/Third_Party/FatFs/src/ff.c **** #define	RDDEM				0x05	/* Replacement of the character collides with DDEM */
-ARM GAS  /tmp/cccTBT9O.s 			page 9
+ARM GAS  /tmp/cc6g2I8d.s 			page 9
 
 
  433:Middlewares/Third_Party/FatFs/src/ff.c **** #define	LLEF				0x40	/* Last long entry flag in LDIR_Ord */
@@ -538,7 +538,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  487:Middlewares/Third_Party/FatFs/src/ff.c **** #else
  488:Middlewares/Third_Party/FatFs/src/ff.c **** #define	SS(fs)	((fs)->ssize)	/* Variable sector size */
  489:Middlewares/Third_Party/FatFs/src/ff.c **** #endif
-ARM GAS  /tmp/cccTBT9O.s 			page 10
+ARM GAS  /tmp/cc6g2I8d.s 			page 10
 
 
  490:Middlewares/Third_Party/FatFs/src/ff.c **** 
@@ -598,7 +598,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  544:Middlewares/Third_Party/FatFs/src/ff.c **** #if _USE_LFN == 0		/* Non-LFN configuration */
  545:Middlewares/Third_Party/FatFs/src/ff.c **** #define	DEF_NAMBUF
  546:Middlewares/Third_Party/FatFs/src/ff.c **** #define INIT_NAMBUF(fs)
-ARM GAS  /tmp/cccTBT9O.s 			page 11
+ARM GAS  /tmp/cc6g2I8d.s 			page 11
 
 
  547:Middlewares/Third_Party/FatFs/src/ff.c **** #define	FREE_NAMBUF()
@@ -658,7 +658,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  601:Middlewares/Third_Party/FatFs/src/ff.c **** /*--------------------------------------------------------------------------
  602:Middlewares/Third_Party/FatFs/src/ff.c **** 
  603:Middlewares/Third_Party/FatFs/src/ff.c ****    Module Private Functions
-ARM GAS  /tmp/cccTBT9O.s 			page 12
+ARM GAS  /tmp/cc6g2I8d.s 			page 12
 
 
  604:Middlewares/Third_Party/FatFs/src/ff.c **** 
@@ -718,7 +718,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  626:Middlewares/Third_Party/FatFs/src/ff.c **** 
  627:Middlewares/Third_Party/FatFs/src/ff.c **** 	rv = ptr[3];
   60              		.loc 1 627 0
-ARM GAS  /tmp/cccTBT9O.s 			page 13
+ARM GAS  /tmp/cc6g2I8d.s 			page 13
 
 
   61 0000 C278     		ldrb	r2, [r0, #3]	@ zero_extendqisi2
@@ -778,7 +778,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  655:Middlewares/Third_Party/FatFs/src/ff.c **** {
   90              		.loc 1 655 0
   91              		.cfi_startproc
-ARM GAS  /tmp/cccTBT9O.s 			page 14
+ARM GAS  /tmp/cc6g2I8d.s 			page 14
 
 
   92              		@ args = 0, pretend = 0, frame = 0
@@ -838,7 +838,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  137 0012 7047     		bx	lr
  138              		.cfi_endproc
  139              	.LFE144:
-ARM GAS  /tmp/cccTBT9O.s 			page 15
+ARM GAS  /tmp/cc6g2I8d.s 			page 15
 
 
  141              		.section	.text.mem_cpy,"ax",%progbits
@@ -898,7 +898,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  163 0006 0270     		strb	r2, [r0]
  164              	.LVL20:
  165 0008 0130     		adds	r0, r0, #1
-ARM GAS  /tmp/cccTBT9O.s 			page 16
+ARM GAS  /tmp/cc6g2I8d.s 			page 16
 
 
  166              	.LVL21:
@@ -958,7 +958,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  210              		.syntax unified
  211              		.thumb
  212              		.thumb_func
-ARM GAS  /tmp/cccTBT9O.s 			page 17
+ARM GAS  /tmp/cc6g2I8d.s 			page 17
 
 
  213              		.fpu fpv5-d16
@@ -1018,7 +1018,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  254 001a 30BC     		pop	{r4, r5}
  255              	.LCFI1:
  256              		.cfi_restore 5
-ARM GAS  /tmp/cccTBT9O.s 			page 18
+ARM GAS  /tmp/cc6g2I8d.s 			page 18
 
 
  257              		.cfi_restore 4
@@ -1078,7 +1078,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  308              	.LFB149:
  733:Middlewares/Third_Party/FatFs/src/ff.c **** 
  734:Middlewares/Third_Party/FatFs/src/ff.c **** 
-ARM GAS  /tmp/cccTBT9O.s 			page 19
+ARM GAS  /tmp/cc6g2I8d.s 			page 19
 
 
  735:Middlewares/Third_Party/FatFs/src/ff.c **** 
@@ -1138,7 +1138,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  777:Middlewares/Third_Party/FatFs/src/ff.c **** 
  778:Middlewares/Third_Party/FatFs/src/ff.c **** 	/* Search file semaphore table */
  779:Middlewares/Third_Party/FatFs/src/ff.c **** 	for (i = be = 0; i < _FS_LOCK; i++) {
-ARM GAS  /tmp/cccTBT9O.s 			page 20
+ARM GAS  /tmp/cc6g2I8d.s 			page 20
 
 
  321              		.loc 1 779 0
@@ -1198,7 +1198,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  361              		.loc 1 782 0
  362 0038 9442     		cmp	r4, r2
  363 003a E6D1     		bne	.L20
-ARM GAS  /tmp/cccTBT9O.s 			page 21
+ARM GAS  /tmp/cc6g2I8d.s 			page 21
 
 
  364              	.L21:
@@ -1258,7 +1258,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  407 0066 01D0     		beq	.L33
  793:Middlewares/Third_Party/FatFs/src/ff.c **** }
  408              		.loc 1 793 0 is_stmt 0
-ARM GAS  /tmp/cccTBT9O.s 			page 22
+ARM GAS  /tmp/cc6g2I8d.s 			page 22
 
 
  409 0068 0020     		movs	r0, #0
@@ -1318,7 +1318,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  457              	.L38:
  803:Middlewares/Third_Party/FatFs/src/ff.c **** 	return (i == _FS_LOCK) ? 0 : 1;
  804:Middlewares/Third_Party/FatFs/src/ff.c **** }
-ARM GAS  /tmp/cccTBT9O.s 			page 23
+ARM GAS  /tmp/cc6g2I8d.s 			page 23
 
 
  458              		.loc 1 804 0 is_stmt 1
@@ -1378,7 +1378,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  502              	.L43:
  503              		.loc 1 816 0 discriminator 1
  504 0008 012B     		cmp	r3, #1
-ARM GAS  /tmp/cccTBT9O.s 			page 24
+ARM GAS  /tmp/cc6g2I8d.s 			page 24
 
 
  505 000a 13D8     		bhi	.L45
@@ -1438,7 +1438,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  542              	.L52:
  832:Middlewares/Third_Party/FatFs/src/ff.c **** 
  833:Middlewares/Third_Party/FatFs/src/ff.c **** 	Files[i].ctr = acc ? 0x100 : Files[i].ctr + 1;	/* Set semaphore value */
-ARM GAS  /tmp/cccTBT9O.s 			page 25
+ARM GAS  /tmp/cc6g2I8d.s 			page 25
 
 
  543              		.loc 1 833 0 is_stmt 1
@@ -1498,7 +1498,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  825:Middlewares/Third_Party/FatFs/src/ff.c **** 		Files[i].clu = dp->obj.sclust;
  590              		.loc 1 825 0
  591 0074 0668     		ldr	r6, [r0]
-ARM GAS  /tmp/cccTBT9O.s 			page 26
+ARM GAS  /tmp/cc6g2I8d.s 			page 26
 
 
  592 0076 0A4D     		ldr	r5, .L60
@@ -1558,7 +1558,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  642              	dec_lock:
  643              	.LFB152:
  837:Middlewares/Third_Party/FatFs/src/ff.c **** 
-ARM GAS  /tmp/cccTBT9O.s 			page 27
+ARM GAS  /tmp/cc6g2I8d.s 			page 27
 
 
  838:Middlewares/Third_Party/FatFs/src/ff.c **** 
@@ -1618,7 +1618,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  675              	.LVL82:
  676 001c 9BB2     		uxth	r3, r3
  677              	.LVL83:
-ARM GAS  /tmp/cccTBT9O.s 			page 28
+ARM GAS  /tmp/cc6g2I8d.s 			page 28
 
 
  678              	.L65:
@@ -1678,7 +1678,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  863:Middlewares/Third_Party/FatFs/src/ff.c **** void clear_lock (	/* Clear lock entries of the volume */
  864:Middlewares/Third_Party/FatFs/src/ff.c **** 	FATFS *fs
  865:Middlewares/Third_Party/FatFs/src/ff.c **** )
-ARM GAS  /tmp/cccTBT9O.s 			page 29
+ARM GAS  /tmp/cc6g2I8d.s 			page 29
 
 
  866:Middlewares/Third_Party/FatFs/src/ff.c **** {
@@ -1738,7 +1738,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  766              	.L75:
  869:Middlewares/Third_Party/FatFs/src/ff.c **** 		if (Files[i].fs == fs) Files[i].fs = 0;
  767              		.loc 1 869 0 discriminator 2
-ARM GAS  /tmp/cccTBT9O.s 			page 30
+ARM GAS  /tmp/cc6g2I8d.s 			page 30
 
 
  768 0022 0133     		adds	r3, r3, #1
@@ -1798,7 +1798,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  896:Middlewares/Third_Party/FatFs/src/ff.c **** 		} else {
  897:Middlewares/Third_Party/FatFs/src/ff.c **** 			fs->wflag = 0;
  898:Middlewares/Third_Party/FatFs/src/ff.c **** 			if (wsect - fs->fatbase < fs->fsize) {		/* Is it in the FAT area? */
-ARM GAS  /tmp/cccTBT9O.s 			page 31
+ARM GAS  /tmp/cc6g2I8d.s 			page 31
 
 
  899:Middlewares/Third_Party/FatFs/src/ff.c **** 				for (nf = fs->n_fats; nf >= 2; nf--) {	/* Reflect the change to all FAT copies */
@@ -1858,7 +1858,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  953:Middlewares/Third_Party/FatFs/src/ff.c **** 		/* Update FSInfo sector if needed */
  954:Middlewares/Third_Party/FatFs/src/ff.c **** 		if (fs->fs_type == FS_FAT32 && fs->fsi_flag == 1) {
  955:Middlewares/Third_Party/FatFs/src/ff.c **** 			/* Create FSInfo structure */
-ARM GAS  /tmp/cccTBT9O.s 			page 32
+ARM GAS  /tmp/cc6g2I8d.s 			page 32
 
 
  956:Middlewares/Third_Party/FatFs/src/ff.c **** 			mem_set(fs->win, 0, SS(fs));
@@ -1918,7 +1918,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  819 0012 7047     		bx	lr
  820              	.LVL98:
  821              	.L89:
-ARM GAS  /tmp/cccTBT9O.s 			page 33
+ARM GAS  /tmp/cc6g2I8d.s 			page 33
 
 
  989:Middlewares/Third_Party/FatFs/src/ff.c **** 	if (clst >= fs->n_fatent - 2) return 0;		/* Invalid cluster# */
@@ -1978,7 +1978,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
 1029:Middlewares/Third_Party/FatFs/src/ff.c **** 			val = ld_word(fs->win + clst * 2 % SS(fs));
 1030:Middlewares/Third_Party/FatFs/src/ff.c **** 			break;
 1031:Middlewares/Third_Party/FatFs/src/ff.c **** 
-ARM GAS  /tmp/cccTBT9O.s 			page 34
+ARM GAS  /tmp/cc6g2I8d.s 			page 34
 
 
 1032:Middlewares/Third_Party/FatFs/src/ff.c **** 		case FS_FAT32 :
@@ -2038,7 +2038,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
 1086:Middlewares/Third_Party/FatFs/src/ff.c **** {
 1087:Middlewares/Third_Party/FatFs/src/ff.c **** 	UINT bc;
 1088:Middlewares/Third_Party/FatFs/src/ff.c **** 	BYTE *p;
-ARM GAS  /tmp/cccTBT9O.s 			page 35
+ARM GAS  /tmp/cc6g2I8d.s 			page 35
 
 
 1089:Middlewares/Third_Party/FatFs/src/ff.c **** 	FRESULT res = FR_INT_ERR;
@@ -2098,7 +2098,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
 1143:Middlewares/Third_Party/FatFs/src/ff.c **** /*--------------------------------------*/
 1144:Middlewares/Third_Party/FatFs/src/ff.c **** 
 1145:Middlewares/Third_Party/FatFs/src/ff.c **** static
-ARM GAS  /tmp/cccTBT9O.s 			page 36
+ARM GAS  /tmp/cc6g2I8d.s 			page 36
 
 
 1146:Middlewares/Third_Party/FatFs/src/ff.c **** DWORD find_bitmap (	/* 0:Not found, 2..:Cluster block found, 0xFFFFFFFF:Disk error */
@@ -2158,7 +2158,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
 1200:Middlewares/Third_Party/FatFs/src/ff.c **** 	i = clst / 8 % SS(fs);						/* Byte offset in the sector */
 1201:Middlewares/Third_Party/FatFs/src/ff.c **** 	bm = 1 << (clst % 8);						/* Bit mask in the byte */
 1202:Middlewares/Third_Party/FatFs/src/ff.c **** 	for (;;) {
-ARM GAS  /tmp/cccTBT9O.s 			page 37
+ARM GAS  /tmp/cc6g2I8d.s 			page 37
 
 
 1203:Middlewares/Third_Party/FatFs/src/ff.c **** 		if (move_window(fs, sect++) != FR_OK) return FR_DISK_ERR;
@@ -2218,7 +2218,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
 1257:Middlewares/Third_Party/FatFs/src/ff.c **** 		obj->n_frag--;
 1258:Middlewares/Third_Party/FatFs/src/ff.c **** 	}
 1259:Middlewares/Third_Party/FatFs/src/ff.c **** 	return FR_OK;
-ARM GAS  /tmp/cccTBT9O.s 			page 38
+ARM GAS  /tmp/cc6g2I8d.s 			page 38
 
 
 1260:Middlewares/Third_Party/FatFs/src/ff.c **** }
@@ -2278,7 +2278,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
 1314:Middlewares/Third_Party/FatFs/src/ff.c **** 			if (fs->fs_type == FS_EXFAT) {
 1315:Middlewares/Third_Party/FatFs/src/ff.c **** 				res = change_bitmap(fs, scl, ecl - scl + 1, 0);	/* Mark the cluster block 'free' on the bitmap 
 1316:Middlewares/Third_Party/FatFs/src/ff.c **** 				if (res != FR_OK) return res;
-ARM GAS  /tmp/cccTBT9O.s 			page 39
+ARM GAS  /tmp/cc6g2I8d.s 			page 39
 
 
 1317:Middlewares/Third_Party/FatFs/src/ff.c **** 			}
@@ -2338,7 +2338,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
 1371:Middlewares/Third_Party/FatFs/src/ff.c **** 	}
 1372:Middlewares/Third_Party/FatFs/src/ff.c **** 
 1373:Middlewares/Third_Party/FatFs/src/ff.c **** #if _FS_EXFAT
-ARM GAS  /tmp/cccTBT9O.s 			page 40
+ARM GAS  /tmp/cc6g2I8d.s 			page 40
 
 
 1374:Middlewares/Third_Party/FatFs/src/ff.c **** 	if (fs->fs_type == FS_EXFAT) {	/* On the exFAT volume */
@@ -2398,7 +2398,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
 1428:Middlewares/Third_Party/FatFs/src/ff.c **** 
 1429:Middlewares/Third_Party/FatFs/src/ff.c **** #endif /* !_FS_READONLY */
 1430:Middlewares/Third_Party/FatFs/src/ff.c **** 
-ARM GAS  /tmp/cccTBT9O.s 			page 41
+ARM GAS  /tmp/cc6g2I8d.s 			page 41
 
 
 1431:Middlewares/Third_Party/FatFs/src/ff.c **** 
@@ -2458,7 +2458,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  868              		.loc 1 1455 0
  869 0016 091A     		subs	r1, r1, r0
  870              	.LVL107:
-ARM GAS  /tmp/cccTBT9O.s 			page 42
+ARM GAS  /tmp/cc6g2I8d.s 			page 42
 
 
  871 0018 0833     		adds	r3, r3, #8
@@ -2518,7 +2518,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
 1486:Middlewares/Third_Party/FatFs/src/ff.c **** 		if (_FS_EXFAT) dp->obj.stat = 0;	/* exFAT: Root dir has an FAT chain */
 1487:Middlewares/Third_Party/FatFs/src/ff.c **** 	}
 1488:Middlewares/Third_Party/FatFs/src/ff.c **** 
-ARM GAS  /tmp/cccTBT9O.s 			page 43
+ARM GAS  /tmp/cc6g2I8d.s 			page 43
 
 
 1489:Middlewares/Third_Party/FatFs/src/ff.c **** 	if (clst == 0) {	/* Static table (root-directory in FAT12/16) */
@@ -2578,7 +2578,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
 1543:Middlewares/Third_Party/FatFs/src/ff.c **** 				clst = get_fat(&dp->obj, dp->clust);			/* Get next cluster */
 1544:Middlewares/Third_Party/FatFs/src/ff.c **** 				if (clst <= 1) return FR_INT_ERR;				/* Internal error */
 1545:Middlewares/Third_Party/FatFs/src/ff.c **** 				if (clst == 0xFFFFFFFF) return FR_DISK_ERR;		/* Disk error */
-ARM GAS  /tmp/cccTBT9O.s 			page 44
+ARM GAS  /tmp/cc6g2I8d.s 			page 44
 
 
 1546:Middlewares/Third_Party/FatFs/src/ff.c **** 				if (clst >= fs->n_fatent) {						/* Reached end of dynamic table */
@@ -2638,7 +2638,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
 1600:Middlewares/Third_Party/FatFs/src/ff.c **** 	if (res == FR_OK) {
 1601:Middlewares/Third_Party/FatFs/src/ff.c **** 		n = 0;
 1602:Middlewares/Third_Party/FatFs/src/ff.c **** 		do {
-ARM GAS  /tmp/cccTBT9O.s 			page 45
+ARM GAS  /tmp/cc6g2I8d.s 			page 45
 
 
 1603:Middlewares/Third_Party/FatFs/src/ff.c **** 			res = move_window(fs, dp->sect);
@@ -2698,7 +2698,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  913 000a FFF7FEFF 		bl	ld_word
  914              	.LVL113:
  915 000e 0446     		mov	r4, r0
-ARM GAS  /tmp/cccTBT9O.s 			page 46
+ARM GAS  /tmp/cc6g2I8d.s 			page 46
 
 
  916              	.LVL114:
@@ -2758,7 +2758,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  954              		.cfi_def_cfa_offset 16
  955              		.cfi_offset 4, -16
  956              		.cfi_offset 5, -12
-ARM GAS  /tmp/cccTBT9O.s 			page 47
+ARM GAS  /tmp/cc6g2I8d.s 			page 47
 
 
  957              		.cfi_offset 6, -8
@@ -2818,7 +2818,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
 1673:Middlewares/Third_Party/FatFs/src/ff.c **** /*--------------------------------------------------------*/
 1674:Middlewares/Third_Party/FatFs/src/ff.c **** /* FAT-LFN: Compare a part of file name with an LFN entry */
 1675:Middlewares/Third_Party/FatFs/src/ff.c **** /*--------------------------------------------------------*/
-ARM GAS  /tmp/cccTBT9O.s 			page 48
+ARM GAS  /tmp/cc6g2I8d.s 			page 48
 
 
 1676:Middlewares/Third_Party/FatFs/src/ff.c **** static
@@ -2878,7 +2878,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
 1730:Middlewares/Third_Party/FatFs/src/ff.c **** 			lfnbuf[i++] = wc = uc;			/* Store it */
 1731:Middlewares/Third_Party/FatFs/src/ff.c **** 		} else {
 1732:Middlewares/Third_Party/FatFs/src/ff.c **** 			if (uc != 0xFFFF) return 0;		/* Check filler */
-ARM GAS  /tmp/cccTBT9O.s 			page 49
+ARM GAS  /tmp/cc6g2I8d.s 			page 49
 
 
 1733:Middlewares/Third_Party/FatFs/src/ff.c **** 		}
@@ -2938,7 +2938,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
 1787:Middlewares/Third_Party/FatFs/src/ff.c **** 
 1788:Middlewares/Third_Party/FatFs/src/ff.c **** static
 1789:Middlewares/Third_Party/FatFs/src/ff.c **** void gen_numname (
-ARM GAS  /tmp/cccTBT9O.s 			page 50
+ARM GAS  /tmp/cc6g2I8d.s 			page 50
 
 
 1790:Middlewares/Third_Party/FatFs/src/ff.c **** 	BYTE* dst,			/* Pointer to the buffer to store numbered SFN */
@@ -2998,7 +2998,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
 1844:Middlewares/Third_Party/FatFs/src/ff.c **** /* FAT-LFN: Calculate checksum of an SFN entry                           */
 1845:Middlewares/Third_Party/FatFs/src/ff.c **** /*-----------------------------------------------------------------------*/
 1846:Middlewares/Third_Party/FatFs/src/ff.c **** 
-ARM GAS  /tmp/cccTBT9O.s 			page 51
+ARM GAS  /tmp/cc6g2I8d.s 			page 51
 
 
 1847:Middlewares/Third_Party/FatFs/src/ff.c **** static
@@ -3058,7 +3058,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
 1901:Middlewares/Third_Party/FatFs/src/ff.c **** 	while ((chr = *name++) != 0) {
 1902:Middlewares/Third_Party/FatFs/src/ff.c **** 		chr = ff_wtoupper(chr);		/* File name needs to be ignored case */
 1903:Middlewares/Third_Party/FatFs/src/ff.c **** 		sum = ((sum & 1) ? 0x8000 : 0) + (sum >> 1) + (chr & 0xFF);
-ARM GAS  /tmp/cccTBT9O.s 			page 52
+ARM GAS  /tmp/cc6g2I8d.s 			page 52
 
 
 1904:Middlewares/Third_Party/FatFs/src/ff.c **** 		sum = ((sum & 1) ? 0x8000 : 0) + (sum >> 1) + (chr >> 8);
@@ -3118,7 +3118,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
 1958:Middlewares/Third_Party/FatFs/src/ff.c **** 	}
 1959:Middlewares/Third_Party/FatFs/src/ff.c **** #endif
 1960:Middlewares/Third_Party/FatFs/src/ff.c **** 	if (di == 0) fno->fname[di++] = '?';	/* Inaccessible object name? */
-ARM GAS  /tmp/cccTBT9O.s 			page 53
+ARM GAS  /tmp/cc6g2I8d.s 			page 53
 
 
 1961:Middlewares/Third_Party/FatFs/src/ff.c **** 	fno->fname[di] = 0;						/* Terminate file name */
@@ -3178,7 +3178,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
 2015:Middlewares/Third_Party/FatFs/src/ff.c **** 	/* Sanity check (do it when accessible object name) */
 2016:Middlewares/Third_Party/FatFs/src/ff.c **** 	if (i <= MAXDIRB(_MAX_LFN)) {
 2017:Middlewares/Third_Party/FatFs/src/ff.c **** 		if (xdir_sum(dirb) != ld_word(dirb + XDIR_SetSum)) return FR_INT_ERR;
-ARM GAS  /tmp/cccTBT9O.s 			page 54
+ARM GAS  /tmp/cc6g2I8d.s 			page 54
 
 
 2018:Middlewares/Third_Party/FatFs/src/ff.c **** 	}
@@ -3238,7 +3238,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
 2072:Middlewares/Third_Party/FatFs/src/ff.c **** 		if (res != FR_OK) break;
 2073:Middlewares/Third_Party/FatFs/src/ff.c **** 		mem_cpy(dp->dir, dirb, SZDIRE);
 2074:Middlewares/Third_Party/FatFs/src/ff.c **** 		dp->obj.fs->wflag = 1;
-ARM GAS  /tmp/cccTBT9O.s 			page 55
+ARM GAS  /tmp/cc6g2I8d.s 			page 55
 
 
 2075:Middlewares/Third_Party/FatFs/src/ff.c **** 		if (--nent == 0) break;
@@ -3298,7 +3298,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
 2129:Middlewares/Third_Party/FatFs/src/ff.c **** 
 2130:Middlewares/Third_Party/FatFs/src/ff.c **** static
 2131:Middlewares/Third_Party/FatFs/src/ff.c **** FRESULT dir_read (
-ARM GAS  /tmp/cccTBT9O.s 			page 56
+ARM GAS  /tmp/cc6g2I8d.s 			page 56
 
 
 2132:Middlewares/Third_Party/FatFs/src/ff.c **** 	DIR* dp,		/* Pointer to the directory object */
@@ -3358,7 +3358,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
 2186:Middlewares/Third_Party/FatFs/src/ff.c **** 			}
 2187:Middlewares/Third_Party/FatFs/src/ff.c **** #else		/* Non LFN configuration */
 2188:Middlewares/Third_Party/FatFs/src/ff.c **** 			if (c != DDEM && c != '.' && a != AM_LFN && (int)((a & ~AM_ARC) == AM_VOL) == vol) {	/* Is it a 
-ARM GAS  /tmp/cccTBT9O.s 			page 57
+ARM GAS  /tmp/cc6g2I8d.s 			page 57
 
 
 2189:Middlewares/Third_Party/FatFs/src/ff.c **** 				break;
@@ -3418,7 +3418,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
 2243:Middlewares/Third_Party/FatFs/src/ff.c **** 	/* On the FAT12/16/32 volume */
 2244:Middlewares/Third_Party/FatFs/src/ff.c **** #if _USE_LFN != 0
 2245:Middlewares/Third_Party/FatFs/src/ff.c **** 	ord = sum = 0xFF; dp->blk_ofs = 0xFFFFFFFF;	/* Reset LFN sequence */
-ARM GAS  /tmp/cccTBT9O.s 			page 58
+ARM GAS  /tmp/cc6g2I8d.s 			page 58
 
 
 2246:Middlewares/Third_Party/FatFs/src/ff.c **** #endif
@@ -3478,7 +3478,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
 2300:Middlewares/Third_Party/FatFs/src/ff.c **** 	BYTE sn[12], sum;
 2301:Middlewares/Third_Party/FatFs/src/ff.c **** 
 2302:Middlewares/Third_Party/FatFs/src/ff.c **** 
-ARM GAS  /tmp/cccTBT9O.s 			page 59
+ARM GAS  /tmp/cc6g2I8d.s 			page 59
 
 
 2303:Middlewares/Third_Party/FatFs/src/ff.c **** 	if (dp->fn[NSFLAG] & (NS_DOT | NS_NONAME)) return FR_INVALID_NAME;	/* Check name validity */
@@ -3538,7 +3538,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
 2357:Middlewares/Third_Party/FatFs/src/ff.c **** 				if (res != FR_OK) break;
 2358:Middlewares/Third_Party/FatFs/src/ff.c **** 				put_lfn(fs->lfnbuf, dp->dir, (BYTE)nent, sum);
 2359:Middlewares/Third_Party/FatFs/src/ff.c **** 				fs->wflag = 1;
-ARM GAS  /tmp/cccTBT9O.s 			page 60
+ARM GAS  /tmp/cc6g2I8d.s 			page 60
 
 
 2360:Middlewares/Third_Party/FatFs/src/ff.c **** 				res = dir_next(dp, 0);	/* Next entry */
@@ -3598,7 +3598,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
 2414:Middlewares/Third_Party/FatFs/src/ff.c **** 				dp->dir[DIR_Name] = DDEM;
 2415:Middlewares/Third_Party/FatFs/src/ff.c **** 			}
 2416:Middlewares/Third_Party/FatFs/src/ff.c **** 			fs->wflag = 1;
-ARM GAS  /tmp/cccTBT9O.s 			page 61
+ARM GAS  /tmp/cc6g2I8d.s 			page 61
 
 
 2417:Middlewares/Third_Party/FatFs/src/ff.c **** 			if (dp->dptr >= last) break;	/* If reached last entry then all entries of the object has been de
@@ -3658,7 +3658,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
 2448:Middlewares/Third_Party/FatFs/src/ff.c **** 	UINT i, j;
  1007              		.loc 1 2448 0
  1008 0008 70B5     		push	{r4, r5, r6, lr}
-ARM GAS  /tmp/cccTBT9O.s 			page 62
+ARM GAS  /tmp/cc6g2I8d.s 			page 62
 
 
  1009              	.LCFI14:
@@ -3718,7 +3718,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
 2503:Middlewares/Third_Party/FatFs/src/ff.c **** 		fno->altname[j] = c;
 2504:Middlewares/Third_Party/FatFs/src/ff.c **** 		if (!lfv) {
 2505:Middlewares/Third_Party/FatFs/src/ff.c **** 			if (IsUpper(c) && (dp->dir[DIR_NTres] & ((i >= 9) ? NS_EXT : NS_BODY))) {
-ARM GAS  /tmp/cccTBT9O.s 			page 63
+ARM GAS  /tmp/cc6g2I8d.s 			page 63
 
 
 2506:Middlewares/Third_Party/FatFs/src/ff.c **** 				c += 0x20;			/* To lower */
@@ -3778,7 +3778,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  1050              	.LVL132:
  1051 0030 EEE7     		b	.L106
  1052              	.LVL133:
-ARM GAS  /tmp/cccTBT9O.s 			page 64
+ARM GAS  /tmp/cc6g2I8d.s 			page 64
 
 
  1053              	.L114:
@@ -3838,7 +3838,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  1098              		.cfi_restore 5
  1099              		.cfi_restore 6
  1100              		.cfi_restore 14
-ARM GAS  /tmp/cccTBT9O.s 			page 65
+ARM GAS  /tmp/cc6g2I8d.s 			page 65
 
 
  1101 0066 7047     		bx	lr
@@ -3898,7 +3898,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
 2577:Middlewares/Third_Party/FatFs/src/ff.c **** 	const TCHAR *pp, *np;
 2578:Middlewares/Third_Party/FatFs/src/ff.c **** 	WCHAR pc, nc;
 2579:Middlewares/Third_Party/FatFs/src/ff.c **** 	int nm, nx;
-ARM GAS  /tmp/cccTBT9O.s 			page 66
+ARM GAS  /tmp/cc6g2I8d.s 			page 66
 
 
 2580:Middlewares/Third_Party/FatFs/src/ff.c **** 
@@ -3958,7 +3958,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  1125              		.cfi_offset 6, -28
  1126              		.cfi_offset 7, -24
  1127              		.cfi_offset 8, -20
-ARM GAS  /tmp/cccTBT9O.s 			page 67
+ARM GAS  /tmp/cc6g2I8d.s 			page 67
 
 
  1128              		.cfi_offset 9, -16
@@ -4018,7 +4018,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
 2671:Middlewares/Third_Party/FatFs/src/ff.c **** 
 2672:Middlewares/Third_Party/FatFs/src/ff.c **** 	/* Create SFN in directory form */
 2673:Middlewares/Third_Party/FatFs/src/ff.c **** 	mem_set(dp->fn, ' ', 11);
-ARM GAS  /tmp/cccTBT9O.s 			page 68
+ARM GAS  /tmp/cc6g2I8d.s 			page 68
 
 
 2674:Middlewares/Third_Party/FatFs/src/ff.c **** 	for (si = 0; lfn[si] == ' ' || lfn[si] == '.'; si++) ;	/* Strip leading spaces and dots */
@@ -4078,7 +4078,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
 2728:Middlewares/Third_Party/FatFs/src/ff.c **** 
 2729:Middlewares/Third_Party/FatFs/src/ff.c **** 	if (ni == 8) b <<= 2;
 2730:Middlewares/Third_Party/FatFs/src/ff.c **** 	if ((b & 0x0C) == 0x0C || (b & 0x03) == 0x03) cf |= NS_LFN;	/* Create LFN entry when there are com
-ARM GAS  /tmp/cccTBT9O.s 			page 69
+ARM GAS  /tmp/cc6g2I8d.s 			page 69
 
 
 2731:Middlewares/Third_Party/FatFs/src/ff.c **** 	if (!(cf & NS_LFN)) {						/* When LFN is in 8.3 format without extended character, NT flags are c
@@ -4138,7 +4138,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
 2765:Middlewares/Third_Party/FatFs/src/ff.c **** 		if (c <= ' ') break; 			/* Break if end of the path name */
 2766:Middlewares/Third_Party/FatFs/src/ff.c **** 		if (c == '/' || c == '\\') {	/* Break if a separator is found */
 2767:Middlewares/Third_Party/FatFs/src/ff.c **** 			while (p[si] == '/' || p[si] == '\\') si++;	/* Skip duplicated separator if exist */
-ARM GAS  /tmp/cccTBT9O.s 			page 70
+ARM GAS  /tmp/cc6g2I8d.s 			page 70
 
 
  1154              		.loc 1 2767 0 discriminator 2
@@ -4198,7 +4198,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
 2803:Middlewares/Third_Party/FatFs/src/ff.c **** }
  1173              		.loc 1 2803 0
  1174 003c BDE8F88F 		pop	{r3, r4, r5, r6, r7, r8, r9, r10, fp, pc}
-ARM GAS  /tmp/cccTBT9O.s 			page 71
+ARM GAS  /tmp/cc6g2I8d.s 			page 71
 
 
  1175              	.LVL152:
@@ -4258,7 +4258,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  1221 0076 DBD9     		bls	.L118
 2766:Middlewares/Third_Party/FatFs/src/ff.c **** 			while (p[si] == '/' || p[si] == '\\') si++;	/* Skip duplicated separator if exist */
  1222              		.loc 1 2766 0
-ARM GAS  /tmp/cccTBT9O.s 			page 72
+ARM GAS  /tmp/cc6g2I8d.s 			page 72
 
 
  1223 0078 5C2C     		cmp	r4, #92
@@ -4318,7 +4318,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  1270              		.loc 1 2801 0 is_stmt 1 discriminator 4
  1271 00bc 0020     		movs	r0, #0
  1272 00be BDE8F88F 		pop	{r3, r4, r5, r6, r7, r8, r9, r10, fp, pc}
-ARM GAS  /tmp/cccTBT9O.s 			page 73
+ARM GAS  /tmp/cc6g2I8d.s 			page 73
 
 
  1273              	.LVL169:
@@ -4378,7 +4378,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
 2824:Middlewares/Third_Party/FatFs/src/ff.c **** #if _FS_RPATH != 0
 2825:Middlewares/Third_Party/FatFs/src/ff.c **** 	if (*path != '/' && *path != '\\') {	/* Without heading separator */
 2826:Middlewares/Third_Party/FatFs/src/ff.c **** 		obj->sclust = fs->cdir;				/* Start from current directory */
-ARM GAS  /tmp/cccTBT9O.s 			page 74
+ARM GAS  /tmp/cc6g2I8d.s 			page 74
 
 
 2827:Middlewares/Third_Party/FatFs/src/ff.c **** 	} else
@@ -4438,7 +4438,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
 2881:Middlewares/Third_Party/FatFs/src/ff.c **** 				obj->c_ofs = dp->blk_ofs;
 2882:Middlewares/Third_Party/FatFs/src/ff.c **** 				obj->sclust = ld_dword(fs->dirbuf + XDIR_FstClus);	/* Open next directory */
 2883:Middlewares/Third_Party/FatFs/src/ff.c **** 				obj->stat = fs->dirbuf[XDIR_GenFlags] & 2;
-ARM GAS  /tmp/cccTBT9O.s 			page 75
+ARM GAS  /tmp/cc6g2I8d.s 			page 75
 
 
 2884:Middlewares/Third_Party/FatFs/src/ff.c **** 				obj->objsize = ld_qword(fs->dirbuf + XDIR_FileSize);
@@ -4498,7 +4498,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
 2920:Middlewares/Third_Party/FatFs/src/ff.c **** 		for (tt = *path; (UINT)*tt >= (_USE_LFN ? ' ' : '!') && *tt != ':'; tt++) ;	/* Find ':' in the pa
  1323              		.loc 1 2920 0 discriminator 3
  1324 000e 0132     		adds	r2, r2, #1
-ARM GAS  /tmp/cccTBT9O.s 			page 76
+ARM GAS  /tmp/cc6g2I8d.s 			page 76
 
 
  1325              	.LVL174:
@@ -4558,7 +4558,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  1344              	.LVL177:
  1345              	.L154:
 2907:Middlewares/Third_Party/FatFs/src/ff.c **** 	const TCHAR *tp, *tt;
-ARM GAS  /tmp/cccTBT9O.s 			page 77
+ARM GAS  /tmp/cc6g2I8d.s 			page 77
 
 
  1346              		.loc 1 2907 0
@@ -4618,7 +4618,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  1395              		.cfi_endproc
  1396              	.LFE175:
  1398              		.section	.text.putc_init,"ax",%progbits
-ARM GAS  /tmp/cccTBT9O.s 			page 78
+ARM GAS  /tmp/cc6g2I8d.s 			page 78
 
 
  1399              		.align	1
@@ -4678,7 +4678,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
 3003:Middlewares/Third_Party/FatFs/src/ff.c **** 	WORD nrsv;
 3004:Middlewares/Third_Party/FatFs/src/ff.c **** 	FATFS *fs;
 3005:Middlewares/Third_Party/FatFs/src/ff.c **** 	UINT i;
-ARM GAS  /tmp/cccTBT9O.s 			page 79
+ARM GAS  /tmp/cc6g2I8d.s 			page 79
 
 
 3006:Middlewares/Third_Party/FatFs/src/ff.c **** 
@@ -4738,7 +4738,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
 3060:Middlewares/Third_Party/FatFs/src/ff.c **** 			fmt = bsect ? check_fs(fs, bsect) : 3;	/* Check the partition */
 3061:Middlewares/Third_Party/FatFs/src/ff.c **** 		} while (LD2PT(vol) == 0 && fmt >= 2 && ++i < 4);
 3062:Middlewares/Third_Party/FatFs/src/ff.c **** 	}
-ARM GAS  /tmp/cccTBT9O.s 			page 80
+ARM GAS  /tmp/cc6g2I8d.s 			page 80
 
 
 3063:Middlewares/Third_Party/FatFs/src/ff.c **** 	if (fmt == 4) return FR_DISK_ERR;		/* An error occured in the disk I/O layer */
@@ -4798,7 +4798,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
 3117:Middlewares/Third_Party/FatFs/src/ff.c **** 
 3118:Middlewares/Third_Party/FatFs/src/ff.c **** 		fasize = ld_word(fs->win + BPB_FATSz16);		/* Number of sectors per FAT */
 3119:Middlewares/Third_Party/FatFs/src/ff.c **** 		if (fasize == 0) fasize = ld_dword(fs->win + BPB_FATSz32);
-ARM GAS  /tmp/cccTBT9O.s 			page 81
+ARM GAS  /tmp/cc6g2I8d.s 			page 81
 
 
 3120:Middlewares/Third_Party/FatFs/src/ff.c **** 		fs->fsize = fasize;
@@ -4858,7 +4858,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
 3174:Middlewares/Third_Party/FatFs/src/ff.c **** 			fs->fsi_flag = 0;
 3175:Middlewares/Third_Party/FatFs/src/ff.c **** 			if (ld_word(fs->win + BS_55AA) == 0xAA55	/* Load FSINFO data if available */
 3176:Middlewares/Third_Party/FatFs/src/ff.c **** 				&& ld_dword(fs->win + FSI_LeadSig) == 0x41615252
-ARM GAS  /tmp/cccTBT9O.s 			page 82
+ARM GAS  /tmp/cc6g2I8d.s 			page 82
 
 
 3177:Middlewares/Third_Party/FatFs/src/ff.c **** 				&& ld_dword(fs->win + FSI_StrucSig) == 0x61417272)
@@ -4918,7 +4918,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
 3231:Middlewares/Third_Party/FatFs/src/ff.c **** 			}
 3232:Middlewares/Third_Party/FatFs/src/ff.c **** 		} else {
 3233:Middlewares/Third_Party/FatFs/src/ff.c **** 			res = FR_TIMEOUT;
-ARM GAS  /tmp/cccTBT9O.s 			page 83
+ARM GAS  /tmp/cc6g2I8d.s 			page 83
 
 
 3234:Middlewares/Third_Party/FatFs/src/ff.c **** 		}
@@ -4978,7 +4978,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
 3288:Middlewares/Third_Party/FatFs/src/ff.c **** 		fs->fs_type = 0;				/* Clear new fs object */
 3289:Middlewares/Third_Party/FatFs/src/ff.c **** #if _FS_REENTRANT						/* Create sync object for the new volume */
 3290:Middlewares/Third_Party/FatFs/src/ff.c **** 		if (!ff_cre_syncobj((BYTE)vol, &fs->sobj)) return FR_INT_ERR;
-ARM GAS  /tmp/cccTBT9O.s 			page 84
+ARM GAS  /tmp/cc6g2I8d.s 			page 84
 
 
 3291:Middlewares/Third_Party/FatFs/src/ff.c **** #endif
@@ -5038,7 +5038,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
 3345:Middlewares/Third_Party/FatFs/src/ff.c **** 		if (mode & (FA_CREATE_ALWAYS | FA_OPEN_ALWAYS | FA_CREATE_NEW)) {
 3346:Middlewares/Third_Party/FatFs/src/ff.c **** 			if (res != FR_OK) {					/* No file, create new */
 3347:Middlewares/Third_Party/FatFs/src/ff.c **** 				if (res == FR_NO_FILE) {		/* There is no file to open, create a new entry */
-ARM GAS  /tmp/cccTBT9O.s 			page 85
+ARM GAS  /tmp/cc6g2I8d.s 			page 85
 
 
 3348:Middlewares/Third_Party/FatFs/src/ff.c **** #if _FS_LOCK != 0
@@ -5098,7 +5098,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
 3402:Middlewares/Third_Party/FatFs/src/ff.c **** 						res = remove_chain(&dj.obj, cl, 0);
 3403:Middlewares/Third_Party/FatFs/src/ff.c **** 						if (res == FR_OK) {
 3404:Middlewares/Third_Party/FatFs/src/ff.c **** 							res = move_window(fs, dw);
-ARM GAS  /tmp/cccTBT9O.s 			page 86
+ARM GAS  /tmp/cc6g2I8d.s 			page 86
 
 
 3405:Middlewares/Third_Party/FatFs/src/ff.c **** 							fs->last_clst = cl - 1;		/* Reuse the cluster hole */
@@ -5158,7 +5158,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
 3459:Middlewares/Third_Party/FatFs/src/ff.c **** #if _USE_FASTSEEK
 3460:Middlewares/Third_Party/FatFs/src/ff.c **** 			fp->cltbl = 0;			/* Disable fast seek mode */
 3461:Middlewares/Third_Party/FatFs/src/ff.c **** #endif
-ARM GAS  /tmp/cccTBT9O.s 			page 87
+ARM GAS  /tmp/cc6g2I8d.s 			page 87
 
 
 3462:Middlewares/Third_Party/FatFs/src/ff.c **** 			fp->obj.fs = fs;	 	/* Validate the file object */
@@ -5218,7 +5218,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
 3516:Middlewares/Third_Party/FatFs/src/ff.c **** )
 3517:Middlewares/Third_Party/FatFs/src/ff.c **** {
 3518:Middlewares/Third_Party/FatFs/src/ff.c **** 	FRESULT res;
-ARM GAS  /tmp/cccTBT9O.s 			page 88
+ARM GAS  /tmp/cc6g2I8d.s 			page 88
 
 
 3519:Middlewares/Third_Party/FatFs/src/ff.c **** 	FATFS *fs;
@@ -5278,7 +5278,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
 3573:Middlewares/Third_Party/FatFs/src/ff.c **** #endif
 3574:Middlewares/Third_Party/FatFs/src/ff.c **** 				rcnt = SS(fs) * cc;				/* Number of bytes transferred */
 3575:Middlewares/Third_Party/FatFs/src/ff.c **** 				continue;
-ARM GAS  /tmp/cccTBT9O.s 			page 89
+ARM GAS  /tmp/cc6g2I8d.s 			page 89
 
 
 3576:Middlewares/Third_Party/FatFs/src/ff.c **** 			}
@@ -5338,7 +5338,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
 3630:Middlewares/Third_Party/FatFs/src/ff.c **** 	/* Check fptr wrap-around (file size cannot reach 4GiB on FATxx) */
 3631:Middlewares/Third_Party/FatFs/src/ff.c **** 	if ((!_FS_EXFAT || fs->fs_type != FS_EXFAT) && (DWORD)(fp->fptr + btw) < (DWORD)fp->fptr) {
 3632:Middlewares/Third_Party/FatFs/src/ff.c **** 		btw = (UINT)(0xFFFFFFFF - (DWORD)fp->fptr);
-ARM GAS  /tmp/cccTBT9O.s 			page 90
+ARM GAS  /tmp/cc6g2I8d.s 			page 90
 
 
 3633:Middlewares/Third_Party/FatFs/src/ff.c **** 	}
@@ -5398,7 +5398,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
 3687:Middlewares/Third_Party/FatFs/src/ff.c **** 					fp->flag &= (BYTE)~FA_DIRTY;
 3688:Middlewares/Third_Party/FatFs/src/ff.c **** 				}
 3689:Middlewares/Third_Party/FatFs/src/ff.c **** #endif
-ARM GAS  /tmp/cccTBT9O.s 			page 91
+ARM GAS  /tmp/cc6g2I8d.s 			page 91
 
 
 3690:Middlewares/Third_Party/FatFs/src/ff.c **** #endif
@@ -5458,7 +5458,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
 3744:Middlewares/Third_Party/FatFs/src/ff.c **** 
 3745:Middlewares/Third_Party/FatFs/src/ff.c **** 	res = validate(&fp->obj, &fs);	/* Check validity of the file object */
 3746:Middlewares/Third_Party/FatFs/src/ff.c **** 	if (res == FR_OK) {
-ARM GAS  /tmp/cccTBT9O.s 			page 92
+ARM GAS  /tmp/cc6g2I8d.s 			page 92
 
 
 3747:Middlewares/Third_Party/FatFs/src/ff.c **** 		if (fp->flag & FA_MODIFIED) {	/* Is there any change to the file? */
@@ -5518,7 +5518,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
 3801:Middlewares/Third_Party/FatFs/src/ff.c **** 	LEAVE_FF(fs, res);
 3802:Middlewares/Third_Party/FatFs/src/ff.c **** }
 3803:Middlewares/Third_Party/FatFs/src/ff.c **** 
-ARM GAS  /tmp/cccTBT9O.s 			page 93
+ARM GAS  /tmp/cc6g2I8d.s 			page 93
 
 
 3804:Middlewares/Third_Party/FatFs/src/ff.c **** #endif /* !_FS_READONLY */
@@ -5578,7 +5578,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
 3858:Middlewares/Third_Party/FatFs/src/ff.c **** 	/* Get logical drive number */
 3859:Middlewares/Third_Party/FatFs/src/ff.c **** 	vol = get_ldnumber(&path);
 3860:Middlewares/Third_Party/FatFs/src/ff.c **** 	if (vol < 0) return FR_INVALID_DRIVE;
-ARM GAS  /tmp/cccTBT9O.s 			page 94
+ARM GAS  /tmp/cc6g2I8d.s 			page 94
 
 
 3861:Middlewares/Third_Party/FatFs/src/ff.c **** 
@@ -5638,7 +5638,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
 3915:Middlewares/Third_Party/FatFs/src/ff.c **** 
 3916:Middlewares/Third_Party/FatFs/src/ff.c **** 	LEAVE_FF(fs, res);
 3917:Middlewares/Third_Party/FatFs/src/ff.c **** }
-ARM GAS  /tmp/cccTBT9O.s 			page 95
+ARM GAS  /tmp/cc6g2I8d.s 			page 95
 
 
 3918:Middlewares/Third_Party/FatFs/src/ff.c **** 
@@ -5698,7 +5698,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
 3972:Middlewares/Third_Party/FatFs/src/ff.c **** #if _VOLUMES >= 2
 3973:Middlewares/Third_Party/FatFs/src/ff.c **** 			*tp++ = '0' + CurrVol;			/* Put drive number */
 3974:Middlewares/Third_Party/FatFs/src/ff.c **** 			*tp++ = ':';
-ARM GAS  /tmp/cccTBT9O.s 			page 96
+ARM GAS  /tmp/cc6g2I8d.s 			page 96
 
 
 3975:Middlewares/Third_Party/FatFs/src/ff.c **** #endif
@@ -5758,7 +5758,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
 4029:Middlewares/Third_Party/FatFs/src/ff.c **** 			if (cl) {
 4030:Middlewares/Third_Party/FatFs/src/ff.c **** 				do {
 4031:Middlewares/Third_Party/FatFs/src/ff.c **** 					/* Get a fragment */
-ARM GAS  /tmp/cccTBT9O.s 			page 97
+ARM GAS  /tmp/cc6g2I8d.s 			page 97
 
 
 4032:Middlewares/Third_Party/FatFs/src/ff.c **** 					tcl = cl; ncl = 0; ulen += 2;	/* Top, length and used items */
@@ -5818,7 +5818,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
 4086:Middlewares/Third_Party/FatFs/src/ff.c **** 			bcs = (DWORD)fs->csize * SS(fs);	/* Cluster size (byte) */
 4087:Middlewares/Third_Party/FatFs/src/ff.c **** 			if (ifptr > 0 &&
 4088:Middlewares/Third_Party/FatFs/src/ff.c **** 				(ofs - 1) / bcs >= (ifptr - 1) / bcs) {	/* When seek to same or following cluster, */
-ARM GAS  /tmp/cccTBT9O.s 			page 98
+ARM GAS  /tmp/cc6g2I8d.s 			page 98
 
 
 4089:Middlewares/Third_Party/FatFs/src/ff.c **** 				fp->fptr = (ifptr - 1) & ~(FSIZE_t)(bcs - 1);	/* start from the current cluster */
@@ -5878,7 +5878,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
 4143:Middlewares/Third_Party/FatFs/src/ff.c **** 				fp->flag &= (BYTE)~FA_DIRTY;
 4144:Middlewares/Third_Party/FatFs/src/ff.c **** 			}
 4145:Middlewares/Third_Party/FatFs/src/ff.c **** #endif
-ARM GAS  /tmp/cccTBT9O.s 			page 99
+ARM GAS  /tmp/cc6g2I8d.s 			page 99
 
 
 4146:Middlewares/Third_Party/FatFs/src/ff.c **** 			if (disk_read(fs->drv, fp->buf, nsect, 1) != RES_OK) ABORT(fs, FR_DISK_ERR);	/* Fill sector cach
@@ -5938,7 +5938,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
 4200:Middlewares/Third_Party/FatFs/src/ff.c **** 				}
 4201:Middlewares/Third_Party/FatFs/src/ff.c **** 			}
 4202:Middlewares/Third_Party/FatFs/src/ff.c **** 			if (res == FR_OK) {
-ARM GAS  /tmp/cccTBT9O.s 			page 100
+ARM GAS  /tmp/cc6g2I8d.s 			page 100
 
 
 4203:Middlewares/Third_Party/FatFs/src/ff.c **** 				obj->id = fs->id;
@@ -5998,7 +5998,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
 4257:Middlewares/Third_Party/FatFs/src/ff.c **** 
 4258:Middlewares/Third_Party/FatFs/src/ff.c **** 
 4259:Middlewares/Third_Party/FatFs/src/ff.c **** 
-ARM GAS  /tmp/cccTBT9O.s 			page 101
+ARM GAS  /tmp/cc6g2I8d.s 			page 101
 
 
 4260:Middlewares/Third_Party/FatFs/src/ff.c **** 
@@ -6058,7 +6058,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
 4314:Middlewares/Third_Party/FatFs/src/ff.c **** 		if (pattern_matching(dp->pat, fno->altname, 0, 0)) break;	/* Test for alternative name if exist *
 4315:Middlewares/Third_Party/FatFs/src/ff.c **** #endif
 4316:Middlewares/Third_Party/FatFs/src/ff.c **** 	}
-ARM GAS  /tmp/cccTBT9O.s 			page 102
+ARM GAS  /tmp/cc6g2I8d.s 			page 102
 
 
 4317:Middlewares/Third_Party/FatFs/src/ff.c **** 	return res;
@@ -6118,7 +6118,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
 4371:Middlewares/Third_Party/FatFs/src/ff.c **** 			} else {							/* Found an object */
 4372:Middlewares/Third_Party/FatFs/src/ff.c **** 				if (fno) get_fileinfo(&dj, fno);
 4373:Middlewares/Third_Party/FatFs/src/ff.c **** 			}
-ARM GAS  /tmp/cccTBT9O.s 			page 103
+ARM GAS  /tmp/cc6g2I8d.s 			page 103
 
 
 4374:Middlewares/Third_Party/FatFs/src/ff.c **** 		}
@@ -6178,7 +6178,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
 4428:Middlewares/Third_Party/FatFs/src/ff.c **** 					i = 0;
 4429:Middlewares/Third_Party/FatFs/src/ff.c **** 					do {
 4430:Middlewares/Third_Party/FatFs/src/ff.c **** 						if (i == 0 && (res = move_window(fs, sect++)) != FR_OK) break;
-ARM GAS  /tmp/cccTBT9O.s 			page 104
+ARM GAS  /tmp/cc6g2I8d.s 			page 104
 
 
 4431:Middlewares/Third_Party/FatFs/src/ff.c **** 						for (b = 8, bm = fs->win[i]; b && clst; b--, clst--) {
@@ -6238,7 +6238,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
 4485:Middlewares/Third_Party/FatFs/src/ff.c **** 	if (res != FR_OK || (res = (FRESULT)fp->err) != FR_OK) LEAVE_FF(fs, res);
 4486:Middlewares/Third_Party/FatFs/src/ff.c **** 	if (!(fp->flag & FA_WRITE)) LEAVE_FF(fs, FR_DENIED);	/* Check access mode */
 4487:Middlewares/Third_Party/FatFs/src/ff.c **** 
-ARM GAS  /tmp/cccTBT9O.s 			page 105
+ARM GAS  /tmp/cc6g2I8d.s 			page 105
 
 
 4488:Middlewares/Third_Party/FatFs/src/ff.c **** 	if (fp->fptr < fp->obj.objsize) {	/* Process when fptr is not on the eof */
@@ -6298,7 +6298,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
 4542:Middlewares/Third_Party/FatFs/src/ff.c **** 	if (res == FR_OK) {
 4543:Middlewares/Third_Party/FatFs/src/ff.c **** 		INIT_NAMBUF(fs);
 4544:Middlewares/Third_Party/FatFs/src/ff.c **** 		res = follow_path(&dj, path);		/* Follow the file path */
-ARM GAS  /tmp/cccTBT9O.s 			page 106
+ARM GAS  /tmp/cc6g2I8d.s 			page 106
 
 
 4545:Middlewares/Third_Party/FatFs/src/ff.c **** 		if (_FS_RPATH && res == FR_OK && (dj.fn[NSFLAG] & NS_DOT)) {
@@ -6358,7 +6358,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
 4599:Middlewares/Third_Party/FatFs/src/ff.c **** 					res = remove_chain(&obj, dclst, 0);
 4600:Middlewares/Third_Party/FatFs/src/ff.c **** #else
 4601:Middlewares/Third_Party/FatFs/src/ff.c **** 					res = remove_chain(&dj.obj, dclst, 0);
-ARM GAS  /tmp/cccTBT9O.s 			page 107
+ARM GAS  /tmp/cc6g2I8d.s 			page 107
 
 
 4602:Middlewares/Third_Party/FatFs/src/ff.c **** #endif
@@ -6418,7 +6418,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
 4656:Middlewares/Third_Party/FatFs/src/ff.c **** 				if (!_FS_EXFAT || fs->fs_type != FS_EXFAT) {
 4657:Middlewares/Third_Party/FatFs/src/ff.c **** 					mem_set(dir + DIR_Name, ' ', 11);	/* Create "." entry */
 4658:Middlewares/Third_Party/FatFs/src/ff.c **** 					dir[DIR_Name] = '.';
-ARM GAS  /tmp/cccTBT9O.s 			page 108
+ARM GAS  /tmp/cc6g2I8d.s 			page 108
 
 
 4659:Middlewares/Third_Party/FatFs/src/ff.c **** 					dir[DIR_Attr] = AM_DIR;
@@ -6478,7 +6478,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
 4713:Middlewares/Third_Party/FatFs/src/ff.c **** /*-----------------------------------------------------------------------*/
 4714:Middlewares/Third_Party/FatFs/src/ff.c **** /* Rename a File/Directory                                               */
 4715:Middlewares/Third_Party/FatFs/src/ff.c **** /*-----------------------------------------------------------------------*/
-ARM GAS  /tmp/cccTBT9O.s 			page 109
+ARM GAS  /tmp/cc6g2I8d.s 			page 109
 
 
 4716:Middlewares/Third_Party/FatFs/src/ff.c **** 
@@ -6538,7 +6538,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
 4770:Middlewares/Third_Party/FatFs/src/ff.c **** 				mem_cpy(&djn, &djo, sizeof (DIR));		/* Duplicate the directory object */
 4771:Middlewares/Third_Party/FatFs/src/ff.c **** 				res = follow_path(&djn, path_new);		/* Make sure if new object name is not in use */
 4772:Middlewares/Third_Party/FatFs/src/ff.c **** 				if (res == FR_OK) {						/* Is new name already in use by any other object? */
-ARM GAS  /tmp/cccTBT9O.s 			page 110
+ARM GAS  /tmp/cc6g2I8d.s 			page 110
 
 
 4773:Middlewares/Third_Party/FatFs/src/ff.c **** 					res = (djn.obj.sclust == djo.obj.sclust && djn.dptr == djo.dptr) ? FR_NO_FILE : FR_EXIST;
@@ -6598,7 +6598,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
 4827:Middlewares/Third_Party/FatFs/src/ff.c **** 	BYTE attr,			/* Attribute bits */
 4828:Middlewares/Third_Party/FatFs/src/ff.c **** 	BYTE mask			/* Attribute mask to change */
 4829:Middlewares/Third_Party/FatFs/src/ff.c **** )
-ARM GAS  /tmp/cccTBT9O.s 			page 111
+ARM GAS  /tmp/cc6g2I8d.s 			page 111
 
 
 4830:Middlewares/Third_Party/FatFs/src/ff.c **** {
@@ -6658,7 +6658,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
 4884:Middlewares/Third_Party/FatFs/src/ff.c **** 	dj.obj.fs = fs;
 4885:Middlewares/Third_Party/FatFs/src/ff.c **** 	if (res == FR_OK) {
 4886:Middlewares/Third_Party/FatFs/src/ff.c **** 		INIT_NAMBUF(fs);
-ARM GAS  /tmp/cccTBT9O.s 			page 112
+ARM GAS  /tmp/cc6g2I8d.s 			page 112
 
 
 4887:Middlewares/Third_Party/FatFs/src/ff.c **** 		res = follow_path(&dj, path);	/* Follow the file path */
@@ -6718,7 +6718,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
 4941:Middlewares/Third_Party/FatFs/src/ff.c **** 		 	res = dir_read(&dj, 1);			/* Find a volume label entry */
 4942:Middlewares/Third_Party/FatFs/src/ff.c **** 		 	if (res == FR_OK) {
 4943:Middlewares/Third_Party/FatFs/src/ff.c **** #if _FS_EXFAT
-ARM GAS  /tmp/cccTBT9O.s 			page 113
+ARM GAS  /tmp/cc6g2I8d.s 			page 113
 
 
 4944:Middlewares/Third_Party/FatFs/src/ff.c **** 				if (fs->fs_type == FS_EXFAT) {
@@ -6778,7 +6778,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
 4998:Middlewares/Third_Party/FatFs/src/ff.c **** 			}
 4999:Middlewares/Third_Party/FatFs/src/ff.c **** 			*vsn = ld_dword(fs->win + di);
 5000:Middlewares/Third_Party/FatFs/src/ff.c **** 		}
-ARM GAS  /tmp/cccTBT9O.s 			page 114
+ARM GAS  /tmp/cc6g2I8d.s 			page 114
 
 
 5001:Middlewares/Third_Party/FatFs/src/ff.c **** 	}
@@ -6838,7 +6838,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
 5055:Middlewares/Third_Party/FatFs/src/ff.c **** 			dirvn[0] = 0; i = j = 0;	/* Create volume label in directory form */
 5056:Middlewares/Third_Party/FatFs/src/ff.c **** 			do {
 5057:Middlewares/Third_Party/FatFs/src/ff.c **** #if _LFN_UNICODE
-ARM GAS  /tmp/cccTBT9O.s 			page 115
+ARM GAS  /tmp/cc6g2I8d.s 			page 115
 
 
 5058:Middlewares/Third_Party/FatFs/src/ff.c **** 				w = ff_convert(ff_wtoupper(label[i++]), 0);
@@ -6898,7 +6898,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
 5112:Middlewares/Third_Party/FatFs/src/ff.c **** 							dj.dir[XDIR_Type] = 0x83;		/* Create 83 entry */
 5113:Middlewares/Third_Party/FatFs/src/ff.c **** 							dj.dir[XDIR_NumLabel] = (BYTE)(slen / 2);
 5114:Middlewares/Third_Party/FatFs/src/ff.c **** 							mem_cpy(dj.dir + XDIR_Label, dirvn, slen);
-ARM GAS  /tmp/cccTBT9O.s 			page 116
+ARM GAS  /tmp/cc6g2I8d.s 			page 116
 
 
 5115:Middlewares/Third_Party/FatFs/src/ff.c **** 						} else {
@@ -6958,7 +6958,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
 5169:Middlewares/Third_Party/FatFs/src/ff.c **** 				res = change_bitmap(fs, scl, tcl, 1);	/* Mark the cluster block 'in use' */
 5170:Middlewares/Third_Party/FatFs/src/ff.c **** 				lclst = scl + tcl - 1;
 5171:Middlewares/Third_Party/FatFs/src/ff.c **** 			} else {		/* Set it as suggested point for next allocation */
-ARM GAS  /tmp/cccTBT9O.s 			page 117
+ARM GAS  /tmp/cc6g2I8d.s 			page 117
 
 
 5172:Middlewares/Third_Party/FatFs/src/ff.c **** 				lclst = scl - 1;
@@ -7018,7 +7018,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
 5226:Middlewares/Third_Party/FatFs/src/ff.c **** /*-----------------------------------------------------------------------*/
 5227:Middlewares/Third_Party/FatFs/src/ff.c **** /* Forward data to the stream directly                                   */
 5228:Middlewares/Third_Party/FatFs/src/ff.c **** /*-----------------------------------------------------------------------*/
-ARM GAS  /tmp/cccTBT9O.s 			page 118
+ARM GAS  /tmp/cc6g2I8d.s 			page 118
 
 
 5229:Middlewares/Third_Party/FatFs/src/ff.c **** 
@@ -7078,7 +7078,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
 5283:Middlewares/Third_Party/FatFs/src/ff.c **** 		fp->sect = sect;
 5284:Middlewares/Third_Party/FatFs/src/ff.c **** 		rcnt = SS(fs) - (UINT)fp->fptr % SS(fs);	/* Number of bytes left in the sector */
 5285:Middlewares/Third_Party/FatFs/src/ff.c **** 		if (rcnt > btf) rcnt = btf;					/* Clip it by btr if needed */
-ARM GAS  /tmp/cccTBT9O.s 			page 119
+ARM GAS  /tmp/cc6g2I8d.s 			page 119
 
 
 5286:Middlewares/Third_Party/FatFs/src/ff.c **** 		rcnt = (*func)(dbuf + ((UINT)fp->fptr % SS(fs)), rcnt);	/* Forward the file data */
@@ -7138,7 +7138,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
 5340:Middlewares/Third_Party/FatFs/src/ff.c **** 	if (ss > _MAX_SS || ss < _MIN_SS || (ss & (ss - 1))) return FR_DISK_ERR;
 5341:Middlewares/Third_Party/FatFs/src/ff.c **** #else
 5342:Middlewares/Third_Party/FatFs/src/ff.c **** 	ss = _MAX_SS;
-ARM GAS  /tmp/cccTBT9O.s 			page 120
+ARM GAS  /tmp/cc6g2I8d.s 			page 120
 
 
 5343:Middlewares/Third_Party/FatFs/src/ff.c **** #endif
@@ -7198,7 +7198,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
 5397:Middlewares/Third_Party/FatFs/src/ff.c **** 		tbl[0] = b_vol; tbl[1] = b_vol + sz_vol - 1;	/* Inform the device the volume area may be erased *
 5398:Middlewares/Third_Party/FatFs/src/ff.c **** 		disk_ioctl(pdrv, CTRL_TRIM, tbl);
 5399:Middlewares/Third_Party/FatFs/src/ff.c **** #endif
-ARM GAS  /tmp/cccTBT9O.s 			page 121
+ARM GAS  /tmp/cc6g2I8d.s 			page 121
 
 
 5400:Middlewares/Third_Party/FatFs/src/ff.c **** 		/* Determine FAT location, data location and number of clusters */
@@ -7258,7 +7258,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
 5454:Middlewares/Third_Party/FatFs/src/ff.c **** 
 5455:Middlewares/Third_Party/FatFs/src/ff.c **** 		/* Initialize the allocation bitmap */
 5456:Middlewares/Third_Party/FatFs/src/ff.c **** 		sect = b_data; nsect = (szb_bit + ss - 1) / ss;	/* Start of bitmap and number of sectors */
-ARM GAS  /tmp/cccTBT9O.s 			page 122
+ARM GAS  /tmp/cc6g2I8d.s 			page 122
 
 
 5457:Middlewares/Third_Party/FatFs/src/ff.c **** 		nb = tbl[0] + tbl[1] + tbl[2];					/* Number of clusters in-use by system */
@@ -7318,7 +7318,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
 5511:Middlewares/Third_Party/FatFs/src/ff.c **** 			mem_cpy(buf + BS_JmpBoot, "\xEB\x76\x90" "EXFAT   ", 11);	/* Boot jump code (x86), OEM name */
 5512:Middlewares/Third_Party/FatFs/src/ff.c **** 			st_dword(buf + BPB_VolOfsEx, b_vol);					/* Volume offset in the physical drive [sector] */
 5513:Middlewares/Third_Party/FatFs/src/ff.c **** 			st_dword(buf + BPB_TotSecEx, sz_vol);					/* Volume size [sector] */
-ARM GAS  /tmp/cccTBT9O.s 			page 123
+ARM GAS  /tmp/cc6g2I8d.s 			page 123
 
 
 5514:Middlewares/Third_Party/FatFs/src/ff.c **** 			st_dword(buf + BPB_FatOfsEx, b_fat - b_vol);			/* FAT offset [sector] */
@@ -7378,7 +7378,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
 5568:Middlewares/Third_Party/FatFs/src/ff.c **** 					for (i = 0, pau = 1; cst[i] && cst[i] <= n; i++, pau <<= 1) ;	/* Get from table */
 5569:Middlewares/Third_Party/FatFs/src/ff.c **** 				}
 5570:Middlewares/Third_Party/FatFs/src/ff.c **** 				n_clst = sz_vol / pau;
-ARM GAS  /tmp/cccTBT9O.s 			page 124
+ARM GAS  /tmp/cc6g2I8d.s 			page 124
 
 
 5571:Middlewares/Third_Party/FatFs/src/ff.c **** 				if (n_clst > MAX_FAT12) {
@@ -7438,7 +7438,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
 5625:Middlewares/Third_Party/FatFs/src/ff.c **** 		disk_ioctl(pdrv, CTRL_TRIM, tbl);
 5626:Middlewares/Third_Party/FatFs/src/ff.c **** #endif
 5627:Middlewares/Third_Party/FatFs/src/ff.c **** 		/* Create FAT VBR */
-ARM GAS  /tmp/cccTBT9O.s 			page 125
+ARM GAS  /tmp/cc6g2I8d.s 			page 125
 
 
 5628:Middlewares/Third_Party/FatFs/src/ff.c **** 		mem_set(buf, 0, ss);
@@ -7498,7 +7498,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
 5682:Middlewares/Third_Party/FatFs/src/ff.c **** 				st_dword(buf + 4, 0xFFFFFFFF);	/* Entry 1 */
 5683:Middlewares/Third_Party/FatFs/src/ff.c **** 				st_dword(buf + 8, 0x0FFFFFFF);	/* Entry 2 (root directory) */
 5684:Middlewares/Third_Party/FatFs/src/ff.c **** 			} else {
-ARM GAS  /tmp/cccTBT9O.s 			page 126
+ARM GAS  /tmp/cc6g2I8d.s 			page 126
 
 
 5685:Middlewares/Third_Party/FatFs/src/ff.c **** 				st_dword(buf + 0, (fmt == FS_FAT12) ? 0xFFFFF8 : 0xFFFFFFF8);	/* Entry 0 and 1 */
@@ -7558,7 +7558,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
 5739:Middlewares/Third_Party/FatFs/src/ff.c **** 			pte[PTE_EdCyl] = (BYTE)n;			/* End cylinder */
 5740:Middlewares/Third_Party/FatFs/src/ff.c **** 			st_dword(pte + PTE_StLba, b_vol);	/* Start offset in LBA */
 5741:Middlewares/Third_Party/FatFs/src/ff.c **** 			st_dword(pte + PTE_SizLba, sz_vol);	/* Size in sectors */
-ARM GAS  /tmp/cccTBT9O.s 			page 127
+ARM GAS  /tmp/cc6g2I8d.s 			page 127
 
 
 5742:Middlewares/Third_Party/FatFs/src/ff.c **** 			if (disk_write(pdrv, buf, 0, 1) != RES_OK) return FR_DISK_ERR;	/* Write it to the MBR */
@@ -7618,7 +7618,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
 5796:Middlewares/Third_Party/FatFs/src/ff.c **** 		e_cyl = b_cyl + p_cyl - 1;	/* End cylinder */
 5797:Middlewares/Third_Party/FatFs/src/ff.c **** 		if (e_cyl >= tot_cyl) return FR_INVALID_PARAMETER;
 5798:Middlewares/Third_Party/FatFs/src/ff.c **** 
-ARM GAS  /tmp/cccTBT9O.s 			page 128
+ARM GAS  /tmp/cc6g2I8d.s 			page 128
 
 
 5799:Middlewares/Third_Party/FatFs/src/ff.c **** 		/* Set partition table */
@@ -7678,7 +7678,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
 5853:Middlewares/Third_Party/FatFs/src/ff.c **** 				c = (c & 0x1F) << 6 | (s[0] & 0x3F);
 5854:Middlewares/Third_Party/FatFs/src/ff.c **** 				if (c < 0x80) c = '?';	/* Reject invalid code range */
 5855:Middlewares/Third_Party/FatFs/src/ff.c **** 			} else {
-ARM GAS  /tmp/cccTBT9O.s 			page 129
+ARM GAS  /tmp/cc6g2I8d.s 			page 129
 
 
 5856:Middlewares/Third_Party/FatFs/src/ff.c **** 				if (c < 0xF0) {		/* Three-byte sequence (0x800-0xFFFF) */
@@ -7738,7 +7738,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
 5910:Middlewares/Third_Party/FatFs/src/ff.c **** 	FIL *fp;		/* Ptr to the writing file */
 5911:Middlewares/Third_Party/FatFs/src/ff.c **** 	int idx, nchr;	/* Write index of buf[] (-1:error), number of chars written */
 5912:Middlewares/Third_Party/FatFs/src/ff.c **** 	BYTE buf[64];	/* Write buffer */
-ARM GAS  /tmp/cccTBT9O.s 			page 130
+ARM GAS  /tmp/cc6g2I8d.s 			page 130
 
 
 5913:Middlewares/Third_Party/FatFs/src/ff.c **** } putbuff;
@@ -7798,7 +7798,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
 5967:Middlewares/Third_Party/FatFs/src/ff.c **** 	pb->idx = i;
 5968:Middlewares/Third_Party/FatFs/src/ff.c **** 	pb->nchr++;
 5969:Middlewares/Third_Party/FatFs/src/ff.c **** }
-ARM GAS  /tmp/cccTBT9O.s 			page 131
+ARM GAS  /tmp/cc6g2I8d.s 			page 131
 
 
 5970:Middlewares/Third_Party/FatFs/src/ff.c **** 
@@ -7858,7 +7858,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  1438              	.LCFI20:
  1439              		.cfi_def_cfa_offset 16
  1440              		.cfi_offset 3, -16
-ARM GAS  /tmp/cccTBT9O.s 			page 132
+ARM GAS  /tmp/cc6g2I8d.s 			page 132
 
 
  1441              		.cfi_offset 4, -12
@@ -7918,7 +7918,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  1484              	.LVL198:
  1485 0028 FFF7FEFF 		bl	disk_status
  1486              	.LVL199:
-ARM GAS  /tmp/cccTBT9O.s 			page 133
+ARM GAS  /tmp/cc6g2I8d.s 			page 133
 
 
  1487 002c 10F0010F 		tst	r0, #1
@@ -7978,7 +7978,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  892:Middlewares/Third_Party/FatFs/src/ff.c **** 		wsect = fs->winsect;	/* Current sector number */
  1539              		.loc 1 892 0
  1540 0002 C378     		ldrb	r3, [r0, #3]	@ zero_extendqisi2
-ARM GAS  /tmp/cccTBT9O.s 			page 134
+ARM GAS  /tmp/cc6g2I8d.s 			page 134
 
 
  1541 0004 0BB9     		cbnz	r3, .L176
@@ -8038,7 +8038,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  899:Middlewares/Third_Party/FatFs/src/ff.c **** 					wsect += fs->fsize;
  1587              		.loc 1 899 0 discriminator 3
  1588 0042 013D     		subs	r5, r5, #1
-ARM GAS  /tmp/cccTBT9O.s 			page 135
+ARM GAS  /tmp/cc6g2I8d.s 			page 135
 
 
  1589              	.LVL216:
@@ -8098,7 +8098,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  1638 0008 0446     		mov	r4, r0
  1639 000a 0D46     		mov	r5, r1
  922:Middlewares/Third_Party/FatFs/src/ff.c **** #endif
-ARM GAS  /tmp/cccTBT9O.s 			page 136
+ARM GAS  /tmp/cc6g2I8d.s 			page 136
 
 
  1640              		.loc 1 922 0
@@ -8158,7 +8158,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  1688              		.loc 1 2969 0
  1689              		.cfi_startproc
  1690              		@ args = 0, pretend = 0, frame = 0
-ARM GAS  /tmp/cccTBT9O.s 			page 137
+ARM GAS  /tmp/cc6g2I8d.s 			page 137
 
 
  1691              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -8218,7 +8218,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  1738              		.loc 1 2976 0
  1739 0044 04F16600 		add	r0, r4, #102
  1740 0048 FFF7FEFF 		bl	ld_dword
-ARM GAS  /tmp/cccTBT9O.s 			page 138
+ARM GAS  /tmp/cc6g2I8d.s 			page 138
 
 
  1741              	.LVL235:
@@ -8278,7 +8278,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  1791 0000 2DE9F047 		push	{r4, r5, r6, r7, r8, r9, r10, lr}
  1792              	.LCFI24:
  1793              		.cfi_def_cfa_offset 32
-ARM GAS  /tmp/cccTBT9O.s 			page 139
+ARM GAS  /tmp/cc6g2I8d.s 			page 139
 
 
  1794              		.cfi_offset 4, -32
@@ -8338,7 +8338,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  1838 0038 09D1     		bne	.L200
 3024:Middlewares/Third_Party/FatFs/src/ff.c **** 				return FR_WRITE_PROTECTED;
  1839              		.loc 1 3024 0
-ARM GAS  /tmp/cccTBT9O.s 			page 140
+ARM GAS  /tmp/cc6g2I8d.s 			page 140
 
 
  1840 003a 002F     		cmp	r7, #0
@@ -8398,7 +8398,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  1883              	.LVL253:
  1884              	.L201:
 3050:Middlewares/Third_Party/FatFs/src/ff.c **** 	if (fmt == 2 || (fmt < 2 && LD2PT(vol) != 0)) {	/* Not an FAT-VBR or forced partition number */
-ARM GAS  /tmp/cccTBT9O.s 			page 141
+ARM GAS  /tmp/cc6g2I8d.s 			page 141
 
 
  1885              		.loc 1 3050 0
@@ -8458,7 +8458,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
 3054:Middlewares/Third_Party/FatFs/src/ff.c **** 		}
  1930              		.loc 1 3054 0
  1931 00aa 0379     		ldrb	r3, [r0, #4]	@ zero_extendqisi2
-ARM GAS  /tmp/cccTBT9O.s 			page 142
+ARM GAS  /tmp/cc6g2I8d.s 			page 142
 
 
  1932 00ac 002B     		cmp	r3, #0
@@ -8518,7 +8518,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
 3116:Middlewares/Third_Party/FatFs/src/ff.c **** 
  1980              		.loc 1 3116 0
  1981 00e4 04F13B00 		add	r0, r4, #59
-ARM GAS  /tmp/cccTBT9O.s 			page 143
+ARM GAS  /tmp/cc6g2I8d.s 			page 143
 
 
  1982              	.LVL274:
@@ -8578,7 +8578,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
 3127:Middlewares/Third_Party/FatFs/src/ff.c **** 
  2028              		.loc 1 3127 0
  2029 0130 002F     		cmp	r7, #0
-ARM GAS  /tmp/cccTBT9O.s 			page 144
+ARM GAS  /tmp/cc6g2I8d.s 			page 144
 
 
  2030 0132 00F0B380 		beq	.L229
@@ -8638,7 +8638,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  2074 017a 09EB0003 		add	r3, r9, r0
  2075 017e 03EB1A13 		add	r3, r3, r10, lsr #4
  2076              	.LVL293:
-ARM GAS  /tmp/cccTBT9O.s 			page 145
+ARM GAS  /tmp/cc6g2I8d.s 			page 145
 
 
 3140:Middlewares/Third_Party/FatFs/src/ff.c **** 		nclst = (tsect - sysect) / fs->csize;			/* Number of clusters */
@@ -8698,7 +8698,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
 3153:Middlewares/Third_Party/FatFs/src/ff.c **** 			if (fs->n_rootdir) return FR_NO_FILESYSTEM;	/* (BPB_RootEntCnt must be 0) */
  2120              		.loc 1 3153 0
  2121 01ba 04F15A00 		add	r0, r4, #90
-ARM GAS  /tmp/cccTBT9O.s 			page 146
+ARM GAS  /tmp/cc6g2I8d.s 			page 146
 
 
  2122              	.LVL301:
@@ -8758,7 +8758,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  2166              		.loc 1 3174 0
  2167 0208 0023     		movs	r3, #0
  2168 020a 2371     		strb	r3, [r4, #4]
-ARM GAS  /tmp/cccTBT9O.s 			page 147
+ARM GAS  /tmp/cc6g2I8d.s 			page 147
 
 
 3175:Middlewares/Third_Party/FatFs/src/ff.c **** 				&& ld_dword(fs->win + FSI_LeadSig) == 0x41615252
@@ -8818,7 +8818,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  2214              		.loc 1 3205 0
  2215 0260 0020     		movs	r0, #0
  2216 0262 12E0     		b	.L199
-ARM GAS  /tmp/cccTBT9O.s 			page 148
+ARM GAS  /tmp/cc6g2I8d.s 			page 148
 
 
  2217              	.LVL314:
@@ -8878,7 +8878,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  2262              		.loc 1 3015 0
  2263 0290 0C20     		movs	r0, #12
  2264              	.LVL322:
-ARM GAS  /tmp/cccTBT9O.s 			page 149
+ARM GAS  /tmp/cc6g2I8d.s 			page 149
 
 
  2265 0292 FAE7     		b	.L199
@@ -8938,7 +8938,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
 3154:Middlewares/Third_Party/FatFs/src/ff.c **** 			fs->dirbase = ld_dword(fs->win + BPB_RootClus32);	/* Root directory start cluster */
  2311              		.loc 1 3154 0
  2312 02b4 0D20     		movs	r0, #13
-ARM GAS  /tmp/cccTBT9O.s 			page 150
+ARM GAS  /tmp/cc6g2I8d.s 			page 150
 
 
  2313 02b6 E8E7     		b	.L199
@@ -8998,7 +8998,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  2364              		.loc 1 1091 0 is_stmt 0 discriminator 1
  2365 0008 4369     		ldr	r3, [r0, #20]
  2366 000a 9942     		cmp	r1, r3
-ARM GAS  /tmp/cccTBT9O.s 			page 151
+ARM GAS  /tmp/cc6g2I8d.s 			page 151
 
 
  2367 000c 01D3     		bcc	.L266
@@ -9058,7 +9058,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  2412 0050 1AF90830 		ldrsb	r3, [r10, r8]
  2413 0054 03F00F03 		and	r3, r3, #15
  2414 0058 3A01     		lsls	r2, r7, #4
-ARM GAS  /tmp/cccTBT9O.s 			page 152
+ARM GAS  /tmp/cc6g2I8d.s 			page 152
 
 
  2415 005a 02F47F62 		and	r2, r2, #4080
@@ -9118,7 +9118,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
 1103:Middlewares/Third_Party/FatFs/src/ff.c **** 			fs->wflag = 1;
  2458              		.loc 1 1103 0 discriminator 2
  2459 0094 1AF90920 		ldrsb	r2, [r10, r9]
-ARM GAS  /tmp/cccTBT9O.s 			page 153
+ARM GAS  /tmp/cc6g2I8d.s 			page 153
 
 
  2460 0098 22F00F02 		bic	r2, r2, #15
@@ -9178,7 +9178,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  2506 00e2 A100     		lsls	r1, r4, #2
  2507 00e4 01F4FE71 		and	r1, r1, #508
  2508 00e8 5C18     		adds	r4, r3, r1
-ARM GAS  /tmp/cccTBT9O.s 			page 154
+ARM GAS  /tmp/cc6g2I8d.s 			page 154
 
 
  2509              	.LVL363:
@@ -9238,7 +9238,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  2559              		.cfi_offset 6, -12
  2560              		.cfi_offset 7, -8
  2561              		.cfi_offset 14, -4
-ARM GAS  /tmp/cccTBT9O.s 			page 155
+ARM GAS  /tmp/cc6g2I8d.s 			page 155
 
 
 1008:Middlewares/Third_Party/FatFs/src/ff.c **** 
@@ -9298,7 +9298,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  2607              	.LVL381:
  2608 003c C5F30805 		ubfx	r5, r5, #0, #9
  2609 0040 3544     		add	r5, r5, r6
-ARM GAS  /tmp/cccTBT9O.s 			page 156
+ARM GAS  /tmp/cc6g2I8d.s 			page 156
 
 
  2610 0042 95F83050 		ldrb	r5, [r5, #48]	@ zero_extendqisi2
@@ -9358,7 +9358,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  2656 008a F8BD     		pop	{r3, r4, r5, r6, r7, pc}
  2657              	.LVL393:
  2658              	.L286:
-ARM GAS  /tmp/cccTBT9O.s 			page 157
+ARM GAS  /tmp/cc6g2I8d.s 			page 157
 
 
 1029:Middlewares/Third_Party/FatFs/src/ff.c **** 			break;
@@ -9418,7 +9418,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  2705 00ca 0120     		movs	r0, #1
  2706              	.LVL406:
  2707 00cc F8BD     		pop	{r3, r4, r5, r6, r7, pc}
-ARM GAS  /tmp/cccTBT9O.s 			page 158
+ARM GAS  /tmp/cc6g2I8d.s 			page 158
 
 
  2708              		.cfi_endproc
@@ -9478,7 +9478,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  2757              		.loc 1 1482 0
  2758 0022 7161     		str	r1, [r6, #20]
 1483:Middlewares/Third_Party/FatFs/src/ff.c **** 	if (clst == 0 && fs->fs_type >= FS_FAT32) {	/* Replace cluster# 0 with root cluster# */
-ARM GAS  /tmp/cccTBT9O.s 			page 159
+ARM GAS  /tmp/cc6g2I8d.s 			page 159
 
 
  2759              		.loc 1 1483 0
@@ -9538,7 +9538,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  2802              		.loc 1 1495 0
  2803 0058 01E0     		b	.L293
  2804              	.LVL420:
-ARM GAS  /tmp/cccTBT9O.s 			page 160
+ARM GAS  /tmp/cc6g2I8d.s 			page 160
 
 
  2805              	.L308:
@@ -9598,7 +9598,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  2849 0094 3037     		adds	r7, r7, #48
  2850              	.LVL428:
  2851 0096 C4F30804 		ubfx	r4, r4, #0, #9
-ARM GAS  /tmp/cccTBT9O.s 			page 161
+ARM GAS  /tmp/cc6g2I8d.s 			page 161
 
 
  2852              	.LVL429:
@@ -9658,7 +9658,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  2902 000a 31B9     		cbnz	r1, .L310
 1362:Middlewares/Third_Party/FatFs/src/ff.c **** 		if (scl == 0 || scl >= fs->n_fatent) scl = 1;
  2903              		.loc 1 1362 0
-ARM GAS  /tmp/cccTBT9O.s 			page 162
+ARM GAS  /tmp/cc6g2I8d.s 			page 162
 
 
  2904 000c F568     		ldr	r5, [r6, #12]
@@ -9718,7 +9718,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  2947              		.loc 1 1407 0
  2948 003a 2146     		mov	r1, r4
  2949 003c 3846     		mov	r0, r7
-ARM GAS  /tmp/cccTBT9O.s 			page 163
+ARM GAS  /tmp/cc6g2I8d.s 			page 163
 
 
  2950 003e FFF7FEFF 		bl	get_fat
@@ -9778,7 +9778,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  2995 007e 0020     		moveq	r0, #0
  2996 0080 70B9     		cbnz	r0, .L327
  2997              	.L316:
-ARM GAS  /tmp/cccTBT9O.s 			page 164
+ARM GAS  /tmp/cc6g2I8d.s 			page 164
 
 
  2998              	.LVL452:
@@ -9838,7 +9838,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  3044              		.loc 1 1367 0
  3045 00bc 0123     		movs	r3, #1
  3046 00be 02E0     		b	.L309
-ARM GAS  /tmp/cccTBT9O.s 			page 165
+ARM GAS  /tmp/cc6g2I8d.s 			page 165
 
 
  3047              	.LVL460:
@@ -9898,7 +9898,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  3097              	.LVL466:
 1287:Middlewares/Third_Party/FatFs/src/ff.c **** 
  3098              		.loc 1 1287 0 is_stmt 0 discriminator 2
-ARM GAS  /tmp/cccTBT9O.s 			page 166
+ARM GAS  /tmp/cc6g2I8d.s 			page 166
 
 
  3099 000e 6369     		ldr	r3, [r4, #20]
@@ -9958,7 +9958,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  3142              		.loc 1 1302 0
  3143 0046 0022     		movs	r2, #0
  3144 0048 3146     		mov	r1, r6
-ARM GAS  /tmp/cccTBT9O.s 			page 167
+ARM GAS  /tmp/cc6g2I8d.s 			page 167
 
 
  3145 004a 2046     		mov	r0, r4
@@ -10018,7 +10018,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  3190              	.LFE160:
  3192              		.section	.text.dir_remove,"ax",%progbits
  3193              		.align	1
-ARM GAS  /tmp/cccTBT9O.s 			page 168
+ARM GAS  /tmp/cc6g2I8d.s 			page 168
 
 
  3194              		.syntax unified
@@ -10078,7 +10078,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  3243              		.syntax unified
  3244              		.thumb
  3245              		.thumb_func
-ARM GAS  /tmp/cccTBT9O.s 			page 169
+ARM GAS  /tmp/cc6g2I8d.s 			page 169
 
 
  3246              		.fpu fpv5-d16
@@ -10138,7 +10138,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  3294 002a 8FB9     		cbnz	r7, .L346
 1534:Middlewares/Third_Party/FatFs/src/ff.c **** 
  3295              		.loc 1 1534 0
-ARM GAS  /tmp/cccTBT9O.s 			page 170
+ARM GAS  /tmp/cc6g2I8d.s 			page 170
 
 
  3296 002c 0133     		adds	r3, r3, #1
@@ -10198,7 +10198,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  3341 0066 48D9     		bls	.L354
 1545:Middlewares/Third_Party/FatFs/src/ff.c **** 				if (clst >= fs->n_fatent) {						/* Reached end of dynamic table */
  3342              		.loc 1 1545 0
-ARM GAS  /tmp/cccTBT9O.s 			page 171
+ARM GAS  /tmp/cc6g2I8d.s 			page 171
 
 
  3343 0068 B0F1FF3F 		cmp	r0, #-1
@@ -10258,7 +10258,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  3388 00ac 0021     		movs	r1, #0
  3389 00ae 06F13000 		add	r0, r6, #48
  3390 00b2 FFF7FEFF 		bl	mem_set
-ARM GAS  /tmp/cccTBT9O.s 			page 172
+ARM GAS  /tmp/cc6g2I8d.s 			page 172
 
 
  3391              	.LVL508:
@@ -10318,7 +10318,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  3437              	.L354:
 1544:Middlewares/Third_Party/FatFs/src/ff.c **** 				if (clst == 0xFFFFFFFF) return FR_DISK_ERR;		/* Disk error */
  3438              		.loc 1 1544 0
-ARM GAS  /tmp/cccTBT9O.s 			page 173
+ARM GAS  /tmp/cc6g2I8d.s 			page 173
 
 
  3439 00fa 0220     		movs	r0, #2
@@ -10378,7 +10378,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  3488 0000 70B5     		push	{r4, r5, r6, lr}
  3489              	.LCFI35:
  3490              		.cfi_def_cfa_offset 16
-ARM GAS  /tmp/cccTBT9O.s 			page 174
+ARM GAS  /tmp/cc6g2I8d.s 			page 174
 
 
  3491              		.cfi_offset 4, -16
@@ -10438,7 +10438,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  3536 0032 0378     		ldrb	r3, [r0]	@ zero_extendqisi2
  3537              	.LVL534:
 2251:Middlewares/Third_Party/FatFs/src/ff.c **** #if _USE_LFN != 0	/* LFN configuration */
-ARM GAS  /tmp/cccTBT9O.s 			page 175
+ARM GAS  /tmp/cc6g2I8d.s 			page 175
 
 
  3538              		.loc 1 2251 0
@@ -10498,7 +10498,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  3589 0004 0446     		mov	r4, r0
  3590 0006 0191     		str	r1, [sp, #4]
  3591              	.LVL540:
-ARM GAS  /tmp/cccTBT9O.s 			page 176
+ARM GAS  /tmp/cc6g2I8d.s 			page 176
 
 
 2821:Middlewares/Third_Party/FatFs/src/ff.c **** 
@@ -10558,7 +10558,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  3635 003c 0346     		mov	r3, r0
  3636 003e E0B9     		cbnz	r0, .L383
 2872:Middlewares/Third_Party/FatFs/src/ff.c **** 			/* Get into the sub-directory */
-ARM GAS  /tmp/cccTBT9O.s 			page 177
+ARM GAS  /tmp/cc6g2I8d.s 			page 177
 
 
  3637              		.loc 1 2872 0
@@ -10618,7 +10618,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  3684 007a 0428     		cmp	r0, #4
  3685 007c FAD1     		bne	.L377
 2867:Middlewares/Third_Party/FatFs/src/ff.c **** 					}
-ARM GAS  /tmp/cccTBT9O.s 			page 178
+ARM GAS  /tmp/cc6g2I8d.s 			page 178
 
 
  3686              		.loc 1 2867 0
@@ -10678,7 +10678,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  3737              	.L389:
 1612:Middlewares/Third_Party/FatFs/src/ff.c **** 			}
  3738              		.loc 1 1612 0
-ARM GAS  /tmp/cccTBT9O.s 			page 179
+ARM GAS  /tmp/cc6g2I8d.s 			page 179
 
 
  3739 0016 0025     		movs	r5, #0
@@ -10738,7 +10738,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  3785              	.L392:
 1618:Middlewares/Third_Party/FatFs/src/ff.c **** 	return res;
  3786              		.loc 1 1618 0
-ARM GAS  /tmp/cccTBT9O.s 			page 180
+ARM GAS  /tmp/cc6g2I8d.s 			page 180
 
 
  3787 004a 0722     		movs	r2, #7
@@ -10798,7 +10798,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  3837              	.LVL577:
 2373:Middlewares/Third_Party/FatFs/src/ff.c **** 			mem_set(dp->dir, 0, SZDIRE);	/* Clean the entry */
  3838              		.loc 1 2373 0
-ARM GAS  /tmp/cccTBT9O.s 			page 181
+ARM GAS  /tmp/cc6g2I8d.s 			page 181
 
 
  3839 001c 0546     		mov	r5, r0
@@ -10858,7 +10858,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  3890              	.LVL583:
 2136:Middlewares/Third_Party/FatFs/src/ff.c **** 	FATFS *fs = dp->obj.fs;
  3891              		.loc 1 2136 0
-ARM GAS  /tmp/cccTBT9O.s 			page 182
+ARM GAS  /tmp/cc6g2I8d.s 			page 182
 
 
  3892 0008 0427     		movs	r7, #4
@@ -10918,7 +10918,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  3935 003c 0F2B     		cmp	r3, #15
  3936 003e E5D0     		beq	.L400
 2188:Middlewares/Third_Party/FatFs/src/ff.c **** 				break;
-ARM GAS  /tmp/cccTBT9O.s 			page 183
+ARM GAS  /tmp/cc6g2I8d.s 			page 183
 
 
  3937              		.loc 1 2188 0 discriminator 2
@@ -10978,7 +10978,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  3987              		.loc 1 951 0
  3988 0004 FFF7FEFF 		bl	sync_window
  3989              	.LVL595:
-ARM GAS  /tmp/cccTBT9O.s 			page 184
+ARM GAS  /tmp/cc6g2I8d.s 			page 184
 
 
  952:Middlewares/Third_Party/FatFs/src/ff.c **** 		/* Update FSInfo sector if needed */
@@ -11038,7 +11038,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  959:Middlewares/Third_Party/FatFs/src/ff.c **** 			st_dword(fs->win + FSI_Free_Count, fs->free_clst);
  4036              		.loc 1 959 0
  4037 004e 0E49     		ldr	r1, .L411+4
-ARM GAS  /tmp/cccTBT9O.s 			page 185
+ARM GAS  /tmp/cc6g2I8d.s 			page 185
 
 
  4038 0050 04F50570 		add	r0, r4, #532
@@ -11098,7 +11098,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  4088 0000 70B5     		push	{r4, r5, r6, lr}
  4089              	.LCFI44:
  4090              		.cfi_def_cfa_offset 16
-ARM GAS  /tmp/cccTBT9O.s 			page 186
+ARM GAS  /tmp/cc6g2I8d.s 			page 186
 
 
  4091              		.cfi_offset 4, -16
@@ -11158,7 +11158,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  4135 0034 0B4A     		ldr	r2, .L421
  4136 0036 42F82530 		str	r3, [r2, r5, lsl #2]
 3295:Middlewares/Third_Party/FatFs/src/ff.c **** 
-ARM GAS  /tmp/cccTBT9O.s 			page 187
+ARM GAS  /tmp/cc6g2I8d.s 			page 187
 
 
  4137              		.loc 1 3295 0
@@ -11218,7 +11218,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  4188              		@ args = 0, pretend = 0, frame = 64
  4189              		@ frame_needed = 0, uses_anonymous_args = 0
  4190              	.LVL618:
-ARM GAS  /tmp/cccTBT9O.s 			page 188
+ARM GAS  /tmp/cc6g2I8d.s 			page 188
 
 
  4191 0000 2DE9F043 		push	{r4, r5, r6, r7, r8, r9, lr}
@@ -11278,7 +11278,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
 3332:Middlewares/Third_Party/FatFs/src/ff.c **** #if !_FS_READONLY	/* R/W configuration */
  4238              		.loc 1 3332 0
  4239 0034 0199     		ldr	r1, [sp, #4]
-ARM GAS  /tmp/cccTBT9O.s 			page 189
+ARM GAS  /tmp/cc6g2I8d.s 			page 189
 
 
  4240 0036 04A8     		add	r0, sp, #16
@@ -11338,7 +11338,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
 3422:Middlewares/Third_Party/FatFs/src/ff.c **** 			if (mode & FA_CREATE_ALWAYS)		/* Set file change flag if created or overwritten */
  4285              		.loc 1 3422 0 is_stmt 1
  4286 0076 A4B9     		cbnz	r4, .L432
-ARM GAS  /tmp/cccTBT9O.s 			page 190
+ARM GAS  /tmp/cc6g2I8d.s 			page 190
 
 
 3423:Middlewares/Third_Party/FatFs/src/ff.c **** 				mode |= FA_MODIFIED;
@@ -11398,7 +11398,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  4331              		.loc 1 3460 0
  4332 00c0 0021     		movs	r1, #0
  4333 00c2 E962     		str	r1, [r5, #44]
-ARM GAS  /tmp/cccTBT9O.s 			page 191
+ARM GAS  /tmp/cc6g2I8d.s 			page 191
 
 
 3462:Middlewares/Third_Party/FatFs/src/ff.c **** 			fp->obj.id = fs->id;
@@ -11458,7 +11458,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
 3336:Middlewares/Third_Party/FatFs/src/ff.c **** 			}
  4375              		.loc 1 3336 0
  4376 00f8 0624     		movs	r4, #6
-ARM GAS  /tmp/cccTBT9O.s 			page 192
+ARM GAS  /tmp/cc6g2I8d.s 			page 192
 
 
  4377 00fa AEE7     		b	.L426
@@ -11518,7 +11518,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  4424              	.LVL656:
  4425 0132 0E30     		adds	r0, r0, #14
  4426 0134 FFF7FEFF 		bl	st_dword
-ARM GAS  /tmp/cccTBT9O.s 			page 193
+ARM GAS  /tmp/cc6g2I8d.s 			page 193
 
 
  4427              	.LVL657:
@@ -11578,7 +11578,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  4472              		.loc 1 3402 0
  4473 017e 0022     		movs	r2, #0
  4474 0180 4946     		mov	r1, r9
-ARM GAS  /tmp/cccTBT9O.s 			page 194
+ARM GAS  /tmp/cc6g2I8d.s 			page 194
 
 
  4475 0182 04A8     		add	r0, sp, #16
@@ -11638,7 +11638,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  4520              	.LVL674:
  4521              	.L456:
 3478:Middlewares/Third_Party/FatFs/src/ff.c **** 					if (clst == 0xFFFFFFFF) res = FR_DISK_ERR;
-ARM GAS  /tmp/cccTBT9O.s 			page 195
+ARM GAS  /tmp/cc6g2I8d.s 			page 195
 
 
  4522              		.loc 1 3478 0
@@ -11698,7 +11698,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  4567              		.loc 1 3483 0 is_stmt 1
  4568 0208 039F     		ldr	r7, [sp, #12]
  4569              	.LVL683:
-ARM GAS  /tmp/cccTBT9O.s 			page 196
+ARM GAS  /tmp/cc6g2I8d.s 			page 196
 
 
  4570 020a 3846     		mov	r0, r7
@@ -11758,7 +11758,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
 3517:Middlewares/Third_Party/FatFs/src/ff.c **** 	FRESULT res;
  4621              		.loc 1 3517 0
  4622              		.cfi_startproc
-ARM GAS  /tmp/cccTBT9O.s 			page 197
+ARM GAS  /tmp/cc6g2I8d.s 			page 197
 
 
  4623              		@ args = 0, pretend = 0, frame = 16
@@ -11818,7 +11818,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  4671 002e 3846     		mov	r0, r7
  4672 0030 05B0     		add	sp, sp, #20
  4673              	.LCFI52:
-ARM GAS  /tmp/cccTBT9O.s 			page 198
+ARM GAS  /tmp/cc6g2I8d.s 			page 198
 
 
  4674              		.cfi_remember_state
@@ -11878,7 +11878,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  4721              	.LVL708:
  4722 0062 6775     		strb	r7, [r4, #21]
  4723 0064 E3E7     		b	.L459
-ARM GAS  /tmp/cccTBT9O.s 			page 199
+ARM GAS  /tmp/cc6g2I8d.s 			page 199
 
 
  4724              	.LVL709:
@@ -11938,7 +11938,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  4771 00a8 4078     		ldrb	r0, [r0, #1]	@ zero_extendqisi2
  4772 00aa FFF7FEFF 		bl	disk_read
  4773              	.LVL717:
-ARM GAS  /tmp/cccTBT9O.s 			page 200
+ARM GAS  /tmp/cc6g2I8d.s 			page 200
 
 
  4774 00ae 0028     		cmp	r0, #0
@@ -11998,7 +11998,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
 3536:Middlewares/Third_Party/FatFs/src/ff.c **** 			if (csect == 0) {					/* On the cluster boundary? */
  4821              		.loc 1 3536 0
  4822 00f6 039B     		ldr	r3, [sp, #12]
-ARM GAS  /tmp/cccTBT9O.s 			page 201
+ARM GAS  /tmp/cc6g2I8d.s 			page 201
 
 
  4823 00f8 B3F80AA0 		ldrh	r10, [r3, #10]
@@ -12058,7 +12058,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  4866              	.LVL731:
  4867 0136 6A89     		ldrh	r2, [r5, #10]
  4868 0138 9342     		cmp	r3, r2
-ARM GAS  /tmp/cccTBT9O.s 			page 202
+ARM GAS  /tmp/cc6g2I8d.s 			page 202
 
 
  4869 013a 01D9     		bls	.L471
@@ -12118,7 +12118,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
 3585:Middlewares/Third_Party/FatFs/src/ff.c **** 			}
  4915              		.loc 1 3585 0 discriminator 1
  4916 017c 0127     		movs	r7, #1
-ARM GAS  /tmp/cccTBT9O.s 			page 203
+ARM GAS  /tmp/cc6g2I8d.s 			page 203
 
 
  4917              	.LVL739:
@@ -12178,7 +12178,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  4969 001c 0746     		mov	r7, r0
  4970 001e 30B9     		cbnz	r0, .L494
 3627:Middlewares/Third_Party/FatFs/src/ff.c **** 	if (!(fp->flag & FA_WRITE)) LEAVE_FF(fs, FR_DENIED);	/* Check access mode */
-ARM GAS  /tmp/cccTBT9O.s 			page 204
+ARM GAS  /tmp/cc6g2I8d.s 			page 204
 
 
  4971              		.loc 1 3627 0 is_stmt 0 discriminator 2
@@ -12238,7 +12238,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  5017 0054 0128     		cmp	r0, #1
  5018 0056 32D0     		beq	.L520
 3657:Middlewares/Third_Party/FatFs/src/ff.c **** 				fp->clust = clst;			/* Update current cluster */
-ARM GAS  /tmp/cccTBT9O.s 			page 205
+ARM GAS  /tmp/cc6g2I8d.s 			page 205
 
 
  5019              		.loc 1 3657 0
@@ -12298,7 +12298,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  5063              	.L509:
 3677:Middlewares/Third_Party/FatFs/src/ff.c **** #if _FS_MINIMIZE <= 2
  5064              		.loc 1 3677 0
-ARM GAS  /tmp/cccTBT9O.s 			page 206
+ARM GAS  /tmp/cc6g2I8d.s 			page 206
 
 
  5065 0096 2B46     		mov	r3, r5
@@ -12358,7 +12358,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  5112 00d4 4078     		ldrb	r0, [r0, #1]	@ zero_extendqisi2
  5113 00d6 FFF7FEFF 		bl	disk_write
  5114              	.LVL764:
-ARM GAS  /tmp/cccTBT9O.s 			page 207
+ARM GAS  /tmp/cc6g2I8d.s 			page 207
 
 
  5115 00da 20B9     		cbnz	r0, .L526
@@ -12418,7 +12418,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  5161 011a E368     		ldr	r3, [r4, #12]
 3700:Middlewares/Third_Party/FatFs/src/ff.c **** 				fp->fptr < fp->obj.objsize &&
  5162              		.loc 1 3700 0 discriminator 1
-ARM GAS  /tmp/cccTBT9O.s 			page 208
+ARM GAS  /tmp/cc6g2I8d.s 			page 208
 
 
  5163 011c 9A42     		cmp	r2, r3
@@ -12478,7 +12478,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  5210              		.loc 1 3635 0
  5211 0168 2EB3     		cbz	r6, .L502
 3637:Middlewares/Third_Party/FatFs/src/ff.c **** 			csect = (UINT)(fp->fptr / SS(fs)) & (fs->csize - 1);	/* Sector offset in the cluster */
-ARM GAS  /tmp/cccTBT9O.s 			page 209
+ARM GAS  /tmp/cc6g2I8d.s 			page 209
 
 
  5212              		.loc 1 3637 0
@@ -12538,7 +12538,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  5257 01b2 6775     		strb	r7, [r4, #21]
  5258 01b4 3BE7     		b	.L494
  5259              	.LVL786:
-ARM GAS  /tmp/cccTBT9O.s 			page 210
+ARM GAS  /tmp/cc6g2I8d.s 			page 210
 
 
  5260              	.L502:
@@ -12598,7 +12598,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  5309              	.LVL790:
  5310 0014 2344     		add	r3, r3, r4
  5311 0016 1E73     		strb	r6, [r3, #12]
-ARM GAS  /tmp/cccTBT9O.s 			page 211
+ARM GAS  /tmp/cc6g2I8d.s 			page 211
 
 
 5963:Middlewares/Third_Party/FatFs/src/ff.c **** 		f_write(pb->fp, pb->buf, (UINT)i, &bw);
@@ -12658,7 +12658,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  5359              	.L537:
  5360 004a 0025     		movs	r5, #0
  5361              	.LVL800:
-ARM GAS  /tmp/cccTBT9O.s 			page 212
+ARM GAS  /tmp/cc6g2I8d.s 			page 212
 
 
  5362 004c E6E7     		b	.L531
@@ -12718,7 +12718,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  5411 0024 02B0     		add	sp, sp, #8
  5412              	.LCFI64:
  5413              		.cfi_def_cfa_offset 8
-ARM GAS  /tmp/cccTBT9O.s 			page 213
+ARM GAS  /tmp/cc6g2I8d.s 			page 213
 
 
  5414              		@ sp needed
@@ -12778,7 +12778,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  5467 0006 01A9     		add	r1, sp, #4
  5468 0008 FFF7FEFF 		bl	validate
  5469              	.LVL808:
-ARM GAS  /tmp/cccTBT9O.s 			page 214
+ARM GAS  /tmp/cc6g2I8d.s 			page 214
 
 
 3746:Middlewares/Third_Party/FatFs/src/ff.c **** 		if (fp->flag & FA_MODIFIED) {	/* Is there any change to the file? */
@@ -12838,7 +12838,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  5516 0040 4078     		ldrb	r0, [r0, #1]	@ zero_extendqisi2
  5517 0042 FFF7FEFF 		bl	disk_write
  5518              	.LVL817:
-ARM GAS  /tmp/cccTBT9O.s 			page 215
+ARM GAS  /tmp/cc6g2I8d.s 			page 215
 
 
  5519 0046 48BB     		cbnz	r0, .L550
@@ -12898,7 +12898,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  5564 0090 0346     		mov	r3, r0
  5565              	.LVL826:
 3795:Middlewares/Third_Party/FatFs/src/ff.c **** 				}
-ARM GAS  /tmp/cccTBT9O.s 			page 216
+ARM GAS  /tmp/cc6g2I8d.s 			page 216
 
 
  5566              		.loc 1 3795 0
@@ -12958,7 +12958,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  5617              		@ sp needed
  5618 0012 10BD     		pop	{r4, pc}
  5619              	.LVL831:
-ARM GAS  /tmp/cccTBT9O.s 			page 217
+ARM GAS  /tmp/cc6g2I8d.s 			page 217
 
 
  5620              	.L557:
@@ -13018,7 +13018,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  5670              		.cfi_offset 7, -24
  5671              		.cfi_offset 8, -20
  5672              		.cfi_offset 9, -16
-ARM GAS  /tmp/cccTBT9O.s 			page 218
+ARM GAS  /tmp/cc6g2I8d.s 			page 218
 
 
  5673              		.cfi_offset 10, -12
@@ -13078,7 +13078,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  5717              		.loc 1 4153 0
  5718 0036 2846     		mov	r0, r5
  5719 0038 05B0     		add	sp, sp, #20
-ARM GAS  /tmp/cccTBT9O.s 			page 219
+ARM GAS  /tmp/cc6g2I8d.s 			page 219
 
 
  5720              	.LCFI77:
@@ -13138,7 +13138,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  5765              		.loc 1 4038 0
  5766 0070 731C     		adds	r3, r6, #1
 4035:Middlewares/Third_Party/FatFs/src/ff.c **** 						if (cl <= 1) ABORT(fs, FR_INT_ERR);
-ARM GAS  /tmp/cccTBT9O.s 			page 220
+ARM GAS  /tmp/cc6g2I8d.s 			page 220
 
 
  5767              		.loc 1 4035 0
@@ -13198,7 +13198,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  5813 00a2 4FF00209 		mov	r9, #2
  5814              	.LVL862:
  5815              	.L563:
-ARM GAS  /tmp/cccTBT9O.s 			page 221
+ARM GAS  /tmp/cc6g2I8d.s 			page 221
 
 
 4044:Middlewares/Third_Party/FatFs/src/ff.c **** 			if (ulen <= tlen) {
@@ -13258,7 +13258,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  5861 00e4 8044     		add	r8, r8, r0
  5862              	.LVL870:
 4058:Middlewares/Third_Party/FatFs/src/ff.c **** #if !_FS_TINY
-ARM GAS  /tmp/cccTBT9O.s 			page 222
+ARM GAS  /tmp/cc6g2I8d.s 			page 222
 
 
  5863              		.loc 1 4058 0
@@ -13318,7 +13318,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  5910 0130 81E7     		b	.L560
  5911              	.LVL877:
  5912              	.L573:
-ARM GAS  /tmp/cccTBT9O.s 			page 223
+ARM GAS  /tmp/cc6g2I8d.s 			page 223
 
 
 4068:Middlewares/Third_Party/FatFs/src/ff.c **** 				}
@@ -13378,7 +13378,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  5955              		.loc 1 4089 0
  5956 016e C9F10002 		rsb	r2, r9, #0
  5957 0172 1340     		ands	r3, r3, r2
-ARM GAS  /tmp/cccTBT9O.s 			page 224
+ARM GAS  /tmp/cc6g2I8d.s 			page 224
 
 
  5958              	.LVL883:
@@ -13438,7 +13438,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  6001              	.LVL890:
  6002 01a0 6575     		strb	r5, [r4, #21]
  6003 01a2 48E7     		b	.L560
-ARM GAS  /tmp/cccTBT9O.s 			page 225
+ARM GAS  /tmp/cc6g2I8d.s 			page 225
 
 
  6004              	.LVL891:
@@ -13498,7 +13498,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
 4113:Middlewares/Third_Party/FatFs/src/ff.c **** 						if (clst == 0) {				/* Clip file size in case of disk full */
  6049              		.loc 1 4113 0
  6050 01de 3946     		mov	r1, r7
-ARM GAS  /tmp/cccTBT9O.s 			page 226
+ARM GAS  /tmp/cc6g2I8d.s 			page 226
 
 
  6051 01e0 4046     		mov	r0, r8
@@ -13558,7 +13558,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  6096              	.L589:
 4130:Middlewares/Third_Party/FatFs/src/ff.c **** 				}
  6097              		.loc 1 4130 0
-ARM GAS  /tmp/cccTBT9O.s 			page 227
+ARM GAS  /tmp/cc6g2I8d.s 			page 227
 
 
  6098 0216 00EB5627 		add	r7, r0, r6, lsr #9
@@ -13618,7 +13618,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  6143 025e EAE6     		b	.L560
  6144              	.LVL911:
  6145              	.L600:
-ARM GAS  /tmp/cccTBT9O.s 			page 228
+ARM GAS  /tmp/cc6g2I8d.s 			page 228
 
 
 4084:Middlewares/Third_Party/FatFs/src/ff.c **** 		if (ofs) {
@@ -13678,7 +13678,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  6196 0000 30B5     		push	{r4, r5, lr}
  6197              	.LCFI79:
  6198              		.cfi_def_cfa_offset 12
-ARM GAS  /tmp/cccTBT9O.s 			page 229
+ARM GAS  /tmp/cc6g2I8d.s 			page 229
 
 
  6199              		.cfi_offset 4, -12
@@ -13738,7 +13738,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
 4183:Middlewares/Third_Party/FatFs/src/ff.c **** 				if (obj->attr & AM_DIR) {		/* This object is a sub-directory */
  6245              		.loc 1 4183 0
  6246 0034 95F92F30 		ldrsb	r3, [r5, #47]
-ARM GAS  /tmp/cccTBT9O.s 			page 230
+ARM GAS  /tmp/cc6g2I8d.s 			page 230
 
 
  6247 0038 002B     		cmp	r3, #0
@@ -13798,7 +13798,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  6292              		.loc 1 4207 0
  6293 0070 AB68     		ldr	r3, [r5, #8]
  6294 0072 13B9     		cbnz	r3, .L629
-ARM GAS  /tmp/cccTBT9O.s 			page 231
+ARM GAS  /tmp/cc6g2I8d.s 			page 231
 
 
 4211:Middlewares/Third_Party/FatFs/src/ff.c **** 					}
@@ -13858,7 +13858,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  6345              		.cfi_def_cfa_offset 8
  6346              		.cfi_offset 4, -8
  6347              		.cfi_offset 14, -4
-ARM GAS  /tmp/cccTBT9O.s 			page 232
+ARM GAS  /tmp/cc6g2I8d.s 			page 232
 
 
  6348 0002 82B0     		sub	sp, sp, #8
@@ -13918,7 +13918,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  6396              		.syntax unified
  6397              		.thumb
  6398              		.thumb_func
-ARM GAS  /tmp/cccTBT9O.s 			page 233
+ARM GAS  /tmp/cc6g2I8d.s 			page 233
 
 
  6399              		.fpu fpv5-d16
@@ -13978,7 +13978,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  6446              	.L636:
 4292:Middlewares/Third_Party/FatFs/src/ff.c **** 
  6447              		.loc 1 4292 0
-ARM GAS  /tmp/cccTBT9O.s 			page 234
+ARM GAS  /tmp/cc6g2I8d.s 			page 234
 
 
  6448 0024 2046     		mov	r0, r4
@@ -14038,7 +14038,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  6498              		.loc 1 4357 0
  6499              		.cfi_startproc
  6500              		@ args = 0, pretend = 0, frame = 56
-ARM GAS  /tmp/cccTBT9O.s 			page 235
+ARM GAS  /tmp/cc6g2I8d.s 			page 235
 
 
  6501              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -14098,7 +14098,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  6549              		.loc 1 4369 0
  6550 002a 9DF93730 		ldrsb	r3, [sp, #55]
  6551 002e 002B     		cmp	r3, #0
-ARM GAS  /tmp/cccTBT9O.s 			page 236
+ARM GAS  /tmp/cc6g2I8d.s 			page 236
 
 
  6552 0030 06DB     		blt	.L644
@@ -14158,7 +14158,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  6603              		.loc 1 4403 0
  6604 000c 0022     		movs	r2, #0
  6605              	.LVL972:
-ARM GAS  /tmp/cccTBT9O.s 			page 237
+ARM GAS  /tmp/cc6g2I8d.s 			page 237
 
 
  6606 000e 07A9     		add	r1, sp, #28
@@ -14218,7 +14218,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  6651              	.LVL982:
 4411:Middlewares/Third_Party/FatFs/src/ff.c **** 			if (fs->fs_type == FS_FAT12) {	/* FAT12: Sector unalighed FAT entries */
  6652              		.loc 1 4411 0
-ARM GAS  /tmp/cccTBT9O.s 			page 238
+ARM GAS  /tmp/cc6g2I8d.s 			page 238
 
 
  6653 0046 0027     		movs	r7, #0
@@ -14278,7 +14278,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  6698              	.LVL991:
  6699 0080 3034     		adds	r4, r4, #48
  6700              	.LVL992:
-ARM GAS  /tmp/cccTBT9O.s 			page 239
+ARM GAS  /tmp/cc6g2I8d.s 			page 239
 
 
 4444:Middlewares/Third_Party/FatFs/src/ff.c **** 							if (res != FR_OK) break;
@@ -14338,7 +14338,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  6746 00ac EDD0     		beq	.L666
 4453:Middlewares/Third_Party/FatFs/src/ff.c **** 							p += 4; i -= 4;
  6747              		.loc 1 4453 0
-ARM GAS  /tmp/cccTBT9O.s 			page 240
+ARM GAS  /tmp/cc6g2I8d.s 			page 240
 
 
  6748 00ae 2046     		mov	r0, r4
@@ -14398,7 +14398,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  6796              		.thumb
  6797              		.thumb_func
  6798              		.fpu fpv5-d16
-ARM GAS  /tmp/cccTBT9O.s 			page 241
+ARM GAS  /tmp/cc6g2I8d.s 			page 241
 
 
  6800              	f_truncate:
@@ -14458,7 +14458,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  6847              		.loc 1 4488 0
  6848 0024 AB69     		ldr	r3, [r5, #24]
  6849 0026 EA68     		ldr	r2, [r5, #12]
-ARM GAS  /tmp/cccTBT9O.s 			page 242
+ARM GAS  /tmp/cc6g2I8d.s 			page 242
 
 
  6850 0028 9342     		cmp	r3, r2
@@ -14518,7 +14518,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  6893 0062 B0F1FF3F 		cmp	r0, #-1
  6894 0066 0ED0     		beq	.L681
  6895              	.L671:
-ARM GAS  /tmp/cccTBT9O.s 			page 243
+ARM GAS  /tmp/cc6g2I8d.s 			page 243
 
 
  6896              	.LVL1019:
@@ -14578,7 +14578,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  6942              		.loc 1 4508 0
  6943 00a0 2B7D     		ldrb	r3, [r5, #20]	@ zero_extendqisi2
  6944 00a2 03F07F03 		and	r3, r3, #127
-ARM GAS  /tmp/cccTBT9O.s 			page 244
+ARM GAS  /tmp/cc6g2I8d.s 			page 244
 
 
  6945 00a6 2B75     		strb	r3, [r5, #20]
@@ -14638,7 +14638,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  6996              	.L684:
 4611:Middlewares/Third_Party/FatFs/src/ff.c **** 
  6997              		.loc 1 4611 0
-ARM GAS  /tmp/cccTBT9O.s 			page 245
+ARM GAS  /tmp/cc6g2I8d.s 			page 245
 
 
  6998 0018 2046     		mov	r0, r4
@@ -14698,7 +14698,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  7044 004e 1899     		ldr	r1, [sp, #96]
  7045 0050 3046     		mov	r0, r6
  7046 0052 FFF7FEFF 		bl	ld_clust
-ARM GAS  /tmp/cccTBT9O.s 			page 246
+ARM GAS  /tmp/cc6g2I8d.s 			page 246
 
 
  7047              	.LVL1042:
@@ -14758,7 +14758,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
 4556:Middlewares/Third_Party/FatFs/src/ff.c **** 				}
  7092              		.loc 1 4556 0
  7093 008c 0724     		movs	r4, #7
-ARM GAS  /tmp/cccTBT9O.s 			page 247
+ARM GAS  /tmp/cc6g2I8d.s 			page 247
 
 
  7094              	.LVL1052:
@@ -14818,7 +14818,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  7141              		.cfi_endproc
  7142              	.LFE192:
  7144              		.section	.text.f_mkdir,"ax",%progbits
-ARM GAS  /tmp/cccTBT9O.s 			page 248
+ARM GAS  /tmp/cc6g2I8d.s 			page 248
 
 
  7145              		.align	1
@@ -14878,7 +14878,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  7195              		.cfi_def_cfa_offset 36
  7196              		@ sp needed
  7197 001e BDE8F08F 		pop	{r4, r5, r6, r7, r8, r9, r10, fp, pc}
-ARM GAS  /tmp/cccTBT9O.s 			page 249
+ARM GAS  /tmp/cc6g2I8d.s 			page 249
 
 
  7198              	.LVL1067:
@@ -14938,7 +14938,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  7244 0058 10D0     		beq	.L720
  7245              	.LVL1075:
  7246              	.L702:
-ARM GAS  /tmp/cccTBT9O.s 			page 250
+ARM GAS  /tmp/cc6g2I8d.s 			page 250
 
 
 4650:Middlewares/Third_Party/FatFs/src/ff.c **** 			tm = GET_FATTIME();
@@ -14998,7 +14998,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  7292              	.LVL1087:
  7293 0086 0446     		mov	r4, r0
  7294              	.LVL1088:
-ARM GAS  /tmp/cccTBT9O.s 			page 251
+ARM GAS  /tmp/cc6g2I8d.s 			page 251
 
 
  7295 0088 E8E7     		b	.L703
@@ -15058,7 +15058,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  7340              		.loc 1 4662 0
  7341 00d2 05F15007 		add	r7, r5, #80
  7342 00d6 2022     		movs	r2, #32
-ARM GAS  /tmp/cccTBT9O.s 			page 252
+ARM GAS  /tmp/cc6g2I8d.s 			page 252
 
 
  7343 00d8 4946     		mov	r1, r9
@@ -15118,7 +15118,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  7387 0112 4FF40072 		mov	r2, #512
  7388 0116 0021     		movs	r1, #0
  7389 0118 4846     		mov	r0, r9
-ARM GAS  /tmp/cccTBT9O.s 			page 253
+ARM GAS  /tmp/cc6g2I8d.s 			page 253
 
 
  7390              	.LVL1106:
@@ -15178,7 +15178,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  7435 0150 E372     		strb	r3, [r4, #11]
 4695:Middlewares/Third_Party/FatFs/src/ff.c **** 				}
  7436              		.loc 1 4695 0
-ARM GAS  /tmp/cccTBT9O.s 			page 254
+ARM GAS  /tmp/cc6g2I8d.s 			page 254
 
 
  7437 0152 0122     		movs	r2, #1
@@ -15238,7 +15238,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  7488 001a 0446     		mov	r4, r0
  7489 001c 10B1     		cbz	r0, .L737
  7490              	.LVL1123:
-ARM GAS  /tmp/cccTBT9O.s 			page 255
+ARM GAS  /tmp/cc6g2I8d.s 			page 255
 
 
  7491              	.L727:
@@ -15298,7 +15298,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  7536 004e E6D1     		bne	.L727
 4769:Middlewares/Third_Party/FatFs/src/ff.c **** 				mem_cpy(&djn, &djo, sizeof (DIR));		/* Duplicate the directory object */
  7537              		.loc 1 4769 0
-ARM GAS  /tmp/cccTBT9O.s 			page 256
+ARM GAS  /tmp/cc6g2I8d.s 			page 256
 
 
  7538 0050 1522     		movs	r2, #21
@@ -15358,7 +15358,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  7583 0090 0998     		ldr	r0, [sp, #36]
  7584              	.LVL1136:
  7585 0092 FFF7FEFF 		bl	sync_fs
-ARM GAS  /tmp/cccTBT9O.s 			page 257
+ARM GAS  /tmp/cc6g2I8d.s 			page 257
 
 
  7586              	.LVL1137:
@@ -15418,7 +15418,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  7631              		.loc 1 4782 0
  7632 00d6 EB7A     		ldrb	r3, [r5, #11]	@ zero_extendqisi2
  7633 00d8 13F0100F 		tst	r3, #16
-ARM GAS  /tmp/cccTBT9O.s 			page 258
+ARM GAS  /tmp/cc6g2I8d.s 			page 258
 
 
  7634 00dc D0D0     		beq	.L731
@@ -15478,7 +15478,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  7679              	.LVL1151:
 4792:Middlewares/Third_Party/FatFs/src/ff.c **** 								}
  7680              		.loc 1 4792 0
-ARM GAS  /tmp/cccTBT9O.s 			page 259
+ARM GAS  /tmp/cc6g2I8d.s 			page 259
 
 
  7681 0122 0122     		movs	r2, #1
@@ -15538,7 +15538,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  7733 001e 9D4B     		ldr	r3, .L828
  7734 0020 53F82030 		ldr	r3, [r3, r0, lsl #2]
  7735 0024 0BB1     		cbz	r3, .L743
-ARM GAS  /tmp/cccTBT9O.s 			page 260
+ARM GAS  /tmp/cc6g2I8d.s 			page 260
 
 
 5329:Middlewares/Third_Party/FatFs/src/ff.c **** 	pdrv = LD2PD(vol);	/* Physical drive */
@@ -15598,7 +15598,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  7781 0060 01D0     		beq	.L745
  7782              	.L744:
 5337:Middlewares/Third_Party/FatFs/src/ff.c **** #if _MAX_SS != _MIN_SS		/* Get sector size of the medium if variable sector size cfg. */
-ARM GAS  /tmp/cccTBT9O.s 			page 261
+ARM GAS  /tmp/cc6g2I8d.s 			page 261
 
 
  7783              		.loc 1 5337 0 discriminator 7
@@ -15658,7 +15658,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  7826              		.loc 1 5351 0
  7827 009a BAF1000F 		cmp	r10, #0
  7828 009e 01D1     		bne	.L826
-ARM GAS  /tmp/cccTBT9O.s 			page 262
+ARM GAS  /tmp/cc6g2I8d.s 			page 262
 
 
  7829 00a0 0E20     		movs	r0, #14
@@ -15718,7 +15718,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  7874 00ee 022B     		cmp	r3, #2
  7875 00f0 69D0     		beq	.L796
 5380:Middlewares/Third_Party/FatFs/src/ff.c **** 				fmt = FS_FAT32; break;
-ARM GAS  /tmp/cccTBT9O.s 			page 263
+ARM GAS  /tmp/cc6g2I8d.s 			page 263
 
 
  7876              		.loc 1 5380 0 is_stmt 0 discriminator 1
@@ -15778,7 +15778,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  7920 0134 9B00     		lsls	r3, r3, #2
  7921 0136 03F2FF13 		addw	r3, r3, #511
  7922 013a 5B0A     		lsrs	r3, r3, #9
-ARM GAS  /tmp/cccTBT9O.s 			page 264
+ARM GAS  /tmp/cc6g2I8d.s 			page 264
 
 
  7923 013c 0293     		str	r3, [sp, #8]
@@ -15838,7 +15838,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  7969              	.L762:
 5593:Middlewares/Third_Party/FatFs/src/ff.c **** 			n_clst = (sz_vol - sz_rsv - sz_fat * n_fats - sz_dir) / pau;
  7970              		.loc 1 5593 0
-ARM GAS  /tmp/cccTBT9O.s 			page 265
+ARM GAS  /tmp/cc6g2I8d.s 			page 265
 
 
  7971 018a 0EEB061E 		add	lr, lr, r6, lsl #4
@@ -15898,7 +15898,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  8017              		.loc 1 5607 0
  8018 01d8 0327     		movs	r7, #3
  8019              	.LVL1195:
-ARM GAS  /tmp/cccTBT9O.s 			page 266
+ARM GAS  /tmp/cc6g2I8d.s 			page 266
 
 
  8020              	.L764:
@@ -15958,7 +15958,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  8066              	.LVL1205:
 5571:Middlewares/Third_Party/FatFs/src/ff.c **** 					n = n_clst * 2 + 4;		/* FAT size [byte] */
  8067              		.loc 1 5571 0
-ARM GAS  /tmp/cccTBT9O.s 			page 267
+ARM GAS  /tmp/cc6g2I8d.s 			page 267
 
 
  8068 0210 40F6F57E 		movw	lr, #4085
@@ -16018,7 +16018,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  8115 0244 0333     		adds	r3, r3, #3
  8116              	.LVL1219:
 5574:Middlewares/Third_Party/FatFs/src/ff.c **** 					n = (n_clst * 3 + 1) / 2 + 3;	/* FAT size [byte] */
-ARM GAS  /tmp/cccTBT9O.s 			page 268
+ARM GAS  /tmp/cc6g2I8d.s 			page 268
 
 
  8117              		.loc 1 5574 0
@@ -16078,7 +16078,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
 5612:Middlewares/Third_Party/FatFs/src/ff.c **** 					if (!au && (au = pau * 2) <= 128) continue;	/* Adjust cluster size and retry */
  8162              		.loc 1 5612 0
  8163 027c 40F6F57E 		movw	lr, #4085
-ARM GAS  /tmp/cccTBT9O.s 			page 269
+ARM GAS  /tmp/cc6g2I8d.s 			page 269
 
 
  8164 0280 F345     		cmp	fp, lr
@@ -16138,7 +16138,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
 5630:Middlewares/Third_Party/FatFs/src/ff.c **** 		buf[BPB_SecPerClus] = (BYTE)pau;				/* Cluster size [sector] */
  8212              		.loc 1 5630 0
  8213 02da 4FF40071 		mov	r1, #512
-ARM GAS  /tmp/cccTBT9O.s 			page 270
+ARM GAS  /tmp/cc6g2I8d.s 			page 270
 
 
  8214 02de 05F10B00 		add	r0, r5, #11
@@ -16198,7 +16198,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  8258              	.LVL1236:
 5643:Middlewares/Third_Party/FatFs/src/ff.c **** 		if (fmt == FS_FAT32) {
  8259              		.loc 1 5643 0
-ARM GAS  /tmp/cccTBT9O.s 			page 271
+ARM GAS  /tmp/cc6g2I8d.s 			page 271
 
 
  8260 0336 4146     		mov	r1, r8
@@ -16258,7 +16258,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  8305              	.LVL1244:
  8306              	.L772:
 5660:Middlewares/Third_Party/FatFs/src/ff.c **** 		if (disk_write(pdrv, buf, b_vol, 1) != RES_OK) return FR_DISK_ERR;	/* Write it to the VBR sector 
-ARM GAS  /tmp/cccTBT9O.s 			page 272
+ARM GAS  /tmp/cc6g2I8d.s 			page 272
 
 
  8307              		.loc 1 5660 0
@@ -16318,7 +16318,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
 5670:Middlewares/Third_Party/FatFs/src/ff.c **** 			st_word(buf + BS_55AA, 0xAA55);
  8354              		.loc 1 5670 0
  8355 03f2 0221     		movs	r1, #2
-ARM GAS  /tmp/cccTBT9O.s 			page 273
+ARM GAS  /tmp/cc6g2I8d.s 			page 273
 
 
  8356 03f4 05F5F670 		add	r0, r5, #492
@@ -16378,7 +16378,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  8402 0448 28BF     		it	cs
  8403 044a 4B46     		movcs	r3, r9
  8404 044c 1E46     		mov	r6, r3
-ARM GAS  /tmp/cccTBT9O.s 			page 274
+ARM GAS  /tmp/cc6g2I8d.s 			page 274
 
 
  8405              	.LVL1259:
@@ -16438,7 +16438,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  8449 049a 0026     		movs	r6, #0
  8450              	.LVL1266:
  8451 049c 85F8BE61 		strb	r6, [r5, #446]
-ARM GAS  /tmp/cccTBT9O.s 			page 275
+ARM GAS  /tmp/cc6g2I8d.s 			page 275
 
 
 5732:Middlewares/Third_Party/FatFs/src/ff.c **** 			pte[PTE_StSec] = 1;					/* Start sector */
@@ -16498,7 +16498,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  8495              	.LVL1271:
  8496              	.L783:
 5746:Middlewares/Third_Party/FatFs/src/ff.c **** 
-ARM GAS  /tmp/cccTBT9O.s 			page 276
+ARM GAS  /tmp/cc6g2I8d.s 			page 276
 
 
  8497              		.loc 1 5746 0
@@ -16558,7 +16558,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  8544              	.LVL1279:
  8545              	.L779:
 5680:Middlewares/Third_Party/FatFs/src/ff.c **** 				st_dword(buf + 0, 0xFFFFFFF8);	/* Entry 0 */
-ARM GAS  /tmp/cccTBT9O.s 			page 277
+ARM GAS  /tmp/cc6g2I8d.s 			page 277
 
 
  8546              		.loc 1 5680 0
@@ -16618,7 +16618,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  8592 059c 039B     		ldr	r3, [sp, #12]
  8593 059e 3B44     		add	r3, r3, r7
  8594 05a0 0393     		str	r3, [sp, #12]
-ARM GAS  /tmp/cccTBT9O.s 			page 278
+ARM GAS  /tmp/cc6g2I8d.s 			page 278
 
 
  8595              	.LVL1287:
@@ -16678,7 +16678,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  8641 05da 4FF00109 		mov	r9, #1
  8642              	.LVL1298:
  8643 05de 4FE7     		b	.L782
-ARM GAS  /tmp/cccTBT9O.s 			page 279
+ARM GAS  /tmp/cc6g2I8d.s 			page 279
 
 
  8644              	.LVL1299:
@@ -16738,7 +16738,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  8690              	.L803:
 5598:Middlewares/Third_Party/FatFs/src/ff.c **** 				}
  8691              		.loc 1 5598 0
-ARM GAS  /tmp/cccTBT9O.s 			page 280
+ARM GAS  /tmp/cc6g2I8d.s 			page 280
 
 
  8692 0600 0E20     		movs	r0, #14
@@ -16798,7 +16798,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  8738              	.L831:
  8739              		.align	2
  8740              	.L830:
-ARM GAS  /tmp/cccTBT9O.s 			page 281
+ARM GAS  /tmp/cc6g2I8d.s 			page 281
 
 
  8741 0624 00000000 		.word	.LC1
@@ -16858,7 +16858,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  8792 0016 6B46     		mov	r3, sp
  8793 0018 0122     		movs	r2, #1
  8794 001a 01A9     		add	r1, sp, #4
-ARM GAS  /tmp/cccTBT9O.s 			page 282
+ARM GAS  /tmp/cc6g2I8d.s 			page 282
 
 
  8795 001c 3846     		mov	r0, r7
@@ -16918,7 +16918,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  8839              	.LVL1328:
  8840              	.L839:
  8841              	.LCFI121:
-ARM GAS  /tmp/cccTBT9O.s 			page 283
+ARM GAS  /tmp/cc6g2I8d.s 			page 283
 
 
  8842              		.cfi_restore_state
@@ -16978,7 +16978,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
 6008:Middlewares/Third_Party/FatFs/src/ff.c **** 	return putc_flush(&pb);
  8883              		.loc 1 6008 0
  8884 0014 01A8     		add	r0, sp, #4
-ARM GAS  /tmp/cccTBT9O.s 			page 284
+ARM GAS  /tmp/cc6g2I8d.s 			page 284
 
 
  8885 0016 FFF7FEFF 		bl	putc_flush
@@ -17038,7 +17038,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  8923 0008 FFF7FEFF 		bl	putc_init
  8924              	.LVL1336:
 6027:Middlewares/Third_Party/FatFs/src/ff.c **** 	while (*str) putc_bfd(&pb, *str++);		/* Put the string */
-ARM GAS  /tmp/cccTBT9O.s 			page 285
+ARM GAS  /tmp/cc6g2I8d.s 			page 285
 
 
  8925              		.loc 1 6027 0
@@ -17098,7 +17098,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  8965              		@ frame_needed = 0, uses_anonymous_args = 1
  8966              	.LVL1340:
  8967 0000 0EB4     		push	{r1, r2, r3}
-ARM GAS  /tmp/cccTBT9O.s 			page 286
+ARM GAS  /tmp/cc6g2I8d.s 			page 286
 
 
  8968              	.LCFI128:
@@ -17158,7 +17158,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  9001 001a 0236     		adds	r6, r6, #2
  9002              	.LVL1344:
  9003 001c 2178     		ldrb	r1, [r4]	@ zero_extendqisi2
-ARM GAS  /tmp/cccTBT9O.s 			page 287
+ARM GAS  /tmp/cc6g2I8d.s 			page 287
 
 
  9004              	.LVL1345:
@@ -17218,7 +17218,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  9046              	.LVL1356:
  9047 0048 0136     		adds	r6, r6, #1
  9048              	.LVL1357:
-ARM GAS  /tmp/cccTBT9O.s 			page 288
+ARM GAS  /tmp/cc6g2I8d.s 			page 288
 
 
  9049              	.L854:
@@ -17278,7 +17278,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  9094 008c 47       		.byte	(.L858-.L860)/2
  9095 008d 47       		.byte	(.L858-.L860)/2
  9096 008e 47       		.byte	(.L858-.L860)/2
-ARM GAS  /tmp/cccTBT9O.s 			page 289
+ARM GAS  /tmp/cc6g2I8d.s 			page 289
 
 
  9097 008f 47       		.byte	(.L858-.L860)/2
@@ -17338,7 +17338,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  9146              	.L870:
 6087:Middlewares/Third_Party/FatFs/src/ff.c **** 				while (j++ < w) putc_bfd(&pb, ' ');
  9147              		.loc 1 6087 0 discriminator 2
-ARM GAS  /tmp/cccTBT9O.s 			page 290
+ARM GAS  /tmp/cc6g2I8d.s 			page 290
 
 
  9148 00c0 2021     		movs	r1, #32
@@ -17398,7 +17398,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  9195              	.LVL1382:
  9196 00fa 1A1D     		adds	r2, r3, #4
  9197 00fc 1B92     		str	r2, [sp, #108]
-ARM GAS  /tmp/cccTBT9O.s 			page 291
+ARM GAS  /tmp/cc6g2I8d.s 			page 291
 
 
  9198 00fe 1978     		ldrb	r1, [r3]	@ zero_extendqisi2
@@ -17458,7 +17458,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
 6114:Middlewares/Third_Party/FatFs/src/ff.c **** 		v = (f & 4) ? (DWORD)va_arg(arp, long) : ((d == 'D') ? (DWORD)(long)va_arg(arp, int) : (DWORD)va_
  9231              		.loc 1 6114 0
  9232 0126 17F0040F 		tst	r7, #4
-ARM GAS  /tmp/cccTBT9O.s 			page 292
+ARM GAS  /tmp/cc6g2I8d.s 			page 292
 
 
  9233 012a 12D1     		bne	.L899
@@ -17518,7 +17518,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  9278              		.loc 1 6122 0
  9279 0166 2724     		movs	r4, #39
  9280              	.L880:
-ARM GAS  /tmp/cccTBT9O.s 			page 293
+ARM GAS  /tmp/cc6g2I8d.s 			page 293
 
 
  9281              		.loc 1 6122 0 is_stmt 0 discriminator 5
@@ -17578,7 +17578,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  9327 01a8 06D0     		beq	.L882
  9328              	.LVL1405:
  9329              		.loc 1 6125 0 is_stmt 0 discriminator 1
-ARM GAS  /tmp/cccTBT9O.s 			page 294
+ARM GAS  /tmp/cc6g2I8d.s 			page 294
 
 
  9330 01aa 1CAB     		add	r3, sp, #112
@@ -17638,7 +17638,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  9379 01ec 13F8701C 		ldrb	r1, [r3, #-112]	@ zero_extendqisi2
  9380 01f0 08A8     		add	r0, sp, #32
  9381 01f2 FFF7FEFF 		bl	putc_bfd
-ARM GAS  /tmp/cccTBT9O.s 			page 295
+ARM GAS  /tmp/cc6g2I8d.s 			page 295
 
 
  9382              	.LVL1415:
@@ -17698,7 +17698,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
 6136:Middlewares/Third_Party/FatFs/src/ff.c **** 	return putc_flush(&pb);
  9424              		.loc 1 6136 0
  9425 0224 08A8     		add	r0, sp, #32
-ARM GAS  /tmp/cccTBT9O.s 			page 296
+ARM GAS  /tmp/cc6g2I8d.s 			page 296
 
 
  9426 0226 FFF7FEFF 		bl	putc_flush
@@ -17758,7 +17758,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  9484 0003 41       		.byte	65
  9485 0004 41       		.byte	65
  9486 0005 41       		.byte	65
-ARM GAS  /tmp/cccTBT9O.s 			page 297
+ARM GAS  /tmp/cc6g2I8d.s 			page 297
 
 
  9487 0006 41       		.byte	65
@@ -17818,7 +17818,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  9541 003c BC       		.byte	-68
  9542 003d BD       		.byte	-67
  9543 003e BE       		.byte	-66
-ARM GAS  /tmp/cccTBT9O.s 			page 298
+ARM GAS  /tmp/cc6g2I8d.s 			page 298
 
 
  9544 003f BF       		.byte	-65
@@ -17878,7 +17878,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  9598 0075 F5       		.byte	-11
  9599 0076 F6       		.byte	-10
  9600 0077 F7       		.byte	-9
-ARM GAS  /tmp/cccTBT9O.s 			page 299
+ARM GAS  /tmp/cc6g2I8d.s 			page 299
 
 
  9601 0078 F8       		.byte	-8
@@ -17938,7 +17938,7 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  9646      20202000 
  9647              		.text
  9648              	.Letext0:
-ARM GAS  /tmp/cccTBT9O.s 			page 300
+ARM GAS  /tmp/cc6g2I8d.s 			page 300
 
 
  9649              		.file 2 "Middlewares/Third_Party/FatFs/src/integer.h"
@@ -17956,172 +17956,172 @@ ARM GAS  /tmp/cccTBT9O.s 			page 1
  9661              		.file 14 "Middlewares/Third_Party/FatFs/src/diskio.h"
  9662              		.file 15 "/usr/lib/gcc/arm-none-eabi/6.3.1/include/stdarg.h"
  9663              		.file 16 "<built-in>"
-ARM GAS  /tmp/cccTBT9O.s 			page 301
+ARM GAS  /tmp/cc6g2I8d.s 			page 301
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 ff.c
-     /tmp/cccTBT9O.s:17     .text.ld_word:0000000000000000 $t
-     /tmp/cccTBT9O.s:23     .text.ld_word:0000000000000000 ld_word
-     /tmp/cccTBT9O.s:46     .text.ld_dword:0000000000000000 $t
-     /tmp/cccTBT9O.s:52     .text.ld_dword:0000000000000000 ld_dword
-     /tmp/cccTBT9O.s:82     .text.st_word:0000000000000000 $t
-     /tmp/cccTBT9O.s:88     .text.st_word:0000000000000000 st_word
-     /tmp/cccTBT9O.s:108    .text.st_dword:0000000000000000 $t
-     /tmp/cccTBT9O.s:114    .text.st_dword:0000000000000000 st_dword
-     /tmp/cccTBT9O.s:142    .text.mem_cpy:0000000000000000 $t
-     /tmp/cccTBT9O.s:148    .text.mem_cpy:0000000000000000 mem_cpy
-     /tmp/cccTBT9O.s:179    .text.mem_set:0000000000000000 $t
-     /tmp/cccTBT9O.s:185    .text.mem_set:0000000000000000 mem_set
-     /tmp/cccTBT9O.s:209    .text.mem_cmp:0000000000000000 $t
-     /tmp/cccTBT9O.s:215    .text.mem_cmp:0000000000000000 mem_cmp
-     /tmp/cccTBT9O.s:265    .text.chk_chr:0000000000000000 $t
-     /tmp/cccTBT9O.s:271    .text.chk_chr:0000000000000000 chk_chr
-     /tmp/cccTBT9O.s:301    .text.chk_lock:0000000000000000 $t
-     /tmp/cccTBT9O.s:307    .text.chk_lock:0000000000000000 chk_lock
-     /tmp/cccTBT9O.s:420    .text.chk_lock:0000000000000070 $d
-     /tmp/cccTBT9O.s:425    .text.enq_lock:0000000000000000 $t
-     /tmp/cccTBT9O.s:431    .text.enq_lock:0000000000000000 enq_lock
-     /tmp/cccTBT9O.s:468    .text.enq_lock:000000000000001c $d
-     /tmp/cccTBT9O.s:473    .text.inc_lock:0000000000000000 $t
-     /tmp/cccTBT9O.s:479    .text.inc_lock:0000000000000000 inc_lock
-     /tmp/cccTBT9O.s:631    .text.inc_lock:00000000000000a0 $d
-     /tmp/cccTBT9O.s:636    .text.dec_lock:0000000000000000 $t
-     /tmp/cccTBT9O.s:642    .text.dec_lock:0000000000000000 dec_lock
-     /tmp/cccTBT9O.s:710    .text.dec_lock:000000000000003c $d
-     /tmp/cccTBT9O.s:715    .text.clear_lock:0000000000000000 $t
-     /tmp/cccTBT9O.s:721    .text.clear_lock:0000000000000000 clear_lock
-     /tmp/cccTBT9O.s:787    .text.clear_lock:0000000000000038 $d
-     /tmp/cccTBT9O.s:792    .text.clust2sect:0000000000000000 $t
-     /tmp/cccTBT9O.s:798    .text.clust2sect:0000000000000000 clust2sect
-     /tmp/cccTBT9O.s:831    .text.clmt_clust:0000000000000000 $t
-     /tmp/cccTBT9O.s:837    .text.clmt_clust:0000000000000000 clmt_clust
-     /tmp/cccTBT9O.s:888    .text.ld_clust:0000000000000000 $t
-     /tmp/cccTBT9O.s:894    .text.ld_clust:0000000000000000 ld_clust
-     /tmp/cccTBT9O.s:939    .text.st_clust:0000000000000000 $t
-     /tmp/cccTBT9O.s:945    .text.st_clust:0000000000000000 st_clust
-     /tmp/cccTBT9O.s:988    .text.get_fileinfo:0000000000000000 $t
-     /tmp/cccTBT9O.s:994    .text.get_fileinfo:0000000000000000 get_fileinfo
-     /tmp/cccTBT9O.s:1106   .text.create_name:0000000000000000 $t
-     /tmp/cccTBT9O.s:1112   .text.create_name:0000000000000000 create_name
-     /tmp/cccTBT9O.s:1292   .text.create_name:00000000000000d4 $d
-     /tmp/cccTBT9O.s:1298   .text.get_ldnumber:0000000000000000 $t
-     /tmp/cccTBT9O.s:1304   .text.get_ldnumber:0000000000000000 get_ldnumber
-     /tmp/cccTBT9O.s:1399   .text.putc_init:0000000000000000 $t
-     /tmp/cccTBT9O.s:1405   .text.putc_init:0000000000000000 putc_init
-     /tmp/cccTBT9O.s:1424   .text.validate:0000000000000000 $t
-     /tmp/cccTBT9O.s:1430   .text.validate:0000000000000000 validate
-     /tmp/cccTBT9O.s:1516   .text.sync_window:0000000000000000 $t
-     /tmp/cccTBT9O.s:1522   .text.sync_window:0000000000000000 sync_window
-     /tmp/cccTBT9O.s:1613   .text.move_window:0000000000000000 $t
-     /tmp/cccTBT9O.s:1619   .text.move_window:0000000000000000 move_window
-     /tmp/cccTBT9O.s:1680   .text.check_fs:0000000000000000 $t
-ARM GAS  /tmp/cccTBT9O.s 			page 302
+     /tmp/cc6g2I8d.s:17     .text.ld_word:0000000000000000 $t
+     /tmp/cc6g2I8d.s:23     .text.ld_word:0000000000000000 ld_word
+     /tmp/cc6g2I8d.s:46     .text.ld_dword:0000000000000000 $t
+     /tmp/cc6g2I8d.s:52     .text.ld_dword:0000000000000000 ld_dword
+     /tmp/cc6g2I8d.s:82     .text.st_word:0000000000000000 $t
+     /tmp/cc6g2I8d.s:88     .text.st_word:0000000000000000 st_word
+     /tmp/cc6g2I8d.s:108    .text.st_dword:0000000000000000 $t
+     /tmp/cc6g2I8d.s:114    .text.st_dword:0000000000000000 st_dword
+     /tmp/cc6g2I8d.s:142    .text.mem_cpy:0000000000000000 $t
+     /tmp/cc6g2I8d.s:148    .text.mem_cpy:0000000000000000 mem_cpy
+     /tmp/cc6g2I8d.s:179    .text.mem_set:0000000000000000 $t
+     /tmp/cc6g2I8d.s:185    .text.mem_set:0000000000000000 mem_set
+     /tmp/cc6g2I8d.s:209    .text.mem_cmp:0000000000000000 $t
+     /tmp/cc6g2I8d.s:215    .text.mem_cmp:0000000000000000 mem_cmp
+     /tmp/cc6g2I8d.s:265    .text.chk_chr:0000000000000000 $t
+     /tmp/cc6g2I8d.s:271    .text.chk_chr:0000000000000000 chk_chr
+     /tmp/cc6g2I8d.s:301    .text.chk_lock:0000000000000000 $t
+     /tmp/cc6g2I8d.s:307    .text.chk_lock:0000000000000000 chk_lock
+     /tmp/cc6g2I8d.s:420    .text.chk_lock:0000000000000070 $d
+     /tmp/cc6g2I8d.s:425    .text.enq_lock:0000000000000000 $t
+     /tmp/cc6g2I8d.s:431    .text.enq_lock:0000000000000000 enq_lock
+     /tmp/cc6g2I8d.s:468    .text.enq_lock:000000000000001c $d
+     /tmp/cc6g2I8d.s:473    .text.inc_lock:0000000000000000 $t
+     /tmp/cc6g2I8d.s:479    .text.inc_lock:0000000000000000 inc_lock
+     /tmp/cc6g2I8d.s:631    .text.inc_lock:00000000000000a0 $d
+     /tmp/cc6g2I8d.s:636    .text.dec_lock:0000000000000000 $t
+     /tmp/cc6g2I8d.s:642    .text.dec_lock:0000000000000000 dec_lock
+     /tmp/cc6g2I8d.s:710    .text.dec_lock:000000000000003c $d
+     /tmp/cc6g2I8d.s:715    .text.clear_lock:0000000000000000 $t
+     /tmp/cc6g2I8d.s:721    .text.clear_lock:0000000000000000 clear_lock
+     /tmp/cc6g2I8d.s:787    .text.clear_lock:0000000000000038 $d
+     /tmp/cc6g2I8d.s:792    .text.clust2sect:0000000000000000 $t
+     /tmp/cc6g2I8d.s:798    .text.clust2sect:0000000000000000 clust2sect
+     /tmp/cc6g2I8d.s:831    .text.clmt_clust:0000000000000000 $t
+     /tmp/cc6g2I8d.s:837    .text.clmt_clust:0000000000000000 clmt_clust
+     /tmp/cc6g2I8d.s:888    .text.ld_clust:0000000000000000 $t
+     /tmp/cc6g2I8d.s:894    .text.ld_clust:0000000000000000 ld_clust
+     /tmp/cc6g2I8d.s:939    .text.st_clust:0000000000000000 $t
+     /tmp/cc6g2I8d.s:945    .text.st_clust:0000000000000000 st_clust
+     /tmp/cc6g2I8d.s:988    .text.get_fileinfo:0000000000000000 $t
+     /tmp/cc6g2I8d.s:994    .text.get_fileinfo:0000000000000000 get_fileinfo
+     /tmp/cc6g2I8d.s:1106   .text.create_name:0000000000000000 $t
+     /tmp/cc6g2I8d.s:1112   .text.create_name:0000000000000000 create_name
+     /tmp/cc6g2I8d.s:1292   .text.create_name:00000000000000d4 $d
+     /tmp/cc6g2I8d.s:1298   .text.get_ldnumber:0000000000000000 $t
+     /tmp/cc6g2I8d.s:1304   .text.get_ldnumber:0000000000000000 get_ldnumber
+     /tmp/cc6g2I8d.s:1399   .text.putc_init:0000000000000000 $t
+     /tmp/cc6g2I8d.s:1405   .text.putc_init:0000000000000000 putc_init
+     /tmp/cc6g2I8d.s:1424   .text.validate:0000000000000000 $t
+     /tmp/cc6g2I8d.s:1430   .text.validate:0000000000000000 validate
+     /tmp/cc6g2I8d.s:1516   .text.sync_window:0000000000000000 $t
+     /tmp/cc6g2I8d.s:1522   .text.sync_window:0000000000000000 sync_window
+     /tmp/cc6g2I8d.s:1613   .text.move_window:0000000000000000 $t
+     /tmp/cc6g2I8d.s:1619   .text.move_window:0000000000000000 move_window
+     /tmp/cc6g2I8d.s:1680   .text.check_fs:0000000000000000 $t
+ARM GAS  /tmp/cc6g2I8d.s 			page 302
 
 
-     /tmp/cccTBT9O.s:1686   .text.check_fs:0000000000000000 check_fs
-     /tmp/cccTBT9O.s:1771   .text.check_fs:0000000000000070 $d
-     /tmp/cccTBT9O.s:1778   .text.find_volume:0000000000000000 $t
-     /tmp/cccTBT9O.s:1784   .text.find_volume:0000000000000000 find_volume
-     /tmp/cccTBT9O.s:2328   .text.find_volume:00000000000002c0 $d
-     /tmp/cccTBT9O.s:2336   .text.put_fat:0000000000000000 $t
-     /tmp/cccTBT9O.s:2342   .text.put_fat:0000000000000000 put_fat
-     /tmp/cccTBT9O.s:2540   .text.get_fat:0000000000000000 $t
-     /tmp/cccTBT9O.s:2546   .text.get_fat:0000000000000000 get_fat
-     /tmp/cccTBT9O.s:2712   .text.dir_sdi:0000000000000000 $t
-     /tmp/cccTBT9O.s:2718   .text.dir_sdi:0000000000000000 dir_sdi
-     /tmp/cccTBT9O.s:2874   .text.create_chain:0000000000000000 $t
-     /tmp/cccTBT9O.s:2880   .text.create_chain:0000000000000000 create_chain
-     /tmp/cccTBT9O.s:3065   .text.remove_chain:0000000000000000 $t
-     /tmp/cccTBT9O.s:3071   .text.remove_chain:0000000000000000 remove_chain
-     /tmp/cccTBT9O.s:3193   .text.dir_remove:0000000000000000 $t
-     /tmp/cccTBT9O.s:3199   .text.dir_remove:0000000000000000 dir_remove
-     /tmp/cccTBT9O.s:3242   .text.dir_next:0000000000000000 $t
-     /tmp/cccTBT9O.s:3248   .text.dir_next:0000000000000000 dir_next
-     /tmp/cccTBT9O.s:3475   .text.dir_find:0000000000000000 $t
-     /tmp/cccTBT9O.s:3481   .text.dir_find:0000000000000000 dir_find
-     /tmp/cccTBT9O.s:3567   .text.follow_path:0000000000000000 $t
-     /tmp/cccTBT9O.s:3573   .text.follow_path:0000000000000000 follow_path
-     /tmp/cccTBT9O.s:3699   .text.dir_alloc:0000000000000000 $t
-     /tmp/cccTBT9O.s:3705   .text.dir_alloc:0000000000000000 dir_alloc
-     /tmp/cccTBT9O.s:3794   .text.dir_register:0000000000000000 $t
-     /tmp/cccTBT9O.s:3800   .text.dir_register:0000000000000000 dir_register
-     /tmp/cccTBT9O.s:3863   .text.dir_read:0000000000000000 $t
-     /tmp/cccTBT9O.s:3869   .text.dir_read:0000000000000000 dir_read
-     /tmp/cccTBT9O.s:3966   .text.sync_fs:0000000000000000 $t
-     /tmp/cccTBT9O.s:3972   .text.sync_fs:0000000000000000 sync_fs
-     /tmp/cccTBT9O.s:4068   .text.sync_fs:0000000000000084 $d
-     /tmp/cccTBT9O.s:4074   .text.f_mount:0000000000000000 $t
-     /tmp/cccTBT9O.s:4081   .text.f_mount:0000000000000000 f_mount
-     /tmp/cccTBT9O.s:4172   .text.f_mount:0000000000000064 $d
-     /tmp/cccTBT9O.s:4177   .text.f_open:0000000000000000 $t
-     /tmp/cccTBT9O.s:4184   .text.f_open:0000000000000000 f_open
-     /tmp/cccTBT9O.s:4612   .text.f_read:0000000000000000 $t
-     /tmp/cccTBT9O.s:4619   .text.f_read:0000000000000000 f_read
-     /tmp/cccTBT9O.s:4924   .text.f_write:0000000000000000 $t
-     /tmp/cccTBT9O.s:4931   .text.f_write:0000000000000000 f_write
-     /tmp/cccTBT9O.s:5271   .text.putc_bfd:0000000000000000 $t
-     /tmp/cccTBT9O.s:5277   .text.putc_bfd:0000000000000000 putc_bfd
-     /tmp/cccTBT9O.s:5367   .text.putc_flush:0000000000000000 $t
-     /tmp/cccTBT9O.s:5373   .text.putc_flush:0000000000000000 putc_flush
-     /tmp/cccTBT9O.s:5441   .text.f_sync:0000000000000000 $t
-     /tmp/cccTBT9O.s:5448   .text.f_sync:0000000000000000 f_sync
-     /tmp/cccTBT9O.s:5580   .text.f_close:0000000000000000 $t
-     /tmp/cccTBT9O.s:5587   .text.f_close:0000000000000000 f_close
-     /tmp/cccTBT9O.s:5650   .text.f_lseek:0000000000000000 $t
-     /tmp/cccTBT9O.s:5657   .text.f_lseek:0000000000000000 f_lseek
-     /tmp/cccTBT9O.s:6182   .text.f_opendir:0000000000000000 $t
-     /tmp/cccTBT9O.s:6189   .text.f_opendir:0000000000000000 f_opendir
-     /tmp/cccTBT9O.s:6329   .text.f_closedir:0000000000000000 $t
-     /tmp/cccTBT9O.s:6336   .text.f_closedir:0000000000000000 f_closedir
-     /tmp/cccTBT9O.s:6394   .text.f_readdir:0000000000000000 $t
-     /tmp/cccTBT9O.s:6401   .text.f_readdir:0000000000000000 f_readdir
-ARM GAS  /tmp/cccTBT9O.s 			page 303
+     /tmp/cc6g2I8d.s:1686   .text.check_fs:0000000000000000 check_fs
+     /tmp/cc6g2I8d.s:1771   .text.check_fs:0000000000000070 $d
+     /tmp/cc6g2I8d.s:1778   .text.find_volume:0000000000000000 $t
+     /tmp/cc6g2I8d.s:1784   .text.find_volume:0000000000000000 find_volume
+     /tmp/cc6g2I8d.s:2328   .text.find_volume:00000000000002c0 $d
+     /tmp/cc6g2I8d.s:2336   .text.put_fat:0000000000000000 $t
+     /tmp/cc6g2I8d.s:2342   .text.put_fat:0000000000000000 put_fat
+     /tmp/cc6g2I8d.s:2540   .text.get_fat:0000000000000000 $t
+     /tmp/cc6g2I8d.s:2546   .text.get_fat:0000000000000000 get_fat
+     /tmp/cc6g2I8d.s:2712   .text.dir_sdi:0000000000000000 $t
+     /tmp/cc6g2I8d.s:2718   .text.dir_sdi:0000000000000000 dir_sdi
+     /tmp/cc6g2I8d.s:2874   .text.create_chain:0000000000000000 $t
+     /tmp/cc6g2I8d.s:2880   .text.create_chain:0000000000000000 create_chain
+     /tmp/cc6g2I8d.s:3065   .text.remove_chain:0000000000000000 $t
+     /tmp/cc6g2I8d.s:3071   .text.remove_chain:0000000000000000 remove_chain
+     /tmp/cc6g2I8d.s:3193   .text.dir_remove:0000000000000000 $t
+     /tmp/cc6g2I8d.s:3199   .text.dir_remove:0000000000000000 dir_remove
+     /tmp/cc6g2I8d.s:3242   .text.dir_next:0000000000000000 $t
+     /tmp/cc6g2I8d.s:3248   .text.dir_next:0000000000000000 dir_next
+     /tmp/cc6g2I8d.s:3475   .text.dir_find:0000000000000000 $t
+     /tmp/cc6g2I8d.s:3481   .text.dir_find:0000000000000000 dir_find
+     /tmp/cc6g2I8d.s:3567   .text.follow_path:0000000000000000 $t
+     /tmp/cc6g2I8d.s:3573   .text.follow_path:0000000000000000 follow_path
+     /tmp/cc6g2I8d.s:3699   .text.dir_alloc:0000000000000000 $t
+     /tmp/cc6g2I8d.s:3705   .text.dir_alloc:0000000000000000 dir_alloc
+     /tmp/cc6g2I8d.s:3794   .text.dir_register:0000000000000000 $t
+     /tmp/cc6g2I8d.s:3800   .text.dir_register:0000000000000000 dir_register
+     /tmp/cc6g2I8d.s:3863   .text.dir_read:0000000000000000 $t
+     /tmp/cc6g2I8d.s:3869   .text.dir_read:0000000000000000 dir_read
+     /tmp/cc6g2I8d.s:3966   .text.sync_fs:0000000000000000 $t
+     /tmp/cc6g2I8d.s:3972   .text.sync_fs:0000000000000000 sync_fs
+     /tmp/cc6g2I8d.s:4068   .text.sync_fs:0000000000000084 $d
+     /tmp/cc6g2I8d.s:4074   .text.f_mount:0000000000000000 $t
+     /tmp/cc6g2I8d.s:4081   .text.f_mount:0000000000000000 f_mount
+     /tmp/cc6g2I8d.s:4172   .text.f_mount:0000000000000064 $d
+     /tmp/cc6g2I8d.s:4177   .text.f_open:0000000000000000 $t
+     /tmp/cc6g2I8d.s:4184   .text.f_open:0000000000000000 f_open
+     /tmp/cc6g2I8d.s:4612   .text.f_read:0000000000000000 $t
+     /tmp/cc6g2I8d.s:4619   .text.f_read:0000000000000000 f_read
+     /tmp/cc6g2I8d.s:4924   .text.f_write:0000000000000000 $t
+     /tmp/cc6g2I8d.s:4931   .text.f_write:0000000000000000 f_write
+     /tmp/cc6g2I8d.s:5271   .text.putc_bfd:0000000000000000 $t
+     /tmp/cc6g2I8d.s:5277   .text.putc_bfd:0000000000000000 putc_bfd
+     /tmp/cc6g2I8d.s:5367   .text.putc_flush:0000000000000000 $t
+     /tmp/cc6g2I8d.s:5373   .text.putc_flush:0000000000000000 putc_flush
+     /tmp/cc6g2I8d.s:5441   .text.f_sync:0000000000000000 $t
+     /tmp/cc6g2I8d.s:5448   .text.f_sync:0000000000000000 f_sync
+     /tmp/cc6g2I8d.s:5580   .text.f_close:0000000000000000 $t
+     /tmp/cc6g2I8d.s:5587   .text.f_close:0000000000000000 f_close
+     /tmp/cc6g2I8d.s:5650   .text.f_lseek:0000000000000000 $t
+     /tmp/cc6g2I8d.s:5657   .text.f_lseek:0000000000000000 f_lseek
+     /tmp/cc6g2I8d.s:6182   .text.f_opendir:0000000000000000 $t
+     /tmp/cc6g2I8d.s:6189   .text.f_opendir:0000000000000000 f_opendir
+     /tmp/cc6g2I8d.s:6329   .text.f_closedir:0000000000000000 $t
+     /tmp/cc6g2I8d.s:6336   .text.f_closedir:0000000000000000 f_closedir
+     /tmp/cc6g2I8d.s:6394   .text.f_readdir:0000000000000000 $t
+     /tmp/cc6g2I8d.s:6401   .text.f_readdir:0000000000000000 f_readdir
+ARM GAS  /tmp/cc6g2I8d.s 			page 303
 
 
-     /tmp/cccTBT9O.s:6489   .text.f_stat:0000000000000000 $t
-     /tmp/cccTBT9O.s:6496   .text.f_stat:0000000000000000 f_stat
-     /tmp/cccTBT9O.s:6572   .text.f_getfree:0000000000000000 $t
-     /tmp/cccTBT9O.s:6579   .text.f_getfree:0000000000000000 f_getfree
-     /tmp/cccTBT9O.s:6793   .text.f_truncate:0000000000000000 $t
-     /tmp/cccTBT9O.s:6800   .text.f_truncate:0000000000000000 f_truncate
-     /tmp/cccTBT9O.s:6956   .text.f_unlink:0000000000000000 $t
-     /tmp/cccTBT9O.s:6963   .text.f_unlink:0000000000000000 f_unlink
-     /tmp/cccTBT9O.s:7145   .text.f_mkdir:0000000000000000 $t
-     /tmp/cccTBT9O.s:7152   .text.f_mkdir:0000000000000000 f_mkdir
-     /tmp/cccTBT9O.s:7451   .text.f_rename:0000000000000000 $t
-     /tmp/cccTBT9O.s:7458   .text.f_rename:0000000000000000 f_rename
-     /tmp/cccTBT9O.s:7689   .text.f_mkfs:0000000000000000 $t
-     /tmp/cccTBT9O.s:7696   .text.f_mkfs:0000000000000000 f_mkfs
-     /tmp/cccTBT9O.s:8180   .text.f_mkfs:0000000000000294 $d
-     /tmp/cccTBT9O.s:8189   .text.f_mkfs:00000000000002ac $t
-     /tmp/cccTBT9O.s:8741   .text.f_mkfs:0000000000000624 $d
-     /tmp/cccTBT9O.s:8751   .text.f_gets:0000000000000000 $t
-     /tmp/cccTBT9O.s:8758   .text.f_gets:0000000000000000 f_gets
-     /tmp/cccTBT9O.s:8850   .text.f_putc:0000000000000000 $t
-     /tmp/cccTBT9O.s:8857   .text.f_putc:0000000000000000 f_putc
-     /tmp/cccTBT9O.s:8897   .text.f_puts:0000000000000000 $t
-     /tmp/cccTBT9O.s:8904   .text.f_puts:0000000000000000 f_puts
-     /tmp/cccTBT9O.s:8953   .text.f_printf:0000000000000000 $t
-     /tmp/cccTBT9O.s:8960   .text.f_printf:0000000000000000 f_printf
-     /tmp/cccTBT9O.s:9088   .text.f_printf:0000000000000086 $d
-     /tmp/cccTBT9O.s:9455   .bss.FatFs:0000000000000000 $d
-     /tmp/cccTBT9O.s:9459   .bss.FatFs:0000000000000000 FatFs
-     /tmp/cccTBT9O.s:9462   .bss.Files:0000000000000000 $d
-     /tmp/cccTBT9O.s:9466   .bss.Files:0000000000000000 Files
-     /tmp/cccTBT9O.s:9469   .bss.Fsid:0000000000000000 $d
-     /tmp/cccTBT9O.s:9473   .bss.Fsid:0000000000000000 Fsid
-     /tmp/cccTBT9O.s:9476   .rodata.ExCvt:0000000000000000 $d
-     /tmp/cccTBT9O.s:9480   .rodata.ExCvt:0000000000000000 ExCvt
-     /tmp/cccTBT9O.s:9610   .rodata.create_name.str1.4:0000000000000000 $d
-     /tmp/cccTBT9O.s:9614   .rodata.cst.10499:0000000000000000 $d
-     /tmp/cccTBT9O.s:9618   .rodata.cst.10499:0000000000000000 cst.10499
-     /tmp/cccTBT9O.s:9627   .rodata.cst32.10500:0000000000000000 $d
-     /tmp/cccTBT9O.s:9631   .rodata.cst32.10500:0000000000000000 cst32.10500
-     /tmp/cccTBT9O.s:9640   .rodata.f_mkfs.str1.4:0000000000000000 $d
+     /tmp/cc6g2I8d.s:6489   .text.f_stat:0000000000000000 $t
+     /tmp/cc6g2I8d.s:6496   .text.f_stat:0000000000000000 f_stat
+     /tmp/cc6g2I8d.s:6572   .text.f_getfree:0000000000000000 $t
+     /tmp/cc6g2I8d.s:6579   .text.f_getfree:0000000000000000 f_getfree
+     /tmp/cc6g2I8d.s:6793   .text.f_truncate:0000000000000000 $t
+     /tmp/cc6g2I8d.s:6800   .text.f_truncate:0000000000000000 f_truncate
+     /tmp/cc6g2I8d.s:6956   .text.f_unlink:0000000000000000 $t
+     /tmp/cc6g2I8d.s:6963   .text.f_unlink:0000000000000000 f_unlink
+     /tmp/cc6g2I8d.s:7145   .text.f_mkdir:0000000000000000 $t
+     /tmp/cc6g2I8d.s:7152   .text.f_mkdir:0000000000000000 f_mkdir
+     /tmp/cc6g2I8d.s:7451   .text.f_rename:0000000000000000 $t
+     /tmp/cc6g2I8d.s:7458   .text.f_rename:0000000000000000 f_rename
+     /tmp/cc6g2I8d.s:7689   .text.f_mkfs:0000000000000000 $t
+     /tmp/cc6g2I8d.s:7696   .text.f_mkfs:0000000000000000 f_mkfs
+     /tmp/cc6g2I8d.s:8180   .text.f_mkfs:0000000000000294 $d
+     /tmp/cc6g2I8d.s:8189   .text.f_mkfs:00000000000002ac $t
+     /tmp/cc6g2I8d.s:8741   .text.f_mkfs:0000000000000624 $d
+     /tmp/cc6g2I8d.s:8751   .text.f_gets:0000000000000000 $t
+     /tmp/cc6g2I8d.s:8758   .text.f_gets:0000000000000000 f_gets
+     /tmp/cc6g2I8d.s:8850   .text.f_putc:0000000000000000 $t
+     /tmp/cc6g2I8d.s:8857   .text.f_putc:0000000000000000 f_putc
+     /tmp/cc6g2I8d.s:8897   .text.f_puts:0000000000000000 $t
+     /tmp/cc6g2I8d.s:8904   .text.f_puts:0000000000000000 f_puts
+     /tmp/cc6g2I8d.s:8953   .text.f_printf:0000000000000000 $t
+     /tmp/cc6g2I8d.s:8960   .text.f_printf:0000000000000000 f_printf
+     /tmp/cc6g2I8d.s:9088   .text.f_printf:0000000000000086 $d
+     /tmp/cc6g2I8d.s:9455   .bss.FatFs:0000000000000000 $d
+     /tmp/cc6g2I8d.s:9459   .bss.FatFs:0000000000000000 FatFs
+     /tmp/cc6g2I8d.s:9462   .bss.Files:0000000000000000 $d
+     /tmp/cc6g2I8d.s:9466   .bss.Files:0000000000000000 Files
+     /tmp/cc6g2I8d.s:9469   .bss.Fsid:0000000000000000 $d
+     /tmp/cc6g2I8d.s:9473   .bss.Fsid:0000000000000000 Fsid
+     /tmp/cc6g2I8d.s:9476   .rodata.ExCvt:0000000000000000 $d
+     /tmp/cc6g2I8d.s:9480   .rodata.ExCvt:0000000000000000 ExCvt
+     /tmp/cc6g2I8d.s:9610   .rodata.create_name.str1.4:0000000000000000 $d
+     /tmp/cc6g2I8d.s:9614   .rodata.cst.10499:0000000000000000 $d
+     /tmp/cc6g2I8d.s:9618   .rodata.cst.10499:0000000000000000 cst.10499
+     /tmp/cc6g2I8d.s:9627   .rodata.cst32.10500:0000000000000000 $d
+     /tmp/cc6g2I8d.s:9631   .rodata.cst32.10500:0000000000000000 cst32.10500
+     /tmp/cc6g2I8d.s:9640   .rodata.f_mkfs.str1.4:0000000000000000 $d
                      .debug_frame:0000000000000010 $d
-     /tmp/cccTBT9O.s:9112   .text.f_printf:000000000000009d $d
-     /tmp/cccTBT9O.s:9112   .text.f_printf:000000000000009e $t
+     /tmp/cc6g2I8d.s:9112   .text.f_printf:000000000000009d $d
+     /tmp/cc6g2I8d.s:9112   .text.f_printf:000000000000009e $t
 
 UNDEFINED SYMBOLS
 disk_status
