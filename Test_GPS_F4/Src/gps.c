@@ -5,8 +5,9 @@ int start_string_gps = 0;
 char string_gps[100];
 int cont_string, cont_comma;
 char data_string_gps;
+int msg_arrived_s = 0;
 extern char buffer_gps[50];
-extern volatile int msg_arrived;
+extern int msg_arrived;
 extern gps_struct gps;
 extern char msg_gps[3];
 extern UART_HandleTypeDef huart2;
@@ -101,27 +102,29 @@ int gps_read(UART_HandleTypeDef *huart, gps_struct *gps)
 				http://aprs.gids.nl/nmea/
 			*/
     //check if it's the huart_gps interrupt
-    int msg_arrived_s = msg_arrived;
-    msg_arrived = 0;
+    
     char buffer_gps_s[50]; 
     //HAL_UART_Transmit(&huart2,(uint8_t*)&buffer_gps[0],1,10);
-    if(msg_arrived_s > 0){
-        for(int i = 0; i < msg_arrived_s; i++){
+    if(msg_arrived > 0){
+        for(int i = 0; i < msg_arrived; i++){
             buffer_gps_s[i] = buffer_gps[i];
-            //HAL_UART_Transmit(&huart2,(uint8_t*)&buffer_gps[0],1,10);
+            //HAL_UART_Transmit(&huart2,(uint8_t*)&buffer_gps_s[i],1,10);
         }
-        for(int j = 0; j < msg_arrived_s; j++){
+        for(int j = 0; j < msg_arrived; j++){
             data_string_gps = buffer_gps_s[j];
-            
             if ((start_string_gps == 1) && (data_string_gps != '$'))
             {											   //check that the new string has not started yet
                 string_gps[cont_string] = data_string_gps; //save the data into the array
                 cont_string++;
-                if (string_gps[cont_string - 1] == '\r' || string_gps[cont_string - 1] == '\n')
+                if (string_gps[cont_string - 2] == '\r' && string_gps[cont_string - 1] == '\n')
                 { //indicates that the string is finishing
-                    cont_string--;
+                    cont_string = cont_string -2;
                     string_gps[cont_string] = '\0'; // '\0'=end of the string
-                    start_string_gps = 0;			//end of string
+                    start_string_gps = 0;	
+                    		//end of string
+                            char txt[100];
+                        sprintf(txt, "%s\r\n", string_gps);
+                        HAL_UART_Transmit(&huart2, (uint8_t*)txt, strlen(txt), 10);
                     if (string_gps[2] == 'G' && string_gps[3] == 'G' && string_gps[4] == 'A')
                     { // operation when the string is GPGGA //
                         //memcpy(gps->string, "", 100);
@@ -226,17 +229,23 @@ int gps_read(UART_HandleTypeDef *huart, gps_struct *gps)
                     }
                     else if (string_gps[2] == 'V' && string_gps[3] == 'T' && string_gps[4] == 'G')
                     { // operation when the string is GPVTG //
+                        
                         if (checksum(string_gps, cont_string) == 1)
                         { //check the checksum (if==true -> enter)
                             cont_comma = 0;
                             int cont_speed = 0;
+                            int cont_true_track_mode = 0;
                             for (int i = 5; i < cont_string; i++)
                             {
                                 if (string_gps[i] == ',')
                                     cont_comma++;
                                 else
                                 {
-                                    if (cont_comma == 7)
+                                    if (cont_comma == 1){
+                                        gps->true_track_mode[cont_true_track_mode] = string_gps[i];
+                                        cont_true_track_mode++;
+                                    }
+                                    else if (cont_comma == 7)
                                     { //save the speed
                                         gps->speed[cont_speed] = string_gps[i];
                                         cont_speed++;
@@ -259,7 +268,9 @@ int gps_read(UART_HandleTypeDef *huart, gps_struct *gps)
                             {
                                 char txt[100];
                                 gps->speed_i = (int)(atof(gps->speed) * 100);
-                                sprintf(txt,"longitude %d",gps->speed_i);
+                                gps->true_track_mode_i = (int)(atof(gps->true_track_mode)*10);
+                                
+                                sprintf(txt,"speed: %d",gps->speed_i);
                                 HAL_UART_Transmit(&huart2,(uint8_t*)txt,strlen(txt),10);
                             }
 
@@ -274,6 +285,10 @@ int gps_read(UART_HandleTypeDef *huart, gps_struct *gps)
                         }
                     }
                     strcpy(string_gps, "");
+                    cont_string = 0;
+
+                    
+                    
                 }
             }
             else
@@ -285,6 +300,7 @@ int gps_read(UART_HandleTypeDef *huart, gps_struct *gps)
                 }
             }
         }
+        msg_arrived = 0;
         //data_string_gps = buffer_gps[0];						  //convert a pointer into a char
     }
 	return ret;
@@ -305,8 +321,9 @@ static int checksum(char *string_checksum, int size_string_checksum)
 	}
 	char check[2] = {string_checksum[i + 1], string_checksum[i + 2]};
 	char res_char[3];
-	sprintf(res_char, "%x", res);
-    HAL_UART_Transmit(&huart2, (uint8_t*)string_checksum, size_string_checksum, 10);
+	sprintf(res_char, "  %x  ", res);
+    //HAL_UART_Transmit(&huart2, (uint8_t*)string_checksum, size_string_checksum, 10);
+    HAL_UART_Transmit(&huart2, (uint8_t*)res_char, strlen(res_char), 10);
 	if (res < 17)
 	{
 		res_char[1] = res_char[0];

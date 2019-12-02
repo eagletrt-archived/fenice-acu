@@ -108,6 +108,8 @@ typedef struct
 	int longitude_i_l;		  //low longitude (lower than comma)
 	char altitude[8];		  //altitude string
 	int altitude_i;			  //altitude converted into a string
+	char true_track_mode[5];  //true track mode string
+	int true_track_mode_i;	  //true track mode integer
 	char hour[3];			  //hour string
     char min[3];			  //min string
     char sec[3];			  //sec string

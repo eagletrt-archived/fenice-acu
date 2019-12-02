@@ -48,7 +48,7 @@ UART_HandleTypeDef huart2;
 char msg_gps[3];
 char buffer_gps[50];
 int cont_char;
-volatile int msg_arrived = 0;
+int msg_arrived = 0;
 char msg_computer[3];
 gps_struct gps;
 /* USER CODE END PV */
@@ -254,6 +254,7 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
       if(msg_arrived == 50){
         msg_arrived = 0;
       }
+      //HAL_UART_Transmit(&huart2, (uint8_t*)&buffer_gps[0], 1, 10);
       HAL_UART_Receive_IT(huart, (uint8_t *)msg_gps, 1); //request of rx buffer interrupt
     }
 }
