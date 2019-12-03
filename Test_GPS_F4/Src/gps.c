@@ -120,11 +120,10 @@ int gps_read(UART_HandleTypeDef *huart, gps_struct *gps)
                 { //indicates that the string is finishing
                     cont_string = cont_string -2;
                     string_gps[cont_string] = '\0'; // '\0'=end of the string
-                    start_string_gps = 0;	
-                    		//end of string
-                            char txt[100];
-                        sprintf(txt, "%s\r\n", string_gps);
-                        HAL_UART_Transmit(&huart2, (uint8_t*)txt, strlen(txt), 10);
+                    start_string_gps = 0; //end of string
+                    char txt[100];
+                    sprintf(txt, "%s\r\n", string_gps);
+                    HAL_UART_Transmit(&huart2, (uint8_t*)txt, strlen(txt), 10);
                     if (string_gps[2] == 'G' && string_gps[3] == 'G' && string_gps[4] == 'A')
                     { // operation when the string is GPGGA //
                         //memcpy(gps->string, "", 100);
@@ -133,7 +132,7 @@ int gps_read(UART_HandleTypeDef *huart, gps_struct *gps)
                         if (checksum(string_gps, cont_string) == 1)
                         { //check the checksum (if==true -> enter)
                             int cont_comma = 0, cont_latitude = 0, cont_longitude = 0, cont_altitude = 0, cont_time = 0;
-                            for (int i = 5; i < 100; i++)
+                            for (int i = 5; i < cont_string; i++)
                             {
                                 if (string_gps[i] == ',')
                                     cont_comma++;
@@ -183,7 +182,7 @@ int gps_read(UART_HandleTypeDef *huart, gps_struct *gps)
                                     }
                                     else if (cont_comma == 10)
                                     {
-                                        i = 100; //end the cicle
+                                        i = cont_string; //end the cicle
                                     }
                                 }
                             }
@@ -285,7 +284,7 @@ int gps_read(UART_HandleTypeDef *huart, gps_struct *gps)
                         }
                     }
                     strcpy(string_gps, "");
-                    cont_string = 0;
+                    //cont_string = 0;
 
                     
                     
