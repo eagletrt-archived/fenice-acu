@@ -115,15 +115,11 @@ int gps_read(UART_HandleTypeDef *huart, gps_struct *gps)
             if ((start_string_gps == 1) && (data_string_gps != '$'))
             {											   //check that the new string has not started yet
                 string_gps[cont_string] = data_string_gps; //save the data into the array
-                cont_string++;
-                if (string_gps[cont_string - 2] == '\r' && string_gps[cont_string - 1] == '\n')
+                if (string_gps[cont_string] == '\r' )
                 { //indicates that the string is finishing
-                    cont_string = cont_string -2;
                     string_gps[cont_string] = '\0'; // '\0'=end of the string
                     start_string_gps = 0; //end of string
-                    char txt[100];
-                    sprintf(txt, "%s\r\n", string_gps);
-                    HAL_UART_Transmit(&huart2, (uint8_t*)txt, strlen(txt), 10);
+                    
                     if (string_gps[2] == 'G' && string_gps[3] == 'G' && string_gps[4] == 'A')
                     { // operation when the string is GPGGA //
                         //memcpy(gps->string, "", 100);
@@ -191,7 +187,7 @@ int gps_read(UART_HandleTypeDef *huart, gps_struct *gps)
                             if (gps->fix_status == '0')
                             {
                                 char txt[100];
-                                sprintf(txt,"\r\nNO CONNECTION\r\n");
+                                sprintf(txt,"NO CONNECTION GGA\r\n");
                                 HAL_UART_Transmit(&huart2,(uint8_t*)txt,strlen(txt),10);
                                 gps->latitude_i_h = 0;
                                 gps->latitude_i_l = 0;
@@ -203,12 +199,12 @@ int gps_read(UART_HandleTypeDef *huart, gps_struct *gps)
                             {
                                 char txt[100];
                                 gps->latitude_i = (long int)(atof(gps->latitude) * 100);
-                                sprintf(txt,"latitude %ld %c", gps->latitude_i, gps->latitude_o[0]);
+                                sprintf(txt,"latitude %ld %c\r\n", gps->latitude_i, gps->latitude_o[0]);
                                 HAL_UART_Transmit(&huart2,(uint8_t*)txt,strlen(txt),10);
                                 gps->longitude_i = (long int)(atof(gps->longitude) * 100);
-                                sprintf(txt,"longitude %ld %c",gps->longitude_i, gps->longitude_o[0]);
+                                sprintf(txt,"longitude %ld %c\r\n",gps->longitude_i, gps->longitude_o[0]);
                                 HAL_UART_Transmit(&huart2,(uint8_t*)txt,strlen(txt),10);
-                                sprintf(txt,"time %c%c:%c%c:%c%c", gps->hour[0], gps->hour[1], gps->min[0], gps->min[1], gps->sec[0], gps->sec[1]);
+                                sprintf(txt,"time %c%c:%c%c:%c%c\r\n", gps->hour[0], gps->hour[1], gps->min[0], gps->min[1], gps->sec[0], gps->sec[1]);
                                 HAL_UART_Transmit(&huart2,(uint8_t*)txt,strlen(txt),10);
                                 gps->altitude_i = (int)(atof(gps->altitude) * 10);
                                 gps->latitude_i_h = (int)(gps->latitude_i >> 16);
@@ -221,14 +217,13 @@ int gps_read(UART_HandleTypeDef *huart, gps_struct *gps)
                         else
                         {
                             char txt[100];
-                            sprintf(txt,"\r\nCHECKSUM FAIL\r\n");
-                            HAL_UART_Transmit(&huart2,(uint8_t*)txt,strlen(txt),10);
+                            sprintf(txt,"\r\nCHECKSUM FAIL GGA\r\n");
+                            //HAL_UART_Transmit(&huart2,(uint8_t*)txt,strlen(txt),10);
                             ret = 0; //checksum failed
                         }
                     }
                     else if (string_gps[2] == 'V' && string_gps[3] == 'T' && string_gps[4] == 'G')
                     { // operation when the string is GPVTG //
-                        
                         if (checksum(string_gps, cont_string) == 1)
                         { //check the checksum (if==true -> enter)
                             cont_comma = 0;
@@ -259,7 +254,7 @@ int gps_read(UART_HandleTypeDef *huart, gps_struct *gps)
                             if (gps->fix_status == '0')
                             {
                                 char txt[100];
-                                sprintf(txt,"\r\nNO CONNECTION\r\n");
+                                sprintf(txt,"NO CONNECTION VTG\r\n");
                                 HAL_UART_Transmit(&huart2,(uint8_t*)txt,strlen(txt),10);
                                 gps->speed_i = 0;
                             }
@@ -269,7 +264,7 @@ int gps_read(UART_HandleTypeDef *huart, gps_struct *gps)
                                 gps->speed_i = (int)(atof(gps->speed) * 100);
                                 gps->true_track_mode_i = (int)(atof(gps->true_track_mode)*10);
                                 
-                                sprintf(txt,"speed: %d",gps->speed_i);
+                                sprintf(txt,"speed: %d\r\n",gps->speed_i);
                                 HAL_UART_Transmit(&huart2,(uint8_t*)txt,strlen(txt),10);
                             }
 
@@ -278,10 +273,15 @@ int gps_read(UART_HandleTypeDef *huart, gps_struct *gps)
                         else
                         {
                             char txt[100];
-                            sprintf(txt,"\r\nCHECKSUM FAIL\r\n");
+                            sprintf(txt,"\r\nCHECKSUM FAIL VTG\r\n");
                             HAL_UART_Transmit(&huart2,(uint8_t*)txt,strlen(txt),10);
                             ret = 0; //checksum failed
                         }
+                    }
+                    else{
+                        char txt[100];
+                            sprintf(txt,"\r\string sconosciuta FAIL VTG\r\n");
+                            HAL_UART_Transmit(&huart2,(uint8_t*)txt,strlen(txt),10);
                     }
                     strcpy(string_gps, "");
                     //cont_string = 0;
@@ -289,6 +289,7 @@ int gps_read(UART_HandleTypeDef *huart, gps_struct *gps)
                     
                     
                 }
+                cont_string++;
             }
             else
             {
@@ -319,16 +320,17 @@ static int checksum(char *string_checksum, int size_string_checksum)
 		res = res ^ string_checksum[i];
 	}
 	char check[2] = {string_checksum[i + 1], string_checksum[i + 2]};
-	char res_char[3];
-	sprintf(res_char, "  %x  ", res);
-    //HAL_UART_Transmit(&huart2, (uint8_t*)string_checksum, size_string_checksum, 10);
-    HAL_UART_Transmit(&huart2, (uint8_t*)res_char, strlen(res_char), 10);
-	if (res < 17)
+	char res_char[3] = {'0','0','\0'};
+
+	sprintf(res_char, "%x", res);
+
+	if (res < 16)
 	{
 		res_char[1] = res_char[0];
 		res_char[0] = '0';
-	}
-	for (int j = 0; j < 2; j++)
+	}	
+    
+    for (int j = 0; j < 2; j++)
 	{ //convert to upper case letter
 		if ((int)res_char[j] >= 'a' && (int)res_char[j] <= 'f')
 		{
