@@ -15,9 +15,6 @@ RM := rm -rf
 -include objects.mk
 
 ifneq ($(MAKECMDGOALS),clean)
-ifneq ($(strip $(S_UPPER_DEPS)),)
--include $(S_UPPER_DEPS)
-endif
 ifneq ($(strip $(C_DEPS)),)
 -include $(C_DEPS)
 endif
@@ -26,31 +23,51 @@ endif
 -include ../makefile.defs
 
 # Add inputs and outputs from these tool invocations to the build variables 
+EXECUTABLES += \
+test_led_ram.elf \
+
+SIZE_OUTPUT += \
+default.size.stdout \
+
+OBJDUMP_LIST += \
+test_led_ram.list \
+
+OBJCOPY_HEX += \
+test_led_ram.hex \
+
 
 # All Target
-all: test_led_ram.elf
+all: test_led_ram.elf secondary-outputs
 
 # Tool invocations
 test_led_ram.elf: $(OBJS) $(USER_OBJS) ../STM32F765VGTx_FLASH.ld
-	@echo 'Building target: $@'
-	@echo 'Invoking: MCU GCC Linker'
-	arm-none-eabi-gcc -mcpu=cortex-m7 -mthumb -mfloat-abi=hard -mfpu=fpv5-d16 -specs=nosys.specs -specs=nano.specs -T"../STM32F765VGTx_FLASH.ld" -Wl,-Map=output.map -Wl,--gc-sections -o "test_led_ram.elf" @"objects.list" $(USER_OBJS) $(LIBS) -lm
+	arm-none-eabi-gcc -o "test_led_ram.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m7 -T"../STM32F765VGTx_FLASH.ld" --specs=nosys.specs -Wl,-Map="test_led_ram.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
-	$(MAKE) --no-print-directory post-build
+
+default.size.stdout: $(EXECUTABLES)
+	arm-none-eabi-size  $(EXECUTABLES)
+	@echo 'Finished building: $@'
+	@echo ' '
+
+test_led_ram.list: $(EXECUTABLES)
+	arm-none-eabi-objdump -h -S $(EXECUTABLES) > "test_led_ram.list"
+	@echo 'Finished building: $@'
+	@echo ' '
+
+test_led_ram.hex: $(EXECUTABLES)
+	arm-none-eabi-objcopy  -O ihex $(EXECUTABLES) "test_led_ram.hex"
+	@echo 'Finished building: $@'
+	@echo ' '
 
 # Other Targets
 clean:
 	-$(RM) *
 	-@echo ' '
 
-post-build:
-	-@echo 'Generating hex and Printing size information:'
-	arm-none-eabi-objcopy -O ihex "test_led_ram.elf" "test_led_ram.hex"
-	arm-none-eabi-size "test_led_ram.elf"
-	-@echo ' '
+secondary-outputs: $(SIZE_OUTPUT) $(OBJDUMP_LIST) $(OBJCOPY_HEX)
 
 .PHONY: all clean dependents
-.SECONDARY: post-build
+.SECONDARY:
 
 -include ../makefile.targets

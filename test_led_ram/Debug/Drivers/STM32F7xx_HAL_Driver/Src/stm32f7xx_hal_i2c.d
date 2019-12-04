@@ -1,80 +1,80 @@
 Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c.o: \
  ../Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c.c \
- C:/Users/Luca\ Caronti/Google\ Drive/eagle\ su\ drive/eagle/F7/test_led_ram/Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal.h \
- C:/Users/Luca\ Caronti/Google\ Drive/eagle\ su\ drive/eagle/F7/test_led_ram/Inc/stm32f7xx_hal_conf.h \
- C:/Users/Luca\ Caronti/Google\ Drive/eagle\ su\ drive/eagle/F7/test_led_ram/Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_rcc.h \
- C:/Users/Luca\ Caronti/Google\ Drive/eagle\ su\ drive/eagle/F7/test_led_ram/Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_def.h \
- C:/Users/Luca\ Caronti/Google\ Drive/eagle\ su\ drive/eagle/F7/test_led_ram/Drivers/CMSIS/Device/ST/STM32F7xx/Include/stm32f7xx.h \
- C:/Users/Luca\ Caronti/Google\ Drive/eagle\ su\ drive/eagle/F7/test_led_ram/Drivers/CMSIS/Device/ST/STM32F7xx/Include/stm32f765xx.h \
- C:/Users/Luca\ Caronti/Google\ Drive/eagle\ su\ drive/eagle/F7/test_led_ram/Drivers/CMSIS/Include/core_cm7.h \
- C:/Users/Luca\ Caronti/Google\ Drive/eagle\ su\ drive/eagle/F7/test_led_ram/Drivers/CMSIS/Include/cmsis_version.h \
- C:/Users/Luca\ Caronti/Google\ Drive/eagle\ su\ drive/eagle/F7/test_led_ram/Drivers/CMSIS/Include/cmsis_compiler.h \
- C:/Users/Luca\ Caronti/Google\ Drive/eagle\ su\ drive/eagle/F7/test_led_ram/Drivers/CMSIS/Include/cmsis_gcc.h \
- C:/Users/Luca\ Caronti/Google\ Drive/eagle\ su\ drive/eagle/F7/test_led_ram/Drivers/CMSIS/Include/mpu_armv7.h \
- C:/Users/Luca\ Caronti/Google\ Drive/eagle\ su\ drive/eagle/F7/test_led_ram/Drivers/CMSIS/Device/ST/STM32F7xx/Include/system_stm32f7xx.h \
- C:/Users/Luca\ Caronti/Google\ Drive/eagle\ su\ drive/eagle/F7/test_led_ram/Drivers/STM32F7xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h \
- C:/Users/Luca\ Caronti/Google\ Drive/eagle\ su\ drive/eagle/F7/test_led_ram/Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_rcc_ex.h \
- C:/Users/Luca\ Caronti/Google\ Drive/eagle\ su\ drive/eagle/F7/test_led_ram/Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_exti.h \
- C:/Users/Luca\ Caronti/Google\ Drive/eagle\ su\ drive/eagle/F7/test_led_ram/Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_gpio.h \
- C:/Users/Luca\ Caronti/Google\ Drive/eagle\ su\ drive/eagle/F7/test_led_ram/Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_gpio_ex.h \
- C:/Users/Luca\ Caronti/Google\ Drive/eagle\ su\ drive/eagle/F7/test_led_ram/Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_dma.h \
- C:/Users/Luca\ Caronti/Google\ Drive/eagle\ su\ drive/eagle/F7/test_led_ram/Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_dma_ex.h \
- C:/Users/Luca\ Caronti/Google\ Drive/eagle\ su\ drive/eagle/F7/test_led_ram/Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_cortex.h \
- C:/Users/Luca\ Caronti/Google\ Drive/eagle\ su\ drive/eagle/F7/test_led_ram/Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_flash.h \
- C:/Users/Luca\ Caronti/Google\ Drive/eagle\ su\ drive/eagle/F7/test_led_ram/Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_flash_ex.h \
- C:/Users/Luca\ Caronti/Google\ Drive/eagle\ su\ drive/eagle/F7/test_led_ram/Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_i2c.h \
- C:/Users/Luca\ Caronti/Google\ Drive/eagle\ su\ drive/eagle/F7/test_led_ram/Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_i2c_ex.h \
- C:/Users/Luca\ Caronti/Google\ Drive/eagle\ su\ drive/eagle/F7/test_led_ram/Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_pwr.h \
- C:/Users/Luca\ Caronti/Google\ Drive/eagle\ su\ drive/eagle/F7/test_led_ram/Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_pwr_ex.h
+ ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal.h \
+ ../Inc/stm32f7xx_hal_conf.h \
+ ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_rcc.h \
+ ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_def.h \
+ ../Drivers/CMSIS/Device/ST/STM32F7xx/Include/stm32f7xx.h \
+ ../Drivers/CMSIS/Device/ST/STM32F7xx/Include/stm32f765xx.h \
+ ../Drivers/CMSIS/Include/core_cm7.h \
+ ../Drivers/CMSIS/Include/cmsis_version.h \
+ ../Drivers/CMSIS/Include/cmsis_compiler.h \
+ ../Drivers/CMSIS/Include/cmsis_gcc.h \
+ ../Drivers/CMSIS/Include/mpu_armv7.h \
+ ../Drivers/CMSIS/Device/ST/STM32F7xx/Include/system_stm32f7xx.h \
+ ../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h \
+ ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_rcc_ex.h \
+ ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_exti.h \
+ ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_gpio.h \
+ ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_gpio_ex.h \
+ ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_dma.h \
+ ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_dma_ex.h \
+ ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_cortex.h \
+ ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_flash.h \
+ ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_flash_ex.h \
+ ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_i2c.h \
+ ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_i2c_ex.h \
+ ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_pwr.h \
+ ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_pwr_ex.h
 
-C:/Users/Luca\ Caronti/Google\ Drive/eagle\ su\ drive/eagle/F7/test_led_ram/Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal.h:
+../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal.h:
 
-C:/Users/Luca\ Caronti/Google\ Drive/eagle\ su\ drive/eagle/F7/test_led_ram/Inc/stm32f7xx_hal_conf.h:
+../Inc/stm32f7xx_hal_conf.h:
 
-C:/Users/Luca\ Caronti/Google\ Drive/eagle\ su\ drive/eagle/F7/test_led_ram/Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_rcc.h:
+../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_rcc.h:
 
-C:/Users/Luca\ Caronti/Google\ Drive/eagle\ su\ drive/eagle/F7/test_led_ram/Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_def.h:
+../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_def.h:
 
-C:/Users/Luca\ Caronti/Google\ Drive/eagle\ su\ drive/eagle/F7/test_led_ram/Drivers/CMSIS/Device/ST/STM32F7xx/Include/stm32f7xx.h:
+../Drivers/CMSIS/Device/ST/STM32F7xx/Include/stm32f7xx.h:
 
-C:/Users/Luca\ Caronti/Google\ Drive/eagle\ su\ drive/eagle/F7/test_led_ram/Drivers/CMSIS/Device/ST/STM32F7xx/Include/stm32f765xx.h:
+../Drivers/CMSIS/Device/ST/STM32F7xx/Include/stm32f765xx.h:
 
-C:/Users/Luca\ Caronti/Google\ Drive/eagle\ su\ drive/eagle/F7/test_led_ram/Drivers/CMSIS/Include/core_cm7.h:
+../Drivers/CMSIS/Include/core_cm7.h:
 
-C:/Users/Luca\ Caronti/Google\ Drive/eagle\ su\ drive/eagle/F7/test_led_ram/Drivers/CMSIS/Include/cmsis_version.h:
+../Drivers/CMSIS/Include/cmsis_version.h:
 
-C:/Users/Luca\ Caronti/Google\ Drive/eagle\ su\ drive/eagle/F7/test_led_ram/Drivers/CMSIS/Include/cmsis_compiler.h:
+../Drivers/CMSIS/Include/cmsis_compiler.h:
 
-C:/Users/Luca\ Caronti/Google\ Drive/eagle\ su\ drive/eagle/F7/test_led_ram/Drivers/CMSIS/Include/cmsis_gcc.h:
+../Drivers/CMSIS/Include/cmsis_gcc.h:
 
-C:/Users/Luca\ Caronti/Google\ Drive/eagle\ su\ drive/eagle/F7/test_led_ram/Drivers/CMSIS/Include/mpu_armv7.h:
+../Drivers/CMSIS/Include/mpu_armv7.h:
 
-C:/Users/Luca\ Caronti/Google\ Drive/eagle\ su\ drive/eagle/F7/test_led_ram/Drivers/CMSIS/Device/ST/STM32F7xx/Include/system_stm32f7xx.h:
+../Drivers/CMSIS/Device/ST/STM32F7xx/Include/system_stm32f7xx.h:
 
-C:/Users/Luca\ Caronti/Google\ Drive/eagle\ su\ drive/eagle/F7/test_led_ram/Drivers/STM32F7xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h:
+../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h:
 
-C:/Users/Luca\ Caronti/Google\ Drive/eagle\ su\ drive/eagle/F7/test_led_ram/Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_rcc_ex.h:
+../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_rcc_ex.h:
 
-C:/Users/Luca\ Caronti/Google\ Drive/eagle\ su\ drive/eagle/F7/test_led_ram/Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_exti.h:
+../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_exti.h:
 
-C:/Users/Luca\ Caronti/Google\ Drive/eagle\ su\ drive/eagle/F7/test_led_ram/Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_gpio.h:
+../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_gpio.h:
 
-C:/Users/Luca\ Caronti/Google\ Drive/eagle\ su\ drive/eagle/F7/test_led_ram/Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_gpio_ex.h:
+../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_gpio_ex.h:
 
-C:/Users/Luca\ Caronti/Google\ Drive/eagle\ su\ drive/eagle/F7/test_led_ram/Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_dma.h:
+../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_dma.h:
 
-C:/Users/Luca\ Caronti/Google\ Drive/eagle\ su\ drive/eagle/F7/test_led_ram/Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_dma_ex.h:
+../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_dma_ex.h:
 
-C:/Users/Luca\ Caronti/Google\ Drive/eagle\ su\ drive/eagle/F7/test_led_ram/Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_cortex.h:
+../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_cortex.h:
 
-C:/Users/Luca\ Caronti/Google\ Drive/eagle\ su\ drive/eagle/F7/test_led_ram/Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_flash.h:
+../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_flash.h:
 
-C:/Users/Luca\ Caronti/Google\ Drive/eagle\ su\ drive/eagle/F7/test_led_ram/Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_flash_ex.h:
+../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_flash_ex.h:
 
-C:/Users/Luca\ Caronti/Google\ Drive/eagle\ su\ drive/eagle/F7/test_led_ram/Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_i2c.h:
+../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_i2c.h:
 
-C:/Users/Luca\ Caronti/Google\ Drive/eagle\ su\ drive/eagle/F7/test_led_ram/Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_i2c_ex.h:
+../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_i2c_ex.h:
 
-C:/Users/Luca\ Caronti/Google\ Drive/eagle\ su\ drive/eagle/F7/test_led_ram/Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_pwr.h:
+../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_pwr.h:
 
-C:/Users/Luca\ Caronti/Google\ Drive/eagle\ su\ drive/eagle/F7/test_led_ram/Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_pwr_ex.h:
+../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_pwr_ex.h:

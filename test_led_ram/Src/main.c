@@ -90,6 +90,14 @@ int main(void)
   MX_GPIO_Init();
   /* USER CODE BEGIN 2 */
   //HAL_GPIO_WritePin(GPIOE,GPIO_PIN_11|GPIO_PIN_12|GPIO_PIN_13|GPIO_PIN_14|GPIO_PIN_15, GPIO_PIN_SET);
+  for(int i = 0; i < 10; i++){
+  		HAL_GPIO_TogglePin(GPIOE,GPIO_PIN_11);
+  		HAL_GPIO_TogglePin(GPIOE,GPIO_PIN_12);
+  		HAL_GPIO_TogglePin(GPIOE,GPIO_PIN_13);
+  		HAL_GPIO_TogglePin(GPIOE,GPIO_PIN_14);
+  		HAL_GPIO_TogglePin(GPIOE,GPIO_PIN_15);
+  		HAL_Delay(100);
+  	}
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -218,6 +226,7 @@ void Error_Handler(void)
 {
   /* USER CODE BEGIN Error_Handler_Debug */
   /* User can add his own implementation to report the HAL error return state */
+
 
   /* USER CODE END Error_Handler_Debug */
 }
