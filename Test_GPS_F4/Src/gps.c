@@ -26,8 +26,8 @@ int gps_init(UART_HandleTypeDef *huart, gps_struct *gps)
     {
         HAL_UART_Transmit(&huart2,(uint8_t*)"ERRORE 4\r\n",6,10);
     }
-	HAL_UART_Transmit(huart, (uint8_t *)PMTK_SET_BAUD_115200, strlen(PMTK_SET_BAUD_115200), 200);
-	HAL_Delay(500);
+	//HAL_UART_Transmit(huart, (uint8_t *)PMTK_SET_BAUD_115200, strlen(PMTK_SET_BAUD_115200), 200);
+	//HAL_Delay(500);
 	/*huart->Init.BaudRate = 57600;
     HAL_UART_DeInit(huart);
 	HAL_UART_Init(huart);
@@ -37,16 +37,21 @@ int gps_init(UART_HandleTypeDef *huart, gps_struct *gps)
     {
         HAL_UART_Transmit(&huart2,(uint8_t*)"ERRORE 5\r\n",6,10);
     }*/
-    huart->Init.BaudRate = 115200;
+    /*huart->Init.BaudRate = 115200;
 	if (HAL_UART_Init(huart) != HAL_OK)
     {
         HAL_UART_Transmit(&huart2,(uint8_t*)"ERRORE 6\r\n",6,10);
-    }
-	HAL_UART_Transmit(huart, (uint8_t *)PMTK_SET_BAUD_115200, strlen(PMTK_SET_BAUD_115200), 200);
+    }*/
+	/*HAL_UART_Transmit(huart, (uint8_t *)PMTK_SET_BAUD_115200, strlen(PMTK_SET_BAUD_115200), 200);
 	HAL_Delay(500);
 	HAL_UART_Transmit(huart, (uint8_t *)PMTK_SET_NMEA_UPDATE_10HZ, strlen(PMTK_SET_NMEA_UPDATE_10HZ), 200);
-	HAL_Delay(500);
+	HAL_Delay(500);*/
+    
 	HAL_UART_Transmit(huart, (uint8_t *)PMTK_SET_NMEA_OUTPUT_GGAVTG, strlen(PMTK_SET_NMEA_OUTPUT_GGAVTG), 200);
+	HAL_Delay(500);
+    HAL_UART_Transmit(huart, (uint8_t *)PMTK_SET_NMEA_OUTPUT_GGAVTG, strlen(PMTK_SET_NMEA_OUTPUT_GGAVTG), 200);
+	HAL_Delay(500);
+    HAL_UART_Transmit(huart, (uint8_t *)PMTK_SET_NMEA_OUTPUT_GGAVTG, strlen(PMTK_SET_NMEA_OUTPUT_GGAVTG), 200);
 	HAL_Delay(500);
 	strcpy(gps->speed, "000.00");
 	strcpy(gps->latitude, "0000.0000");
@@ -119,7 +124,9 @@ int gps_read(UART_HandleTypeDef *huart, gps_struct *gps)
                 { //indicates that the string is finishing
                     string_gps[cont_string] = '\0'; // '\0'=end of the string
                     start_string_gps = 0; //end of string
-                    
+                    /*char txt[100];
+                    sprintf(txt,"%c%c%c\r\n",string_gps[2], string_gps[3], string_gps[4]);
+                    HAL_UART_Transmit(&huart2,(uint8_t*)txt,strlen(txt),10);*/
                     if (string_gps[2] == 'G' && string_gps[3] == 'G' && string_gps[4] == 'A')
                     { // operation when the string is GPGGA //
                         //memcpy(gps->string, "", 100);
@@ -218,7 +225,7 @@ int gps_read(UART_HandleTypeDef *huart, gps_struct *gps)
                         {
                             char txt[100];
                             sprintf(txt,"\r\nCHECKSUM FAIL GGA\r\n");
-                            //HAL_UART_Transmit(&huart2,(uint8_t*)txt,strlen(txt),10);
+                            HAL_UART_Transmit(&huart2,(uint8_t*)txt,strlen(txt),10);
                             ret = 0; //checksum failed
                         }
                     }
@@ -266,6 +273,8 @@ int gps_read(UART_HandleTypeDef *huart, gps_struct *gps)
                                 
                                 sprintf(txt,"speed: %d\r\n",gps->speed_i);
                                 HAL_UART_Transmit(&huart2,(uint8_t*)txt,strlen(txt),10);
+                                sprintf(txt,"TTM: %d\r\n", gps->true_track_mode_i);
+                                HAL_UART_Transmit(&huart2,(uint8_t*)txt,strlen(txt),10);
                             }
 
                             ret = 1;
@@ -280,7 +289,7 @@ int gps_read(UART_HandleTypeDef *huart, gps_struct *gps)
                     }
                     else{
                         char txt[100];
-                            sprintf(txt,"\r\string sconosciuta FAIL VTG\r\n");
+                            sprintf(txt,"\r\nstring sconosciuta FAIL VTG\r\n");
                             HAL_UART_Transmit(&huart2,(uint8_t*)txt,strlen(txt),10);
                     }
                     strcpy(string_gps, "");
