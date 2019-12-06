@@ -458,6 +458,7 @@ static void MX_GPIO_Init(void)
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
 	if (htim == &htim2) {
 		count_ms += 1;
+		count_ms_abs++; //absolute 32 bit counter -> up to 50 days 
 		if (accel_implausibility_check_count_flag == 1) {
 			accel_implausibility_check_count++;
 			if (accel_implausibility_check_count == 50) {
@@ -473,14 +474,12 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
 			count_inverter++;
 			count_imu++;
 			count_atc++;
-			if (count_inverter ==
-				10) {  //--- check if inverter is connected ---//
+			if (count_inverter == 10) {  //--- check if inverter is connected ---//
 					   // TODO: to implement error functions
 			} else if (count_inverter == 11) {
 				count_inverter = 10;
 			}
-			if (count_atc ==
-				10) {  //--- check if Analog To Can is connected ---//
+			if (count_atc == 10) {  //--- check if Analog To Can is connected ---//
 				// TODO: to implement error functions
 				atc_connected = 0;
 			} else if (count_atc == 11) {
@@ -489,8 +488,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
 			if (count_imu == 10) {  //--- check if imu is connected ---//
 				// imu non presente //
 				imu_connected = 0;  // imu not connected
-				HAL_UART_Transmit(&huart3, (uint8_t *)"IMU non presente\r\n",
-								  strlen("IMU non presente\r\n"), 10);
+				HAL_UART_Transmit(&huart3, (uint8_t *)"IMU non presente\r\n", strlen("IMU non presente\r\n"), 10);
 			} else if (count_imu == 11) {
 				count_imu = 10;
 			}
@@ -674,13 +672,11 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
 				// overflow
 				debug_rx_count = 0;  // reset counter for overflow
 			} else {
-				HAL_UART_Transmit(&huart3, (uint8_t *)&debug_rx[debug_rx_count],
-								  1, 10);  // retransmit char
+				HAL_UART_Transmit(&huart3, (uint8_t *)&debug_rx[debug_rx_count],1, 10);  // retransmit char
 				debug_rx_count++;
 			}
 		}
-		HAL_UART_Receive_IT(&huart3, (uint8_t *)&debug_rx[debug_rx_count],
-							1);  // activate rx interrupt for debug
+		HAL_UART_Receive_IT(&huart3, (uint8_t *)&debug_rx[debug_rx_count], 1);  // activate rx interrupt for debug
 	}
 }
 /* USER CODE END 4 */

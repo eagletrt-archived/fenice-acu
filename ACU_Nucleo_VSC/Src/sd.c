@@ -160,7 +160,7 @@ void init_sd(){
 			if(res_open == FR_OK){
 
 				char local_txt[] = "0000\r\n4096\r\n0000\r\n4096";
-				f_write(&pot_values_f,(TCHAR const*)&local_txt,strlen(local_txt), byteswritten);
+				f_write(&pot_values_f,(TCHAR const*)&local_txt,strlen(local_txt), &byteswritten);
 				f_close(&pot_values_f);
 			}
 		}

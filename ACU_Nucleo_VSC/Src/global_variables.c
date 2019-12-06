@@ -3,7 +3,8 @@
 #include "fatfs.h"
 
 //--- FOR TIMING COUNTER ---//
-uint16_t count_ms = 0, count_dec = 0, count_sec = 0, count_min = 0, count_hour = 0;
+uint16_t volatile count_ms = 0, count_dec = 0, count_sec = 0, count_min = 0, count_hour = 0; 
+uint32_t volatile count_ms_abs = 0;
 
 //--- COUNTER FOR DEVICE PRESENCE ---//
 uint16_t count_inverter = 0;
@@ -19,7 +20,8 @@ char debug_rx[MAX_DEBUG_RX_L], debug_tx[MAX_DEBUG_TX_L];
 uint8_t debug_rx_count = 0, debug_msg_arrived = 0;
 
 //--- DEVICE CONNECTED VARIABLES ---//
-uint8_t imu_connected = 0, its0_connected = 0, its1_connected = 0, its2_connected = 0, its3_connected = 0;
+uint8_t imu_connected = 0;
+uint8_t its_connected = 0;
 uint8_t atc_connected = 0;
 
 

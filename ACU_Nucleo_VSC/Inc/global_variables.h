@@ -12,7 +12,8 @@
 
 extern canStruct can1, can3;
 
-extern uint16_t count_ms, count_dec, count_sec, count_min, count_hour;
+extern uint16_t volatile count_ms, count_dec, count_sec, count_min, count_hour;
+extern uint32_t volatile count_ms_abs;
 extern uint16_t count_inverter;
 extern uint16_t count_accumulator;
 extern uint16_t count_imu;
@@ -25,7 +26,8 @@ extern uint8_t debug_rx_count, debug_msg_arrived;
 
 extern UART_HandleTypeDef huart3;
 
-extern uint8_t imu_connected, its0_connected, its1_connected, its2_connected, its3_connected;
+extern uint8_t imu_connected;
+extern uint8_t its_connected;
 extern uint8_t atc_connected;
 
 //-----------------------------------------//

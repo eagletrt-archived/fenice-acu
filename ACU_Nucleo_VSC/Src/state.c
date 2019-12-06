@@ -4,12 +4,25 @@
 #include "stdio.h"
 #include "stm32f7xx_hal.h"
 #include "string.h"
-
+/*******************************************************************
+ *                         USER FUNCTIONS
+ *******************************************************************/ 
+void set_bit_uint8(uint8_t* _var, uint8_t _nBit, uint8_t _bool){
+	if(_bool == 0 || _bool == 1){
+		(*_var) = ((*_var) & ( 0b11111111 ^ (0b00000001 << _nBit))) | (0b00000000 | (_bool << _nBit));
+	}
+}
 /*******************************************************************
  *                         STATE VARIABLES
  *******************************************************************/ 
+/*** GLOBAL ***/
 int setup_init = 0;
 int critical_errors = 0;
+
+/*** FOR INIT STATE ***/
+int init_step = 0;
+uint32_t init_step_start_time = 0;
+uint8_t inv_init_response = 0; // bit 0 = inv R -> 0 = no / 1 = YES ---- bit 1 = inv L -> 0 = no / 1 = yes
 // Default state
 // Init variables
 /*******************************************************************
@@ -17,28 +30,92 @@ int critical_errors = 0;
  *******************************************************************/
 void init()
 {
-	if (debug_msg_arrived == 1)
-	{
-		debug_msg_arrived = 0; // reset flag
-		debug_operations();
-	}
-	if (fifoRxDataCAN_pop(&can1))
-	{
-		switch (can1.rx_id)
-		{
-		case ID_imu_acceleration:
-		case ID_imu_angular_rate:
-			imu_operations();
-			break;
+	if(init_step == 0){
+		init_step = 1;
+		/* Send inverter L disable */
+		can3.tx_id = ID_ASK_INV_SX;
+		can3.dataTx[0] = 0x51;
+		can3.dataTx[1] = 0x04;
+		can3.dataTx[2] = 0x00;
+		can3.tx_size = 3;
+		CAN_Send(&can1, normalPriority);
 
-		default:
-			break;
+		/* Send inverter R disable */
+		can3.tx_id = ID_ASK_INV_DX;
+		can3.dataTx[0] = 0x51;
+		can3.dataTx[1] = 0x04;
+		can3.dataTx[2] = 0x00;
+		can3.tx_size = 3;
+		CAN_Send(&can1, normalPriority);
+
+		/* Send req to inverter L presence */
+		can3.tx_id = ID_ASK_INV_SX;
+		can3.dataTx[0] = 0x3D;
+		can3.dataTx[1] = 0xE2;
+		can3.dataTx[2] = 0x00;
+		can3.tx_size = 3;
+		CAN_Send(&can1, normalPriority);
+
+		/* Send req to inverter R presence */
+		can3.tx_id = ID_ASK_INV_DX;
+		can3.dataTx[0] = 0x3D;
+		can3.dataTx[1] = 0xE2;
+		can3.dataTx[2] = 0x00;
+		can3.tx_size = 3;
+		CAN_Send(&can1, normalPriority);
+
+		init_step_start_time = count_ms_abs; // save the curret time
+
+	}else if(init_step == 1){
+		if (fifoRxDataCAN_pop(&can1)){
+			switch (can1.rx_id)
+			{
+			case ID_ASK_INV_DX:
+				if(can1.dataRx[0] == 0xE2 && can1.dataRx[1] == 0x01 && can1.dataRx[2] == 0x00 && can1.dataRx[3] == 0x00){
+					set_bit_uint8(&inv_init_response, 0, 1); //set bit 0 to 1
+				}
+				break;
+			case ID_ASK_INV_SX:
+				if(can1.dataRx[0] == 0xE2 && can1.dataRx[1] == 0x01 && can1.dataRx[2] == 0x00 && can1.dataRx[3] == 0x00){
+					set_bit_uint8(&inv_init_response, 1, 1); //set bit 1 to 1
+				}
+			default:
+				break;
+			}
 		}
+		if(inv_init_response == 3){ // means that each inv has responded
+			init_step = 2;
+		}else{
+			if(count_ms_abs - init_step_start_time > 1000 ){ //if is passed more than 1 second -> go ahead
+				/* Send Error to steer */ 
+
+				//TODO: send errors
+
+				init_step = 3;
+			}
+		}
+	}else if(init_step == 2){
+		/* Send periodical status inv L */
+		can1.tx_id = ID_ASK_INV_SX;
+		can1.dataTx[0] = 0x3D;
+		can1.dataTx[1] = 0x40;
+		can1.dataTx[2] = 0xFA; // each 250ms
+		can1.tx_size = 3;
+		CAN_Send(&can1, normalPriority);
+
+		/* Send periodical status inv R */
+		can1.tx_id = ID_ASK_INV_DX;
+		can1.dataTx[0] = 0x3D;
+		can1.dataTx[1] = 0x40;
+		can1.dataTx[2] = 0xFA; // each 250ms
+		can1.tx_size = 3;
+		CAN_Send(&can1, normalPriority);
+
+		init_step = 3;
+	}else if(init_step == 3){
+		current_state = STATE_IDLE; // Change state to STATE_IDLE
+		/* Send msg to steer of changing state */
 	}
-	if (fifoRxDataCAN_pop(&can3))
-	{
-	}
-	current_state = STATE_IDLE; // Change state to STATE_IDLE
 }
 /*******************************************************************
  *                         END INIT STATE
@@ -358,14 +435,10 @@ void debug_operations()
 		}
 		sprintf(debug_tx,
 				"\r\n"
-				"Device connected : (0 = no, 1 = yes)\r\n"
+				"Device connected : (0 = no, 1 = yes (for each bit))\r\n"
 				"\t IMU -> %d\r\n"
-				"\t ITS0 -> %d\r\n"
-				"\t ITS1 -> %d\r\n"
-				"\t ITS2 -> %d\r\n"
-				"\t ITS3 -> %d\r\n",
-				imu_connected, its0_connected, its1_connected, its2_connected,
-				its3_connected);
+				"\t ITS -> %d\r\n",
+				imu_connected, its_connected);
 		HAL_UART_Transmit(&huart3, (uint8_t *)debug_tx, strlen(debug_tx), 100);
 	}
 	else if (strcmp(debug_rx, "sd status") == 0){
