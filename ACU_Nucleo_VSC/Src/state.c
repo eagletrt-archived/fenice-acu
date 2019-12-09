@@ -22,6 +22,8 @@ int critical_errors = 0;
 /*** FOR INIT STATE ***/
 int init_step = 0;
 uint32_t init_step_start_time = 0;
+uint32_t init_precharge_start_time = 0;
+
 uint8_t inv_init_response = 0; // bit 0 = inv R -> 0 = no / 1 = YES ---- bit 1 = inv L -> 0 = no / 1 = yes
 // Default state
 // Init variables
@@ -125,14 +127,14 @@ void init()
  *******************************************************************/
 void idle()
 {
-	if (HAL_GPIO_ReadPin(USER_BUTTON_GPIO_Port,USER_BUTTON_Pin) == GPIO_PIN_SET){
+	/*if (HAL_GPIO_ReadPin(USER_BUTTON_GPIO_Port,USER_BUTTON_Pin) == GPIO_PIN_SET){
 		sprintf(txt,"%d\r\n%d\r\n%d\r\n%d\r\n",accel.pot1_val,accel.pot2_val,brake.pot1_val,brake.pot2_val);
 		HAL_UART_Transmit(&huart3,(uint8_t*)txt,strlen(txt),10);
 		res_open = f_open(&pot_values_f, (TCHAR const*)&filename_pot, FA_OPEN_ALWAYS | FA_WRITE );
 		f_write(&pot_values_f,(TCHAR const*)&txt,strlen(txt), &byteswritten);
 		f_close(&pot_values_f);
 		HAL_Delay(1000);
-	}
+	}*/
 	if (debug_msg_arrived == 1)
 	{
 		debug_msg_arrived = 0; // reset flag
@@ -156,6 +158,9 @@ void idle()
 			if (can1.dataRx[0] == 0x03)
 			{
 				// Turn ON tractive system
+				if(critical_errors == 0){
+
+				}
 			}
 			else if (can1.dataRx[0] == 0x04)
 			{
@@ -196,18 +201,29 @@ void setup()
 			//If Analog to CAN device is connected, brake is pressed and there aren't critical erros -> send request of TS ON to BMS_HV
 			can1.dataTx[0] = 1;
 			can1.tx_size = 1;
-			can1.tx_id = ID_ACU_1;
+			//can1.tx_id = ; put the BMS_HV ID
 			CAN_Send(&can1, normalPriority);
+			init_precharge_start_time = count_ms_abs; //take the time when the pre-charge is sent
 		}else{
 			//Can't turn on TS caused by some errors
 			current_state = STATE_IDLE; //return to idle state
-			can1.dataTx[0] = 1;
-			can1.tx_size = 1;
-			can1.tx_id = ID_ACU_2;
-			CAN_Send(&can1, highPriority);
+			
+			// TODO: report error to steer
+		}
+	}else if(setup_init == 1){
+		if (fifoRxDataCAN_pop(&can1)){
+			switch(can1.rx_id){
+				case ID_BMS_HV:
+					if(can1.dataRx[0] == 1){ //Pre-cherge ended sucessfully
+						setup_init = 2;
+					}else{ //Pre-charge failed
+						current_state = STATE_IDLE;
+						//TODO: send error to steer
+					}
+			}
 		}
 	}
-	if (fifoRxDataCAN_pop(&can1))
+	/*if (fifoRxDataCAN_pop(&can1))
 	{
 		switch (can1.rx_id)
 		{
@@ -256,7 +272,7 @@ void setup()
 				// Update Inverter Dx Temp = (can1.RxData[2] * 256 + can1.RxData[1] - 15797) / 112.1182
 				break;
 			case 0xD8:
-				if (can1.dataRx[2] == 0x0C /* && request of shutdown == false*/)
+				if (can1.dataRx[2] == 0x0C  && request of shutdown == false)
 				{
 					can1.dataTx[0] = 0x09;
 					can1.dataTx[1] = 0;
@@ -294,7 +310,7 @@ void setup()
 				// Update Inverter Sx Temp = (can1.RxData[2] * 256 + can1.RxData[1] - 15797) / 112.1182
 				break;
 			case 0xD8:
-				if (can1.dataRx[2] == 0x0C /* && request of shutdown == false*/)
+				if (can1.dataRx[2] == 0x0C  && request of shutdown == false)
 				{
 					can1.dataTx[0] = 0x08;
 					can1.dataTx[1] = 0;
@@ -328,7 +344,7 @@ void setup()
 		default:
 			break;
 		}
-	}
+	}*/
 }
 /*******************************************************************
  *                         END SETUP STATE
