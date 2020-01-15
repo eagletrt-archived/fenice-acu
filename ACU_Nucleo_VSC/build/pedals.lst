@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccmpnq9q.s 			page 1
+ARM GAS  /tmp/ccCsV6ts.s 			page 1
 
 
    1              		.cpu cortex-m7
@@ -16,16 +16,24 @@ ARM GAS  /tmp/ccmpnq9q.s 			page 1
   13              		.text
   14              	.Ltext0:
   15              		.cfi_sections	.debug_frame
-  16              		.section	.text.accel_implausibility_check,"ax",%progbits
-  17              		.align	1
-  18              		.global	accel_implausibility_check
-  19              		.syntax unified
-  20              		.thumb
-  21              		.thumb_func
-  22              		.fpu fpv5-d16
-  24              	accel_implausibility_check:
-  25              	.LFB142:
-  26              		.file 1 "Src/pedals.c"
+  16              		.section	.rodata.accel_implausibility_check.str1.4,"aMS",%progbits,1
+  17              		.align	2
+  18              	.LC0:
+  19 0000 504F5420 		.ascii	"POT FAIL4****\015\012\000"
+  19      4641494C 
+  19      342A2A2A 
+  19      2A0D0A00 
+  20              		.section	.text.accel_implausibility_check,"ax",%progbits
+  21              		.align	1
+  22              		.global	accel_implausibility_check
+  23              		.arch armv7e-m
+  24              		.syntax unified
+  25              		.thumb
+  26              		.thumb_func
+  27              		.fpu fpv5-d16
+  29              	accel_implausibility_check:
+  30              	.LFB144:
+  31              		.file 1 "Src/pedals.c"
    1:Src/pedals.c  **** #include "pedals.h"
    2:Src/pedals.c  **** #include "global_variables.h"
    3:Src/pedals.c  **** #include "stdio.h"
@@ -39,246 +47,261 @@ ARM GAS  /tmp/ccmpnq9q.s 			page 1
   11:Src/pedals.c  **** uint8_t brake_implausibility_check_count = 0;
   12:Src/pedals.c  **** 
   13:Src/pedals.c  **** uint8_t accel_implausibility_check() {
-  27              		.loc 1 13 0
-  28              		.cfi_startproc
-  29              		@ args = 0, pretend = 0, frame = 0
-  30              		@ frame_needed = 0, uses_anonymous_args = 0
-  31 0000 38B5     		push	{r3, r4, r5, lr}
-  32              	.LCFI0:
-  33              		.cfi_def_cfa_offset 16
-  34              		.cfi_offset 3, -16
-  35              		.cfi_offset 4, -12
-  36              		.cfi_offset 5, -8
-  37              		.cfi_offset 14, -4
+  32              		.loc 1 13 38 view -0
+  33              		.cfi_startproc
+  34              		@ args = 0, pretend = 0, frame = 0
+  35              		@ frame_needed = 0, uses_anonymous_args = 0
+  36 0000 38B5     		push	{r3, r4, r5, lr}
+  37              	.LCFI0:
+  38              		.cfi_def_cfa_offset 16
+  39              		.cfi_offset 3, -16
+  40              		.cfi_offset 4, -12
+  41              		.cfi_offset 5, -8
+  42              		.cfi_offset 14, -4
+ARM GAS  /tmp/ccCsV6ts.s 			page 2
+
+
   14:Src/pedals.c  **** 	if (abs(accel.pot1_val_100 + accel.pot2_val_100 - 100) > 10) {
-  38              		.loc 1 14 0
-  39 0002 194A     		ldr	r2, .L11
-  40 0004 9378     		ldrb	r3, [r2, #2]	@ zero_extendqisi2
-  41 0006 9279     		ldrb	r2, [r2, #6]	@ zero_extendqisi2
-  42 0008 1344     		add	r3, r3, r2
-  43 000a 643B     		subs	r3, r3, #100
-  44 000c 002B     		cmp	r3, #0
-ARM GAS  /tmp/ccmpnq9q.s 			page 2
-
-
-  45 000e B8BF     		it	lt
-  46 0010 5B42     		rsblt	r3, r3, #0
-  47 0012 0A2B     		cmp	r3, #10
-  48 0014 22DD     		ble	.L2
+  43              		.loc 1 14 2 view .LVU1
+  44              		.loc 1 14 15 is_stmt 0 view .LVU2
+  45 0002 194A     		ldr	r2, .L11
+  46 0004 9378     		ldrb	r3, [r2, #2]	@ zero_extendqisi2
+  47              		.loc 1 14 36 view .LVU3
+  48 0006 9279     		ldrb	r2, [r2, #6]	@ zero_extendqisi2
+  49              		.loc 1 14 29 view .LVU4
+  50 0008 1344     		add	r3, r3, r2
+  51              		.loc 1 14 50 view .LVU5
+  52 000a 643B     		subs	r3, r3, #100
+  53              		.loc 1 14 6 view .LVU6
+  54 000c 002B     		cmp	r3, #0
+  55 000e B8BF     		it	lt
+  56 0010 5B42     		rsblt	r3, r3, #0
+  57              		.loc 1 14 5 view .LVU7
+  58 0012 0A2B     		cmp	r3, #10
+  59 0014 22DD     		ble	.L2
   15:Src/pedals.c  **** 		// error
   16:Src/pedals.c  **** 		/*sprintf(txt, "POT FAIL2** %d\r\n",
   17:Src/pedals.c  **** 				accel_implausibility_check_count_flag);
   18:Src/pedals.c  **** 		HAL_UART_Transmit(&huart3, (uint8_t*)txt, strlen(txt), 10);*/
   19:Src/pedals.c  **** 		if (accel_implausibility_check_count_flag == 0) {
-  49              		.loc 1 19 0
-  50 0016 154B     		ldr	r3, .L11+4
-  51 0018 1878     		ldrb	r0, [r3]	@ zero_extendqisi2
-  52 001a 28B1     		cbz	r0, .L8
+  60              		.loc 1 19 3 is_stmt 1 view .LVU8
+  61              		.loc 1 19 45 is_stmt 0 view .LVU9
+  62 0016 154B     		ldr	r3, .L11+4
+  63 0018 1878     		ldrb	r0, [r3]	@ zero_extendqisi2
+  64              		.loc 1 19 6 view .LVU10
+  65 001a 28B1     		cbz	r0, .L8
   20:Src/pedals.c  **** 			accel_implausibility_check_count_flag = 1;
   21:Src/pedals.c  **** 			/*sprintf(txt, "POT FAIL3***\r\n");
   22:Src/pedals.c  **** 			HAL_UART_Transmit(&huart3, (uint8_t*)txt, strlen(txt), 10);*/
   23:Src/pedals.c  **** 			return 0;
   24:Src/pedals.c  **** 		} else if (accel_implausibility_check_count_flag == 2) {
-  53              		.loc 1 24 0
-  54 001c 0228     		cmp	r0, #2
-  55 001e 06D0     		beq	.L9
+  66              		.loc 1 24 10 is_stmt 1 view .LVU11
+  67              		.loc 1 24 13 is_stmt 0 view .LVU12
+  68 001c 0228     		cmp	r0, #2
+  69 001e 06D0     		beq	.L9
   25:Src/pedals.c  **** 			accel_implausibility_check_count_flag = 3;
   26:Src/pedals.c  **** 			sprintf(txt, "POT FAIL4****\r\n");
   27:Src/pedals.c  **** 			HAL_UART_Transmit(&huart3, (uint8_t*)txt, strlen(txt), 10);
   28:Src/pedals.c  **** 			return 1;
   29:Src/pedals.c  **** 		} else if (accel_implausibility_check_count_flag == 3) {
-  56              		.loc 1 29 0
-  57 0020 0328     		cmp	r0, #3
-  58 0022 19D0     		beq	.L10
+  70              		.loc 1 29 10 is_stmt 1 view .LVU13
+  71              		.loc 1 29 13 is_stmt 0 view .LVU14
+  72 0020 0328     		cmp	r0, #3
+  73 0022 19D0     		beq	.L10
   30:Src/pedals.c  **** 			return 2;
   31:Src/pedals.c  **** 		} else {
   32:Src/pedals.c  **** 			return 0;
-  59              		.loc 1 32 0
-  60 0024 0020     		movs	r0, #0
+  74              		.loc 1 32 11 view .LVU15
+  75 0024 0020     		movs	r0, #0
+  76 0026 1EE0     		b	.L4
+  77              	.L8:
+  20:Src/pedals.c  **** 			/*sprintf(txt, "POT FAIL3***\r\n");
+  78              		.loc 1 20 4 is_stmt 1 view .LVU16
+  20:Src/pedals.c  **** 			/*sprintf(txt, "POT FAIL3***\r\n");
+ARM GAS  /tmp/ccCsV6ts.s 			page 3
+
+
+  79              		.loc 1 20 42 is_stmt 0 view .LVU17
+  80 0028 0122     		movs	r2, #1
+  81 002a 1A70     		strb	r2, [r3]
+  23:Src/pedals.c  **** 		} else if (accel_implausibility_check_count_flag == 2) {
+  82              		.loc 1 23 4 is_stmt 1 view .LVU18
+  23:Src/pedals.c  **** 		} else if (accel_implausibility_check_count_flag == 2) {
+  83              		.loc 1 23 11 is_stmt 0 view .LVU19
+  84 002c 1BE0     		b	.L4
+  85              	.L9:
+  25:Src/pedals.c  **** 			sprintf(txt, "POT FAIL4****\r\n");
+  86              		.loc 1 25 4 is_stmt 1 view .LVU20
+  25:Src/pedals.c  **** 			sprintf(txt, "POT FAIL4****\r\n");
+  87              		.loc 1 25 42 is_stmt 0 view .LVU21
+  88 002e 0F4B     		ldr	r3, .L11+4
+  89 0030 0322     		movs	r2, #3
+  90 0032 1A70     		strb	r2, [r3]
+  26:Src/pedals.c  **** 			HAL_UART_Transmit(&huart3, (uint8_t*)txt, strlen(txt), 10);
+  91              		.loc 1 26 4 is_stmt 1 view .LVU22
+  92 0034 0E4C     		ldr	r4, .L11+8
+  93 0036 0F4D     		ldr	r5, .L11+12
+  94 0038 0FCD     		ldmia	r5!, {r0, r1, r2, r3}
+  95 003a 2060     		str	r0, [r4]	@ unaligned
+  96 003c 6160     		str	r1, [r4, #4]	@ unaligned
+  97 003e A260     		str	r2, [r4, #8]	@ unaligned
+  98 0040 E360     		str	r3, [r4, #12]	@ unaligned
+  27:Src/pedals.c  **** 			return 1;
+  99              		.loc 1 27 4 view .LVU23
+  27:Src/pedals.c  **** 			return 1;
+ 100              		.loc 1 27 46 is_stmt 0 view .LVU24
+ 101 0042 2046     		mov	r0, r4
+ 102 0044 FFF7FEFF 		bl	strlen
+ 103              	.LVL0:
+  27:Src/pedals.c  **** 			return 1;
+ 104              		.loc 1 27 4 view .LVU25
+ 105 0048 0A23     		movs	r3, #10
+ 106 004a 82B2     		uxth	r2, r0
+ 107 004c 2146     		mov	r1, r4
+ 108 004e 0A48     		ldr	r0, .L11+16
+ 109 0050 FFF7FEFF 		bl	HAL_UART_Transmit
+ 110              	.LVL1:
+  28:Src/pedals.c  **** 		} else if (accel_implausibility_check_count_flag == 3) {
+ 111              		.loc 1 28 4 is_stmt 1 view .LVU26
+  28:Src/pedals.c  **** 		} else if (accel_implausibility_check_count_flag == 3) {
+ 112              		.loc 1 28 11 is_stmt 0 view .LVU27
+ 113 0054 0120     		movs	r0, #1
+ 114 0056 06E0     		b	.L4
+ 115              	.L10:
+  30:Src/pedals.c  **** 		} else {
+ 116              		.loc 1 30 11 view .LVU28
+ 117 0058 0220     		movs	r0, #2
+ 118 005a 04E0     		b	.L4
+ 119              	.L2:
   33:Src/pedals.c  **** 		}
   34:Src/pedals.c  **** 	} else {
   35:Src/pedals.c  **** 		accel_implausibility_check_count_flag = 0;
+ 120              		.loc 1 35 3 is_stmt 1 view .LVU29
+ 121              		.loc 1 35 41 is_stmt 0 view .LVU30
+ARM GAS  /tmp/ccCsV6ts.s 			page 4
+
+
+ 122 005c 0020     		movs	r0, #0
+ 123 005e 034B     		ldr	r3, .L11+4
+ 124 0060 1870     		strb	r0, [r3]
   36:Src/pedals.c  **** 		accel_implausibility_check_count = 0;
+ 125              		.loc 1 36 3 is_stmt 1 view .LVU31
+ 126              		.loc 1 36 36 is_stmt 0 view .LVU32
+ 127 0062 064B     		ldr	r3, .L11+20
+ 128 0064 1870     		strb	r0, [r3]
   37:Src/pedals.c  **** 		/*sprintf(txt, "POT FAIL5*****\r\n");
   38:Src/pedals.c  **** 		HAL_UART_Transmit(&huart3, (uint8_t*)txt, strlen(txt), 10);*/
   39:Src/pedals.c  **** 		return 0;  // retrun ok
+ 129              		.loc 1 39 3 is_stmt 1 view .LVU33
+ 130              	.L4:
   40:Src/pedals.c  **** 	}
   41:Src/pedals.c  **** }
-  61              		.loc 1 41 0
-  62 0026 38BD     		pop	{r3, r4, r5, pc}
-  63              	.L8:
-  20:Src/pedals.c  **** 			/*sprintf(txt, "POT FAIL3***\r\n");
-  64              		.loc 1 20 0
-  65 0028 0122     		movs	r2, #1
-  66 002a 1A70     		strb	r2, [r3]
-  23:Src/pedals.c  **** 		} else if (accel_implausibility_check_count_flag == 2) {
-  67              		.loc 1 23 0
-  68 002c 38BD     		pop	{r3, r4, r5, pc}
-  69              	.L9:
-  25:Src/pedals.c  **** 			sprintf(txt, "POT FAIL4****\r\n");
-  70              		.loc 1 25 0
-  71 002e 0322     		movs	r2, #3
-ARM GAS  /tmp/ccmpnq9q.s 			page 3
-
-
-  72 0030 0E4B     		ldr	r3, .L11+4
-  73 0032 1A70     		strb	r2, [r3]
-  26:Src/pedals.c  **** 			HAL_UART_Transmit(&huart3, (uint8_t*)txt, strlen(txt), 10);
-  74              		.loc 1 26 0
-  75 0034 0E4C     		ldr	r4, .L11+8
-  76 0036 0F4D     		ldr	r5, .L11+12
-  77 0038 0FCD     		ldmia	r5!, {r0, r1, r2, r3}
-  78 003a 2060     		str	r0, [r4]	@ unaligned
-  79 003c 6160     		str	r1, [r4, #4]	@ unaligned
-  80 003e A260     		str	r2, [r4, #8]	@ unaligned
-  81 0040 E360     		str	r3, [r4, #12]	@ unaligned
-  27:Src/pedals.c  **** 			return 1;
-  82              		.loc 1 27 0
-  83 0042 2046     		mov	r0, r4
-  84 0044 FFF7FEFF 		bl	strlen
-  85              	.LVL0:
-  86 0048 0A23     		movs	r3, #10
-  87 004a 82B2     		uxth	r2, r0
-  88 004c 2146     		mov	r1, r4
-  89 004e 0A48     		ldr	r0, .L11+16
-  90 0050 FFF7FEFF 		bl	HAL_UART_Transmit
-  91              	.LVL1:
-  28:Src/pedals.c  **** 		} else if (accel_implausibility_check_count_flag == 3) {
-  92              		.loc 1 28 0
-  93 0054 0120     		movs	r0, #1
-  94 0056 38BD     		pop	{r3, r4, r5, pc}
-  95              	.L10:
-  30:Src/pedals.c  **** 		} else {
-  96              		.loc 1 30 0
-  97 0058 0220     		movs	r0, #2
-  98 005a 38BD     		pop	{r3, r4, r5, pc}
-  99              	.L2:
-  35:Src/pedals.c  **** 		accel_implausibility_check_count = 0;
- 100              		.loc 1 35 0
- 101 005c 0020     		movs	r0, #0
- 102 005e 034B     		ldr	r3, .L11+4
- 103 0060 1870     		strb	r0, [r3]
-  36:Src/pedals.c  **** 		/*sprintf(txt, "POT FAIL5*****\r\n");
- 104              		.loc 1 36 0
- 105 0062 064B     		ldr	r3, .L11+20
- 106 0064 1870     		strb	r0, [r3]
-  39:Src/pedals.c  **** 	}
- 107              		.loc 1 39 0
- 108 0066 38BD     		pop	{r3, r4, r5, pc}
- 109              	.L12:
- 110              		.align	2
- 111              	.L11:
- 112 0068 00000000 		.word	accel
- 113 006c 00000000 		.word	.LANCHOR0
- 114 0070 00000000 		.word	txt
- 115 0074 00000000 		.word	.LC0
- 116 0078 00000000 		.word	huart3
- 117 007c 00000000 		.word	.LANCHOR1
- 118              		.cfi_endproc
- 119              	.LFE142:
- 121              		.section	.text.brake_implausibility_check,"ax",%progbits
- 122              		.align	1
-ARM GAS  /tmp/ccmpnq9q.s 			page 4
-
-
- 123              		.global	brake_implausibility_check
- 124              		.syntax unified
- 125              		.thumb
- 126              		.thumb_func
- 127              		.fpu fpv5-d16
- 129              	brake_implausibility_check:
- 130              	.LFB143:
+ 131              		.loc 1 41 1 is_stmt 0 view .LVU34
+ 132 0066 38BD     		pop	{r3, r4, r5, pc}
+ 133              	.L12:
+ 134              		.align	2
+ 135              	.L11:
+ 136 0068 00000000 		.word	accel
+ 137 006c 00000000 		.word	.LANCHOR0
+ 138 0070 00000000 		.word	txt
+ 139 0074 00000000 		.word	.LC0
+ 140 0078 00000000 		.word	huart3
+ 141 007c 00000000 		.word	.LANCHOR1
+ 142              		.cfi_endproc
+ 143              	.LFE144:
+ 145              		.section	.text.brake_implausibility_check,"ax",%progbits
+ 146              		.align	1
+ 147              		.global	brake_implausibility_check
+ 148              		.syntax unified
+ 149              		.thumb
+ 150              		.thumb_func
+ 151              		.fpu fpv5-d16
+ 153              	brake_implausibility_check:
+ 154              	.LFB145:
   42:Src/pedals.c  **** uint8_t brake_implausibility_check() { return 0; }...
- 131              		.loc 1 42 0
- 132              		.cfi_startproc
- 133              		@ args = 0, pretend = 0, frame = 0
- 134              		@ frame_needed = 0, uses_anonymous_args = 0
- 135              		@ link register save eliminated.
- 136              		.loc 1 42 0
- 137 0000 0020     		movs	r0, #0
- 138 0002 7047     		bx	lr
- 139              		.cfi_endproc
- 140              	.LFE143:
- 142              		.global	brake_implausibility_check_count
- 143              		.global	accel_implausibility_check_count
- 144              		.global	brake_implausibility_check_count_flag
- 145              		.global	accel_implausibility_check_count_flag
- 146              		.comm	brake,20,4
- 147              		.comm	accel,20,4
- 148              		.section	.bss.accel_implausibility_check_count,"aw",%nobits
- 149              		.set	.LANCHOR1,. + 0
- 152              	accel_implausibility_check_count:
- 153 0000 00       		.space	1
- 154              		.section	.bss.accel_implausibility_check_count_flag,"aw",%nobits
- 155              		.set	.LANCHOR0,. + 0
- 158              	accel_implausibility_check_count_flag:
- 159 0000 00       		.space	1
- 160              		.section	.bss.brake_implausibility_check_count,"aw",%nobits
- 163              	brake_implausibility_check_count:
- 164 0000 00       		.space	1
- 165              		.section	.bss.brake_implausibility_check_count_flag,"aw",%nobits
- 168              	brake_implausibility_check_count_flag:
- 169 0000 00       		.space	1
- 170              		.section	.rodata.accel_implausibility_check.str1.4,"aMS",%progbits,1
- 171              		.align	2
- 172              	.LC0:
- 173 0000 504F5420 		.ascii	"POT FAIL4****\015\012\000"
- 173      4641494C 
- 173      342A2A2A 
- 173      2A0D0A00 
- 174              		.text
- 175              	.Letext0:
- 176              		.file 2 "Drivers/CMSIS/Device/ST/STM32F7xx/Include/stm32f767xx.h"
- 177              		.file 3 "/usr/include/newlib/machine/_default_types.h"
- 178              		.file 4 "/usr/include/newlib/sys/_stdint.h"
- 179              		.file 5 "Drivers/CMSIS/Include/core_cm7.h"
- 180              		.file 6 "Drivers/CMSIS/Device/ST/STM32F7xx/Include/system_stm32f7xx.h"
- 181              		.file 7 "Drivers/CMSIS/Device/ST/STM32F7xx/Include/stm32f7xx.h"
- 182              		.file 8 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_def.h"
- 183              		.file 9 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_dma.h"
- 184              		.file 10 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_can.h"
- 185              		.file 11 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart.h"
-ARM GAS  /tmp/ccmpnq9q.s 			page 5
+ 155              		.loc 1 42 38 is_stmt 1 view -0
+ 156              		.cfi_startproc
+ 157              		@ args = 0, pretend = 0, frame = 0
+ 158              		@ frame_needed = 0, uses_anonymous_args = 0
+ 159              		@ link register save eliminated.
+ 160              		.loc 1 42 40 view .LVU36
+ 161              		.loc 1 42 1 is_stmt 0 view .LVU37
+ 162 0000 0020     		movs	r0, #0
+ 163 0002 7047     		bx	lr
+ 164              		.cfi_endproc
+ 165              	.LFE145:
+ 167              		.global	brake_implausibility_check_count
+ 168              		.global	accel_implausibility_check_count
+ 169              		.global	brake_implausibility_check_count_flag
+ 170              		.global	accel_implausibility_check_count_flag
+ 171              		.comm	brake,20,4
+ 172              		.comm	accel,20,4
+ 173              		.section	.bss.accel_implausibility_check_count,"aw",%nobits
+ 174              		.set	.LANCHOR1,. + 0
+ARM GAS  /tmp/ccCsV6ts.s 			page 5
 
 
- 186              		.file 12 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal.h"
- 187              		.file 13 "Inc/pedals.h"
- 188              		.file 14 "Inc/can.h"
- 189              		.file 15 "Middlewares/Third_Party/FatFs/src/integer.h"
- 190              		.file 16 "/usr/include/newlib/sys/lock.h"
- 191              		.file 17 "/usr/include/newlib/sys/_types.h"
- 192              		.file 18 "/usr/lib/gcc/arm-none-eabi/6.3.1/include/stddef.h"
- 193              		.file 19 "/usr/include/newlib/sys/reent.h"
- 194              		.file 20 "/usr/include/newlib/stdlib.h"
- 195              		.file 21 "Middlewares/Third_Party/FatFs/src/ff.h"
- 196              		.file 22 "Middlewares/Third_Party/FatFs/src/diskio.h"
- 197              		.file 23 "Middlewares/Third_Party/FatFs/src/ff_gen_drv.h"
- 198              		.file 24 "Inc/sd_diskio.h"
- 199              		.file 25 "Inc/fatfs.h"
- 200              		.file 26 "Inc/global_variables.h"
- 201              		.file 27 "/usr/include/newlib/string.h"
-ARM GAS  /tmp/ccmpnq9q.s 			page 6
+ 177              	accel_implausibility_check_count:
+ 178 0000 00       		.space	1
+ 179              		.section	.bss.accel_implausibility_check_count_flag,"aw",%nobits
+ 180              		.set	.LANCHOR0,. + 0
+ 183              	accel_implausibility_check_count_flag:
+ 184 0000 00       		.space	1
+ 185              		.section	.bss.brake_implausibility_check_count,"aw",%nobits
+ 188              	brake_implausibility_check_count:
+ 189 0000 00       		.space	1
+ 190              		.section	.bss.brake_implausibility_check_count_flag,"aw",%nobits
+ 193              	brake_implausibility_check_count_flag:
+ 194 0000 00       		.space	1
+ 195              		.text
+ 196              	.Letext0:
+ 197              		.file 2 "Drivers/CMSIS/Device/ST/STM32F7xx/Include/stm32f767xx.h"
+ 198              		.file 3 "/usr/arm-none-eabi/include/machine/_default_types.h"
+ 199              		.file 4 "/usr/arm-none-eabi/include/sys/_stdint.h"
+ 200              		.file 5 "Drivers/CMSIS/Include/core_cm7.h"
+ 201              		.file 6 "Drivers/CMSIS/Device/ST/STM32F7xx/Include/system_stm32f7xx.h"
+ 202              		.file 7 "Drivers/CMSIS/Device/ST/STM32F7xx/Include/stm32f7xx.h"
+ 203              		.file 8 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_def.h"
+ 204              		.file 9 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_dma.h"
+ 205              		.file 10 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_can.h"
+ 206              		.file 11 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart.h"
+ 207              		.file 12 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal.h"
+ 208              		.file 13 "Inc/pedals.h"
+ 209              		.file 14 "Inc/can.h"
+ 210              		.file 15 "Middlewares/Third_Party/FatFs/src/integer.h"
+ 211              		.file 16 "/usr/arm-none-eabi/include/sys/lock.h"
+ 212              		.file 17 "/usr/arm-none-eabi/include/sys/_types.h"
+ 213              		.file 18 "/usr/lib/gcc/arm-none-eabi/9.2.0/include/stddef.h"
+ 214              		.file 19 "/usr/arm-none-eabi/include/sys/reent.h"
+ 215              		.file 20 "/usr/arm-none-eabi/include/stdlib.h"
+ 216              		.file 21 "Middlewares/Third_Party/FatFs/src/ff.h"
+ 217              		.file 22 "Middlewares/Third_Party/FatFs/src/diskio.h"
+ 218              		.file 23 "Middlewares/Third_Party/FatFs/src/ff_gen_drv.h"
+ 219              		.file 24 "Inc/sd_diskio.h"
+ 220              		.file 25 "Inc/fatfs.h"
+ 221              		.file 26 "Inc/global_variables.h"
+ 222              		.file 27 "/usr/arm-none-eabi/include/string.h"
+ARM GAS  /tmp/ccCsV6ts.s 			page 6
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 pedals.c
-     /tmp/ccmpnq9q.s:17     .text.accel_implausibility_check:0000000000000000 $t
-     /tmp/ccmpnq9q.s:24     .text.accel_implausibility_check:0000000000000000 accel_implausibility_check
-     /tmp/ccmpnq9q.s:112    .text.accel_implausibility_check:0000000000000068 $d
+     /tmp/ccCsV6ts.s:17     .rodata.accel_implausibility_check.str1.4:0000000000000000 $d
+     /tmp/ccCsV6ts.s:21     .text.accel_implausibility_check:0000000000000000 $t
+     /tmp/ccCsV6ts.s:29     .text.accel_implausibility_check:0000000000000000 accel_implausibility_check
+     /tmp/ccCsV6ts.s:136    .text.accel_implausibility_check:0000000000000068 $d
                             *COM*:0000000000000014 accel
-     /tmp/ccmpnq9q.s:122    .text.brake_implausibility_check:0000000000000000 $t
-     /tmp/ccmpnq9q.s:129    .text.brake_implausibility_check:0000000000000000 brake_implausibility_check
-     /tmp/ccmpnq9q.s:163    .bss.brake_implausibility_check_count:0000000000000000 brake_implausibility_check_count
-     /tmp/ccmpnq9q.s:152    .bss.accel_implausibility_check_count:0000000000000000 accel_implausibility_check_count
-     /tmp/ccmpnq9q.s:168    .bss.brake_implausibility_check_count_flag:0000000000000000 brake_implausibility_check_count_flag
-     /tmp/ccmpnq9q.s:158    .bss.accel_implausibility_check_count_flag:0000000000000000 accel_implausibility_check_count_flag
+     /tmp/ccCsV6ts.s:146    .text.brake_implausibility_check:0000000000000000 $t
+     /tmp/ccCsV6ts.s:153    .text.brake_implausibility_check:0000000000000000 brake_implausibility_check
+     /tmp/ccCsV6ts.s:188    .bss.brake_implausibility_check_count:0000000000000000 brake_implausibility_check_count
+     /tmp/ccCsV6ts.s:177    .bss.accel_implausibility_check_count:0000000000000000 accel_implausibility_check_count
+     /tmp/ccCsV6ts.s:193    .bss.brake_implausibility_check_count_flag:0000000000000000 brake_implausibility_check_count_flag
+     /tmp/ccCsV6ts.s:183    .bss.accel_implausibility_check_count_flag:0000000000000000 accel_implausibility_check_count_flag
                             *COM*:0000000000000014 brake
-     /tmp/ccmpnq9q.s:153    .bss.accel_implausibility_check_count:0000000000000000 $d
-     /tmp/ccmpnq9q.s:159    .bss.accel_implausibility_check_count_flag:0000000000000000 $d
-     /tmp/ccmpnq9q.s:164    .bss.brake_implausibility_check_count:0000000000000000 $d
-     /tmp/ccmpnq9q.s:169    .bss.brake_implausibility_check_count_flag:0000000000000000 $d
-     /tmp/ccmpnq9q.s:171    .rodata.accel_implausibility_check.str1.4:0000000000000000 $d
-                     .debug_frame:0000000000000010 $d
+     /tmp/ccCsV6ts.s:178    .bss.accel_implausibility_check_count:0000000000000000 $d
+     /tmp/ccCsV6ts.s:184    .bss.accel_implausibility_check_count_flag:0000000000000000 $d
+     /tmp/ccCsV6ts.s:189    .bss.brake_implausibility_check_count:0000000000000000 $d
+     /tmp/ccCsV6ts.s:194    .bss.brake_implausibility_check_count_flag:0000000000000000 $d
 
 UNDEFINED SYMBOLS
 strlen

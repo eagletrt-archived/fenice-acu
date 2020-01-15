@@ -114,6 +114,7 @@ extern uint8_t accel_implausibility_check_count;
 #define REQUEST_TS_ON 2
 //from BMS
 #define ID_BMS_HV 0xAA
+#define ID_REQ_PRCH 0xB4
 #define ID_BMS_LV 0xFF
 
 //from ATC (Analog To CAN)

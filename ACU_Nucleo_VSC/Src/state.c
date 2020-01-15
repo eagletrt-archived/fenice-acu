@@ -23,6 +23,7 @@ int critical_errors = 0;
 int init_step = 0;
 uint32_t init_step_start_time = 0;
 uint32_t init_precharge_start_time = 0;
+uint32_t init_inv_resp = 0;
 
 uint8_t inv_init_response = 0; // bit 0 = inv R -> 0 = no / 1 = YES ---- bit 1 = inv L -> 0 = no / 1 = yes
 // Default state
@@ -175,6 +176,7 @@ void idle()
 			case REQUEST_TS_ON:
 				//If req Tractive System ON msg arrives -> go to setup state
 				current_state = STATE_SETUP;
+				break;
 			default:
 				break;
 			}
@@ -198,20 +200,23 @@ void setup()
 	if(setup_init == 0){
 		setup_init = 1; //set that setup procedure is started
 		if((atc_connected == 1) && (brake.pot_avr_100 > 50) && (critical_errors = 0)){
-			//If Analog to CAN device is connected, brake is pressed and there aren't critical erros -> send request of TS ON to BMS_HV
+			//If Analog to CAN device is connected, brake is pressed and there aren't critical erros -> 
+				//-> send pre-charge request to HV
+			can1.tx_id = ID_REQ_PRCH;
 			can1.dataTx[0] = 1;
 			can1.tx_size = 1;
-			//can1.tx_id = ; put the BMS_HV ID
 			CAN_Send(&can1, normalPriority);
 			init_precharge_start_time = count_ms_abs; //take the time when the pre-charge is sent
 		}else{
 			//Can't turn on TS caused by some errors
 			current_state = STATE_IDLE; //return to idle state
-			
 			// TODO: report error to steer
 		}
 	}else if(setup_init == 1){
-		if (fifoRxDataCAN_pop(&can1)){
+		if(count_ms_abs - init_precharge_start_time > 5000){
+			// report error
+			current_state = STATE_IDLE;
+		}else if (fifoRxDataCAN_pop(&can1)){
 			switch(can1.rx_id){
 				case ID_BMS_HV:
 					if(can1.dataRx[0] == 1){ //Pre-cherge ended sucessfully
@@ -222,6 +227,47 @@ void setup()
 					}
 			}
 		}
+	}else if(setup_init = 2){
+		//send command inverter enable
+		can1.tx_id = ID_REQ_INV_DX;
+		can1.dataTx[0] = 0x51;
+		can1.dataTx[1] = 0x00;
+		can1.dataTx[2] = 0x00;
+		can1.tx_size = 3;
+		CAN_Send(&can1, normalPriority);
+
+		//send request inverter enable
+		can1.tx_id = ID_ASK_INV_DX;
+		can1.dataTx[0] = 0x3D;
+		can1.dataTx[1] = 0xE8;
+		can1.dataTx[2] = 0x00;
+		can1.tx_size = 3;
+		CAN_Send(&can1, normalPriority);
+
+		setup_init = 3;
+
+		init_inv_resp = count_ms_abs;
+	}else if(setup_init == 3){
+		if(count_ms_abs - init_inv_resp > 10000){
+			// report error
+			//send pre-charge OFF req
+			can1.tx_id = ID_REQ_PRCH;
+			can1.dataTx[0] = 0x00;
+			can1.tx_size = 1;
+			CAN_Send(&can1, highPriority);
+			current_state = STATE_IDLE;
+		}else if (fifoRxDataCAN_pop(&can1)){
+			switch(can1.rx_id){
+				case ID_REQ_INV_DX:
+					if(can1.dataRx[0] == 0xE0 && can1.dataRx[1] == 0x01 && can1.dataRx[2] == 0x00 && can1.dataRx[3] == 0x00){
+						setup_init = 4;
+					}
+			}			
+		}
+	}else if(setup_init == 4){
+		// In this state all is ready for run //
+		// Waiting for run signal from steer //
+		
 	}
 	/*if (fifoRxDataCAN_pop(&can1))
 	{
@@ -359,8 +405,7 @@ void run()
 		switch (can1.rx_id)
 		{
 		case ID_STEERING_WEEL_1:
-			if (can1.dataRx[0] ==
-				6)
+			if (can1.dataRx[0] == 6)
 			{ //----- change state to setup -----//
 				current_state = STATE_SETUP;
 			}
