@@ -199,7 +199,7 @@ void setup()
 {
 	if(setup_init == 0){
 		setup_init = 1; //set that setup procedure is started
-		if((atc_connected == 1) && (brake.pot_avr_100 > 50) && (critical_errors = 0)){
+		if((atc_connected == 1) && (critical_errors = 0)){
 			//If Analog to CAN device is connected, brake is pressed and there aren't critical erros -> 
 				//-> send pre-charge request to HV
 			can1.tx_id = ID_REQ_PRCH;
@@ -227,7 +227,7 @@ void setup()
 					}
 			}
 		}
-	}else if(setup_init = 2){
+	}else if(setup_init == 2){
 		//send command inverter enable
 		can1.tx_id = ID_REQ_INV_DX;
 		can1.dataTx[0] = 0x51;
@@ -558,57 +558,4 @@ void atc_pot_operations()
 {
 	atc_connected = 1;
 	count_atc = 0;
-	accel.pot1_val = can1.dataRx[0] * 256 + can1.dataRx[1];
-	accel.pot2_val = can1.dataRx[2] * 256 + can1.dataRx[3];
-	// brake.pot1_val = can1.dataRx[4] * 256 + can1.dataRx[5];
-	// brake.pot2_val = can1.dataRx[6] * 256 + can1.dataRx[7];
-	/*sprintf(txt, "CAN: %d %d %d %d\r\n ", can1.dataRx[0], can1.dataRx[1],
-			can1.dataRx[2], can1.dataRx[3]);
-	HAL_UART_Transmit(&huart3, (uint8_t*)txt, strlen(txt), 10);*/
-	// val100 = (val - pot_min_val)/(pot_max_val - pot_min_val)*100
-
-	if (accel.pot1_range != 0 && accel.pot2_range != 0)
-	{
-		accel.pot1_val_100 =
-			((accel.pot1_val - accel.pot1_min_val) * 100) / (accel.pot1_range);
-		accel.pot2_val_100 =
-			((accel.pot2_val - accel.pot2_min_val) * 100) / (accel.pot2_range);
-	}
-	if (brake.pot1_range != 0 && brake.pot2_range != 0)
-	{
-		brake.pot1_val_100 =
-			(brake.pot1_val - brake.pot1_min_val) / (brake.pot1_range) * 100;
-		brake.pot2_val_100 =
-			(brake.pot2_val - brake.pot2_min_val) / (brake.pot2_range) * 100;
-	}
-	/*sprintf(txt, "size: %d ", can1.rx_size);
-	HAL_UART_Transmit(&huart3, (uint8_t*)txt, strlen(txt), 10);*/
-	/*sprintf(txt, "%d %d\r\n", accel.pot1_val, accel.pot2_val);
-	HAL_UART_Transmit(&huart3, (uint8_t*)txt, strlen(txt), 10);*/
-	/*sprintf(txt, "%d %d\r\n", accel.pot1_val_100, accel.pot2_val_100);
-	HAL_UART_Transmit(&huart3, (uint8_t*)txt, strlen(txt), 10);*/
-	if (accel_implausibility_check() == 1)
-	{
-		accel.pot1_val = 0;
-		accel.pot2_val = 0;
-		accel.pot1_val_100 = 0;
-		accel.pot2_val_100 = 0;
-		// send error//
-		can1.tx_id = 0x10;
-		can1.dataTx[0] = 1;
-		can1.tx_size = 1;
-		// CAN_Send(&can1, highPriority);
-		sprintf(txt, "POT FAIL %d\r\n", accel_implausibility_check_count_flag);
-		HAL_UART_Transmit(&huart3, (uint8_t *)txt, strlen(txt), 10);
-	}
-	else if (accel_implausibility_check() == 0)
-	{
-		sprintf(txt, "POT WORK %d %d\r\n", accel.pot1_val_100,
-				accel.pot2_val_100);
-		HAL_UART_Transmit(&huart3, (uint8_t *)txt, strlen(txt), 10);
-	}
-	/*if(brake_implausibility_check()){
-		brake.pot1_val = 0;
-		brake.pot2_val = 0;
-	}*/
 }

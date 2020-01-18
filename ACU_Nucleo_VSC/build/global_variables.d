@@ -35,8 +35,7 @@ build/global_variables.o: Src/global_variables.c Inc/global_variables.h \
  Inc/bsp_driver_sd.h Inc/fatfs_platform.h \
  Middlewares/Third_Party/FatFs/src/ff_gen_drv.h \
  Middlewares/Third_Party/FatFs/src/diskio.h \
- Middlewares/Third_Party/FatFs/src/ff.h Inc/sd_diskio.h Inc/pedals.h \
- Inc/fatfs.h
+ Middlewares/Third_Party/FatFs/src/ff.h Inc/sd_diskio.h Inc/fatfs.h
 
 Inc/global_variables.h:
 
@@ -129,7 +128,5 @@ Middlewares/Third_Party/FatFs/src/diskio.h:
 Middlewares/Third_Party/FatFs/src/ff.h:
 
 Inc/sd_diskio.h:
-
-Inc/pedals.h:
 
 Inc/fatfs.h:

@@ -5,7 +5,6 @@
 #include "can.h"
 #include "stm32f7xx_hal.h"
 #include "fatfs.h"
-#include "pedals.h"
 
 #define MAX_DEBUG_RX_L 20
 #define MAX_DEBUG_TX_L 2000
@@ -63,14 +62,6 @@ extern FRESULT res_mount;
 extern int successfull_opening;
 
 extern uint8_t pot_values_loaded;
-
-//-----------------------------------------//
-//------------- FROM PEDALS----------------//
-//-----------------------------------------//
-extern PotStc accel;
-extern PotStc brake;
-extern uint8_t accel_implausibility_check_count_flag;
-extern uint8_t accel_implausibility_check_count;
 
 //-----------------------------------------//
 //------------------ ID -------------------//

@@ -133,14 +133,7 @@ int main(void)
 						1);  // activate rx interrupt for debug
 
 	current_state = STATE_INIT;
-
-	accel.pot1_max_val = 4096;
-	accel.pot1_min_val = 0;
-	accel.pot1_range = accel.pot1_max_val - accel.pot1_min_val;
-	accel.pot2_max_val = 4096;
-	accel.pot2_min_val = 0;
-	accel.pot2_range = accel.pot2_max_val - accel.pot2_min_val;
-
+  
 	init_sd();
 
 	
@@ -459,14 +452,6 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
 	if (htim == &htim2) {
 		count_ms += 1;
 		count_ms_abs++; //absolute 32 bit counter -> up to 50 days 
-		if (accel_implausibility_check_count_flag == 1) {
-			accel_implausibility_check_count++;
-			if (accel_implausibility_check_count == 50) {
-				accel_implausibility_check_count_flag = 2;
-				accel_implausibility_check_count = 0;
-				// TODO: add error messages
-			}
-		}
 		if (count_ms == 100) {
 			count_ms = 0;
 			count_dec++;
