@@ -503,11 +503,15 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan) {
 		// FIFO0\r\n"), 10);
 		if (HAL_CAN_GetRxFifoFillLevel(&hcan1, CAN_RX_FIFO0) != 0) {
 			CAN_RxHeaderTypeDef header;
-			HAL_CAN_GetRxMessage(&hcan1, CAN_RX_FIFO0, &header,
-								 can1.dataRX_int);
+			HAL_CAN_GetRxMessage(&hcan1, CAN_RX_FIFO0, &header, can1.dataRX_int);
 			can1.rx_id_int = header.StdId;
 			can1.rx_size_int = header.DLC;
-			fifoRxDataCAN_push(&can1);
+      if(canSnifferMode == 1){
+        sprintf(txt,"%ld %d %d %d %d %d %d %d %d\r\n", can1.rx_id_int, can1.dataRX_int[0], can1.dataRX_int[1], can1.dataRX_int[2], can1.dataRX_int[3], can1.dataRX_int[4], can1.dataRX_int[5], can1.dataRX_int[6], can1.dataRX_int[7] );
+        HAL_UART_Transmit(&huart3, (uint8_t*)txt, strlen(txt), 50);
+      }else{
+			  fifoRxDataCAN_push(&can1);
+      }
 			/*sprintf(txt, "DATA: %d %d %d %d %d %d %d %d\r\n", can1.dataRx[0],
 					can1.dataRx[1], can1.dataRx[2], can1.dataRx[3],
 					can1.dataRx[4], can1.dataRx[5], can1.dataRx[6],

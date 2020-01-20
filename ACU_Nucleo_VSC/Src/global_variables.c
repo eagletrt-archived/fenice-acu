@@ -18,6 +18,7 @@ const char code_version[]="\r\nCode version = 1.0, updated 01/11/2019\r\n";
 //--- FOR DEBUG ---//
 char debug_rx[MAX_DEBUG_RX_L], debug_tx[MAX_DEBUG_TX_L];
 uint8_t debug_rx_count = 0, debug_msg_arrived = 0;
+uint8_t canSnifferMode = 0;
 
 //--- DEVICE CONNECTED VARIABLES ---//
 uint8_t imu_connected = 0;

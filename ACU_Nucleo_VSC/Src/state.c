@@ -430,6 +430,7 @@ void debug_operations()
 				"\r\n***********ECU HELP***********\r\n"
 				"Avaiable msg are:\r\n"
 				"\t-- status -> print ECU status\r\n"
+				"\t-- can sniffer -> enter in can sniffer mode (q for quit)\r\n"
 				"\t-- sd status -> print SD status and the name of file inside\r\n"
 				"\t-- sd file -> print files inside the SD\r\n"
 				"\t-- time -> print activity time\r\n"
@@ -501,8 +502,15 @@ void debug_operations()
 				"\t ITS -> %d\r\n",
 				imu_connected, its_connected);
 		HAL_UART_Transmit(&huart3, (uint8_t *)debug_tx, strlen(debug_tx), 100);
-	}
-	else if (strcmp(debug_rx, "sd status") == 0){
+	}else if(strcmp(debug_rx, "can sniffer") == 0){
+		canSnifferMode = 1;
+		sprintf(debug_tx,"\r\nEnter in can sniffer mode\r\n");
+		HAL_UART_Transmit(&huart3, (uint8_t *)debug_tx, strlen(debug_tx), 100);
+	}else if(strcmp(debug_rx, "q") == 0){
+		canSnifferMode = 0;
+		sprintf(debug_tx,"\r\nExit from can sniffer mode\r\n");
+		HAL_UART_Transmit(&huart3, (uint8_t *)debug_tx, strlen(debug_tx), 100);
+	}else if (strcmp(debug_rx, "sd status") == 0){
 		if(mount_ok == 1){
 			HAL_UART_Transmit(&huart3, (uint8_t *)"\r\nSd mounted ", strlen("\r\nSd mounted "), 100);
 			if(successfull_opening == 1){

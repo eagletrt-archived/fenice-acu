@@ -22,6 +22,7 @@ extern const char code_version[];
 
 extern char debug_rx[MAX_DEBUG_RX_L], debug_tx[MAX_DEBUG_TX_L];
 extern uint8_t debug_rx_count, debug_msg_arrived;
+extern uint8_t canSnifferMode;
 
 extern UART_HandleTypeDef huart3;
 

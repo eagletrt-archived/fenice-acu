@@ -1,4 +1,4 @@
-ARM GAS  /tmp/cc3Iv8jU.s 			page 1
+ARM GAS  /tmp/ccGLPj9k.s 			page 1
 
 
    1              		.cpu cortex-m7
@@ -19,156 +19,162 @@ ARM GAS  /tmp/cc3Iv8jU.s 			page 1
   16              		.global	atc_connected
   17              		.global	its_connected
   18              		.global	imu_connected
-  19              		.global	debug_msg_arrived
-  20              		.global	debug_rx_count
-  21              		.comm	debug_tx,2000,4
-  22              		.comm	debug_rx,20,4
-  23              		.global	code_version
-  24              		.global	count_atc
-  25              		.global	count_imu
-  26              		.global	count_accumulator
-  27              		.global	count_inverter
-  28              		.global	count_ms_abs
-  29              		.global	count_hour
-  30              		.global	count_min
-  31              		.global	count_sec
-  32              		.global	count_dec
-  33              		.global	count_ms
-  34              		.section	.bss.atc_connected,"aw",%nobits
-  37              	atc_connected:
-  38 0000 00       		.space	1
-  39              		.section	.bss.count_accumulator,"aw",%nobits
-  40              		.align	1
-  43              	count_accumulator:
-  44 0000 0000     		.space	2
-  45              		.section	.bss.count_atc,"aw",%nobits
+  19              		.global	canSnifferMode
+  20              		.global	debug_msg_arrived
+  21              		.global	debug_rx_count
+  22              		.comm	debug_tx,2000,4
+  23              		.comm	debug_rx,20,4
+  24              		.global	code_version
+  25              		.global	count_atc
+  26              		.global	count_imu
+  27              		.global	count_accumulator
+  28              		.global	count_inverter
+  29              		.global	count_ms_abs
+  30              		.global	count_hour
+  31              		.global	count_min
+  32              		.global	count_sec
+  33              		.global	count_dec
+  34              		.global	count_ms
+  35              		.section	.bss.atc_connected,"aw",%nobits
+  38              	atc_connected:
+  39 0000 00       		.space	1
+  40              		.section	.bss.canSnifferMode,"aw",%nobits
+  43              	canSnifferMode:
+  44 0000 00       		.space	1
+  45              		.section	.bss.count_accumulator,"aw",%nobits
   46              		.align	1
-  49              	count_atc:
+  49              	count_accumulator:
   50 0000 0000     		.space	2
-  51              		.section	.bss.count_dec,"aw",%nobits
+  51              		.section	.bss.count_atc,"aw",%nobits
   52              		.align	1
-  55              	count_dec:
+  55              	count_atc:
   56 0000 0000     		.space	2
-  57              		.section	.bss.count_hour,"aw",%nobits
+  57              		.section	.bss.count_dec,"aw",%nobits
   58              		.align	1
-  61              	count_hour:
+  61              	count_dec:
   62 0000 0000     		.space	2
-  63              		.section	.bss.count_imu,"aw",%nobits
+  63              		.section	.bss.count_hour,"aw",%nobits
   64              		.align	1
-  67              	count_imu:
+  67              	count_hour:
   68 0000 0000     		.space	2
-  69              		.section	.bss.count_inverter,"aw",%nobits
-ARM GAS  /tmp/cc3Iv8jU.s 			page 2
+  69              		.section	.bss.count_imu,"aw",%nobits
+ARM GAS  /tmp/ccGLPj9k.s 			page 2
 
 
   70              		.align	1
-  73              	count_inverter:
+  73              	count_imu:
   74 0000 0000     		.space	2
-  75              		.section	.bss.count_min,"aw",%nobits
+  75              		.section	.bss.count_inverter,"aw",%nobits
   76              		.align	1
-  79              	count_min:
+  79              	count_inverter:
   80 0000 0000     		.space	2
-  81              		.section	.bss.count_ms,"aw",%nobits
+  81              		.section	.bss.count_min,"aw",%nobits
   82              		.align	1
-  85              	count_ms:
+  85              	count_min:
   86 0000 0000     		.space	2
-  87              		.section	.bss.count_ms_abs,"aw",%nobits
-  88              		.align	2
-  91              	count_ms_abs:
-  92 0000 00000000 		.space	4
-  93              		.section	.bss.count_sec,"aw",%nobits
-  94              		.align	1
-  97              	count_sec:
-  98 0000 0000     		.space	2
-  99              		.section	.bss.debug_msg_arrived,"aw",%nobits
- 102              	debug_msg_arrived:
- 103 0000 00       		.space	1
- 104              		.section	.bss.debug_rx_count,"aw",%nobits
- 107              	debug_rx_count:
- 108 0000 00       		.space	1
- 109              		.section	.bss.imu_connected,"aw",%nobits
- 112              	imu_connected:
- 113 0000 00       		.space	1
- 114              		.section	.bss.its_connected,"aw",%nobits
- 117              	its_connected:
- 118 0000 00       		.space	1
- 119              		.section	.rodata.code_version,"a"
- 120              		.align	2
- 123              	code_version:
- 124 0000 0D0A436F 		.ascii	"\015\012Code version = 1.0, updated 01/11/2019\015\012"
- 124      64652076 
- 124      65727369 
- 124      6F6E203D 
- 124      20312E30 
- 125 002a 00       		.ascii	"\000"
- 126              		.text
- 127              	.Letext0:
- 128              		.file 1 "Drivers/CMSIS/Device/ST/STM32F7xx/Include/stm32f767xx.h"
- 129              		.file 2 "/usr/arm-none-eabi/include/machine/_default_types.h"
- 130              		.file 3 "/usr/arm-none-eabi/include/sys/_stdint.h"
- 131              		.file 4 "Drivers/CMSIS/Include/core_cm7.h"
- 132              		.file 5 "Drivers/CMSIS/Device/ST/STM32F7xx/Include/system_stm32f7xx.h"
- 133              		.file 6 "Drivers/CMSIS/Device/ST/STM32F7xx/Include/stm32f7xx.h"
- 134              		.file 7 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_def.h"
- 135              		.file 8 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_dma.h"
- 136              		.file 9 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_can.h"
- 137              		.file 10 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart.h"
- 138              		.file 11 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal.h"
- 139              		.file 12 "Inc/can.h"
- 140              		.file 13 "Middlewares/Third_Party/FatFs/src/integer.h"
- 141              		.file 14 "/usr/arm-none-eabi/include/sys/lock.h"
- 142              		.file 15 "/usr/arm-none-eabi/include/sys/_types.h"
-ARM GAS  /tmp/cc3Iv8jU.s 			page 3
+  87              		.section	.bss.count_ms,"aw",%nobits
+  88              		.align	1
+  91              	count_ms:
+  92 0000 0000     		.space	2
+  93              		.section	.bss.count_ms_abs,"aw",%nobits
+  94              		.align	2
+  97              	count_ms_abs:
+  98 0000 00000000 		.space	4
+  99              		.section	.bss.count_sec,"aw",%nobits
+ 100              		.align	1
+ 103              	count_sec:
+ 104 0000 0000     		.space	2
+ 105              		.section	.bss.debug_msg_arrived,"aw",%nobits
+ 108              	debug_msg_arrived:
+ 109 0000 00       		.space	1
+ 110              		.section	.bss.debug_rx_count,"aw",%nobits
+ 113              	debug_rx_count:
+ 114 0000 00       		.space	1
+ 115              		.section	.bss.imu_connected,"aw",%nobits
+ 118              	imu_connected:
+ 119 0000 00       		.space	1
+ 120              		.section	.bss.its_connected,"aw",%nobits
+ 123              	its_connected:
+ 124 0000 00       		.space	1
+ 125              		.section	.rodata.code_version,"a"
+ 126              		.align	2
+ 129              	code_version:
+ 130 0000 0D0A436F 		.ascii	"\015\012Code version = 1.0, updated 01/11/2019\015\012"
+ 130      64652076 
+ 130      65727369 
+ 130      6F6E203D 
+ 130      20312E30 
+ 131 002a 00       		.ascii	"\000"
+ 132              		.text
+ 133              	.Letext0:
+ 134              		.file 1 "Drivers/CMSIS/Device/ST/STM32F7xx/Include/stm32f767xx.h"
+ 135              		.file 2 "/usr/arm-none-eabi/include/machine/_default_types.h"
+ 136              		.file 3 "/usr/arm-none-eabi/include/sys/_stdint.h"
+ 137              		.file 4 "Drivers/CMSIS/Include/core_cm7.h"
+ 138              		.file 5 "Drivers/CMSIS/Device/ST/STM32F7xx/Include/system_stm32f7xx.h"
+ 139              		.file 6 "Drivers/CMSIS/Device/ST/STM32F7xx/Include/stm32f7xx.h"
+ 140              		.file 7 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_def.h"
+ 141              		.file 8 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_dma.h"
+ 142              		.file 9 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_can.h"
+ 143              		.file 10 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart.h"
+ 144              		.file 11 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal.h"
+ARM GAS  /tmp/ccGLPj9k.s 			page 3
 
 
- 143              		.file 16 "/usr/lib/gcc/arm-none-eabi/9.2.0/include/stddef.h"
- 144              		.file 17 "/usr/arm-none-eabi/include/sys/reent.h"
- 145              		.file 18 "/usr/arm-none-eabi/include/stdlib.h"
- 146              		.file 19 "Middlewares/Third_Party/FatFs/src/ff.h"
- 147              		.file 20 "Middlewares/Third_Party/FatFs/src/diskio.h"
- 148              		.file 21 "Middlewares/Third_Party/FatFs/src/ff_gen_drv.h"
- 149              		.file 22 "Inc/sd_diskio.h"
- 150              		.file 23 "Inc/fatfs.h"
- 151              		.file 24 "Inc/global_variables.h"
- 152              		.file 25 "Src/global_variables.c"
-ARM GAS  /tmp/cc3Iv8jU.s 			page 4
+ 145              		.file 12 "Inc/can.h"
+ 146              		.file 13 "Middlewares/Third_Party/FatFs/src/integer.h"
+ 147              		.file 14 "/usr/arm-none-eabi/include/sys/lock.h"
+ 148              		.file 15 "/usr/arm-none-eabi/include/sys/_types.h"
+ 149              		.file 16 "/usr/lib/gcc/arm-none-eabi/9.2.0/include/stddef.h"
+ 150              		.file 17 "/usr/arm-none-eabi/include/sys/reent.h"
+ 151              		.file 18 "/usr/arm-none-eabi/include/stdlib.h"
+ 152              		.file 19 "Middlewares/Third_Party/FatFs/src/ff.h"
+ 153              		.file 20 "Middlewares/Third_Party/FatFs/src/diskio.h"
+ 154              		.file 21 "Middlewares/Third_Party/FatFs/src/ff_gen_drv.h"
+ 155              		.file 22 "Inc/sd_diskio.h"
+ 156              		.file 23 "Inc/fatfs.h"
+ 157              		.file 24 "Inc/global_variables.h"
+ 158              		.file 25 "Src/global_variables.c"
+ARM GAS  /tmp/ccGLPj9k.s 			page 4
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 global_variables.c
-     /tmp/cc3Iv8jU.s:37     .bss.atc_connected:0000000000000000 atc_connected
-     /tmp/cc3Iv8jU.s:117    .bss.its_connected:0000000000000000 its_connected
-     /tmp/cc3Iv8jU.s:112    .bss.imu_connected:0000000000000000 imu_connected
-     /tmp/cc3Iv8jU.s:102    .bss.debug_msg_arrived:0000000000000000 debug_msg_arrived
-     /tmp/cc3Iv8jU.s:107    .bss.debug_rx_count:0000000000000000 debug_rx_count
+     /tmp/ccGLPj9k.s:38     .bss.atc_connected:0000000000000000 atc_connected
+     /tmp/ccGLPj9k.s:123    .bss.its_connected:0000000000000000 its_connected
+     /tmp/ccGLPj9k.s:118    .bss.imu_connected:0000000000000000 imu_connected
+     /tmp/ccGLPj9k.s:43     .bss.canSnifferMode:0000000000000000 canSnifferMode
+     /tmp/ccGLPj9k.s:108    .bss.debug_msg_arrived:0000000000000000 debug_msg_arrived
+     /tmp/ccGLPj9k.s:113    .bss.debug_rx_count:0000000000000000 debug_rx_count
                             *COM*:00000000000007d0 debug_tx
                             *COM*:0000000000000014 debug_rx
-     /tmp/cc3Iv8jU.s:123    .rodata.code_version:0000000000000000 code_version
-     /tmp/cc3Iv8jU.s:49     .bss.count_atc:0000000000000000 count_atc
-     /tmp/cc3Iv8jU.s:67     .bss.count_imu:0000000000000000 count_imu
-     /tmp/cc3Iv8jU.s:43     .bss.count_accumulator:0000000000000000 count_accumulator
-     /tmp/cc3Iv8jU.s:73     .bss.count_inverter:0000000000000000 count_inverter
-     /tmp/cc3Iv8jU.s:91     .bss.count_ms_abs:0000000000000000 count_ms_abs
-     /tmp/cc3Iv8jU.s:61     .bss.count_hour:0000000000000000 count_hour
-     /tmp/cc3Iv8jU.s:79     .bss.count_min:0000000000000000 count_min
-     /tmp/cc3Iv8jU.s:97     .bss.count_sec:0000000000000000 count_sec
-     /tmp/cc3Iv8jU.s:55     .bss.count_dec:0000000000000000 count_dec
-     /tmp/cc3Iv8jU.s:85     .bss.count_ms:0000000000000000 count_ms
-     /tmp/cc3Iv8jU.s:38     .bss.atc_connected:0000000000000000 $d
-     /tmp/cc3Iv8jU.s:40     .bss.count_accumulator:0000000000000000 $d
-     /tmp/cc3Iv8jU.s:46     .bss.count_atc:0000000000000000 $d
-     /tmp/cc3Iv8jU.s:52     .bss.count_dec:0000000000000000 $d
-     /tmp/cc3Iv8jU.s:58     .bss.count_hour:0000000000000000 $d
-     /tmp/cc3Iv8jU.s:64     .bss.count_imu:0000000000000000 $d
-     /tmp/cc3Iv8jU.s:70     .bss.count_inverter:0000000000000000 $d
-     /tmp/cc3Iv8jU.s:76     .bss.count_min:0000000000000000 $d
-     /tmp/cc3Iv8jU.s:82     .bss.count_ms:0000000000000000 $d
-     /tmp/cc3Iv8jU.s:88     .bss.count_ms_abs:0000000000000000 $d
-     /tmp/cc3Iv8jU.s:94     .bss.count_sec:0000000000000000 $d
-     /tmp/cc3Iv8jU.s:103    .bss.debug_msg_arrived:0000000000000000 $d
-     /tmp/cc3Iv8jU.s:108    .bss.debug_rx_count:0000000000000000 $d
-     /tmp/cc3Iv8jU.s:113    .bss.imu_connected:0000000000000000 $d
-     /tmp/cc3Iv8jU.s:118    .bss.its_connected:0000000000000000 $d
-     /tmp/cc3Iv8jU.s:120    .rodata.code_version:0000000000000000 $d
+     /tmp/ccGLPj9k.s:129    .rodata.code_version:0000000000000000 code_version
+     /tmp/ccGLPj9k.s:55     .bss.count_atc:0000000000000000 count_atc
+     /tmp/ccGLPj9k.s:73     .bss.count_imu:0000000000000000 count_imu
+     /tmp/ccGLPj9k.s:49     .bss.count_accumulator:0000000000000000 count_accumulator
+     /tmp/ccGLPj9k.s:79     .bss.count_inverter:0000000000000000 count_inverter
+     /tmp/ccGLPj9k.s:97     .bss.count_ms_abs:0000000000000000 count_ms_abs
+     /tmp/ccGLPj9k.s:67     .bss.count_hour:0000000000000000 count_hour
+     /tmp/ccGLPj9k.s:85     .bss.count_min:0000000000000000 count_min
+     /tmp/ccGLPj9k.s:103    .bss.count_sec:0000000000000000 count_sec
+     /tmp/ccGLPj9k.s:61     .bss.count_dec:0000000000000000 count_dec
+     /tmp/ccGLPj9k.s:91     .bss.count_ms:0000000000000000 count_ms
+     /tmp/ccGLPj9k.s:39     .bss.atc_connected:0000000000000000 $d
+     /tmp/ccGLPj9k.s:44     .bss.canSnifferMode:0000000000000000 $d
+     /tmp/ccGLPj9k.s:46     .bss.count_accumulator:0000000000000000 $d
+     /tmp/ccGLPj9k.s:52     .bss.count_atc:0000000000000000 $d
+     /tmp/ccGLPj9k.s:58     .bss.count_dec:0000000000000000 $d
+     /tmp/ccGLPj9k.s:64     .bss.count_hour:0000000000000000 $d
+     /tmp/ccGLPj9k.s:70     .bss.count_imu:0000000000000000 $d
+     /tmp/ccGLPj9k.s:76     .bss.count_inverter:0000000000000000 $d
+     /tmp/ccGLPj9k.s:82     .bss.count_min:0000000000000000 $d
+     /tmp/ccGLPj9k.s:88     .bss.count_ms:0000000000000000 $d
+     /tmp/ccGLPj9k.s:94     .bss.count_ms_abs:0000000000000000 $d
+     /tmp/ccGLPj9k.s:100    .bss.count_sec:0000000000000000 $d
+     /tmp/ccGLPj9k.s:109    .bss.debug_msg_arrived:0000000000000000 $d
+     /tmp/ccGLPj9k.s:114    .bss.debug_rx_count:0000000000000000 $d
+     /tmp/ccGLPj9k.s:119    .bss.imu_connected:0000000000000000 $d
+     /tmp/ccGLPj9k.s:124    .bss.its_connected:0000000000000000 $d
+     /tmp/ccGLPj9k.s:126    .rodata.code_version:0000000000000000 $d
 
 NO UNDEFINED SYMBOLS
