@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccGLPj9k.s 			page 1
+ARM GAS  /tmp/ccGgPJuI.s 			page 1
 
 
    1              		.cpu cortex-m7
@@ -23,7 +23,7 @@ ARM GAS  /tmp/ccGLPj9k.s 			page 1
   20              		.global	debug_msg_arrived
   21              		.global	debug_rx_count
   22              		.comm	debug_tx,2000,4
-  23              		.comm	debug_rx,20,4
+  23              		.comm	debug_rx,50,4
   24              		.global	code_version
   25              		.global	count_atc
   26              		.global	count_imu
@@ -58,7 +58,7 @@ ARM GAS  /tmp/ccGLPj9k.s 			page 1
   67              	count_hour:
   68 0000 0000     		.space	2
   69              		.section	.bss.count_imu,"aw",%nobits
-ARM GAS  /tmp/ccGLPj9k.s 			page 2
+ARM GAS  /tmp/ccGgPJuI.s 			page 2
 
 
   70              		.align	1
@@ -118,7 +118,7 @@ ARM GAS  /tmp/ccGLPj9k.s 			page 1
  142              		.file 9 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_can.h"
  143              		.file 10 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart.h"
  144              		.file 11 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal.h"
-ARM GAS  /tmp/ccGLPj9k.s 			page 3
+ARM GAS  /tmp/ccGgPJuI.s 			page 3
 
 
  145              		.file 12 "Inc/can.h"
@@ -135,46 +135,46 @@ ARM GAS  /tmp/ccGLPj9k.s 			page 1
  156              		.file 23 "Inc/fatfs.h"
  157              		.file 24 "Inc/global_variables.h"
  158              		.file 25 "Src/global_variables.c"
-ARM GAS  /tmp/ccGLPj9k.s 			page 4
+ARM GAS  /tmp/ccGgPJuI.s 			page 4
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 global_variables.c
-     /tmp/ccGLPj9k.s:38     .bss.atc_connected:0000000000000000 atc_connected
-     /tmp/ccGLPj9k.s:123    .bss.its_connected:0000000000000000 its_connected
-     /tmp/ccGLPj9k.s:118    .bss.imu_connected:0000000000000000 imu_connected
-     /tmp/ccGLPj9k.s:43     .bss.canSnifferMode:0000000000000000 canSnifferMode
-     /tmp/ccGLPj9k.s:108    .bss.debug_msg_arrived:0000000000000000 debug_msg_arrived
-     /tmp/ccGLPj9k.s:113    .bss.debug_rx_count:0000000000000000 debug_rx_count
+     /tmp/ccGgPJuI.s:38     .bss.atc_connected:0000000000000000 atc_connected
+     /tmp/ccGgPJuI.s:123    .bss.its_connected:0000000000000000 its_connected
+     /tmp/ccGgPJuI.s:118    .bss.imu_connected:0000000000000000 imu_connected
+     /tmp/ccGgPJuI.s:43     .bss.canSnifferMode:0000000000000000 canSnifferMode
+     /tmp/ccGgPJuI.s:108    .bss.debug_msg_arrived:0000000000000000 debug_msg_arrived
+     /tmp/ccGgPJuI.s:113    .bss.debug_rx_count:0000000000000000 debug_rx_count
                             *COM*:00000000000007d0 debug_tx
-                            *COM*:0000000000000014 debug_rx
-     /tmp/ccGLPj9k.s:129    .rodata.code_version:0000000000000000 code_version
-     /tmp/ccGLPj9k.s:55     .bss.count_atc:0000000000000000 count_atc
-     /tmp/ccGLPj9k.s:73     .bss.count_imu:0000000000000000 count_imu
-     /tmp/ccGLPj9k.s:49     .bss.count_accumulator:0000000000000000 count_accumulator
-     /tmp/ccGLPj9k.s:79     .bss.count_inverter:0000000000000000 count_inverter
-     /tmp/ccGLPj9k.s:97     .bss.count_ms_abs:0000000000000000 count_ms_abs
-     /tmp/ccGLPj9k.s:67     .bss.count_hour:0000000000000000 count_hour
-     /tmp/ccGLPj9k.s:85     .bss.count_min:0000000000000000 count_min
-     /tmp/ccGLPj9k.s:103    .bss.count_sec:0000000000000000 count_sec
-     /tmp/ccGLPj9k.s:61     .bss.count_dec:0000000000000000 count_dec
-     /tmp/ccGLPj9k.s:91     .bss.count_ms:0000000000000000 count_ms
-     /tmp/ccGLPj9k.s:39     .bss.atc_connected:0000000000000000 $d
-     /tmp/ccGLPj9k.s:44     .bss.canSnifferMode:0000000000000000 $d
-     /tmp/ccGLPj9k.s:46     .bss.count_accumulator:0000000000000000 $d
-     /tmp/ccGLPj9k.s:52     .bss.count_atc:0000000000000000 $d
-     /tmp/ccGLPj9k.s:58     .bss.count_dec:0000000000000000 $d
-     /tmp/ccGLPj9k.s:64     .bss.count_hour:0000000000000000 $d
-     /tmp/ccGLPj9k.s:70     .bss.count_imu:0000000000000000 $d
-     /tmp/ccGLPj9k.s:76     .bss.count_inverter:0000000000000000 $d
-     /tmp/ccGLPj9k.s:82     .bss.count_min:0000000000000000 $d
-     /tmp/ccGLPj9k.s:88     .bss.count_ms:0000000000000000 $d
-     /tmp/ccGLPj9k.s:94     .bss.count_ms_abs:0000000000000000 $d
-     /tmp/ccGLPj9k.s:100    .bss.count_sec:0000000000000000 $d
-     /tmp/ccGLPj9k.s:109    .bss.debug_msg_arrived:0000000000000000 $d
-     /tmp/ccGLPj9k.s:114    .bss.debug_rx_count:0000000000000000 $d
-     /tmp/ccGLPj9k.s:119    .bss.imu_connected:0000000000000000 $d
-     /tmp/ccGLPj9k.s:124    .bss.its_connected:0000000000000000 $d
-     /tmp/ccGLPj9k.s:126    .rodata.code_version:0000000000000000 $d
+                            *COM*:0000000000000032 debug_rx
+     /tmp/ccGgPJuI.s:129    .rodata.code_version:0000000000000000 code_version
+     /tmp/ccGgPJuI.s:55     .bss.count_atc:0000000000000000 count_atc
+     /tmp/ccGgPJuI.s:73     .bss.count_imu:0000000000000000 count_imu
+     /tmp/ccGgPJuI.s:49     .bss.count_accumulator:0000000000000000 count_accumulator
+     /tmp/ccGgPJuI.s:79     .bss.count_inverter:0000000000000000 count_inverter
+     /tmp/ccGgPJuI.s:97     .bss.count_ms_abs:0000000000000000 count_ms_abs
+     /tmp/ccGgPJuI.s:67     .bss.count_hour:0000000000000000 count_hour
+     /tmp/ccGgPJuI.s:85     .bss.count_min:0000000000000000 count_min
+     /tmp/ccGgPJuI.s:103    .bss.count_sec:0000000000000000 count_sec
+     /tmp/ccGgPJuI.s:61     .bss.count_dec:0000000000000000 count_dec
+     /tmp/ccGgPJuI.s:91     .bss.count_ms:0000000000000000 count_ms
+     /tmp/ccGgPJuI.s:39     .bss.atc_connected:0000000000000000 $d
+     /tmp/ccGgPJuI.s:44     .bss.canSnifferMode:0000000000000000 $d
+     /tmp/ccGgPJuI.s:46     .bss.count_accumulator:0000000000000000 $d
+     /tmp/ccGgPJuI.s:52     .bss.count_atc:0000000000000000 $d
+     /tmp/ccGgPJuI.s:58     .bss.count_dec:0000000000000000 $d
+     /tmp/ccGgPJuI.s:64     .bss.count_hour:0000000000000000 $d
+     /tmp/ccGgPJuI.s:70     .bss.count_imu:0000000000000000 $d
+     /tmp/ccGgPJuI.s:76     .bss.count_inverter:0000000000000000 $d
+     /tmp/ccGgPJuI.s:82     .bss.count_min:0000000000000000 $d
+     /tmp/ccGgPJuI.s:88     .bss.count_ms:0000000000000000 $d
+     /tmp/ccGgPJuI.s:94     .bss.count_ms_abs:0000000000000000 $d
+     /tmp/ccGgPJuI.s:100    .bss.count_sec:0000000000000000 $d
+     /tmp/ccGgPJuI.s:109    .bss.debug_msg_arrived:0000000000000000 $d
+     /tmp/ccGgPJuI.s:114    .bss.debug_rx_count:0000000000000000 $d
+     /tmp/ccGgPJuI.s:119    .bss.imu_connected:0000000000000000 $d
+     /tmp/ccGgPJuI.s:124    .bss.its_connected:0000000000000000 $d
+     /tmp/ccGgPJuI.s:126    .rodata.code_version:0000000000000000 $d
 
 NO UNDEFINED SYMBOLS

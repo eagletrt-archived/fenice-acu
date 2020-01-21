@@ -6,7 +6,7 @@
 #include "stm32f7xx_hal.h"
 #include "fatfs.h"
 
-#define MAX_DEBUG_RX_L 20
+#define MAX_DEBUG_RX_L 50
 #define MAX_DEBUG_TX_L 2000
 
 extern canStruct can1, can3;

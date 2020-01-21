@@ -431,6 +431,7 @@ void debug_operations()
 				"Avaiable msg are:\r\n"
 				"\t-- status -> print ECU status\r\n"
 				"\t-- can sniffer -> enter in can sniffer mode (q for quit)\r\n"
+				"\t-- send -> send a CAN msg (xxxx.xxx.xxx.xxx ... ecc)\r\n"
 				"\t-- sd status -> print SD status and the name of file inside\r\n"
 				"\t-- sd file -> print files inside the SD\r\n"
 				"\t-- time -> print activity time\r\n"
@@ -509,6 +510,32 @@ void debug_operations()
 	}else if(strcmp(debug_rx, "q") == 0){
 		canSnifferMode = 0;
 		sprintf(debug_tx,"\r\nExit from can sniffer mode\r\n");
+		HAL_UART_Transmit(&huart3, (uint8_t *)debug_tx, strlen(debug_tx), 100);
+	}else if(strncmp(debug_rx, "send",4) == 0){
+		uint8_t dataToSend[8];can1.dataTx[0] = dataToSend[0];
+		uint32_t idToSend;
+		uint8_t offset = (uint8_t)'0';
+		idToSend = ((uint8_t)debug_rx[5]-offset)*1000 + ((uint8_t)debug_rx[6]-offset)*100 + ((uint8_t)debug_rx[7]-offset)*10 + ((uint8_t)debug_rx[8]-offset);
+		dataToSend[0] = ((uint8_t)debug_rx[10]-offset)*100 + ((uint8_t)debug_rx[11]-offset)*10 + ((uint8_t)debug_rx[12]-offset);
+		dataToSend[1] = ((uint8_t)debug_rx[14]-offset)*100 + ((uint8_t)debug_rx[15]-offset)*10 + ((uint8_t)debug_rx[16]-offset);
+		dataToSend[2] = ((uint8_t)debug_rx[18]-offset)*100 + ((uint8_t)debug_rx[19]-offset)*10 + ((uint8_t)debug_rx[20]-offset);
+		dataToSend[3] = ((uint8_t)debug_rx[22]-offset)*100 + ((uint8_t)debug_rx[23]-offset)*10 + ((uint8_t)debug_rx[24]-offset);
+		dataToSend[4] = ((uint8_t)debug_rx[26]-offset)*100 + ((uint8_t)debug_rx[27]-offset)*10 + ((uint8_t)debug_rx[28]-offset);
+		dataToSend[5] = ((uint8_t)debug_rx[30]-offset)*100 + ((uint8_t)debug_rx[31]-offset)*10 + ((uint8_t)debug_rx[32]-offset);
+		dataToSend[6] = ((uint8_t)debug_rx[34]-offset)*100 + ((uint8_t)debug_rx[35]-offset)*10 + ((uint8_t)debug_rx[36]-offset);
+		dataToSend[7] = ((uint8_t)debug_rx[38]-offset)*100 + ((uint8_t)debug_rx[39]-offset)*10 + ((uint8_t)debug_rx[40]-offset);
+		can1.tx_id = idToSend;
+		can1.dataTx[0] = dataToSend[0];
+		can1.dataTx[1] = dataToSend[1];
+		can1.dataTx[2] = dataToSend[2];
+		can1.dataTx[3] = dataToSend[3];
+		can1.dataTx[4] = dataToSend[4];
+		can1.dataTx[5] = dataToSend[5];
+		can1.dataTx[6] = dataToSend[6];
+		can1.dataTx[7] = dataToSend[7];
+		can1.tx_size = 8;
+		CAN_Send(&can1, normalPriority);
+		sprintf(debug_tx,"\r\nSent %ld %d %d %d %d %d %d %d %d\r\n", idToSend, dataToSend[0], dataToSend[1], dataToSend[2], dataToSend[3], dataToSend[4], dataToSend[5], dataToSend[6], dataToSend[7]);
 		HAL_UART_Transmit(&huart3, (uint8_t *)debug_tx, strlen(debug_tx), 100);
 	}else if (strcmp(debug_rx, "sd status") == 0){
 		if(mount_ok == 1){
