@@ -184,6 +184,8 @@ void idle()
 		case ID_ATC_POT:
 			atc_pot_operations();
 			break;
+		case ID_ATC_MAX_VAL:
+			break;
 		default:
 			break;
 		}
@@ -435,7 +437,8 @@ void debug_operations()
 				"\t-- sd status -> print SD status and the name of file inside\r\n"
 				"\t-- sd file -> print files inside the SD\r\n"
 				"\t-- time -> print activity time\r\n"
-				"\t-- codev  -> print code version\r\n");
+				"\t-- codev  -> print code version\r\n"
+				"\t-- best car? -> print the best car\r\n");
 		HAL_UART_Transmit(&huart3, (uint8_t *)debug_tx, strlen(debug_tx), 100);
 	}
 	else if (strcmp(debug_rx, "codev") == 0)
@@ -554,22 +557,17 @@ void debug_operations()
 		sprintf(debug_tx,"\r\nFiles inside sd are:\r\n%s",log_names);
 		HAL_UART_Transmit(&huart3, (uint8_t *)debug_tx, strlen(debug_tx), 1000);
 	}
-	else if (strcmp(debug_rx, "gay") == 0)
+	else if (strcmp(debug_rx, "best car?") == 0)
 	{
 		sprintf(debug_tx,
-				"\r\n"
-				"          $\r\n"
-				"        $   $\r\n"
-				"       $     $\r\n"
-				"       $$$$$$$\r\n"
-				"       $$$$$$$\r\n"
-				"       $$$$$$$\r\n"
-				"       $$$$$$$\r\n"
-				"  $$$$$$     $$$$$$\r\n"
-				" $$$$$$$$   $$$$$$$$\r\n"
-				"$$$$$$$$$$$$$$$$$$$$\r\n"
-				" $$$$$$$$   $$$$$$$$\r\n"
-				"  $$$$$$     $$$$$$\r\n");
+			"\r\n"
+			"oooooooooooo oooooooooooo ooooo      ooo ooooo   .oooooo.   oooooooooooo\r\n" 
+			"`888'     `8 `888'     `8 `888b.     `8' `888'  d8P'  `Y8b  `888'     `8\r\n"  
+			" 888          888          8 `88b.    8   888  888           888\r\n"          
+			" 888oooo8     888oooo8     8   `88b.  8   888  888           888oooo8\r\n"     
+			" 888          888          8     `88b.8   888  888           888\r\n"     
+			" 888          888       o  8       `888   888  `88b    ooo   888o\r\n"  
+			"o888o        o888ooooood8 o8o        `8  o888o  `Y8bood8P'  o888ooooood8\r\n");
 		HAL_UART_Transmit(&huart3, (uint8_t *)debug_tx, strlen(debug_tx), 100);
 	}
 	else

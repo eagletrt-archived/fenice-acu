@@ -64,6 +64,8 @@ extern int successfull_opening;
 
 extern uint8_t pot_values_loaded;
 
+extern uint32_t pot1_max, pot1_min, pot2_max, pot2_min;
+
 //-----------------------------------------//
 //------------------ ID -------------------//
 //-----------------------------------------//
@@ -111,5 +113,8 @@ extern uint8_t pot_values_loaded;
 
 //from ATC (Analog To CAN)
 #define ID_ATC_POT 0x34
+#define ID_ATC_ERRORS 0x11
+#define ID_ATC_MAX_VAL 0x104
+#define ID_ATC_MIN_VAL 0x105
 
 #endif

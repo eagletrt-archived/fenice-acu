@@ -130,28 +130,59 @@ void init_sd(){
 		HAL_UART_Transmit(&huart3,(uint8_t*)txt,strlen(txt),100);
 		if(res_open == FR_OK){
 			
-			/*HAL_UART_Transmit(&huart3,(uint8_t*)"\r\nPOT FILE OPEND\r\n",strlen("\r\nPOT FILE OPEND\r\n"),10);
+			HAL_UART_Transmit(&huart3,(uint8_t*)"\r\nPOT FILE OPEND\r\n",strlen("\r\nPOT FILE OPEND\r\n"),10);
 			f_read(&pot_values_f, pot_values, 100, (void*)&bytes_read); //read into file "pot_values.txt" and put the result into "pot_value" variable
 			char val_pot[6];
 			val_pot[5] = '\0';
+			int pot_val_count = 0;
 			for(int i=0; i<5 ; i++){
-				val_pot[i] = pot_values[i];
+				if(pot_values[pot_val_count] == ' '){ // check if the number isn't finished
+					val_pot[i] = '\0';
+					i = 5; // set exit condition
+					pot_val_count++;
+
+				}else{
+					val_pot[i] = pot_values[pot_val_count];
+					pot_val_count++;
+				}
 			}
-			//accel.max_val = atoi(val_pot);
+			pot1_max = atoi(val_pot);
 			for(int i=0 ; i<5 ; i++){
-				val_pot[i] = pot_values[i+7];
+				if(pot_values[pot_val_count] == ' '){ // check if the number isn't finished
+					val_pot[i] = '\0';
+					i = 5; // set exit condition
+					pot_val_count++;
+				}else{
+					val_pot[i] = pot_values[pot_val_count];
+					pot_val_count++;
+				}
 			}
-			//accel.min_val = atoi(val_pot);
+			pot1_min = atoi(val_pot);
 			for(int i=0 ; i<5 ; i++){
-				val_pot[i] = pot_values[i+14];
+				if(pot_values[pot_val_count] == ' '){ // check if the number isn't finished
+					val_pot[i] = '\0';
+					i = 5; // set exit condition
+					pot_val_count++;
+				}else{
+					val_pot[i] = pot_values[pot_val_count];
+					pot_val_count++;
+				}
 			}
-			//brake.max_val = atoi(pot_values);
+			pot2_max = atoi(val_pot);
 			for(int i=0 ; i<5 ; i++){
-				val_pot[i] = pot_values[i+21];
+				if(pot_values[pot_val_count] == ' '){ // check if the number isn't finished
+					val_pot[i] = '\0';
+					i = 5; // set exit condition
+					pot_val_count++;
+				}else{
+					val_pot[i] = pot_values[pot_val_count];
+					pot_val_count++;
+				}
 			}
-			//brake.min_val = atoi(pot_values);
-			
-			pot_values_loaded = 1;*/
+			pot2_min = atoi(val_pot);
+			sprintf(txt, "max1 %ld, min1 %ld, max2 %ld, min2 %ld\r\n", pot1_max, pot1_min, pot2_max, pot2_min);
+			HAL_UART_Transmit(&huart3,(uint8_t*)txt, strlen(txt),10);
+			pot_values_loaded = 1;
 
 		}else if(res_open == FR_NO_FILE){
 			res_open = f_open(&pot_values_f, (TCHAR const*)&filename_pot, FA_CREATE_NEW | FA_WRITE );
@@ -159,7 +190,7 @@ void init_sd(){
 			HAL_UART_Transmit(&huart3,(uint8_t*)txt,strlen(txt),100);
 			if(res_open == FR_OK){
 
-				char local_txt[] = "0000\r\n4096\r\n0000\r\n4096";
+				char local_txt[] = "4096 0000 4096 0000 \r\n";
 				f_write(&pot_values_f,(TCHAR const*)&local_txt,strlen(local_txt), &byteswritten);
 				f_close(&pot_values_f);
 			}

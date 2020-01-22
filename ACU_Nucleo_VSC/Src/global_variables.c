@@ -25,5 +25,10 @@ uint8_t imu_connected = 0;
 uint8_t its_connected = 0;
 uint8_t atc_connected = 0;
 
+//--- POT VALUES ---//
+uint32_t pot1_max;
+uint32_t pot1_min;
+uint32_t pot2_max;
+uint32_t pot2_min;
 
 

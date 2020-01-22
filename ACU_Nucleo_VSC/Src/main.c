@@ -543,8 +543,6 @@ void HAL_CAN_RxFifo1FullCallback(CAN_HandleTypeDef *hcan) {
 }
 
 void HAL_CAN_TxMailbox0CompleteCallback(CAN_HandleTypeDef *hcan) {
-	sprintf(txt, "mb0: %d\r\n", (int)can1.idBck);
-	HAL_UART_Transmit(&huart3, (uint8_t *)(txt), strlen(txt), 10);
 	HAL_GPIO_TogglePin(LED_green_GPIO_Port, LED_green_Pin);
 	if (hcan == &hcan1) {
 		if (fifoTxDataCAN_high_pop(&can1)) {

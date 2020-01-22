@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccXjbAY9.s 			page 1
+ARM GAS  /tmp/cc4dYJCl.s 			page 1
 
 
    1              		.cpu cortex-m7
@@ -58,7 +58,7 @@ ARM GAS  /tmp/ccXjbAY9.s 			page 1
   37      302E7478 
   37      7400
   38 0072 0000     		.align	2
-ARM GAS  /tmp/ccXjbAY9.s 			page 2
+ARM GAS  /tmp/cc4dYJCl.s 			page 2
 
 
   39              	.LC7:
@@ -101,32 +101,46 @@ ARM GAS  /tmp/ccXjbAY9.s 			page 1
   58      0D0A00
   59 00db 00       		.align	2
   60              	.LC14:
-  61 00dc 504F5420 		.ascii	"POT FILE VAL2: %d\015\012\000"
-  61      46494C45 
-  61      2056414C 
-  61      323A2025 
-  61      640D0A00 
-  62              		.align	2
+  61 00dc 0D0A504F 		.ascii	"\015\012POT FILE OPEND\015\012\000"
+  61      54204649 
+  61      4C45204F 
+  61      50454E44 
+  61      0D0A00
+  62 00ef 00       		.align	2
   63              	.LC15:
-  64 00f0 30303030 		.ascii	"0000\015\0124096\015\0120000\015\0124096\000"
-  64      0D0A3430 
-  64      39360D0A 
-  64      30303030 
-  64      0D0A3430 
-  65              		.section	.text.init_sd,"ax",%progbits
-  66              		.align	1
-  67              		.global	init_sd
-  68              		.arch armv7e-m
-  69              		.syntax unified
-ARM GAS  /tmp/ccXjbAY9.s 			page 3
+  64 00f0 6D617831 		.ascii	"max1 %ld, min1 %ld, max2 %ld, min2 %ld\015\012\000"
+  64      20256C64 
+  64      2C206D69 
+  64      6E312025 
+  64      6C642C20 
+  65 0119 000000   		.align	2
+  66              	.LC16:
+  67 011c 504F5420 		.ascii	"POT FILE VAL2: %d\015\012\000"
+  67      46494C45 
+  67      2056414C 
+ARM GAS  /tmp/cc4dYJCl.s 			page 3
 
 
-  70              		.thumb
-  71              		.thumb_func
-  72              		.fpu fpv5-d16
-  74              	init_sd:
-  75              	.LFB144:
-  76              		.file 1 "Src/sd.c"
+  67      323A2025 
+  67      640D0A00 
+  68              		.align	2
+  69              	.LC17:
+  70 0130 30303030 		.ascii	"0000\015\0124096\015\0120000\015\0124096\000"
+  70      0D0A3430 
+  70      39360D0A 
+  70      30303030 
+  70      0D0A3430 
+  71              		.section	.text.init_sd,"ax",%progbits
+  72              		.align	1
+  73              		.global	init_sd
+  74              		.arch armv7e-m
+  75              		.syntax unified
+  76              		.thumb
+  77              		.thumb_func
+  78              		.fpu fpv5-d16
+  80              	init_sd:
+  81              	.LFB144:
+  82              		.file 1 "Src/sd.c"
    1:Src/sd.c      **** #include "global_variables.h"
    2:Src/sd.c      **** #include "fatfs.h"
    3:Src/sd.c      **** #include "string.h"
@@ -164,44 +178,44 @@ ARM GAS  /tmp/ccXjbAY9.s 			page 1
   35:Src/sd.c      **** 
   36:Src/sd.c      **** int successfull_opening = 0;
   37:Src/sd.c      **** 
+ARM GAS  /tmp/cc4dYJCl.s 			page 4
+
+
   38:Src/sd.c      **** //----------------------------------------//
   39:Src/sd.c      **** //------------- FUNCTIONS ----------------//
   40:Src/sd.c      **** //----------------------------------------//
   41:Src/sd.c      **** 
   42:Src/sd.c      **** void init_sd(){
-  77              		.loc 1 42 15 view -0
-  78              		.cfi_startproc
-  79              		@ args = 0, pretend = 0, frame = 280
-  80              		@ frame_needed = 0, uses_anonymous_args = 0
-  81 0000 70B5     		push	{r4, r5, r6, lr}
-  82              	.LCFI0:
-  83              		.cfi_def_cfa_offset 16
-  84              		.cfi_offset 4, -16
-  85              		.cfi_offset 5, -12
-ARM GAS  /tmp/ccXjbAY9.s 			page 4
-
-
-  86              		.cfi_offset 6, -8
-  87              		.cfi_offset 14, -4
-  88 0002 C6B0     		sub	sp, sp, #280
-  89              	.LCFI1:
-  90              		.cfi_def_cfa_offset 296
+  83              		.loc 1 42 15 view -0
+  84              		.cfi_startproc
+  85              		@ args = 0, pretend = 0, frame = 368
+  86              		@ frame_needed = 0, uses_anonymous_args = 0
+  87 0000 70B5     		push	{r4, r5, r6, lr}
+  88              	.LCFI0:
+  89              		.cfi_def_cfa_offset 16
+  90              		.cfi_offset 4, -16
+  91              		.cfi_offset 5, -12
+  92              		.cfi_offset 6, -8
+  93              		.cfi_offset 14, -4
+  94 0002 DEB0     		sub	sp, sp, #376
+  95              	.LCFI1:
+  96              		.cfi_def_cfa_offset 392
   43:Src/sd.c      ****     res_mount = f_mount(&SDFatFS, (TCHAR const*)SDPath, 1); //try to mount sd card
-  91              		.loc 1 43 5 view .LVU1
-  92              		.loc 1 43 17 is_stmt 0 view .LVU2
-  93 0004 0122     		movs	r2, #1
-  94 0006 9949     		ldr	r1, .L18
-  95 0008 9948     		ldr	r0, .L18+4
-  96 000a FFF7FEFF 		bl	f_mount
-  97              	.LVL0:
-  98              		.loc 1 43 15 view .LVU3
-  99 000e 994B     		ldr	r3, .L18+8
- 100 0010 1870     		strb	r0, [r3]
+  97              		.loc 1 43 5 view .LVU1
+  98              		.loc 1 43 17 is_stmt 0 view .LVU2
+  99 0004 0122     		movs	r2, #1
+ 100 0006 B449     		ldr	r1, .L40
+ 101 0008 B448     		ldr	r0, .L40+4
+ 102 000a FFF7FEFF 		bl	f_mount
+ 103              	.LVL0:
+ 104              		.loc 1 43 15 view .LVU3
+ 105 000e B44B     		ldr	r3, .L40+8
+ 106 0010 1870     		strb	r0, [r3]
   44:Src/sd.c      **** 
   45:Src/sd.c      **** 	if (res_mount == FR_OK) {
- 101              		.loc 1 45 2 is_stmt 1 view .LVU4
- 102              		.loc 1 45 5 is_stmt 0 view .LVU5
- 103 0012 20B1     		cbz	r0, .L13
+ 107              		.loc 1 45 2 is_stmt 1 view .LVU4
+ 108              		.loc 1 45 5 is_stmt 0 view .LVU5
+ 109 0012 20B1     		cbz	r0, .L30
   46:Src/sd.c      **** 		res_open = f_open(&log_names_f, (TCHAR const*)&name_txt, FA_OPEN_ALWAYS | FA_READ ); //open "name
   47:Src/sd.c      **** 		if(res_open == 0)f_read(&log_names_f, log_names, 1099, (void*)&bytes_read); //read into file "nam
   48:Src/sd.c      **** 
@@ -224,6 +238,9 @@ ARM GAS  /tmp/ccXjbAY9.s 			page 1
   65:Src/sd.c      **** 			pointer = strstr(log_names, name);
   66:Src/sd.c      **** 
   67:Src/sd.c      **** 			if(i == max_files){
+ARM GAS  /tmp/cc4dYJCl.s 			page 5
+
+
   68:Src/sd.c      **** 
   69:Src/sd.c      **** 				sprintf(filename_log,"default.txt");
   70:Src/sd.c      **** 
@@ -238,9 +255,6 @@ ARM GAS  /tmp/ccXjbAY9.s 			page 1
   79:Src/sd.c      **** 				break;
   80:Src/sd.c      **** 			}
   81:Src/sd.c      **** 
-ARM GAS  /tmp/ccXjbAY9.s 			page 5
-
-
   82:Src/sd.c      **** 			if(i == 0 && pointer == NULL){
   83:Src/sd.c      **** 
   84:Src/sd.c      **** 				sprintf(filename_log, "log_0 \r\n");
@@ -284,6 +298,9 @@ ARM GAS  /tmp/ccXjbAY9.s 			page 1
  122:Src/sd.c      **** 		}
  123:Src/sd.c      **** 
  124:Src/sd.c      **** 		mount_ok = 1;
+ARM GAS  /tmp/cc4dYJCl.s 			page 6
+
+
  125:Src/sd.c      **** 		HAL_UART_Transmit(&huart3,(uint8_t*)"files closed\r\n",strlen("files closed\r\n"),10);
  126:Src/sd.c      **** 
  127:Src/sd.c      **** 		res_open = f_open(&pot_values_f, (TCHAR const*)&filename_pot, FA_OPEN_EXISTING | FA_READ ); //ope
@@ -292,760 +309,1249 @@ ARM GAS  /tmp/ccXjbAY9.s 			page 1
  130:Src/sd.c      **** 		HAL_UART_Transmit(&huart3,(uint8_t*)txt,strlen(txt),100);
  131:Src/sd.c      **** 		if(res_open == FR_OK){
  132:Src/sd.c      **** 			
- 133:Src/sd.c      **** 			/*HAL_UART_Transmit(&huart3,(uint8_t*)"\r\nPOT FILE OPEND\r\n",strlen("\r\nPOT FILE OPEND\r\n"),
+ 133:Src/sd.c      **** 			HAL_UART_Transmit(&huart3,(uint8_t*)"\r\nPOT FILE OPEND\r\n",strlen("\r\nPOT FILE OPEND\r\n"),10
  134:Src/sd.c      **** 			f_read(&pot_values_f, pot_values, 100, (void*)&bytes_read); //read into file "pot_values.txt" an
  135:Src/sd.c      **** 			char val_pot[6];
  136:Src/sd.c      **** 			val_pot[5] = '\0';
- 137:Src/sd.c      **** 			for(int i=0; i<5 ; i++){
- 138:Src/sd.c      **** 				val_pot[i] = pot_values[i];
-ARM GAS  /tmp/ccXjbAY9.s 			page 6
+ 137:Src/sd.c      **** 			int pot_val_count = 0;
+ 138:Src/sd.c      **** 			for(int i=0; i<5 ; i++){
+ 139:Src/sd.c      **** 				if(pot_values[pot_val_count] == ' '){ // check if the number isn't finished
+ 140:Src/sd.c      **** 					val_pot[i] = '\0';
+ 141:Src/sd.c      **** 					i = 5; // set exit condition
+ 142:Src/sd.c      **** 					pot_val_count++;
+ 143:Src/sd.c      **** 
+ 144:Src/sd.c      **** 				}else{
+ 145:Src/sd.c      **** 					val_pot[i] = pot_values[pot_val_count];
+ 146:Src/sd.c      **** 					pot_val_count++;
+ 147:Src/sd.c      **** 				}
+ 148:Src/sd.c      **** 			}
+ 149:Src/sd.c      **** 			pot1_max = atoi(val_pot);
+ 150:Src/sd.c      **** 			for(int i=0 ; i<5 ; i++){
+ 151:Src/sd.c      **** 				if(pot_values[pot_val_count] == ' '){ // check if the number isn't finished
+ 152:Src/sd.c      **** 					val_pot[i] = '\0';
+ 153:Src/sd.c      **** 					i = 5; // set exit condition
+ 154:Src/sd.c      **** 					pot_val_count++;
+ 155:Src/sd.c      **** 				}else{
+ 156:Src/sd.c      **** 					val_pot[i] = pot_values[pot_val_count];
+ 157:Src/sd.c      **** 					pot_val_count++;
+ 158:Src/sd.c      **** 				}
+ 159:Src/sd.c      **** 			}
+ 160:Src/sd.c      **** 			pot1_min = atoi(val_pot);
+ 161:Src/sd.c      **** 			for(int i=0 ; i<5 ; i++){
+ 162:Src/sd.c      **** 				if(pot_values[pot_val_count] == ' '){ // check if the number isn't finished
+ 163:Src/sd.c      **** 					val_pot[i] = '\0';
+ 164:Src/sd.c      **** 					i = 5; // set exit condition
+ 165:Src/sd.c      **** 					pot_val_count++;
+ 166:Src/sd.c      **** 				}else{
+ 167:Src/sd.c      **** 					val_pot[i] = pot_values[pot_val_count];
+ 168:Src/sd.c      **** 					pot_val_count++;
+ 169:Src/sd.c      **** 				}
+ 170:Src/sd.c      **** 			}
+ 171:Src/sd.c      **** 			pot2_max = atoi(val_pot);
+ 172:Src/sd.c      **** 			for(int i=0 ; i<5 ; i++){
+ 173:Src/sd.c      **** 				if(pot_values[pot_val_count] == ' '){ // check if the number isn't finished
+ 174:Src/sd.c      **** 					val_pot[i] = '\0';
+ 175:Src/sd.c      **** 					i = 5; // set exit condition
+ 176:Src/sd.c      **** 					pot_val_count++;
+ 177:Src/sd.c      **** 				}else{
+ 178:Src/sd.c      **** 					val_pot[i] = pot_values[pot_val_count];
+ 179:Src/sd.c      **** 					pot_val_count++;
+ 180:Src/sd.c      **** 				}
+ 181:Src/sd.c      **** 			}
+ARM GAS  /tmp/cc4dYJCl.s 			page 7
 
 
- 139:Src/sd.c      **** 			}
- 140:Src/sd.c      **** 			//accel.max_val = atoi(val_pot);
- 141:Src/sd.c      **** 			for(int i=0 ; i<5 ; i++){
- 142:Src/sd.c      **** 				val_pot[i] = pot_values[i+7];
- 143:Src/sd.c      **** 			}
- 144:Src/sd.c      **** 			//accel.min_val = atoi(val_pot);
- 145:Src/sd.c      **** 			for(int i=0 ; i<5 ; i++){
- 146:Src/sd.c      **** 				val_pot[i] = pot_values[i+14];
- 147:Src/sd.c      **** 			}
- 148:Src/sd.c      **** 			//brake.max_val = atoi(pot_values);
- 149:Src/sd.c      **** 			for(int i=0 ; i<5 ; i++){
- 150:Src/sd.c      **** 				val_pot[i] = pot_values[i+21];
- 151:Src/sd.c      **** 			}
- 152:Src/sd.c      **** 			//brake.min_val = atoi(pot_values);
- 153:Src/sd.c      **** 			
- 154:Src/sd.c      **** 			pot_values_loaded = 1;*/
- 155:Src/sd.c      **** 
- 156:Src/sd.c      **** 		}else if(res_open == FR_NO_FILE){
- 157:Src/sd.c      **** 			res_open = f_open(&pot_values_f, (TCHAR const*)&filename_pot, FA_CREATE_NEW | FA_WRITE );
- 158:Src/sd.c      **** 			sprintf(txt, "POT FILE VAL2: %d\r\n",(int)res_open);
- 159:Src/sd.c      **** 			HAL_UART_Transmit(&huart3,(uint8_t*)txt,strlen(txt),100);
- 160:Src/sd.c      **** 			if(res_open == FR_OK){
- 161:Src/sd.c      **** 
- 162:Src/sd.c      **** 				char local_txt[] = "0000\r\n4096\r\n0000\r\n4096";
- 163:Src/sd.c      **** 				f_write(&pot_values_f,(TCHAR const*)&local_txt,strlen(local_txt), &byteswritten);
- 164:Src/sd.c      **** 				f_close(&pot_values_f);
- 165:Src/sd.c      **** 			}
- 166:Src/sd.c      **** 		}
- 167:Src/sd.c      **** 		f_close(&pot_values_f);
- 168:Src/sd.c      **** 		
- 169:Src/sd.c      **** 	}else {
- 170:Src/sd.c      **** 		mount_ok = 0;
- 104              		.loc 1 170 3 is_stmt 1 view .LVU6
- 105              		.loc 1 170 12 is_stmt 0 view .LVU7
- 106 0014 984B     		ldr	r3, .L18+12
- 107 0016 0022     		movs	r2, #0
- 108 0018 1A60     		str	r2, [r3]
- 109              	.L1:
- 171:Src/sd.c      **** 	}
- 172:Src/sd.c      **** }...
- 110              		.loc 1 172 1 view .LVU8
- 111 001a 46B0     		add	sp, sp, #280
- 112              	.LCFI2:
- 113              		.cfi_remember_state
- 114              		.cfi_def_cfa_offset 16
- 115              		@ sp needed
- 116 001c 70BD     		pop	{r4, r5, r6, pc}
- 117              	.L13:
- 118              	.LCFI3:
- 119              		.cfi_restore_state
- 120              	.LBB2:
+ 182:Src/sd.c      **** 			pot2_min = atoi(val_pot);
+ 183:Src/sd.c      **** 			sprintf(txt, "max1 %ld, min1 %ld, max2 %ld, min2 %ld\r\n", pot1_max, pot1_min, pot2_max, pot2_mi
+ 184:Src/sd.c      **** 			HAL_UART_Transmit(&huart3,(uint8_t*)txt, strlen(txt),10);
+ 185:Src/sd.c      **** 			pot_values_loaded = 1;
+ 186:Src/sd.c      **** 
+ 187:Src/sd.c      **** 		}else if(res_open == FR_NO_FILE){
+ 188:Src/sd.c      **** 			res_open = f_open(&pot_values_f, (TCHAR const*)&filename_pot, FA_CREATE_NEW | FA_WRITE );
+ 189:Src/sd.c      **** 			sprintf(txt, "POT FILE VAL2: %d\r\n",(int)res_open);
+ 190:Src/sd.c      **** 			HAL_UART_Transmit(&huart3,(uint8_t*)txt,strlen(txt),100);
+ 191:Src/sd.c      **** 			if(res_open == FR_OK){
+ 192:Src/sd.c      **** 
+ 193:Src/sd.c      **** 				char local_txt[] = "0000\r\n4096\r\n0000\r\n4096";
+ 194:Src/sd.c      **** 				f_write(&pot_values_f,(TCHAR const*)&local_txt,strlen(local_txt), &byteswritten);
+ 195:Src/sd.c      **** 				f_close(&pot_values_f);
+ 196:Src/sd.c      **** 			}
+ 197:Src/sd.c      **** 		}
+ 198:Src/sd.c      **** 		f_close(&pot_values_f);
+ 199:Src/sd.c      **** 		
+ 200:Src/sd.c      **** 	}else {
+ 201:Src/sd.c      **** 		mount_ok = 0;
+ 110              		.loc 1 201 3 is_stmt 1 view .LVU6
+ 111              		.loc 1 201 12 is_stmt 0 view .LVU7
+ 112 0014 B34B     		ldr	r3, .L40+12
+ 113 0016 0022     		movs	r2, #0
+ 114 0018 1A60     		str	r2, [r3]
+ 115              	.L1:
+ 202:Src/sd.c      **** 	}
+ 203:Src/sd.c      **** }...
+ 116              		.loc 1 203 1 view .LVU8
+ 117 001a 5EB0     		add	sp, sp, #376
+ 118              	.LCFI2:
+ 119              		.cfi_remember_state
+ 120              		.cfi_def_cfa_offset 16
+ 121              		@ sp needed
+ 122 001c 70BD     		pop	{r4, r5, r6, pc}
+ 123              	.L30:
+ 124              	.LCFI3:
+ 125              		.cfi_restore_state
+ 126              	.LBB2:
   46:Src/sd.c      **** 		res_open = f_open(&log_names_f, (TCHAR const*)&name_txt, FA_OPEN_ALWAYS | FA_READ ); //open "name
- 121              		.loc 1 46 3 is_stmt 1 view .LVU9
+ 127              		.loc 1 46 3 is_stmt 1 view .LVU9
   46:Src/sd.c      **** 		res_open = f_open(&log_names_f, (TCHAR const*)&name_txt, FA_OPEN_ALWAYS | FA_READ ); //open "name
- 122              		.loc 1 46 14 is_stmt 0 view .LVU10
- 123 001e 1122     		movs	r2, #17
- 124 0020 9649     		ldr	r1, .L18+16
-ARM GAS  /tmp/ccXjbAY9.s 			page 7
-
-
- 125 0022 9748     		ldr	r0, .L18+20
- 126 0024 FFF7FEFF 		bl	f_open
- 127              	.LVL1:
+ 128              		.loc 1 46 14 is_stmt 0 view .LVU10
+ 129 001e 1122     		movs	r2, #17
+ 130 0020 B149     		ldr	r1, .L40+16
+ 131 0022 B248     		ldr	r0, .L40+20
+ 132 0024 FFF7FEFF 		bl	f_open
+ 133              	.LVL1:
   46:Src/sd.c      **** 		res_open = f_open(&log_names_f, (TCHAR const*)&name_txt, FA_OPEN_ALWAYS | FA_READ ); //open "name
- 128              		.loc 1 46 12 view .LVU11
- 129 0028 964B     		ldr	r3, .L18+24
- 130 002a 1870     		strb	r0, [r3]
+ 134              		.loc 1 46 12 view .LVU11
+ 135 0028 B14B     		ldr	r3, .L40+24
+ 136 002a 1870     		strb	r0, [r3]
   47:Src/sd.c      **** 		if(res_open == 0)f_read(&log_names_f, log_names, 1099, (void*)&bytes_read); //read into file "nam
- 131              		.loc 1 47 3 is_stmt 1 view .LVU12
+ 137              		.loc 1 47 3 is_stmt 1 view .LVU12
   47:Src/sd.c      **** 		if(res_open == 0)f_read(&log_names_f, log_names, 1099, (void*)&bytes_read); //read into file "nam
- 132              		.loc 1 47 5 is_stmt 0 view .LVU13
- 133 002c 08B3     		cbz	r0, .L14
- 134              	.L3:
+ 138              		.loc 1 47 5 is_stmt 0 view .LVU13
+ 139 002c 08B3     		cbz	r0, .L31
+ARM GAS  /tmp/cc4dYJCl.s 			page 8
+
+
+ 140              	.L3:
   49:Src/sd.c      **** 		HAL_UART_Transmit(&huart3,(uint8_t*)"mounted, opened\r\n",strlen("mounted, opened\r\n"),10);
- 135              		.loc 1 49 3 is_stmt 1 view .LVU14
- 136 002e 964D     		ldr	r5, .L18+28
- 137 0030 0A23     		movs	r3, #10
- 138 0032 1122     		movs	r2, #17
- 139 0034 9549     		ldr	r1, .L18+32
- 140 0036 2846     		mov	r0, r5
- 141 0038 FFF7FEFF 		bl	HAL_UART_Transmit
- 142              	.LVL2:
+ 141              		.loc 1 49 3 is_stmt 1 view .LVU14
+ 142 002e B14D     		ldr	r5, .L40+28
+ 143 0030 0A23     		movs	r3, #10
+ 144 0032 1122     		movs	r2, #17
+ 145 0034 B049     		ldr	r1, .L40+32
+ 146 0036 2846     		mov	r0, r5
+ 147 0038 FFF7FEFF 		bl	HAL_UART_Transmit
+ 148              	.LVL2:
   51:Src/sd.c      **** 		sprintf(txt, "FILENAME RES VAL: %d",(int)res_open);
- 143              		.loc 1 51 3 view .LVU15
- 144 003c 944C     		ldr	r4, .L18+36
- 145 003e 914B     		ldr	r3, .L18+24
- 146 0040 1A78     		ldrb	r2, [r3]	@ zero_extendqisi2
- 147 0042 9449     		ldr	r1, .L18+40
- 148 0044 2046     		mov	r0, r4
- 149 0046 FFF7FEFF 		bl	sprintf
- 150              	.LVL3:
+ 149              		.loc 1 51 3 view .LVU15
+ 150 003c AF4C     		ldr	r4, .L40+36
+ 151 003e AC4B     		ldr	r3, .L40+24
+ 152 0040 1A78     		ldrb	r2, [r3]	@ zero_extendqisi2
+ 153 0042 AF49     		ldr	r1, .L40+40
+ 154 0044 2046     		mov	r0, r4
+ 155 0046 FFF7FEFF 		bl	sprintf
+ 156              	.LVL3:
   52:Src/sd.c      **** 		HAL_UART_Transmit(&huart3,(uint8_t*)txt,strlen(txt),100);
- 151              		.loc 1 52 3 view .LVU16
+ 157              		.loc 1 52 3 view .LVU16
   52:Src/sd.c      **** 		HAL_UART_Transmit(&huart3,(uint8_t*)txt,strlen(txt),100);
- 152              		.loc 1 52 43 is_stmt 0 view .LVU17
- 153 004a 2046     		mov	r0, r4
- 154 004c FFF7FEFF 		bl	strlen
- 155              	.LVL4:
+ 158              		.loc 1 52 43 is_stmt 0 view .LVU17
+ 159 004a 2046     		mov	r0, r4
+ 160 004c FFF7FEFF 		bl	strlen
+ 161              	.LVL4:
   52:Src/sd.c      **** 		HAL_UART_Transmit(&huart3,(uint8_t*)txt,strlen(txt),100);
- 156              		.loc 1 52 3 view .LVU18
- 157 0050 6423     		movs	r3, #100
- 158 0052 82B2     		uxth	r2, r0
- 159 0054 2146     		mov	r1, r4
- 160 0056 2846     		mov	r0, r5
- 161 0058 FFF7FEFF 		bl	HAL_UART_Transmit
- 162              	.LVL5:
+ 162              		.loc 1 52 3 view .LVU18
+ 163 0050 6423     		movs	r3, #100
+ 164 0052 82B2     		uxth	r2, r0
+ 165 0054 2146     		mov	r1, r4
+ 166 0056 2846     		mov	r0, r5
+ 167 0058 FFF7FEFF 		bl	HAL_UART_Transmit
+ 168              	.LVL5:
   56:Src/sd.c      **** 		char name[256];
- 163              		.loc 1 56 3 is_stmt 1 view .LVU19
+ 169              		.loc 1 56 3 is_stmt 1 view .LVU19
   58:Src/sd.c      **** 		f_close(&log_names_f); // close the file
- 164              		.loc 1 58 3 view .LVU20
- 165 005c 884C     		ldr	r4, .L18+20
- 166 005e 2046     		mov	r0, r4
- 167 0060 FFF7FEFF 		bl	f_close
- 168              	.LVL6:
+ 170              		.loc 1 58 3 view .LVU20
+ 171 005c A34C     		ldr	r4, .L40+20
+ 172 005e 2046     		mov	r0, r4
+ 173 0060 FFF7FEFF 		bl	f_close
+ 174              	.LVL6:
   59:Src/sd.c      **** 		f_open(&log_names_f, (TCHAR const*)&name_txt, FA_OPEN_APPEND | FA_OPEN_ALWAYS | FA_WRITE );
- 169              		.loc 1 59 3 view .LVU21
- 170 0064 3222     		movs	r2, #50
-ARM GAS  /tmp/ccXjbAY9.s 			page 8
+ 175              		.loc 1 59 3 view .LVU21
+ 176 0064 3222     		movs	r2, #50
+ 177 0066 A049     		ldr	r1, .L40+16
+ 178 0068 2046     		mov	r0, r4
+ 179 006a FFF7FEFF 		bl	f_open
+ 180              	.LVL7:
+  61:Src/sd.c      **** 		for(int i = 0; i < max_files; i++){
+ 181              		.loc 1 61 3 view .LVU22
+ 182              	.LBB3:
+  61:Src/sd.c      **** 		for(int i = 0; i < max_files; i++){
+ 183              		.loc 1 61 7 view .LVU23
+  61:Src/sd.c      **** 		for(int i = 0; i < max_files; i++){
+ 184              		.loc 1 61 11 is_stmt 0 view .LVU24
+ 185 006e 0024     		movs	r4, #0
+ARM GAS  /tmp/cc4dYJCl.s 			page 9
 
 
- 171 0066 8549     		ldr	r1, .L18+16
- 172 0068 2046     		mov	r0, r4
- 173 006a FFF7FEFF 		bl	f_open
- 174              	.LVL7:
   61:Src/sd.c      **** 		for(int i = 0; i < max_files; i++){
- 175              		.loc 1 61 3 view .LVU22
- 176              	.LBB3:
+ 186              		.loc 1 61 3 view .LVU25
+ 187 0070 4DE0     		b	.L4
+ 188              	.LVL8:
+ 189              	.L31:
   61:Src/sd.c      **** 		for(int i = 0; i < max_files; i++){
- 177              		.loc 1 61 7 view .LVU23
-  61:Src/sd.c      **** 		for(int i = 0; i < max_files; i++){
- 178              		.loc 1 61 11 is_stmt 0 view .LVU24
- 179 006e 0024     		movs	r4, #0
-  61:Src/sd.c      **** 		for(int i = 0; i < max_files; i++){
- 180              		.loc 1 61 3 view .LVU25
- 181 0070 4BE0     		b	.L4
- 182              	.LVL8:
- 183              	.L14:
-  61:Src/sd.c      **** 		for(int i = 0; i < max_files; i++){
- 184              		.loc 1 61 3 view .LVU26
- 185              	.LBE3:
+ 190              		.loc 1 61 3 view .LVU26
+ 191              	.LBE3:
   47:Src/sd.c      **** 		if(res_open == 0)f_read(&log_names_f, log_names, 1099, (void*)&bytes_read); //read into file "nam
- 186              		.loc 1 47 20 is_stmt 1 discriminator 1 view .LVU27
- 187 0072 894B     		ldr	r3, .L18+44
- 188 0074 40F24B42 		movw	r2, #1099
- 189 0078 8849     		ldr	r1, .L18+48
- 190 007a 8148     		ldr	r0, .L18+20
- 191 007c FFF7FEFF 		bl	f_read
- 192              	.LVL9:
- 193 0080 D5E7     		b	.L3
- 194              	.LVL10:
- 195              	.L17:
- 196              	.LBB4:
+ 192              		.loc 1 47 20 is_stmt 1 discriminator 1 view .LVU27
+ 193 0072 A44B     		ldr	r3, .L40+44
+ 194 0074 40F24B42 		movw	r2, #1099
+ 195 0078 A349     		ldr	r1, .L40+48
+ 196 007a 9C48     		ldr	r0, .L40+20
+ 197 007c FFF7FEFF 		bl	f_read
+ 198              	.LVL9:
+ 199 0080 D5E7     		b	.L3
+ 200              	.LVL10:
+ 201              	.L35:
+ 202              	.LBB4:
   69:Src/sd.c      **** 				sprintf(filename_log,"default.txt");
- 197              		.loc 1 69 5 view .LVU28
- 198 0082 874C     		ldr	r4, .L18+52
- 199              	.LVL11:
+ 203              		.loc 1 69 5 view .LVU28
+ 204 0082 A24C     		ldr	r4, .L40+52
+ 205              	.LVL11:
   69:Src/sd.c      **** 				sprintf(filename_log,"default.txt");
- 200              		.loc 1 69 5 is_stmt 0 view .LVU29
- 201 0084 874B     		ldr	r3, .L18+56
- 202 0086 07CB     		ldmia	r3!, {r0, r1, r2}
- 203 0088 2060     		str	r0, [r4]	@ unaligned
- 204 008a 6160     		str	r1, [r4, #4]	@ unaligned
- 205 008c A260     		str	r2, [r4, #8]	@ unaligned
+ 206              		.loc 1 69 5 is_stmt 0 view .LVU29
+ 207 0084 A24B     		ldr	r3, .L40+56
+ 208 0086 07CB     		ldmia	r3!, {r0, r1, r2}
+ 209 0088 2060     		str	r0, [r4]	@ unaligned
+ 210 008a 6160     		str	r1, [r4, #4]	@ unaligned
+ 211 008c A260     		str	r2, [r4, #8]	@ unaligned
   71:Src/sd.c      **** 				f_open(&loggingFile, (TCHAR const*)&filename_log, FA_OPEN_APPEND | FA_OPEN_ALWAYS | FA_READ | F
- 206              		.loc 1 71 5 is_stmt 1 view .LVU30
- 207 008e 864D     		ldr	r5, .L18+60
- 208 0090 3322     		movs	r2, #51
- 209 0092 2146     		mov	r1, r4
- 210 0094 2846     		mov	r0, r5
- 211 0096 FFF7FEFF 		bl	f_open
- 212              	.LVL12:
+ 212              		.loc 1 71 5 is_stmt 1 view .LVU30
+ 213 008e A14D     		ldr	r5, .L40+60
+ 214 0090 3322     		movs	r2, #51
+ 215 0092 2146     		mov	r1, r4
+ 216 0094 2846     		mov	r0, r5
+ 217 0096 FFF7FEFF 		bl	f_open
+ 218              	.LVL12:
   72:Src/sd.c      **** 				f_close(&loggingFile);
- 213              		.loc 1 72 5 view .LVU31
- 214 009a 2846     		mov	r0, r5
- 215 009c FFF7FEFF 		bl	f_close
- 216              	.LVL13:
+ 219              		.loc 1 72 5 view .LVU31
+ 220 009a 2846     		mov	r0, r5
+ 221 009c FFF7FEFF 		bl	f_close
+ 222              	.LVL13:
   75:Src/sd.c      **** 				HAL_UART_Transmit(&huart3,(uint8_t*)"created -> default.txt\r\n",strlen("created -> default.txt
-ARM GAS  /tmp/ccXjbAY9.s 			page 9
+ 223              		.loc 1 75 5 view .LVU32
+ 224 00a0 0A23     		movs	r3, #10
+ 225 00a2 1822     		movs	r2, #24
+ 226 00a4 9C49     		ldr	r1, .L40+64
+ 227 00a6 9348     		ldr	r0, .L40+28
+ 228 00a8 FFF7FEFF 		bl	HAL_UART_Transmit
+ 229              	.LVL14:
+  77:Src/sd.c      **** 				successfull_opening = 1;
+ 230              		.loc 1 77 5 view .LVU33
+  77:Src/sd.c      **** 				successfull_opening = 1;
+ 231              		.loc 1 77 25 is_stmt 0 view .LVU34
+ 232 00ac 9B4B     		ldr	r3, .L40+68
+ARM GAS  /tmp/cc4dYJCl.s 			page 10
 
 
- 217              		.loc 1 75 5 view .LVU32
- 218 00a0 0A23     		movs	r3, #10
- 219 00a2 1822     		movs	r2, #24
- 220 00a4 8149     		ldr	r1, .L18+64
- 221 00a6 7848     		ldr	r0, .L18+28
- 222 00a8 FFF7FEFF 		bl	HAL_UART_Transmit
- 223              	.LVL14:
-  77:Src/sd.c      **** 				successfull_opening = 1;
- 224              		.loc 1 77 5 view .LVU33
-  77:Src/sd.c      **** 				successfull_opening = 1;
- 225              		.loc 1 77 25 is_stmt 0 view .LVU34
- 226 00ac 804B     		ldr	r3, .L18+68
- 227 00ae 0122     		movs	r2, #1
- 228 00b0 1A60     		str	r2, [r3]
+ 233 00ae 0122     		movs	r2, #1
+ 234 00b0 1A60     		str	r2, [r3]
   79:Src/sd.c      **** 				break;
- 229              		.loc 1 79 5 is_stmt 1 view .LVU35
- 230              	.L6:
- 231              	.LBE4:
+ 235              		.loc 1 79 5 is_stmt 1 view .LVU35
+ 236              	.L6:
+ 237              	.LBE4:
  124:Src/sd.c      **** 		mount_ok = 1;
- 232              		.loc 1 124 3 view .LVU36
+ 238              		.loc 1 124 3 view .LVU36
  124:Src/sd.c      **** 		mount_ok = 1;
- 233              		.loc 1 124 12 is_stmt 0 view .LVU37
- 234 00b2 0124     		movs	r4, #1
- 235 00b4 704B     		ldr	r3, .L18+12
- 236 00b6 1C60     		str	r4, [r3]
+ 239              		.loc 1 124 12 is_stmt 0 view .LVU37
+ 240 00b2 0124     		movs	r4, #1
+ 241 00b4 8B4B     		ldr	r3, .L40+12
+ 242 00b6 1C60     		str	r4, [r3]
  125:Src/sd.c      **** 		HAL_UART_Transmit(&huart3,(uint8_t*)"files closed\r\n",strlen("files closed\r\n"),10);
- 237              		.loc 1 125 3 is_stmt 1 view .LVU38
- 238 00b8 734E     		ldr	r6, .L18+28
- 239 00ba 0A23     		movs	r3, #10
- 240 00bc 0E22     		movs	r2, #14
- 241 00be 7D49     		ldr	r1, .L18+72
- 242 00c0 3046     		mov	r0, r6
- 243 00c2 FFF7FEFF 		bl	HAL_UART_Transmit
- 244              	.LVL15:
+ 243              		.loc 1 125 3 is_stmt 1 view .LVU38
+ 244 00b8 8E4E     		ldr	r6, .L40+28
+ 245 00ba 0A23     		movs	r3, #10
+ 246 00bc 0E22     		movs	r2, #14
+ 247 00be 9849     		ldr	r1, .L40+72
+ 248 00c0 3046     		mov	r0, r6
+ 249 00c2 FFF7FEFF 		bl	HAL_UART_Transmit
+ 250              	.LVL15:
  127:Src/sd.c      **** 		res_open = f_open(&pot_values_f, (TCHAR const*)&filename_pot, FA_OPEN_EXISTING | FA_READ ); //ope
- 245              		.loc 1 127 3 view .LVU39
+ 251              		.loc 1 127 3 view .LVU39
  127:Src/sd.c      **** 		res_open = f_open(&pot_values_f, (TCHAR const*)&filename_pot, FA_OPEN_EXISTING | FA_READ ); //ope
- 246              		.loc 1 127 14 is_stmt 0 view .LVU40
- 247 00c6 2246     		mov	r2, r4
- 248 00c8 7B49     		ldr	r1, .L18+76
- 249 00ca 7C48     		ldr	r0, .L18+80
- 250 00cc FFF7FEFF 		bl	f_open
- 251              	.LVL16:
- 252 00d0 0246     		mov	r2, r0
+ 252              		.loc 1 127 14 is_stmt 0 view .LVU40
+ 253 00c6 2246     		mov	r2, r4
+ 254 00c8 9649     		ldr	r1, .L40+76
+ 255 00ca 9748     		ldr	r0, .L40+80
+ 256 00cc FFF7FEFF 		bl	f_open
+ 257              	.LVL16:
+ 258 00d0 0246     		mov	r2, r0
  127:Src/sd.c      **** 		res_open = f_open(&pot_values_f, (TCHAR const*)&filename_pot, FA_OPEN_EXISTING | FA_READ ); //ope
- 253              		.loc 1 127 12 view .LVU41
- 254 00d2 6C4D     		ldr	r5, .L18+24
- 255 00d4 2870     		strb	r0, [r5]
+ 259              		.loc 1 127 12 view .LVU41
+ 260 00d2 874D     		ldr	r5, .L40+24
+ 261 00d4 2870     		strb	r0, [r5]
  128:Src/sd.c      **** 		char pot_values[100];
- 256              		.loc 1 128 3 is_stmt 1 view .LVU42
+ 262              		.loc 1 128 3 is_stmt 1 view .LVU42
  129:Src/sd.c      **** 		sprintf(txt, "POT FILE VAL: %d\r\n",(int)res_open);
- 257              		.loc 1 129 3 view .LVU43
- 258 00d6 6E4C     		ldr	r4, .L18+36
- 259 00d8 7949     		ldr	r1, .L18+84
- 260 00da 2046     		mov	r0, r4
- 261 00dc FFF7FEFF 		bl	sprintf
- 262              	.LVL17:
-ARM GAS  /tmp/ccXjbAY9.s 			page 10
+ 263              		.loc 1 129 3 view .LVU43
+ 264 00d6 894C     		ldr	r4, .L40+36
+ 265 00d8 9449     		ldr	r1, .L40+84
+ 266 00da 2046     		mov	r0, r4
+ 267 00dc FFF7FEFF 		bl	sprintf
+ 268              	.LVL17:
+ 130:Src/sd.c      **** 		HAL_UART_Transmit(&huart3,(uint8_t*)txt,strlen(txt),100);
+ 269              		.loc 1 130 3 view .LVU44
+ 130:Src/sd.c      **** 		HAL_UART_Transmit(&huart3,(uint8_t*)txt,strlen(txt),100);
+ 270              		.loc 1 130 43 is_stmt 0 view .LVU45
+ 271 00e0 2046     		mov	r0, r4
+ 272 00e2 FFF7FEFF 		bl	strlen
+ 273              	.LVL18:
+ 130:Src/sd.c      **** 		HAL_UART_Transmit(&huart3,(uint8_t*)txt,strlen(txt),100);
+ 274              		.loc 1 130 3 view .LVU46
+ 275 00e6 6423     		movs	r3, #100
+ 276 00e8 82B2     		uxth	r2, r0
+ 277 00ea 2146     		mov	r1, r4
+ARM GAS  /tmp/cc4dYJCl.s 			page 11
 
 
- 130:Src/sd.c      **** 		HAL_UART_Transmit(&huart3,(uint8_t*)txt,strlen(txt),100);
- 263              		.loc 1 130 3 view .LVU44
- 130:Src/sd.c      **** 		HAL_UART_Transmit(&huart3,(uint8_t*)txt,strlen(txt),100);
- 264              		.loc 1 130 43 is_stmt 0 view .LVU45
- 265 00e0 2046     		mov	r0, r4
- 266 00e2 FFF7FEFF 		bl	strlen
- 267              	.LVL18:
- 130:Src/sd.c      **** 		HAL_UART_Transmit(&huart3,(uint8_t*)txt,strlen(txt),100);
- 268              		.loc 1 130 3 view .LVU46
- 269 00e6 6423     		movs	r3, #100
- 270 00e8 82B2     		uxth	r2, r0
- 271 00ea 2146     		mov	r1, r4
- 272 00ec 3046     		mov	r0, r6
- 273 00ee FFF7FEFF 		bl	HAL_UART_Transmit
- 274              	.LVL19:
+ 278 00ec 3046     		mov	r0, r6
+ 279 00ee FFF7FEFF 		bl	HAL_UART_Transmit
+ 280              	.LVL19:
  131:Src/sd.c      **** 		if(res_open == FR_OK){
- 275              		.loc 1 131 3 is_stmt 1 view .LVU47
+ 281              		.loc 1 131 3 is_stmt 1 view .LVU47
  131:Src/sd.c      **** 		if(res_open == FR_OK){
- 276              		.loc 1 131 15 is_stmt 0 view .LVU48
- 277 00f2 2B78     		ldrb	r3, [r5]	@ zero_extendqisi2
+ 282              		.loc 1 131 15 is_stmt 0 view .LVU48
+ 283 00f2 2B78     		ldrb	r3, [r5]	@ zero_extendqisi2
  131:Src/sd.c      **** 		if(res_open == FR_OK){
- 278              		.loc 1 131 5 view .LVU49
- 279 00f4 13B1     		cbz	r3, .L10
- 156:Src/sd.c      **** 		}else if(res_open == FR_NO_FILE){
- 280              		.loc 1 156 9 is_stmt 1 view .LVU50
- 156:Src/sd.c      **** 		}else if(res_open == FR_NO_FILE){
- 281              		.loc 1 156 11 is_stmt 0 view .LVU51
- 282 00f6 042B     		cmp	r3, #4
- 283 00f8 00F08680 		beq	.L15
- 284              	.L10:
- 167:Src/sd.c      **** 		f_close(&pot_values_f);
- 285              		.loc 1 167 3 is_stmt 1 discriminator 1 view .LVU52
- 286 00fc 6F48     		ldr	r0, .L18+80
- 287 00fe FFF7FEFF 		bl	f_close
- 288              	.LVL20:
- 289              	.LBE2:
- 290 0102 8AE7     		b	.L1
- 291              	.LVL21:
- 292              	.L7:
- 293              	.LBB7:
- 294              	.LBB5:
+ 284              		.loc 1 131 5 view .LVU49
+ 285 00f4 002B     		cmp	r3, #0
+ 286 00f6 00F08980 		beq	.L32
+ 187:Src/sd.c      **** 		}else if(res_open == FR_NO_FILE){
+ 287              		.loc 1 187 9 is_stmt 1 view .LVU50
+ 187:Src/sd.c      **** 		}else if(res_open == FR_NO_FILE){
+ 288              		.loc 1 187 11 is_stmt 0 view .LVU51
+ 289 00fa 042B     		cmp	r3, #4
+ 290 00fc 00F05581 		beq	.L33
+ 291              	.L27:
+ 198:Src/sd.c      **** 		f_close(&pot_values_f);
+ 292              		.loc 1 198 3 is_stmt 1 discriminator 1 view .LVU52
+ 293 0100 8948     		ldr	r0, .L40+80
+ 294 0102 FFF7FEFF 		bl	f_close
+ 295              	.LVL20:
+ 296              	.LBE2:
+ 297 0106 88E7     		b	.L1
+ 298              	.LVL21:
+ 299              	.L7:
+ 300              	.LBB12:
+ 301              	.LBB5:
  101:Src/sd.c      **** 			if(pointer == NULL){
- 295              		.loc 1 101 4 view .LVU53
+ 302              		.loc 1 101 4 view .LVU53
  101:Src/sd.c      **** 			if(pointer == NULL){
- 296              		.loc 1 101 6 is_stmt 0 view .LVU54
- 297 0104 0028     		cmp	r0, #0
- 298 0106 44D0     		beq	.L16
+ 303              		.loc 1 101 6 is_stmt 0 view .LVU54
+ 304 0108 0028     		cmp	r0, #0
+ 305 010a 44D0     		beq	.L34
   61:Src/sd.c      **** 		for(int i = 0; i < max_files; i++){
- 299              		.loc 1 61 33 is_stmt 1 discriminator 2 view .LVU55
+ 306              		.loc 1 61 33 is_stmt 1 discriminator 2 view .LVU55
   61:Src/sd.c      **** 		for(int i = 0; i < max_files; i++){
- 300              		.loc 1 61 34 is_stmt 0 discriminator 2 view .LVU56
- 301 0108 0134     		adds	r4, r4, #1
- 302              	.LVL22:
- 303              	.L4:
+ 307              		.loc 1 61 34 is_stmt 0 discriminator 2 view .LVU56
+ 308 010c 0134     		adds	r4, r4, #1
+ 309              	.LVL22:
+ 310              	.L4:
   61:Src/sd.c      **** 		for(int i = 0; i < max_files; i++){
- 304              		.loc 1 61 18 is_stmt 1 discriminator 1 view .LVU57
+ 311              		.loc 1 61 18 is_stmt 1 discriminator 1 view .LVU57
   61:Src/sd.c      **** 		for(int i = 0; i < max_files; i++){
-ARM GAS  /tmp/ccXjbAY9.s 			page 11
-
-
- 305              		.loc 1 61 20 is_stmt 0 discriminator 1 view .LVU58
- 306 010a 6E4B     		ldr	r3, .L18+88
- 307 010c 1B68     		ldr	r3, [r3]
+ 312              		.loc 1 61 20 is_stmt 0 discriminator 1 view .LVU58
+ 313 010e 884B     		ldr	r3, .L40+88
+ 314 0110 1B68     		ldr	r3, [r3]
   61:Src/sd.c      **** 		for(int i = 0; i < max_files; i++){
- 308              		.loc 1 61 3 discriminator 1 view .LVU59
- 309 010e A342     		cmp	r3, r4
- 310 0110 CFDD     		ble	.L6
+ 315              		.loc 1 61 3 discriminator 1 view .LVU59
+ 316 0112 A342     		cmp	r3, r4
+ 317 0114 CDDD     		ble	.L6
   63:Src/sd.c      **** 			sprintf(name, "log_%d ", i);
- 311              		.loc 1 63 4 is_stmt 1 view .LVU60
- 312 0112 2246     		mov	r2, r4
- 313 0114 6C49     		ldr	r1, .L18+92
- 314 0116 06A8     		add	r0, sp, #24
- 315 0118 FFF7FEFF 		bl	sprintf
- 316              	.LVL23:
-  65:Src/sd.c      **** 			pointer = strstr(log_names, name);
- 317              		.loc 1 65 4 view .LVU61
-  65:Src/sd.c      **** 			pointer = strstr(log_names, name);
- 318              		.loc 1 65 14 is_stmt 0 view .LVU62
- 319 011c 06A9     		add	r1, sp, #24
- 320 011e 5F48     		ldr	r0, .L18+48
- 321 0120 FFF7FEFF 		bl	strstr
- 322              	.LVL24:
-  65:Src/sd.c      **** 			pointer = strstr(log_names, name);
- 323              		.loc 1 65 12 view .LVU63
- 324 0124 694B     		ldr	r3, .L18+96
- 325 0126 1860     		str	r0, [r3]
-  67:Src/sd.c      **** 			if(i == max_files){
- 326              		.loc 1 67 4 is_stmt 1 view .LVU64
-  67:Src/sd.c      **** 			if(i == max_files){
- 327              		.loc 1 67 9 is_stmt 0 view .LVU65
- 328 0128 664B     		ldr	r3, .L18+88
- 329 012a 1B68     		ldr	r3, [r3]
-  67:Src/sd.c      **** 			if(i == max_files){
- 330              		.loc 1 67 6 view .LVU66
- 331 012c A342     		cmp	r3, r4
- 332 012e A8D0     		beq	.L17
-  82:Src/sd.c      **** 			if(i == 0 && pointer == NULL){
- 333              		.loc 1 82 4 is_stmt 1 view .LVU67
-  82:Src/sd.c      **** 			if(i == 0 && pointer == NULL){
- 334              		.loc 1 82 6 is_stmt 0 view .LVU68
- 335 0130 002C     		cmp	r4, #0
- 336 0132 E7D1     		bne	.L7
-  82:Src/sd.c      **** 			if(i == 0 && pointer == NULL){
- 337              		.loc 1 82 14 discriminator 1 view .LVU69
- 338 0134 0028     		cmp	r0, #0
- 339 0136 E5D1     		bne	.L7
-  84:Src/sd.c      **** 				sprintf(filename_log, "log_0 \r\n");
- 340              		.loc 1 84 5 is_stmt 1 view .LVU70
- 341 0138 594C     		ldr	r4, .L18+52
- 342              	.LVL25:
-  84:Src/sd.c      **** 				sprintf(filename_log, "log_0 \r\n");
- 343              		.loc 1 84 5 is_stmt 0 view .LVU71
- 344 013a 654B     		ldr	r3, .L18+100
- 345 013c 03CB     		ldmia	r3!, {r0, r1}
- 346 013e 2060     		str	r0, [r4]	@ unaligned
- 347 0140 6160     		str	r1, [r4, #4]	@ unaligned
- 348 0142 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
-ARM GAS  /tmp/ccXjbAY9.s 			page 12
+ 318              		.loc 1 63 4 is_stmt 1 view .LVU60
+ 319 0116 2246     		mov	r2, r4
+ 320 0118 8649     		ldr	r1, .L40+92
+ARM GAS  /tmp/cc4dYJCl.s 			page 12
 
 
- 349 0144 2372     		strb	r3, [r4, #8]
+ 321 011a 1EA8     		add	r0, sp, #120
+ 322 011c FFF7FEFF 		bl	sprintf
+ 323              	.LVL23:
+  65:Src/sd.c      **** 			pointer = strstr(log_names, name);
+ 324              		.loc 1 65 4 view .LVU61
+  65:Src/sd.c      **** 			pointer = strstr(log_names, name);
+ 325              		.loc 1 65 14 is_stmt 0 view .LVU62
+ 326 0120 1EA9     		add	r1, sp, #120
+ 327 0122 7948     		ldr	r0, .L40+48
+ 328 0124 FFF7FEFF 		bl	strstr
+ 329              	.LVL24:
+  65:Src/sd.c      **** 			pointer = strstr(log_names, name);
+ 330              		.loc 1 65 12 view .LVU63
+ 331 0128 834B     		ldr	r3, .L40+96
+ 332 012a 1860     		str	r0, [r3]
+  67:Src/sd.c      **** 			if(i == max_files){
+ 333              		.loc 1 67 4 is_stmt 1 view .LVU64
+  67:Src/sd.c      **** 			if(i == max_files){
+ 334              		.loc 1 67 9 is_stmt 0 view .LVU65
+ 335 012c 804B     		ldr	r3, .L40+88
+ 336 012e 1B68     		ldr	r3, [r3]
+  67:Src/sd.c      **** 			if(i == max_files){
+ 337              		.loc 1 67 6 view .LVU66
+ 338 0130 A342     		cmp	r3, r4
+ 339 0132 A6D0     		beq	.L35
+  82:Src/sd.c      **** 			if(i == 0 && pointer == NULL){
+ 340              		.loc 1 82 4 is_stmt 1 view .LVU67
+  82:Src/sd.c      **** 			if(i == 0 && pointer == NULL){
+ 341              		.loc 1 82 6 is_stmt 0 view .LVU68
+ 342 0134 002C     		cmp	r4, #0
+ 343 0136 E7D1     		bne	.L7
+  82:Src/sd.c      **** 			if(i == 0 && pointer == NULL){
+ 344              		.loc 1 82 14 discriminator 1 view .LVU69
+ 345 0138 0028     		cmp	r0, #0
+ 346 013a E5D1     		bne	.L7
+  84:Src/sd.c      **** 				sprintf(filename_log, "log_0 \r\n");
+ 347              		.loc 1 84 5 is_stmt 1 view .LVU70
+ 348 013c 734C     		ldr	r4, .L40+52
+ 349              	.LVL25:
+  84:Src/sd.c      **** 				sprintf(filename_log, "log_0 \r\n");
+ 350              		.loc 1 84 5 is_stmt 0 view .LVU71
+ 351 013e 7F4B     		ldr	r3, .L40+100
+ 352 0140 03CB     		ldmia	r3!, {r0, r1}
+ 353 0142 2060     		str	r0, [r4]	@ unaligned
+ 354 0144 6160     		str	r1, [r4, #4]	@ unaligned
+ 355 0146 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 356 0148 2372     		strb	r3, [r4, #8]
   86:Src/sd.c      **** 				f_write(&log_names_f, filename_log, strlen(filename_log), &byteswritten);
- 350              		.loc 1 86 5 is_stmt 1 view .LVU72
- 351 0146 2046     		mov	r0, r4
- 352 0148 FFF7FEFF 		bl	strlen
- 353              	.LVL26:
- 354 014c 0246     		mov	r2, r0
- 355 014e 4C4D     		ldr	r5, .L18+20
- 356 0150 604B     		ldr	r3, .L18+104
- 357 0152 2146     		mov	r1, r4
- 358 0154 2846     		mov	r0, r5
- 359 0156 FFF7FEFF 		bl	f_write
- 360              	.LVL27:
+ 357              		.loc 1 86 5 is_stmt 1 view .LVU72
+ 358 014a 2046     		mov	r0, r4
+ 359 014c FFF7FEFF 		bl	strlen
+ 360              	.LVL26:
+ 361 0150 0246     		mov	r2, r0
+ 362 0152 664D     		ldr	r5, .L40+20
+ 363 0154 7A4B     		ldr	r3, .L40+104
+ 364 0156 2146     		mov	r1, r4
+ 365 0158 2846     		mov	r0, r5
+ARM GAS  /tmp/cc4dYJCl.s 			page 13
+
+
+ 366 015a FFF7FEFF 		bl	f_write
+ 367              	.LVL27:
   87:Src/sd.c      **** 				f_close(&log_names_f);
- 361              		.loc 1 87 5 view .LVU73
- 362 015a 2846     		mov	r0, r5
- 363 015c FFF7FEFF 		bl	f_close
- 364              	.LVL28:
+ 368              		.loc 1 87 5 view .LVU73
+ 369 015e 2846     		mov	r0, r5
+ 370 0160 FFF7FEFF 		bl	f_close
+ 371              	.LVL28:
   89:Src/sd.c      **** 				sprintf(filename_log, "Log_0.txt");
- 365              		.loc 1 89 5 view .LVU74
- 366 0160 5D4B     		ldr	r3, .L18+108
- 367 0162 03CB     		ldmia	r3!, {r0, r1}
- 368 0164 2060     		str	r0, [r4]	@ unaligned
- 369 0166 6160     		str	r1, [r4, #4]	@ unaligned
- 370 0168 1B88     		ldrh	r3, [r3]	@ unaligned
- 371 016a 2381     		strh	r3, [r4, #8]	@ unaligned
+ 372              		.loc 1 89 5 view .LVU74
+ 373 0164 774B     		ldr	r3, .L40+108
+ 374 0166 03CB     		ldmia	r3!, {r0, r1}
+ 375 0168 2060     		str	r0, [r4]	@ unaligned
+ 376 016a 6160     		str	r1, [r4, #4]	@ unaligned
+ 377 016c 1B88     		ldrh	r3, [r3]	@ unaligned
+ 378 016e 2381     		strh	r3, [r4, #8]	@ unaligned
   91:Src/sd.c      **** 				f_open(&loggingFile, (TCHAR const*)&filename_log, FA_OPEN_APPEND | FA_OPEN_ALWAYS | FA_READ | F
- 372              		.loc 1 91 5 view .LVU75
- 373 016c 4E4D     		ldr	r5, .L18+60
- 374 016e 3322     		movs	r2, #51
- 375 0170 2146     		mov	r1, r4
- 376 0172 2846     		mov	r0, r5
- 377 0174 FFF7FEFF 		bl	f_open
- 378              	.LVL29:
+ 379              		.loc 1 91 5 view .LVU75
+ 380 0170 684D     		ldr	r5, .L40+60
+ 381 0172 3322     		movs	r2, #51
+ 382 0174 2146     		mov	r1, r4
+ 383 0176 2846     		mov	r0, r5
+ 384 0178 FFF7FEFF 		bl	f_open
+ 385              	.LVL29:
   92:Src/sd.c      **** 				f_close(&loggingFile);
- 379              		.loc 1 92 5 view .LVU76
- 380 0178 2846     		mov	r0, r5
- 381 017a FFF7FEFF 		bl	f_close
- 382              	.LVL30:
+ 386              		.loc 1 92 5 view .LVU76
+ 387 017c 2846     		mov	r0, r5
+ 388 017e FFF7FEFF 		bl	f_close
+ 389              	.LVL30:
   95:Src/sd.c      **** 				HAL_UART_Transmit(&huart3,(uint8_t*)"\r\ncreated -> Log_0\r\n",strlen("\r\ncreated -> Log_0\r\n
- 383              		.loc 1 95 5 view .LVU77
- 384 017e 0A23     		movs	r3, #10
- 385 0180 1422     		movs	r2, #20
- 386 0182 5649     		ldr	r1, .L18+112
- 387 0184 4048     		ldr	r0, .L18+28
- 388 0186 FFF7FEFF 		bl	HAL_UART_Transmit
- 389              	.LVL31:
+ 390              		.loc 1 95 5 view .LVU77
+ 391 0182 0A23     		movs	r3, #10
+ 392 0184 1422     		movs	r2, #20
+ 393 0186 7049     		ldr	r1, .L40+112
+ 394 0188 5A48     		ldr	r0, .L40+28
+ 395 018a FFF7FEFF 		bl	HAL_UART_Transmit
+ 396              	.LVL31:
   97:Src/sd.c      **** 				successfull_opening = 1;
- 390              		.loc 1 97 5 view .LVU78
+ 397              		.loc 1 97 5 view .LVU78
   97:Src/sd.c      **** 				successfull_opening = 1;
- 391              		.loc 1 97 25 is_stmt 0 view .LVU79
- 392 018a 494B     		ldr	r3, .L18+68
- 393 018c 0122     		movs	r2, #1
- 394 018e 1A60     		str	r2, [r3]
+ 398              		.loc 1 97 25 is_stmt 0 view .LVU79
+ 399 018e 634B     		ldr	r3, .L40+68
+ 400 0190 0122     		movs	r2, #1
+ 401 0192 1A60     		str	r2, [r3]
   99:Src/sd.c      **** 				break;
- 395              		.loc 1 99 5 is_stmt 1 view .LVU80
- 396 0190 8FE7     		b	.L6
-ARM GAS  /tmp/ccXjbAY9.s 			page 13
-
-
- 397              	.LVL32:
- 398              	.L16:
+ 402              		.loc 1 99 5 is_stmt 1 view .LVU80
+ 403 0194 8DE7     		b	.L6
+ 404              	.LVL32:
+ 405              	.L34:
  103:Src/sd.c      **** 				sprintf(filename_log, "log_%d \r\n", i);
- 399              		.loc 1 103 5 view .LVU81
- 400 0192 434D     		ldr	r5, .L18+52
- 401 0194 2246     		mov	r2, r4
- 402 0196 5249     		ldr	r1, .L18+116
- 403 0198 2846     		mov	r0, r5
- 404 019a FFF7FEFF 		bl	sprintf
- 405              	.LVL33:
+ 406              		.loc 1 103 5 view .LVU81
+ 407 0196 5D4D     		ldr	r5, .L40+52
+ 408 0198 2246     		mov	r2, r4
+ 409 019a 6C49     		ldr	r1, .L40+116
+ 410 019c 2846     		mov	r0, r5
+ 411 019e FFF7FEFF 		bl	sprintf
+ 412              	.LVL33:
  105:Src/sd.c      **** 				f_write(&log_names_f, filename_log, strlen(filename_log), (void*)&byteswritten);
- 406              		.loc 1 105 5 view .LVU82
- 407 019e 2846     		mov	r0, r5
- 408 01a0 FFF7FEFF 		bl	strlen
- 409              	.LVL34:
- 410 01a4 0246     		mov	r2, r0
- 411 01a6 364E     		ldr	r6, .L18+20
- 412 01a8 4A4B     		ldr	r3, .L18+104
- 413 01aa 2946     		mov	r1, r5
- 414 01ac 3046     		mov	r0, r6
- 415 01ae FFF7FEFF 		bl	f_write
- 416              	.LVL35:
+ARM GAS  /tmp/cc4dYJCl.s 			page 14
+
+
+ 413              		.loc 1 105 5 view .LVU82
+ 414 01a2 2846     		mov	r0, r5
+ 415 01a4 FFF7FEFF 		bl	strlen
+ 416              	.LVL34:
+ 417 01a8 0246     		mov	r2, r0
+ 418 01aa 504E     		ldr	r6, .L40+20
+ 419 01ac 644B     		ldr	r3, .L40+104
+ 420 01ae 2946     		mov	r1, r5
+ 421 01b0 3046     		mov	r0, r6
+ 422 01b2 FFF7FEFF 		bl	f_write
+ 423              	.LVL35:
  106:Src/sd.c      **** 				f_close(&log_names_f);
- 417              		.loc 1 106 5 view .LVU83
- 418 01b2 3046     		mov	r0, r6
- 419 01b4 FFF7FEFF 		bl	f_close
- 420              	.LVL36:
+ 424              		.loc 1 106 5 view .LVU83
+ 425 01b6 3046     		mov	r0, r6
+ 426 01b8 FFF7FEFF 		bl	f_close
+ 427              	.LVL36:
  108:Src/sd.c      **** 				sprintf(filename_log, "Log_%d.txt", i);
- 421              		.loc 1 108 5 view .LVU84
- 422 01b8 2246     		mov	r2, r4
- 423 01ba 4A49     		ldr	r1, .L18+120
- 424 01bc 2846     		mov	r0, r5
- 425 01be FFF7FEFF 		bl	sprintf
- 426              	.LVL37:
+ 428              		.loc 1 108 5 view .LVU84
+ 429 01bc 2246     		mov	r2, r4
+ 430 01be 6449     		ldr	r1, .L40+120
+ 431 01c0 2846     		mov	r0, r5
+ 432 01c2 FFF7FEFF 		bl	sprintf
+ 433              	.LVL37:
  110:Src/sd.c      **** 				f_open(&loggingFile, (TCHAR const*)&filename_log, FA_OPEN_APPEND | FA_OPEN_ALWAYS | FA_READ | F
- 427              		.loc 1 110 5 view .LVU85
- 428 01c2 394C     		ldr	r4, .L18+60
- 429              	.LVL38:
+ 434              		.loc 1 110 5 view .LVU85
+ 435 01c6 534C     		ldr	r4, .L40+60
+ 436              	.LVL38:
  110:Src/sd.c      **** 				f_open(&loggingFile, (TCHAR const*)&filename_log, FA_OPEN_APPEND | FA_OPEN_ALWAYS | FA_READ | F
- 430              		.loc 1 110 5 is_stmt 0 view .LVU86
- 431 01c4 3322     		movs	r2, #51
- 432 01c6 2946     		mov	r1, r5
- 433 01c8 2046     		mov	r0, r4
- 434 01ca FFF7FEFF 		bl	f_open
- 435              	.LVL39:
+ 437              		.loc 1 110 5 is_stmt 0 view .LVU86
+ 438 01c8 3322     		movs	r2, #51
+ 439 01ca 2946     		mov	r1, r5
+ 440 01cc 2046     		mov	r0, r4
+ 441 01ce FFF7FEFF 		bl	f_open
+ 442              	.LVL39:
  111:Src/sd.c      **** 				f_close(&loggingFile);
- 436              		.loc 1 111 5 is_stmt 1 view .LVU87
- 437 01ce 2046     		mov	r0, r4
- 438 01d0 FFF7FEFF 		bl	f_close
- 439              	.LVL40:
+ 443              		.loc 1 111 5 is_stmt 1 view .LVU87
+ 444 01d2 2046     		mov	r0, r4
+ 445 01d4 FFF7FEFF 		bl	f_close
+ 446              	.LVL40:
  114:Src/sd.c      **** 				HAL_UART_Transmit(&huart3,(uint8_t*)"\r\ncreated -> ",strlen("\r\ncreated -> "),10);
- 440              		.loc 1 114 5 view .LVU88
- 441 01d4 2C4C     		ldr	r4, .L18+28
- 442 01d6 0A23     		movs	r3, #10
- 443 01d8 0D22     		movs	r2, #13
- 444 01da 4349     		ldr	r1, .L18+124
- 445 01dc 2046     		mov	r0, r4
-ARM GAS  /tmp/ccXjbAY9.s 			page 14
+ 447              		.loc 1 114 5 view .LVU88
+ 448 01d8 464C     		ldr	r4, .L40+28
+ 449 01da 0A23     		movs	r3, #10
+ 450 01dc 0D22     		movs	r2, #13
+ 451 01de 5D49     		ldr	r1, .L40+124
+ 452 01e0 2046     		mov	r0, r4
+ 453 01e2 FFF7FEFF 		bl	HAL_UART_Transmit
+ 454              	.LVL41:
+ 115:Src/sd.c      **** 				HAL_UART_Transmit(&huart3,(uint8_t*) filename_log, strlen(filename_log), 10);
+ 455              		.loc 1 115 5 view .LVU89
+ 115:Src/sd.c      **** 				HAL_UART_Transmit(&huart3,(uint8_t*) filename_log, strlen(filename_log), 10);
+ 456              		.loc 1 115 56 is_stmt 0 view .LVU90
+ 457 01e6 2846     		mov	r0, r5
+ 458 01e8 FFF7FEFF 		bl	strlen
+ 459              	.LVL42:
+ 115:Src/sd.c      **** 				HAL_UART_Transmit(&huart3,(uint8_t*) filename_log, strlen(filename_log), 10);
+ 460              		.loc 1 115 5 view .LVU91
+ARM GAS  /tmp/cc4dYJCl.s 			page 15
 
 
- 446 01de FFF7FEFF 		bl	HAL_UART_Transmit
- 447              	.LVL41:
- 115:Src/sd.c      **** 				HAL_UART_Transmit(&huart3,(uint8_t*) filename_log, strlen(filename_log), 10);
- 448              		.loc 1 115 5 view .LVU89
- 115:Src/sd.c      **** 				HAL_UART_Transmit(&huart3,(uint8_t*) filename_log, strlen(filename_log), 10);
- 449              		.loc 1 115 56 is_stmt 0 view .LVU90
- 450 01e2 2846     		mov	r0, r5
- 451 01e4 FFF7FEFF 		bl	strlen
- 452              	.LVL42:
- 115:Src/sd.c      **** 				HAL_UART_Transmit(&huart3,(uint8_t*) filename_log, strlen(filename_log), 10);
- 453              		.loc 1 115 5 view .LVU91
- 454 01e8 0A23     		movs	r3, #10
- 455 01ea 82B2     		uxth	r2, r0
- 456 01ec 2946     		mov	r1, r5
- 457 01ee 2046     		mov	r0, r4
- 458 01f0 FFF7FEFF 		bl	HAL_UART_Transmit
- 459              	.LVL43:
+ 461 01ec 0A23     		movs	r3, #10
+ 462 01ee 82B2     		uxth	r2, r0
+ 463 01f0 2946     		mov	r1, r5
+ 464 01f2 2046     		mov	r0, r4
+ 465 01f4 FFF7FEFF 		bl	HAL_UART_Transmit
+ 466              	.LVL43:
  116:Src/sd.c      **** 				HAL_UART_Transmit(&huart3,(uint8_t*) "\r\n", strlen("\r\n"),10);
- 460              		.loc 1 116 5 is_stmt 1 view .LVU92
- 461 01f4 0A23     		movs	r3, #10
- 462 01f6 0222     		movs	r2, #2
- 463 01f8 3C49     		ldr	r1, .L18+128
- 464 01fa 2046     		mov	r0, r4
- 465 01fc FFF7FEFF 		bl	HAL_UART_Transmit
- 466              	.LVL44:
+ 467              		.loc 1 116 5 is_stmt 1 view .LVU92
+ 468 01f8 0A23     		movs	r3, #10
+ 469 01fa 0222     		movs	r2, #2
+ 470 01fc 5649     		ldr	r1, .L40+128
+ 471 01fe 2046     		mov	r0, r4
+ 472 0200 FFF7FEFF 		bl	HAL_UART_Transmit
+ 473              	.LVL44:
  118:Src/sd.c      **** 				successfull_opening = 1;
- 467              		.loc 1 118 5 view .LVU93
+ 474              		.loc 1 118 5 view .LVU93
  118:Src/sd.c      **** 				successfull_opening = 1;
- 468              		.loc 1 118 25 is_stmt 0 view .LVU94
- 469 0200 2B4B     		ldr	r3, .L18+68
- 470 0202 0122     		movs	r2, #1
- 471 0204 1A60     		str	r2, [r3]
+ 475              		.loc 1 118 25 is_stmt 0 view .LVU94
+ 476 0204 454B     		ldr	r3, .L40+68
+ 477 0206 0122     		movs	r2, #1
+ 478 0208 1A60     		str	r2, [r3]
  120:Src/sd.c      **** 				break;
- 472              		.loc 1 120 5 is_stmt 1 view .LVU95
- 473 0206 54E7     		b	.L6
- 474              	.L15:
+ 479              		.loc 1 120 5 is_stmt 1 view .LVU95
+ 480 020a 52E7     		b	.L6
+ 481              	.L32:
  120:Src/sd.c      **** 				break;
- 475              		.loc 1 120 5 is_stmt 0 view .LVU96
- 476              	.LBE5:
- 157:Src/sd.c      **** 			res_open = f_open(&pot_values_f, (TCHAR const*)&filename_pot, FA_CREATE_NEW | FA_WRITE );
- 477              		.loc 1 157 4 is_stmt 1 view .LVU97
- 157:Src/sd.c      **** 			res_open = f_open(&pot_values_f, (TCHAR const*)&filename_pot, FA_CREATE_NEW | FA_WRITE );
- 478              		.loc 1 157 15 is_stmt 0 view .LVU98
- 479 0208 0622     		movs	r2, #6
- 480 020a 2B49     		ldr	r1, .L18+76
- 481 020c 2B48     		ldr	r0, .L18+80
- 482 020e FFF7FEFF 		bl	f_open
- 483              	.LVL45:
- 484 0212 0246     		mov	r2, r0
- 157:Src/sd.c      **** 			res_open = f_open(&pot_values_f, (TCHAR const*)&filename_pot, FA_CREATE_NEW | FA_WRITE );
- 485              		.loc 1 157 13 view .LVU99
- 486 0214 2870     		strb	r0, [r5]
- 158:Src/sd.c      **** 			sprintf(txt, "POT FILE VAL2: %d\r\n",(int)res_open);
- 487              		.loc 1 158 4 is_stmt 1 view .LVU100
- 488 0216 3649     		ldr	r1, .L18+132
- 489 0218 2046     		mov	r0, r4
- 490 021a FFF7FEFF 		bl	sprintf
-ARM GAS  /tmp/ccXjbAY9.s 			page 15
+ 482              		.loc 1 120 5 is_stmt 0 view .LVU96
+ 483              	.LBE5:
+ 484              	.LBB6:
+ 133:Src/sd.c      **** 			HAL_UART_Transmit(&huart3,(uint8_t*)"\r\nPOT FILE OPEND\r\n",strlen("\r\nPOT FILE OPEND\r\n"),10
+ 485              		.loc 1 133 4 is_stmt 1 view .LVU97
+ 486 020c 0A23     		movs	r3, #10
+ 487 020e 1222     		movs	r2, #18
+ 488 0210 5249     		ldr	r1, .L40+132
+ 489 0212 3046     		mov	r0, r6
+ 490 0214 FFF7FEFF 		bl	HAL_UART_Transmit
+ 491              	.LVL45:
+ 134:Src/sd.c      **** 			f_read(&pot_values_f, pot_values, 100, (void*)&bytes_read); //read into file "pot_values.txt" an
+ 492              		.loc 1 134 4 view .LVU98
+ 493 0218 3A4B     		ldr	r3, .L40+44
+ 494 021a 6422     		movs	r2, #100
+ 495 021c 05A9     		add	r1, sp, #20
+ 496 021e 4248     		ldr	r0, .L40+80
+ 497 0220 FFF7FEFF 		bl	f_read
+ 498              	.LVL46:
+ 135:Src/sd.c      **** 			char val_pot[6];
+ 499              		.loc 1 135 4 view .LVU99
+ 136:Src/sd.c      **** 			val_pot[5] = '\0';
+ 500              		.loc 1 136 4 view .LVU100
+ 136:Src/sd.c      **** 			val_pot[5] = '\0';
+ 501              		.loc 1 136 15 is_stmt 0 view .LVU101
+ 502 0224 0024     		movs	r4, #0
+ 503 0226 8DF81140 		strb	r4, [sp, #17]
+ 137:Src/sd.c      **** 			int pot_val_count = 0;
+ 504              		.loc 1 137 4 is_stmt 1 view .LVU102
+ 505              	.LVL47:
+ 138:Src/sd.c      **** 			for(int i=0; i<5 ; i++){
+ARM GAS  /tmp/cc4dYJCl.s 			page 16
 
 
- 491              	.LVL46:
- 159:Src/sd.c      **** 			HAL_UART_Transmit(&huart3,(uint8_t*)txt,strlen(txt),100);
- 492              		.loc 1 159 4 view .LVU101
- 159:Src/sd.c      **** 			HAL_UART_Transmit(&huart3,(uint8_t*)txt,strlen(txt),100);
- 493              		.loc 1 159 44 is_stmt 0 view .LVU102
- 494 021e 2046     		mov	r0, r4
- 495 0220 FFF7FEFF 		bl	strlen
- 496              	.LVL47:
- 159:Src/sd.c      **** 			HAL_UART_Transmit(&huart3,(uint8_t*)txt,strlen(txt),100);
- 497              		.loc 1 159 4 view .LVU103
- 498 0224 6423     		movs	r3, #100
- 499 0226 82B2     		uxth	r2, r0
- 500 0228 2146     		mov	r1, r4
- 501 022a 3046     		mov	r0, r6
- 502 022c FFF7FEFF 		bl	HAL_UART_Transmit
- 503              	.LVL48:
- 160:Src/sd.c      **** 			if(res_open == FR_OK){
- 504              		.loc 1 160 4 is_stmt 1 view .LVU104
- 160:Src/sd.c      **** 			if(res_open == FR_OK){
- 505              		.loc 1 160 16 is_stmt 0 view .LVU105
- 506 0230 2B78     		ldrb	r3, [r5]	@ zero_extendqisi2
- 160:Src/sd.c      **** 			if(res_open == FR_OK){
- 507              		.loc 1 160 6 view .LVU106
- 508 0232 002B     		cmp	r3, #0
- 509 0234 7FF462AF 		bne	.L10
- 510              	.LBB6:
- 162:Src/sd.c      **** 				char local_txt[] = "0000\r\n4096\r\n0000\r\n4096";
- 511              		.loc 1 162 5 is_stmt 1 discriminator 2 view .LVU107
- 162:Src/sd.c      **** 				char local_txt[] = "0000\r\n4096\r\n0000\r\n4096";
- 512              		.loc 1 162 10 is_stmt 0 discriminator 2 view .LVU108
- 513 0238 6C46     		mov	r4, sp
- 514 023a 2E4D     		ldr	r5, .L18+136
- 515 023c 0FCD     		ldmia	r5!, {r0, r1, r2, r3}
- 516 023e 0FC4     		stmia	r4!, {r0, r1, r2, r3}
- 517 0240 95E80300 		ldm	r5, {r0, r1}
- 518 0244 44F8040B 		str	r0, [r4], #4
- 519 0248 24F8021B 		strh	r1, [r4], #2	@ movhi
- 520 024c 090C     		lsrs	r1, r1, #16
- 521 024e 2170     		strb	r1, [r4]
- 163:Src/sd.c      **** 				f_write(&pot_values_f,(TCHAR const*)&local_txt,strlen(local_txt), &byteswritten);
- 522              		.loc 1 163 5 is_stmt 1 discriminator 2 view .LVU109
- 523 0250 6846     		mov	r0, sp
- 524 0252 FFF7FEFF 		bl	strlen
- 525              	.LVL49:
- 526 0256 0246     		mov	r2, r0
- 527 0258 184C     		ldr	r4, .L18+80
- 528 025a 1E4B     		ldr	r3, .L18+104
- 529 025c 6946     		mov	r1, sp
- 530 025e 2046     		mov	r0, r4
- 531 0260 FFF7FEFF 		bl	f_write
- 532              	.LVL50:
- 164:Src/sd.c      **** 				f_close(&pot_values_f);
- 533              		.loc 1 164 5 discriminator 2 view .LVU110
- 534 0264 2046     		mov	r0, r4
- 535 0266 FFF7FEFF 		bl	f_close
- 536              	.LVL51:
- 537 026a 47E7     		b	.L10
-ARM GAS  /tmp/ccXjbAY9.s 			page 16
+ 506              		.loc 1 138 4 view .LVU103
+ 507              	.LBB7:
+ 138:Src/sd.c      **** 			for(int i=0; i<5 ; i++){
+ 508              		.loc 1 138 8 view .LVU104
+ 138:Src/sd.c      **** 			for(int i=0; i<5 ; i++){
+ 509              		.loc 1 138 12 is_stmt 0 view .LVU105
+ 510 022a 2346     		mov	r3, r4
+ 138:Src/sd.c      **** 			for(int i=0; i<5 ; i++){
+ 511              		.loc 1 138 4 view .LVU106
+ 512 022c 03E0     		b	.L11
+ 513              	.LVL48:
+ 514              	.L12:
+ 145:Src/sd.c      **** 					val_pot[i] = pot_values[pot_val_count];
+ 515              		.loc 1 145 6 is_stmt 1 view .LVU107
+ 145:Src/sd.c      **** 					val_pot[i] = pot_values[pot_val_count];
+ 516              		.loc 1 145 17 is_stmt 0 view .LVU108
+ 517 022e 03A9     		add	r1, sp, #12
+ 518 0230 CA54     		strb	r2, [r1, r3]
+ 146:Src/sd.c      **** 					pot_val_count++;
+ 519              		.loc 1 146 6 is_stmt 1 view .LVU109
+ 146:Src/sd.c      **** 					pot_val_count++;
+ 520              		.loc 1 146 19 is_stmt 0 view .LVU110
+ 521 0232 0134     		adds	r4, r4, #1
+ 522              	.LVL49:
+ 523              	.L13:
+ 138:Src/sd.c      **** 			for(int i=0; i<5 ; i++){
+ 524              		.loc 1 138 23 is_stmt 1 discriminator 2 view .LVU111
+ 138:Src/sd.c      **** 			for(int i=0; i<5 ; i++){
+ 525              		.loc 1 138 24 is_stmt 0 discriminator 2 view .LVU112
+ 526 0234 0133     		adds	r3, r3, #1
+ 527              	.LVL50:
+ 528              	.L11:
+ 138:Src/sd.c      **** 			for(int i=0; i<5 ; i++){
+ 529              		.loc 1 138 17 is_stmt 1 discriminator 1 view .LVU113
+ 138:Src/sd.c      **** 			for(int i=0; i<5 ; i++){
+ 530              		.loc 1 138 4 is_stmt 0 discriminator 1 view .LVU114
+ 531 0236 042B     		cmp	r3, #4
+ 532 0238 09DC     		bgt	.L36
+ 139:Src/sd.c      **** 				if(pot_values[pot_val_count] == ' '){ // check if the number isn't finished
+ 533              		.loc 1 139 5 is_stmt 1 view .LVU115
+ 139:Src/sd.c      **** 				if(pot_values[pot_val_count] == ' '){ // check if the number isn't finished
+ 534              		.loc 1 139 18 is_stmt 0 view .LVU116
+ 535 023a 05AA     		add	r2, sp, #20
+ 536 023c 125D     		ldrb	r2, [r2, r4]	@ zero_extendqisi2
+ 139:Src/sd.c      **** 				if(pot_values[pot_val_count] == ' '){ // check if the number isn't finished
+ 537              		.loc 1 139 7 view .LVU117
+ 538 023e 202A     		cmp	r2, #32
+ 539 0240 F5D1     		bne	.L12
+ 140:Src/sd.c      **** 					val_pot[i] = '\0';
+ 540              		.loc 1 140 6 is_stmt 1 view .LVU118
+ 140:Src/sd.c      **** 					val_pot[i] = '\0';
+ 541              		.loc 1 140 17 is_stmt 0 view .LVU119
+ 542 0242 03AA     		add	r2, sp, #12
+ 543 0244 0021     		movs	r1, #0
+ 544 0246 D154     		strb	r1, [r2, r3]
+ 141:Src/sd.c      **** 					i = 5; // set exit condition
+ 545              		.loc 1 141 6 is_stmt 1 view .LVU120
+ARM GAS  /tmp/cc4dYJCl.s 			page 17
 
 
- 538              	.L19:
- 539              		.align	2
- 540              	.L18:
- 541 026c 00000000 		.word	SDPath
- 542 0270 00000000 		.word	SDFatFS
- 543 0274 00000000 		.word	res_mount
- 544 0278 00000000 		.word	.LANCHOR3
- 545 027c 00000000 		.word	.LANCHOR0
- 546 0280 00000000 		.word	log_names_f
- 547 0284 00000000 		.word	res_open
- 548 0288 00000000 		.word	huart3
- 549 028c 00000000 		.word	.LC0
- 550 0290 00000000 		.word	txt
- 551 0294 14000000 		.word	.LC1
- 552 0298 00000000 		.word	bytes_read
- 553 029c 00000000 		.word	log_names
- 554 02a0 00000000 		.word	filename_log
- 555 02a4 34000000 		.word	.LC3
- 556 02a8 00000000 		.word	loggingFile
- 557 02ac 40000000 		.word	.LC4
- 558 02b0 00000000 		.word	.LANCHOR2
- 559 02b4 B8000000 		.word	.LC12
- 560 02b8 00000000 		.word	.LANCHOR4
- 561 02bc 00000000 		.word	pot_values_f
- 562 02c0 C8000000 		.word	.LC13
- 563 02c4 00000000 		.word	.LANCHOR1
- 564 02c8 2C000000 		.word	.LC2
- 565 02cc 00000000 		.word	pointer
- 566 02d0 5C000000 		.word	.LC5
- 567 02d4 00000000 		.word	byteswritten
- 568 02d8 68000000 		.word	.LC6
- 569 02dc 74000000 		.word	.LC7
- 570 02e0 8C000000 		.word	.LC8
- 571 02e4 98000000 		.word	.LC9
- 572 02e8 A4000000 		.word	.LC10
- 573 02ec B4000000 		.word	.LC11
- 574 02f0 DC000000 		.word	.LC14
- 575 02f4 F0000000 		.word	.LC15
- 576              	.LBE6:
- 577              	.LBE7:
- 578              		.cfi_endproc
- 579              	.LFE144:
- 581              		.global	successfull_opening
- 582              		.global	pot_values_loaded
- 583              		.comm	log_names,1100,4
- 584              		.comm	pointer,4,4
- 585              		.comm	bytes_read,4,4
- 586              		.global	msg_index
- 587              		.global	msg_counter
- 588              		.global	mount_ok
- 589              		.comm	byteswritten,4,4
- 590              		.global	max_files
- 591              		.comm	txt,2000,4
- 592              		.global	filename_pot
- 593              		.comm	filename_log,50,4
- 594              		.global	name_txt
- 595              		.comm	message,256,4
-ARM GAS  /tmp/ccXjbAY9.s 			page 17
+ 546              	.LVL51:
+ 142:Src/sd.c      **** 					pot_val_count++;
+ 547              		.loc 1 142 6 view .LVU121
+ 142:Src/sd.c      **** 					pot_val_count++;
+ 548              		.loc 1 142 19 is_stmt 0 view .LVU122
+ 549 0248 0134     		adds	r4, r4, #1
+ 550              	.LVL52:
+ 141:Src/sd.c      **** 					i = 5; // set exit condition
+ 551              		.loc 1 141 8 view .LVU123
+ 552 024a 0523     		movs	r3, #5
+ 553 024c F2E7     		b	.L13
+ 554              	.LVL53:
+ 555              	.L36:
+ 141:Src/sd.c      **** 					i = 5; // set exit condition
+ 556              		.loc 1 141 8 view .LVU124
+ 557              	.LBE7:
+ 149:Src/sd.c      **** 			pot1_max = atoi(val_pot);
+ 558              		.loc 1 149 4 is_stmt 1 view .LVU125
+ 149:Src/sd.c      **** 			pot1_max = atoi(val_pot);
+ 559              		.loc 1 149 15 is_stmt 0 view .LVU126
+ 560 024e 03A8     		add	r0, sp, #12
+ 561 0250 FFF7FEFF 		bl	atoi
+ 562              	.LVL54:
+ 149:Src/sd.c      **** 			pot1_max = atoi(val_pot);
+ 563              		.loc 1 149 13 view .LVU127
+ 564 0254 424B     		ldr	r3, .L40+136
+ 565 0256 1860     		str	r0, [r3]
+ 150:Src/sd.c      **** 			for(int i=0 ; i<5 ; i++){
+ 566              		.loc 1 150 4 is_stmt 1 view .LVU128
+ 567              	.LBB8:
+ 150:Src/sd.c      **** 			for(int i=0 ; i<5 ; i++){
+ 568              		.loc 1 150 8 view .LVU129
+ 569              	.LVL55:
+ 150:Src/sd.c      **** 			for(int i=0 ; i<5 ; i++){
+ 570              		.loc 1 150 12 is_stmt 0 view .LVU130
+ 571 0258 0023     		movs	r3, #0
+ 150:Src/sd.c      **** 			for(int i=0 ; i<5 ; i++){
+ 572              		.loc 1 150 4 view .LVU131
+ 573 025a 03E0     		b	.L15
+ 574              	.LVL56:
+ 575              	.L16:
+ 156:Src/sd.c      **** 					val_pot[i] = pot_values[pot_val_count];
+ 576              		.loc 1 156 6 is_stmt 1 view .LVU132
+ 156:Src/sd.c      **** 					val_pot[i] = pot_values[pot_val_count];
+ 577              		.loc 1 156 17 is_stmt 0 view .LVU133
+ 578 025c 03A9     		add	r1, sp, #12
+ 579 025e CA54     		strb	r2, [r1, r3]
+ 157:Src/sd.c      **** 					pot_val_count++;
+ 580              		.loc 1 157 6 is_stmt 1 view .LVU134
+ 157:Src/sd.c      **** 					pot_val_count++;
+ 581              		.loc 1 157 19 is_stmt 0 view .LVU135
+ 582 0260 0134     		adds	r4, r4, #1
+ 583              	.LVL57:
+ 584              	.L17:
+ 150:Src/sd.c      **** 			for(int i=0 ; i<5 ; i++){
+ 585              		.loc 1 150 24 is_stmt 1 discriminator 2 view .LVU136
+ 150:Src/sd.c      **** 			for(int i=0 ; i<5 ; i++){
+ARM GAS  /tmp/cc4dYJCl.s 			page 18
 
 
- 596              		.comm	log_names_f,560,4
- 597              		.comm	pot_values_f,560,4
- 598              		.comm	loggingFile,560,4
- 599              		.comm	res_mount,1,1
- 600              		.comm	res_open,1,1
- 601              		.section	.bss.mount_ok,"aw",%nobits
- 602              		.align	2
- 603              		.set	.LANCHOR3,. + 0
- 606              	mount_ok:
- 607 0000 00000000 		.space	4
- 608              		.section	.bss.msg_counter,"aw",%nobits
- 609              		.align	2
- 612              	msg_counter:
- 613 0000 00000000 		.space	4
- 614              		.section	.bss.msg_index,"aw",%nobits
- 615              		.align	2
- 618              	msg_index:
- 619 0000 00000000 		.space	4
- 620              		.section	.bss.pot_values_loaded,"aw",%nobits
- 623              	pot_values_loaded:
- 624 0000 00       		.space	1
- 625              		.section	.bss.successfull_opening,"aw",%nobits
- 626              		.align	2
- 627              		.set	.LANCHOR2,. + 0
- 630              	successfull_opening:
- 631 0000 00000000 		.space	4
- 632              		.section	.data.filename_pot,"aw"
- 633              		.align	2
- 634              		.set	.LANCHOR4,. + 0
- 637              	filename_pot:
- 638 0000 706F7456 		.ascii	"potV.txt\000"
- 638      2E747874 
- 638      00
- 639              		.section	.data.max_files,"aw"
- 640              		.align	2
- 641              		.set	.LANCHOR1,. + 0
- 644              	max_files:
- 645 0000 64000000 		.word	100
- 646              		.section	.data.name_txt,"aw"
- 647              		.align	2
- 648              		.set	.LANCHOR0,. + 0
- 651              	name_txt:
- 652 0000 6E616D65 		.ascii	"name.txt\000"
- 652      2E747874 
- 652      00
- 653              		.text
- 654              	.Letext0:
- 655              		.file 2 "Drivers/CMSIS/Device/ST/STM32F7xx/Include/stm32f767xx.h"
- 656              		.file 3 "/usr/arm-none-eabi/include/machine/_default_types.h"
- 657              		.file 4 "/usr/arm-none-eabi/include/sys/_stdint.h"
- 658              		.file 5 "Drivers/CMSIS/Include/core_cm7.h"
- 659              		.file 6 "Drivers/CMSIS/Device/ST/STM32F7xx/Include/system_stm32f7xx.h"
- 660              		.file 7 "Drivers/CMSIS/Device/ST/STM32F7xx/Include/stm32f7xx.h"
- 661              		.file 8 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_def.h"
- 662              		.file 9 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_dma.h"
- 663              		.file 10 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_can.h"
- 664              		.file 11 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart.h"
-ARM GAS  /tmp/ccXjbAY9.s 			page 18
+ 586              		.loc 1 150 25 is_stmt 0 discriminator 2 view .LVU137
+ 587 0262 0133     		adds	r3, r3, #1
+ 588              	.LVL58:
+ 589              	.L15:
+ 150:Src/sd.c      **** 			for(int i=0 ; i<5 ; i++){
+ 590              		.loc 1 150 18 is_stmt 1 discriminator 1 view .LVU138
+ 150:Src/sd.c      **** 			for(int i=0 ; i<5 ; i++){
+ 591              		.loc 1 150 4 is_stmt 0 discriminator 1 view .LVU139
+ 592 0264 042B     		cmp	r3, #4
+ 593 0266 09DC     		bgt	.L37
+ 151:Src/sd.c      **** 				if(pot_values[pot_val_count] == ' '){ // check if the number isn't finished
+ 594              		.loc 1 151 5 is_stmt 1 view .LVU140
+ 151:Src/sd.c      **** 				if(pot_values[pot_val_count] == ' '){ // check if the number isn't finished
+ 595              		.loc 1 151 18 is_stmt 0 view .LVU141
+ 596 0268 05AA     		add	r2, sp, #20
+ 597 026a 125D     		ldrb	r2, [r2, r4]	@ zero_extendqisi2
+ 151:Src/sd.c      **** 				if(pot_values[pot_val_count] == ' '){ // check if the number isn't finished
+ 598              		.loc 1 151 7 view .LVU142
+ 599 026c 202A     		cmp	r2, #32
+ 600 026e F5D1     		bne	.L16
+ 152:Src/sd.c      **** 					val_pot[i] = '\0';
+ 601              		.loc 1 152 6 is_stmt 1 view .LVU143
+ 152:Src/sd.c      **** 					val_pot[i] = '\0';
+ 602              		.loc 1 152 17 is_stmt 0 view .LVU144
+ 603 0270 03AA     		add	r2, sp, #12
+ 604 0272 0021     		movs	r1, #0
+ 605 0274 D154     		strb	r1, [r2, r3]
+ 153:Src/sd.c      **** 					i = 5; // set exit condition
+ 606              		.loc 1 153 6 is_stmt 1 view .LVU145
+ 607              	.LVL59:
+ 154:Src/sd.c      **** 					pot_val_count++;
+ 608              		.loc 1 154 6 view .LVU146
+ 154:Src/sd.c      **** 					pot_val_count++;
+ 609              		.loc 1 154 19 is_stmt 0 view .LVU147
+ 610 0276 0134     		adds	r4, r4, #1
+ 611              	.LVL60:
+ 153:Src/sd.c      **** 					i = 5; // set exit condition
+ 612              		.loc 1 153 8 view .LVU148
+ 613 0278 0523     		movs	r3, #5
+ 614 027a F2E7     		b	.L17
+ 615              	.LVL61:
+ 616              	.L37:
+ 153:Src/sd.c      **** 					i = 5; // set exit condition
+ 617              		.loc 1 153 8 view .LVU149
+ 618              	.LBE8:
+ 160:Src/sd.c      **** 			pot1_min = atoi(val_pot);
+ 619              		.loc 1 160 4 is_stmt 1 view .LVU150
+ 160:Src/sd.c      **** 			pot1_min = atoi(val_pot);
+ 620              		.loc 1 160 15 is_stmt 0 view .LVU151
+ 621 027c 03A8     		add	r0, sp, #12
+ 622 027e FFF7FEFF 		bl	atoi
+ 623              	.LVL62:
+ 160:Src/sd.c      **** 			pot1_min = atoi(val_pot);
+ 624              		.loc 1 160 13 view .LVU152
+ 625 0282 384B     		ldr	r3, .L40+140
+ 626 0284 1860     		str	r0, [r3]
+ 161:Src/sd.c      **** 			for(int i=0 ; i<5 ; i++){
+ARM GAS  /tmp/cc4dYJCl.s 			page 19
 
 
- 665              		.file 12 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal.h"
- 666              		.file 13 "Inc/can.h"
- 667              		.file 14 "Middlewares/Third_Party/FatFs/src/integer.h"
- 668              		.file 15 "/usr/arm-none-eabi/include/sys/lock.h"
- 669              		.file 16 "/usr/arm-none-eabi/include/sys/_types.h"
- 670              		.file 17 "/usr/lib/gcc/arm-none-eabi/9.2.0/include/stddef.h"
- 671              		.file 18 "/usr/arm-none-eabi/include/sys/reent.h"
- 672              		.file 19 "/usr/arm-none-eabi/include/stdlib.h"
- 673              		.file 20 "Middlewares/Third_Party/FatFs/src/ff.h"
- 674              		.file 21 "Middlewares/Third_Party/FatFs/src/diskio.h"
- 675              		.file 22 "Middlewares/Third_Party/FatFs/src/ff_gen_drv.h"
- 676              		.file 23 "Inc/sd_diskio.h"
- 677              		.file 24 "Inc/fatfs.h"
- 678              		.file 25 "Inc/global_variables.h"
- 679              		.file 26 "/usr/arm-none-eabi/include/stdio.h"
- 680              		.file 27 "/usr/arm-none-eabi/include/string.h"
-ARM GAS  /tmp/ccXjbAY9.s 			page 19
+ 627              		.loc 1 161 4 is_stmt 1 view .LVU153
+ 628              	.LBB9:
+ 161:Src/sd.c      **** 			for(int i=0 ; i<5 ; i++){
+ 629              		.loc 1 161 8 view .LVU154
+ 630              	.LVL63:
+ 161:Src/sd.c      **** 			for(int i=0 ; i<5 ; i++){
+ 631              		.loc 1 161 12 is_stmt 0 view .LVU155
+ 632 0286 0023     		movs	r3, #0
+ 161:Src/sd.c      **** 			for(int i=0 ; i<5 ; i++){
+ 633              		.loc 1 161 4 view .LVU156
+ 634 0288 03E0     		b	.L19
+ 635              	.LVL64:
+ 636              	.L20:
+ 167:Src/sd.c      **** 					val_pot[i] = pot_values[pot_val_count];
+ 637              		.loc 1 167 6 is_stmt 1 view .LVU157
+ 167:Src/sd.c      **** 					val_pot[i] = pot_values[pot_val_count];
+ 638              		.loc 1 167 17 is_stmt 0 view .LVU158
+ 639 028a 03A9     		add	r1, sp, #12
+ 640 028c CA54     		strb	r2, [r1, r3]
+ 168:Src/sd.c      **** 					pot_val_count++;
+ 641              		.loc 1 168 6 is_stmt 1 view .LVU159
+ 168:Src/sd.c      **** 					pot_val_count++;
+ 642              		.loc 1 168 19 is_stmt 0 view .LVU160
+ 643 028e 0134     		adds	r4, r4, #1
+ 644              	.LVL65:
+ 645              	.L21:
+ 161:Src/sd.c      **** 			for(int i=0 ; i<5 ; i++){
+ 646              		.loc 1 161 24 is_stmt 1 discriminator 2 view .LVU161
+ 161:Src/sd.c      **** 			for(int i=0 ; i<5 ; i++){
+ 647              		.loc 1 161 25 is_stmt 0 discriminator 2 view .LVU162
+ 648 0290 0133     		adds	r3, r3, #1
+ 649              	.LVL66:
+ 650              	.L19:
+ 161:Src/sd.c      **** 			for(int i=0 ; i<5 ; i++){
+ 651              		.loc 1 161 18 is_stmt 1 discriminator 1 view .LVU163
+ 161:Src/sd.c      **** 			for(int i=0 ; i<5 ; i++){
+ 652              		.loc 1 161 4 is_stmt 0 discriminator 1 view .LVU164
+ 653 0292 042B     		cmp	r3, #4
+ 654 0294 09DC     		bgt	.L38
+ 162:Src/sd.c      **** 				if(pot_values[pot_val_count] == ' '){ // check if the number isn't finished
+ 655              		.loc 1 162 5 is_stmt 1 view .LVU165
+ 162:Src/sd.c      **** 				if(pot_values[pot_val_count] == ' '){ // check if the number isn't finished
+ 656              		.loc 1 162 18 is_stmt 0 view .LVU166
+ 657 0296 05AA     		add	r2, sp, #20
+ 658 0298 125D     		ldrb	r2, [r2, r4]	@ zero_extendqisi2
+ 162:Src/sd.c      **** 				if(pot_values[pot_val_count] == ' '){ // check if the number isn't finished
+ 659              		.loc 1 162 7 view .LVU167
+ 660 029a 202A     		cmp	r2, #32
+ 661 029c F5D1     		bne	.L20
+ 163:Src/sd.c      **** 					val_pot[i] = '\0';
+ 662              		.loc 1 163 6 is_stmt 1 view .LVU168
+ 163:Src/sd.c      **** 					val_pot[i] = '\0';
+ 663              		.loc 1 163 17 is_stmt 0 view .LVU169
+ 664 029e 03AA     		add	r2, sp, #12
+ 665 02a0 0021     		movs	r1, #0
+ 666 02a2 D154     		strb	r1, [r2, r3]
+ 164:Src/sd.c      **** 					i = 5; // set exit condition
+ARM GAS  /tmp/cc4dYJCl.s 			page 20
+
+
+ 667              		.loc 1 164 6 is_stmt 1 view .LVU170
+ 668              	.LVL67:
+ 165:Src/sd.c      **** 					pot_val_count++;
+ 669              		.loc 1 165 6 view .LVU171
+ 165:Src/sd.c      **** 					pot_val_count++;
+ 670              		.loc 1 165 19 is_stmt 0 view .LVU172
+ 671 02a4 0134     		adds	r4, r4, #1
+ 672              	.LVL68:
+ 164:Src/sd.c      **** 					i = 5; // set exit condition
+ 673              		.loc 1 164 8 view .LVU173
+ 674 02a6 0523     		movs	r3, #5
+ 675 02a8 F2E7     		b	.L21
+ 676              	.LVL69:
+ 677              	.L38:
+ 164:Src/sd.c      **** 					i = 5; // set exit condition
+ 678              		.loc 1 164 8 view .LVU174
+ 679              	.LBE9:
+ 171:Src/sd.c      **** 			pot2_max = atoi(val_pot);
+ 680              		.loc 1 171 4 is_stmt 1 view .LVU175
+ 171:Src/sd.c      **** 			pot2_max = atoi(val_pot);
+ 681              		.loc 1 171 15 is_stmt 0 view .LVU176
+ 682 02aa 03A8     		add	r0, sp, #12
+ 683 02ac FFF7FEFF 		bl	atoi
+ 684              	.LVL70:
+ 171:Src/sd.c      **** 			pot2_max = atoi(val_pot);
+ 685              		.loc 1 171 13 view .LVU177
+ 686 02b0 2D4B     		ldr	r3, .L40+144
+ 687 02b2 1860     		str	r0, [r3]
+ 172:Src/sd.c      **** 			for(int i=0 ; i<5 ; i++){
+ 688              		.loc 1 172 4 is_stmt 1 view .LVU178
+ 689              	.LBB10:
+ 172:Src/sd.c      **** 			for(int i=0 ; i<5 ; i++){
+ 690              		.loc 1 172 8 view .LVU179
+ 691              	.LVL71:
+ 172:Src/sd.c      **** 			for(int i=0 ; i<5 ; i++){
+ 692              		.loc 1 172 12 is_stmt 0 view .LVU180
+ 693 02b4 0023     		movs	r3, #0
+ 172:Src/sd.c      **** 			for(int i=0 ; i<5 ; i++){
+ 694              		.loc 1 172 4 view .LVU181
+ 695 02b6 03E0     		b	.L23
+ 696              	.LVL72:
+ 697              	.L24:
+ 178:Src/sd.c      **** 					val_pot[i] = pot_values[pot_val_count];
+ 698              		.loc 1 178 6 is_stmt 1 view .LVU182
+ 178:Src/sd.c      **** 					val_pot[i] = pot_values[pot_val_count];
+ 699              		.loc 1 178 17 is_stmt 0 view .LVU183
+ 700 02b8 03A9     		add	r1, sp, #12
+ 701 02ba CA54     		strb	r2, [r1, r3]
+ 179:Src/sd.c      **** 					pot_val_count++;
+ 702              		.loc 1 179 6 is_stmt 1 view .LVU184
+ 179:Src/sd.c      **** 					pot_val_count++;
+ 703              		.loc 1 179 19 is_stmt 0 view .LVU185
+ 704 02bc 0134     		adds	r4, r4, #1
+ 705              	.LVL73:
+ 706              	.L25:
+ 172:Src/sd.c      **** 			for(int i=0 ; i<5 ; i++){
+ 707              		.loc 1 172 24 is_stmt 1 discriminator 2 view .LVU186
+ARM GAS  /tmp/cc4dYJCl.s 			page 21
+
+
+ 172:Src/sd.c      **** 			for(int i=0 ; i<5 ; i++){
+ 708              		.loc 1 172 25 is_stmt 0 discriminator 2 view .LVU187
+ 709 02be 0133     		adds	r3, r3, #1
+ 710              	.LVL74:
+ 711              	.L23:
+ 172:Src/sd.c      **** 			for(int i=0 ; i<5 ; i++){
+ 712              		.loc 1 172 18 is_stmt 1 discriminator 1 view .LVU188
+ 172:Src/sd.c      **** 			for(int i=0 ; i<5 ; i++){
+ 713              		.loc 1 172 4 is_stmt 0 discriminator 1 view .LVU189
+ 714 02c0 042B     		cmp	r3, #4
+ 715 02c2 53DC     		bgt	.L39
+ 173:Src/sd.c      **** 				if(pot_values[pot_val_count] == ' '){ // check if the number isn't finished
+ 716              		.loc 1 173 5 is_stmt 1 view .LVU190
+ 173:Src/sd.c      **** 				if(pot_values[pot_val_count] == ' '){ // check if the number isn't finished
+ 717              		.loc 1 173 18 is_stmt 0 view .LVU191
+ 718 02c4 05AA     		add	r2, sp, #20
+ 719 02c6 125D     		ldrb	r2, [r2, r4]	@ zero_extendqisi2
+ 173:Src/sd.c      **** 				if(pot_values[pot_val_count] == ' '){ // check if the number isn't finished
+ 720              		.loc 1 173 7 view .LVU192
+ 721 02c8 202A     		cmp	r2, #32
+ 722 02ca F5D1     		bne	.L24
+ 174:Src/sd.c      **** 					val_pot[i] = '\0';
+ 723              		.loc 1 174 6 is_stmt 1 view .LVU193
+ 174:Src/sd.c      **** 					val_pot[i] = '\0';
+ 724              		.loc 1 174 17 is_stmt 0 view .LVU194
+ 725 02cc 03AA     		add	r2, sp, #12
+ 726 02ce 0021     		movs	r1, #0
+ 727 02d0 D154     		strb	r1, [r2, r3]
+ 175:Src/sd.c      **** 					i = 5; // set exit condition
+ 728              		.loc 1 175 6 is_stmt 1 view .LVU195
+ 729              	.LVL75:
+ 176:Src/sd.c      **** 					pot_val_count++;
+ 730              		.loc 1 176 6 view .LVU196
+ 176:Src/sd.c      **** 					pot_val_count++;
+ 731              		.loc 1 176 19 is_stmt 0 view .LVU197
+ 732 02d2 0134     		adds	r4, r4, #1
+ 733              	.LVL76:
+ 175:Src/sd.c      **** 					i = 5; // set exit condition
+ 734              		.loc 1 175 8 view .LVU198
+ 735 02d4 0523     		movs	r3, #5
+ 736 02d6 F2E7     		b	.L25
+ 737              	.L41:
+ 738              		.align	2
+ 739              	.L40:
+ 740 02d8 00000000 		.word	SDPath
+ 741 02dc 00000000 		.word	SDFatFS
+ 742 02e0 00000000 		.word	res_mount
+ 743 02e4 00000000 		.word	.LANCHOR3
+ 744 02e8 00000000 		.word	.LANCHOR0
+ 745 02ec 00000000 		.word	log_names_f
+ 746 02f0 00000000 		.word	res_open
+ 747 02f4 00000000 		.word	huart3
+ 748 02f8 00000000 		.word	.LC0
+ 749 02fc 00000000 		.word	txt
+ 750 0300 14000000 		.word	.LC1
+ 751 0304 00000000 		.word	bytes_read
+ 752 0308 00000000 		.word	log_names
+ARM GAS  /tmp/cc4dYJCl.s 			page 22
+
+
+ 753 030c 00000000 		.word	filename_log
+ 754 0310 34000000 		.word	.LC3
+ 755 0314 00000000 		.word	loggingFile
+ 756 0318 40000000 		.word	.LC4
+ 757 031c 00000000 		.word	.LANCHOR2
+ 758 0320 B8000000 		.word	.LC12
+ 759 0324 00000000 		.word	.LANCHOR4
+ 760 0328 00000000 		.word	pot_values_f
+ 761 032c C8000000 		.word	.LC13
+ 762 0330 00000000 		.word	.LANCHOR1
+ 763 0334 2C000000 		.word	.LC2
+ 764 0338 00000000 		.word	pointer
+ 765 033c 5C000000 		.word	.LC5
+ 766 0340 00000000 		.word	byteswritten
+ 767 0344 68000000 		.word	.LC6
+ 768 0348 74000000 		.word	.LC7
+ 769 034c 8C000000 		.word	.LC8
+ 770 0350 98000000 		.word	.LC9
+ 771 0354 A4000000 		.word	.LC10
+ 772 0358 B4000000 		.word	.LC11
+ 773 035c DC000000 		.word	.LC14
+ 774 0360 00000000 		.word	pot1_max
+ 775 0364 00000000 		.word	pot1_min
+ 776 0368 00000000 		.word	pot2_max
+ 777              	.LVL77:
+ 778              	.L39:
+ 175:Src/sd.c      **** 					i = 5; // set exit condition
+ 779              		.loc 1 175 8 view .LVU199
+ 780              	.LBE10:
+ 182:Src/sd.c      **** 			pot2_min = atoi(val_pot);
+ 781              		.loc 1 182 4 is_stmt 1 view .LVU200
+ 182:Src/sd.c      **** 			pot2_min = atoi(val_pot);
+ 782              		.loc 1 182 15 is_stmt 0 view .LVU201
+ 783 036c 03A8     		add	r0, sp, #12
+ 784 036e FFF7FEFF 		bl	atoi
+ 785              	.LVL78:
+ 182:Src/sd.c      **** 			pot2_min = atoi(val_pot);
+ 786              		.loc 1 182 13 view .LVU202
+ 787 0372 284B     		ldr	r3, .L42
+ 788 0374 1860     		str	r0, [r3]
+ 183:Src/sd.c      **** 			sprintf(txt, "max1 %ld, min1 %ld, max2 %ld, min2 %ld\r\n", pot1_max, pot1_min, pot2_max, pot2_mi
+ 789              		.loc 1 183 4 is_stmt 1 view .LVU203
+ 790 0376 284C     		ldr	r4, .L42+4
+ 791              	.LVL79:
+ 183:Src/sd.c      **** 			sprintf(txt, "max1 %ld, min1 %ld, max2 %ld, min2 %ld\r\n", pot1_max, pot1_min, pot2_max, pot2_mi
+ 792              		.loc 1 183 4 is_stmt 0 view .LVU204
+ 793 0378 0190     		str	r0, [sp, #4]
+ 794 037a 284B     		ldr	r3, .L42+8
+ 795 037c 1B68     		ldr	r3, [r3]
+ 796 037e 0093     		str	r3, [sp]
+ 797 0380 274B     		ldr	r3, .L42+12
+ 798 0382 1B68     		ldr	r3, [r3]
+ 799 0384 274A     		ldr	r2, .L42+16
+ 800 0386 1268     		ldr	r2, [r2]
+ 801 0388 2749     		ldr	r1, .L42+20
+ 802 038a 2046     		mov	r0, r4
+ 803 038c FFF7FEFF 		bl	sprintf
+ARM GAS  /tmp/cc4dYJCl.s 			page 23
+
+
+ 804              	.LVL80:
+ 184:Src/sd.c      **** 			HAL_UART_Transmit(&huart3,(uint8_t*)txt, strlen(txt),10);
+ 805              		.loc 1 184 4 is_stmt 1 view .LVU205
+ 184:Src/sd.c      **** 			HAL_UART_Transmit(&huart3,(uint8_t*)txt, strlen(txt),10);
+ 806              		.loc 1 184 45 is_stmt 0 view .LVU206
+ 807 0390 2046     		mov	r0, r4
+ 808 0392 FFF7FEFF 		bl	strlen
+ 809              	.LVL81:
+ 184:Src/sd.c      **** 			HAL_UART_Transmit(&huart3,(uint8_t*)txt, strlen(txt),10);
+ 810              		.loc 1 184 4 view .LVU207
+ 811 0396 0A23     		movs	r3, #10
+ 812 0398 82B2     		uxth	r2, r0
+ 813 039a 2146     		mov	r1, r4
+ 814 039c 2348     		ldr	r0, .L42+24
+ 815 039e FFF7FEFF 		bl	HAL_UART_Transmit
+ 816              	.LVL82:
+ 185:Src/sd.c      **** 			pot_values_loaded = 1;
+ 817              		.loc 1 185 4 is_stmt 1 view .LVU208
+ 185:Src/sd.c      **** 			pot_values_loaded = 1;
+ 818              		.loc 1 185 22 is_stmt 0 view .LVU209
+ 819 03a2 234B     		ldr	r3, .L42+28
+ 820 03a4 0122     		movs	r2, #1
+ 821 03a6 1A70     		strb	r2, [r3]
+ 822              	.LBE6:
+ 823 03a8 AAE6     		b	.L27
+ 824              	.L33:
+ 188:Src/sd.c      **** 			res_open = f_open(&pot_values_f, (TCHAR const*)&filename_pot, FA_CREATE_NEW | FA_WRITE );
+ 825              		.loc 1 188 4 is_stmt 1 view .LVU210
+ 188:Src/sd.c      **** 			res_open = f_open(&pot_values_f, (TCHAR const*)&filename_pot, FA_CREATE_NEW | FA_WRITE );
+ 826              		.loc 1 188 15 is_stmt 0 view .LVU211
+ 827 03aa 0622     		movs	r2, #6
+ 828 03ac 2149     		ldr	r1, .L42+32
+ 829 03ae 2248     		ldr	r0, .L42+36
+ 830 03b0 FFF7FEFF 		bl	f_open
+ 831              	.LVL83:
+ 832 03b4 0246     		mov	r2, r0
+ 188:Src/sd.c      **** 			res_open = f_open(&pot_values_f, (TCHAR const*)&filename_pot, FA_CREATE_NEW | FA_WRITE );
+ 833              		.loc 1 188 13 view .LVU212
+ 834 03b6 214D     		ldr	r5, .L42+40
+ 835 03b8 2870     		strb	r0, [r5]
+ 189:Src/sd.c      **** 			sprintf(txt, "POT FILE VAL2: %d\r\n",(int)res_open);
+ 836              		.loc 1 189 4 is_stmt 1 view .LVU213
+ 837 03ba 174C     		ldr	r4, .L42+4
+ 838 03bc 2049     		ldr	r1, .L42+44
+ 839 03be 2046     		mov	r0, r4
+ 840 03c0 FFF7FEFF 		bl	sprintf
+ 841              	.LVL84:
+ 190:Src/sd.c      **** 			HAL_UART_Transmit(&huart3,(uint8_t*)txt,strlen(txt),100);
+ 842              		.loc 1 190 4 view .LVU214
+ 190:Src/sd.c      **** 			HAL_UART_Transmit(&huart3,(uint8_t*)txt,strlen(txt),100);
+ 843              		.loc 1 190 44 is_stmt 0 view .LVU215
+ 844 03c4 2046     		mov	r0, r4
+ 845 03c6 FFF7FEFF 		bl	strlen
+ 846              	.LVL85:
+ 190:Src/sd.c      **** 			HAL_UART_Transmit(&huart3,(uint8_t*)txt,strlen(txt),100);
+ 847              		.loc 1 190 4 view .LVU216
+ 848 03ca 6423     		movs	r3, #100
+ARM GAS  /tmp/cc4dYJCl.s 			page 24
+
+
+ 849 03cc 82B2     		uxth	r2, r0
+ 850 03ce 2146     		mov	r1, r4
+ 851 03d0 1648     		ldr	r0, .L42+24
+ 852 03d2 FFF7FEFF 		bl	HAL_UART_Transmit
+ 853              	.LVL86:
+ 191:Src/sd.c      **** 			if(res_open == FR_OK){
+ 854              		.loc 1 191 4 is_stmt 1 view .LVU217
+ 191:Src/sd.c      **** 			if(res_open == FR_OK){
+ 855              		.loc 1 191 16 is_stmt 0 view .LVU218
+ 856 03d6 2B78     		ldrb	r3, [r5]	@ zero_extendqisi2
+ 191:Src/sd.c      **** 			if(res_open == FR_OK){
+ 857              		.loc 1 191 6 view .LVU219
+ 858 03d8 002B     		cmp	r3, #0
+ 859 03da 7FF491AE 		bne	.L27
+ 860              	.LBB11:
+ 193:Src/sd.c      **** 				char local_txt[] = "0000\r\n4096\r\n0000\r\n4096";
+ 861              		.loc 1 193 5 is_stmt 1 discriminator 2 view .LVU220
+ 193:Src/sd.c      **** 				char local_txt[] = "0000\r\n4096\r\n0000\r\n4096";
+ 862              		.loc 1 193 10 is_stmt 0 discriminator 2 view .LVU221
+ 863 03de 05AC     		add	r4, sp, #20
+ 864 03e0 184D     		ldr	r5, .L42+48
+ 865 03e2 0FCD     		ldmia	r5!, {r0, r1, r2, r3}
+ 866 03e4 0FC4     		stmia	r4!, {r0, r1, r2, r3}
+ 867 03e6 95E80300 		ldm	r5, {r0, r1}
+ 868 03ea 44F8040B 		str	r0, [r4], #4
+ 869 03ee 24F8021B 		strh	r1, [r4], #2	@ movhi
+ 870 03f2 090C     		lsrs	r1, r1, #16
+ 871 03f4 2170     		strb	r1, [r4]
+ 194:Src/sd.c      **** 				f_write(&pot_values_f,(TCHAR const*)&local_txt,strlen(local_txt), &byteswritten);
+ 872              		.loc 1 194 5 is_stmt 1 discriminator 2 view .LVU222
+ 873 03f6 05A8     		add	r0, sp, #20
+ 874 03f8 FFF7FEFF 		bl	strlen
+ 875              	.LVL87:
+ 876 03fc 0246     		mov	r2, r0
+ 877 03fe 0E4C     		ldr	r4, .L42+36
+ 878 0400 114B     		ldr	r3, .L42+52
+ 879 0402 05A9     		add	r1, sp, #20
+ 880 0404 2046     		mov	r0, r4
+ 881 0406 FFF7FEFF 		bl	f_write
+ 882              	.LVL88:
+ 195:Src/sd.c      **** 				f_close(&pot_values_f);
+ 883              		.loc 1 195 5 discriminator 2 view .LVU223
+ 884 040a 2046     		mov	r0, r4
+ 885 040c FFF7FEFF 		bl	f_close
+ 886              	.LVL89:
+ 887 0410 76E6     		b	.L27
+ 888              	.L43:
+ 889 0412 00BF     		.align	2
+ 890              	.L42:
+ 891 0414 00000000 		.word	pot2_min
+ 892 0418 00000000 		.word	txt
+ 893 041c 00000000 		.word	pot2_max
+ 894 0420 00000000 		.word	pot1_min
+ 895 0424 00000000 		.word	pot1_max
+ 896 0428 F0000000 		.word	.LC15
+ 897 042c 00000000 		.word	huart3
+ 898 0430 00000000 		.word	.LANCHOR5
+ARM GAS  /tmp/cc4dYJCl.s 			page 25
+
+
+ 899 0434 00000000 		.word	.LANCHOR4
+ 900 0438 00000000 		.word	pot_values_f
+ 901 043c 00000000 		.word	res_open
+ 902 0440 1C010000 		.word	.LC16
+ 903 0444 30010000 		.word	.LC17
+ 904 0448 00000000 		.word	byteswritten
+ 905              	.LBE11:
+ 906              	.LBE12:
+ 907              		.cfi_endproc
+ 908              	.LFE144:
+ 910              		.global	successfull_opening
+ 911              		.global	pot_values_loaded
+ 912              		.comm	log_names,1100,4
+ 913              		.comm	pointer,4,4
+ 914              		.comm	bytes_read,4,4
+ 915              		.global	msg_index
+ 916              		.global	msg_counter
+ 917              		.global	mount_ok
+ 918              		.comm	byteswritten,4,4
+ 919              		.global	max_files
+ 920              		.comm	txt,2000,4
+ 921              		.global	filename_pot
+ 922              		.comm	filename_log,50,4
+ 923              		.global	name_txt
+ 924              		.comm	message,256,4
+ 925              		.comm	log_names_f,560,4
+ 926              		.comm	pot_values_f,560,4
+ 927              		.comm	loggingFile,560,4
+ 928              		.comm	res_mount,1,1
+ 929              		.comm	res_open,1,1
+ 930              		.section	.bss.mount_ok,"aw",%nobits
+ 931              		.align	2
+ 932              		.set	.LANCHOR3,. + 0
+ 935              	mount_ok:
+ 936 0000 00000000 		.space	4
+ 937              		.section	.bss.msg_counter,"aw",%nobits
+ 938              		.align	2
+ 941              	msg_counter:
+ 942 0000 00000000 		.space	4
+ 943              		.section	.bss.msg_index,"aw",%nobits
+ 944              		.align	2
+ 947              	msg_index:
+ 948 0000 00000000 		.space	4
+ 949              		.section	.bss.pot_values_loaded,"aw",%nobits
+ 950              		.set	.LANCHOR5,. + 0
+ 953              	pot_values_loaded:
+ 954 0000 00       		.space	1
+ 955              		.section	.bss.successfull_opening,"aw",%nobits
+ 956              		.align	2
+ 957              		.set	.LANCHOR2,. + 0
+ 960              	successfull_opening:
+ 961 0000 00000000 		.space	4
+ 962              		.section	.data.filename_pot,"aw"
+ 963              		.align	2
+ 964              		.set	.LANCHOR4,. + 0
+ 967              	filename_pot:
+ 968 0000 706F7456 		.ascii	"potV.txt\000"
+ARM GAS  /tmp/cc4dYJCl.s 			page 26
+
+
+ 968      2E747874 
+ 968      00
+ 969              		.section	.data.max_files,"aw"
+ 970              		.align	2
+ 971              		.set	.LANCHOR1,. + 0
+ 974              	max_files:
+ 975 0000 64000000 		.word	100
+ 976              		.section	.data.name_txt,"aw"
+ 977              		.align	2
+ 978              		.set	.LANCHOR0,. + 0
+ 981              	name_txt:
+ 982 0000 6E616D65 		.ascii	"name.txt\000"
+ 982      2E747874 
+ 982      00
+ 983              		.text
+ 984              	.Letext0:
+ 985              		.file 2 "Drivers/CMSIS/Device/ST/STM32F7xx/Include/stm32f767xx.h"
+ 986              		.file 3 "/usr/arm-none-eabi/include/machine/_default_types.h"
+ 987              		.file 4 "/usr/arm-none-eabi/include/sys/_stdint.h"
+ 988              		.file 5 "Drivers/CMSIS/Include/core_cm7.h"
+ 989              		.file 6 "Drivers/CMSIS/Device/ST/STM32F7xx/Include/system_stm32f7xx.h"
+ 990              		.file 7 "Drivers/CMSIS/Device/ST/STM32F7xx/Include/stm32f7xx.h"
+ 991              		.file 8 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_def.h"
+ 992              		.file 9 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_dma.h"
+ 993              		.file 10 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_can.h"
+ 994              		.file 11 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart.h"
+ 995              		.file 12 "Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal.h"
+ 996              		.file 13 "Inc/can.h"
+ 997              		.file 14 "Middlewares/Third_Party/FatFs/src/integer.h"
+ 998              		.file 15 "/usr/arm-none-eabi/include/sys/lock.h"
+ 999              		.file 16 "/usr/arm-none-eabi/include/sys/_types.h"
+ 1000              		.file 17 "/usr/lib/gcc/arm-none-eabi/9.2.0/include/stddef.h"
+ 1001              		.file 18 "/usr/arm-none-eabi/include/sys/reent.h"
+ 1002              		.file 19 "/usr/arm-none-eabi/include/stdlib.h"
+ 1003              		.file 20 "Middlewares/Third_Party/FatFs/src/ff.h"
+ 1004              		.file 21 "Middlewares/Third_Party/FatFs/src/diskio.h"
+ 1005              		.file 22 "Middlewares/Third_Party/FatFs/src/ff_gen_drv.h"
+ 1006              		.file 23 "Inc/sd_diskio.h"
+ 1007              		.file 24 "Inc/fatfs.h"
+ 1008              		.file 25 "Inc/global_variables.h"
+ 1009              		.file 26 "/usr/arm-none-eabi/include/stdio.h"
+ 1010              		.file 27 "/usr/arm-none-eabi/include/string.h"
+ARM GAS  /tmp/cc4dYJCl.s 			page 27
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 sd.c
-     /tmp/ccXjbAY9.s:17     .rodata.init_sd.str1.4:0000000000000000 $d
-     /tmp/ccXjbAY9.s:66     .text.init_sd:0000000000000000 $t
-     /tmp/ccXjbAY9.s:74     .text.init_sd:0000000000000000 init_sd
-     /tmp/ccXjbAY9.s:541    .text.init_sd:000000000000026c $d
+     /tmp/cc4dYJCl.s:17     .rodata.init_sd.str1.4:0000000000000000 $d
+     /tmp/cc4dYJCl.s:72     .text.init_sd:0000000000000000 $t
+     /tmp/cc4dYJCl.s:80     .text.init_sd:0000000000000000 init_sd
+     /tmp/cc4dYJCl.s:740    .text.init_sd:00000000000002d8 $d
                             *COM*:0000000000000001 res_mount
                             *COM*:0000000000000230 log_names_f
                             *COM*:0000000000000001 res_open
@@ -1057,23 +1563,25 @@ DEFINED SYMBOLS
                             *COM*:0000000000000230 pot_values_f
                             *COM*:0000000000000004 pointer
                             *COM*:0000000000000004 byteswritten
-     /tmp/ccXjbAY9.s:630    .bss.successfull_opening:0000000000000000 successfull_opening
-     /tmp/ccXjbAY9.s:623    .bss.pot_values_loaded:0000000000000000 pot_values_loaded
-     /tmp/ccXjbAY9.s:618    .bss.msg_index:0000000000000000 msg_index
-     /tmp/ccXjbAY9.s:612    .bss.msg_counter:0000000000000000 msg_counter
-     /tmp/ccXjbAY9.s:606    .bss.mount_ok:0000000000000000 mount_ok
-     /tmp/ccXjbAY9.s:644    .data.max_files:0000000000000000 max_files
-     /tmp/ccXjbAY9.s:637    .data.filename_pot:0000000000000000 filename_pot
-     /tmp/ccXjbAY9.s:651    .data.name_txt:0000000000000000 name_txt
+     /tmp/cc4dYJCl.s:783    .text.init_sd:000000000000036c $t
+     /tmp/cc4dYJCl.s:891    .text.init_sd:0000000000000414 $d
+     /tmp/cc4dYJCl.s:960    .bss.successfull_opening:0000000000000000 successfull_opening
+     /tmp/cc4dYJCl.s:953    .bss.pot_values_loaded:0000000000000000 pot_values_loaded
+     /tmp/cc4dYJCl.s:947    .bss.msg_index:0000000000000000 msg_index
+     /tmp/cc4dYJCl.s:941    .bss.msg_counter:0000000000000000 msg_counter
+     /tmp/cc4dYJCl.s:935    .bss.mount_ok:0000000000000000 mount_ok
+     /tmp/cc4dYJCl.s:974    .data.max_files:0000000000000000 max_files
+     /tmp/cc4dYJCl.s:967    .data.filename_pot:0000000000000000 filename_pot
+     /tmp/cc4dYJCl.s:981    .data.name_txt:0000000000000000 name_txt
                             *COM*:0000000000000100 message
-     /tmp/ccXjbAY9.s:602    .bss.mount_ok:0000000000000000 $d
-     /tmp/ccXjbAY9.s:609    .bss.msg_counter:0000000000000000 $d
-     /tmp/ccXjbAY9.s:615    .bss.msg_index:0000000000000000 $d
-     /tmp/ccXjbAY9.s:624    .bss.pot_values_loaded:0000000000000000 $d
-     /tmp/ccXjbAY9.s:626    .bss.successfull_opening:0000000000000000 $d
-     /tmp/ccXjbAY9.s:633    .data.filename_pot:0000000000000000 $d
-     /tmp/ccXjbAY9.s:640    .data.max_files:0000000000000000 $d
-     /tmp/ccXjbAY9.s:647    .data.name_txt:0000000000000000 $d
+     /tmp/cc4dYJCl.s:931    .bss.mount_ok:0000000000000000 $d
+     /tmp/cc4dYJCl.s:938    .bss.msg_counter:0000000000000000 $d
+     /tmp/cc4dYJCl.s:944    .bss.msg_index:0000000000000000 $d
+     /tmp/cc4dYJCl.s:954    .bss.pot_values_loaded:0000000000000000 $d
+     /tmp/cc4dYJCl.s:956    .bss.successfull_opening:0000000000000000 $d
+     /tmp/cc4dYJCl.s:963    .data.filename_pot:0000000000000000 $d
+     /tmp/cc4dYJCl.s:970    .data.max_files:0000000000000000 $d
+     /tmp/cc4dYJCl.s:977    .data.name_txt:0000000000000000 $d
 
 UNDEFINED SYMBOLS
 f_mount
@@ -1085,6 +1593,11 @@ f_close
 f_read
 strstr
 f_write
+atoi
 SDPath
 SDFatFS
 huart3
+pot1_max
+pot1_min
+pot2_max
+pot2_min
