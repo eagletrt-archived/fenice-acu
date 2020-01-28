@@ -82,6 +82,9 @@ void init()
 				if(can1.dataRx[0] == 0xE2 && can1.dataRx[1] == 0x01 && can1.dataRx[2] == 0x00 && can1.dataRx[3] == 0x00){
 					set_bit_uint8(&inv_init_response, 1, 1); //set bit 1 to 1
 				}
+			case ID_ATC_POT:
+				atc_pot_operations();
+				break;
 			default:
 				break;
 			}
@@ -128,14 +131,6 @@ void init()
  *******************************************************************/
 void idle()
 {
-	/*if (HAL_GPIO_ReadPin(USER_BUTTON_GPIO_Port,USER_BUTTON_Pin) == GPIO_PIN_SET){
-		sprintf(txt,"%d\r\n%d\r\n%d\r\n%d\r\n",accel.pot1_val,accel.pot2_val,brake.pot1_val,brake.pot2_val);
-		HAL_UART_Transmit(&huart3,(uint8_t*)txt,strlen(txt),10);
-		res_open = f_open(&pot_values_f, (TCHAR const*)&filename_pot, FA_OPEN_ALWAYS | FA_WRITE );
-		f_write(&pot_values_f,(TCHAR const*)&txt,strlen(txt), &byteswritten);
-		f_close(&pot_values_f);
-		HAL_Delay(1000);
-	}*/
 	if (debug_msg_arrived == 1)
 	{
 		debug_msg_arrived = 0; // reset flag
