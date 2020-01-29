@@ -12,12 +12,32 @@ void set_bit_uint8(uint8_t* _var, uint8_t _nBit, uint8_t _bool){
 		(*_var) = ((*_var) & ( 0b11111111 ^ (0b00000001 << _nBit))) | (0b00000000 | (_bool << _nBit));
 	}
 }
+void send_errors(){
+	can1.tx_id = ID_ACU_ERRORS;
+	can1.dataTx[0] = critical_errors[0];
+	can1.dataTx[1] = critical_errors[1];
+	can1.dataTx[2] = critical_errors[2];
+	can1.dataTx[3] = critical_errors[3];
+	can1.dataTx[4] = critical_errors[4];
+	can1.dataTx[5] = critical_errors[5];
+	can1.dataTx[6] = critical_errors[6];
+	can1.dataTx[7] = critical_errors[7];
+	can1.tx_size = 8;
+	CAN_Send(&can1, highPriority);
+}
+
+uint8_t check_error_presence(){
+	for(int i = 0; i < 8 ; i++){
+		if(critical_errors[i] != 0 ) return 1;
+	}
+	return 0;
+}
 /*******************************************************************
  *                         STATE VARIABLES
  *******************************************************************/ 
 /*** GLOBAL ***/
 int setup_init = 0;
-int critical_errors = 0;
+uint8_t critical_errors[8] = {0,0,0,0,0,0,0,0};
 
 /*** FOR INIT STATE ***/
 int init_step = 0;
@@ -95,8 +115,8 @@ void init()
 			if(count_ms_abs - init_step_start_time > 1000 ){ //if is passed more than 1 second -> go ahead
 				/* Send Error to steer */ 
 
-				//TODO: send errors
-
+				set_bit_uint8(&critical_errors[0],1,1);
+				send_errors();
 				init_step = 3;
 			}
 		}
@@ -154,7 +174,7 @@ void idle()
 			if (can1.dataRx[0] == 0x03)
 			{
 				// Turn ON tractive system
-				if(critical_errors == 0){
+				if(check_error_presence() == 0){
 
 				}
 			}
@@ -196,8 +216,8 @@ void setup()
 {
 	if(setup_init == 0){
 		setup_init = 1; //set that setup procedure is started
-		if((atc_connected == 1) && (critical_errors = 0)){
-			//If Analog to CAN device is connected, brake is pressed and there aren't critical erros -> 
+		if(check_error_presence() == 0){ //TODO: add brake check
+			//if brake is pressed and there aren't critical erros -> 
 				//-> send pre-charge request to HV
 			can1.tx_id = ID_REQ_PRCH;
 			can1.dataTx[0] = 1;
@@ -208,19 +228,27 @@ void setup()
 			//Can't turn on TS caused by some errors
 			current_state = STATE_IDLE; //return to idle state
 			// TODO: report error to steer
+			if(check_error_presence() != 0){
+				send_errors();
+			}
+			//TODO: if brake isn't pressed -> send error
 		}
 	}else if(setup_init == 1){
 		if(count_ms_abs - init_precharge_start_time > 5000){
-			// report error
-			current_state = STATE_IDLE;
+			set_bit_uint8(&critical_errors[0],2,1); // set error
+			send_errors(); // send errors
+			set_bit_uint8(&critical_errors[0],2,0); // reset error
+			current_state = STATE_IDLE; // return to STATE_IDLE
 		}else if (fifoRxDataCAN_pop(&can1)){
 			switch(can1.rx_id){
 				case ID_BMS_HV:
 					if(can1.dataRx[0] == 1){ //Pre-cherge ended sucessfully
 						setup_init = 2;
 					}else{ //Pre-charge failed
-						current_state = STATE_IDLE;
-						//TODO: send error to steer
+						set_bit_uint8(&critical_errors[0],3,1); // set error
+						send_errors(); // send errors
+						set_bit_uint8(&critical_errors[0],3,0); // reset error
+						current_state = STATE_IDLE; // return to STATE_IDLE
 					}
 			}
 		}
@@ -247,6 +275,9 @@ void setup()
 	}else if(setup_init == 3){
 		if(count_ms_abs - init_inv_resp > 10000){
 			// report error
+			set_bit_uint8(&critical_errors[0],4,1);
+			send_errors();
+			set_bit_uint8(&critical_errors[0],4,0);
 			//send pre-charge OFF req
 			can1.tx_id = ID_REQ_PRCH;
 			can1.dataTx[0] = 0x00;
@@ -397,6 +428,9 @@ void setup()
  *******************************************************************/
 void run()
 {
+	if(check_error_presence != 0){
+		
+	}
 	if (fifoRxDataCAN_pop(&can1))
 	{
 		switch (can1.rx_id)
@@ -585,5 +619,6 @@ void imu_operations()
 void atc_pot_operations()
 {
 	atc_connected = 1;
+	set_bit_uint8(&critical_errors[0],0,0);
 	count_atc = 0;
 }

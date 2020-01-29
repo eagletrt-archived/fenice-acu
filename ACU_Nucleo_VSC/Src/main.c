@@ -464,12 +464,20 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
 			} else if (count_inverter == 11) {
 				count_inverter = 10;
 			}
+      /*******************************************************************
+      *                           ATC COUNTER
+      *******************************************************************/ 
 			if (count_atc == 10) {  //--- check if Analog To Can is connected ---//
-				// TODO: to implement error functions
+				set_bit_uint8(&critical_errors[0], 0, 1);
+        send_errors();
 				atc_connected = 0;
 			} else if (count_atc == 11) {
 				count_atc = 10;
 			}
+      /******************************************************************/ 
+      /*******************************************************************
+      *                           IMU COUNTER
+      *******************************************************************/ 
 			if (count_imu == 10) {  //--- check if imu is connected ---//
 				// imu non presente //
 				imu_connected = 0;  // imu not connected
@@ -477,6 +485,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
 			} else if (count_imu == 11) {
 				count_imu = 10;
 			}
+      /*****************************************************************/ 
 			if (count_dec == 10) {
 				count_dec = 0;
 				count_sec++;

@@ -30,6 +30,10 @@ extern uint8_t imu_connected;
 extern uint8_t its_connected;
 extern uint8_t atc_connected;
 
+extern void set_bit_uint8(uint8_t* _var, uint8_t _nBit, uint8_t _bool);
+extern void send_errors();
+extern uint8_t critical_errors[8];
+
 //-----------------------------------------//
 //--------------- FROM SD------------------//
 //-----------------------------------------//
@@ -72,6 +76,7 @@ extern uint32_t pot1_max, pot1_min, pot2_max, pot2_min;
 //ACU ID
 #define ID_ACU_1 0x100
 #define ID_ACU_2 0x55
+#define ID_ACU_ERRORS 0x005
 //IMU
 #define ID_imu_angular_rate 0x4EC
 #define ID_imu_acceleration 0x4ED
