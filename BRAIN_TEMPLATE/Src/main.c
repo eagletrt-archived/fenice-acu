@@ -107,6 +107,14 @@ int main(void)
   MX_NVIC_Init();
   /* USER CODE BEGIN 2 */
 
+  for(int i = 0; i < 10; i++){
+    HAL_GPIO_TogglePin(LED_1_GPIO_Port, LED_1_Pin);
+    HAL_GPIO_TogglePin(LED_2_GPIO_Port, LED_2_Pin);
+    HAL_GPIO_TogglePin(LED_3_GPIO_Port, LED_3_Pin);
+    HAL_GPIO_TogglePin(LED_4_GPIO_Port, LED_4_Pin);
+    HAL_GPIO_TogglePin(LED_5_GPIO_Port, LED_5_Pin);
+    HAL_Delay(50);
+  }
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -118,7 +126,7 @@ int main(void)
     HAL_GPIO_TogglePin(LED_3_GPIO_Port, LED_3_Pin);
     HAL_GPIO_TogglePin(LED_4_GPIO_Port, LED_4_Pin);
     HAL_GPIO_TogglePin(LED_5_GPIO_Port, LED_5_Pin);
-    HAL_Delay(200);
+    HAL_Delay(500);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
