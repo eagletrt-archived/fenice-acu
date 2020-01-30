@@ -32,6 +32,24 @@ uint8_t check_error_presence(){
 	}
 	return 0;
 }
+
+void shutdown(){
+	/* Send inverter L disable */
+	can3.tx_id = ID_ASK_INV_SX;
+	can3.dataTx[0] = 0x51;
+	can3.dataTx[1] = 0x04;
+	can3.dataTx[2] = 0x00;
+	can3.tx_size = 3;
+	CAN_Send(&can1, highPriority);
+
+	/* Send inverter R disable */
+	can3.tx_id = ID_ASK_INV_DX;
+	can3.dataTx[0] = 0x51;
+	can3.dataTx[1] = 0x04;
+	can3.dataTx[2] = 0x00;
+	can3.tx_size = 3;
+	CAN_Send(&can1, highPriority);
+}
 /*******************************************************************
  *                         STATE VARIABLES
  *******************************************************************/ 
@@ -428,26 +446,29 @@ void setup()
  *******************************************************************/
 void run()
 {
-	if(check_error_presence != 0){
-		
-	}
-	if (fifoRxDataCAN_pop(&can1))
-	{
-		switch (can1.rx_id)
+	if(check_error_presence() != 0){
+		send_errors();
+		current_state = STATE_SETUP;
+	}else{
+		if (fifoRxDataCAN_pop(&can1))
 		{
-		case ID_STEERING_WEEL_1:
-			if (can1.dataRx[0] == 6)
-			{ //----- change state to setup -----//
-				current_state = STATE_SETUP;
+			switch (can1.rx_id)
+			{
+			case ID_STEERING_WEEL_1:
+				if (can1.dataRx[0] == 6)
+				{ //----- change state to setup -----//
+					current_state = STATE_SETUP;
+				}
+				break;
+			case ID_ATC_POT:
+				atc_pot_operations();
+				break;
+			default:
+				break;
 			}
-			break;
-		case ID_ATC_POT:
-			atc_pot_operations();
-			break;
-		default:
-			break;
 		}
 	}
+	
 }
 /*******************************************************************
  *                         END RUN STATE
