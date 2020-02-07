@@ -27,8 +27,8 @@ Sensors Repository for Fenice
 
 ### How it works
 The sensor is made from two components: 
-- **The ring**: it is a circle made of magnetinc poles. It is made in a such  way, that by rotating it, you can read 2 signals _sin_ and _cos_ with an offset of 90°.
-- **The Reader sensor**: it reads the magnetic signal from the ring and transform the signal from analogic to digital. Thanks to interpolation, it can give more resolution and be more prcise during the conversion. The digital signal can be distinguish in ***A*** and ***B*** and thanks to the offset of 90°, reading the signals you can determine both, direction and speed.
+- **The ring**: it is a circle made of magnetic poles. It is made in such a way, that by rotating it, you can read 2 signals _sin_ and _cos_ with an offset of 90°.
+- **The Reader sensor**: it reads the magnetic signal from the ring and transforms the signal from analogic to digital. Thanks to interpolation, it can give more resolution and be more precise during the conversion. The digital signal can be distinguished in ***A*** and ***B*** and thanks to the offset of 90°, reading the signals you can determine both, direction and speed.
 > **A** -011001100110
 > **B** -001100110011
 
@@ -43,8 +43,8 @@ The inputs are 2 squared signals **A** and **B** from the LM13 sensor with a off
 #### Process
 - **Signals**: There are two interrupts on the GPIO receiving the signals _A_ and _B_. At every interrupt, of the signals, the __cp__ variable will be incremented, the __direction__ will be decided and will be memorized if the edge is __rising__ or __falling__.
 - **Timers**: There are two timers to make the measure work properly.  
-    - **TIM3**: This timer is giving the frequency for reading the speed. So every time the timer's period elapses, the second timer starts and the speed measurment begins.  
+    - **TIM3**: This timer is giving the frequency for reading the speed. So every time the timer's period elapses, the second timer starts and the speed measurement begins.  
     ***Period***: 1s
-    - **TIM4**: This timer gives the period in which the measurment is maked. In fact, the interrupts on the signals _A_ and _B_ are active only in this period.
+    - **TIM4**: This timer gives the period in which the measurement is made. In fact, the interrupts on the signals _A_ and _B_ are active only in this period.
     ***Period***: 0.1s 
-        - **DO NOT EXCEED 9s** otherwise you will have an integer overflow
+        - **DO NOT EXCEED 9s** otherwise, you will have an integer overflow
