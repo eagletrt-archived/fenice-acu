@@ -54,8 +54,8 @@ int polB_cont_down = 0;
 int polB_cont_up = 0;
 int cp;
 double resolution = 0.000005;
-double mult_fact = 3.9303482587;
-double mult_fact2 = 3.8778125;
+double mult_fact = 5.238726792;
+double mult_fact2 = 5.170416667;
 double measurment_per = 0.4;
 double enc_speed = 0;
 double wheel_speed = 0;
@@ -427,14 +427,14 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
 //		print(&huart2, mes);
 
 		// Resolution = 5um = 0.000005 m
-		// cpr = 64'000
-		// encoder diameter = 100.5 mm = 0.1005 m
+		// cpr = 48'000
+		// encoder diameter = 75.4 mm = 0.0754 m
 		// wheel diameter = 0.395 m
-		// encoder circumference = 3.1415926535 * 0.1005 = 0.31573006167675
+		// encoder circumference = 3.1415926535 * 0.0754 = 0.236876086
 		// wheel circumference = 3.1415926535 * 0.395 = 1.2409290981325
-		// speed multiplier factor = 3.9303482587064676616
-		// second mult_factor = 1.2409/0.32 = 3.8778125
-		// encoder speed = Resolution*cp/0.1s
+		// speed multiplier factor = 1.2409290981325 ÷ 0.236876086 = 5.238726792
+		// second mult_factor = 1.2409/0.24 = 5.170416667
+		// encoder speed = Resolution*cp/0.4s
 		// wheel speed = encoder speed * sp_mult
 
 

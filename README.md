@@ -7,19 +7,20 @@ Sensors Repository for Fenice
     - **Interpolation factor** => 400   
     - **Resolution** => 5 um  
     - **Minimum edge separation** => 0.12us (8MHz)  
-- **MR100F**  
-    - **Diameter** => 100.5 +- 0.1 mm  
-    - **Circumference** => `3.1415926535 * 0.1005 = 0.31573006167675m` 
-    - **Poles** => 160  
-    - **cpr** => 64000  
-    - **ppr** => 16000   
-    - **Circumference with datasheet** => `64000*0.000005 = 0.32m`  
+- **MR075E**  
+    - **Outer Diameter** => 75.4 ± 0.1 mm  
+    - **Inner Diameter** => 60 H7 mm  
+    - **Circumference** => `3.1415926535 * 0.1005 = 0.236876086m` 
+    - **Poles** => 120  
+    - **cpr** => 48000  
+    - **ppr** => 12000   
+    - **Circumference with datasheet LM13 resolution** => `48000*0.000005 = 0.24m`  
 - **Wheel**  
     - **Diameter** => 0.395 m
     - **Circumference** => `3.1415926535 * 0.395 = 1.2409290981325m`  
 - **Speed**  
-    - **Speed1:** is the speed calculated with the real circumference of the encoder `mult fact = 3.9303482587064676616`  
-    - **Speed2:** is the speed caluclated with the resolution and the cpr of the encoder `mult fact = 3.8778125`  
+    - **Speed1:** is the speed calculated with the real circumference of the encoder `mult fact = 5.238726792`  
+    - **Speed2:** is the speed calculated with the resolution and the cpr of the encoder `mult fact = 5.170416667`  
 - **Price**  
     - ???
     
