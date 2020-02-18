@@ -530,6 +530,12 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(USER_BUTTON_GPIO_Port, &GPIO_InitStruct);
 
+  /*Configure GPIO pins : PA4 PA6 */
+  GPIO_InitStruct.Pin = GPIO_PIN_4|GPIO_PIN_6;
+  GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+
   /*Configure GPIO pin : SD_detect_Pin */
   GPIO_InitStruct.Pin = SD_detect_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
@@ -543,11 +549,12 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : PA10 PA11 */
-  GPIO_InitStruct.Pin = GPIO_PIN_10|GPIO_PIN_11;
-  GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
-  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+  /* EXTI interrupt init*/
+  HAL_NVIC_SetPriority(EXTI4_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(EXTI4_IRQn);
+
+  HAL_NVIC_SetPriority(EXTI9_5_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(EXTI9_5_IRQn);
 
 }
 
@@ -603,7 +610,56 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
 				}
 			}
 		}
-	}
+	}else if(htim == &htim4){
+    cp = 0;
+		polA_cont_up = 0;
+		polA_cont_down = 0;
+		polB_cont_up = 0;
+		polB_cont_down = 0;
+		HAL_TIM_Base_Start(&htim5);
+		HAL_TIM_Base_Start_IT(&htim5);
+		HAL_NVIC_EnableIRQ(EXTI15_10_IRQn);
+		HAL_NVIC_EnableIRQ(EXTI9_5_IRQn);
+		//HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_5);
+  }else if(htim == &htim5){
+
+    HAL_NVIC_DisableIRQ(EXTI4_IRQn);
+		HAL_NVIC_DisableIRQ(EXTI9_5_IRQn);
+		HAL_TIM_Base_Stop(&htim5);
+		// The next line it is not necessary but can be a good practice
+		__HAL_TIM_SET_COUNTER(&htim5,0);
+
+		char message[256] = "";
+		char message2[256] = "";
+		char mes[200] = "";
+		int val = -1;
+		int val2 = -1;
+
+    //		sprintf(message, "\r\nCP = %u -- Encoder = %f", cp, enc_speed);
+    //		sprintf(message2, "\r\nSpeed1 = %f -- Speed2 = %f", wheel_speed, wheel_speed2);
+    //		print(&huart2, message);
+    //		print(&huart2, message2);
+    //		val = __HAL_TIM_GET_COUNTER(&htim3);
+    //		val2 = __HAL_TIM_GET_COUNTER(&htim4);
+    //		sprintf(mes,"\r\n TIM3 = %d -- TIM4 = %d",val,val2);
+    //		print(&huart2, mes);
+
+    // Resolution = 5um = 0.000005 m
+    // cpr = 48'000
+    // encoder diameter = 75.4 mm = 0.0754 m
+    // wheel diameter = 0.395 m
+    // encoder circumference = 3.1415926535 * 0.0754 = 0.236876086
+    // wheel circumference = 3.1415926535 * 0.395 = 1.2409290981325
+    // speed multiplier factor = 1.2409290981325 ?????? 0.236876086 = 5.238726792
+    // second mult_factor = 1.2409/0.24 = 5.170416667
+    // encoder speed = Resolution*cp/0.4s
+    // wheel speed = encoder speed * sp_mult
+
+
+    enc_speed = resolution*cp*-3.60/measurment_per;
+    wheel_speed = enc_speed*mult_fact;
+    wheel_speed2 = resolution*cp*mult_fact2*-3.6/measurment_per;
+  }
 }
 
 void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan) {

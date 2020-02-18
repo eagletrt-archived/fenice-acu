@@ -63,6 +63,7 @@ Middlewares/Third_Party/FatFs/src/ff_gen_drv.c \
 Middlewares/Third_Party/FatFs/src/option/syscall.c \
 Src/bsp_driver_sd.c \
 Src/can.c \
+Src/encoder.c \
 Src/fatfs.c \
 Src/fatfs_platform.c \
 Src/global_variables.c \

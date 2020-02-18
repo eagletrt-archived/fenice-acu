@@ -70,6 +70,23 @@ extern uint8_t pot_values_loaded;
 
 extern uint32_t pot1_max, pot1_min, pot2_max, pot2_min;
 
+
+//-----------------------------------------//
+//--------------- ENCODER -----------------//
+//-----------------------------------------//
+extern int polA_cont_up;
+extern int polA_cont_down;
+extern int polB_cont_down;
+extern int polB_cont_up;
+extern int cp;
+extern double resolution;
+extern double mult_fact;
+extern double mult_fact2;
+extern double measurment_per;
+extern double enc_speed;
+extern double wheel_speed;
+extern double wheel_speed2;
+
 //-----------------------------------------//
 //------------------ ID -------------------//
 //-----------------------------------------//
