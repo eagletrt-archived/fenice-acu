@@ -30,6 +30,7 @@
 #include "state.h"
 #include "stdio.h"
 #include "string.h"
+#include "encoder.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -629,11 +630,11 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
 		// The next line it is not necessary but can be a good practice
 		__HAL_TIM_SET_COUNTER(&htim5,0);
 
-		char message[256] = "";
-		char message2[256] = "";
-		char mes[200] = "";
-		int val = -1;
-		int val2 = -1;
+		// char message[256] = "";
+		// char message2[256] = "";
+		// char mes[200] = "";
+		// int val = -1;
+		// int val2 = -1;
 
     //		sprintf(message, "\r\nCP = %u -- Encoder = %f", cp, enc_speed);
     //		sprintf(message2, "\r\nSpeed1 = %f -- Speed2 = %f", wheel_speed, wheel_speed2);
@@ -660,6 +661,37 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
     wheel_speed = enc_speed*mult_fact;
     wheel_speed2 = resolution*cp*mult_fact2*-3.6/measurment_per;
   }
+}
+
+void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin){
+  if(GPIO_Pin == GPIO_PIN_6){
+    if(HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_6)){
+      polB_cont_up++;
+      sig_b = SET;
+      if(sig_a) cp++;
+      else cp--;
+    }
+    else{
+      polB_cont_down++;
+      sig_b = RESET;
+      if(sig_a) cp--;
+      else cp++;
+    }
+  }else{
+    if(HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_4)){
+      polA_cont_up++;
+      sig_a = SET;
+      if(sig_b) cp--;
+      else cp++;
+    }
+    else{
+      polA_cont_down++;
+      sig_a = RESET;
+      if(sig_b) cp++;
+      else  cp--;
+    }
+  }
+  
 }
 
 void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan) {

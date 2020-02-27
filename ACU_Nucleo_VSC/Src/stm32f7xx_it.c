@@ -43,8 +43,7 @@
 
 /* Private variables ---------------------------------------------------------*/
 /* USER CODE BEGIN PV */
-int sig_a = RESET;
-int sig_b = RESET;
+
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -210,32 +209,6 @@ void SysTick_Handler(void)
 void EXTI4_IRQHandler(void)
 {
   /* USER CODE BEGIN EXTI4_IRQn 0 */
-  if(HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_4)){
-    polA_cont_up++;
-    sig_a = SET;
-    if(sig_b)
-    {
-      cp--;
-    }
-    else
-    {
-      cp++;
-    }
-  }
-  else
-  {
-    polA_cont_down++;
-    sig_a = RESET;
-    if(sig_b)
-    {
-      cp++;
-    }
-    else
-    {
-      cp--;
-    }
-  }
-
 
   /* USER CODE END EXTI4_IRQn 0 */
   HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_4);
@@ -306,32 +279,7 @@ void CAN1_SCE_IRQHandler(void)
 void EXTI9_5_IRQHandler(void)
 {
   /* USER CODE BEGIN EXTI9_5_IRQn 0 */
-  if(HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_6))
-	{
-		polB_cont_up++;
-		sig_b = SET;
-		if(sig_a)
-		{
-			cp++;
-		}
-		else
-		{
-			cp--;
-		}
-	}
-	else
-	{
-		polB_cont_down++;
-		sig_b = RESET;
-		if(sig_a)
-		{
-			cp--;
-		}
-		else
-		{
-			cp++;
-		}
-	}
+
   /* USER CODE END EXTI9_5_IRQn 0 */
   HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_6);
   /* USER CODE BEGIN EXTI9_5_IRQn 1 */
