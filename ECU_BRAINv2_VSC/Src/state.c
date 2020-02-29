@@ -1,9 +1,5 @@
 #include "state.h"
-#include "can.h"
-#include "global_variables.h"
-#include "stdio.h"
-#include "stm32f7xx_hal.h"
-#include "string.h"
+
 /*******************************************************************
  *                         USER FUNCTIONS
  *******************************************************************/ 
@@ -72,6 +68,11 @@ uint8_t inv_init_response = 0; // bit 0 = inv R -> 0 = no / 1 = YES ---- bit 1 =
 void init()
 {
 	if(init_step == 0){
+		HAL_GPIO_WritePin(LED_1_GPIO_Port,LED_1_Pin, GPIO_PIN_SET);
+		HAL_GPIO_WritePin(LED_2_GPIO_Port,LED_2_Pin, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(LED_3_GPIO_Port,LED_3_Pin, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(LED_4_GPIO_Port,LED_4_Pin, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(LED_5_GPIO_Port,LED_5_Pin, GPIO_PIN_RESET);
 		init_step = 1;
 		/* Send inverter L disable */
 		can3.tx_id = ID_ASK_INV_SX;
@@ -108,6 +109,11 @@ void init()
 		init_step_start_time = count_ms_abs; // save the curret time
 
 	}else if(init_step == 1){
+		HAL_GPIO_WritePin(LED_1_GPIO_Port,LED_1_Pin, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(LED_2_GPIO_Port,LED_2_Pin, GPIO_PIN_SET);
+		HAL_GPIO_WritePin(LED_3_GPIO_Port,LED_3_Pin, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(LED_4_GPIO_Port,LED_4_Pin, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(LED_5_GPIO_Port,LED_5_Pin, GPIO_PIN_RESET);
 		if (fifoRxDataCAN_pop(&can1)){
 			switch (can1.rx_id)
 			{
@@ -139,6 +145,11 @@ void init()
 			}
 		}
 	}else if(init_step == 2){
+		HAL_GPIO_WritePin(LED_1_GPIO_Port,LED_1_Pin, GPIO_PIN_SET);
+		HAL_GPIO_WritePin(LED_2_GPIO_Port,LED_2_Pin, GPIO_PIN_SET);
+		HAL_GPIO_WritePin(LED_3_GPIO_Port,LED_3_Pin, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(LED_4_GPIO_Port,LED_4_Pin, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(LED_5_GPIO_Port,LED_5_Pin, GPIO_PIN_RESET);
 		/* Send periodical status inv L */
 		can1.tx_id = ID_ASK_INV_SX;
 		can1.dataTx[0] = 0x3D;
@@ -169,6 +180,11 @@ void init()
  *******************************************************************/
 void idle()
 {
+	HAL_GPIO_WritePin(LED_1_GPIO_Port,LED_1_Pin, GPIO_PIN_RESET);
+	HAL_GPIO_WritePin(LED_2_GPIO_Port,LED_2_Pin, GPIO_PIN_RESET);
+	HAL_GPIO_WritePin(LED_3_GPIO_Port,LED_3_Pin, GPIO_PIN_SET);
+	HAL_GPIO_WritePin(LED_4_GPIO_Port,LED_4_Pin, GPIO_PIN_RESET);
+	HAL_GPIO_WritePin(LED_5_GPIO_Port,LED_5_Pin, GPIO_PIN_RESET);
 	if (debug_msg_arrived == 1)
 	{
 		debug_msg_arrived = 0; // reset flag
@@ -233,6 +249,11 @@ void idle()
 void setup()
 {
 	if(setup_init == 0){
+		HAL_GPIO_WritePin(LED_1_GPIO_Port,LED_1_Pin, GPIO_PIN_SET);
+		HAL_GPIO_WritePin(LED_2_GPIO_Port,LED_2_Pin, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(LED_3_GPIO_Port,LED_3_Pin, GPIO_PIN_SET);
+		HAL_GPIO_WritePin(LED_4_GPIO_Port,LED_4_Pin, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(LED_5_GPIO_Port,LED_5_Pin, GPIO_PIN_RESET);
 		setup_init = 1; //set that setup procedure is started
 		if(check_error_presence() == 0){ //TODO: add brake check
 			//if brake is pressed and there aren't critical erros -> 
@@ -252,6 +273,11 @@ void setup()
 			//TODO: if brake isn't pressed -> send error
 		}
 	}else if(setup_init == 1){
+		HAL_GPIO_WritePin(LED_1_GPIO_Port,LED_1_Pin, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(LED_2_GPIO_Port,LED_2_Pin, GPIO_PIN_SET);
+		HAL_GPIO_WritePin(LED_3_GPIO_Port,LED_3_Pin, GPIO_PIN_SET);
+		HAL_GPIO_WritePin(LED_4_GPIO_Port,LED_4_Pin, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(LED_5_GPIO_Port,LED_5_Pin, GPIO_PIN_RESET);
 		if(count_ms_abs - init_precharge_start_time > 5000){
 			set_bit_uint8(&critical_errors[0],2,1); // set error
 			send_errors(); // send errors
@@ -268,9 +294,17 @@ void setup()
 						set_bit_uint8(&critical_errors[0],3,0); // reset error
 						current_state = STATE_IDLE; // return to STATE_IDLE
 					}
+					break;
+				default:
+					break;
 			}
 		}
 	}else if(setup_init == 2){
+		HAL_GPIO_WritePin(LED_1_GPIO_Port,LED_1_Pin, GPIO_PIN_SET);
+		HAL_GPIO_WritePin(LED_2_GPIO_Port,LED_2_Pin, GPIO_PIN_SET);
+		HAL_GPIO_WritePin(LED_3_GPIO_Port,LED_3_Pin, GPIO_PIN_SET);
+		HAL_GPIO_WritePin(LED_4_GPIO_Port,LED_4_Pin, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(LED_5_GPIO_Port,LED_5_Pin, GPIO_PIN_RESET);
 		//send command inverter enable
 		can1.tx_id = ID_REQ_INV_DX;
 		can1.dataTx[0] = 0x51;
@@ -291,6 +325,11 @@ void setup()
 
 		init_inv_resp = count_ms_abs;
 	}else if(setup_init == 3){
+		HAL_GPIO_WritePin(LED_1_GPIO_Port,LED_1_Pin, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(LED_2_GPIO_Port,LED_2_Pin, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(LED_3_GPIO_Port,LED_3_Pin, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(LED_4_GPIO_Port,LED_4_Pin, GPIO_PIN_SET);
+		HAL_GPIO_WritePin(LED_5_GPIO_Port,LED_5_Pin, GPIO_PIN_RESET);
 		if(count_ms_abs - init_inv_resp > 10000){
 			// report error
 			set_bit_uint8(&critical_errors[0],4,1);
@@ -308,135 +347,21 @@ void setup()
 					if(can1.dataRx[0] == 0xE0 && can1.dataRx[1] == 0x01 && can1.dataRx[2] == 0x00 && can1.dataRx[3] == 0x00){
 						setup_init = 4;
 					}
+					break;
+				default:
+					break;
 			}			
 		}
 	}else if(setup_init == 4){
+		HAL_GPIO_WritePin(LED_1_GPIO_Port,LED_1_Pin, GPIO_PIN_SET);
+		HAL_GPIO_WritePin(LED_2_GPIO_Port,LED_2_Pin, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(LED_3_GPIO_Port,LED_3_Pin, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(LED_4_GPIO_Port,LED_4_Pin, GPIO_PIN_SET);
+		HAL_GPIO_WritePin(LED_5_GPIO_Port,LED_5_Pin, GPIO_PIN_RESET);
 		// In this state all is ready for run //
 		// Waiting for run signal from steer //
 		
 	}
-	/*if (fifoRxDataCAN_pop(&can1))
-	{
-		switch (can1.rx_id)
-		{
-		case ID_STEERING_WEEL_1:
-			switch (can1.dataRx[0])
-			{
-			//----- change state to run -----//
-			case 5:
-				// If inverter are ON and Brake is Pressed
-				current_state = STATE_RUN;
-				can1.tx_id = ID_ACU_2;
-				can1.dataRx[0] = 5;
-				can1.tx_size = 1;
-				CAN_Send(&can1, normalPriority);
-				break;
-			// Turn On inverter Dx
-			case 8:
-				// If Inverter Temp < 80
-				break;
-			// Turn On inverter Sx
-			case 9:
-				// if Iverter Temp < 80
-				break;
-			default:
-				break;
-			}
-			break;
-		case ID_BMS_HV:
-			switch (can1.dataRx[0])
-			{
-			case 4:
-				// Shutdown Confirmed
-				break;
-			case 8:
-				// Shutdown from Error
-				break;
-			}
-			break;
-		case ID_ATC_POT:
-			atc_pot_operations();
-			break;
-		case ID_REQ_INV_DX:
-			switch (can1.dataRx[0])
-			{
-			case 0x4A:
-				// Update Inverter Dx Temp = (can1.RxData[2] * 256 + can1.RxData[1] - 15797) / 112.1182
-				break;
-			case 0xD8:
-				if (can1.dataRx[2] == 0x0C  && request of shutdown == false)
-				{
-					can1.dataTx[0] = 0x09;
-					can1.dataTx[1] = 0;
-					can1.dataTx[2] = 0;
-					can1.dataTx[3] = 0;
-					can1.dataTx[4] = 0;
-					can1.dataTx[5] = 0;
-					can1.dataTx[6] = 0;
-					can1.dataTx[7] = 0;
-					can1.tx_id = ID_ACU_1;
-					CAN_Send(&can1, normalPriority);
-					// Inverter Dx true
-				}
-				else
-				{
-					can1.dataTx[0] = 0xD0;
-					can1.dataTx[1] = 0;
-					can1.dataTx[2] = 0;
-					can1.dataTx[3] = 0;
-					can1.dataTx[4] = 0;
-					can1.dataTx[5] = 0;
-					can1.dataTx[6] = 0;
-					can1.dataTx[7] = 0;
-					can1.tx_id = ID_ACU_1;
-					CAN_Send(&can1, normalPriority);
-					// Inverter Dx false
-				}
-				break;
-			}
-			break;
-		case ID_REQ_INV_SX:
-			switch (can1.dataRx[0])
-			{
-			case 0x4A:
-				// Update Inverter Sx Temp = (can1.RxData[2] * 256 + can1.RxData[1] - 15797) / 112.1182
-				break;
-			case 0xD8:
-				if (can1.dataRx[2] == 0x0C  && request of shutdown == false)
-				{
-					can1.dataTx[0] = 0x08;
-					can1.dataTx[1] = 0;
-					can1.dataTx[2] = 0;
-					can1.dataTx[3] = 0;
-					can1.dataTx[4] = 0;
-					can1.dataTx[5] = 0;
-					can1.dataTx[6] = 0;
-					can1.dataTx[7] = 0;
-					can1.tx_id = ID_ACU_1;
-					CAN_Send(&can1, normalPriority);
-					// Inverter Sx true
-				}
-				else
-				{
-					can1.dataTx[0] = 0x0C;
-					can1.dataTx[1] = 0;
-					can1.dataTx[2] = 0;
-					can1.dataTx[3] = 0;
-					can1.dataTx[4] = 0;
-					can1.dataTx[5] = 0;
-					can1.dataTx[6] = 0;
-					can1.dataTx[7] = 0;
-					can1.tx_id = ID_ACU_1;
-					CAN_Send(&can1, normalPriority);
-					// Inverter Sx false
-				}
-				break;
-			}
-			break;
-		default:
-			break;
-		}
-	}*/
 }
 /*******************************************************************
  *                         END SETUP STATE
@@ -446,6 +371,11 @@ void setup()
  *******************************************************************/
 void run()
 {
+	HAL_GPIO_WritePin(LED_1_GPIO_Port,LED_1_Pin, GPIO_PIN_RESET);
+	HAL_GPIO_WritePin(LED_2_GPIO_Port,LED_2_Pin, GPIO_PIN_SET);
+	HAL_GPIO_WritePin(LED_3_GPIO_Port,LED_3_Pin, GPIO_PIN_RESET);
+	HAL_GPIO_WritePin(LED_4_GPIO_Port,LED_4_Pin, GPIO_PIN_SET);
+	HAL_GPIO_WritePin(LED_5_GPIO_Port,LED_5_Pin, GPIO_PIN_RESET);
 	if(check_error_presence() != 0){
 		send_errors();
 		current_state = STATE_SETUP;
@@ -486,6 +416,7 @@ void debug_operations()
 				"\t-- send -> send a CAN msg (xxxx.xxx.xxx.xxx ... ecc)\r\n"
 				"\t-- sd status -> print SD status and the name of file inside\r\n"
 				"\t-- sd file -> print files inside the SD\r\n"
+				"\t-- clean sd -> remove all log files on SD\r\n"
 				"\t-- time -> print activity time\r\n"
 				"\t-- codev  -> print code version\r\n"
 				"\t-- best car? -> print the best car\r\n");
@@ -604,8 +535,20 @@ void debug_operations()
 		}
 	}
 	else if(strcmp(debug_rx, "sd file") == 0){
-		sprintf(debug_tx,"\r\nFiles inside sd are:\r\n%s",log_names);
+		sprintf(debug_tx,"\r\nFiles inside sd are:\r\n");
 		HAL_UART_Transmit(&huart4, (uint8_t *)debug_tx, strlen(debug_tx), 1000);
+		print_files_name();
+	}
+	else if (strcmp(debug_rx, "clean sd") == 0){
+		sprintf(debug_tx,"\r\n\r\n");
+		HAL_UART_Transmit(&huart4, (uint8_t *)debug_tx, strlen(debug_tx), 1000);
+		if(clean_sd() == true){
+			sprintf(debug_tx,"\r\nClean done\r\n");
+			HAL_UART_Transmit(&huart4, (uint8_t *)debug_tx, strlen(debug_tx), 1000);
+		}else{
+			sprintf(debug_tx,"\r\nClean error\r\n");
+			HAL_UART_Transmit(&huart4, (uint8_t *)debug_tx, strlen(debug_tx), 1000);
+		}
 	}
 	else if (strcmp(debug_rx, "best car?") == 0)
 	{

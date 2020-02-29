@@ -93,7 +93,7 @@ extern double wheel_speed2;
 //ACU ID
 #define ID_ACU_1 0x100
 #define ID_ACU_2 0x55
-#define ID_ACU_ERRORS 0x005
+#define ID_ACU_ERRORS 0x05
 //IMU
 #define ID_imu_angular_rate 0x4EC
 #define ID_imu_acceleration 0x4ED

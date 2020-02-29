@@ -1,9 +1,4 @@
-#include "global_variables.h"
-#include "fatfs.h"
-#include "string.h"
-#include "stdio.h"
 #include "sd.h"
-
 
 //--- RESULT VARIABLES FOR SD ---//
 FRESULT res_open;
@@ -43,15 +38,16 @@ void init_sd(){
     res_mount = f_mount(&SDFatFS, (TCHAR const*)SDPath, 1); //try to mount sd card
 
 	if (res_mount == FR_OK) {
+
 		res_open = f_open(&log_names_f, (TCHAR const*)&name_txt, FA_OPEN_ALWAYS | FA_READ ); //open "name.txt" file, if doesn't exit create it
 		if(res_open == 0)f_read(&log_names_f, log_names, 1099, (void*)&bytes_read); //read into file "name.txt" and put the result into "log_names" variable
 
 		HAL_UART_Transmit(&huart4,(uint8_t*)"mounted, opened\r\n",strlen("mounted, opened\r\n"),10);
 
-		sprintf(txt, "FILENAME RES VAL: %d",(int)res_open);
-		HAL_UART_Transmit(&huart4,(uint8_t*)txt,strlen(txt),100);
-		/*sprintf(txt, "%s\r\n", log_names);
-		HAL_UART_Transmit(&huart3,(uint8_t*)txt,strlen(txt),100);*/
+		// sprintf(txt, "FILENAME RES VAL: %d",(int)res_open);
+		// HAL_UART_Transmit(&huart4,(uint8_t*)txt,strlen(txt),100);
+		// sprintf(txt, "%s\r\n", log_names);
+		// HAL_UART_Transmit(&huart4,(uint8_t*)txt,strlen(txt),100);
 
 		char name[256];
 
@@ -92,7 +88,7 @@ void init_sd(){
 				f_close(&loggingFile);
 				//f_open(&loggingFile, (TCHAR const*)&filename, FA_OPEN_APPEND | FA_OPEN_ALWAYS | FA_READ | FA_WRITE );
 
-				HAL_UART_Transmit(&huart4,(uint8_t*)"\r\ncreated -> Log_0\r\n",strlen("\r\ncreated -> Log_0\r\n"),10);
+				HAL_UART_Transmit(&huart4,(uint8_t*)"\r\ncreated -> Log_0.txt\r\n",strlen("\r\ncreated -> Log_0\r\n"),10);
 
 				successfull_opening = 1;
 
@@ -199,5 +195,75 @@ void init_sd(){
 		
 	}else {
 		mount_ok = 0;
+	}
+}
+bool clean_sd(){
+	bool ret = false;
+	if (res_mount == FR_OK) {
+			res_open = f_open(&log_names_f, (TCHAR const*)&name_txt, FA_OPEN_ALWAYS | FA_READ ); //open "name.txt" file, if doesn't exit create it
+			if(res_open == 0){
+				f_read(&log_names_f, log_names, 1099, (void*)&bytes_read); //read into file "name.txt" and put the result into "log_names" variable
+				char name[256];
+				char nameFile[256];
+				for(int i = 0; i < max_files; i++){
+
+					sprintf(name, "log_%d ", i);
+
+					pointer = strstr(log_names, name);
+					if(pointer != NULL){
+						sprintf(txt,"\r\nRemoving %s ... ", name);
+						HAL_UART_Transmit(&huart4,(uint8_t*)txt,strlen(txt),100);
+						sprintf(nameFile, "Log_%d.txt", i);
+						if(f_unlink(nameFile) == FR_OK){
+							sprintf(txt,"DONE");
+							HAL_UART_Transmit(&huart4,(uint8_t*)txt,strlen(txt),100);
+						}else{
+							sprintf(txt,"FAIL");
+							HAL_UART_Transmit(&huart4,(uint8_t*)txt,strlen(txt),100);
+						} 
+					}else{
+						sprintf(txt,"\r\nNo more file to remove\r\n");
+						HAL_UART_Transmit(&huart4,(uint8_t*)txt,strlen(txt),100);
+						i = max_files;
+					}
+					
+				}
+				f_close(&log_names_f);
+				sprintf(txt,"\r\nRemoving log name file ... ");
+				HAL_UART_Transmit(&huart4,(uint8_t*)txt,strlen(txt),100);
+				if(f_unlink(name_txt) == FR_OK){
+					sprintf(txt,"DONE");
+					HAL_UART_Transmit(&huart4,(uint8_t*)txt,strlen(txt),100);
+				}else{
+					sprintf(txt,"FAIL");
+					HAL_UART_Transmit(&huart4,(uint8_t*)txt,strlen(txt),100);
+				} 
+				ret = true;
+			}
+	}
+	return ret;
+}
+
+void print_files_name(){
+	if (res_mount == FR_OK) {
+		res_open = f_open(&log_names_f, (TCHAR const*)&name_txt, FA_OPEN_ALWAYS | FA_READ ); //open "name.txt" file, if doesn't exit create it
+		if(res_open == 0){
+			f_read(&log_names_f, log_names, 1099, (void*)&bytes_read); //read into file "name.txt" and put the result into "log_names" variable
+			char name[256];
+			for(int i = 0; i < max_files; i++){
+
+				sprintf(name, "log_%d ", i);
+
+				pointer = strstr(log_names, name);
+				if(pointer != NULL){
+					sprintf(txt,"%s\r\n", name);
+					HAL_UART_Transmit(&huart4,(uint8_t*)txt,strlen(txt),100);
+				}else{
+					i = max_files;
+				}
+				
+			}
+			f_close(&log_names_f);
+		}
 	}
 }

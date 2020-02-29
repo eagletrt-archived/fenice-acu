@@ -130,6 +130,45 @@ int main(void)
   /* Initialize interrupts */
   MX_NVIC_Init();
   /* USER CODE BEGIN 2 */
+  HAL_GPIO_WritePin(LED_1_GPIO_Port,LED_1_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(LED_2_GPIO_Port,LED_2_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(LED_3_GPIO_Port,LED_3_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(LED_4_GPIO_Port,LED_4_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(LED_5_GPIO_Port,LED_5_Pin, GPIO_PIN_RESET);
+  for(int i = 0; i < 2; i++){
+    HAL_GPIO_WritePin(LED_5_GPIO_Port,LED_5_Pin, GPIO_PIN_RESET);
+    HAL_GPIO_WritePin(LED_1_GPIO_Port,LED_1_Pin, GPIO_PIN_SET);
+    HAL_Delay(50);
+    HAL_GPIO_WritePin(LED_1_GPIO_Port,LED_1_Pin, GPIO_PIN_RESET);
+    HAL_GPIO_WritePin(LED_2_GPIO_Port,LED_2_Pin, GPIO_PIN_SET);
+    HAL_Delay(50);
+    HAL_GPIO_WritePin(LED_2_GPIO_Port,LED_2_Pin, GPIO_PIN_RESET);
+    HAL_GPIO_WritePin(LED_3_GPIO_Port,LED_3_Pin, GPIO_PIN_SET);
+    HAL_Delay(50);
+    HAL_GPIO_WritePin(LED_3_GPIO_Port,LED_3_Pin, GPIO_PIN_RESET);
+    HAL_GPIO_WritePin(LED_4_GPIO_Port,LED_4_Pin, GPIO_PIN_SET);
+    HAL_Delay(50);
+    HAL_GPIO_WritePin(LED_4_GPIO_Port,LED_4_Pin, GPIO_PIN_RESET);
+    HAL_GPIO_WritePin(LED_5_GPIO_Port,LED_5_Pin, GPIO_PIN_SET);
+    HAL_Delay(100);
+    HAL_GPIO_WritePin(LED_5_GPIO_Port,LED_5_Pin, GPIO_PIN_RESET);
+    HAL_GPIO_WritePin(LED_4_GPIO_Port,LED_4_Pin, GPIO_PIN_SET);
+    HAL_Delay(50);
+    HAL_GPIO_WritePin(LED_4_GPIO_Port,LED_4_Pin, GPIO_PIN_RESET);
+    HAL_GPIO_WritePin(LED_3_GPIO_Port,LED_3_Pin, GPIO_PIN_SET);
+    HAL_Delay(50);
+    HAL_GPIO_WritePin(LED_3_GPIO_Port,LED_3_Pin, GPIO_PIN_RESET);
+    HAL_GPIO_WritePin(LED_2_GPIO_Port,LED_2_Pin, GPIO_PIN_SET);
+    HAL_Delay(50);
+    HAL_GPIO_WritePin(LED_2_GPIO_Port,LED_2_Pin, GPIO_PIN_RESET);
+    HAL_GPIO_WritePin(LED_1_GPIO_Port,LED_1_Pin, GPIO_PIN_SET);
+    HAL_Delay(50);
+  }
+  HAL_GPIO_WritePin(LED_1_GPIO_Port,LED_1_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(LED_2_GPIO_Port,LED_2_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(LED_3_GPIO_Port,LED_3_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(LED_4_GPIO_Port,LED_4_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(LED_5_GPIO_Port,LED_5_Pin, GPIO_PIN_RESET);
   HAL_TIM_Base_Start_IT(&htim2);
 
 	can1.rx0_interrupt = CAN1_RX0_IRQn;
@@ -143,7 +182,7 @@ int main(void)
 
 	current_state = STATE_INIT;
   
-	//init_sd();
+	init_sd();
 
   /* USER CODE END 2 */
  
@@ -259,6 +298,18 @@ static void MX_NVIC_Init(void)
   /* UART4_IRQn interrupt configuration */
   HAL_NVIC_SetPriority(UART4_IRQn, 0, 0);
   HAL_NVIC_EnableIRQ(UART4_IRQn);
+  /* CAN1_TX_IRQn interrupt configuration */
+  HAL_NVIC_SetPriority(CAN1_TX_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(CAN1_TX_IRQn);
+  /* CAN1_RX0_IRQn interrupt configuration */
+  HAL_NVIC_SetPriority(CAN1_RX0_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(CAN1_RX0_IRQn);
+  /* CAN1_RX1_IRQn interrupt configuration */
+  HAL_NVIC_SetPriority(CAN1_RX1_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(CAN1_RX1_IRQn);
+  /* CAN1_SCE_IRQn interrupt configuration */
+  HAL_NVIC_SetPriority(CAN1_SCE_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(CAN1_SCE_IRQn);
 }
 
 /**
@@ -739,7 +790,7 @@ void HAL_CAN_TxMailbox0CompleteCallback(CAN_HandleTypeDef *hcan) {
 								  strlen("high\r\n"), 10);
 			}
 		} else if (fifoTxDataCAN_normal_pop(&can1)) {
-			// HAL_UART_Transmit(&huart3,(uint8_t*)("Prendo dalla fifo\r\n"),
+			// HAL_UART_Transmit(&huart3,(uint8_t*)("Prendo : 19:31:19.703:d: 19:31:19.703:alla fifo\r\n"),
 			// strlen("Prendo dalla fifo\r\n"), 10);
 			if (CAN_Send_IT(&can1) == 0) {
 				// TODO: implementare errore
@@ -863,7 +914,20 @@ void Error_Handler(void)
 {
   /* USER CODE BEGIN Error_Handler_Debug */
   /* User can add his own implementation to report the HAL error return state */
-
+  for(int i = 0; i < 4; i++){
+    HAL_GPIO_WritePin(LED_1_GPIO_Port, LED_1_Pin, GPIO_PIN_SET);
+    HAL_GPIO_WritePin(LED_2_GPIO_Port, LED_2_Pin, GPIO_PIN_RESET);
+    HAL_GPIO_WritePin(LED_3_GPIO_Port, LED_3_Pin, GPIO_PIN_SET);
+    HAL_GPIO_WritePin(LED_4_GPIO_Port, LED_4_Pin, GPIO_PIN_RESET);
+    HAL_GPIO_WritePin(LED_5_GPIO_Port, LED_5_Pin, GPIO_PIN_SET);
+    HAL_Delay(100);
+    HAL_GPIO_WritePin(LED_1_GPIO_Port, LED_1_Pin, GPIO_PIN_RESET);
+    HAL_GPIO_WritePin(LED_2_GPIO_Port, LED_2_Pin, GPIO_PIN_SET);
+    HAL_GPIO_WritePin(LED_3_GPIO_Port, LED_3_Pin, GPIO_PIN_RESET);
+    HAL_GPIO_WritePin(LED_4_GPIO_Port, LED_4_Pin, GPIO_PIN_SET);
+    HAL_GPIO_WritePin(LED_5_GPIO_Port, LED_5_Pin, GPIO_PIN_RESET);
+    HAL_Delay(100);
+  }
   /* USER CODE END Error_Handler_Debug */
 }
 
