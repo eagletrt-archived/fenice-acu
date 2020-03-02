@@ -1,8 +1,4 @@
 #include "can.h"
-#include "main.h"
-#include "stdio.h"
-#include "stm32f7xx_hal_can.h"
-#include "string.h"
 
 // extern CAN_HandleTypeDef hcan1;
 

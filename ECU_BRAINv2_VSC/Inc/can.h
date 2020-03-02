@@ -1,10 +1,15 @@
-#ifndef _FENICE_H
-#define _FENICE_H
+#ifndef __CAN_H__
+#define __CAN_H__
 
 #define fifoLengthN 100
 #define fifoLengthH 10
 
 #include "stm32f7xx_hal.h"
+#include "main.h"
+#include "stdio.h"
+#include "stm32f7xx_hal_can.h"
+#include "string.h"
+
 
 void fenice_init();
 
@@ -82,6 +87,6 @@ uint8_t fifoTxDataCAN_high_push(canStruct *);
 
 void can_init();
 
-#endif
+#endif // HAL_CAN_MODULE_ENABLE
 
 #endif
