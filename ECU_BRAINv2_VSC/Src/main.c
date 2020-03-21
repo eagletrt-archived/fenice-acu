@@ -1,21 +1,21 @@
 /* USER CODE BEGIN Header */
 /**
-  ******************************************************************************
-  * @file           : main.c
-  * @brief          : Main program body
-  ******************************************************************************
-  * @attention
-  *
-  * <h2><center>&copy; Copyright (c) 2020 STMicroelectronics.
-  * All rights reserved.</center></h2>
-  *
-  * This software component is licensed by ST under BSD 3-Clause license,
-  * the "License"; You may not use this file except in compliance with the
-  * License. You may obtain a copy of the License at:
-  *                        opensource.org/licenses/BSD-3-Clause
-  *
-  ******************************************************************************
-  */
+	******************************************************************************
+	* @file           : main.c
+	* @brief          : Main program body
+	******************************************************************************
+	* @attention
+	*
+	* <h2><center>&copy; Copyright (c) 2020 STMicroelectronics.
+	* All rights reserved.</center></h2>
+	*
+	* This software component is licensed by ST under BSD 3-Clause license,
+	* the "License"; You may not use this file except in compliance with the
+	* License. You may obtain a copy of the License at:
+	*                        opensource.org/licenses/BSD-3-Clause
+	*
+	******************************************************************************
+	*/
 /* USER CODE END Header */
 
 /* Includes ------------------------------------------------------------------*/
@@ -53,6 +53,7 @@ CAN_HandleTypeDef hcan3;
 SD_HandleTypeDef hsd2;
 
 SPI_HandleTypeDef hspi2;
+DMA_HandleTypeDef hdma_spi2_tx;
 
 TIM_HandleTypeDef htim2;
 TIM_HandleTypeDef htim4;
@@ -62,18 +63,12 @@ UART_HandleTypeDef huart4;
 
 /* USER CODE BEGIN PV */
 
-uint8_t i_debug;
-extern canStruct can1, can3;
-extern fifoPriority fifoPriority_t;
-
-CAN_FilterTypeDef sFilter;
-
-long int counter = 0;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
+static void MX_DMA_Init(void);
 static void MX_CAN1_Init(void);
 static void MX_CAN3_Init(void);
 static void MX_SDMMC2_SD_Init(void);
@@ -120,6 +115,7 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
+  MX_DMA_Init();
   MX_CAN1_Init();
   MX_CAN3_Init();
   MX_SDMMC2_SD_Init();
@@ -133,46 +129,46 @@ int main(void)
   /* Initialize interrupts */
   MX_NVIC_Init();
   /* USER CODE BEGIN 2 */
-  HAL_GPIO_WritePin(LED_1_GPIO_Port,LED_1_Pin, GPIO_PIN_RESET);
-  HAL_GPIO_WritePin(LED_2_GPIO_Port,LED_2_Pin, GPIO_PIN_RESET);
-  HAL_GPIO_WritePin(LED_3_GPIO_Port,LED_3_Pin, GPIO_PIN_RESET);
-  HAL_GPIO_WritePin(LED_4_GPIO_Port,LED_4_Pin, GPIO_PIN_RESET);
-  HAL_GPIO_WritePin(LED_5_GPIO_Port,LED_5_Pin, GPIO_PIN_RESET);
-  for(int i = 0; i < 2; i++){
-    HAL_GPIO_WritePin(LED_5_GPIO_Port,LED_5_Pin, GPIO_PIN_RESET);
-    HAL_GPIO_WritePin(LED_1_GPIO_Port,LED_1_Pin, GPIO_PIN_SET);
-    HAL_Delay(50);
-    HAL_GPIO_WritePin(LED_1_GPIO_Port,LED_1_Pin, GPIO_PIN_RESET);
-    HAL_GPIO_WritePin(LED_2_GPIO_Port,LED_2_Pin, GPIO_PIN_SET);
-    HAL_Delay(50);
-    HAL_GPIO_WritePin(LED_2_GPIO_Port,LED_2_Pin, GPIO_PIN_RESET);
-    HAL_GPIO_WritePin(LED_3_GPIO_Port,LED_3_Pin, GPIO_PIN_SET);
-    HAL_Delay(50);
-    HAL_GPIO_WritePin(LED_3_GPIO_Port,LED_3_Pin, GPIO_PIN_RESET);
-    HAL_GPIO_WritePin(LED_4_GPIO_Port,LED_4_Pin, GPIO_PIN_SET);
-    HAL_Delay(50);
-    HAL_GPIO_WritePin(LED_4_GPIO_Port,LED_4_Pin, GPIO_PIN_RESET);
-    HAL_GPIO_WritePin(LED_5_GPIO_Port,LED_5_Pin, GPIO_PIN_SET);
-    HAL_Delay(100);
-    HAL_GPIO_WritePin(LED_5_GPIO_Port,LED_5_Pin, GPIO_PIN_RESET);
-    HAL_GPIO_WritePin(LED_4_GPIO_Port,LED_4_Pin, GPIO_PIN_SET);
-    HAL_Delay(50);
-    HAL_GPIO_WritePin(LED_4_GPIO_Port,LED_4_Pin, GPIO_PIN_RESET);
-    HAL_GPIO_WritePin(LED_3_GPIO_Port,LED_3_Pin, GPIO_PIN_SET);
-    HAL_Delay(50);
-    HAL_GPIO_WritePin(LED_3_GPIO_Port,LED_3_Pin, GPIO_PIN_RESET);
-    HAL_GPIO_WritePin(LED_2_GPIO_Port,LED_2_Pin, GPIO_PIN_SET);
-    HAL_Delay(50);
-    HAL_GPIO_WritePin(LED_2_GPIO_Port,LED_2_Pin, GPIO_PIN_RESET);
-    HAL_GPIO_WritePin(LED_1_GPIO_Port,LED_1_Pin, GPIO_PIN_SET);
-    HAL_Delay(50);
-  }
-  HAL_GPIO_WritePin(LED_1_GPIO_Port,LED_1_Pin, GPIO_PIN_RESET);
-  HAL_GPIO_WritePin(LED_2_GPIO_Port,LED_2_Pin, GPIO_PIN_RESET);
-  HAL_GPIO_WritePin(LED_3_GPIO_Port,LED_3_Pin, GPIO_PIN_RESET);
-  HAL_GPIO_WritePin(LED_4_GPIO_Port,LED_4_Pin, GPIO_PIN_RESET);
-  HAL_GPIO_WritePin(LED_5_GPIO_Port,LED_5_Pin, GPIO_PIN_RESET);
-  HAL_TIM_Base_Start_IT(&htim2);
+	HAL_GPIO_WritePin(LED_1_GPIO_Port,LED_1_Pin, GPIO_PIN_RESET);
+	HAL_GPIO_WritePin(LED_2_GPIO_Port,LED_2_Pin, GPIO_PIN_RESET);
+	HAL_GPIO_WritePin(LED_3_GPIO_Port,LED_3_Pin, GPIO_PIN_RESET);
+	HAL_GPIO_WritePin(LED_4_GPIO_Port,LED_4_Pin, GPIO_PIN_RESET);
+	HAL_GPIO_WritePin(LED_5_GPIO_Port,LED_5_Pin, GPIO_PIN_RESET);
+	for(int i = 0; i < 2; i++){
+		HAL_GPIO_WritePin(LED_5_GPIO_Port,LED_5_Pin, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(LED_1_GPIO_Port,LED_1_Pin, GPIO_PIN_SET);
+		HAL_Delay(50);
+		HAL_GPIO_WritePin(LED_1_GPIO_Port,LED_1_Pin, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(LED_2_GPIO_Port,LED_2_Pin, GPIO_PIN_SET);
+		HAL_Delay(50);
+		HAL_GPIO_WritePin(LED_2_GPIO_Port,LED_2_Pin, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(LED_3_GPIO_Port,LED_3_Pin, GPIO_PIN_SET);
+		HAL_Delay(50);
+		HAL_GPIO_WritePin(LED_3_GPIO_Port,LED_3_Pin, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(LED_4_GPIO_Port,LED_4_Pin, GPIO_PIN_SET);
+		HAL_Delay(50);
+		HAL_GPIO_WritePin(LED_4_GPIO_Port,LED_4_Pin, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(LED_5_GPIO_Port,LED_5_Pin, GPIO_PIN_SET);
+		HAL_Delay(100);
+		HAL_GPIO_WritePin(LED_5_GPIO_Port,LED_5_Pin, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(LED_4_GPIO_Port,LED_4_Pin, GPIO_PIN_SET);
+		HAL_Delay(50);
+		HAL_GPIO_WritePin(LED_4_GPIO_Port,LED_4_Pin, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(LED_3_GPIO_Port,LED_3_Pin, GPIO_PIN_SET);
+		HAL_Delay(50);
+		HAL_GPIO_WritePin(LED_3_GPIO_Port,LED_3_Pin, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(LED_2_GPIO_Port,LED_2_Pin, GPIO_PIN_SET);
+		HAL_Delay(50);
+		HAL_GPIO_WritePin(LED_2_GPIO_Port,LED_2_Pin, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(LED_1_GPIO_Port,LED_1_Pin, GPIO_PIN_SET);
+		HAL_Delay(50);
+	}
+	HAL_GPIO_WritePin(LED_1_GPIO_Port,LED_1_Pin, GPIO_PIN_RESET);
+	HAL_GPIO_WritePin(LED_2_GPIO_Port,LED_2_Pin, GPIO_PIN_RESET);
+	HAL_GPIO_WritePin(LED_3_GPIO_Port,LED_3_Pin, GPIO_PIN_RESET);
+	HAL_GPIO_WritePin(LED_4_GPIO_Port,LED_4_Pin, GPIO_PIN_RESET);
+	HAL_GPIO_WritePin(LED_5_GPIO_Port,LED_5_Pin, GPIO_PIN_RESET);
+	HAL_TIM_Base_Start_IT(&htim2);
 
 	can1.rx0_interrupt = CAN1_RX0_IRQn;
 	can1.tx_interrupt = CAN1_TX_IRQn;
@@ -184,31 +180,15 @@ int main(void)
 						1);  // activate rx interrupt for debug
 
 	current_state = STATE_INIT;
-  
+	
 	init_sd();
 
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  while (1)
-  {
-    can1.dataTx[0] = 0;
-		can1.dataTx[1] = 0;
-		can1.dataTx[2] = 0;
-		can1.dataTx[3] = 0;
-		can1.dataTx[4] = counter >> 24;
-		can1.dataTx[5] = counter >> 16;
-		can1.dataTx[6] = counter >> 8;
-		can1.dataTx[7] = counter % 256;
-
-		can1.tx_id = 0xA0;
-
-		// CAN_Send(&can1, normalPriority);
-		// HAL_Delay(500);
-
-		// counter ++;
-
+	while (1)
+	{
 		if (current_state == STATE_INIT) {
 			init();
 		} else if (current_state == STATE_IDLE) {
@@ -221,7 +201,7 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-  }
+	}
   /* USER CODE END 3 */
 }
 
@@ -625,6 +605,22 @@ static void MX_UART4_Init(void)
 
 }
 
+/** 
+  * Enable DMA controller clock
+  */
+static void MX_DMA_Init(void) 
+{
+
+  /* DMA controller clock enable */
+  __HAL_RCC_DMA1_CLK_ENABLE();
+
+  /* DMA interrupt init */
+  /* DMA1_Stream4_IRQn interrupt configuration */
+  HAL_NVIC_SetPriority(DMA1_Stream4_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(DMA1_Stream4_IRQn);
+
+}
+
 /**
   * @brief GPIO Initialization Function
   * @param None
@@ -683,6 +679,15 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
 	if (htim == &htim2) {
 		count_ms += 1;
 		count_ms_abs++; //absolute 32 bit counter -> up to 50 days 
+		count_control_send++;
+		if(count_control_send == control_send_period){
+			count_control_send = 0;
+      control_pck[0] = (uint8_t)(count_ms_abs>>24);
+      control_pck[1] = (uint8_t)(count_ms_abs>>16);
+      control_pck[2] = (uint8_t)(count_ms_abs>>8);
+      control_pck[3] = (uint8_t)(count_ms_abs);
+      HAL_SPI_Transmit_DMA(&hspi2, control_pck, 17);
+		}
 		if (count_ms == 100) {
 			count_ms = 0;
 			count_dec++;
@@ -691,24 +696,24 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
 			count_imu++;
 			count_atc++;
 			if (count_inverter == 10) {  //--- check if inverter is connected ---//
-					   // TODO: to implement error functions
+						 // TODO: to implement error functions
 			} else if (count_inverter == 11) {
 				count_inverter = 10;
 			}
-      /*******************************************************************
-      *                           ATC COUNTER
-      *******************************************************************/ 
+			/*******************************************************************
+			*                           ATC COUNTER
+			*******************************************************************/ 
 			if (count_atc == 10) {  //--- check if Analog To Can is connected ---//
 				set_bit_uint8(&critical_errors[0], 0, 1);
-        send_errors();
+				send_errors();
 				atc_connected = 0;
 			} else if (count_atc == 11) {
 				count_atc = 10;
 			}
-      /******************************************************************/ 
-      /*******************************************************************
-      *                           IMU COUNTER
-      *******************************************************************/ 
+			/******************************************************************/ 
+			/*******************************************************************
+			*                           IMU COUNTER
+			*******************************************************************/ 
 			if (count_imu == 10) {  //--- check if imu is connected ---//
 				// imu non presente //
 				imu_connected = 0;  // imu not connected
@@ -716,7 +721,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
 			} else if (count_imu == 11) {
 				count_imu = 10;
 			}
-      /*****************************************************************/ 
+			/*****************************************************************/ 
 			if (count_dec == 10) {
 				count_dec = 0;
 				count_sec++;
@@ -731,7 +736,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
 			}
 		}
 	}else if(htim == &htim4){
-    cp = 0;
+		cp = 0;
 		polA_cont_up = 0;
 		polA_cont_down = 0;
 		polB_cont_up = 0;
@@ -741,9 +746,9 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
 		HAL_NVIC_EnableIRQ(EXTI15_10_IRQn);
 		HAL_NVIC_EnableIRQ(EXTI9_5_IRQn);
 		//HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_5);
-  }else if(htim == &htim5){
+	}else if(htim == &htim5){
 
-    HAL_NVIC_DisableIRQ(EXTI4_IRQn);
+		HAL_NVIC_DisableIRQ(EXTI4_IRQn);
 		HAL_NVIC_DisableIRQ(EXTI9_5_IRQn);
 		HAL_TIM_Base_Stop(&htim5);
 		// The next line it is not necessary but can be a good practice
@@ -755,35 +760,35 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
 		int val = -1;
 		int val2 = -1;
 
-    //		sprintf(message, "\r\nCP = %u -- Encoder = %f", cp, enc_speed);
-    //		sprintf(message2, "\r\nSpeed1 = %f -- Speed2 = %f", wheel_speed, wheel_speed2);
-    //		print(&huart2, message);
-    //		print(&huart2, message2);
-    //		val = __HAL_TIM_GET_COUNTER(&htim3);
-    //		val2 = __HAL_TIM_GET_COUNTER(&htim4);
-    //		sprintf(mes,"\r\n TIM3 = %d -- TIM4 = %d",val,val2);
-    //		print(&huart2, mes);
+		//		sprintf(message, "\r\nCP = %u -- Encoder = %f", cp, enc_speed);
+		//		sprintf(message2, "\r\nSpeed1 = %f -- Speed2 = %f", wheel_speed, wheel_speed2);
+		//		print(&huart2, message);
+		//		print(&huart2, message2);
+		//		val = __HAL_TIM_GET_COUNTER(&htim3);
+		//		val2 = __HAL_TIM_GET_COUNTER(&htim4);
+		//		sprintf(mes,"\r\n TIM3 = %d -- TIM4 = %d",val,val2);
+		//		print(&huart2, mes);
 
-    // Resolution = 5um = 0.000005 m
-    // cpr = 48'000
-    // encoder diameter = 75.4 mm = 0.0754 m
-    // wheel diameter = 0.395 m
-    // encoder circumference = 3.1415926535 * 0.0754 = 0.236876086
-    // wheel circumference = 3.1415926535 * 0.395 = 1.2409290981325
-    // speed multiplier factor = 1.2409290981325 ?????? 0.236876086 = 5.238726792
-    // second mult_factor = 1.2409/0.24 = 5.170416667
-    // encoder speed = Resolution*cp/0.4s
-    // wheel speed = encoder speed * sp_mult
+		// Resolution = 5um = 0.000005 m
+		// cpr = 48'000
+		// encoder diameter = 75.4 mm = 0.0754 m
+		// wheel diameter = 0.395 m
+		// encoder circumference = 3.1415926535 * 0.0754 = 0.236876086
+		// wheel circumference = 3.1415926535 * 0.395 = 1.2409290981325
+		// speed multiplier factor = 1.2409290981325 ?????? 0.236876086 = 5.238726792
+		// second mult_factor = 1.2409/0.24 = 5.170416667
+		// encoder speed = Resolution*cp/0.4s
+		// wheel speed = encoder speed * sp_mult
 
 
-    enc_speed = resolution*cp*-3.60/measurment_per;
-    wheel_speed = enc_speed*mult_fact;
-    wheel_speed2 = resolution*cp*mult_fact2*-3.6/measurment_per;
-  }
+		enc_speed = resolution*cp*-3.60/measurment_per;
+		wheel_speed = enc_speed*mult_fact;
+		wheel_speed2 = resolution*cp*mult_fact2*-3.6/measurment_per;
+	}
 }
 
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
-  HAL_GPIO_TogglePin(LED_2_GPIO_Port,LED_2_Pin);
+	HAL_GPIO_TogglePin(LED_2_GPIO_Port,LED_2_Pin);
 	if (huart == &huart4) {
 		if ((debug_rx[debug_rx_count] == '\r') |
 			(debug_rx[debug_rx_count] == '\n')) {
@@ -811,21 +816,21 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
 void Error_Handler(void)
 {
   /* USER CODE BEGIN Error_Handler_Debug */
-  /* User can add his own implementation to report the HAL error return state */
-  for(int i = 0; i < 4; i++){
-    HAL_GPIO_WritePin(LED_1_GPIO_Port, LED_1_Pin, GPIO_PIN_SET);
-    HAL_GPIO_WritePin(LED_2_GPIO_Port, LED_2_Pin, GPIO_PIN_RESET);
-    HAL_GPIO_WritePin(LED_3_GPIO_Port, LED_3_Pin, GPIO_PIN_SET);
-    HAL_GPIO_WritePin(LED_4_GPIO_Port, LED_4_Pin, GPIO_PIN_RESET);
-    HAL_GPIO_WritePin(LED_5_GPIO_Port, LED_5_Pin, GPIO_PIN_SET);
-    HAL_Delay(100);
-    HAL_GPIO_WritePin(LED_1_GPIO_Port, LED_1_Pin, GPIO_PIN_RESET);
-    HAL_GPIO_WritePin(LED_2_GPIO_Port, LED_2_Pin, GPIO_PIN_SET);
-    HAL_GPIO_WritePin(LED_3_GPIO_Port, LED_3_Pin, GPIO_PIN_RESET);
-    HAL_GPIO_WritePin(LED_4_GPIO_Port, LED_4_Pin, GPIO_PIN_SET);
-    HAL_GPIO_WritePin(LED_5_GPIO_Port, LED_5_Pin, GPIO_PIN_RESET);
-    HAL_Delay(100);
-  }
+	/* User can add his own implementation to report the HAL error return state */
+	for(int i = 0; i < 4; i++){
+		HAL_GPIO_WritePin(LED_1_GPIO_Port, LED_1_Pin, GPIO_PIN_SET);
+		HAL_GPIO_WritePin(LED_2_GPIO_Port, LED_2_Pin, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(LED_3_GPIO_Port, LED_3_Pin, GPIO_PIN_SET);
+		HAL_GPIO_WritePin(LED_4_GPIO_Port, LED_4_Pin, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(LED_5_GPIO_Port, LED_5_Pin, GPIO_PIN_SET);
+		HAL_Delay(100);
+		HAL_GPIO_WritePin(LED_1_GPIO_Port, LED_1_Pin, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(LED_2_GPIO_Port, LED_2_Pin, GPIO_PIN_SET);
+		HAL_GPIO_WritePin(LED_3_GPIO_Port, LED_3_Pin, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(LED_4_GPIO_Port, LED_4_Pin, GPIO_PIN_SET);
+		HAL_GPIO_WritePin(LED_5_GPIO_Port, LED_5_Pin, GPIO_PIN_RESET);
+		HAL_Delay(100);
+	}
   /* USER CODE END Error_Handler_Debug */
 }
 
@@ -840,8 +845,8 @@ void Error_Handler(void)
 void assert_failed(uint8_t *file, uint32_t line)
 { 
   /* USER CODE BEGIN 6 */
-  /* User can add his own implementation to report the file name and line number,
-     tex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
+	/* User can add his own implementation to report the file name and line number,
+		 tex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
   /* USER CODE END 6 */
 }
 #endif /* USE_FULL_ASSERT */

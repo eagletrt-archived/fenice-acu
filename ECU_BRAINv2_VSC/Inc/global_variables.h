@@ -15,6 +15,26 @@ extern uint16_t count_inverter;
 extern uint16_t count_accumulator;
 extern uint16_t count_imu;
 extern uint16_t count_atc;
+extern uint8_t count_control_send;
+extern uint8_t control_send_period;
+extern uint8_t control_pck[17];
+#define timestamp_24_31 0
+#define timestamp_16_23 1
+#define timestamp_8_15  2
+#define timestamp_0_7   3
+#define steer_delta_h   4
+#define steer_delta_l   5
+#define pot_accel       6
+#define accel_x_h       7
+#define accel_x_l       8
+#define yaw_rate_h      9
+#define yaw_rate_l      10
+#define omega_rr_h      11
+#define omega_rr_l      12
+#define omega_rl_h      13
+#define omega_rl_l      14
+#define omega_fr_h      15
+#define omega_fl_l      16
 
 extern const char code_version[];
 
@@ -68,11 +88,6 @@ extern uint8_t pot_values_loaded;
 
 extern uint32_t pot1_max, pot1_min, pot2_max, pot2_min;
 
-//-----------------------------------------//
-//----------------- IMU -------------------//
-//-----------------------------------------//
-extern uint8_t accel_x_h;
-extern uint8_t accel_x_l;
 
 
 //-----------------------------------------//

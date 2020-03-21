@@ -138,8 +138,8 @@ void init()
 			{
 				case ID_imu_acceleration:
 					imu_operations();
-					accel_x_h = can3.dataRx[0];
-					accel_x_l = can3.dataRx[1];
+					control_pck[accel_x_h] = can3.dataRx[0];
+					control_pck[accel_x_l] = can3.dataRx[1];
 					break;
 				
 				default:
@@ -258,8 +258,8 @@ void idle()
 		{
 		case ID_imu_acceleration:
 			imu_operations();
-			accel_x_h = can3.dataRx[0];
-			accel_x_l = can3.dataRx[1];
+			control_pck[accel_x_h] = can3.dataRx[0];
+			control_pck[accel_x_l] = can3.dataRx[1];
 			break;
 		
 		default:
@@ -330,8 +330,8 @@ void setup()
 			{
 				case ID_imu_acceleration:
 					imu_operations();
-					accel_x_h = can3.dataRx[0];
-					accel_x_l = can3.dataRx[1];
+					control_pck[accel_x_h] = can3.dataRx[0];
+					control_pck[accel_x_l] = can3.dataRx[1];
 					break;
 				
 				default:
@@ -395,8 +395,8 @@ void setup()
 			{
 				case ID_imu_acceleration:
 					imu_operations();
-					accel_x_h = can3.dataRx[0];
-					accel_x_l = can3.dataRx[1];
+					control_pck[accel_x_h] = can3.dataRx[0];
+					control_pck[accel_x_l] = can3.dataRx[1];
 					break;
 				
 				default:
@@ -453,8 +453,8 @@ void run()
 			{
 				case ID_imu_acceleration:
 					imu_operations();
-					accel_x_h = can3.dataRx[0];
-					accel_x_l = can3.dataRx[1];
+					control_pck[accel_x_h] = can3.dataRx[0];
+					control_pck[accel_x_l] = can3.dataRx[1];
 					break;
 				
 				default:

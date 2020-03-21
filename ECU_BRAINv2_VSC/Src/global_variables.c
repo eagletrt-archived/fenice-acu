@@ -12,6 +12,11 @@ uint16_t count_accumulator = 0;
 uint16_t count_imu = 0;
 uint16_t count_atc = 0;
 
+//--- CONTROL VARIABLES ---//
+uint8_t count_control_send = 0;
+uint8_t control_send_period = 100;
+uint8_t control_pck[17];
+
 //--- CODE VERSION ---//
 const char code_version[]="\r\nCode version = 1.0, updated 01/11/2019\r\n";
 
@@ -31,7 +36,4 @@ uint32_t pot1_min;
 uint32_t pot2_max;
 uint32_t pot2_min;
 
-//--- ACCEL VAL ---//
-uint8_t accel_x_h;
-uint8_t accel_x_l;
 
