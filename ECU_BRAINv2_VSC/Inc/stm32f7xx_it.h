@@ -64,6 +64,7 @@ void CAN1_RX1_IRQHandler(void);
 void CAN1_SCE_IRQHandler(void);
 void TIM2_IRQHandler(void);
 void TIM4_IRQHandler(void);
+void SPI2_IRQHandler(void);
 void TIM5_IRQHandler(void);
 void UART4_IRQHandler(void);
 void CAN3_TX_IRQHandler(void);
