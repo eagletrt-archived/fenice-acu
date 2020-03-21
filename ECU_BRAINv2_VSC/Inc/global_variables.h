@@ -9,8 +9,6 @@
 #define MAX_DEBUG_RX_L 50
 #define MAX_DEBUG_TX_L 2000
 
-extern canStruct can1, can3;
-
 extern uint16_t volatile count_ms, count_dec, count_sec, count_min, count_hour;
 extern uint32_t volatile count_ms_abs;
 extern uint16_t count_inverter;
@@ -69,6 +67,12 @@ extern int successfull_opening;
 extern uint8_t pot_values_loaded;
 
 extern uint32_t pot1_max, pot1_min, pot2_max, pot2_min;
+
+//-----------------------------------------//
+//----------------- IMU -------------------//
+//-----------------------------------------//
+extern uint8_t accel_x_h;
+extern uint8_t accel_x_l;
 
 
 //-----------------------------------------//

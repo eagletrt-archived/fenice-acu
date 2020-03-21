@@ -31,4 +31,7 @@ uint32_t pot1_min;
 uint32_t pot2_max;
 uint32_t pot2_min;
 
+//--- ACCEL VAL ---//
+uint8_t accel_x_h;
+uint8_t accel_x_l;
 

@@ -9,7 +9,8 @@
 #include "stdio.h"
 #include "stm32f7xx_hal_can.h"
 #include "string.h"
-
+#include "global_variables.h"
+#include "stdbool.h"
 
 void fenice_init();
 
@@ -70,22 +71,24 @@ typedef struct {
 
 } canStruct;
 
-uint8_t CAN_initialization(canStruct *can);
+bool CAN_initialization(canStruct *can);
 void report_error_can1();
 void report_error_can3();
-uint8_t CAN_Send(canStruct *, fifoPriority);
-uint8_t CAN_Send_IT(canStruct *);
-uint8_t CAN_Send_Bck(canStruct *);
+bool CAN_Send(canStruct *, fifoPriority);
+bool CAN_Send_IT(canStruct *);
+bool CAN_Send_Bck(canStruct *);
 
-uint8_t fifoRxDataCAN_pop(canStruct *);
-uint8_t fifoRxDataCAN_push(canStruct *);
+bool fifoRxDataCAN_pop(canStruct *);
+bool fifoRxDataCAN_push(canStruct *);
 
-uint8_t fifoTxDataCAN_normal_pop(canStruct *);
-uint8_t fifoTxDataCAN_high_pop(canStruct *);
-uint8_t fifoTxDataCAN_normal_push(canStruct *);
-uint8_t fifoTxDataCAN_high_push(canStruct *);
+bool fifoTxDataCAN_normal_pop(canStruct *);
+bool fifoTxDataCAN_high_pop(canStruct *);
+bool fifoTxDataCAN_normal_push(canStruct *);
+bool fifoTxDataCAN_high_push(canStruct *);
 
 void can_init();
+
+extern canStruct can1, can3;
 
 #endif // HAL_CAN_MODULE_ENABLE
 

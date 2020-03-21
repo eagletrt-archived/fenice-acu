@@ -133,6 +133,19 @@ void init()
 				break;
 			}
 		}
+		if(fifoRxDataCAN_pop(&can3)){
+			switch (can3.rx_id)
+			{
+				case ID_imu_acceleration:
+					imu_operations();
+					accel_x_h = can3.dataRx[0];
+					accel_x_l = can3.dataRx[1];
+					break;
+				
+				default:
+					break;
+			}
+		}
 		if(inv_init_response == 3){ // means that each inv has responded
 			init_step = 2;
 		}else{
@@ -224,6 +237,7 @@ void idle()
 			{
 			case REQUEST_TS_ON:
 				//If req Tractive System ON msg arrives -> go to setup state
+				setup_init = 0;
 				current_state = STATE_SETUP;
 				break;
 			default:
@@ -235,6 +249,19 @@ void idle()
 			break;
 		case ID_ATC_MAX_VAL:
 			break;
+		default:
+			break;
+		}
+	}
+	if(fifoRxDataCAN_pop(&can3)){
+		switch (can3.rx_id)
+		{
+		case ID_imu_acceleration:
+			imu_operations();
+			accel_x_h = can3.dataRx[0];
+			accel_x_l = can3.dataRx[1];
+			break;
+		
 		default:
 			break;
 		}
@@ -298,6 +325,18 @@ void setup()
 				default:
 					break;
 			}
+		} else if(fifoRxDataCAN_pop(&can3)){
+			switch (can3.rx_id)
+			{
+				case ID_imu_acceleration:
+					imu_operations();
+					accel_x_h = can3.dataRx[0];
+					accel_x_l = can3.dataRx[1];
+					break;
+				
+				default:
+					break;
+			}
 		}
 	}else if(setup_init == 2){
 		HAL_GPIO_WritePin(LED_1_GPIO_Port,LED_1_Pin, GPIO_PIN_SET);
@@ -351,6 +390,18 @@ void setup()
 				default:
 					break;
 			}			
+		} else if(fifoRxDataCAN_pop(&can3)){
+			switch (can3.rx_id)
+			{
+				case ID_imu_acceleration:
+					imu_operations();
+					accel_x_h = can3.dataRx[0];
+					accel_x_l = can3.dataRx[1];
+					break;
+				
+				default:
+					break;
+			}
 		}
 	}else if(setup_init == 4){
 		HAL_GPIO_WritePin(LED_1_GPIO_Port,LED_1_Pin, GPIO_PIN_SET);
@@ -395,6 +446,19 @@ void run()
 				break;
 			default:
 				break;
+			}
+		}
+		else if(fifoRxDataCAN_pop(&can3)){
+			switch (can3.rx_id)
+			{
+				case ID_imu_acceleration:
+					imu_operations();
+					accel_x_h = can3.dataRx[0];
+					accel_x_l = can3.dataRx[1];
+					break;
+				
+				default:
+					break;
 			}
 		}
 	}
