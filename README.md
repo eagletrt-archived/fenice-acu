@@ -3,11 +3,11 @@ Sensors Repository for Fenice
 
 ## Encoder Docs and Usage
 ### Encoder Specifics
-- **LM13**  
+- **LM13ICD40AB10F00**  
     - **Interpolation factor** => 400   
     - **Resolution** => 5 um  
     - **Minimum edge separation** => 0.12us (8MHz)  
-- **MR075E**  
+- **MR075E060A120B00**  
     - **Outer Diameter** => 75.4 ± 0.1 mm  
     - **Inner Diameter** => 60 H7 mm  
     - **Circumference** => `3.1415926535 * 0.1005 = 0.236876086m` 
